@@ -1,0 +1,19 @@
+{
+  "editor.formatOnType": true,
+  "files.associations": {
+    "*.lsp": "autolisp",
+    "*.dcl": "autolisp-dcl"
+  },
+  "autolispext.debug.attachProcess": "acad",
+  "autolispext.debug.launchProgram": "C:\\Program Files\\Autodesk\\AutoCAD 2026\\acad.exe",
+  "[autolisp]": {
+    "editor.wordSeparators": "`|;'\",()",
+    "editor.tabSize": 2,
+    "editor.insertSpaces": false,
+    "editor.wordWrap": "off"
+  },
+  "[autolisp-dcl]": {
+    "editor.tabSize": 2,
+    "editor.insertSpaces": true
+  }
+}

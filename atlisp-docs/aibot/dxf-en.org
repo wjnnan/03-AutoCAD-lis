@@ -1,0 +1,3427 @@
+* -5
+App: permanent reactor chain
+* -4
+App: conditional operator (only used with ssget)
+* -3
+App: extended data (XDATA) tag (fixed)
+* -2
+App: element name reference (fixed)
+* -1
+App: element name. Every time you open a drawing, the element name changes and is never saved (fixed)
+* 0
+String representing element type (fixed)
+* 1
+Primary text value of the element
+* 2
+Name (attribute tag, block name, etc.)
+* 3-4
+Other text or name values
+* 5
+Primitive handle; String of up to 16 hexadecimal digits (fixed)
+* 6
+Linetype name (fixed) (appears if it is not bylayer). The special name 'byblock' indicates a variable linetype (optional)
+* 7
+Text style name (fixed)
+* 8
+Layer name (fixed)
+* 9
+DXF: variable name identifier (only used in header section of DXF file)
+* 10
+Main points; The starting point of a line or text element, the center of a circle, and so on
+DXF: x value of main point (followed by Y and Z value codes 20 and 30)
+App: 3D points (list of three real numbers)
+* 11-18
+Other points
+DXF: x value of other points (followed by y value code 21-28 and Z value code 31-38)
+App: 3D points (list of three real numbers)
+* 20, 30
+DXF: y and Z values of major points
+* 21-28, 31-37
+DXF: y and Z values of other points
+* 38
+DXF: if it is not zero, it is the elevation of the element
+* 39
+If it is not zero, it is the thickness of the element (fixed)
+* 40-48
+Double precision floating point value (text height, scale, etc.)
+* 48
+Linetype scale; Double precision floating-point scalar value; The default value applies to all element types
+* 49
+Duplicate double precision floating-point value. Multiple 49 groups may appear in the variable length table of an entity (for example, the dashed line length in the Ltype table). 7x group always appears before the first 49 group to specify the length of the table
+* 50-58
+Angle (in degrees in DXF files and radians in AutoLISP and ObjectARX applications)
+* 60
+Element visibility; Integer value; If it is not assigned or the value is 0, it means it is visible; A value of 1 means invisible
+* 62
+Color number (fixed)
+* 66
+'Heel element' flag (fixed)
+* 67
+Space - model space or paper space (fixed)
+Non existence or zero indicates that the element is in model space. 1 indicates that the element is in paper space (optional)
+* 68
+App: indicates whether the viewport is open but completely invisible on the screen, or inactive or closed
+* 69
+App: viewport ID
+* 70-78
+Integer value, such as repeat count, flag bit or mode
+* 90-91,93-99
+DWORD 32-bit integer value
+* 92
+The number of bytes in the proxy primitive graphics represented in the following 310 groups (binary data block records) (optional)
+* 100
+Subclass data tag (using the derived class name as a string) all object and element classes derived from other concrete classes must have this tag. Subclass data tags are used to separate data defined by different classes in the inheritance chain of the same object. 
+This is an additional requirement that must be met for the DXF name of each different concrete class derived from ObjectARX (see 'subclass marking')
+* 102
+Control string followed by '{< any name >' or '}'. Similar to the extended data 1002 group code, the difference is that when the string starts with '{', it can be followed by any string, and the interpretation of the string depends on the application. The only other allowed control string is '}' as the end of the group. AutoCAD does not interpret these strings outside the drawing review operation. They are supplied for use by programs
+'{acad_reactors' indicates the beginning of the AutoCAD permanent reactor group. This group exists only when permanent reactors are attached to this object (optional)
+* 105
+Object handle of dimvar symbol table entry
+* 110
+UCS origin (displayed only when code 72 is set to 1)
+DXF: x value; App: 3D points
+* 111
+UCS X axis (displayed only when code 72 is set to 1)
+DXF: x value; App: 3D vector
+* 112
+UCS Y axis (displayed only when code 72 is set to 1)
+DXF: x value; App: 3D vector
+* 120-122
+DXF: y value of UCS origin, UCS X axis and UCS Y axis
+* 130-132
+DXF: Z value of UCS origin, UCS X axis and UCS Y axis
+* 140-149
+Double precision floating-point values (such as point, elevation, and dimstyle settings)
+* 170-179
+Word 16 bit integer value, for example, indicating the flag bit set by dimstyle
+* 210
+Stretching direction (fixed)
+DXF: x value of extrusion direction
+App: 3D extrusion direction vector
+* 220, 230
+DXF: y and Z values of extrusion direction
+* 270-279
+16 bit integer value
+* 280-283,285-289
+16 bit integer value
+* 284
+Shadow mode
+0 = cast and receive shadows
+1 = cast shadow
+2 = receive shadow
+3 = ignore shadows
+Note: this feature has been deprecated since AutoCAD 2016 based products, but it is still supported for backward compatibility. 
+* 290-299
+Boolean flag value
+* 300-309
+Any string
+* 310
+Proxy primitive graphics data (multiple lines; 256 characters per line at most) (optional)
+Any binary block with the same representation and 1004 group code limit: a hexadecimal string with a maximum length of 254 characters is used to represent a data block with a maximum length of 127 bytes
+* 311-319
+Any binary block with the same representation and 1004 group code limit: a hexadecimal string with a maximum length of 254 characters is used to represent a data block with a maximum length of 127 bytes
+* 320-329
+Any object handle; Handle value obtained 'as is'. They are not converted during insert and XRef operations
+* 330-339
+Soft pointer handle; Any soft pointer to another object in the same DXF file or drawing. Convert during insert and XRef operations
+330 owner block_Soft pointer ID / handle of record object
+* 340-349
+Hard pointer handle; Any hard pointer to another object in the same DXF file or drawing. Convert during insert and XRef operations
+347 hard pointer ID / handle of material object (appears if it is not 'bylayer')
+* 350-359
+Soft owner handle; Any soft owner pointer to another object in the same DXF file or drawing. Convert during insert and XRef operations
+* 360-369
+Hard owner handle; Any hard owner pointer to another object in the same DXF file or drawing. Convert during insert and XRef operations
+Hard owner ID / handle of owner Dictionary (optional)
+* 370-379
+Line width enumeration value (acdb:: lineweight). Stored and moved as a 16 bit integer. Custom non entity objects can use the whole range of group codes, but the drawing element class can only use the 371-379 DXF group codes in its representation, because AutoCAD and AutoLISP always assume that the 370 group code is the line width of the entity. This makes 370 group codes behave similarly to other 'common' primitive fields
+* 380-389
+Plotstylename type enumeration (acdb:: plotstylenametype). Stored and moved as a 16 bit integer. Custom non primitive objects can use the group code in the whole range, but the primitive class can only be used in its representation
+* 390-399
+A string representing the handle value of the plotstylename object. It is a hard pointer in nature, but has different ranges, making it easier to handle backward compatibility. It is stored and moved as object ID (handle in DXF file) and special type in AutoLISP. User defined non primitive objects can use the group codes in the whole range, but the graphic element class can only use 391-399 DXF group codes in its representation, for the same reason as the above line width range
+* 400-409
+Word 16 bit integer
+* 410-419
+String, 410 app: Layout tab name
+* 420-427
+DWORD is a 32-bit integer value. When used with true color, it is a 32-bit integer representing a 24 bit color value. High order byte (8 bits) is 0; The lower order byte is an unsigned character containing a 'blue' value (0-255) followed by a 'green' value; The next higher byte is the 'red' value. Converting this integer value to hexadecimal value will get the following bitmask: 0x00rrggbb. For example, the true colors of red = = 200, green = = 100 and blue = = 50 are 0x00c86432, while in DXF, they are 13132850 in decimal notation
+* 430-437
+character string; When used for true color, it is a string representing the color name
+* 440-447
+DWORD is a 32-bit integer value. When used for true color, it indicates the transparency value
+* 450-459
+long integer
+* 460-469
+Double precision floating point value
+* 470-479
+character string
+* 480-481
+Hard pointer handle; Any hard pointer to another object in the same DXF file or drawing. Convert during insert and XRef operations
+* 999
+DXF: 999 group code indicates that the following line is a comment string. SaveAs does not include such groups in the DXF output file, but open includes these groups and ignores comments. You can use the 999 group to include comments in DXF files that you have edited
+* 1000
+Ascii string in extended data (up to 255 bytes)
+* 1001
+Registered application name of extended data (can contain up to 31 byte ascii string)
+* 1002
+XDATA control string ('{' or '}')
+* 1003
+Extended data layer name
+* 1004
+Byte data block in extended data (up to 127 bytes)
+* 1005
+Primitive handle in extended data; A string that can contain up to 16 hexadecimal digits
+* 1010
+Points in extended data
+DXF: x value (followed by 1020 and 1030 groups)
+App: 3D points
+* 1020, 1030
+DXF: y and Z values of points
+* 1011
+3D world space position in XDATA
+DXF: x value (followed by groups 1021 and 1031)
+App: 3D points
+* 1021, 1031
+DXF: y and Z values of world space position
+* 1012
+3D world spatial displacement in XDATA
+DXF: x value (followed by 1022 and 1032 groups)
+App: 3D vector
+* 1022, 1032
+DXF: y and Z values of world space displacement
+* 1013
+3D spatial direction in XDATA
+DXF: x value (followed by 1022 and 1032 groups)
+App: 3D vector
+* 1023, 1033
+DXF: y and Z values of world space direction
+* 1040
+XDATA double precision floating point value
+* 1041
+Extended data distance value
+* 1042
+Extended data scaling
+* 1070
+Extended data 16 bit signed integer
+* 1071
+Extended data 32-bit signed long integer
+* 3DFACE
+** 100
+Subclass marker (acdbface)
+** 10
+First corner (in WCS)
+DXF: x value; App: 3D points
+** 20, 30
+DXF: y and Z values of the first corner (in WCS)
+** 11
+Second corner (in WCS)
+DXF: x value; App: 3D points
+** 21, 31 
+DXF: y and Z values of the second corner (in WCS)
+** 12
+Third point (in WCS)
+DXF: x value; App: 3D points
+** 22, 32
+DXF: y and Z values of the third triangle point (in WCS)
+** 13
+The fourth corner (in WCS). If only three corners are input, the fourth corner is the same as the third corner
+DXF: x value; App: 3D points
+** 23, 33
+DXF: y and Z values of the fourth corner (in WCS)
+** 70
+Invisible edge flag (optional; default = 0): 
+1 = the first edge is invisible
+2 = the second edge is invisible
+4 = the third edge is invisible
+8 = the fourth edge is invisible
+* 3DSOLID
+** 100
+Subclass tag (acdbmodelergeometry)
+** 70
+Modeling format version number (current value = 1)
+** 1
+Ownership data (multiple lines, each line < 255 characters)
+** 3
+Additional row of ownership data (if the string length of the previous group 1 is greater than 255 characters) (optional)
+** 100
+Subclass tag (acdb3dsolid)
+** 350
+Soft owner ID / handle of history object
+* ACAD_PROXY_ENTITY
+** 100 DXF：AcDbProxyEntity
+** 90 DXF: proxy primitive class ID (always 498)
+** 91 DXF: class ID of application entity. The class ID is based on the order of the classes in the classes section. The ID of the first class is 500, the next is 501, and so on
+** 92 DXF: size of drawing data (in bytes)
+** 310 DXF: binary drawing data (multiple entries may occur) (optional)
+** 93 DXF: size of entity data (in bits)
+** 310 DXF: binary entity data (multiple entries may occur) (optional)
+** 330, 340, 350 or 360 DXF: object ID (multiple entries may occur) (optional)
+** 94 DXF: 0 (end of object ID segment)
+** 95 DXF: object graphics format when an object becomes a proxy (32-bit unsigned integer): 
+The lower word is acdbdwgversion
+The high word is maintenancerereleaseversion
+** 70 DXF: original custom object data format: 
+0 = DWG format
+1 = DXF format
+* ARC
+** 100
+Subclass marker (acdbcircle)
+** 39
+Thickness (optional; default = 0)
+** 10
+Center point (in OCS)
+DXF: x value; App: 3D points
+** 20, 30
+DXF: y and Z values of the center point (in OCS)
+** 40
+radius
+** 100
+Subclass marker (acdbarc)
+** 50
+Starting angle
+** 51
+End angle
+** 210
+Stretch direction (optional; default = 0, 0, 1)
+DXF: x value; App: 3D vector
+** 220, 230
+DXF: y and Z values of extrusion direction (optional)
+* ATTDEF
+** 100
+Subclass tag (acdbtext)
+** 39
+Thickness (optional; default = 0)
+** 10
+First alignment point (in OCS)
+DXF: x value; App: 3D points
+** 20, 30
+DXF: y value and Z value of text starting point (in OCS)
+** 40
+Text height
+** 1
+Default value (string)
+** 50
+Text rotation angle (optional; default = 0)
+** 41
+X relative scale (width) (optional; default = 1). This value is also adjusted when fitting type text is used. 
+** 51
+Tilt angle (optional; default = 0)
+** 7
+Text style name (optional; default = standard)
+** 71
+Text generation flag (optional; default = 0); See text group code
+** 72
+Text horizontal alignment type (optional; default = 0); See text group code
+** 11
+Second alignment point (in OCS) (optional)
+DXF: x value; App: 3D points
+It is meaningful only when the 72 or 74 group values are non-zero
+** 21, 31
+DXF: y and Z values of the second alignment point (in OCS) (optional)
+** 210
+Stretch direction (optional; default = 0, 0, 1)
+DXF: x value; App: 3D vector
+** 220, 230
+DXF: y and Z values of extrusion direction
+** 100
+Subclass tag (acdbattributeddefinition)
+** 280
+Version number: 
+0 = 2010
+** 3
+Prompt string
+** 2
+Label string (cannot contain spaces)
+** 70
+Attribute tag: 
+1 = attribute invisible (not present)
+2 = fixed attribute
+4 = require verification when entering attributes
+8 = attribute is preset (no prompt when inserting)
+** 73
+Field length (optional; default = 0) (not currently used)
+** 74
+Text vertical alignment type (optional; default = 0); See group code 73 in text
+** 280
+Lock the position mark. Locks the location of attributes in a block reference
+** 100
+Subclass tag (acdbxrecord)
+** 280
+Duplicate record clone flag (determines how to merge duplicate entries): 
+1 = keep existing
+** 70
+Multiline text mark: 
+2 = multiline text attribute
+4 = fixed multiline text attribute definition
+** 70
+Actual lock flag: 
+0 = unlock
+1 = lock
+** 70
+Number of secondary attributes or attribute definitions
+** 340
+Hard pointer ID of secondary attribute or attribute definition
+** 10
+Attribute or attribute definition alignment point
+DXF: x value; App: 3D points
+** 20,30
+DXF: y and Z values of insertion point
+** 40
+Current annotation scale
+** 2
+Property or property definition label string
+** 0
+Element type (Mtext)
+** 100
+Subclass tag (acdbentity)
+** 67
+Non existence or zero indicates that the element is in model space. 1 indicates that the element is in paper space (optional)
+** 8
+Layer name
+** 100
+Subclass tag (acdbmtext)
+** 10
+insertion point
+DXF: x value; App: 3D points
+** 20,30
+DXF: y and Z values of insertion point
+** 40
+Nominal (initial) text height
+** 41
+Reference rectangle width
+** 46
+Define annotation height
+** 71
+Attachment point: 
+1 = upper left; 2 = upper middle; 3 = upper right
+4 = left middle; 5 = center; 6 = right middle
+7 = lower left; 8 = middle lower; 9 = lower right
+** 72
+Drawing direction: 
+1 = left to right
+3 = from top to bottom
+5 = with style (inherited from relevant text style)
+** 1
+Text string
+If the string length is less than 250 characters, all characters appear in group 1. If the string length is greater than 250 characters, the string will be divided into data blocks with a length of 250 characters and displayed in one or more group 3 codes. If the group 3 code is used, the last group will be group 1 and less than 250 characters. 
+** 3
+Additional text (always in a 250 character block) (optional)
+** 7
+DXF: x value; App: 3D vector text style name (standard if not provided) (optional)
+** 210
+Stretch direction (optional; default = 0, 0, 1)
+DXF: x value; App: 3D vector
+** 220,230
+DXF: y and Z values of extrusion direction (optional)
+** 11
+X-axis direction vector (in WCS)
+DXF: x value; App: 3D vector
+** 21,31
+DXF: y value and Z value of x-axis direction vector (in WCS)
+** 42
+The horizontal width of the characters that make up the Mtext entity. 
+This value is always equal to or less than the value of group code 41 (read only, ignored if provided). 
+** 43
+Vertical height of Mtext element (read only, ignored if provided)
+** 50
+Rotation angle in radians
+** 73
+Line spacing style for multiline text (optional): 
+1 = at least (will be replaced with higher characters)
+2 = precise (will not be replaced with higher characters)
+** 44
+Line spacing ratio of multiline text (optional): 
+The default percentage (three fifths) of line spacing to apply. 
+Valid values range from 0.25 to 4.00
+** 90
+Background fill settings: 
+0 = background fill off
+1 = use background fill color
+2 = use the graphics window color as the background fill color
+** 63
+Background color (color index number)
+** 420-429
+Background color (RGB color)
+** 430-439
+Background color (color name)
+** 45
+Fill box size (optional): 
+Determines the size of the border around the text. 
+** 63
+Background fill color (optional): 
+The color to be used for background filling when the group code 90 is 1. 
+** 441
+Transparency of background fill color (not implemented)
+* ATTRIB
+** 100
+Subclass tag (acdbtext)
+** 39
+Thickness (optional; default = 0)
+** 10
+Text start point (in OCS)
+DXF: x value; App: 3D points
+** 20, 30
+DXF: y value and Z value of text starting point (in OCS)
+** 40
+Text height
+** 1
+Default value (string)
+** 100
+Subclass tag (acdbattribute)
+** 280
+Version number: 
+0 = 2010
+** 2
+Attribute label (string; cannot contain spaces)
+** 70
+Attribute tag: 
+1 = attribute invisible (not present)
+2 = fixed attribute
+4 = require verification when entering attributes
+8 = attribute is preset (no prompt when inserting)
+** 73
+Field length (optional; default = 0) (not currently used)
+** 50
+Text rotation angle (optional; default = 0)
+** 41
+X relative scale (width) (optional; default = 1). This value is also adjusted when fitting type text is used. 
+** 51
+Tilt angle (optional; default = 0)
+** 7
+Text style name (optional; default = standard)
+** 71
+Text generation flag (optional; default = 0). See 'text group codes' 
+** 72
+Text horizontal justification type (optional; default = 0). See 'text group codes' 
+** 74
+Vertical text justification type (optional; default = 0). See 'group code 73 in text' 
+** 11
+Alignment point (in OCS) (optional)
+DXF: x value; App: 3D points
+It only appears when group 72 or 74 appears and is not zero
+** 21, 31
+DXF: y and Z values of alignment points (in OCS) (optional)
+** 210
+Stretch direction. Appears only when the extrusion direction of the element is not parallel to the Z axis of WCS (optional; default = 0, 0, 1)
+DXF: x value; App: 3D vector
+** 220, 230
+DXF: y and Z values of extrusion direction (optional)
+** 280
+Lock the position mark. Locks the location of attributes in a block reference
+** 100
+Subclass tag (acdbxrecord)
+** 280
+Duplicate record clone flag (determines how to merge duplicate entries): 
+1 = keep existing
+** 70
+Multiline text mark: 
+2 = multiline text attribute
+4 = fixed multiline text attribute definition
+** 70
+Actual lock flag: 
+0 = unlock
+1 = lock
+** 70
+Number of secondary attributes or attribute definitions
+three hundred and forty
+Hard pointer ID of secondary attribute or attribute definition
+** 10
+Attribute or attribute definition alignment point
+DXF: x value; App: 3D points
+** 20,30
+DXF: y and Z values of insertion point
+** 40
+Current annotation scale
+** 2
+Property or property definition label string
+** 0
+Element type (Mtext)
+** 100
+Subclass tag (acdbentity)
+** 67
+Non existence or zero indicates that the element is in model space. 1 indicates that the element is in paper space (optional)
+** 8
+Layer name
+** 100
+Subclass tag (acdbmtext)
+** 10
+insertion point
+DXF: x value; App: 3D points
+** 20,30
+DXF: y and Z values of insertion point
+** 40
+Nominal (initial) text height
+** 41
+Reference rectangle width
+** 46
+Define annotation height
+** 71
+Attachment point: 
+1 = upper left; 2 = upper middle; 3 = upper right
+4 = left middle; 5 = center; 6 = right middle
+7 = lower left; 8 = middle lower; 9 = lower right
+** 72
+Drawing direction: 
+1 = left to right
+3 = from top to bottom
+5 = with style (inherited from relevant text style)
+** 1
+Text string
+If the string length is less than 250 characters, all characters appear in group 1. If the string length is greater than 250 characters, the string will be divided into data blocks with a length of 250 characters and displayed in one or more group 3 codes. If the group 3 code is used, the last group will be group 1 and less than 250 characters. 
+** 3
+Additional text (always in a 250 character block) (optional)
+** 7
+DXF: x value; App: 3D vector text style name (standard if not provided) (optional)
+** 210
+Stretch direction (optional; default = 0, 0, 1)
+DXF: x value; App: 3D vector
+** 220,230
+DXF: y and Z values of extrusion direction (optional)
+** 11
+X-axis direction vector (in WCS)
+DXF: x value; App: 3D vector
+** 21,31
+DXF: y value and Z value of x-axis direction vector (in WCS)
+** 42
+The horizontal width of the characters that make up the Mtext entity. 
+This value is always equal to or less than the value of group code 41 (read only, ignored if provided). 
+** 43
+Vertical height of Mtext element (read only, ignored if provided)
+** 50
+Rotation angle in radians
+** 73
+Line spacing style for multiline text (optional): 
+1 = at least (will be replaced with higher characters)
+2 = precise (will not be replaced with higher characters)
+** 44
+Line spacing ratio of multiline text (optional): 
+The default percentage (three fifths) of line spacing to apply. 
+Valid values range from 0.25 to 4.00
+** 90
+Background fill settings: 
+0 = background fill off
+1 = use background fill color
+2 = use the graphics window color as the background fill color
+** 63
+Background color (color index number)
+** 420-429
+Background color (RGB color)
+** 430-439
+Background color (color name)
+** 45
+Fill box size (optional): 
+Determines the size of the border around the text. 
+** 63
+Background fill color (optional): 
+The color to be used for background filling when the group code 90 is 1. 
+** 441
+Transparency of background fill color (not implemented)
+* BODY
+** 100
+Subclass tag (acdbmodelergeometry)
+** 70
+Modeling format version number (current value = 1)
+** 1
+Ownership data (multiple lines, each line < 255 characters)
+** 3
+Additional row of ownership data (if the string length of the previous group 1 is greater than 255 characters) (optional)
+* CIRCLE
+** 100
+Subclass marker (acdbcircle)
+** 39
+Thickness (optional; default = 0)
+** 10
+Center point (in OCS)
+DXF: x value; App: 3D points
+** 20, 30
+DXF: y and Z values of the center point (in OCS)
+** 40
+radius
+** 210
+Stretch direction (optional; default = 0, 0, 1)
+DXF: x value; App: 3D vector
+** 220, 230
+DXF: y and Z values of extrusion direction (optional)
+* COORDINATION MODEL
+** 0
+Object name (coordination model)
+** 5
+handle
+** 330
+Soft pointer ID / handle of owner dictionary
+** 100
+Subclass tag (acdbnavisworksmodel)
+** 340
+Soft pointer ID / handle to acdbnavisworksmodeldef object
+40, 40, 40, 40
+40, 40, 40, 40
+40, 40, 40, 40
+40, 40, 40, 40
+Model transformation in WCS coordinates (4x4 matrix)
+** 40
+Insert unit factor
+* DIMENSION
+** 100
+Subclass tag (acdbdimension)
+** 280
+Version number: 
+0 = 2010
+** 2
+The name of the block that contains the elements that make up the annotation picture
+** 10
+Define points (in WCS)
+DXF: x value; App: 3D points
+** 20, 30
+DXF: define y and Z values of points (in WCS)
+** 11
+Midpoint of dimension text (in OCS)
+DXF: x value; App: 3D points
+** 21, 31
+DXF: y and Z values of the midpoint of dimension text (in OCS)
+** 70
+Dimension type: 
+The value 0-6 is an integer value representing the dimension type. The values 32, 64 and 128 are the bit values added to the integer value (the value 32 is always set in R13 and later versions)
+0 = rotation, horizontal or vertical
+1 = align
+2 = angle
+3 = diameter
+4 = radius
+5 = three point angle
+6 = coordinates
+32 = indicates that the block reference (group code 2) is only referenced by this dimension. 
+64 = coordinate type. This is a bit value (bit 7), which is only used with integer value 6. If this value is set, the coordinate is of type X; If not set, the coordinates are of type y. 
+128 = this is a bit value (bit 8) added to the 70 value of the other group (if the dimension text has been placed in the user-defined position instead of the default position)
+** 71
+Attachment point: 
+1 = upper left
+2 = middle upper
+3 = upper right
+4 = left center
+5 = center
+6 = right middle
+7 = lower left
+8 = middle lower
+9 = lower right
+** 72
+Dimension text line spacing style (optional): 
+1 (or missing) = at least (will be replaced with higher characters)
+2 = precise (will not be replaced with higher characters)
+** 41
+Dimension text line spacing scale (optional): 
+The default percentage (three fifths) of line spacing to apply. Valid values range from 0.25 to 4.00
+** 42
+Actual measurement result (optional; read-only value)
+** 1
+Dimension text explicitly entered by the user. Optional; The default value is the measurement result. If it is empty or '< >', the dimensioned measurement results will be drawn as text; If it is '' (a space), the text will be suppressed. Other content is drawn as text
+** 53
+Optional group code 53 is the rotation angle (dimension line direction) between dimension text and its default direction (optional)
+** 51
+All dimension types have optional 51 group codes, which represent the horizontal direction of dimension entities. Dimension elements determine the direction of dimension text and lines for horizontal, vertical, and rotational linear dimensions
+This set of values is the negative angle between the OCS X axis and the UCS X axis. It is always on the XY plane of the OCS
+** 210
+Stretch direction (optional; default = 0, 0, 1)
+DXF: x value; App: 3D vector
+** 220, 230
+DXF: y and Z values of extrusion direction (optional)
+** 3
+Dimension style name
+* ELLIPSE
+** 100
+Subclass marker (acdbellipse)
+** 10
+Center point (in WCS)
+DXF: x value; App: 3D points
+** 20, 30
+DXF: y and Z values of the center point (in WCS)
+** 11
+Long axis endpoint relative to the center (in WCS)
+DXF: x value; App: 3D points
+** 21, 31
+DXF: y and Z values of the major axis endpoint relative to the center (in WCS)
+** 210
+Stretch direction (optional; default = 0, 0, 1)
+DXF: x value; App: 3D vector
+** 220, 230
+DXF: y and Z values of extrusion direction (optional)
+** 40
+Ratio of minor axis to major axis
+** 41
+Start point parameter (0.0 for closed ellipse)
+** 42
+Endpoint parameter (2pi for closed ellipses)
+* HATCH
+#Boundary path data
+** 100
+Subclass tag (acdbhatch)
+** 10
+Elevation point (in OCS)
+DXF: x value = 0; App: 3D point (x and y are always equal to 0, Z represents elevation)
+** 20, 30
+DXF: y and Z values of elevation points (in OCS)
+Y = 0, z = elevation
+** 210
+Stretch direction (optional; default = 0, 0, 1)
+DXF: x value; App: 3D vector
+** 220, 230
+DXF: y and Z values of extrusion direction
+** 2
+Pattern name
+** 70
+Solid fill flag (0 = hatch; 1 = solid fill); For mpolygon, it is the version of mpolygon
+** 63
+For mpolygon, the hatch color is ACI
+** 71
+Correlation flag (0 = no correlation; 1 = correlation); For mpolygon, set the solid filling flag (0 = no solid filling; 1 = solid filling)
+** 91
+Number of boundary paths (rings)
+varied
+Boundary path data. Repeat the number of times specified by code 91. See 'boundary path data' 
+** 75
+Hatch pattern: 
+0 = hatch the odd parity area (normal style)
+1 = hatch only the outermost region (external style)
+2 = hatch the entire area (ignore style)
+** 76
+Pattern type: 
+0 = user defined
+1 = predefined
+2 = custom
+** 52
+Pattern angle (hatch only)
+** 41
+Hatch pattern scale or spacing (hatch only)
+** 73
+For mpolygon, set the boundary annotation flag: 
+0 = boundary is not annotation boundary
+1 = boundary is annotation boundary
+** 77
+Pattern bidirectional flag (hatch only): 
+0 = non bidirectional flag
+1 = two way sign
+** 78
+Number of pattern definition lines
+varied
+Pattern line data. The number of repetitions specified by code 78. See 'pattern data' 
+** 47
+The pixel size used to determine the density of performing various intersecting and ray method operations in the pattern calculation of related hatches and hatches created using the 'fill' method of hatches. 
+** 98
+Seed number
+** 11
+For mpolygon, is the offset vector
+** 99
+For mpolygon, it is the number of degenerate boundary paths (rings) (degenerate boundary paths are borders ignored by hatch)
+** 10
+Seed point (in OCS)
+DXF: x value; App: two dimensional point (multiple entries)
+** 20
+DXF: y value of seed point (in OCS); (multiple entries)
+** 450
+Represents a solid hatch or gradient; If it is a solid hatch, the value of the remaining code is ignored, but it must exist. Optional; If code 450 is in the file, the following codes must also be in the file: 451, 452, 453, 460, 461, 462, and 470. If code 450 is not in the file, the following codes must also not be in the file: 451, 452, 453, 460, 461, 462, and 470
+0 = solid hatch
+1 = gradient
+** 451
+Keep zero for future use
+four hundred and fifty-two
+Record the method to define the color, only for dialog code: 
+0 = two color gradient
+1 = monochrome gradient
+** 453
+Number of colors: 
+0 = solid hatch
+2 = gradient
+** 460
+Rotation angle of gradient color in radians (default = 0, 0)
+** 461
+Gradient color definition; Corresponds to the center option in the gradient tab of the boundary hatch dialog box. Each gradient has two definitions: moving and non moving. The move value describes the transition between the two definitions that should be used. A value of 0.0 indicates that only the non mobile version should be used, and a value of 1.0 indicates that only the mobile version should be used. 
+** 462
+The tone value used by the dialog code (default = 0, 0; range from 0.0 to 1.0). The hue value is a gradient color used to control the hue in the dialog box when the hatch group code 452 is set to 1. 
+** 463
+Reserved for future use: 
+0 = first value
+1 = second value
+** 470
+String (default = linear)
+#Pattern data
+** 53
+Pattern line angle
+** 43
+Pattern line base point, x component
+** 44
+Pattern line base point, Y component
+** 45
+Pattern line offset, x component
+** 46
+Pattern line offset, Y component
+** 79
+Number of dashed line length items
+** 49
+Dashed line length (multiple entries)
+* HELIX
+Spline data
+** 100
+Subclass marker (acdbhelix)
+** 90
+Major version number
+** 91
+Maintenance version number
+10, 20, 30
+Axis base point
+11, 21, 31
+starting point
+** 12, 22, 32
+Axis vector
+** 40
+radius
+** 41
+Number of turns
+** 42
+Circle height
+** 290
+Left and right hand habits: 
+0 = left hand
+1 = right hand
+** 280
+Constraint type: 
+0 = constraint ring height
+1 = number of restraint turns
+2 = constraint height
+* IMAGE
+** 100
+Subclass marker (AcDbRasterImage)
+** 90
+Class version
+** 10
+Insertion point (in WCS)
+DXF: x value; App: 3D points
+** 20, 30
+DXF: y and Z values of insertion point (in WCS)
+** 11
+U vector of a single pixel (point along the visible bottom of the image, starting from the insertion point) (in WCS)
+DXF: x value; App: 3D points
+** 21, 31
+DXF: y and Z values of u vector (in WCS)
+** 12
+V vector of a single pixel (the point on the left visible along the image, starting from the insertion point) (in WCS)
+DXF: x value; App: 3D points
+** 22, 32
+DXF: y and Z values of V vector (in WCS)
+** 13
+Image size (pixels)
+DXF: U value; App: two dimensional point (U value and V value)
+** 23
+DXF: V value of image size (pixels)
+** 340
+Hard reference of imagedef object
+** 70
+Image display characteristics: 
+1 = display image
+2 = display image when it is not aligned with the screen
+4 = use clipping boundary
+8 = transparency on
+** 280
+Clipping status: 
+0 = off
+1 = on
+** 281
+Brightness value (0-100; default = 50)
+** 282
+Contrast value (0-100; default = 50)
+** 283
+Fade value (0-100; default = 0)
+** 360
+imagedef_Hard reference of reactor object
+** 71
+Clipping boundary type. 1 = rectangle; 2 = polygon
+** 91
+Vertex number of the rear crop boundary
+** 14
+Crop boundary vertex (in OCS)
+DXF: x value; App: two dimensional point (multiple entries)
+Note 1) for the rectangular clipping boundary type, you must specify two diagonal points. The default values are (- 0.5, - 0.5), (size. X-0.5, size. Y-0.5). 2) For polygon clipping boundary types, you must specify three or more vertices. Polygon vertices must be listed in order
+** 24
+DXF: y value of clipping boundary vertex (in OCS) (multiple entries)
+** 290
+Clipping mode: 
+0 = external mode
+1 = internal mode
+* INSERT
+** 100
+Subclass tag (acdbblockreference)
+** 66
+Variable attribute follow flag (optional; default = 0); If the value of the attribute follow flag is 1, a series of attribute entities will follow and insert, and end with a seqend entity
+** 2
+Block name
+** 10
+Insertion point (in OCS)
+DXF: x value; App: 3D points
+** 20, 30
+DXF: y and Z values of insertion point (in OCS)
+** 41
+X scale (optional; default = 1)
+** 42
+Y scale (optional; default = 1)
+** 43
+Z scale (optional; default = 1)
+** 50
+Rotation angle (optional; default = 0)
+** 70
+Column count (optional; default = 1)
+** 71
+Row count (optional; default = 1)
+** 44
+Column spacing (optional; default = 0)
+** 45
+Line spacing (optional; default = 0)
+** 210
+Stretch direction (optional; default = 0, 0, 1)
+DXF: x value; App: 3D vector
+** 220, 230
+DXF: y and Z values of extrusion direction (optional)
+
+*LEADER
+** 100
+Subclass marker (acdbleader)
+** 3
+Dimension style name
+** 71
+Arrow mark: 0 = disabled; 1 = enabled
+** 72
+Leader path type: 0 = straight line segment; 1 = spline
+** 73
+Leader creation flag (default = 3):
+0 = created using text notes
+1 = created using tolerance notes
+2 = create with block reference annotation
+3 = created without any annotation
+** 74
+Baseline direction sign:
+0 = the baseline (or the tangent end of the spline leader) is opposite to the direction of the horizontal vector
+1 = the baseline (or tangent end of spline leader) is in the same direction as the horizontal vector (see code 75)
+** 75
+Baseline mark:
+0 = no baseline
+1 = baseline
+** 40
+Text note height
+** 41
+Text annotation width
+** 76
+Number of lead vertices (ignored if OPEN)
+** 10
+Vertex coordinates (one entry per vertex)
+DXF: X value;
+APP: 3D Point
+** 20, 30
+DXF: Y and Z values ​​of vertex coordinates
+
+** 77
+Color to use when DIMCLRD = BYBLOCK for the lead
+
+** 340
+Hard references to related annotations (multiline text, tolerances, or inserted elements)
+
+** 210
+normal vector
+DXF: X value;
+APP: 3D Vector
+** 220, 230
+DXF: Y and Z values ​​of the normal vector
+** 211
+The "horizontal" orientation of the leader
+DXF: X value;
+APP: 3D Vector
+
+** 221, 231
+DXF: Y and Z values ​​for the "horizontal" direction of the leader
+
+** 212
+The offset of the previous leader vertex from the block reference insertion point
+DXF: X value;
+APP: 3D Vector
+
+** 222, 232
+DXF: Offset Y and Z values
+
+** 213
+The offset of the previous leader point from the annotation location point
+DXF: X value;
+APP: 3D Vector
+
+** 223, 233
+DXF: Offset Y and Z values
+
+*LIGHT
+** 100
+Subclass Marker (AcDbLight)
+** 90
+version number
+** 1
+light source name
+** 70
+type of light source:
+1 = directional light
+2 = point light
+3 = Spotlight
+** 290
+state
+** 291
+print outline
+** 40
+strength
+** 10
+light source position
+DXF: X value;
+APP: 3D Point
+** 20, 30
+DXF: X, Y, and Z values ​​of the light source position
+** 11
+target location
+DXF: X value;
+APP: 3D Point
+** 21, 31
+DXF: X, Y, and Z values ​​of the target position
+** 72
+Attenuation Type:
+0 = none
+1 = Inverse Linear
+2 = inverse square
+** 292
+Use falloff bounds
+** 41
+Attenuation start limit
+** 42
+Falloff End Bounds
+** 50
+Spot angle
+** 51
+Irradiation angle
+** 293
+cast shadows
+** 73
+shade type
+0 = ray traced shadows
+1 = shadow map
+** 91
+Shadow map size
+** 280
+Shadow map softness
+
+*LINE
+** 100
+Subclass Marker (AcDbLine)
+** 39
+thickness (optional; default = 0)
+** 10
+Starting point (in WCS)
+DXF: X value;
+APP: 3D Point
+** 20, 30
+DXF: Y and Z values ​​of the starting point (in WCS)
+** 11
+Endpoint (in WCS)
+DXF: X value;
+APP: 3D Point
+** 21, 31
+DXF: Y and Z values ​​of endpoints (in WCS)
+** 210
+stretch direction (optional; default = 0, 0, 1)
+DXF: X value;
+APP: 3D Vector
+** 220, 230
+DXF: Y and Z values ​​of the extrusion direction (optional)
+
+* LWPOLYLINE
+** 100
+Subclass Marker (AcDbPolyline)
+** 90
+number of vertices
+** 70
+polyline flag (bitwise encoded);
+The default value is 0:
+1 = off;
+128 = Plinegen
+** 43
+Fixed width (optional; default = 0).
+Not used if set to variable width (code 40 and/or 41)
+** 38
+Elevation (optional; default = 0)
+** 39
+thickness (optional; default = 0)
+** 10
+vertex coordinates (in OCS), multiple entries;
+One entry per vertex
+DXF: X value;
+APP: 2D point
+** 20
+DXF: Y value of vertex coordinates (in OCS), multiple entries;
+One entry per vertex
+** 91
+vertex identifier
+** 40
+Start width (multiple entries; one entry per vertex) (optional; default = 0; multiple entries).
+Not used if set to fixed width (code 43)
+** 41
+Endpoint width (multiple entries; one entry per vertex) (optional; default = 0; multiple entries).
+Not used if set to fixed width (code 43)
+** 42
+convexity (multiple entries; one entry per vertex) (optional; default = 0)
+** 210
+stretch direction (optional; default = 0, 0, 1)
+DXF: X value;
+APP: 3D Vector
+** 220, 230
+DXF: Y and Z values ​​of the extrusion direction (optional)
+*mesh
+** 100
+Subclass Marker (AcDbSubDMesh)
+** 71
+version number
+** 72
+Smooth Sharpening feature
+0 = off
+1 = On
+** 91
+Number of subdivision levels
+** 92
+Level 0 Vertices
+** 10
+vertex position
+** 93
+Size of the level 0 face list
+** 90
+face list item
+** 94
+Level 0 Edges
+** 90
+vertex index for each edge
+** 95
+Level 0 edge sharpening
+** 140
+edge creation value
+** 90
+The number of sub-entities whose properties have been replaced
+** 91
+Sub-entity tag
+** 92
+Number of replaced features
+** 90
+Feature type
+0 = color
+1 = Material
+2 = Transparency
+3 = Material Mapper
+*MLEADER
+** 340
+Leader Style ID
+** 90
+Feature Override Flag
+** 170
+Lead Type
+** 91
+lead color
+** 341
+Lead Type ID
+** 171
+lead line width
+** 290
+enable baseline
+** 291
+enable baseline
+** 41
+Baseline length
+** 342
+Arrow ID
+** 42
+arrow size
+** 172
+content type
+** 343
+Text Style ID
+** 173
+Text Left Attachment Style
+** 95
+Text Right Attachment Type
+** 174
+Type of text angle
+** 175
+Type of text alignment
+** 92
+text color
+** 292
+Enable text borders
+** 344
+Block Content ID
+** 93
+block content color
+** 10
+block content ratio
+** 43
+block content rotation
+** 176
+block content connection type
+** 293
+Enable annotation scale
+** 94
+arrow index
+** 345
+Arrow ID
+** 330
+Block attribute ID
+** 177
+block attribute index
+** 44
+block attribute width
+** 302
+block attribute literal string
+** 294
+negative text direction
+** 178
+Text alignment in IPE
+** 179
+text attachment point
+** 271
+Text attachment direction for MText content:
+0 = horizontal
+1 = vertical
+** 272
+Bottom text attachment direction:
+9 = Centered
+10 = underline and center
+** 273
+Top text attachment direction:
+9 = Centered
+10 = overline and center
+* MLEADERSTYLE
+** 170
+content type
+** 171
+Draw Multileader Order Types
+** 172
+Draw Leader Order Type
+** 90
+Maximum leader line segment point
+** 40
+First Line Segment Angle Constraint
+** 41
+Second line segment angle constraint
+** 173
+Lead Type
+** 91
+lead color
+** 340
+Lead Type ID
+** 92
+lead line width
+** 290
+enable baseline
+** 42
+Baseline gap
+** 291
+enable baseline
+** 43
+Baseline length
+** 3
+Multileader Style Description
+** 341
+Arrow ID
+** 44
+arrow size
+** 300
+Default Mtext Content
+** 342
+Mtext style ID
+** 174
+Text Left Attachment Style
+** 175
+Type of text angle
+** 176
+Type of text alignment
+** 178
+Text Join Position Type - Right
+** 93
+text color
+** 45
+text height
+** 292
+Enable text borders
+** 297
+Text is always left aligned
+** 46
+Align space
+** 343
+Block Content ID
+** 94
+block content color
+** 47
+block content scale on the x-axis
+** 49
+Block content scale on the Y axis
+** 140
+Block content scale on Z axis
+** 293
+Enable block content scale
+** 141
+block content rotation
+** 294
+Enable block content rotation
+** 177
+block content connection type
+** 142
+Proportion
+** 295
+Override property values
+** 296
+Annotative
+** 143
+Break spacing size
+** 271
+Text attachment direction for Mtext content:
+0 = horizontal
+1 = vertical
+** 272
+Bottom text attachment direction:
+9 = Centered
+10 = underline and center
+** 273
+Top text attachment direction:
+9 = Centered
+10 = overline and center
+*mline
+** 100
+Subclass Marker (AcDbMline)
+** 2
+String with a maximum length of 32 characters.
+The style name to use for this multiline.
+An entry for this style must exist in the MLINESTYLE dictionary.
+Do not modify this field without also updating the related entry in the MLINESTYLE dictionary.
+** 340
+Pointer handle/ID of the MLINESTYLE object
+** 40
+Scale Factor
+** 70
+Positive:
+0 = top justified
+1 = no alignment
+2 = Bottom justified
+** 71
+Flags (bit-encoded value):
+1 = At ​​least one vertex (code 72 is greater than 0)
+2 = off
+4 = start sealing prohibited
+8 = End capping disabled
+** 72
+number of vertices
+** 73
+The number of elements in the MLINESTYLE definition
+** 10
+Starting point (in WCS)
+DXF: X value;
+APP: 3D Point
+** 20, 30
+DXF: Y and Z values ​​of the starting point (in WCS)
+** 210
+stretch direction (optional; default = 0, 0, 1)
+DXF: X value;
+APP: 3D Vector
+** 220, 230
+DXF: Y and Z values ​​of the extrusion direction (optional)
+** 11
+vertex coordinates (multiple entries; one entry per vertex) DXF: X value;
+APP: 3D Point
+** 21, 31
+DXF: Y and Z values ​​of vertex coordinates
+** 12
+direction vector of the line segment starting from this vertex (multiple entries; one entry per vertex)
+DXF: X value;
+APP: 3D Vector
+** 22, 32
+DXF: The Y and Z values ​​of the direction vector of the line segment starting from this vertex
+** 13
+the miter direction vector at this vertex (multiple entries; one entry per vertex)
+DXF: X value;
+APP: 3D Vector
+** 23, 33
+DXF: Y and Z values ​​of the miter direction vector
+** 74
+The number of arguments for this element (repeated for each element in the line segment)
+** 41
+element parameter (repeated from previous code 74)
+** 75
+The number of area fill parameters for this element (repeated for each element in the line segment)
+** 42
+Area fill parameter (repeated from previous code 75)
+*MTEXT
+** 100
+Subclass Marker (AcDbMText)
+** 10
+insertion point
+DXF: X value;
+APP: 3D Point
+** 20, 30
+DXF: Y and Z values ​​of the insertion point
+** 40
+Nominal (initial) text height
+** 41
+Reference rectangle width
+** 71
+Attachment point:
+1 = top left
+2 = upper middle
+3 = top right
+4 = left center
+5 = Center
+6 = middle right
+7 = bottom left
+8 = middle and lower
+9 = bottom right
+** 72
+Graphic Orientation:
+1 = left to right
+3 = top to bottom
+5 = Follow style (inherit from related text style)
+** 1
+string.
+if
+
+String length is less than 250 characters, all characters appear in group 1.
+If the string is longer than 250 characters, the string is split into 250-character chunks and displayed in one or more Group 3 codes.
+If using group 3 codes, the last group will be group 1 and have less than 250 characters
+** 3
+Additional text (always in a 250-character block) (optional)
+** 7
+text style name ("standard" if not provided) (optional)
+** 210
+stretch direction (optional; default = 0, 0, 1)
+DXF: X value;
+APP: 3D Vector
+** 220, 230
+DXF: Y and Z values ​​of the extrusion direction (optional)
+** 11
+X-axis direction vector (in WCS)
+DXF: X value;
+APP: 3D Vector
+Converts group code 50 (rotation angle in radians) passed as DXF input to an equivalent orientation vector (if code 50 and codes 11, 21, 31 are passed at the same time, the last code is converted).
+This is an easy way to convert from literal objects.
+** 21, 31
+DXF: Y and Z values ​​of the X-axis direction vector (in WCS)
+** 42
+The horizontal width of the characters that make up the MText primitive.
+The value is always equal to or less than the value of group code 41 (read only, ignored if provided)
+** 43
+vertical height of mtext primitives (read-only, ignored if provided)
+** 50
+Rotation angle in radians
+** 73
+Line spacing style for multiline text (optional):
+1= at least (will be substituted with higher character)
+2 = exact (will not substitute higher characters)
+** 44
+Line spacing ratio for multiline text (optional):
+The default percentage of leading (three-fifths) to apply.
+Valid values ​​range from 0.25 to 4.00
+** 90
+Background fill settings:
+0 = Background padding is off
+1 = use background fill color
+2 = Use the graphics window color as the background fill color
+** 420 - 429
+Background color (RGB color)
+** 430 - 439
+background color (color name)
+** 45
+Padding box size (optional):
+Determines the size of the border around the text.
+** 63
+Background fill color (optional):
+The color to use for the background fill when group code 90 is 1.
+** 441
+Transparency of the background fill color (not implemented)
+** 75
+column type
+** 76
+column count
+** 78
+Reverse column direction
+** 79
+Column auto height
+** 48
+column width
+** 49
+column spacing
+** 50
+column height;
+This code is followed by the column count (Int16), then the column height number
+*oleframe
+** 100
+Subclass Marker (AcDbOleFrame)
+** 70
+OLE version number
+** 90
+length of binary data
+** 310
+binary data (multi-line)
+** 1
+End of OLE data (string "OLE")
+* ole2frame
+** 100
+Subclass Marker (AcDbOle2Frame)
+** 70
+OLE version number
+** 3
+length of binary data
+** 10
+Top left corner (WCS)
+DXF: X value;
+APP: 3D Point
+** 20, 30
+DXF: Y and Z values ​​for the upper left corner (in WCS)
+** 11
+Bottom Right Corner (WCS)
+DXF: X value;
+APP: 3D Point
+** 21, 31
+DXF: Y and Z values ​​in the lower right corner (in WCS)
+** 71
+OLE object type, 1 = link;
+2 = embedded;
+3 = static
+** 72
+Tile Mode Descriptor:
+0 = object resides in model space
+1 = Object resides in paper space
+** 90
+length of binary data
+** 310
+binary data (multi-line)
+** 1
+End of OLE data (string "OLE")
+
+
+
+*point
+** 100
+Subclass Marker (AcDbPoint)
+** 10
+Point location (in WCS)
+DXF: X value;
+APP: 3D Point
+** 20, 30
+DXF: Y and Z values ​​of point positions (in WCS)
+** 39
+thickness (optional; default = 0)
+** 210
+stretch direction (optional; default = 0, 0, 1)
+DXF: X value;
+APP: 3D Vector
+** 220, 230
+DXF: Y and Z values ​​of the extrusion direction (optional)
+** 50
+The angle of the X-axis of the UCS to use when drawing points (optional; default = 0);
+Used when PDMODE is non-zero
+* polyline
+** 100
+Subclass marker (AcDb2dPolyline or AcDb3dPolyline)
+** 66
+obsolete;
+Previously "followed by entity flags" (optional; ignored if present)
+** 10
+DXF: always 0
+APP: "virtual" point;
+The X and Y values ​​are always 0, and the Z value is the level of the polyline (in OCS for 2D, WCS for 3D)
+** 20
+DXF: always 0
+** 30
+DXF: Elevation of the polyline (in OCS for 2D, in WCS for 3D)
+** 39
+thickness (optional; default = 0)
+** 70
+Polyline flags (bitwise encoded; default = 0):
+1 = This is a closed polyline (or a polygon mesh closed in the M direction)
+2 = Curve fit vertices added
+4 = Spline fit vertices added
+8 = This is a 3D polyline
+16 = This is a 3D polygon mesh
+32 = polygon mesh closed in N direction
+64 = The polyline is a faceted mesh
+128 = Linetype pattern is generated continuously around the vertices of this polyline
+** 40
+Default start width (optional; default = 0)
+** 41
+Default endpoint width (optional; default = 0)
+** 71
+polygon mesh M vertex count (optional; default = 0)
+** 72
+polygon mesh N vertex count (optional; default = 0)
+** 73
+Smooth Surface M Density (optional; default = 0)
+** 74
+Smooth Surface N Density (optional; default = 0)
+** 75
+Curve and smooth surface type (optional; default = 0);
+Integer code, not bitwise encoded:
+0 = do not fit smooth surfaces
+5 = Quadratic B-spline surface
+6 = cubic B-spline surface
+8 = Bezier surface
+** 210
+stretch direction (optional; default = 0, 0, 1)
+DXF: X value;
+APP: 3D Vector
+** 220, 230
+DXF: Y and Z values ​​of the extrusion direction (optional)
+*ray
+** 100
+Subclass Marker (AcDbRay)
+** 10
+Starting point (in WCS)
+DXF: X value;
+APP: 3D Point
+** 20, 30
+DXF: Y and Z values ​​of the starting point (in WCS)
+** 11
+Unit Direction Vector (in WCS)
+DXF: X value;
+APP: 3D Vector
+** 21, 31
+DXF: Y and Z values ​​of the unit direction vector (in WCS)
+* region
+** 100
+Subclass Marker (AcDbModelerGeometry)
+** 70
+Modeling format version number (current value = 1)
+** 1
+Ownership data (multiple lines, < 255 characters each)
+** 3
+Additional line of ownership data (if the previous group 1 string was longer than 255 characters) (optional)
+*section
+** 100
+Subclass Marker (AcDbSection)
+** 90
+Section state
+** 91
+Sectional sign
+** 1
+name
+** 10, 20, 30
+vertical direction
+** 40
+top height
+** 41
+Bottom height
+** 70
+Indicator transparency
+** 63, 411
+Indicator color
+** 92
+number of vertices
+** 11, 21, 31
+Vertices (repeated based on vertex count)
+** 93
+Backline Vertices
+** 12, 22, 32
+Back line vertices (repeated based on the number of back line vertices)
+** 360
+Hard pointer ID/handle to geometry settings object
+*seqend
+**  -2
+APP: The name of the primitive that starts the sequence.
+This primitive marks the end of a polyline vertex (vertex type name), or the end of an attribute primitive (attribute type name) of an inset primitive with attributes (represented by the non-zero 66 groups present in the inset primitive).
+The code is not saved in the DXF file.
+* shape
+** 100
+Subclass Marker (AcDbShape)
+** 39
+thickness (optional; default = 0)
+** 10
+Insertion point (in WCS)
+DXF: X value;
+APP: 3D Point
+** 20, 30
+DXF: Y and Z values ​​of insertion point (in WCS)
+** 40
+size
+** 2
+shape name
+** 50
+rotation angle (optional; default = 0)
+** 41
+X relative scaling (optional; default = 1)
+** 51
+tilt angle (optional; default = 0)
+** 210
+stretch direction (optional; default = 0, 0, 1)
+DXF: X value;
+APP: 3D Vector
+** 220, 230
+DXF: Y and Z values ​​of the extrusion direction (optional)
+*solid
+** 100
+Subclass Marker (AcDbTrace)
+** 10
+first corner
+DXF: X value;
+APP: 3D Point
+** 20, 30
+DXF: Y and Z values ​​of the first corner
+** 11
+second corner
+DXF: X value;
+APP: 3D Point
+** 21, 31
+DXF: Y and Z values ​​of the second corner
+** 12
+third corner
+DXF: X value;
+APP: 3D Point
+** 22, 32
+DXF: Y and Z values ​​of the third corner
+** 13
+Fourth corner.
+If you enter only three corner points to define SOLID, the coordinates of the fourth corner point are the same as the coordinates of the third corner point.
+DXF: X value;
+APP: 3D Point
+** 23, 33
+DXF: Y and Z values ​​of the fourth corner
+** 39
+thickness (optional; default = 0)
+** 210
+stretch direction (optional; default = 0, 0, 1)
+DXF: X value;
+APP: 3D Vector
+** 220, 230
+DXF: Y and Z values ​​of the extrusion direction (optional)
+*spline
+** 100
+Subclass Marker (AcDbSpline)
+** 210
+normal vector (omitted if spline is non-planar)
+DXF: X value;
+APP: 3D Vector
+** 220, 230
+DXF: Y and Z values ​​of the normal vector (optional)
+** 70
+Spline flags (bitwise encoded):
+1 = closed spline
+2 = Periodic spline
+4 = Rational spline
+8 = Flat
+16 = Linear (also sets the plane bit)
+71
+order of the spline
+** 72
+number of nodes
+** 73
+control points
+** 74
+number of fitting points (if any)
+** 42
+Node tolerance (default = 0.0000001)
+** 43
+Control point tolerance (default = 0.0000001)
+** 44
+Fit tolerance (default = 0.0000000001)
+** 12
+Start Tangent - can be omitted (in WCS)
+DXF: X value;
+APP: 3D Point
+** 22, 32
+DXF: Y and Z values ​​tangent to the start point - can be omitted (in WCS)
+** 13
+End tangent - can be omitted (in WCS)
+DXF: X value;
+APP: 3D Point
+** 23, 33
+DXF: Y and Z values ​​for endpoint tangent - can be omitted (in WCS)
+** 40
+Node values ​​(one entry per node)
+** 41
+weight (if not 1);
+Occurs if neither is 1 for multiple pairs.
+** 10
+control points (in WCS);
+One entry per control point
+DXF: X value;
+APP: 3D Point
+** 20, 30
+DXF: Y and Z values ​​of control points (in WCS);
+One entry per control point
+** 11
+fit points (in WCS);
+One entry per fit point
+DXF: X value;
+APP: 3D Point
+** 21, 31
+DXF: Y and Z values ​​of fitted points (in WCS);
+One entry per fit point
+* sun
+** 100
+Subclass Marker (AcDbSun)
+** 90
+version number
+** 290
+state
+** 63
+color
+** 40
+strength
+** 291
+shadow
+** 91
+Gregorian date
+** 92
+time (in seconds since midnight)
+** 292
+daylight saving time
+** 70
+shade type
+0 = ray traced shadows
+1 = shadow map
+** 71
+Shadow map size
+** 280
+Shadow Softness
+* surface
+** 100
+Subclass Marker (AcDbModelerGeometry)
+** 70
+Modeling format version number (current value = 1)
+** 1
+Ownership data (multiple lines, < 255 characters each)
+** 3
+Additional line of ownership data (if the previous group 1 string was longer than 255 characters) (optional)
+** 100
+Subclass Marker (AcDbSurface)
+** 71
+U prime lines
+** 72
+V prime lines
+
+* table
+** 0
+Entity Name (ACAD_TABLE)
+** 5
+entity handle
+** 330
+Soft pointer ID of the owner dictionary
+** 100
+Subclass tag.
+(AcDbEntity)
+** 92
+Number of bytes in proxy primitive graphics
+** 310
+Data for proxy primitive graphics (multi-line; up to 256 characters per line)
+** 100
+Subclass tag.
+(AcDbBlockReference)
+** 2
+block name;
+Unnamed blocks start with a *T value
+** 10,20,30
+insertion point
+** 100
+Subclass tag.
+(AcDbTable)
+** 280
+Form data version number:
+** 0 = 2010
+** 342
+Hard pointer ID of the TABLESTYLE object
+** 343
+The hard pointer ID of the owner BLOCK record
+** 11,21,31
+horizontal vector
+** 90
+flag flag (unsigned integer)
+** 91
+Rows
+** 92
+number of columns
+** 93
+alternative sign
+** 94
+Alternative flags for border color
+** 95
+Alternative flags for border line widths
+** 96
+Alternative flag for border visibility
+** 141
+row height;
+This value keeps repeating, each row has a value of 1
+** 142
+column height;
+This value keeps repeating and each column has a value of 1
+** 171
+unit type;
+This value repeats itself with a value of 1 per cell:
+1 = literal type
+2 = block type
+** 172
+unit flag value;
+This value is repeated, and each cell has a value of 1
+** 173
+unit merge value;
+This value is repeated, and each cell has a value of 1
+** 174
+boolean flag indicating whether autoscale options are set for the unit;
+This value is repeated, and each cell has a value of 1
+** 175
+cell border width (only for merged cells);
+This value is repeated, and each cell has a value of 1
+** 176
+cell border height (for merged cells);
+This value is repeated, and each cell has a value of 1
+** 91
+unit substitution flag;
+This value repeats itself with a value of 1 per cell (since AutoCAD 2007)
+** 178
+Flag value of virtual edge
+** 145
+Rotation angle value (real number; applies to block-type cells and text-type cells)
+** 344
+The hard pointer ID of the FIELD object. This ID applies only to literal type units.
+If the text in the cell contains one or more fields, only the ID of the FIELD object is saved.
+Ignore literal strings (group codes 1 and 3)
+** 1
+Literal string in the cell.
+If the string length is less than 250 characters, all characters are displayed in code 1.
+If the string is longer than 250 characters, the string is split into chunks of 250 characters in length.
+These data blocks will be contained in one or more Code 2 codes.
+If using Code 2 codes, the last group will be Code 1 and less than 250 characters long.
+This value applies only to literal type cells and repeats, with a value of 1 per cell
+** 2
+Literal strings in cells, in data blocks of length 250 characters;
+Optional.
+This value applies only to literal type cells and repeats, with a value of 1 per cell
+** 340
+Hard pointer ID of the block table record.
+This value applies only to block type cells and repeats continuously, with a value of 1 per cell
+** 144
+The scale of the block (real number).
+This value applies only to block type cells and repeats continuously, with a value of 1 per cell
+** 179
+The number of attribute definitions in the block table record (for block type units only)
+** 331
+The soft pointer ID of the attribute definition in the block table record, referenced by group code 179 (for block type units only).
+Repeats each time an attribute defines this value
+** 300
+The literal string value of the attribute definition, repeated for each occurrence of the attribute definition and only applicable to block-type units
+** 7
+textstylename(string);
+Overrides applied at the cell level
+** 140
+text height value;
+Overrides applied at the cell level
+** 170
+cell alignment value;
+Overrides applied at the cell level
+** 64
+the color value of the cell content;
+Overrides applied at the cell level
+** 63
+The value of the background (fill) color of the cell content;
+Overrides applied at the cell level
+** 69
+The true color value of the border on the cell;
+Overrides applied at the cell level
+** 65
+The true color value of the cell's right border;
+Overrides applied at the cell level
+** 66
+The true color value of the lower border of the cell;
+Overrides applied at the cell level
+** 68
+The true color value of the left border of the cell;
+Overrides applied at the cell level
+** 279
+The line width of the upper border of the cell;
+Overrides applied at the cell level
+** 275
+The line width of the cell's right border;
+Overrides applied at the cell level
+** 276
+The line width of the lower border of the unit;
+Overrides applied at the cell level
+** 278
+The line width of the cell's left border;
+Overrides applied at the cell level
+** 283
+boolean flag whether to turn on fill color;
+Overrides applied at the cell level
+** 289
+Boolean flag for the visibility of the border on the cell;
+Overrides applied at the cell level
+** 285
+Boolean flag for the visibility of the cell's right border;
+Overrides applied at the cell level
+** 286
+Boolean flag for visibility of the cell's lower border;
+Overrides applied at the cell level
+** 288
+Boolean flag for the visibility of the cell's left border;
+Overrides applied at the cell level
+** 70
+flow direction;
+Overrides applied at the table element level
+** 40
+horizontal cell margins;
+Overrides applied at the table element level
+** 41
+vertical cell margins;
+Overrides applied at the table element level
+** 280
+Whether to suppress the flag of the title;
+Overrides applied at the table element level
+** 281
+Whether to suppress the flag of the header row;
+Overrides applied at the table element level
+** 7
+textstylename(string);
+Overrides applied at the table element level.
+There may be one entry per unit type
+** 140
+text-height (real);
+Overrides applied at the table element level.
+There may be one entry per unit type
+** 170
+unit_align(integer);
+Overrides applied at the table element level.
+There may be one entry per unit type
+** 63
+The color value of the vertical left border of the table or the cell background;
+Overrides applied at the table element level.
+There may be one entry per unit type
+** 64
+The color value of the table's horizontal top border or cell content;
+Overrides applied at the table element level.
+There may be one entry per unit type
+** 65
+The color value of the horizontal inner border line;
+Overrides applied at the table element level
+** 66
+The color value of the horizontal lower border line;
+Overrides applied at the table element level
+** 68
+The color value of the vertical inner border line;
+Overrides applied at the table element level
+** 69
+The color value of the vertical right border line;
+Overrides applied at the table element level
+** 283
+whether to enable the background color flag (default = 0);
+Overrides applied at the table element level.
+There may be one entry per unit type:
+0 = disabled
+1 = enabled
+** 274-279
+Line width per cell border type (default = kLnWtByBlock);
+Overrides applied at the table element level.
+There may be one group per unit type
+** 284-289
+Visibility flag for each cell border type (default = 1);
+Overrides applied at the table element level.
+There may be one group per unit type:
+0 = not visible
+1 = visible
+** 97
+Standard/Title/Header Row Data Type
+** 98
+Standard/Title/Header Row Unit Type
+** 4
+Standard/Title/Header Row Format String
+** 177
+Cell Substitution Flag Value (prior to AutoCAD 2007)
+** 92
+Extended Cell Flags (since AutoCAD 2007)
+** 301
+Cell Value Block Start (since AutoCAD 2007)
+** 302
+Literal string in the cell.
+If the string length is less than 250 characters, all characters are displayed in code 302.
+If the string is longer than 250 characters, the string is split into chunks of 250 characters in length.
+These data blocks will be contained in one or more Code 303 codes.
+If the code 393 code is used, the last group will be code 1 and less than 250 characters long.
+This value applies only to text type cells and repeats with a value of 1 per cell (since AutoCAD 2007)
+** 303
+Literal strings in cells, in data blocks of length 250 characters;
+Optional.
+This value applies only to text type cells and repeats, with a value of 302 per cell (since AutoCAD 2007)
+*text
+** 100
+Subclass Marker (AcDbText)
+** 39
+thickness (optional; default = 0)
+** 10
+First alignment point (in OCS)
+DXF: X value;
+APP: 3D Point
+** 20, 30
+DXF: Y and Z values ​​of the first alignment point (in OCS)
+** 40
+text height
+** 1
+Default value (the string itself)
+** 50
+text rotation angle (optional; default = 0)
+** 41
+relative X scale factor - width (optional; default = 1)
+This value will also be adjusted when using fit-type text.
+** 51
+tilt angle (optional; default = 0)
+** 7
+text style name (optional; default = standard)
+** 71
+Text generation flag (optional; default = 0):
+2 = Text is reversed (mirrored in the X-axis direction)
+4 = Text upside down (mirror in Y direction)
+** 72
+Text horizontal justification type (optional; default = 0) Integer code (not bitwise encoded):
+0 = left justified
+1 = Center justified
+2 = right justified
+3 = aligned (if vertical alignment = 0)
+4 = middle (if vertical alignment = 0)
+5 = fit (if vertical alignment = 0)
+See Group 72 and 73 Integer Code Table for details
+** 11
+Second alignment point (in OCS) (optional)
+DXF: X value;
+APP: 3D Point
+The value is meaningful only if the value of the 72 or 73 group is non-zero (if the justification is not baseline justified/left justified)
+** 21, 31
+DXF: Y and Z values ​​of the second alignment point (in OCS) (optional)
+** 210
+stretch direction (optional; default = 0, 0, 1)
+DXF: X value;
+APP: 3D Vector
+** 220, 230
+DXF: Y and Z values ​​of the extrusion direction (optional)
+** 100
+Subclass Marker (AcDbText)
+** 73
+literal vertical justification type (optional; default = 0) integer code (not bitwise encoded)
+0 = Baseline justified
+1 = Bottom justified
+2 = Center justified
+3 = Top justified
+See Group 72 and 73 Integer Code Table for details
+* tolerance
+** 100
+Subclass Marker (AcDbFcf)
+** 3
+dimension style name
+** 10
+Insertion point (in WCS)
+DXF: X value;
+APP: 3D Point
+** 20, 30
+DXF: Y and Z values ​​of insertion point (in WCS)
+** 1
+a string representing a visual representation of the tolerance
+** 210
+stretch direction (optional; default = 0, 0, 1)
+DXF: X value;
+APP: 3D Vector
+** 220, 230
+DXF: Y and Z values ​​of the extrusion direction (optional)
+** 11
+X-axis direction vector (in WCS)
+DXF: X value;
+APP: 3D Vector
+** 21, 31
+DXF: Y and Z values ​​of the X-axis direction vector (in WCS)
+* trace
+** 100
+Subclass Marker (AcDbTrace)
+** 10
+First corner (in OCS)
+DXF: X value;
+APP: 3D Point
+** 20, 30
+DXF: Y and Z values ​​of the first corner (in OCS)
+** 11
+Second corner (in OCS)
+DXF: X value;
+APP: 3D Point
+** 21, 31
+DXF: Y and Z values ​​of the second corner (in OCS)
+** 12
+Third corner point (in OCS)
+DXF: X value;
+APP: 3D Point
+** 22, 32
+DXF: Y and Z values ​​of the third corner point (in OCS)
+** 13
+Fourth corner (in OCS)
+DXF: X value;
+APP: 3D Point
+** 23, 33
+DXF: Y and Z values ​​of the fourth corner (in OCS)
+** 39
+thickness (optional; default = 0)
+** 210
+stretch direction (optional; default = 0, 0, 1)
+DXF: X value;
+APP: 3D Vector
+** 220, 230
+DXF: Y and Z values ​​of the extrusion direction (optional)
+*underlay
+** 0
+object name.
+DGNUNDERLAY - Attached DGN file
+DWFUNDERLAY - Attached DWF file
+PDFUNDERLAY - Attached PDF file
+** 100
+Subclass Marker (AcDbUnderlayReference)
+** 340
+ID of the AcDbUnderlayDefinition object
+** 10,20,30
+The X, Y, and Z coordinates of the underlay insertion point.
+These are the OCS/ECS coordinates
+** 41,42,43
+DXF: X, Y, and Z scale factors
+** 50
+Rotation angle (in OCS/ECS. Rotate around the Z axis counterclockwise from the X axis of the coordinate system)
+** 210,220,230
+normal vector (in WCS)
+** 280
+logo
+1 = Clipping is on
+2 = Underlay is on
+4 = Monochrome
+8 =Adjust the background
+16 = clip to internal mode
+** 281
+Contrast (value between 20 and 100)
+** 282
+Fade degree (value between 0 and 80)
+** 11, 21
+Repeat: 2D points in OCS/ECS.
+If there are only two 2D points, they are the lower-left and upper-right corners of the clipping rectangle.
+If there are more than two 2D points, they are the vertices of the clipping polygon
+* vertex
+** 100
+Subclass Marker (AcDbVertex)
+** 100
+Subclass tag (AcDb2dVertex or AcDb3dPolylineVertex)
+** 10
+Location point (in OCS for 2D, WCS for 3D)
+DXF: X value;
+APP: 3D Point
+** 20, 30
+DXF: Y and Z values ​​of the location point (in OCS for 2D, WCS for 3D)
+** 40
+start width (optional; default is 0)
+** 41
+endpoint width (optional; default is 0)
+** 42
+convexity (optional; default is 0).
+Bulge is the tangent to the corner of a quarter arc segment, and is negative if the arc is clockwise from the start point to the end point.
+A convexity of 0 represents a straight line segment, and a convexity of 1 represents a semicircle
+** 70
+Vertex Flags:
+1 = extra vertices created by curve fitting
+2 = Curve-fit tangents defined for this vertex.
+If the curve fit tangent direction is 0, it is omitted on DXF output, but cannot be omitted if this bit is set
+4 = not used
+8 = Spline vertices created by spline fit
+16 = Spline frame control points
+32 = 3D polyline vertex
+64 = 3D polygon mesh
+128 = faceted mesh vertices
+** 50
+Curve Fit Tangent Direction
+** 71
+facet mesh vertex index (optional; appears if non-zero)
+** 72
+facet mesh vertex index (optional; appears if non-zero)
+** 73
+facet mesh vertex index (optional; appears if non-zero)
+** 74
+facet mesh vertex index (optional; appears if non-zero)
+** 91
+vertex identifier
+* viewport
+** 100
+Subclass Marker (AcDbViewport)
+** 10
+Center point (in WCS)
+DXF: X value;
+APP: 3D Point
+** 20, 30
+DXF: Y and Z values ​​of the center point (in WCS)
+** 40
+Width, measured in paper space units
+** 41
+Height, measured in paper space units
+** 68
+Viewport state fields:
+-1 = On, but not visible at all on the screen, or an inactive viewport because the $MAXACTVP count has currently been exceeded.
+0 = off
+<positive value> = on and active.
+The value represents the order of the viewport stack, where 1 is the active viewport, the next is 2, and so on
+** 69
+Viewport ID
+** 12
+Viewport Center Point (in DCS)
+DXF: X value;
+APP: 2D point
+** twenty two
+DXF: Y value of viewport center point (in DCS)
+** 13
+snap base point
+DXF: X value;
+APP: 2D point
+** twenty three
+DXF: Snap to the Y value of the base point
+** 14
+Snap Spacing
+DXF: X value;
+APP: 2D point
+** twenty four
+DXF: Y value of snap spacing
+** 15
+grid spacing
+DXF: X value;
+APP: 2D point
+** 25
+DXF: Y value of grid spacing
+** 16
+View direction vector (in WCS)
+DXF: X value;
+APP: 3D Vector
+** 26, 36
+DXF: Y and Z values ​​of the viewing direction vector (in WCS)
+** 17
+Observe the target point (in WCS)
+DXF: X value;
+APP: 3D Vector
+** 27, 37
+DXF: Observe the Y and Z values ​​of the target point (in WCS)
+** 42
+perspective focal length
+** 43
+Z value of forward clipping plane
+** 44
+Z value of the back clipping plane
+** 45
+View height (measured in model space units)
+** 50
+snap angle
+** 51
+View twist angle
+** 72
+The zoom percentage of the circle
+** 331
+Freeze layer object ID/handle (multiple entries possible) (optional)
+** 90
+Viewport state bitwise encoding flags:
+1 (0x1) = enable perspective mode
+2 (0x2) = enable forward clipping
+4 (0x4) = enable backward clipping
+8 (0x8) = enable UCS following
+16 (0x10) = enable forward clipping if not visible
+32 (0x20) = enable UCS icon visibility
+64 (0x40) = enable UCS icon (at origin)
+128 (0x80) = enable fast zoom
+256 (0x100) = enable capture mode
+512 (0x200) = enable grid mode
+1024 (0x400) = Enable isometric snapping style
+2048 (0x800) = enable hidden print mode
+4096 (0x1000) = kIsoPairTop.
+If kIsoPairTop is set, but kIsoPairRight is not set, isopair top is enabled.
+Enable isopair left if both kIsoPairTop and kIsoPairRight are set
+8192 (0x2000) = kIsoPairRight.
+If kIsoPairRight is set but kIsoPairTop is not set, isopair right is enabled
+16384 (0x4000) = Enable viewport zoom lock
+32768 (0x8000) = currently always enabled
+65536 (0x10000) = Enable non-rectangular clipping
+131072 (0x20000) = close viewport
+262144 (0x40000) = Enables display of grids outside drawing bounds
+524288 (0x80000) = Enable adaptive grid display
+1048576 (0x100000) = Enables grid subdivision at set grid spacing when grid is displayed as adaptive
+2097152 (0x200000) = Allow grid to follow work plane toggle
+** 340
+Hard pointer ID/handle of the primitive to use as the viewport clipping boundary (appears only if the viewport is non-rectangular)
+** 1
+the name of the plot style sheet assigned to this viewport
+** 281
+Render Mode:
+0 = 2D optimization (traditional 2D)
+1 = wireframe
+2 = hidden lines
+3 = Flat Shading
+4 = body shading
+5 = Flat shading with wireframe
+6 = Shaded with wireframe
+All non-2D optimized rendering modes use the new 3D graphics pipeline.
+These values ​​correspond directly to the SHADEMODE command and the AcDbAbstractViewTableRecord::RenderMode enumeration
+** 71
+UCS for each viewport flag:
+0 = UCS does not change while this viewport is active.
+1 = This viewport stores its own UCS, which will become the current UCS whenever the viewport is activated.
+** 74
+Display the UCS icon at the UCS origin marker:
+Controls whether the UCS icon represents the viewport UCS or the current UCS (a difference if UCSVP is 1 and the viewport is not active).
+However, this field is currently ignored and the icon always represents the viewport UCS
+** 110
+UCS origin
+DXF: X value;
+APP: 3D Point
+** 120, 130
+DXF: Y and Z values ​​of the UCS origin
+** 111
+UCS X-axis
+DXF: X value;
+APP: 3D Vector
+** 121, 131
+DXF: Y and Z values ​​of UCS X-axis
+** 112
+UCS Y-axis
+DXF: X value;
+APP: 3D Vector
+** 122, 132
+DXF: Y and Z values ​​of UCS Y-axis
+** 345
+If the UCS is a named UCS, the ID/handle of the AcDbUCSTableRecord.
+Unnamed UCS if not present
+** 346
+ID/handle to the AcDbUCSTableRecord of the base UCS if the UCS is an orthogonal UCS (code 79 non-zero).
+If not present and code 79 is nonzero, base UCS as WORLD
+** 79
+Orthogonal types of UCS:
+0 = UCS is a non-orthogonal view
+1 = top view;
+2 = bottom view
+3 = main view;
+4 = rear view
+5 = left view;
+6 = Right view
+** 146
+elevation
+** 170
+Shaded print mode:
+0 = press display
+1 = wireframe
+2 = blanking
+3 = render
+** 61
+How often primary and secondary gridlines are compared
+** 332
+Background ID/handle (optional)
+** 333
+Shade print ID/handle (optional)
+** 348
+Visual style ID/handle (optional)
+** 292
+Default light source flag.
+On when no user light source is specified.
+** 282
+Default light type:
+0 = a directional light
+1 = two parallel lights
+** 141
+View Brightness
+** 142
+View contrast
+** 63,421,431
+Ambient light color.
+White only if it's not black.
+** 361
+Sunshine ID/handle (optional)
+** 335
+Soft pointer reference for viewport objects (for layer viewport property overrides)
+** 343
+Soft pointer reference for viewport objects (for layer viewport property overrides)
+** 344
+Soft pointer reference for viewport objects (for layer viewport property overrides)
+** 91
+Soft pointer reference for viewport objects (for layer viewport property overrides)
+* wipeout
+** 100
+Subclass Marker (AcDbRasterImage)
+** 90
+class version
+** 10
+Insertion point (in WCS)
+DXF: X value;
+APP: 3D Point
+** 20, 30
+DXF: Y and Z values ​​of insertion point (in WCS)
+** 11
+Single-pixel U vector (point along the visible bottom of the image, starting from the insertion point) (in WCS)
+DXF: X value;
+APP: 3D Point
+** 21, 31
+DXF: Y and Z values ​​of U vector (in WCS)
+** 12
+Single-pixel V vector (point along the visible left of the image, from the insertion point) (in WCS)
+DXF: X value;
+APP: 3D Point
+** 22, 32
+DXF: Y and Z values ​​of the V vector (in WCS)
+** 13
+Image size (pixels)
+DXF: U value;
+APP: 2D point (U-value and V-value)
+** twenty three
+DXF: V value of image size (pixels)
+** 340
+hard reference to the imagedef object
+** 70
+Image Display Features:
+1 = show image
+2 = Display image when not aligned with screen
+4 = use clipping boundaries
+8 = Transparency on
+** 280
+clipping state: 0 = off;
+1 = On
+** 281
+Brightness value (0-100; default = 50)
+** 282
+Contrast value (0-100; default = 50)
+** 283
+Fade value (0-100; default = 0)
+** 360
+imagedef_
+hard reference to the reactor object
+** 71
+Clipping boundary type.
+1 = rectangle;
+2 = Polygon
+** 91
+Number of clipping boundary vertices behind
+** 14
+Clip Boundary Vertices (in OCS)
+DXF: X value;
+APP: 2D point (multiple entries)
+Note 1) For rectangular clipping boundary type, two opposite corners must be specified.
+The default values ​​are (-0.5,-0.5), (size.x-0.5,size.y-0.5).
+2) For polygon clipping boundary types, three or more vertices must be specified.
+   Polygon vertices must be listed in order
+** twenty four
+DXF: Clip Y values ​​of boundary vertices (in OCS) (multiple entries)
+*xline
+** 100
+Subclass Marker (AcDbXline)
+** 10
+First point (in WCS)
+DXF: X value;
+APP: 3D Point
+** 20, 30
+DXF: Y and Z values ​​of the first point (in WCS)
+** 11
+Unit Direction Vector (in WCS)
+DXF: X value;
+APP: 3D Vector
+** 21, 31
+DXF: Y and Z values ​​of the unit direction vector (in WCS)
+
+
+
+
+*xline
+** 100
+Subclass Marker (AcDbXline)
+** 10
+First point (in WCS)
+DXF: X value;
+APP: 3D Point
+** 20, 30
+DXF: Y and Z values ​​of the first point (in WCS)
+** 11
+Unit Direction Vector (in WCS)
+DXF: X value;
+APP: 3D Vector
+** 21, 31
+DXF: Y and Z values ​​of the unit direction vector (in WCS)
+* datatype
+** 0-9
+Strings (since the introduction of extended symbol names in AutoCAD 2000, the character limit has been extended from 255 characters to 2049 single-byte characters, excluding newlines at the end of lines), for more information see "Storage of String Values" "part
+** 10-39
+Double precision 3D point value
+** 40-59
+Double precision floating point value
+** 60-79
+16-bit integer value
+** 90-99
+32-bit integer value
+** 100
+String (up to 255 characters; less for Unicode strings);
+See the "Storage of String Values" section for more information
+** 102
+String (up to 255 characters; less for Unicode strings);
+See the "Storage of String Values" section for more information
+** 105
+A string representing the hexadecimal (hex) handle value
+** 110-119
+Double precision floating point value
+** 120-129
+Double precision floating point value
+** 130-139
+Double precision floating point value
+** 140-149
+Double-precision scalar floating-point value
+** 160-169
+64-bit integer value
+** 170-179
+16-bit integer value
+** 210-239
+Double precision floating point value
+** 270-279
+16-bit integer value
+** 280-289
+16-bit integer value
+** 290-299
+boolean flag value
+** 300-309
+any string;
+See the "Storage of String Values" section for more information
+** 310-319
+A string representing the hexadecimal value of the binary data block
+** 320-329
+String representing the hexadecimal handle value
+** 330-369
+A string representing the hexadecimal object ID
+** 370-379
+16-bit integer value
+** 380-389
+16-bit integer value
+** 390-399
+String representing the hexadecimal handle value
+** 400-409
+16-bit integer value
+** 410-419
+string;
+See the "Storage of String Values" section for more information
+** 420-429
+32-bit integer value
+** 430-439
+string;
+See the "Storage of String Values" section for more information
+** 440-449
+32-bit integer value
+** 450-459
+long integer
+** 460-469
+Double precision floating point value
+** 470-479
+string;
+See the "Storage of String Values" section for more information
+** 480-481
+String representing the hexadecimal handle value
+** 999
+comment(string);
+See the "Storage of String Values" section for more information
+** 1000-1009
+String (same restrictions as 0-9 code range);
+See the "Storage of String Values" section for more information
+** 1010-1059
+Double precision floating point value
+** 1060-1070
+16-bit integer value
+** 1071
+32-bit integer value
+*classes
+** 0
+Record Type (CLASS).
+Identifies the start of a CLASS record
+** 1
+DXF-like record name;
+always unique
+** 2
+C++ class name.
+Used to bind with software that defines the behavior of object classes;
+always unique
+** 3
+application name.
+Appears in the Warning box when one of the class definitions listed in this paragraph is not currently loaded
+** 90
+Proxy feature flag.
+A bitwise encoded value indicating the capability of this object as a proxy:
+0 = Operation not allowed (0)
+1 = Delete is allowed (0x1)
+2 = Conversion allowed (0x2)
+4 = Allow color change (0x4)
+8 = Allow layer changes (0x8)
+16 = Allow changing line type (0x10)
+32 = Allow changing linetype scale (0x20)
+64 = allow changing visibility (0x40)
+128 = allow cloning (0x80)
+256 = Allow changing line width (0x100)
+512 = Allow change of plot style name (0x200)
+895 = Allow all operations except clone (0x37F)
+1023 = All operations allowed (0x3FF)
+1024 = Disable proxy warning dialog (0x400)
+32768 = R13 format proxy (0x8000)
+** 91
+Instance count of custom class
+** 280
+"is a proxy" flag.
+Set to 1 if no classes were loaded when this DXF file was created, otherwise set to 0
+** 281
+"is a primitive" flag.
+Set to 1 if the class is derived from the AcDbEntity class and may be in a BLOCKS or ENTITIES section.
+If set to 0, the instance may only appear in the OBJECTS section
+*appid
+** 100
+Subclass Marker (AcDbRegAppTableRecord)
+** 2
+User-supplied (or application-supplied) application name (for extended data).
+These table entries are used to maintain the names of all registered applications
+** 70
+Standard tag values ​​(bit-encoded values):
+16 = If this bit is set, the table entry is externally dependent on the xref
+32 = If both this bit and bit 16 are set, the externally dependent xref has been successfully incorporated
+64 = If this bit is set, it indicates that at least one entity in the drawing referenced a table entry when the drawing was last edited.
+(This flag is useful for AutoCAD commands. It can be ignored by most programs that read DXF files and does not need to be set by programs that write DXF files)
+*block_
+record
+** 100
+Subclass Marker (AcDbBlockTableRecord)
+** 2
+block name
+** 340
+Hard pointer ID/handle to the associated LAYOUT object
+** 70
+Block insertion unit.
+** 280
+block decomposability
+** 281
+block scalability
+** 310
+DXF: binary data for bitmap preview (optional)
+** 1001
+Extended Data Application Name "ACAD" (optional)
+** 1000
+Extended data string data "Design Center Data" (optional)
+** 1002
+start of extended data "{" (optional)
+** 1070
+AutoCAD DesignCenter version number
+** 1070
+Insert unit:
+0 = no unit
+1 = inches
+2 = feet
+3 = miles
+4 = mm
+5 = cm
+6 = meters
+7 = kilometers
+8 = micro inches
+9 = miles
+10 = yards
+11 = Angstrom
+12 = nanometers
+13 = microns
+14 = decimeters
+15 = ten meters
+16 = 100 meters
+17 = million kilometers
+18 = Astronomical Units
+19 = light years
+20 = parsecs
+21 = US Survey Feet
+22 = US measurement inches
+23 = US measuring code
+24 = US Survey Miles
+** 1002
+End of extended data '}'
+* dimstyle
+** 100
+Subclass Marker (AcDbDimStyleTableRecord)
+** 2
+dimension style name
+** 70
+Standard tag values ​​(bit-encoded values):
+16 = If this bit is set, the table entry is externally dependent on the xref
+32 = If both this bit and bit 16 are set, the externally dependent xref has been successfully incorporated
+64 = If this bit is set, it indicates that at least one entity in the drawing referenced a table entry when the drawing was last edited.
+(This flag is useful for AutoCAD commands. It can be ignored by most programs that read DXF files and does not need to be set by programs that write DXF files)
+** 3
+DIMPOST
+** 4
+DIMAPOST
+** 5
+DIMBLK (obsolete, now object ID)
+** 6
+DIMBLK1 (obsolete, now object ID)
+** 7
+DIMBLK2 (obsolete, now object ID)
+** 40
+DIMSCALE
+** 41
+DIMASZ
+** 42
+DIMEXO
+** 43
+DIMDLI
+** 44
+DIMEXE
+** 45
+DIMRND
+** 46
+DIMDLE
+** 47
+DIMTP
+** 48
+DIMTM
+** 140
+DIMTXT
+** 141
+DIMCEN
+** 142
+DIMTSZ
+** 143
+DIMALTF
+** 144
+DIMLFAC
+** 145
+DIMTVP
+** 146
+DIMTFAC
+** 147
+DIMGAP
+** 148
+DIMATRND
+** 71
+DIMTOL
+** 72
+DIMLIM
+** 73
+DIMTIH
+** 74
+DIMTOH
+** 75
+DIMSE1
+** 76
+DIMSE2
+** 77
+DIMTAD
+** 78
+DIMZIN
+** 79
+DIMAZIN
+** 170
+DIMALT
+** 171
+DIMALTD
+** 172
+DIMTOFL
+** 173
+DIMSAH
+** 174
+DIMTIX
+** 175
+DIMSOXD
+** 176
+DIMCLRD
+** 177
+DIMCLRE
+** 178
+DIMCLRT
+** 179
+DIMADEC
+** 270
+DIMUNIT (obsolete, now use DIMLUNIT and DIMFRAC)
+** 271
+DIMDEC
+** 272
+DIMTDEC
+** 273
+DIMALTU
+** 274
+DIMALTTD
+** 275
+DIMAUNIT
+** 276
+DIMFRAC
+** 277
+DIMLUNIT
+** 278
+DIMDSEP
+** 279
+DIMTMOVE
+** 280
+DIMJUST
+** 281
+DIMSD1
+** 282
+DIMSD2
+** 283
+DIMTOLJ
+** 284
+DIMTZIN
+** 285
+DIMALTZ
+** 286
+DIMALTTZ
+** 287
+DIMFIT (obsolete, now use DIMATFIT and DIMTMOVE)
+** 288
+DIMUPT
+** 289
+DIMATFIT
+** 340
+DIMTXSTY (handle to the referenced STYLE)
+** 341
+DIMLDRBLK (handle to the referenced BLOCK)
+** 342
+DIMBLK (handle to the referenced BLOCK)
+** 343
+DIMBLK1 (handle of the referenced BLOCK)
+** 344
+DIMBLK2 (handle of the referenced BLOCK)
+** 371
+DIMLWD (line width enumeration value)
+** 372
+DIMLWE (line width enumeration value)
+
+
+* layer
+** 100
+Subclass Marker (AcDbLayerTableRecord)
+** 2
+layer name
+** 70
+Standard flags (bit-encoded values):
+1 = Freeze the layer, otherwise unfreeze the layer
+2 = Freeze layers in new viewports by default
+4 = Lock layer
+16 = If this bit is set, the table entry is externally dependent on the xref
+32 = If both this bit and bit 16 are set, the externally dependent xref has been successfully incorporated
+64 = If this bit is set, it indicates that at least one entity in the drawing referenced a table entry when the drawing was last edited.
+(This flag is useful for AutoCAD commands. It can be ignored by most programs that read DXF files and does not need to be set by programs that write DXF files)
+** 62
+Color number (if negative, the layer is off)
+** 6
+Line type name
+** 290
+print logo.
+If set to 0, this layer will not be printed
+** 370
+Line width enumeration value
+** 390
+Hard pointer ID/handle to the PlotStyleName object
+** 347
+Hard pointer ID/handle to the Material object
+* ltype
+** 100
+Subclass Marker (AcDbLinetypeTableRecord)
+** 2
+Line type name
+** 70
+Standard tag values ​​(bit-encoded values):
+16 = If this bit is set, the table entry is externally dependent on the xref
+32 = If both this bit and bit 16 are set, the externally dependent xref has been successfully incorporated
+64 = If this bit is set, it indicates that at least one entity in the drawing referenced a table entry when the drawing was last edited.
+(This flag is useful for AutoCAD commands. It can be ignored by most programs that read DXF files and does not need to be set by programs that write DXF files)
+** 3
+Linetype description text
+** 72
+align code;
+The value is usually 65, the ASCII code for A
+** 73
+the number of linetype elements
+** 40
+Overall length of pattern
+** 49
+dash, dot, or space length (one entry per element)
+** 74
+Complex linetype element types (one type per element).
+Default is 0 (no embedded shape/text)
+The following codes are bit values:
+1 = If this bit is set, code 50 specifies absolute rotation;
+If this bit is not set, code 50 specifies relative rotation
+2 = embedded element is a string
+4 = Embedded element is a shape
+** 75
+If code 74 specifies an embedded shape, the shape number (one number per element)
+If code 74 specifies an embedded string, this value will be set to 0
+Code 75 is omitted if code 74 is set to 0
+** 340
+pointers to STYLE objects (one pointer per element if code 74 > 0)
+** 46
+S = scale value (optional);
+Multiple entries can exist
+** 50
+R = relative rotation value (in radians) of the embedded shape or text, A = absolute rotation value (in radians) of the embedded shape or text;
+If code 74 specifies an embedded shape or string, one per element
+** 44
+X = X offset value (optional);
+Multiple entries can exist
+** 45
+Y = Y offset value (optional);
+Multiple entries can exist
+** 9
+String (one string per element if code 74 = 2)
+* style
+** 100
+Subclass Marker (AcDbTextStyleTableRecord)
+** 2
+style name
+** 70
+Standard tag values ​​(bit-encoded values):
+1 = If this bit is set, this entry is used to describe the form
+4 = vertical text
+16 = If this bit is set, the table entry is externally dependent on the xref
+32 = If both this bit and bit 16 are set, the externally dependent xref has been successfully incorporated
+64 = If this bit is set, it indicates that at least one entity in the drawing referenced a table entry when the drawing was last edited.
+(This flag is useful for AutoCAD commands. It can be ignored by most programs that read DXF files and does not need to be set by programs that write DXF files)
+** 40
+fixed text height;
+0 if the text height is not fixed
+** 41
+width factor
+** 50
+slope
+** 71
+Text generation flags:
+2 = Text is reversed (mirrored in the X-axis direction)
+4 = Text upside down (mirror in Y direction)
+** 42
+last used altitude
+** 3
+Primary font file name
+** 4
+Large font file name;
+empty if none
+** 1071
+Contains the font width and font family, character set, and length values ​​of italic and bold flags for Truetype fonts
+*ucs
+** 100
+Subclass Marker (AcDbUCSTableRecord)
+** 2
+UCS name
+** 70
+Standard tag values ​​(bit-encoded values):
+16 = If this bit is set, the table entry is externally dependent on the xref
+32 = If both this bit and bit 16 are set, the externally dependent xref has been successfully incorporated
+64 = If this bit is set, it indicates that at least one entity in the drawing referenced a table entry when the drawing was last edited.
+(This flag is useful for AutoCAD commands. It can be ignored by most programs that read DXF files and does not need to be set by programs that write DXF files)
+** 10
+Origin (in WCS)
+DXF: X value;
+APP: 3D Point
+** 20, 30
+DXF: Y and Z values ​​of the origin (in WCS)
+** 11
+X-axis direction (in WCS)
+DXF: X value;
+APP: 3D Vector
+** 21, 31
+DXF: Y and Z values ​​in the X-axis direction (in WCS)
+** 12
+Y-axis direction (in WCS)
+DXF: X value;
+APP: 3D Vector
+** 22, 32
+DXF: Y and Z values ​​in the Y-axis direction (in WCS)
+** 79
+always 0
+** 146
+elevation
+** 346
+The ID/handle of the datum UCS (if orthogonal).
+If the 79 code is 0, this code is not displayed.
+If this code is not displayed and the 79 code is not zero, the base UCS is assumed to be WORLD
+** 71
+Orthogonal type (optional; usually paired with 13, 23, and 33 codes):
+1 = top view;
+2 = bottom view
+3 = main view;
+4 = rear view
+5 = left view;
+6 = Right view
+** 13
+the origin of the orthogonal type associated with this UCS
+DXF: the X value of the origin;
+APP: 3D Point
+** 23, 33
+DXF: Y value and Y value of the origin
+* view
+** 100
+Subclass Marker (AcDbViewTableRecord)
+** 2
+view name
+** 70
+Standard tag values ​​(bit-encoded values):
+1 = Paper space view if this bit is set
+16 = If this bit is set, the table entry is externally dependent on the xref
+32 = If both this bit and bit 16 are set, the externally dependent xref has been successfully incorporated
+64 = If this bit is set, it indicates that at least one entity in the drawing referenced a table entry when the drawing was last edited.
+(This flag is useful for AutoCAD commands. It can be ignored by most programs that read DXF files and does not need to be set by programs that write DXF files)
+** 40
+View height (in DCS)
+** 10
+Viewport Center Point (in DCS)
+DXF: X value;
+APP: 2D point
+** 20
+DXF: Y value of view center point (in DCS)
+** 41
+View width (in DCS)
+** 11
+Viewing direction from target (in WCS)
+DXF: X value;
+APP: 3D Vector
+** 21, 31
+DXF: Y and Z values ​​from the viewing direction of the target (in WCS)
+** 12
+Target point (in WCS)
+DXF: X value;
+APP: 3D Point
+** 22, 32
+DXF: Y and Z values ​​of the target point (in WCS)
+** 42
+focal length
+** 43
+Forward clipping plane (offset from target point)
+** 44
+Back clipping plane (offset from target point)
+** 50
+twist angle
+** 71
+view mode (see VIEWMODE system variable)
+** 281
+Render Mode:
+0 = 2D optimization (traditional 2D)
+1 = wireframe
+2 = hidden lines
+3 = Flat Shading
+4 = body shading
+5 = Flat shading with wireframe
+6 = Shaded with wireframe
+All non-2D optimized rendering modes use the new 3D graphics pipeline.
+These values ​​correspond directly to the SHADEMODE command and the AcDbAbstractViewTableRecord::RenderMode enumeration
+** 72
+1 if there is a UCS associated with this view;
+0 otherwise
+** 73
+1 if the camera is printable
+** 332
+Soft pointer ID/handle of the background object (optional)
+** 334
+Soft pointer ID/handle of the active section object (optional)
+** 348
+Hard pointer ID/handle to the visual style object (optional)
+** 361
+Sun Hard Title ID
+*vport
+** 100
+Subclass Marker (AcDbViewportTableRecord)
+** 2
+viewport name
+** 70
+Standard tag values ​​(bit-encoded values):
+16 = If this bit is set, the table entry is externally dependent on the xref
+32 = If both this bit and bit 16 are set, the externally dependent xref has been successfully incorporated
+64 = If this bit is set, it indicates that at least one entity in the drawing referenced a table entry when the drawing was last edited.
+(This flag is useful for AutoCAD commands. It can be ignored by most programs that read DXF files and does not need to be set by programs that write DXF files)
+** 10
+Bottom left corner of viewport
+DXF: X value;
+APP: 2D point
+** 20
+DXF: Y value of the lower left corner of the viewport
+** 11
+top right corner of viewport
+DXF: X value;
+APP: 2D point
+** twenty one
+DXF: Y value in the upper right corner of the viewport
+** 12
+Viewport Center Point (in DCS)
+DXF: X value;
+APP: 2D point
+** twenty two
+DXF: Y value of view center point (in DCS)
+** 13
+Snap base point (in DCS)
+DXF: X value;
+APP: 2D point
+** twenty three
+DXF: Snap Y value of base point (in DCS)
+** 14
+Snap Spacing X and Y
+DXF: X value;
+APP: 2D point
+** twenty four
+DXF: Snap to Y value of Spacing X and Y
+** 15
+Grid Spacing X and Y
+DXF: X value;
+APP: 2D point
+** 25
+DXF: Y value of grid spacing X and Y
+** 16
+Viewing direction relative to target point (in WCS)
+DXF: X value;
+APP: 3D Point
+** 26, 36
+DXF: Y and Z values ​​relative to the viewing direction of the target point
+(in WCS)
+** 17
+Observe the target point (in WCS)
+DXF: X value;
+APP: 3D Point
+** 27, 37
+DXF: Observe the Y and Z values ​​of the target point (in WCS)
+** 42
+focal length
+** 43
+Forward clipping plane (offset from target point)
+** 44
+Back clipping plane (offset from target point)
+** 45
+view height
+** 50
+Snap rotation angle
+** 51
+View twist angle
+** 72
+rounded edge
+** 331 or 441
+Soft pointer ID/handle or hard pointer ID/handle of the frozen layer object;
+Repeat for each frozen layer
+** 1
+print style sheet
+** 281
+Render Mode:
+0 = 2D optimization (traditional 2D)
+1 = wireframe
+2 = hidden lines
+3 = Flat Shading
+4 = body shading
+5 = Flat shading with wireframe
+6 = Shaded with wireframe
+All non-2D optimized rendering modes use the new 3D graphics pipeline.
+These values ​​correspond directly to the SHADEMODE command and the AcDbAbstractViewTableRecord::RenderMode enumeration
+** 71
+view mode (see VIEWMODE system variable)
+** 74
+UCSICON settings
+** 110
+UCS origin
+DXF: X value;
+APP: 3D Point
+** 120, 130
+DXF: Y and Z values ​​of the UCS origin
+** 111
+UCS X-axis
+DXF: X value;
+APP: 3D Vector
+** 121, 131
+DXF: Y and Z values ​​of UCS X-axis
+** 112
+UCS Y-axis
+DXF: X value;
+APP: 3D Vector
+** 122, 132
+DXF: Y and Z values ​​of UCS Y-axis
+** 345
+If the UCS is a named UCS, the ID/handle of the AcDbUCSTableRecord.
+Unnamed UCS if not present
+** 346
+ID/handle to the AcDbUCSTableRecord of the base UCS if the UCS is an orthogonal UCS (code 79 non-zero).
+If not present and code 79 is nonzero, base UCS as WORLD
+** 79
+Orthogonal types of UCS
+0 = UCS is a non-orthogonal view
+1 = Looking down
+2 =
+
+look up
+3 = Forward looking
+4 = rear view
+5 = left view
+6 = Right view
+** 146
+elevation
+** 170
+Shaded print settings
+** 61
+home grid line
+** 332
+Soft pointer ID/handle of the background object (optional)
+** 333
+Soft pointer ID/handle to shader object (optional)
+** 348
+Hard pointer ID/handle to the visual style object (optional)
+** 292
+Default light source on logo
+** 282
+Default light type
+0 = a directional light
+1 = two parallel lights
+** 141
+brightness
+** 142
+Contrast
+** 63, 421, 431
+Ambient color (output only if not black)
+*block
+** 0
+Entity Type (BLOCK)
+** 5
+handle
+** 102
+The start of an application-defined group '{application_name'. For example, "{ACAD_REACTORS" represents the start of an AutoCAD permanent reactor group (optional)
+application-defined code
+** Codes and values ​​in group 102 are defined by the application (optional)
+** 102
+End of group '}' (optional)
+** 330
+Soft pointer ID/handle to the owner object
+** 100
+Subclass Marker (AcDbEntity)
+** 8
+layer name
+** 100
+Subclass Marker (AcDbBlockBegin)
+** 2
+block name
+** 70
+Block type flags (bit-encoded values, can be combined):
+0 = Indicates that none of the following flags should be applied
+1 = Anonymous blocks generated by hatches, associative callouts, other internal operations, or applications
+2 = The block has non-fixed attribute definitions (this bit is not set if the block has any fixed attribute definitions or no attribute definitions at all)
+4 = Block is an external reference (xref)
+8 = Block is an xref override
+16 = Block depends on xref
+32 = Block is an incorporated xref, or depends on an xref (ignored on import)
+64 = Definition is a referenced xref (when entering
+be ignored)
+** 10
+basis point
+DXF: X value;
+APP: 3D Point
+** 20, 30
+DXF: Y value and Y value of base point
+** 3
+block name
+** 1
+xref pathname
+** 4
+block description (optional)
+* endblock
+** 0
+Entity Type (ENDBLK)
+** 5
+handle
+** 102
+The start of an application-defined group '{application_name'. For example, "{ACAD_REACTORS" represents the start of an AutoCAD permanent reactor group (optional)
+application-defined code
+** 102
+The codes and values ​​in the group are defined by the application (optional)
+** 102
+End of group '}' (optional)
+** 330
+Soft pointer ID/handle to the owner object
+** 100
+Subclass Marker (AcDbEntity)
+** 8
+layer name
+** 100
+Subclass Marker (AcDbBlockEnd)

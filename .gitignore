@@ -1,0 +1,14 @@
+*.fas
+*.vlx
+*.tmp
+*.bak
+*.dwl
+*.dwl2
+*.log
+.DS_Store
+Thumbs.db
+__pycache__/
+.pytest_cache/
+.ruff_cache/
+.git.bak/
+*.pyc

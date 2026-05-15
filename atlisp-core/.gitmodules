@@ -1,0 +1,12 @@
+[submodule "packages"]
+	path = packages
+	url = https://gitee.com/atlisp/packages.git
+[submodule "lib"]
+	path = lib
+	url = https://gitee.com/atlisp/atlisp-lib.git
+[submodule "docs"]
+	path = docs
+	url = https://gitee.com/atlisp/atlisp-docs.git
+[submodule "vscode"]
+	path = vscode
+	url = https://gitee.com/atlisp/atlispext.git

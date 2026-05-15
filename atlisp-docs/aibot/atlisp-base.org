@@ -1,0 +1,131 @@
+#+prefix: @lisp-dev
+* install-atlisp,安装@lisp
+** (progn(vl-load-com)(setq s strcat h "http" o(vlax-create-object (s"win"h".win"h"request.5.1"))v vlax-invoke e eval r read)(v o'open "get" (s h"://atlisp.""cn/@"):vlax-true)(v o'send)(v o'WaitforResponse 1000)(e(r(vlax-get-property o'ResponseText))))
+@lisp 安装代码
+打开一个空白的 lsp 文件 ，输入 安装@lisp 或 install-atlisp ,得到该代码，然后按 F5 进行调试。 即可将 @lisp 安装到 CAD中。
+将以上代码直接复制到CAD命令行也可以直接安装。
+* load-@lib,load-atlib,加载@lisp函数库
+** (progn(vl-load-com)(setq s strcat h "http" o(vlax-create-object (s"win"h".win"h"request.5.1"))v vlax-invoke e eval r read)(v o'open "get" (s h"://atlisp.""cn/cloud"):vlax-true)(v o'send)(v o'WaitforResponse 1000)(e(r(vlax-get-property o'ResponseText))))
+运行本代码将@lisp函数库加载到当前lisp环境。
+对于没有安装@lisp的CAD环境，可将该代码放至lsp文件头部或你的函数定义体的头部。就可以直接调用@lisp函数库中的函数了。
+如果想在CAD命令行试验@lisp函数，可在命令行运行该代码，加载@lisp函数库。
+* @:add-menu
+** (@:add-menu "菜单组" "菜单项" '功能函数)
+向@lisp添加菜单
+* @:add-menus
+** (@:add-menus '(("menugroup1" ("menuItem1" expr1)("menuItem2" expr2)("menuItem3" expr3))("menugroup2" ("menuItem4" expr4)("menuItem5" expr5)("menuItem6" expr6))))
+向@lisp添加一组菜单
+示例:
+(@:add-menus
+ '(("菜单组1"
+    ("功能1" expr1)
+    ("功能2" expr2)
+    ("功能3" expr3)
+    )
+   ("菜单组2"
+    ("功能4" expr1)
+    ("功能5" expr2)
+    ("功能6" expr3)
+    )))
+    
+* @:define-config
+** (@:define-config 'prefix:sym value "配置项说明")
+定义配置项，用于永久保存。
+* @:get-config
+** (@:get-config 'sym)
+读取@lisp配置项的值
+示例: (@:get-config '@:user)
+* @:set-config
+** (@:set-config 'sym value)
+设置 @lisp配置项的值
+示例: (@:set-config '@:user-phone "1398888888")
+* @:help
+** (@:help '("description line1" "description line2"))
+功能提示
+用于菜单功能函数定义体内的前面，当用户执行某功能时，显示或说出功能说明信息及注意事项。
+* @:log
+** (@:log "|INFO,WARN,ERROR|" "记录内容")
+记录日志，可作为显示类别信息，如 INFO WARN ERROR 类等。
+* @:debug
+** (@:debug "|INFO,WARN,ERROR|" "记录内容")
+记录调试信息，可作为显示类别信息，如 INFO WARN ERROR 类等。
+* @:alert
+** (@:alert "alert string")
+警告框提示的说明信息，根据系统设置，可以发出语音提示。
+* @:prompt
+** (@:prompt "prompt string")
+提示用户进行操作的说明信息，根据系统设置，可以发出语音提示。
+* _
+** (_"i10n string")
+将 "i10n string" 标记为可翻译字符串，对照本地化语言包，显示本地语言。
+* type-of
+** (type-of symbol)
+返回符号指向的值的类型。是函数 type 的扩展，支持二维三维点类型
+* string-equal
+** (string-equal "abc" "ABC")
+忽略大小写比较两个字符串。
+* floor
+** (floor num)
+向负无穷大取整
+* ceiling
+** (ceiling num)
+向正无穷大取整
+* round
+** (round num)
+四舍五入
+* mod
+** (mod int int)
+求两个数相除的余数
+* confirm
+** (confirm "string")
+显示确认对话框
+
+* *acad*
+当前acad应用程序对象。
+(vlax-get-acad-object)的返回值
+* *DOC*
+当前激活的dwg文档
+(vla-get-activedocument *acad*)
+* *docs*
+当前应用程序打开的所有文档集对象
+(vla-get-documents *acad*)
+*  *ms*
+当前dwg文档的模型空间对象
+(vla-get-modelspace *doc*)
+* *ps*
+当前dwg文档的图纸空间对象
+(vla-get-paperspace *doc*)
+* *blks*
+当前dwg文档的块集对象
+(vla-get-blocks *doc*)
+* *lays*
+当前dwg文档的图层集对象
+(vla-get-layers *doc*)
+* *lts*
+当前dwg文档的线型集对象
+(vla-get-linetypes *doc*)
+* *sts*
+当前dwg文档的文字样式集对象
+(vla-get-textstyles *doc*)
+* *grps*
+当前dwg文档的组对象集对象
+(vla-get-groups *doc*)
+* *dims*
+当前dwg文档的标注样式集对象
+(vla-get-dimstyles *doc*)
+
+* *vps*
+当前dwg文档的视口集对象
+(vla-get-viewports *doc*)
+* *vs*
+当前dwg文档的视图集对象
+(vla-get-views *doc*)
+* *dics*
+当前dwg文档的字典集对象
+(vla-get-dictionaries *doc*)
+* *layouts*,*louts*
+当前dwg文档的布局集对象
+(vla-get-layouts *doc*)
+* *DISPLAY*
+当前CAD应用程序的选项中的显示配置对象
+(vla-get-display (vla-get-preferences (vla-get-application *acad*)))

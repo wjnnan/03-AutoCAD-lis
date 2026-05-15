@@ -1,0 +1,30 @@
+*atline1, __/__
+A,1.0,[XIE,@lisp.shx,S=1],1.0
+*atline3, ) ) ) )
+A,0,[ARC1,@lisp.shx,S=1,Y=0.707],-1.0
+*Î§À¸1,Ô²Î§À¸ ----0-----0----0-----0----0-----0--
+A,.25,-.1,[CIRC1,ltypeshp.shx,x=-.1,s=.1],-.1,1
+*Î§À¸2,·½Î§À¸ ----[]-----[]----[]-----[]----[]---
+A,.25,-.1,[BOX,ltypeshp.shx,x=-.1,s=.1],-.1,1
+*¹ìµÀ,Tracks -|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-
+A,.15,[TRACK1,ltypeshp.shx,s=.25],.15
+*at_BATTING,Batting SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS
+A,.0001,-.1,[BAT,ltypeshp.shx,x=-.1,s=.1],-.2,[BAT,ltypeshp.shx,r=180,x=.1,s=.1],-.1
+*¾â³ÝÏß,Zig zag /\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/
+A,.0001,-.2,[ZIG,ltypeshp.shx,x=-.2,s=.2],-.4,[ZIG,ltypeshp.shx,r=180,x=.2,s=.2],-.2
+*²¨ÀËÏß, ²¨ÀËÏß ~~~~~~~~~~~~~~
+A,0,[QUARTERCIRCLE,@lisp.shx,S=1],-1.414,[QUARTERCIRCLE,@lisp.shx,S=1,R=180,X=1.414],-1.414
+*²¨ÀËÏß1, ²¨ÀËÏß1 ~~~~~~~~~~~~~~
+A,0,[HALFCIRCLE,@lisp.shx,S=1],-2.0,[HALFCIRCLE,@lisp.shx,S=1,R=180,X=2.0],-2.0
+*²¨ÀËÏß2, ²¨ÀËÏß2 ~~~~~~~~~~~~~~
+A,0,[WAVE,@lisp.shx,S=1],-6.8305
+*@line1,  ~~~~~~~~~~~~~~
+A,0,[QUARTERCIRCLE,@lisp.shx,S=1],-0.707,[QUARTERCIRCLE,@lisp.shx,S=1,R=180,X=0.707],-0.707
+*@line2,  ~~~~~~~~~~~~~~
+A,0,[QUARTERCIRCLE,@lisp.shx,S=1],-1.0605,[QUARTERCIRCLE,@lisp.shx,S=1,R=180,X=1.0605],-1.0605
+*µ¼ÏòÏß, ---->----->----
+A,0,2.5,[GUIDEWIRE,@lisp.shx,S=1,Y=-0.5],2.5
+*µ¼ÏòÏß2, ---->>----->>----
+A,0,2.5,[GUIDEWIRE,@lisp.shx,S=1,Y=-0.5],0.5,[GUIDEWIRE,@lisp.shx,S=1,Y=-0.5],2.5
+*º¸·ì, _)_)_)_)_)_)_)_)
+A,0,[HANFENG,@lisp.shx,S=1,Y=0.707],1.414,[HANFENG,@lisp.shx,S=1,Y=0.707],1.414

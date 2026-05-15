@@ -1,0 +1,83 @@
+#+prefix: FAQ
+* 修复单色显示,单色显示修复
+点击CAD菜单 文件/页面设置管理器，打开页面设置管理器后，点击修改，去掉显示打印样式前的 对勾 即可。
+
+* 如何使用自带的编译器
+对于autocad 2021 及以后的版本，默认 vscode 作为 visual lisp 编辑器及调试器。
+如果想使用旧的 vlide ， 可以将变量 lispsys 设为 0。然后重启 CAD ,即可。
+* not found visualisp env
+有些精简版的CAD或CAD LT版本，删除了 visuallisp环境。这些版本不支持@lisp的安装和运行。
+
+如果想要使用 @lisp，请安装支持vl的CAD版本。
+* 文本不显示数字和字母
+文字样式中的小字体没有对应的文件时，可能会导致数字和字母不显示。
+首先，选中文本，在特性中查看这个文本的样式，记住这个样式名。
+输入 st 打开文字样式，选中这个样式名，如果SHX字体显示一个小黄叹号，说明缺失字体。换成已有的字体，点击下面的应用按钮即可。
+如果还是不显示，可以 regen 重生成一下试试。
+* 乱码,汉字乱码
+对于低于2021版本或 lispsys=0的 CAD， 记事本中 保存时 改为 GB2312 或 ANSI 编码。
+
+2021版本以上的，可以用vscode编辑lsp源码，源码可采用 utf8 编码。
+
+建议 lispsys 设为 2，这样编译的fas文件可以用在低版本的CAD中。
+* 双击不能编辑文字
+1 两个变量会影响双击文字的编辑。
+  - =DBLCLKEDIT=
+  - =pickfirst=
+2 鼠标双击反应器影响。执行下面的代码查看有没有 :VLR-beginDoubleClick字样。
+#+begin_src lisp
+(foreach reaction (vlr-reactors)(princ (vlr-reactions  (cadr reaction))))
+#+end_src
+
+* 移除双击反应器
+#+begin_src lisp
+  (foreach
+   reactor (vlr-reactors)
+   (if (and (eq :vlr-mouse-reactor(car reactor))
+            (assoc :VLR-beginDoubleClick (vlr-reactions (cadr reactor))))
+       (vlr-remove (cadr reactor))))
+#+end_src
+* 改变CAD背景色,CAD底色怎么将黑色变更白色
+命令 op，或菜单工具-选项，打开选项对话框。
+点击 ‘显示’ 栏，然后点击颜色。
+上下文：二维模型空间，界面元素：统一背景。颜色选白色或你希望的颜色。
+最后点确定。
+
+* 未知命令Txx_xxx
+当不是以 天正平台选择 方式启动CAD时，如双击dwg,或双击autocad的图标打开的CAD应用程序，CAD的当前配置是天正时。
+可能会出现天正的侧边栏菜单，但是天正的相关文件没有加载。
+
+正确的方式是先用桌面上的天正图标打开CAD，然后再打开dwg文件。
+
+* 双击dwg不在当前CAD打开,双击dwg打开新的CAD
+DWG文件的打开方式应该设为AutoCAD DWG Launcher。
+这样双击dwg时会在最后打开的CAD应用程序窗口打开。
+如果dwg的打开方式是acad.exe 之类的，双击dwg会打开新的CAD应用程序。
+* PDF字体乱码, PDF字体间距不正确
+当CAD打印导出的PDF文字乱码或间距不正常时。
+将PDF打印机中PDF选项中的 ’将所有文字转换为几何图形‘。确定保存重新打印即可。
+步骤：
+1. Ctrl+P 或命令 plot 或菜单 文件/ 打印，打开 打印对话框。
+2. 打印机/绘图仪 名称中选择 使用的PDF打印机。将会出现 PDF选项 按钮。
+3. 点击 PDF选项 按钮打开，勾选 ‘将所有文字转换为几何图形’ ,确定。
+4. 重新打印PDF。
+* PDF图层信息
+我们可以控制输出的PDF文件是否包含图层信息。
+步骤：
+1. Ctrl+P 或命令 plot 或菜单 文件/ 打印，打开 打印对话框。
+2. 打印机/绘图仪 名称中选择 使用的PDF打印机。将会出现 PDF选项 按钮。
+3. 点击 PDF选项 按钮打开，勾选/不勾选 ‘包含图层信息’ ,确定。
+4. 重新打印PDF。
+* PDF书签
+我们可以控制输出的PDF文件是否包含书签。
+步骤：
+1. Ctrl+P 或命令 plot 或菜单 文件/ 打印，打开 打印对话框。
+2. 打印机/绘图仪 名称中选择 使用的PDF打印机。将会出现 PDF选项 按钮。
+3. 点击 PDF选项 按钮打开，勾选/不勾选 ‘创建书签’ ,确定。
+4. 重新打印PDF。
+* 按F8卡顿
+将 =TEMPOVERRIDES= 改为 0 试试。
+据说是因为微软输入法的兼容问题导致的，我们只需要稍稍调整一下，关闭临时替代键值就可以了。
+* 安装多个版本
+如果要在一台电脑上安装多个CAD版本，应该按从低到高的顺序进行安装。
+否则会有兼容性问题。

@@ -1,0 +1,2 @@
+(setvar "SECURELOAD" 0)
+(load "d:\\My Code\\Claude Code\\03-AutoCAD-lisp\\tests\\autocad_2024_smoke.lsp")

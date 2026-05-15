@@ -1,0 +1,6 @@
+[submodule "dev-tools"]
+	path = dev-tools
+	url = https://gitee.com/atlisp/dev-tools.git
+[submodule "at-pm"]
+	path = at-pm
+	url = https://gitee.com/vitalmm/at-pm.git

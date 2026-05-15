@@ -1,0 +1,76 @@
+﻿分类(必填),问题(必填),相似问题(选填-多个用##分隔),反例问题(选填-多个用##分隔),机器人回答(必填-多个用##分隔),是否全部回复(选填-默认FALSE),是否停用(选填-默认FALSE)
+autolisp,safearray-value,,,(safearray-value Saf)LINE_BREAK和Safearray->list差不多一个意思.,false,false
+autolisp,variant-value,,,(variant-value Varint)LINE_BREAK获得Variant的值.,false,false
+autolisp,LispEdit_InsertText,,,(LispEdit_InsertText text)LINE_BREAK将文字插入到飞诗Lisp编辑器当前文件,false,false
+autolisp,LispEdit_GetSelectText,,,(LispEdit_GetSelectText)LINE_BREAK取得飞诗Lisp编辑器中当前选取的文字,false,false
+autolisp,fnsplitl,,,"(fnsplitl path)LINE_BREAK_$ (fnsplitl ""c:\\path\\filename.ext"")LINE_BREAK(""C:\\path\\"" ""filename"" "".ext"")LINE_BREAK将带路径的文件名拆分成路径、文件名及扩展名组成的表",false,false
+autolisp,geturl,,,(geturl ent)LINE_BREAK获取图元上的链接地址,false,false
+autolisp,pause,,,"(command ""line"" pause)LINE_BREAK调用命令时暂停等待用户输入,值为""\\"",falseLINE_BREAKautolisp,seturl,0.91,,""为指定对象设置链接地址,(seturl ent url)",false,false
+autolisp,c:stats,,,"(c:stats [filename , nil])LINE_BREAK显示上一次渲染的统计信息（外部定义：render ARX 应用程序）",false,false
+autolisp,c:solprof,,,(c:solprof args ...)LINE_BREAK创建三维实体的剖面图像（外部定义：solids ARX 应用程序）,false,false
+autolisp,c:showmat,,,(c:showmat arg1)LINE_BREAK列出选定对象的材质类型和附着方法（外部定义：render ARX 应用程序）,false,false
+autolisp,c:setuv,,,(c:setuv modeoptions)LINE_BREAK向选定对象指定材质贴图坐标，此函数有两种模式，由字符串参数指定（外部定义：render ARX 应用程序）,false,false
+autolisp,c:scene,,,(c:scene mode [options])LINE_BREAK（仅适用于图纸空间）创建新场景，修改或删除现有的场景（外部定义：render ARX 应用程序）,false,false
+autolisp,c:saveimg,,,(c:saveimg filename type [portion] [xoff yoff xsize ysize] [compression])LINE_BREAK将渲染图形保存到 BMP、TGA 或 TIFF 格式的文件中（外部定义：render ARX 应用程序）,false,false
+autolisp,c:rpref,,,(c:rpref mode option [setting])LINE_BREAK设置渲染系统配置（外部定义：render ARX 应用程序）,false,false
+autolisp,函数rotate3d,,,(rotate3d args ...)LINE_BREAK绕任意三维轴旋转对象（外部定义：geom3d ARX 应用程序）,false,false
+autolisp,c:rmat,,,(c:rmat mode options)LINE_BREAK创建、编辑、附着和拆离渲染材质（外部定义：render ARX 应用程序）,false,false
+autolisp,c:replay,,,(c:replay filename type [xoff yoff xsize ysize])LINE_BREAK显示 BMP、TGA 或 TIFF 图像（外部定义：render ARX 应用程序）,false,false
+autolisp,c:render,,,"(c:render [filename,point1 point2])LINE_BREAK用几何图形、光源和表面修饰信息创建三维线框模型的真实感着色图像（外部定义：render ARX 应用程序）",false,false
+autolisp,函数mirror3d,,,(mirror3d arg1 arg2 ...)LINE_BREAK相对于用户指定的平面反射选定的对象（外部定义：geom3d ARX 应用程序）,false,false
+autolisp,c:matlib,,,(c:matlib mode name [file])LINE_BREAK管理材质库（外部定义：render ARX 应用程序）,false,false
+autolisp,c:lsnew,,,(c:lsnew object-type height position alignment)LINE_BREAK创建配景对象（外部定义：render ARX 应用程序）,false,false
+autolisp,c:lslib,,,(c:lslib mode [options])LINE_BREAK管理配景库（外部定义：render ARX 应用程序）,false,false
+autolisp,c:lsedit,,,(c:lsedit mode [options])LINE_BREAK创建或修改配景对象（外部定义：render ARX 应用程序）,false,false
+autolisp,c:light,,,(c:light mode [options])LINE_BREAK创建、修改和删除光源和照明效果（外部定义：render ARX 应用程序）,false,false
+autolisp,C:cal,,,(c:cal expression)LINE_BREAK调用联机的几何图形计算器并返回表达式的值（外部定义：geomcal ARX 应用程序）,false,false
+autolisp,函数align,,,(align arg1 arg2 ...)LINE_BREAK平移和旋转对象，使它们与其他对象对齐（外部定义：geom3d ARX 应用程序）,false,false
+autolisp,c:3dsout,,,(c:3dsout sset omode div smooth weld file)LINE_BREAK输出 3D Studio 文件（外部定义：render ARX 应用程序）,false,false
+autolisp,c:3dsin,,,(c:3dsin mode [multimat create] file)LINE_BREAK输入 3D Studio (.3ds) 文件（外部定义：render ARX 应用程序）,false,false
+autolisp,vlisp-compile,,,(vlisp-compile 'mode filename [out-filename])LINE_BREAK将 AutoLISP 源代码生成为 FAS 文件,false,false
+autolisp,setenv,,,(setenv varname value)LINE_BREAK将系统环境变量设为指定值,false,false
+autolisp,read-char,,,(read-char [file-desc])LINE_BREAK从键盘输入缓冲区或打开文件中读入一个字符，并将该字符转换成十进制的 ASCII 码值后返回,false,false
+autolisp,prin1,,,(prin1 [expr [file-desc]])LINE_BREAK在命令行打印一个表达式或将表达式写入已打开的文件中,false,false
+autolisp,layoutlist,,,(layoutlist)LINE_BREAK返回当前图形中所有图纸空间布局组成的表,false,false
+autolisp,initdia,,,(initdia [dialogflag])LINE_BREAK强制显示下一个命令的对话框,false,false
+autolisp,函数help,,,(help [helpfile [topic [command]]])LINE_BREAK调用帮助工具,false,false
+autolisp,function,,,"(function symbol , lambda-expr)LINE_BREAK通知 Visual LISP 编译器将参数作为内置函数进行链接和优化",false,false
+autolisp,defun-q-list-set,,,(defun-q-list-set 'sym list)LINE_BREAK将符号设置为以表形式定义的函数,false,false
+autolisp,defun-q-list-ref,,,(defun-q-list-ref 'function )LINE_BREAK返回用 defun-q 定义的函数的表结构,false,false
+autolisp,defun-q,,,(defun-q sym ([arguments] [/ variables...]) expr...)LINE_BREAK将函数定义为表,false,false
+autolisp,cadr,,,(cadr list)LINE_BREAK返回表的第二个元素,false,false
+autolisp,caddr,,,(caddr list)LINE_BREAK返回表的第三个元素,false,false
+autolisp,atoms-family,,,(atoms-family format [symlist])LINE_BREAK返回由当前已定义的符号组成的一个表,false,false
+autolisp,1-,,,(1– number)LINE_BREAK将参数减 1,false,false
+autolisp,Tan,,,(Tan x)LINE_BREAK正切,false,false
+autolisp,filetbclose,,,"Command：filetbclose,隐藏位于绘图区域顶部的文件选项卡。",false,false
+autolisp,xdrx_getss,,,"(xdrx_getss)LINE_BREAK返回值：选择集LINE_BREAK说  明：命令实若没有设立标记，则返回图中的所有实体。若在LISP中使用，格式为LINE_BREAK(setq ss(c:xdrx_getss )可以构造选择集的时候透明使用，提供C:PP是为了方便命令LINE_BREAKPP和命令XDRX_GETSS在命令行上使用，把得到标记后的实体选择集加入到内部数据库P1LINE_BREAK位置。若这两个命令在其他命令内部选物体的时候透明使用，仅仅返回标记后的实体选LINE_BREAK择集而不加入到内部数据库中。,返回上次标记后的，所有新画实体的选择集",false,false
+autolisp,xdrx_text_make,,,"(xdrx_text_make <基<> <字符串> <文 样式><字高><转角> )LINE_BREAK(xdrx_text_make <基点> <字符串> <字高><转角> )LINE_BREAK返 回 值：实体名,创建文本实体",false,false
+autolisp,xdrx_AttributeDef_make,,,"(xdrx_attributedef_make  <""文字实体""> [T])LINE_BREAK返回值：块名 LINE_BREAK说  明：若给参数T，删除文字实体,创建属性定义实体",false,false
+autolisp,xdrx_setpropertyvalue,,,"(xdrx_SetPropertyValue <实体名> [<属性><值>]...[<体体><值>])LINE_BREAK·不给参数，屏幕打印出该函数当前支持修改的类名LINE_BREAK·只给一个实体一参数，屏幕打印该类实体支持的属性修改内容LINE_BREAK·属性值参数长度1，如果，1个元素，用表的形式,设置对象属属性值",false,false
+autolisp,xdrx_polyline_make,,,"(xdrx_polyline_make p1[..pn [flag]).返回值：实体名.flag=T,闭合,创多段线",false,false
+autolisp,xdrx_setmark,,,"调用格式：(xdrx_setmark [实体名])LINE_BREAK返 回 值：T LINE_BREAK说    明：系统默认标记是图形的第一个实体。即，通过命令xdrx_getss获得所有实体。命令版本若在LISP中调用，格式为(c:xdrx_setmark) LINE_BREAKLINE_BREAK如果给可选参数[实体名]，获得这个实体之后新生成的所有实体。如果实体名无效，返回当前数据库所有实体。,功  能：建立标记，通过下面的命令xdrx_getss获得标记后，新画的实体的选择集",false,false
+autolisp,XD::Table:Begin,,,"调用格式：(XD::Table:Begin tb) LINE_BREAK参    数： tb --- 表格实体名 LINE_BREAK返 回 值： T,禁止表格更新",false,false
+autolisp,nbtf_dxf,,,（nbtf_dxf e 10)LINE_BREAK获取DXF代码值,false,false
+autolisp,vlisp-fasres-list,,,(vlisp-fasres-list filename)LINE_BREAK返回VLX文件中包含的FAS文件,false,false
+autolisp,loadedp,,,(loadedp str str-lst)LINE_BREAK判断表里是否含有特定的字符串,false,false
+autolisp,XSTRCASE,,,"同STRCASE,用法同STRCASE",false,false
+autolisp,getpropertyvalue,,,(getpropertyvalue ename propertyname [or collectionName index name])LINE_BREAK获取对象的属性值,false,false
+autolisp,dumpallproperties,,,(dumpallproperties ename [context])LINE_BREAK显示对象的所有属性,false,false
+autolisp,initcommandversion,,,(initcommandversion [version])LINE_BREAK强制下一个命令以指定版本运行LINE_BREAK参数 version 类型为整数，如不提供该参数，则指定版本为最新,false,false
+autolisp,all-documents,,,"'all-documents,反应器 notification 值，必须与单引号或 quote 函数一同使用。",false,false
+autolisp,we,,,()LINE_BREAK请勿加入自定义函数,false,false
+autolisp,findtrustedfile,,,(findtrustedfile file)LINE_BREAK在AutoCAD信任文件路径中搜索指定的文件,false,false
+autolisp,command-s,,,"(command-s [参数...])LINE_BREAK*error*错误函数等内部不支持command时, 用此函数代替command，但旧版CAD不支持",false,false
+autolisp,bherrs,,,"(bherrs)LINE_BREAK数据库中没有收录这个函数!请帮助录入,谢谢",false,false
+autolisp,xdrx_entsel,,,()LINE_BREAK请勿加入自定义函数,false,false
+autolisp,xdrx_pickset_HighLight,,,()LINE_BREAK请勿加入自定义函数,false,false
+autolisp,xdrx_pickset_reeraw,,,()LINE_BREAK请勿加入自定义函数,false,false
+autolisp,XLRX-SsUnion,,,()LINE_BREAK请勿加入自定义函数,false,false
+autolisp,XLRX-SsSub,,,()LINE_BREAK请勿加入自定义函数,false,false
+autolisp,XLRX-SsFree,,,()LINE_BREAK请勿加入自定义函数,false,false
+autolisp,XLRX-SelectInsertByAtts,,,()LINE_BREAK请勿加入自定义函数,false,false
+autolisp,XLRX-PickSet-GetBox,,,()LINE_BREAK请勿加入自定义函数,false,false
+autolisp,XLRX-PickSet->List,,,()LINE_BREAK请勿加入自定义函数,false,false
+autolisp,XLRX-List->PickSet,,,()LINE_BREAK请勿加入自定义函数,false,false
+autolisp,XLRX-entsel,,,()LINE_BREAK谁瞎填的自定义函数,false,false

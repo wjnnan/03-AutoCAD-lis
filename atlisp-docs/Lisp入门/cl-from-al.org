@@ -1,0 +1,76 @@
+#+title: 从 autolisp 到 commonlisp
+* 命名空间
+common lisp 中函数与符号是不同用命名空间。
+' 是 quote 的简写（语法糖）,不能用于函数前缀。
+#‘ 是 function 的简写（语法糖）
+
+cl 写法:
+#+begin_src lisp
+  (mapcar #'+ (list 1 2)(list 3 4))
+  (mapcar #'(lambda(x y)(+ x y)) (list 1 2)(list 3 4))
+  (mapcar (function (lambda(x y)(+ x y))) (list 1 2)(list 3 4))
+
+  ;;以下是错误的写法
+  (mapcar '+ (list 1 2)(list 3 4))
+  (mapcar '(lambda(x y)(+ x y)) (list 1 2)(list 3 4))
+  (mapcar (quote +) (list 1 2)(list 3 4))
+  
+#+end_src
+al 写法:
+#+begin_src autolisp
+  (mapcar '+ (list 1 2)(list 3 4))
+  (mapcar '(lambda(x y)(+ x y)) (list 1 2)(list 3 4))
+  (mapcar (quote +) (list 1 2)(list 3 4))
+  (mapcar (function (lambda(x y)(+ x y))) (list 1 2)(list 3 4))
+#+end_src
+
+同样有区别的还有
+  - apply
+  - sort(对应al中的vl-sort)
+  - remove-if,remove-if-not(对应al中的vl-remove-if,vl-remove-if-not等
+
+** 函数与变量
+因为在cl中函数与变量在不同的命名空间，所以同名的函数和变量不冲突
+如
+#+begin_src lisp
+  (defun a() 5)
+  (defvar a 9) ;;相当于
+  (setq a 8)
+  (a);;返回 5
+  a ;;返回 8
+#+end_src
+** 自解析符号
+在cl中 ，以:(冒号)开头的符号是自解析的，即符号的值就是符号本身。不能给它赋值。
+
+类似于其它语言中的常量。但是其值就是它本身。
+
+(setq :a 5) 是错误的。
+
+* 局部变量
+cl中用 let 定义局部变量
+
+cl 写法:
+#+begin_src lisp
+  (defun foobar ()
+    (let ((a 5)
+          (b 6))
+      (+ a b)))
+#+end_src
+
+al 写法:
+#+begin_src autolisp
+  (defun foobar (/ a b)
+    (setq a 5 b 6)
+    (+ a b))
+#+end_src
+* let 与 let*
+let* 可以使用前面定义的局部变量,let 不可以。
+#+begin_src lisp
+  (let ((a 5)
+        (b 6))
+    (+ a b))
+
+  (let* ((a 5)
+         (b (1+ a)))
+    (+ a b))
+#+end_src

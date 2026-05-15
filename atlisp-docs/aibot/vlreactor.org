@@ -1,0 +1,214 @@
+* vlr-reactors,现有反应器
+** (vlr-reactors [reactor-types])
+返回由现有反应器组成的表
+* vlr-reaction-set
+** (vlr-reaction-set reactor event function)
+添加或替换反应器中的一个回调函数
+* vlr-reaction-name
+** (vlr-reaction-names reactor-type)
+返回由该类型反应器所有可能回调条件组成的表
+* vlr-pers-release
+** (vlr-pers-release reactor)
+使反应器成为临时反应器
+* vlr-pers-p
+** (vlr-pers-p reactor)
+确定反应器是否是永久反应器
+* vlr-pers-list
+** (vlr-pers-list [reactor])
+返回由当前图形文档中永久反应器组成的表
+* vlr-pers,永久反应器
+** (vlr-pers reactor)
+使反应器成为永久反应器
+* vlr-owners,反应器的所有者
+** (vlr-owners reactor)
+返回对象反应器的所有者列表
+* vlr-owner-remove
+** (vlr-owner-remove reactor owner)
+从对象反应器的所有者列表中删除对象
+* vlr-owner-add
+** (vlr-owner-add reactor owner)
+将对象添加到对象反应器的所有者列表
+* vlr-object-reactor,对象反应器
+** (vlr-object-reactor owners data callbacks)
+构造对象反应器对象
+** 事件
+*** :vlr-cancelled
+*** :vlr-copied
+*** :vlr-erased
+*** :vlr-unerased
+*** :vlr-goodbye
+*** :vlr-openedForModify
+*** :vlr-modified
+*** :vlr-subObjModified
+*** :vlr-modifyUndone
+*** :vlr-modifiedXData
+*** :vlr-unappended
+*** :vlr-reappended
+*** :vlr-objectClosed
+
+* vlr-data-set
+** (vlr-data-set objdata)
+覆盖与反应器相关的应用程序特定数据
+* vlr-xref-reactor,参照反应器
+** (vlr-xref-reactor data callbacks)
+构造编辑器反应器对象，在发生附着或修改外部参照事件时通知应用程序
+* vlr-window-reactor,窗口反应器
+** (vlr-window-reactor data callbacks)
+构造编辑器反应器对象，在发生与移动或缩放 AutoCAD 窗口相关的事件时通知应用程序
+* vlr-wblock-reactor,写块反应器
+** (vlr-wblock-reactor data callbacks)
+构造编辑器反应器对象，在发生与写块相关的事件时通知应用程序
+* vlr-undo-reactor,放弃操作反应器
+** (vlr-undo-reactor data callbacks)
+构造通知放弃操作的编辑器反应器
+* vlr-types
+** (vlr-types)
+返回由所有反应器类型组成的表
+* vlr-type
+** (vlr-type reactor)
+返回代表反应器类型的符号
+* vlr-trace-reaction
+** (vlr-trace-reaction)
+预定义回调函数，在“跟踪”窗口显示一个或多个回调参数
+* vlr-toolbar-reactor,工具栏反应器
+** (vlr-toolbar-reactor data callbacks)
+构造编辑器反应器对象，在工具栏中的位图改变时通知应用程序
+* vlr-sysvar-reactor,系统变量反应器
+** (vlr-sysvar-reactor data callbacks)
+构造编辑器反应器对象，在修改系统变量时通知应用程序
+* vlr-set-notification
+** (vlr-set-notification reactor 'range)
+确定当反应器在其所关联的名称空间非活动时是否执行其回调函数
+* vlr-remove-all
+** (vlr-remove-all [reactor-type])
+禁用指定类型的所有反应器
+* vlr-remove,禁用反应器
+** (vlr-remove reactor)
+禁用反应器
+* vlr-reactions,反应器回调表
+** (vlr-reactions reactor)
+返回反应器的形如 (event-name . callback_function) 的点对表
+* vlr-notification
+** (vlr-notification reactor)
+确定当反应器相关联的名称空间不在活动状态时是否激发反应器
+* vlr-mouse-reactor,鼠标反应器
+** (vlr-mouse-reactor data callbacks)
+构造编辑器反应器对象，通知鼠标事件（如双击）
+** 事件
+:vlr-beginDoubleClick | 双击事件
+:vlr-beginRightClick | 单击右键事件
+
+* vlr-miscellaneous-reactor
+** (vlr-miscellaneous-reactor data callbacks)
+构造编辑器反应器对象，它不属于任何其他编辑器反应器类型
+* vlr-lisp-reactor,lisp反应器
+** (vlr-lisp-reactor data callbacks)
+构造编辑器反应器对象，通知 LISP 事件
+** 事件
+:vlr-lispWillStart | An AutoLISP expression is to be evaluated.
+:vlr-lispEnded | Evaluation of an AutoLISP expression has been completed.
+:vlr-lispCancelled | Evaluation of an AutoLISP expression has been canceled.
+
+* vlr-linker-reactor
+** (vlr-linker-reactor data callbacks)
+构造反应器对象，在每次应用程序加载或卸载 ObjectARX 应用程序时通知应用程序
+** 事件名
+:vlr-rxAppLoaded  | 加载 ARX 
+:vlr-rxAppUnLoaded | 卸载 ARX
+
+* vlr-insert-reactor,块插入反应器
+** (vlr-insert-reactor data callbacks)
+构造反应器对象，通知与块插入相关的事件
+** 事件名
+*** :vlr-beginInsert
+*** :vlr-beginInsertM
+*** :vlr-otherInsert
+*** :vlr-endInsert
+*** :vlr-abortInsert
+* vlr-editor-reactor,编辑器反应器
+** (vlr-editor-reactor data callbacks)
+构造编辑器反应器对象
+* vlr-dxf-reactor,dxf反应器
+** (vlr-dxf-reactor datacallbacks)
+构造编辑器反应器对象，通知与读写 DXF 文件相关的事件
+** 事件
+*** :vlr-beginDxfIn
+*** :vlr-abortDxfIn
+*** :vlr-dxfInComplete
+*** :vlr-beginDxfOut
+*** :vlr-abortDxfOut
+*** :vlr-dxfOutComplete
+* vlr-dwg-reactor,dwg反应器
+** (vlr-dwg-reactor data callbacks)
+构造反应器对象，通知图形事件（如打开或关闭图形文件）
+** 事件
+*** :vlr-beginClose
+*** :vlr-databaseConstructed
+*** :vlr-databaseToBeDestroyed
+*** :vlr-beginDwgOpen
+*** :vlr-endDwgOpen
+*** :vlr-dwgFileOpened
+*** :vlr-beginSave
+*** :vlr-saveComplete
+* vlr-docmanager-reactor,文档反应器
+** (vlr-docmanager-reactor data callbacks)
+构造反应器对象，通知与图形文档相关的事件
+** 事件
+*** :vlr-documentCreated
+*** :vlr-documentToBeDestroyed
+*** :vlr-documentLockModeWillChange
+*** :vlr-documentLockModeChangeVetoed
+*** :vlr-documentLockModeChanged
+*** :vlr-documentBecameCurrent
+*** :vlr-documentToBeActivated
+*** :vlr-documentToBeDeactivated
+
+* vlr-deepclone-reactor,深克隆反应器
+** (vlr-deepclone-reactor datacallbacks)
+构造编辑器反应器对象，在发生 deepclone 事件时给出通知
+** 事件
+:vlr-beginDeepClone
+:vlr-beginDeepCloneXlation
+:vlr-abortDeepClone
+:vlr-endDeepClone
+* vlr-data
+** (vlr-data obj)
+返回与反应器相关的应用程序特定数据
+* vlr-current-reaction-name
+** (vlr-current-reaction-name)
+如果在反应器回调函数中调用该函数，它返回当前事件的名称（符号）
+* vlr-command-reactor,命令反应器
+** (vlr-command-reactor data callbacks)
+构造 AutoCAD 命令反应器，对命令事件给出通知
+** 事件
+:vlr-commandFailed | 未能完成 AutoCAD 命令。
+:vlr-commandCancelled | 以取消 AutoCAD 命令。
+:vlr-commandEnded | 已完成完成 AutoCAD 命令。
+:vlr-commandWillStart | 产生了 AutoCAD 命令调用。
+:vlr-unknownCommand | 发出了 AutoCAD 未知的命令。
+* vlr-beep-reaction
+** (vlr-beep-reaction [args])
+产生声音提示的回调函数
+* vlr-added-p
+** (vlr-added-p obj)
+测试以确定是否已启用反应器对象
+* vlr-add
+** (vlr-add obj)
+启动当前禁用的反应器对象
+* vlr-acdb-reactor,数据库反应器
+** (vlr-acdb-reactor data callbacks)
+构造 AutoCAD 数据库反应器对象，在从图形数据库中加入、修改或删除对象时通知应用程序.
+* vlr-readme,反应器
+** 构造一个反应器
+(vlr-*-reactor nil '((反应器类型 . 回调函数)))
+** 启用已禁用的反应器
+(vlr-add 反应器实例)
+反应器实例 由 vlr-*-reactor 构造
+** 列出所有反应器
+(vlr-reactors)
+** 禁用反应器
+(vlr-remove 反应器实例)
+(vlr-remove-all)
+
+** 永久反应器
+vlr-pers-* 相关函数

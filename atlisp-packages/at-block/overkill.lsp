@@ -1,0 +1,75 @@
+(defun @block:overblocks (/ *error* blkname ss-blk blks blkent blkname box)
+  (@::prompt "定位相互重叠的同名块")
+  (defun *error* (msg)
+    ;; 重启动处理 
+    (if (= 'file (type dcl_fp))
+	(close (dcl_fp)))
+    (princ (strcat msg ))
+    (princ))
+  (prompt  "请选择一个块:")
+  (while (null(and (setq blkent (ssget "_:S:E" '((0 . "insert"))))
+		   (setq blkent (ssname blkent 0))))
+    (@:prompt "\n未选中块，请选择一个块:"))
+  (if blkent
+      (progn
+	(setq blks (pickset:to-list (ssget "x" '((0 . "INSERT")))))
+	(setq blkname (block:get-effectivename blkent))
+	(setq blks (vl-remove-if '(lambda (x) (/= blkname
+					       (block:get-effectivename x)))
+				 blks))
+	(setq corner (pickset:getbox blks 100))
+	(command "zoom" "w" (car corner) (cadr corner))
+
+	(setq blks-overed nil)
+	(while (and (setq blk (car blks))
+		    (setq box (@block:get-corner blk))
+		    (setq ss-blk
+			  (pickset:to-list
+			   (ssget "c" (car box)(cadr box)
+				  (list '(0 . "insert")
+					(cons 2 blkname))))))
+	  (if (and ss-blk (> (length ss-blk) 1))
+	      (progn
+		(setq blks-overed (append blks-overed (vl-remove blk ss-blk)))
+		))
+	  (setq blks (vl-remove-if '(lambda(x)(member x ss-blk)) blks)))
+	(if (and blks-overed)
+	    (progn
+	      (setq corner (pickset:getbox (pickset:from-list blks-overed) 100))
+	      (command "zoom" "w" (car corner) (cadr corner))
+	      (sssetfirst nil (pickset:from-list blks-overed)))
+	    (princ (@:speak "没有发现重叠块。"))
+	    )))
+  (princ))
+(defun @block:overblocks2 (/ *error* blkname ss-blk blks blkent blkname box)
+  (@::prompt "定位相互重叠的块(块外围尺寸对角线长度不大于设定值)")
+  (defun *error* (msg)
+    ;; 重启动处理 
+    (if (= 'file (type dcl_fp))
+	(close (dcl_fp)))
+    (princ (strcat msg ))
+    (princ))
+  (@:prompt "请框选要检测的范围:")
+  (if (null (setq blks (pickset:to-list (ssget '((0 . "INSERT"))))))
+      (setq blks (pickset:to-list (ssget "x" '((0 . "INSERT"))))))
+  (setq blks (vl-remove-if '(lambda (x / box)
+			     (setq box (entity:getbox x 0))
+			     (> (distance (car box)(cadr box)) (@:get-config '@block:size)))
+			   blks))
+  (while (and (setq blk (car blks))
+	      (setq box (entity:getbox blk -1))
+	      (setq ss-blk
+		    (ssget "c" (car box)(cadr box) (list '(0 . "insert")
+							 )))
+	      (<= (sslength ss-blk)  1))
+    (setq blks (cdr  blks)))
+  (if (and ss-blk (> (sslength ss-blk) 1))
+      (progn
+	(setq corner (pickset:getbox ss-blk 10))
+	(command "zoom" "w" (car corner) (cadr corner))
+	(sssetfirst nil (ssadd (ssname ss-blk 0))))
+      (princ (@:speak "没有发现重叠块。"))
+      )
+  (princ))
+  
+    
