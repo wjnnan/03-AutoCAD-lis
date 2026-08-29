@@ -1,7 +1,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; è¿™æ˜¯ä½¿ç”¨å¼€å‘å·¥å…· dev-tools è‡ªåŠ¨åˆ›å»ºçš„ç¨‹åºæºæ–‡ä»¶ 
+;; ÕâÊÇÊ¹ÓÃ¿ª·¢¹¤¾ß dev-tools ×Ô¶¯´´½¨µÄ³ÌĞòÔ´ÎÄ¼ş 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; å®šä¹‰é…ç½®é¡¹ 'prefabricated-building:first ç”¨äº åº”ç”¨åŒ… prefabricated-building çš„ ç¬¬ä¸€ä¸ªé…ç½®é¡¹ first 
-;; (@:get-config 'prefabricated-building:first) ;; è·å–é…ç½®é¡¶çš„å€¼
-;; (@:set-config 'prefabricated-building:first  "æ–°è®¾çš„å€¼") ;; è®¾ç½®é…ç½®é¡¶çš„å€¼
-;; å‘ç³»ç»Ÿä¸­æ·»åŠ èœå• 
+;; ¶¨ÒåÅäÖÃÏî 'prefabricated-building:first ÓÃÓÚ Ó¦ÓÃ°ü prefabricated-building µÄ µÚÒ»¸öÅäÖÃÏî first 
+;; (@:get-config 'prefabricated-building:first) ;; »ñÈ¡ÅäÖÃ¶¥µÄÖµ
+;; (@:set-config 'prefabricated-building:first  "ĞÂÉèµÄÖµ") ;; ÉèÖÃÅäÖÃ¶¥µÄÖµ
+;; ÏòÏµÍ³ÖĞÌí¼Ó²Ëµ¥ 

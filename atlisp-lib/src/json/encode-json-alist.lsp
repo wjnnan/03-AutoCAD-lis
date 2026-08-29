@@ -1,5 +1,5 @@
 (defun json:encode-json-alist (alist)
-  "å°†å±æ€§è¡¨ï¼ˆç‚¹å¯¹è¡¨ç»„æˆçš„åˆ—è¡¨ï¼‰ç¼–ç ä¸ºjsonå­—ç¬¦ä¸²"
+  "½«ÊôĞÔ±í£¨µã¶Ô±í×é³ÉµÄÁĞ±í£©±àÂëÎªjson×Ö·û´®"
   "String"
   (@::post (strcat (@::uri)"/api/encode-json")
 	   (vl-prin1-to-string  alist)

@@ -1,14 +1,14 @@
 (@::def-pkg '((:NAME . "pdftk")
-        (:FULL-NAME . "PDFå¤„ç†å·¥å…·")
+        (:FULL-NAME . "PDF´¦Àí¹¤¾ß")
         (:AUTHOR . "VitalGG")
         (:EMAIL . "vitalgg@gmail.com")
         (:VERSION . "0.2.10")
         (:LOCALE . "CHS")
-        (:CATEGORY . "å›¾æ¡£ç®¡ç†")
+        (:CATEGORY . "Í¼µµ¹ÜÀí")
         (:REQUIRED . "base")
         (:OPENSOURCE . 0)
         (:FREE . T)
-        (:DESCRIPTION . "åŸºäºŽ pdftk free çš„PDFå¤„ç†å·¥å…·ã€‚ç”¨äºŽ PDF åˆå¹¶ï¼Œæ‹†åˆ†ï¼ŒåŠ å¯†ï¼Œè§£å¯†ï¼ŒåŠ æ°´å°ï¼Œæˆ³è®°ç­‰ã€‚pdftk è¯¦æƒ…è§ pdftk.com")
+        (:DESCRIPTION . "»ùÓÚ pdftk free µÄPDF´¦Àí¹¤¾ß¡£ÓÃÓÚ PDF ºÏ²¢£¬²ð·Ö£¬¼ÓÃÜ£¬½âÃÜ£¬¼ÓË®Ó¡£¬´Á¼ÇµÈ¡£pdftk ÏêÇé¼û pdftk.com")
         (:URL . "http://atlisp.cn")
         (:FILES "pdftk"
             "background.pdf"

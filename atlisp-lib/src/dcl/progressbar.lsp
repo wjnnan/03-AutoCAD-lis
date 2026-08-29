@@ -1,5 +1,5 @@
 (defun dcl:progressbar (key style show-txt? / color)
-  "dcl è¿›åº¦æ¡ã€‚"
+  "dcl ½ø¶ÈÌõ¡£"
   ""
   "(dcl:progress-bar \"pbar1\"
     \"\"

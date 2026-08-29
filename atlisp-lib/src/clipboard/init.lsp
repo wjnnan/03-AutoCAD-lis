@@ -1,4 +1,4 @@
-(defun clipboard:init nil "åˆå§‹åŒ–å‰ªè´´æ¿å¯¹è±¡ã€‚"
+(defun clipboard:init nil "³õÊ¼»¯¼ôÌù°å¶ÔÏó¡£"
   ""
   (setq @:*clipboard* (vlax-get (vlax-get-property (vlax-get-or-create-object "HTMLFILE")
         (quote parentwindow))

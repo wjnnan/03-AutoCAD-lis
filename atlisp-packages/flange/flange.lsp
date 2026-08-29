@@ -54,7 +54,8 @@
 		    paras)
 		    )
 
-	(setq pt-c (getpoint "点选要绘制的位置坐标:"))
+	(if (null (setq pt-c (getpoint "点选要绘制的位置坐标:"))) (progn (princ "
+未指定坐标 -- 退出.") (quit)))
 	(setq para (mapcar 'read para))
 	(flange:make pt-c (atoi (substr (vl-symbol-name (nth 0 para)) 3)) (nth 1 para) (nth 2 para)(nth 3 para) (nth 4 para)(nth 5 para))
 	)))

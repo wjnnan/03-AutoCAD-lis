@@ -96,7 +96,8 @@
 		      (-4 . "<=")(90 . 8)
 		      (-4 . "AND>"))))
   (setq en% 0)
-  (setq pt1 (getpoint "请点取列表位置: "))
+  (if (null (setq pt1 (getpoint "请点取列表位置: "))) (progn (princ "
+未指定位置 -- 退出.") (quit)))
   (entity:make-text 
    (format nil "rectang   width               height  ~%" nil)
    pt1 3.5 0 0.8 0 13)

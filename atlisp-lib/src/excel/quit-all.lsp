@@ -1,4 +1,4 @@
 (defun excel:quit-all (saveyn / exlobj)
-  "閫�鍑烘墍鏈夋墦寮�鐨別xcel鏂囦欢\n鍙傛暟:SaveYN:鏄惁淇濆瓨"
+  "退出所有打开的excel文件\n参数:SaveYN:是否保存"
   (while (setq exlobj (vlax-get-object "Excel.Application"))
     (excel:quit exlobj saveyn)))

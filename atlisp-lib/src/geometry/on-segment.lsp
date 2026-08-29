@@ -1,5 +1,5 @@
 (defun geometry:on-segment (pt segment)
-  "åˆ¤æ–­ä¸€ä¸ªä¸Žçº¿æ®µå…±çº¿çš„ç‚¹æ˜¯å¦åœ¨çº¿æ®µä¸Šã€‚"
+  "ÅÐ¶ÏÒ»¸öÓëÏß¶Î¹²ÏßµÄµãÊÇ·ñÔÚÏß¶ÎÉÏ¡£"
   (and (>= (car pt)
       (apply (quote min)
         (mapcar (quote car)

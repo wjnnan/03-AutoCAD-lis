@@ -1,5 +1,5 @@
 (defun json:encode-from-alist (lst / lst2array )
-  "å°†å…³è”åˆ—è¡¨è½¬åŒ–ä¸ºjsonä¸²,æµ‹è¯•ç‰ˆ"
+  "½«¹ØÁªÁĞ±í×ª»¯Îªjson´®,²âÊÔ°æ"
   "list"
   (defun lst2array (lst)
     (strcat "["

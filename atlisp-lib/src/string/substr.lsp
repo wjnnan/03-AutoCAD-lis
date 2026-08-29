@@ -1,9 +1,9 @@
 (defun string:substr (str start len / res i)
-  "æˆªå–å­—ç¬¦ä¸²ï¼Œansi å­—ç¬¦æŒ‰ 1 ä½ è®¡ç®—ã€‚start æœ€å°å€¼ä¸º 1, len æœ€å°ä¸º1 "
-  "ç»“æœå­—ç¬¦ä¸²"
-  "(string:substr \"aä¸­å›½äººbcdå¼€å‘lisp\"
+  "½ØÈ¡×Ö·û´®£¬ansi ×Ö·û°´ 1 Î» ¼ÆËã¡£start ×îĞ¡ÖµÎª 1, len ×îĞ¡Îª1 "
+  "½á¹û×Ö·û´®"
+  "(string:substr \"aÖĞ¹úÈËbcd¿ª·¢lisp\"
     2 3)
-  => ä¸­å›½äºº"
+  => ÖĞ¹úÈË"
   (setq start (fix start)
     len (fix len))
   (if (< start 1)

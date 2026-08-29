@@ -1,6 +1,6 @@
 (defun entity:gettextbox (ent-text offset / pt1 pt2 pts)
-  "è·å–å•è¡Œæ–‡æœ¬åŒ…å›´æ¡†"
-  "return:æ–‡å­—å¤–æ¡†ï¼ˆåç§»åï¼‰çš„å››ä¸ªè§’ç‚¹ï¼ˆå·¦ä¸‹ï¼Œå³ä¸‹ï¼Œå³ä¸Šï¼Œå·¦ä¸Š"
+  "»ñÈ¡µ¥ĞĞÎÄ±¾°üÎ§¿ò"
+  "return:ÎÄ×ÖÍâ¿ò£¨Æ«ÒÆºó£©µÄËÄ¸ö½Çµã£¨×óÏÂ£¬ÓÒÏÂ£¬ÓÒÉÏ£¬×óÉÏ"
   "example:(entity:getTextBox (car(entsel))
     2)"
   (setq pts (textbox (entget ent-text)))

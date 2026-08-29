@@ -239,7 +239,7 @@
        
        (setq  obj_a (ssadd))                                 ;;由交点串列找到物体 
        (foreach  x  eel
-		 (setq mm (ssname (ssget "C" x x ) 0))
+		 (setq mm (ssname (cond ((setq _ss (ssget "C" x x )) _ss) (t (ssadd))) 0))
 		 (setq obj_a (ssadd  mm obj_a))		               ;;物体加入选集内
 		 
 	         )
@@ -332,7 +332,7 @@
     (setq tel (remove_ab road sel))                        ;再去两侧道路线交点所剩下的点 就是在十字路口要去除的交点
     (setq  vet (ssadd))
     (foreach  x  pbel
-	      (setq mm (ssname (ssget "C" x x ) 0))
+	      (setq mm (ssname (cond ((setq _ss (ssget "C" x x )) _ss) (t (ssadd))) 0))
 	      (setq vet (ssadd  mm vet))		               ;;将头尾两端的封口线加入选集内
 	      (command "erase" vet "")                      ;;删除头尾线                     
 	      )
@@ -354,7 +354,7 @@
     ;;说明 将中心线放置于两头尾线的下方 这样下个步骤才能确保选到头尾线	  
     
     (foreach  x  pbel                                      ;;pbel=头尾端串列点 ,由点去选择到实际线
-	      (setq mm (ssname (ssget "C" x x ) 0))
+	      (setq mm (ssname (cond ((setq _ss (ssget "C" x x )) _ss) (t (ssadd))) 0))
 	      (setq ss1 (ssadd  mm ss1))		               ;;将头尾两端的封口线也加入中心线选集内
 	      )
     
@@ -659,7 +659,8 @@
   (if (vl-catch-all-error-p
         (vl-catch-all-apply 'vla-getboundingbox (list (vlax-ename->vla-object en) 'p1 'p2)))
     (setq p1 nil p2 nil))         ;;根据启始块物件名求出最小边界框 左下p1,右上p2
-  (setq p1 (vlax-safearray->list p1) p2 (vlax-safearray->list p2)) ;;将启始块的p1,p2 转为实际的两点(左下点p1,p2右上点)
+  (if p1
+    (setq p1 (vlax-safearray->list p1) p2 (vlax-safearray->list p2))) ;;将启始块的p1,p2 转为实际的两点(左下点p1,p2右上点)
   (setq pp (list p1 p2))
   )
 ;;--------------------------------------------------------------------
@@ -831,14 +832,13 @@
   ;;=====================================
   (defun get_interpts (obj1 obj2 / iplist)
     (if (not (vl-catch-all-error-p
-              (setq iplist (vl-catch-all-apply
-                            'vlax-safearray->list
-                            (list
-                             (vlax-variant-value
-                              (vla-intersectwith obj1 obj2 acextendnone)
-                              ))))))
-	iplist
-	)
+              (setq iplist (vl-catch-all-apply 'vla-intersectwith (list obj1 obj2 acextendnone)))))
+        (if (not (vl-catch-all-error-p
+                  (setq iplist (vl-catch-all-apply 'vlax-safearray->list
+                                                   (list (vlax-variant-value iplist))))))
+            iplist
+            nil)
+        nil)
     )
 
 
@@ -1532,9 +1532,10 @@
 	  )
     (while (< n2 n)
       (setq obj2 (vlax-ename->vla-object (ssname ss n2))
-            ipt  (vlax-variant-value (vla-intersectwith obj1 obj2 0))
+            ipt  (vl-catch-all-apply 'vla-intersectwith (list obj1 obj2 0))
 	    )
-      (if (> (vlax-safearray-get-u-bound ipt 1) 0)
+      (if (and ipt (not (vl-catch-all-error-p ipt))
+	   (> (vlax-safearray-get-u-bound (setq ipt (vlax-variant-value ipt)) 1) 0))
           (progn
             (setq ipt (vlax-safearray->list ipt))
             (while (> (length ipt) 0)

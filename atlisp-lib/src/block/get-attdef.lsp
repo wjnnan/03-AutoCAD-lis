@@ -1,5 +1,5 @@
 (defun block:get-attdef (blkname)
-  "鍙栧潡瀹氫箟涓殑灞炴�у畾涔夊悕鍙婃彁绀哄悕"
+  "取块定义中的属性定义名及提示名"
   "list"
   (setq ents (vl-remove-if-not
 	      '(lambda(x)

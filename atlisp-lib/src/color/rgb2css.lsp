@@ -1,5 +1,5 @@
 (defun color:rgb2css (lst-color)
-  "å°† color çš„ä¸‰è‰²å€¼è½¬æ¢ä¸º #FFFFFF æ ·å¼çš„å­—ç¬¦ä¸²"
+  "½« color µÄÈıÉ«Öµ×ª»»Îª #FFFFFF ÑùÊ½µÄ×Ö·û´®"
   "String"
   
   (strcat "#"

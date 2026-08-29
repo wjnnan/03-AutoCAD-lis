@@ -1,7 +1,7 @@
 
-;;;��������V2.0
-;;;���ߣ�������
-;;;�����ڲ�ʹ��
+;;;????????V2.0
+;;;???????????
+;;;??????????
 (defun c:ZBZL()
     (setvar "cmdecho" 0)
 (if (= hd nil) (setq hd 2800))
@@ -11,15 +11,15 @@
 (if (= L_cLu nil) (setq L_cLu "*S-OUTLINE*"))
 (if (= L_tab nil) (setq L_tab "*TAB*"))
 (if (= L_pdx nil) (setq L_pdx "*pdx*"))
-        (princ "\n��ѡ�����<�ո���߻س�����>��")
+        (princ "\n????????<????????????>??")
         (while (= nil ss_tab )
                (setq tab (ssget(list (cons 0 "LWPOLYLINE")(cons 8 L_tab))))        
                (if (= nil tab) (dcl_ZBZL_Form1) (ZBZL))
         )
 )
 (defun dcl_ZBZL_Form1()
-  (setq dcl_id (load_dialog "ZBZL.dcl"));����DCL
-     (if (not (new_dialog "ZBZL" dcl_id))(exit)) ;;����Ի���
+  (setq dcl_id (load_dialog "ZBZL.dcl"));????DCL
+     (if (not (new_dialog "ZBZL" dcl_id))(exit)) ;;????????
 
   (set_tile "Text1" (rtos hd))
   (set_tile "Text2" (rtos ht))
@@ -44,31 +44,31 @@
      ((= dZBZL 3) (setq ht (QYD:dist)) (dcl_ZBZL_Form1))
      ((= dZBZL 4) (setq DL (QYD:dist)) (dcl_ZBZL_Form1))
      ((= dZBZL 5) (setq PDL (QYD:dist)) (dcl_ZBZL_Form1))
-     ((= dZBZL 6) (setq s_sym (ssget)) (setq L_tab (QYD:SQTY 8 s_sym L_tab ",")) (dcl_ZBZL_Form1)) ;78.ʰȡͼԪ���ͣ�ͼ��(��ť)
+     ((= dZBZL 6) (setq s_sym (ssget)) (setq L_tab (QYD:SQTY 8 s_sym L_tab ",")) (dcl_ZBZL_Form1)) ;78.????????????(???)
      ((= dZBZL 7) (setq s_sym (ssget)) (setq L_cLu (QYD:SQTY 8 s_sym L_cLu ",")) (dcl_ZBZL_Form1)) 
      ((= dZBZL 8) (setq s_sym (ssget)) (setq L_pdx (QYD:SQTY 8 s_sym L_pdx ",")) (dcl_ZBZL_Form1))
   )
  )
 
-;;;��ֵ��������
+;;;???????????
 (defun get_TabText()
-  (setq hd (atof (get_tile "Text1")))   ;;;���������ױ߾�
-  (setq ht (atof (get_tile "Text2")))    ;;;�������ֿ��ܸ߶�
-  (setq DL (atof (get_tile "Text3")))   ;;;�ߴ�����ƫ����
-  (setq PDL (atof (get_tile "Text4")))    ;;;ǽ�ʶ��߳�
-  (setq L_tab (get_tile "Text5"))  ;;;����ͼ��
-  (setq L_cLu (get_tile "Text6"))   ;;;������ͼ��
-  (setq L_pdx (get_tile "Text7"))   ;;;�ʶ���ͼ��
+  (setq hd (atof (get_tile "Text1")))   ;;;????????????
+  (setq ht (atof (get_tile "Text2")))    ;;;?????????????
+  (setq DL (atof (get_tile "Text3")))   ;;;????????????
+  (setq PDL (atof (get_tile "Text4")))    ;;;???????
+  (setq L_tab (get_tile "Text5"))  ;;;???????
+  (setq L_cLu (get_tile "Text6"))   ;;;?????????
+  (setq L_pdx (get_tile "Text7"))   ;;;????????
 )
-;;;�������
+;;;???????
 (defun QYD:dist()
-  (setq pt1 (getpoint "\n��ȡ��һ��:"))
-  (setq pt2 (getpoint pt1 "\n��ȡ�ڶ���:"))
+  (setq pt1 (getpoint "\n????????:"))
+  (setq pt2 (getpoint pt1 "\n????????:"))
   (setq pdist (distance pt1 pt2))
   pdist
 )
 
-;;;�������������
+;;;?????????????
 (defun ZBZL()  
   (if tab    
  (progn
@@ -81,11 +81,11 @@
        (vlax-ename->vla-object obj)
        'p1
        'p2
-     ) ;_ȡ�ð���ͼԪ���������С��
-     (setq p1 (vlax-safearray->list p1)) ;_���½�
-     (setq p2 (vlax-safearray->list p2)) ;_���Ͻ�
+     ) ;_?????????????????��??
+     (setq p1 (vlax-safearray->list p1)) ;_?????
+     (setq p2 (vlax-safearray->list p2)) ;_?????
      (command "..zoom" p1 p2)
-     (setq ss1 (ssget "_w" (mapcar '+ p1 (list 0 ht)) p2 (list (cons -4 "<not")(cons 8 "�乿У��")(cons -4 "not>")(cons -4 "<not")(cons 8 L_tab)(cons -4 "not>"))))
+     (setq ss1 (ssget "_w" (mapcar '+ p1 (list 0 ht)) p2 (list (cons -4 "<not")(cons 8 "?�v��??")(cons -4 "not>")(cons -4 "<not")(cons 8 L_tab)(cons -4 "not>"))))
      (setq ss2 (ssget "_p" (list                                 
                              (cons 0 "*LINE")(cons 8 L_cLu) 
                              (cons -4 "<not")
@@ -104,10 +104,10 @@
 	)
 )      
       (command "_u")
-;;;�������µ�
+;;;?????????
   (if (/= ss2 nil)
     (progn
-      (setq &ss1 (MJ:GetssBox ss2));64.ѡ�񼯵�ʵ������ο� by gxl
+      (setq &ss1 (MJ:GetssBox ss2));64.???????????��? by gxl
       (setq p1 (car &ss1))
       (setq p2 (cadr &ss1))        
      )
@@ -122,13 +122,13 @@
      (command "move" ss1 """non" pz "non"pb1 ) 
    )
    (setvar "cmdecho" oldmcdecho)
-   (princ "\n���")
+   (princ "\n???")
  )
   )
   (princ)
 )
-;64.ѡ�񼯵�ʵ������ο� by gxl
-;;������½ǵ�����Ͻǵ���ɵĵ��
+;64.???????????��? by gxl
+;;??????????????????????
 (defun MJ:GetssBox (ss / i l1 l2 ll ur)
   (repeat (setq i (sslength ss))
     (if (vl-catch-all-error-p
@@ -160,9 +160,9 @@
 	       (list l1 l2)
   )
 )
-;12.�÷ָ����б������ַ����ɱ�
-;�÷ָ����б������ַ����ɱ� by PEACE 2013/09/06
-;string=�ַ�����strkeylst=�ָ����б�
+;12.?��?????��?????????????
+;?��?????��????????????? by PEACE 2013/09/06
+;string=???????strkeylst=??????��?
 (defun QYD:Split (string strkeylst / strkey i j po strlst strlst0 xlen)
   (setq strlst (cons string '()))
   (cond
@@ -209,9 +209,9 @@
   )
   (setq strlst (reverse strlst0))
   strlst
-);12.�÷ָ����б������ַ����ɱ�
-;�÷ָ����б������ַ����ɱ� by PEACE 2013/09/06
-;string=�ַ�����strkeylst=�ָ����б�
+);12.?��?????��?????????????
+;?��?????��????????????? by PEACE 2013/09/06
+;string=???????strkeylst=??????��?
 (defun QYD:Split (string strkeylst / strkey i j po strlst strlst0 xlen)
   (setq strlst (cons string '()))
   (cond
@@ -259,35 +259,35 @@
   (setq strlst (reverse strlst0))
   strlst
 )
-;;48. [����] ɾ��������ͬͼԪ
+;;48. [????] ????????????
 (defun MJ:delsame (l)
   (if L
     (cons (car L) (MJ:delsame (vl-remove (car L) (cdr L))))
   )
 )
-;59a.��������ַ���
+;59a.????????????
 (defun QYD:List_str(lst str)
   (substr (apply 'strcat (mapcar '(lambda (a) (strcat str a)) lst))
    (1+ (strlen str))
   )
 )
 
-;77.��ȡͼԪ��Ӧ��DXF������
+;77.??????????DXF??????
 (defun QYD:dxf (n s1) (cdr (assoc n (entget s1))))
 
-;78.ʰȡͼԪ���ͣ�ͼ��(��ť)
-;���ú���
+;78.????????????(???)
+;???��???
 (defun QYD:SQTY (n s_sym s_sym_1 chrm)
      (setq s_sym_0 s_sym_1)
      (setq in0 0 num (sslength s_sym))
    (repeat num
-     (setq s_sym_i (QYD:dxf n (ssname s_sym in0)));77.��ȡͼԪ��Ӧ��DXF������
+     (setq s_sym_i (QYD:dxf n (ssname s_sym in0)));77.??????????DXF??????
      (setq s_sym_0 (strcat s_sym_0","s_sym_i))
      (setq in0 (1+ in0)
    ) 
-   (setq s_sym_list (QYD:Split s_sym_0 '(","))) ;12.�÷ָ����б������ַ����ɱ�
-   (setq s_sym_list (MJ:delsame s_sym_list))     ;;48. [����] ɾ��������ͬͼԪ
-    (setq s_sym_1 (QYD:List_str s_sym_list chrm));59a.��������ַ���
+   (setq s_sym_list (QYD:Split s_sym_0 '(","))) ;12.?��?????��?????????????
+   (setq s_sym_list (MJ:delsame s_sym_list))     ;;48. [????] ????????????
+    (setq s_sym_1 (QYD:List_str s_sym_list chrm));59a.????????????
      s_sym_1
      )
 )

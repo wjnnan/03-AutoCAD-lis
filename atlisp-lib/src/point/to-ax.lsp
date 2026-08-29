@@ -1,3 +1,3 @@
 (defun point:to-ax (pt)
-  "灏嗙偣鍧愭爣杞负ActiveX瀵硅薄"
+  "将点坐标转为ActiveX对象"
   (apply  'vlax-3d-point pt))

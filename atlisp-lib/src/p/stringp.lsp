@@ -1,4 +1,4 @@
 (defun p:stringp (arg)
-  "åˆ¤æ–­æ˜¯å¦å­—ç¬¦ä¸²"
+  "ÅĞ¶ÏÊÇ·ñ×Ö·û´®"
   (equal (type arg)
     (quote str)))

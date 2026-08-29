@@ -1,5 +1,5 @@
 (defun list:sort (lst fun / res)
-  "鏃犳崯鎺掑簭锛寁l-sort 鍙兘浼氬垹闄ょ浉鍚岀殑鍏冪礌锛屽鑷寸粨鏋滃垪琛ㄥ唴鐨勪釜鏁板皬浜庡師鍒楄〃銆俵ist:sort 涓嶄細鍒犻櫎琛ㄥ唴鍏冪礌銆俧un:鎺掑簭渚濇嵁"
+  "无损排序，vl-sort 可能会删除相同的元素，导致结果列表内的个数小于原列表。list:sort 不会删除表内元素。fun:排序依据"
   "lst"
   "(list:sort '(1 2 3 1 2) '<)"
   (setq res (cons (car lst) nil))

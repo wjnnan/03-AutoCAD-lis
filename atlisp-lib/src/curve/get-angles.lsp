@@ -1,5 +1,5 @@
 (defun curve:get-angles (lwpl / pts  angles)
-  "取得闭合多段线各点相邻边的夹角角度值"
+  "ȡ�ñպ϶���߸������ڱߵļнǽǶ�ֵ"
   "list"
   (setq pts (curve:get-points lwpl))
   (setq pts (append (list (last pts)) pts (list (car pts))))

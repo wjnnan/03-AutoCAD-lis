@@ -1,6 +1,6 @@
 (defun string:bytelength (str)
-  "å­—ç¬¦ä¸²çš„å­—èŠ‚æ•°ï¼Œç”¨äºŽcad2021ç‰ˆæœ¬ã€‚"
-  "å­—ç¬¦ä¸²çš„å­—èŠ‚æ•°"
+  "×Ö·û´®µÄ×Ö½ÚÊý£¬ÓÃÓÚcad2021°æ±¾¡£"
+  "×Ö·û´®µÄ×Ö½ÚÊý"
   (+ (length (vl-string->list str))
     (length (vl-remove-if (quote (lambda (m)
             (< m 256)))

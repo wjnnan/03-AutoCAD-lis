@@ -1,15 +1,15 @@
-(@:define-config 'lpsidemenu:width 120 "é¢æ¿å®½åº¦")
-(@:define-config 'lpsidemenu:isaddlp 1 "æ˜¯å¦åŠ è½½LPèœå•ï¼Œ1åŠ è½½ï¼Œ0ä¸åŠ è½½")
-(@:define-config 'lpsidemenu:menugroup-color "White" "èœå•ç»„æ–‡å­—é¢œè‰²")
-(@:define-config 'lpsidemenu:menuitem-color "White" "èœå•é¡¹æ–‡å­—é¢œè‰²")
-(@:define-config 'lpsidemenu:menuitem-bgcolor "LightSlateGray" "èœå•é¡¹èƒŒæ™¯é¢œè‰²")
-(@:define-config 'lpsidemenu:menuitem-hovercolor "Black" "é¼ æ ‡æ‚¬åœæ—¶èœå•é¡¹æ–‡å­—é¢œè‰²")
-(@:define-config 'lpsidemenu:menuitem-hoverbgcolor "LightGreen" "é¼ æ ‡æ‚¬åœæ—¶èœå•é¡¹èƒŒæ™¯é¢œè‰²")
-(@:define-config 'lpsidemenu:title "@lispä¾§è¾¹æ " "é€‰é¡¹æ¿æ ‡é¢˜")
+(@:define-config 'lpsidemenu:width 120 "Ãæ°å¿í¶È")
+(@:define-config 'lpsidemenu:isaddlp 1 "ÊÇ·ñ¼ÓÔØLP²Ëµ¥£¬1¼ÓÔØ£¬0²»¼ÓÔØ")
+(@:define-config 'lpsidemenu:menugroup-color "White" "²Ëµ¥×éÎÄ×ÖÑÕÉ«")
+(@:define-config 'lpsidemenu:menuitem-color "White" "²Ëµ¥ÏîÎÄ×ÖÑÕÉ«")
+(@:define-config 'lpsidemenu:menuitem-bgcolor "LightSlateGray" "²Ëµ¥Ïî±³¾°ÑÕÉ«")
+(@:define-config 'lpsidemenu:menuitem-hovercolor "Black" "Êó±êĞüÍ£Ê±²Ëµ¥ÏîÎÄ×ÖÑÕÉ«")
+(@:define-config 'lpsidemenu:menuitem-hoverbgcolor "LightGreen" "Êó±êĞüÍ£Ê±²Ëµ¥Ïî±³¾°ÑÕÉ«")
+(@:define-config 'lpsidemenu:title "@lisp²à±ßÀ¸" "Ñ¡Ïî°å±êÌâ")
 
-(@:add-menu "LPä¾§è¾¹æ " "è®¾ç½®ä¾§æ " "(lpsidemenu:setup)" )
-(@:add-menu "LPä¾§è¾¹æ " "åŠ è½½ä¾§æ " "(lpsidemenu:load)" )
-(@:add-menu "LPä¾§è¾¹æ " "ç”Ÿæˆèœå•" "(lpsidemenu:make-menu)" )
+(@:add-menu "LP²à±ßÀ¸" "ÉèÖÃ²àÀ¸" "(lpsidemenu:setup)" )
+(@:add-menu "LP²à±ßÀ¸" "¼ÓÔØ²àÀ¸" "(lpsidemenu:load)" )
+(@:add-menu "LP²à±ßÀ¸" "Éú³É²Ëµ¥" "(lpsidemenu:make-menu)" )
 
 (defun lpsidemenu:load()
   (setq netdll
@@ -43,42 +43,42 @@
   (close fp)
   (setq fp (open (strcat (@::package-path "lpsidemenu") "Setting.ini") "w"))
   (setq cfg (list
-	     "[mMenu]"  "Isautoload=1 ;æ˜¯å¦è‡ªåŠ¨åŠ è½½,1åŠ è½½ï¼Œ0ä¸åŠ è½½"
-	     "Isautoload=1 ;æ˜¯å¦è‡ªåŠ¨åŠ è½½,1åŠ è½½ï¼Œ0ä¸åŠ è½½"
-	     "Location=1  ;1:å·¦ï¼Œ2:ä¸Šï¼Œ3:å³ï¼Œ4:ä¸‹ï¼Œ5:æµ®åŠ¨"
-	     "Isaddlp=0 ;æ˜¯å¦åŠ è½½LPèœå•ï¼Œ1åŠ è½½ï¼Œ0ä¸åŠ è½½"
+	     "[mMenu]"  "Isautoload=1 ;ÊÇ·ñ×Ô¶¯¼ÓÔØ,1¼ÓÔØ£¬0²»¼ÓÔØ"
+	     "Isautoload=1 ;ÊÇ·ñ×Ô¶¯¼ÓÔØ,1¼ÓÔØ£¬0²»¼ÓÔØ"
+	     "Location=1  ;1:×ó£¬2:ÉÏ£¬3:ÓÒ£¬4:ÏÂ£¬5:¸¡¶¯"
+	     "Isaddlp=0 ;ÊÇ·ñ¼ÓÔØLP²Ëµ¥£¬1¼ÓÔØ£¬0²»¼ÓÔØ"
 	     "Isaddmenu=1"
-	     "Isaddribbon1=0 ;æ˜¯å¦ç”ŸæˆLPåŠŸèƒ½åŒºèœå•ï¼Œ1ç”Ÿæˆï¼Œ0ä¸ç”Ÿæˆ"
-	     "Isaddribbon2=0 ;æ˜¯å¦ç”Ÿæˆè‡ªå®šä¹‰åŠŸèƒ½åŒºèœå•ï¼Œ1ç”Ÿæˆï¼Œ0ä¸ç”Ÿæˆ"
-	     "Width=120 ;é¢æ¿å®½åº¦"
+	     "Isaddribbon1=0 ;ÊÇ·ñÉú³ÉLP¹¦ÄÜÇø²Ëµ¥£¬1Éú³É£¬0²»Éú³É"
+	     "Isaddribbon2=0 ;ÊÇ·ñÉú³É×Ô¶¨Òå¹¦ÄÜÇø²Ëµ¥£¬1Éú³É£¬0²»Éú³É"
+	     "Width=120 ;Ãæ°å¿í¶È"
 	     "nWidth=100"
 	     "Imgwidth=20"
-	     "Textheight=12 ;æ–‡å­—é«˜åº¦"
-	     "Textcolor=White ;èœå•ç»„æ–‡å­—é¢œè‰²"
-	     "Textcolora=White ;èœå•ç»„æ–‡å­—é¢œè‰²(é¼ æ ‡ç»è¿‡æ—¶ï¼‰"
-	     "Textbackcolor=LightSlateGray ;èœå•ç»„æ–‡å­—èƒŒæ™¯é¢œè‰²"
-	     "Textcolor2=White ;å†…å®¹æ–‡å­—é¢œè‰²"
-	     "Textcolor2a=White ;å†…å®¹æ–‡å­—é¢œè‰²(é¼ æ ‡ç»è¿‡æ—¶ï¼‰"
-	     "Textbackcolor2=LightGreen ;å†…å®¹æ–‡å­—èƒŒæ™¯é¢œè‰²"
-	     "Textbackcolor3=#3B4453 ;å±•å¼€èƒŒæ™¯é¢œè‰²"
+	     "Textheight=12 ;ÎÄ×Ö¸ß¶È"
+	     "Textcolor=White ;²Ëµ¥×éÎÄ×ÖÑÕÉ«"
+	     "Textcolora=White ;²Ëµ¥×éÎÄ×ÖÑÕÉ«(Êó±ê¾­¹ıÊ±£©"
+	     "Textbackcolor=LightSlateGray ;²Ëµ¥×éÎÄ×Ö±³¾°ÑÕÉ«"
+	     "Textcolor2=White ;ÄÚÈİÎÄ×ÖÑÕÉ«"
+	     "Textcolor2a=White ;ÄÚÈİÎÄ×ÖÑÕÉ«(Êó±ê¾­¹ıÊ±£©"
+	     "Textbackcolor2=LightGreen ;ÄÚÈİÎÄ×Ö±³¾°ÑÕÉ«"
+	     "Textbackcolor3=#3B4453 ;Õ¹¿ª±³¾°ÑÕÉ«"
 	     "Separator=Black"
-	     ;; (strcat "Isaddlp= "(itoa (@::get-config 'lpsidemenu:isaddlp))" ;æ˜¯å¦åŠ è½½LPèœå•ï¼Œ1åŠ è½½ï¼Œ0ä¸åŠ è½½")
+	     ;; (strcat "Isaddlp= "(itoa (@::get-config 'lpsidemenu:isaddlp))" ;ÊÇ·ñ¼ÓÔØLP²Ëµ¥£¬1¼ÓÔØ£¬0²»¼ÓÔØ")
 	     
-	     ;; (strcat "Width="(itoa (@::get-config 'lpsidemenu:width)) " ;é¢æ¿å®½åº¦")
+	     ;; (strcat "Width="(itoa (@::get-config 'lpsidemenu:width)) " ;Ãæ°å¿í¶È")
 	     
 	     ;; "nWidth=100"
-	     ;; "Imgwidth=20"  "Textheight=12 ;æ–‡å­—é«˜åº¦"
-	     ;; (strcat "Textcolor=" (@::get-config 'lpsidemenu:menugroup-color) " ;èœå•ç»„æ–‡å­—é¢œè‰²")
-	     ;; "Textbackcolor=LightSlateGray ;èœå•ç»„æ–‡å­—èƒŒæ™¯é¢œè‰²"
-	     ;; (strcat "Textcolor2="(@::get-config 'lpsidemenu:menuitem-color)  " ;å†…å®¹æ–‡å­—é¢œè‰²")
-	     ;; (strcat "Textbackcolor2="(@::get-config 'lpsidemenu:menuitem-hoverbgcolor)" ;å†…å®¹æ–‡å­—èƒŒæ™¯é¢œè‰²")
-	     ;; "Textbackcolor3=#3B4453 ;å±•å¼€èƒŒæ™¯é¢œè‰²"
+	     ;; "Imgwidth=20"  "Textheight=12 ;ÎÄ×Ö¸ß¶È"
+	     ;; (strcat "Textcolor=" (@::get-config 'lpsidemenu:menugroup-color) " ;²Ëµ¥×éÎÄ×ÖÑÕÉ«")
+	     ;; "Textbackcolor=LightSlateGray ;²Ëµ¥×éÎÄ×Ö±³¾°ÑÕÉ«"
+	     ;; (strcat "Textcolor2="(@::get-config 'lpsidemenu:menuitem-color)  " ;ÄÚÈİÎÄ×ÖÑÕÉ«")
+	     ;; (strcat "Textbackcolor2="(@::get-config 'lpsidemenu:menuitem-hoverbgcolor)" ;ÄÚÈİÎÄ×Ö±³¾°ÑÕÉ«")
+	     ;; "Textbackcolor3=#3B4453 ;Õ¹¿ª±³¾°ÑÕÉ«"
 	     (strcat "Title="(@::get-config 'lpsidemenu:title) )
-	     "Title1=@lisp ;å¯å¢åŠ 20ä¸ªèœå•"
+	     "Title1=@lisp ;¿ÉÔö¼Ó20¸ö²Ëµ¥"
 	     ))
   (foreach cfg% cfg
 	   (write-line cfg% fp))
-  ;;åŠ è½½å…¶å®ƒèœå•ç»„
+  ;;¼ÓÔØÆäËü²Ëµ¥×é
   (if (setq menus  (vl-directory-files (vl-string-right-trim "\\/" (@::package-path "lpsidemenu")) ".ini"  1))
       (repeat menu menus
 	      (if (not (member menu '("Setting.ini""@lisp.ini")))

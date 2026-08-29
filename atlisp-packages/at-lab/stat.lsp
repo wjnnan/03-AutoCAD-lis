@@ -73,7 +73,8 @@
 					     res1))))
 			   res1))))
 		res))
-  (setq pt (getpoint "表格绘制位置点："))
+  (if (null (setq pt (getpoint "表格绘制位置点："))) (progn (princ "
+未指定表格位置 -- 退出.") (quit)))
   (foreach data res
 	   (table:make pt
 		       (car data)
@@ -166,7 +167,8 @@
 					     res1))))
 			   res1))))
 			 res))
-	   (setq pt (getpoint "表格绘制位置点："))
+	   (if (null (setq pt (getpoint "表格绘制位置点："))) (progn (princ "
+未指定表格位置 -- 退出.") (quit)))
 	   (setq item-name (list:remove-duplicates (mapcar 'car (apply 'append (mapcar 'cdr res))))))
       (progn
 	(setq i 0)

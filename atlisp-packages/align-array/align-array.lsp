@@ -1,38 +1,38 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; è¿™æ˜¯ä½¿ç”¨å¼€å‘å·¥å…· dev-tools è‡ªåŠ¨åˆ›å»ºçš„ç¨‹åºæºæ–‡ä»¶ 
+;; ÕâÊÇÊ¹ÓÃ¿ª·¢¹¤¾ß dev-tools ×Ô¶¯´´½¨µÄ³ÌĞòÔ´ÎÄ¼ş 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; å®šä¹‰é…ç½®é¡¹ 'align-array:first ç”¨äº åº”ç”¨åŒ… align-array çš„ ç¬¬ä¸€ä¸ªé…ç½®é¡¹ first 
-;;(@:define-config 'align-array:first "æˆ‘æ˜¯é…ç½®é¡¹ align-array:first çš„å€¼" "è¿™ä¸ªé…ç½®é¡¹çš„ç”¨é€”è¯´æ˜ã€‚")
-;; (@:get-config 'align-array:first) ;; è·å–é…ç½®é¡¶çš„å€¼
-;; (@:set-config 'align-array:first  "æ–°è®¾çš„å€¼") ;; è®¾ç½®é…ç½®é¡¶çš„å€¼
-;; å‘ç³»ç»Ÿä¸­æ·»åŠ èœå• 
-(@:add-menu "åˆ›æ„ç»˜å›¾" "å¯¹é½æ’åˆ—" "(align-array:align-array)" )
-;;==========================================================================ä»£ç è¯´æ˜
-;;å•ä½“å¯¹é½ã€ç­‰è·æ’åˆ—æ’ä»¶/è¡¥å……å›¾æ¡†ç±»åˆ«é€‰æ‹©/ST-2020.03ã€‚
-;;åŒå‘å¯¹é½ä¸åšæ’åˆ—ï¼Œæ°´å¹³ï¼šä»¥å·¦ä¸‹è§’xå€¼ç”±å·¦åˆ°å³æ’åˆ—ï¼Œå‚ç›´ï¼šä»¥å·¦ä¸‹è§’yå€¼ç”±ä¸‹åˆ°ä¸Šæ’åˆ—ã€‚
-;;ç¼–ç æ€è·¯ï¼š1ï¼Œåˆ©ç”¨é™¢é•¿å¤–åŒ…å›´9ç‚¹å‡½æ•°æ‰¾åˆ°åˆé€‚ç§»åŠ¨åŸºç‚¹ã€‚2ï¼Œæ ¹æ®å¯¹é½å½¢å¼è®¡ç®—ç§»åŠ¨ç»ˆç‚¹ã€‚3ï¼Œç§»åŠ¨å‘½ä»¤å®Œæˆæœ€åæ­¥éª¤ã€‚
-;;å›¾æ¡†ã€æ–¹æ¡†å’Œæ‰‹å·¥æ“ä½œåˆ™åˆ©ç”¨å¯¹è§’ç‚¹ä½œä¸ºssget æ¡†é€‰ç‚¹ï¼Œå…¨é€‰å›¾çº¸å†…å®¹åå†åšç§»åŠ¨ï¼Œæ’åˆ—ï¼Œæ³¨æ„è¾¹æ¡†ä¸è¦é‡å ï¼Œå¦åˆ™ä¼šé”™ä½ï¼
-;;æ’å›¾çº¸è¯´æ˜ï¼šå›¾æ¡†ä¸ºå—çš„é€‰2æ“ä½œï¼Œé»˜è®¤éƒ½æ˜¯åŒåå—ï¼Œç‚¹é€‰å›¾æ¡†å³é”®å¯å…¨é€‰ï¼Œä¸åŒåå—å‹¾é€‰å¼‚åå—ï¼Œå•ç‹¬ç‚¹é€‰ï¼›å›¾æ¡†ä¸ä¸ºå—æ˜¯æ–¹æ¡†çš„é€‰3ï¼Œé»˜è®¤åŒå±‚åŒè‰²çŸ©å½¢æ¡†å¯ä»¥å¿«é€Ÿå…¨é€‰ï¼Œä¸å…±æ€§çš„æ‰“é’©å•ç‹¬ç‚¹é€‰ï¼›å¦‚æœè¿æ–¹æ¡†éƒ½æ²¡æœ‰ç›´æ¥ç”¨4 æ‰‹åŠ¨æ¡†é€‰å›¾çº¸å†…å®¹ï¼Œæ²¡é€‰ä¸€æ¬¡ç”»ä¸€ä¸ªçŸ©å½¢æ¡†ï¼Œé€‰å®Œå³é”®ç»§ç»­ï¼Œå‹¾é€‰è¾¹æ¡†æ¯”ä¼šè‡ªåŠ¨é‡‡ç”¨æ ‡å‡†å›¾çº¸æ¯”ä¾‹æ¡†ã€‚
-;; /ST-2020.03.06æ›´æ–°ã€‚
-;;1ï¼Œå¢åŠ æ’å›¾æ¡†ç¨‹åºï¼Œæ ¹æ®çŸ©å½¢æ¡†æ’å…¥æŒ‡å®šå›¾æ¡†å—ï¼Œè‡ªåŠ¨ç¼©æ”¾å±…ä¸­ï¼Œå› æ¯ç§å›¾æ¡†æ¬¾å¼ä¸ä¸€ï¼Œéœ€åæœŸæ‰‹åŠ¨å¾®è°ƒä½ç½®ï¼Œé€‰å–æ“ä½œä¸ä¸Šé¢çŸ©å½¢æ¡†æ’åˆ—ä¸€æ ·ã€‚é»˜è®¤å›¾æ¡†æ–‡ä»¶æ˜¯ Dï¼š\A2å›¾æ¡†MR.dwg å·¦ä¸‹è§’ä¸ºæ’å…¥ç‚¹ï¼Œè¦æŒ‰ç…§æ ‡å‡†A2å›¾å¹…ï¼ˆ594x420mmï¼‰å°ºå¯¸æ¥åšï¼Œä¸ç„¶ç¼©æ”¾æ¯”ä¾‹ä¸å¯¹çš„ï¼›
-;;2ï¼Œå®Œå–„äº†dclå¯¹è¯æ¡†ç¨‹åºï¼Œå¯è®°å¿†ä¸Šæ¬¡æ•°å€¼ï¼›
-;;3ï¼Œè¡¥å……å¤„ç†å› åæ ‡ç³»éä¸–ç•Œç³»å‡ºé”™ä»£ç ï¼›
-;;4ï¼Œæœ‰ç¾¤ç»„çš„æ—¶å€™æ¡†é€‰ç±»å‹ä¼šé”™ä½ï¼Œæœªè§£å†³ã€‚
+;; ¶¨ÒåÅäÖÃÏî 'align-array:first ÓÃÓÚ Ó¦ÓÃ°ü align-array µÄ µÚÒ»¸öÅäÖÃÏî first 
+;;(@:define-config 'align-array:first "ÎÒÊÇÅäÖÃÏî align-array:first µÄÖµ" "Õâ¸öÅäÖÃÏîµÄÓÃÍ¾ËµÃ÷¡£")
+;; (@:get-config 'align-array:first) ;; »ñÈ¡ÅäÖÃ¶¥µÄÖµ
+;; (@:set-config 'align-array:first  "ĞÂÉèµÄÖµ") ;; ÉèÖÃÅäÖÃ¶¥µÄÖµ
+;; ÏòÏµÍ³ÖĞÌí¼Ó²Ëµ¥ 
+(@:add-menu "´´Òâ»æÍ¼" "¶ÔÆëÅÅÁĞ" "(align-array:align-array)" )
+;;==========================================================================´úÂëËµÃ÷
+;;µ¥Ìå¶ÔÆë¡¢µÈ¾àÅÅÁĞ²å¼ş/²¹³äÍ¼¿òÀà±ğÑ¡Ôñ/ST-2020.03¡£
+;;Ë«Ïò¶ÔÆë²»×öÅÅÁĞ£¬Ë®Æ½£ºÒÔ×óÏÂ½ÇxÖµÓÉ×óµ½ÓÒÅÅÁĞ£¬´¹Ö±£ºÒÔ×óÏÂ½ÇyÖµÓÉÏÂµ½ÉÏÅÅÁĞ¡£
+;;±àÂëË¼Â·£º1£¬ÀûÓÃÔº³¤Íâ°üÎ§9µãº¯ÊıÕÒµ½ºÏÊÊÒÆ¶¯»ùµã¡£2£¬¸ù¾İ¶ÔÆëĞÎÊ½¼ÆËãÒÆ¶¯ÖÕµã¡£3£¬ÒÆ¶¯ÃüÁîÍê³É×îºó²½Öè¡£
+;;Í¼¿ò¡¢·½¿òºÍÊÖ¹¤²Ù×÷ÔòÀûÓÃ¶Ô½Çµã×÷Îªssget ¿òÑ¡µã£¬È«Ñ¡Í¼Ö½ÄÚÈİºóÔÙ×öÒÆ¶¯£¬ÅÅÁĞ£¬×¢Òâ±ß¿ò²»ÒªÖØµş£¬·ñÔò»á´íÎ»£¡
+;;ÅÅÍ¼Ö½ËµÃ÷£ºÍ¼¿òÎª¿éµÄÑ¡2²Ù×÷£¬Ä¬ÈÏ¶¼ÊÇÍ¬Ãû¿é£¬µãÑ¡Í¼¿òÓÒ¼ü¿ÉÈ«Ñ¡£¬²»Í¬Ãû¿é¹´Ñ¡ÒìÃû¿é£¬µ¥¶ÀµãÑ¡£»Í¼¿ò²»Îª¿éÊÇ·½¿òµÄÑ¡3£¬Ä¬ÈÏÍ¬²ãÍ¬É«¾ØĞÎ¿ò¿ÉÒÔ¿ìËÙÈ«Ñ¡£¬²»¹²ĞÔµÄ´ò¹³µ¥¶ÀµãÑ¡£»Èç¹ûÁ¬·½¿ò¶¼Ã»ÓĞÖ±½ÓÓÃ4 ÊÖ¶¯¿òÑ¡Í¼Ö½ÄÚÈİ£¬Ã»Ñ¡Ò»´Î»­Ò»¸ö¾ØĞÎ¿ò£¬Ñ¡ÍêÓÒ¼ü¼ÌĞø£¬¹´Ñ¡±ß¿ò±È»á×Ô¶¯²ÉÓÃ±ê×¼Í¼Ö½±ÈÀı¿ò¡£
+;; /ST-2020.03.06¸üĞÂ¡£
+;;1£¬Ôö¼Ó²åÍ¼¿ò³ÌĞò£¬¸ù¾İ¾ØĞÎ¿ò²åÈëÖ¸¶¨Í¼¿ò¿é£¬×Ô¶¯Ëõ·Å¾ÓÖĞ£¬ÒòÃ¿ÖÖÍ¼¿ò¿îÊ½²»Ò»£¬ĞèºóÆÚÊÖ¶¯Î¢µ÷Î»ÖÃ£¬Ñ¡È¡²Ù×÷ÓëÉÏÃæ¾ØĞÎ¿òÅÅÁĞÒ»Ñù¡£Ä¬ÈÏÍ¼¿òÎÄ¼şÊÇ D£º\A2Í¼¿òMR.dwg ×óÏÂ½ÇÎª²åÈëµã£¬Òª°´ÕÕ±ê×¼A2Í¼·ù£¨594x420mm£©³ß´çÀ´×ö£¬²»È»Ëõ·Å±ÈÀı²»¶ÔµÄ£»
+;;2£¬ÍêÉÆÁËdcl¶Ô»°¿ò³ÌĞò£¬¿É¼ÇÒäÉÏ´ÎÊıÖµ£»
+;;3£¬²¹³ä´¦ÀíÒò×ø±êÏµ·ÇÊÀ½çÏµ³ö´í´úÂë£»
+;;4£¬ÓĞÈº×éµÄÊ±ºò¿òÑ¡ÀàĞÍ»á´íÎ»£¬Î´½â¾ö¡£
 ;;==========================================================================
-;; /ST-2020.03.09æ›´æ–°ã€‚
-;;1,å¤„ç†äº†ç¾¤ç»„å•ä½“æ’åˆ—çš„é—®é¢˜ï¼›2,å¢åŠ æœ¬å›¾å›¾æ¡†æ’å…¥ï¼›
-;;3,å¢åŠ é˜µåˆ—,åªåšäº†ä»å·¦åˆ°å³ä»ä¸Šåˆ°ä¸‹æ’åˆ—ï¼›
-;;4,å¢åŠ å•ä½“é€Ÿé€‰.
+;; /ST-2020.03.09¸üĞÂ¡£
+;;1,´¦ÀíÁËÈº×éµ¥ÌåÅÅÁĞµÄÎÊÌâ£»2,Ôö¼Ó±¾Í¼Í¼¿ò²åÈë£»
+;;3,Ôö¼ÓÕóÁĞ,Ö»×öÁË´Ó×óµ½ÓÒ´ÓÉÏµ½ÏÂÅÅÁĞ£»
+;;4,Ôö¼Óµ¥ÌåËÙÑ¡.
 ;;==========================================================================
-;; /ST-2020.03.11æ›´æ–°ã€‚
-;;1,å¢åŠ  è‡ªåŠ¨/æ‰‹é€‰ é¡ºåºæ’åˆ—å¼€å…³ï¼›2,å¢åŠ å¤åˆ¶é˜µåˆ—(è‡ªå¸¦é‚£ç§)ï¼›
+;; /ST-2020.03.11¸üĞÂ¡£
+;;1,Ôö¼Ó ×Ô¶¯/ÊÖÑ¡ Ë³ĞòÅÅÁĞ¿ª¹Ø£»2,Ôö¼Ó¸´ÖÆÕóÁĞ(×Ô´øÄÇÖÖ)£»
 ;;==========================================================================
-;; /ST-2020.03.13æ›´æ–°ã€‚é€‰å–æ–¹å¼å¢åŠ è‡ªåŠ¨è¯†åˆ«å›¾æ¡†ã€‚
-;;ç”¨äºå¼‚åå›¾æ¡†å—ï¼Œæˆ–è€…éå—çš„çŸ©å½¢å¤–æ¡†å›¾æ¡†çš„é€Ÿé€‰ï¼Œè¦å…¨å¯¹è±¡è®¡ç®—å¯¹æ¯”ï¼Œå¤§å‹å›¾çº¸å°½é‡ä¸è¦ä½¿ç”¨ï¼Œä½¿ç”¨å¸ƒå±€å›¾çº¸ç©ºé—´çš„åº”è¯¥é—®é¢˜ä¸å¤§ã€‚
+;; /ST-2020.03.13¸üĞÂ¡£Ñ¡È¡·½Ê½Ôö¼Ó×Ô¶¯Ê¶±ğÍ¼¿ò¡£
+;;ÓÃÓÚÒìÃûÍ¼¿ò¿é£¬»òÕß·Ç¿éµÄ¾ØĞÎÍâ¿òÍ¼¿òµÄËÙÑ¡£¬ÒªÈ«¶ÔÏó¼ÆËã¶Ô±È£¬´óĞÍÍ¼Ö½¾¡Á¿²»ÒªÊ¹ÓÃ£¬Ê¹ÓÃ²¼¾ÖÍ¼Ö½¿Õ¼äµÄÓ¦¸ÃÎÊÌâ²»´ó¡£
 ;;==========================================================================
-;; /ST-2020.03.18æ›´æ–°ã€‚è‡ªåŠ¨è¯†åˆ«å¢åŠ é€Ÿé€‰ï¼šç›´æ¥æ¡†é€‰ç”Ÿæˆè¾¹æ¡†ï¼Œå¤§å‹å›¾æ…ç”¨ã€‚
+;; /ST-2020.03.18¸üĞÂ¡£×Ô¶¯Ê¶±ğÔö¼ÓËÙÑ¡£ºÖ±½Ó¿òÑ¡Éú³É±ß¿ò£¬´óĞÍÍ¼É÷ÓÃ¡£
 
-;;==========================================================================å¯¹è¯æ¡†ç¨‹å¼ä»£ç ï¼ˆä¸ç†Ÿä¸å¤šè¯´ï¼‰
+;;==========================================================================¶Ô»°¿ò³ÌÊ½´úÂë£¨²»Êì²»¶àËµ£©
 (defun align-array:align-array (/ DCL dd ucs)
   (if (= (getvar "WORLDUCS" ) 0) (if (tblsearch "ucs" "ucs_old") (command "ucs" "na" "s" "ucs_old" "y" "ucs" "w") 
 				     (command "ucs" "na" "s" "ucs_old" "ucs" "w")) (setq ucs 1))
@@ -49,14 +49,14 @@
   (if (not LB_TMP) (setq LB_TMP 1))
   
   (if (not tukuang_TMP) (setq tukuang_TMP 1) ) 	
-  (if (not t_lujing) (setq t_lujing "D:\\A2å›¾æ¡†MR.dwg"))
+  (if (not t_lujing) (setq t_lujing "D:\\A2Í¼¿òMR.dwg"))
   
-  (if cp_dx1 (setq cp_xx 1 cp_dx cp_dx1 cp_dx1 nil) );åˆ¤æ–­æ‰‹åŠ¨ç‚¹è·ç¦»æ˜¯å¦æœ‰
+  (if cp_dx1 (setq cp_xx 1 cp_dx cp_dx1 cp_dx1 nil) );ÅĞ¶ÏÊÖ¶¯µã¾àÀëÊÇ·ñÓĞ
   (if tk_BLfile  (setq t_lujing tk_BLfile))
   
-  (if (not RB_zhenlieFS) (progn (SETQ RB_zhenlieFS 1)));é˜µåˆ—æ–¹å¼é»˜è®¤
+  (if (not RB_zhenlieFS) (progn (SETQ RB_zhenlieFS 1)));ÕóÁĞ·½Ê½Ä¬ÈÏ
   
-					;å˜ç°åˆ¤æ–­
+					;±ä»ÒÅĞ¶Ï
   (if (or (= cp_xx 1) (/= LB_TMP 1)) (mode_tile "row_sxdq" 1))
   (if  (= cp_xx 0)  (mode_tile "cp_d" 1))
   (if  (or (= tukuang_TMP 1) (= tukuang_TMP 2))  (progn (mode_tile "k_lujing" 1) (mode_tile "k_liulan" 1)) )
@@ -71,24 +71,24 @@
   (if (not t_shushu) (setq t_shushu 3))
   (if (not RB_zhenliejianju) (setq RB_zhenliejianju 1))
   
-  (if t_hengju_dx (setq t_hengju t_hengju_dx t_hengju_dx nil));æ‰‹åŠ¨é€‰é—´è·èµ‹å€¼å‡½æ•°å˜é‡ï¼Œè‡ªæ¸…ç©º
+  (if t_hengju_dx (setq t_hengju t_hengju_dx t_hengju_dx nil));ÊÖ¶¯Ñ¡¼ä¾à¸³Öµº¯Êı±äÁ¿£¬×ÔÇå¿Õ
   (if t_shuju_dx (setq t_shuju t_shuju_dx t_shuju_dx nil))
   
-  (if (not RB_paixuFS) (setq RB_paixuFS 1));æ’åºæ–¹å¼  
+  (if (not RB_paixuFS) (setq RB_paixuFS 1));ÅÅĞò·½Ê½  
   
-  (if (not t_tog_zhongdian) (setq t_tog_zhongdian 0));é˜µåˆ—åŸºç‚¹é»˜è®¤0-å·¦ä¸‹è§’
+  (if (not t_tog_zhongdian) (setq t_tog_zhongdian 0));ÕóÁĞ»ùµãÄ¬ÈÏ0-×óÏÂ½Ç
   
   
   (setdate)
-  ;;æ°´å¹³
+  ;;Ë®Æ½
   (action_tile "dtpl1" "(S_RECT) (S_PGON) (S_toggle) (done_dialog 1)")
   (action_tile "dtpl2" "(S_RECT) (S_PGON) (S_toggle) (done_dialog 2)")
   (action_tile "dtpl3" "(S_RECT) (S_PGON) (S_toggle) (done_dialog 3)")
-  ;;å‚ç›´
+  ;;´¹Ö±
   (action_tile "dtpl4" "(S_RECT) (S_PGON) (S_toggle) (done_dialog 4)")
   (action_tile "dtpl5" "(S_RECT) (S_PGON) (S_toggle) (done_dialog 5)")
   (action_tile "dtpl6" "(S_RECT) (S_PGON) (S_toggle) (done_dialog 6)")
-  ;;åŒå‘
+  ;;Ë«Ïò
   (action_tile "dtpl7" "(S_RECT) (S_PGON) (S_toggle) (done_dialog 7)")
   (action_tile "dtpl8" "(S_RECT) (S_PGON) (S_toggle) (done_dialog 8)")
   (action_tile "dtpl9" "(S_RECT) (S_PGON) (S_toggle) (done_dialog 9)")
@@ -98,26 +98,26 @@
   (action_tile "dtpl13" "(S_RECT) (S_PGON) (S_toggle) (done_dialog 13)")
   (action_tile "dtpl14" "(S_RECT) (S_PGON) (S_toggle) (done_dialog 14)")
   (action_tile "dtpl15" "(S_RECT) (S_PGON) (S_toggle) (done_dialog 15)")
-  ;;é‡æ’	
-  (action_tile "dxjj" "(S_RECT) (S_PGON) (S_toggle) (done_dialog 16)"); æ’åˆ—ç‚¹é€‰è·ç¦»
-  (action_tile "k_liulan" "(S_RECT) (S_PGON) (S_toggle) (setq t_moren 0) (done_dialog 17)");æµè§ˆ
-  (action_tile "k_ctk" "(S_RECT) (S_PGON) (S_toggle) (done_dialog 18)");æ’å›¾æ¡†ç¡®è®¤é”®
+  ;;ÖØÅÅ	
+  (action_tile "dxjj" "(S_RECT) (S_PGON) (S_toggle) (done_dialog 16)"); ÅÅÁĞµãÑ¡¾àÀë
+  (action_tile "k_liulan" "(S_RECT) (S_PGON) (S_toggle) (setq t_moren 0) (done_dialog 17)");ä¯ÀÀ
+  (action_tile "k_ctk" "(S_RECT) (S_PGON) (S_toggle) (done_dialog 18)");²åÍ¼¿òÈ·ÈÏ¼ü
   
-  (action_tile "k_zlqueding" "(S_RECT) (S_PGON) (S_toggle) (if  (or (= t_hengshu 0) (= t_shushu 0)) (alert \"è¾“å…¥æ•°æ®æœ‰è¯¯ï¼\")  (done_dialog 19))");é˜µåˆ—ç¡®å®šæŒ‰é”® 
+  (action_tile "k_zlqueding" "(S_RECT) (S_PGON) (S_toggle) (if  (or (= t_hengshu 0) (= t_shushu 0)) (alert \"ÊäÈëÊı¾İÓĞÎó£¡\")  (done_dialog 19))");ÕóÁĞÈ·¶¨°´¼ü 
   
-  (action_tile "k_bt_dianxuan" "(S_RECT) (S_PGON) (S_toggle) (done_dialog 20)");é˜µåˆ—ç‚¹é€‰è·ç¦»
+  (action_tile "k_bt_dianxuan" "(S_RECT) (S_PGON) (S_toggle) (done_dialog 20)");ÕóÁĞµãÑ¡¾àÀë
   
-					;--------------------------------------------------------------------------------édoneé¡¹ç›®
-  (ACTION_TILE "xlb2" "(MODE_TILE \"row_sxdq\" 1)");å˜ç°	
-  (ACTION_TILE "xlb3" "(MODE_TILE \"row_sxdq\" 1)");å˜ç°
-  (ACTION_TILE "xlb4" "(MODE_TILE \"row_sxdq\" 1)");å˜ç°
-  (ACTION_TILE "xlb5" "(MODE_TILE \"row_sxdq\" 1)");å˜ç°
-  (ACTION_TILE "xlb1" "(S_RECT) (if (= cp_xx 0) (MODE_TILE \"row_sxdq\" 0))");æ¢å¤	
+					;--------------------------------------------------------------------------------·ÇdoneÏîÄ¿
+  (ACTION_TILE "xlb2" "(MODE_TILE \"row_sxdq\" 1)");±ä»Ò	
+  (ACTION_TILE "xlb3" "(MODE_TILE \"row_sxdq\" 1)");±ä»Ò
+  (ACTION_TILE "xlb4" "(MODE_TILE \"row_sxdq\" 1)");±ä»Ò
+  (ACTION_TILE "xlb5" "(MODE_TILE \"row_sxdq\" 1)");±ä»Ò
+  (ACTION_TILE "xlb1" "(S_RECT) (if (= cp_xx 0) (MODE_TILE \"row_sxdq\" 0))");»Ö¸´	
   (action_tile "cp_x" "(S_RECT) (if (= cp_xx 1) (progn (mode_tile \"cp_d\" 0) (mode_tile \"row_sxdq\" 1)) (progn (mode_tile \"cp_d\" 1) (if (= xlb1 1) (mode_tile \"row_sxdq\" 0))))")
   (action_tile "k_moren" "(S_RECT) (mode_tile \"k_lujing\" 1) (mode_tile \"k_liulan\" 1)")
   (action_tile "k_tuzhong" "(S_RECT) (mode_tile \"k_lujing\" 1) (mode_tile \"k_liulan\" 1)")
   (action_tile "k_chawenjian" "(S_RECT) (mode_tile \"k_lujing\" 0) (mode_tile \"k_liulan\" 0)")
-					;(action_tile "k_zlqueding" "(S_RECT) (S_PGON) (S_toggle) (if  (= t_hengshu 0) (alert \"è¾“å…¥æ•°æ®æœ‰è¯¯ï¼\") )")
+					;(action_tile "k_zlqueding" "(S_RECT) (S_PGON) (S_toggle) (if  (= t_hengshu 0) (alert \"ÊäÈëÊı¾İÓĞÎó£¡\") )")
   (action_tile "k_rb_chongpaizhenlie" "(S_RECT) (chongpaizhenlie) (mode_tile \"k_shushu\" 1) (mode_tile \"k_rb_zuoxia\" 0) (mode_tile \"k_tog_zhongdian\" 0) (mode_tile \"k_paixuFS\" 0)")
   (action_tile "k_rb_fuzhizhenlie" "(S_RECT) (fuzhizhenlie) (mode_tile \"k_shushu\" 0) (mode_tile \"k_rb_zuoxia\" 1) (mode_tile \"k_tog_zhongdian\" 1) (mode_tile \"k_paixuFS\" 1)")
 					;--------------------------------------------------------------------------------
@@ -125,47 +125,47 @@
   (setq dd (start_dialog ))
   (cond
     
-    ((= dd 1) (cond ((= LB_TMP 1) (if (= cp_xx 1) (S_PLcx 0 7 9 0) (S_DQcx 0 9)));å•ä½“
-		    ((= LB_TMP 2) (if (= cp_xx 1) (tukuang_BK 0 x 7 9 0) (tukuang_BK 0 9 x x x)));å›¾æ¡†å—
-		    ((= LB_TMP 3) (if (= cp_xx 1) (juxing_WL 0 x 7 9 0) (juxing_WL 0 9 x x x)));çŸ©å½¢æ¡†
-		    ((= LB_TMP 4) (if (= cp_xx 1) (select_SG 0 x 7 9 0) (select_SG 0 9 x x x)));æ‰‹å·¥é€‰
-		    ((= LB_TMP 5) (if (= cp_xx 1) (zidongshibie_WL 0 x 7 9 0) (zidongshibie_WL 0 9 x x x)));è‡ªåŠ¨è¯†åˆ«
+    ((= dd 1) (cond ((= LB_TMP 1) (if (= cp_xx 1) (S_PLcx 0 7 9 0) (S_DQcx 0 9)));µ¥Ìå
+		    ((= LB_TMP 2) (if (= cp_xx 1) (tukuang_BK 0 x 7 9 0) (tukuang_BK 0 9 x x x)));Í¼¿ò¿é
+		    ((= LB_TMP 3) (if (= cp_xx 1) (juxing_WL 0 x 7 9 0) (juxing_WL 0 9 x x x)));¾ØĞÎ¿ò
+		    ((= LB_TMP 4) (if (= cp_xx 1) (select_SG 0 x 7 9 0) (select_SG 0 9 x x x)));ÊÖ¹¤Ñ¡
+		    ((= LB_TMP 5) (if (= cp_xx 1) (zidongshibie_WL 0 x 7 9 0) (zidongshibie_WL 0 9 x x x)));×Ô¶¯Ê¶±ğ
 		    )) 		
-    ((= dd 2) (cond ((= LB_TMP 1) (if (= cp_xx 1) (S_PLcx 0 4 6 0) (S_DQcx 0 5)));å•ä½“
-		    ((= LB_TMP 2) (if (= cp_xx 1) (tukuang_BK 0 x 4 6 0) (tukuang_BK 0 5 x x x)));å›¾æ¡†å—
-		    ((= LB_TMP 3) (if (= cp_xx 1) (juxing_WL 0 x 4 6 0) (juxing_WL 0 5 x x x)));çŸ©å½¢æ¡†
-		    ((= LB_TMP 4) (if (= cp_xx 1) (select_SG 0 x 4 6 0) (select_SG 0 5 x x x)));æ‰‹å·¥é€‰
-		    ((= LB_TMP 5) (if (= cp_xx 1) (zidongshibie_WL 0 x 4 6 0) (zidongshibie_WL 0 5 x x x)));è‡ªåŠ¨è¯†åˆ«
+    ((= dd 2) (cond ((= LB_TMP 1) (if (= cp_xx 1) (S_PLcx 0 4 6 0) (S_DQcx 0 5)));µ¥Ìå
+		    ((= LB_TMP 2) (if (= cp_xx 1) (tukuang_BK 0 x 4 6 0) (tukuang_BK 0 5 x x x)));Í¼¿ò¿é
+		    ((= LB_TMP 3) (if (= cp_xx 1) (juxing_WL 0 x 4 6 0) (juxing_WL 0 5 x x x)));¾ØĞÎ¿ò
+		    ((= LB_TMP 4) (if (= cp_xx 1) (select_SG 0 x 4 6 0) (select_SG 0 5 x x x)));ÊÖ¹¤Ñ¡
+		    ((= LB_TMP 5) (if (= cp_xx 1) (zidongshibie_WL 0 x 4 6 0) (zidongshibie_WL 0 5 x x x)));×Ô¶¯Ê¶±ğ
 		    ))
     
-    ((= dd 3) (cond ((= LB_TMP 1) (if (= cp_xx 1) (S_PLcx 0 1 3 0) (S_DQcx 0 1)));å•ä½“
-		    ((= LB_TMP 2) (if (= cp_xx 1) (tukuang_BK 0 x 1 3 0) (tukuang_BK 0 1 x x x)));å›¾æ¡†å—
-		    ((= LB_TMP 3) (if (= cp_xx 1) (juxing_WL 0 x 1 3 0) (juxing_WL 0 1 x x x)));çŸ©å½¢æ¡†
-		    ((= LB_TMP 4) (if (= cp_xx 1) (select_SG 0 x 1 3 0) (select_SG 0 1 x x x)));æ‰‹å·¥é€‰
-		    ((= LB_TMP 5) (if (= cp_xx 1) (zidongshibie_WL 0 x 1 3 0) (zidongshibie_WL 0 1 x x x)));è‡ªåŠ¨è¯†åˆ«
+    ((= dd 3) (cond ((= LB_TMP 1) (if (= cp_xx 1) (S_PLcx 0 1 3 0) (S_DQcx 0 1)));µ¥Ìå
+		    ((= LB_TMP 2) (if (= cp_xx 1) (tukuang_BK 0 x 1 3 0) (tukuang_BK 0 1 x x x)));Í¼¿ò¿é
+		    ((= LB_TMP 3) (if (= cp_xx 1) (juxing_WL 0 x 1 3 0) (juxing_WL 0 1 x x x)));¾ØĞÎ¿ò
+		    ((= LB_TMP 4) (if (= cp_xx 1) (select_SG 0 x 1 3 0) (select_SG 0 1 x x x)));ÊÖ¹¤Ñ¡
+		    ((= LB_TMP 5) (if (= cp_xx 1) (zidongshibie_WL 0 x 1 3 0) (zidongshibie_WL 0 1 x x x)));×Ô¶¯Ê¶±ğ
 		    ))
     
     
     
-    ((= dd 4) (cond ((= LB_TMP 1) (if (= cp_xx 1) (S_PLcx 1 1 7 (* 0.5 pi)) (S_DQcx 1 1)));å•ä½“
-		    ((= LB_TMP 2) (if (= cp_xx 1) (tukuang_BK 1 x 1 7 (* 0.5 pi)) (tukuang_BK 1 1 x x x)));å›¾æ¡†å—
-		    ((= LB_TMP 3) (if (= cp_xx 1) (juxing_WL 1 x 1 7 (* 0.5 pi)) (juxing_WL 1 1 x x x)));çŸ©å½¢æ¡†
-		    ((= LB_TMP 4) (if (= cp_xx 1) (select_SG 1 x 1 7 (* 0.5 pi)) (select_SG 1 1 x x x)));æ‰‹å·¥é€‰
-		    ((= LB_TMP 5) (if (= cp_xx 1) (zidongshibie_WL 1 x 1 7 (* 0.5 pi)) (zidongshibie_WL 1 1 x x x)));è‡ªåŠ¨è¯†åˆ«
+    ((= dd 4) (cond ((= LB_TMP 1) (if (= cp_xx 1) (S_PLcx 1 1 7 (* 0.5 pi)) (S_DQcx 1 1)));µ¥Ìå
+		    ((= LB_TMP 2) (if (= cp_xx 1) (tukuang_BK 1 x 1 7 (* 0.5 pi)) (tukuang_BK 1 1 x x x)));Í¼¿ò¿é
+		    ((= LB_TMP 3) (if (= cp_xx 1) (juxing_WL 1 x 1 7 (* 0.5 pi)) (juxing_WL 1 1 x x x)));¾ØĞÎ¿ò
+		    ((= LB_TMP 4) (if (= cp_xx 1) (select_SG 1 x 1 7 (* 0.5 pi)) (select_SG 1 1 x x x)));ÊÖ¹¤Ñ¡
+		    ((= LB_TMP 5) (if (= cp_xx 1) (zidongshibie_WL 1 x 1 7 (* 0.5 pi)) (zidongshibie_WL 1 1 x x x)));×Ô¶¯Ê¶±ğ
 		    ))
     
-    ((= dd 5) (cond ((= LB_TMP 1) (if (= cp_xx 1) (S_PLcx 1 2 8 (* 0.5 pi)) (S_DQcx 1 5)));å•ä½“
-		    ((= LB_TMP 2) (if (= cp_xx 1) (tukuang_BK 1 x 2 8 (* 0.5 pi)) (tukuang_BK 1 5 x x x)));å›¾æ¡†å—
-		    ((= LB_TMP 3) (if (= cp_xx 1) (juxing_WL 1 x 2 8 (* 0.5 pi)) (juxing_WL 1 5 x x x)));çŸ©å½¢æ¡†
-		    ((= LB_TMP 4) (if (= cp_xx 1) (select_SG 1 x 2 8 (* 0.5 pi)) (select_SG 1 5 x x x)));æ‰‹å·¥é€‰	
-		    ((= LB_TMP 5) (if (= cp_xx 1) (zidongshibie_WL 1 x 2 8 (* 0.5 pi)) (zidongshibie_WL 1 5 x x x)));è‡ªåŠ¨è¯†åˆ«	
+    ((= dd 5) (cond ((= LB_TMP 1) (if (= cp_xx 1) (S_PLcx 1 2 8 (* 0.5 pi)) (S_DQcx 1 5)));µ¥Ìå
+		    ((= LB_TMP 2) (if (= cp_xx 1) (tukuang_BK 1 x 2 8 (* 0.5 pi)) (tukuang_BK 1 5 x x x)));Í¼¿ò¿é
+		    ((= LB_TMP 3) (if (= cp_xx 1) (juxing_WL 1 x 2 8 (* 0.5 pi)) (juxing_WL 1 5 x x x)));¾ØĞÎ¿ò
+		    ((= LB_TMP 4) (if (= cp_xx 1) (select_SG 1 x 2 8 (* 0.5 pi)) (select_SG 1 5 x x x)));ÊÖ¹¤Ñ¡	
+		    ((= LB_TMP 5) (if (= cp_xx 1) (zidongshibie_WL 1 x 2 8 (* 0.5 pi)) (zidongshibie_WL 1 5 x x x)));×Ô¶¯Ê¶±ğ	
 		    ))
     
-    ((= dd 6) (cond ((= LB_TMP 1) (if (= cp_xx 1) (S_PLcx 1 3 9 (* 0.5 pi)) (S_DQcx 1 9)));å•ä½“
-		    ((= LB_TMP 2) (if (= cp_xx 1) (tukuang_BK 1 x 3 9 (* 0.5 pi)) (tukuang_BK 1 9 x x x)));å›¾æ¡†å—
-		    ((= LB_TMP 3) (if (= cp_xx 1) (juxing_WL 1 x 3 9 (* 0.5 pi)) (juxing_WL 1 9 x x x)));çŸ©å½¢æ¡†
-		    ((= LB_TMP 4) (if (= cp_xx 1) (select_SG 1 x 3 9 (* 0.5 pi)) (select_SG 1 9 x x x)));æ‰‹å·¥é€‰	
-		    ((= LB_TMP 5) (if (= cp_xx 1) (zidongshibie_WL 1 x 3 9 (* 0.5 pi)) (zidongshibie_WL 1 9 x x x)));è‡ªåŠ¨è¯†åˆ«
+    ((= dd 6) (cond ((= LB_TMP 1) (if (= cp_xx 1) (S_PLcx 1 3 9 (* 0.5 pi)) (S_DQcx 1 9)));µ¥Ìå
+		    ((= LB_TMP 2) (if (= cp_xx 1) (tukuang_BK 1 x 3 9 (* 0.5 pi)) (tukuang_BK 1 9 x x x)));Í¼¿ò¿é
+		    ((= LB_TMP 3) (if (= cp_xx 1) (juxing_WL 1 x 3 9 (* 0.5 pi)) (juxing_WL 1 9 x x x)));¾ØĞÎ¿ò
+		    ((= LB_TMP 4) (if (= cp_xx 1) (select_SG 1 x 3 9 (* 0.5 pi)) (select_SG 1 9 x x x)));ÊÖ¹¤Ñ¡	
+		    ((= LB_TMP 5) (if (= cp_xx 1) (zidongshibie_WL 1 x 3 9 (* 0.5 pi)) (zidongshibie_WL 1 9 x x x)));×Ô¶¯Ê¶±ğ
 		    ))	
     
     ((= dd 7) (S_DQcx 2 7))
@@ -178,9 +178,9 @@
     ((= dd 14) (S_DQcx 2 6))
     ((= dd 15) (S_DQcx 2 3))
     
-    ((= dd 16) (S_RECT2)) ;;æ’åˆ—ç‚¹é€‰é—´è·
-    ((= dd 17) (setq tk_BLfile (getfiled "é€‰æ‹©å›¾æ¡†æ–‡ä»¶" "C:/Users/Administrator/Desktop/" "dwg" 16)) (c:ent_DQPL))
-    ((= dd 18) (cond  ((= tukuang_TMP 1) (chatukuang "D:\\A2å›¾æ¡†MR.dwg"))
+    ((= dd 16) (S_RECT2)) ;;ÅÅÁĞµãÑ¡¼ä¾à
+    ((= dd 17) (setq tk_BLfile (getfiled "Ñ¡ÔñÍ¼¿òÎÄ¼ş" "C:/Users/Administrator/Desktop/" "dwg" 16)) (c:ent_DQPL))
+    ((= dd 18) (cond  ((= tukuang_TMP 1) (chatukuang "D:\\A2Í¼¿òMR.dwg"))
 		      ((= tukuang_TMP 2) (chatukuang_tuzhong))
 		      ((= tukuang_TMP 3) (chatukuang t_lujing))))
     
@@ -194,24 +194,24 @@
      
      
      )
-    ((= dd 20)	(S_RECT3))	;;é˜µåˆ—ç‚¹é€‰é—´è·					
+    ((= dd 20)	(S_RECT3))	;;ÕóÁĞµãÑ¡¼ä¾à					
     
     
     );cond
   (if (not ucs) (command "ucs" "na" "r" "ucs_old"))
   (princ)
   )
-;;==========================================================================è¾…åŠ©å‡½æ•°
-;;æå–å‹¾é€‰é”®ã€æ’è·æ•°å€¼
+;;==========================================================================¸¨Öúº¯Êı
+;;ÌáÈ¡¹´Ñ¡¼ü¡¢ÅÅ¾àÊıÖµ
 (DEFUN S_RECT()
-  (SETQ cp_dx (ABS (ATOF (GET_TILE "cp_d"))) ;é—´è·å€¼
-	cp_xx (atoi (GET_TILE "cp_x")) ;é‡æ’å¼€å…³å€¼
-	xlb1  (atoi (GET_TILE "xlb1")));ç±»åˆ«å¼€å…³å€¼
-					;t_moren  (atoi (GET_TILE "k_moren"));é»˜è®¤å›¾æ¡†å¼€å…³å€¼
+  (SETQ cp_dx (ABS (ATOF (GET_TILE "cp_d"))) ;¼ä¾àÖµ
+	cp_xx (atoi (GET_TILE "cp_x")) ;ÖØÅÅ¿ª¹ØÖµ
+	xlb1  (atoi (GET_TILE "xlb1")));Àà±ğ¿ª¹ØÖµ
+					;t_moren  (atoi (GET_TILE "k_moren"));Ä¬ÈÏÍ¼¿ò¿ª¹ØÖµ
   (COND ((= (GET_TILE "k_moren") "1") (SETQ tukuang_TMP 1))
         ((= (GET_TILE "k_tuzhong") "1") (SETQ tukuang_TMP 2))
 	((= (GET_TILE "k_chawenjian") "1") (SETQ tukuang_TMP 3))
-	);å›¾æ¡†ç±»åˆ«     
+	);Í¼¿òÀà±ğ     
   (setq t_hengju (ATOF (GET_TILE "k_hengju")) 
 	t_hengshu (atoi (GET_TILE "k_hengshu"))
         t_shuju (ATOF (GET_TILE "k_shuju"))
@@ -220,35 +220,35 @@
   (COND ((= (GET_TILE "k_rb_zhongzhong") "1") (SETQ RB_zhenliejianju 1))
         ((= (GET_TILE "k_rb_bianbian") "1") (SETQ RB_zhenliejianju 2))
 	
-	);é˜µåˆ—é—´è·æ–¹å¼ 
+	);ÕóÁĞ¼ä¾à·½Ê½ 
   (COND ((= (GET_TILE "k_rb_zidong") "1") (SETQ RB_paixuFS 1))
         ((= (GET_TILE "k_rb_xuanxu") "1") (SETQ RB_paixuFS 2))
 	
-	);æ’åºæ–¹å¼
+	);ÅÅĞò·½Ê½
   (COND ((= (GET_TILE "k_rb_chongpaizhenlie") "1") (SETQ RB_zhenlieFS 1))
         ((= (GET_TILE "k_rb_fuzhizhenlie") "1") (SETQ RB_zhenlieFS 2))
 	
-	);é˜µåˆ—æ–¹å¼ t_tog_zhongdian
+	);ÕóÁĞ·½Ê½ t_tog_zhongdian
   
-  (setq t_tog_zhongdian (atoi (GET_TILE "k_tog_zhongdian")));é˜µåˆ—å¯¹é½åŸºç‚¹
+  (setq t_tog_zhongdian (atoi (GET_TILE "k_tog_zhongdian")));ÕóÁĞ¶ÔÆë»ùµã
   
   )
-(defun S_RECT2 (/ pdx1);;é€‰ç‚¹å®šè·å‡½æ•°(æ’åˆ—)
-  (if (and (setq pdx1 (getpoint "\nç¬¬ä¸€ç‚¹: ")) (setq pdx2 (getpoint pdx1 "\nç¬¬äºŒç‚¹: ")))
+(defun S_RECT2 (/ pdx1);;Ñ¡µã¶¨¾àº¯Êı(ÅÅÁĞ)
+  (if (and (setq pdx1 (getpoint "\nµÚÒ»µã: ")) (setq pdx2 (getpoint pdx1 "\nµÚ¶şµã: ")))
     (setq cp_dx1 (distance pdx1 pdx2))
   (setq cp_dx1 0))
   (c:ent_DQPL)
   )
-(defun S_RECT3 (/ pdx1);;é€‰ç‚¹å®šè·å‡½æ•°(é˜µåˆ—); 
+(defun S_RECT3 (/ pdx1);;Ñ¡µã¶¨¾àº¯Êı(ÕóÁĞ); 
   (if (setq p1(getpoint "
-é€‰å–1ç‚¹ï¼š"))
+Ñ¡È¡1µã£º"))
     (progn
       (setq p2 (getcorner p1"
-é€‰å–2ç‚¹(Xå·®=æ¨ªè·ï¼ŒYå·®=ç«–è·)ï¼š"))
+Ñ¡È¡2µã(X²î=ºá¾à£¬Y²î=Êú¾à)£º"))
       (setq t_hengju_dx (abs (- (car p1) (car p2))) t_shuju_dx (abs (- (cadr p1) (cadr p2))))))
   (c:ent_DQPL)
   )
-;; é™¢é•¿å‡½æ•° / å¤–åŒ…ç›’9ç‚¹åæ ‡ï¼›åœ¨æ­¤ç¨‹åºä¸­å‘æŒ¥å…³é”®ä½œç”¨
+;; Ôº³¤º¯Êı / Íâ°üºĞ9µã×ø±ê£»ÔÚ´Ë³ÌĞòÖĞ·¢»Ó¹Ø¼ü×÷ÓÃ
 (defun ss9pt (ss n / ss i s1 ll rr box ptn a p1 p2 p3 p4 p5 p6 p7 p8 p9)
 
   (progn ss
@@ -275,7 +275,7 @@
 	 (nth (- n 1) (list p1 p2 p3 p4 p5 p6 p7 p8 p9))
 	 )
   )
-;;é€‰æ‹©é›†=>>åè¡¨
+;;Ñ¡Ôñ¼¯=>>Ãû±í
 (defun SStoLST (ss / i entname lst)
   (setq i -1)
   (if ss
@@ -284,7 +284,7 @@
   (reverse lst)
   )
 
-(defun setdate ();;è®¾ç½®dclå„ä¸ªå€¼ 
+(defun setdate ();;ÉèÖÃdcl¸÷¸öÖµ 
   (set_tile "cp_x" (rtos cp_xx 2 2))
   (set_tile "cp_d" (rtos cp_dx 2 2))
   (set_tile "toggle_ymk" (rtos YMK_TMP 2 2))
@@ -311,18 +311,18 @@
   (set_tile "k_shushu" (rtos t_shushu 2 0))
   (cond  ((= RB_zhenliejianju 1) (set_tile "k_rb_zhongzhong" "1"))
 	 ((= RB_zhenliejianju 2) (set_tile "k_rb_bianbian" "1"))		    
-	 );é˜µåˆ—é—´è·æ–¹å¼
+	 );ÕóÁĞ¼ä¾à·½Ê½
   (cond  ((= RB_paixuFS 1) (set_tile "k_rb_zidong" "1"))
 	 ((= RB_paixuFS 2) (set_tile "k_rb_xuanxu" "1"))		    
-	 );æ’åºæ–¹å¼
+	 );ÅÅĞò·½Ê½
   (cond  ((= RB_zhenlieFS 1) (set_tile "k_rb_chongpaizhenlie" "1"))
 	 ((= RB_zhenlieFS 2) (set_tile "k_rb_fuzhizhenlie" "1"))		    
-	 );é˜µåˆ—æ–¹å¼
-  (set_tile "k_tog_zhongdian" (rtos t_tog_zhongdian 2 2));é˜µåˆ—å¯¹é½åŸºç‚¹-é»˜è®¤å·¦ä¸‹è§’
+	 );ÕóÁĞ·½Ê½
+  (set_tile "k_tog_zhongdian" (rtos t_tog_zhongdian 2 2));ÕóÁĞ¶ÔÆë»ùµã-Ä¬ÈÏ×óÏÂ½Ç
   
   )
 
-(defun fuzhizhenlie ();ç‚¹å¤åˆ¶é˜µåˆ—é€‰é¡¹å˜ç°å¤„ç† 
+(defun fuzhizhenlie ();µã¸´ÖÆÕóÁĞÑ¡Ïî±ä»Ò´¦Àí 
   (mode_tile "k_no1" 1)	
   (mode_tile "k_no2" 1)
   (mode_tile "k_shuipingduiqi" 1)
@@ -331,7 +331,7 @@
 					;(mode_tile "k_zlqueding" 1)
   (mode_tile "row_sxdq" 1)
   )
-(defun chongpaizhenlie ();ç‚¹é‡æ’é˜µåˆ—é€‰é¡¹å˜äº®å¤„ç† 
+(defun chongpaizhenlie ();µãÖØÅÅÕóÁĞÑ¡Ïî±äÁÁ´¦Àí 
   (S_PGON) (S_RECT)	
   (mode_tile "k_no1" 0)	
   (mode_tile "k_no2" 0)
@@ -341,60 +341,60 @@
 					;(mode_tile "k_zlqueding" 0)
   (if (and (= LB_TMP 1) (= cp_xx 0)) (mode_tile "row_sxdq" 0))
   )
-;;==========================================================================ä¸»å¤„ç†å‡½æ•°
-;;å•ä½“å¯¹é½ä¸»ç¨‹åº,/ H-S=0ï¼šæ°´å¹³ / H-S=1ï¼šå‚ç›´ / H-S=2:åŒå‘ / 9NB:ç§»åŠ¨åŸºç‚¹ /
+;;==========================================================================Ö÷´¦Àíº¯Êı
+;;µ¥Ìå¶ÔÆëÖ÷³ÌĞò,/ H-S=0£ºË®Æ½ / H-S=1£º´¹Ö± / H-S=2:Ë«Ïò / 9NB:ÒÆ¶¯»ùµã /
 (defun S_DQcx (H-S 9NB / ang entdate entname gpname gpname_lst gpss_lst gx_list i nb nb0 p0 p1 p1a p2 pick_date ss ss_gp ss_gp_temp ss-9 ssall sslst sslst_px)
-  (command "undo" "be");æ’¤é”€å¼€å§‹ç‚¹ï¼Œå¯¹äºæ‰¹é‡æ“ä½œåšå¥½æ’¤é”€è®¾ç½®ï¼Œä¸ç„¶ä¸€æ­¥æ­¥åé€€å¾ˆéº»çƒ¦ã€‚
-  (prompt "\né€‰æ‹©å¯¹è±¡:"); ssget åé¢ä¸èƒ½å¸¦æ“ä½œè¯´æ˜ï¼Œåœ¨å…¶å‰å¯ä»¥ç”¨ prompt å…ˆè¡Œæç¤ºã€‚
+  (command "undo" "be");³·Ïú¿ªÊ¼µã£¬¶ÔÓÚÅúÁ¿²Ù×÷×öºÃ³·ÏúÉèÖÃ£¬²»È»Ò»²½²½ºóÍËºÜÂé·³¡£
+  (prompt "\nÑ¡Ôñ¶ÔÏó:"); ssget ºóÃæ²»ÄÜ´ø²Ù×÷ËµÃ÷£¬ÔÚÆäÇ°¿ÉÒÔÓÃ prompt ÏÈĞĞÌáÊ¾¡£
 
   
   (if (= SX_TMP 1)
-      (progn (setq  pick_date (entget (car (entsel "\nç‚¹é€‰æºå¯¹è±¡:"))) GX_list '())
+      (progn (setq  pick_date (entget (car (entsel "\nµãÑ¡Ô´¶ÔÏó:"))) GX_list '())
       (if (not pick_date) (quit))	     
 	     (if (= (cdr (assoc 0 pick_date)) "INSERT")  
-		 (setq  GX_list (list (assoc 0 pick_date) (assoc 2 pick_date)));å›¾å—ç±»
-		 (progn (setq  GX_list (list (assoc 0 pick_date) (assoc 8 pick_date))) (if (assoc 62 pick_date) (setq GX_list (cons  (assoc 62 pick_date) GX_list))));å…¶ä»–ç±»
+		 (setq  GX_list (list (assoc 0 pick_date) (assoc 2 pick_date)));Í¼¿éÀà
+		 (progn (setq  GX_list (list (assoc 0 pick_date) (assoc 8 pick_date))) (if (assoc 62 pick_date) (setq GX_list (cons  (assoc 62 pick_date) GX_list))));ÆäËûÀà
 		 
-		 );;æ”¶é›†å…±æ€§ç»„ç 
+		 );;ÊÕ¼¯¹²ĞÔ×éÂë
 	     
-	     (prompt "\né€‰æ‹©è¦å¤„ç†å¯¹è±¡ / å…¨é€‰<ç©ºæ ¼>ï¼š")
-	     (if (not (setq ssall (ssget GX_list))) (setq ssall (ssget "x"  GX_list)));;å…±æ€§é€‰é›†(åŒå±‚ã€åŒè‰²)
+	     (prompt "\nÑ¡ÔñÒª´¦Àí¶ÔÏó / È«Ñ¡<¿Õ¸ñ>£º")
+	     (if (not (setq ssall (ssget GX_list))) (setq ssall (ssget "x"  GX_list)));;¹²ĞÔÑ¡¼¯(Í¬²ã¡¢Í¬É«)
 	     
 	     (sssetfirst nil ssall)
 	     (setq  ss_gp (ssadd) ss (ssadd))
 	     
 	     );progn
       
-      (setq ssall (ssget) ss_gp (ssadd) ss (ssadd)));if ;ss_gp:å…¨éƒ¨å±äºç¾¤ç»„æˆå‘˜çš„é€‰é›†
+      (setq ssall (ssget) ss_gp (ssadd) ss (ssadd)));if ;ss_gp:È«²¿ÊôÓÚÈº×é³ÉÔ±µÄÑ¡¼¯
   
-  ;;åˆ¤æ–­ç¾¤ç»„
-					;â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼
+  ;;ÅĞ¶ÏÈº×é
+					;¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹
   (setq i -1 GPname_lst '()) 
   (while (setq entname (ssname ssall (setq i (1+ i))))	  
     (if (= (cdr (assoc 102 (setq entdate (entget entname)))) "{ACAD_REACTORS") (progn (setq GPname (cdr (assoc 330 entdate))) (setq ss_gp (ssadd entname ss_gp))) (setq ss (ssadd entname ss)))
-    (if (not (member GPname GPname_lst)) (setq GPname_lst (cons GPname GPname_lst)));ç¾¤ç»„åçš„è¡¨
+    (if (not (member GPname GPname_lst)) (setq GPname_lst (cons GPname GPname_lst)));Èº×éÃûµÄ±í
     );while 
-					;(sssetfirst nil ss);äº®æ˜¾ss
-					;â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼
-  ;; å•ä½“ssé€‰é›†å¤„ç†
-  (setq p0 (getpoint "\né€‰æ‹©å¯¹é½åŸºç‚¹<é€€å‡º>: "));getpoint ç­‰å¾ˆå¤šå‡½æ•°åé¢å¯ä»¥æ¥è¯´æ˜ï¼Œ\n æ¢è¡Œå·ï¼Œå‘½ä»¤è¡Œä¼šæ¢ä¸€è¡Œå†æç¤ºã€‚
+					;(sssetfirst nil ss);ÁÁÏÔss
+					;¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹
+  ;; µ¥ÌåssÑ¡¼¯´¦Àí
+  (setq p0 (getpoint "\nÑ¡Ôñ¶ÔÆë»ùµã<ÍË³ö>: "));getpoint µÈºÜ¶àº¯ÊıºóÃæ¿ÉÒÔ½ÓËµÃ÷£¬\n »»ĞĞºÅ£¬ÃüÁîĞĞ»á»»Ò»ĞĞÔÙÌáÊ¾¡£
   (if (not p0) (quit))
-  (setq i -1);ä¸ºäº†é…åˆä¸‹é¢ ssname å‡½æ•°è®¾çš„å˜é‡ï¼Œç¬¬ä¸€ä¸ªå¯¹è±¡ç¼–å·ä¸º 0ï¼Œæ‰€ä»¥è®¾ä¸º -1ã€‚
-  (while (setq entname (ssname ss (setq i (1+ i))));while å¯¹é€‰é›†å…¨éƒ¨å¯¹è±¡åšå¾ªç¯å¤„ç†ï¼Œä¹Ÿå¯ä»¥ç”¨ repeat å‡½æ•°æ¥åšã€‚
+  (setq i -1);ÎªÁËÅäºÏÏÂÃæ ssname º¯ÊıÉèµÄ±äÁ¿£¬µÚÒ»¸ö¶ÔÏó±àºÅÎª 0£¬ËùÒÔÉèÎª -1¡£
+  (while (setq entname (ssname ss (setq i (1+ i))));while ¶ÔÑ¡¼¯È«²¿¶ÔÏó×öÑ­»·´¦Àí£¬Ò²¿ÉÒÔÓÃ repeat º¯ÊıÀ´×ö¡£
     (setq ss-9 (ssadd) ss-9 (ssadd entname ss-9))
-    (setq  p1 (ss9pt ss-9 9NB));9NBæ˜¯æ­¤å‡½æ•°å‚æ•°ä¹‹ä¸€ï¼Œå°±æ˜¯å¯¹è±¡çš„9ç‚¹ä¹‹ä¸€ï¼ˆç§»åŠ¨åŸºç‚¹p1ï¼‰ï¼Œæ ¹æ®å¯¹é½å½¢å¼é€‰å–ã€‚
-    (cond ((= H-S 0) (setq p2 (list (car p1) (cadr p0))));H-Sä¹Ÿæ˜¯å‚æ•°ä¹‹ä¸€ï¼Œæ ¹æ®ä»–æ¥è®¡ç®—ç§»åŠ¨çš„ç›®æ ‡ç‚¹ p2
+    (setq  p1 (ss9pt ss-9 9NB));9NBÊÇ´Ëº¯Êı²ÎÊıÖ®Ò»£¬¾ÍÊÇ¶ÔÏóµÄ9µãÖ®Ò»£¨ÒÆ¶¯»ùµãp1£©£¬¸ù¾İ¶ÔÆëĞÎÊ½Ñ¡È¡¡£
+    (cond ((= H-S 0) (setq p2 (list (car p1) (cadr p0))));H-SÒ²ÊÇ²ÎÊıÖ®Ò»£¬¸ù¾İËûÀ´¼ÆËãÒÆ¶¯µÄÄ¿±êµã p2
 	  ((= H-S 1) (setq p2 (list (car p0) (cadr p1))))
-	  ((= H-S 2) (setq p2 p0));åŒå‘å¯¹é½æ—¶ï¼Œé€‰çš„ç‚¹p0å°±æ˜¯ç›®æ ‡ç‚¹p2
+	  ((= H-S 2) (setq p2 p0));Ë«Ïò¶ÔÆëÊ±£¬Ñ¡µÄµãp0¾ÍÊÇÄ¿±êµãp2
 	  )
-    (command "MOVE" entname "" "non" p1 "non" p2);ç§»åŠ¨å‘½ä»¤å®Œæˆ
+    (command "MOVE" entname "" "non" p1 "non" p2);ÒÆ¶¯ÃüÁîÍê³É
     );while
-					;â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼
-  ;;ç¾¤ç»„å¯¹è±¡å¤„ç†ï¼š
+					;¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹
+  ;;Èº×é¶ÔÏó´¦Àí£º
   (if ss_gp (progn 
-	      (setq GPss_lst '());GPss_lst-å„ç»„å¯¹è±¡é€‰é›† åˆ—è¡¨ 
+	      (setq GPss_lst '());GPss_lst-¸÷×é¶ÔÏóÑ¡¼¯ ÁĞ±í 
 	      (foreach x GPname_lst
-		       (setq i -1 ss_gp_temp (ssadd)) ;ss_gp_temp-ä¸´æ—¶é€‰é›† 
+		       (setq i -1 ss_gp_temp (ssadd)) ;ss_gp_temp-ÁÙÊ±Ñ¡¼¯ 
 		       (while (setq entname (ssname ss_gp (setq i (1+ i))))      
 			 (if (equal (cdr (assoc 330  (entget entname))) x) (setq ss_gp_temp (ssadd entname ss_gp_temp)))				
 			 );while
@@ -415,84 +415,84 @@
 	      
 	      );progn
       );if
-					; â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼	
-  (command "undo" "e");æ’¤é”€ç»“æŸç‚¹ï¼Œä¸å¼€å§‹ç‚¹ä¹‹é—´çš„æ“ä½œä¸€æ­¥æ’¤é”€å®Œæˆ
-  (princ);è¿™ä¸ªæ˜¯æ ‡é…å§
-  );ç»“æŸ
+					; ¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹	
+  (command "undo" "e");³·Ïú½áÊøµã£¬Óë¿ªÊ¼µãÖ®¼äµÄ²Ù×÷Ò»²½³·ÏúÍê³É
+  (princ);Õâ¸öÊÇ±êÅä°É
+  );½áÊø
 ;;==========================================================================
-;;å•ä½“æ’åˆ—ä¸»ç¨‹åº,/ H-S=0ï¼šæ°´å¹³ / H-S=1ï¼šå‚ç›´ / ang:æ°´å¹³0ï¼Œå‚ç›´90Â° / NB:å¯¹è±¡ç§»åŠ¨åŸºç‚¹ / NB0: ç§»åŠ¨ç›®æ ‡ç‚¹(é€‰å–åˆé€‚çš„9ç‚¹ä¹‹ä¸€æ¥è®¡ç®—)
+;;µ¥ÌåÅÅÁĞÖ÷³ÌĞò,/ H-S=0£ºË®Æ½ / H-S=1£º´¹Ö± / ang:Ë®Æ½0£¬´¹Ö±90¡ã / NB:¶ÔÏóÒÆ¶¯»ùµã / NB0: ÒÆ¶¯Ä¿±êµã(Ñ¡È¡ºÏÊÊµÄ9µãÖ®Ò»À´¼ÆËã)
 (defun S_PLcx (H-S NB NB0 ang / entname i p0 p1a ss sslst sslst_px ss-9)
-  (command "undo" "be");åŒä¸Š
+  (command "undo" "be");Í¬ÉÏ
   
   (if (= SX_TMP 1)
-      (progn (setq  pick_date (entget (car (entsel "\nç‚¹é€‰æºå¯¹è±¡:"))) GX_list '())
+      (progn (setq  pick_date (entget (car (entsel "\nµãÑ¡Ô´¶ÔÏó:"))) GX_list '())
       (if (not pick_date) (quit))	     
 	     (if (= (cdr (assoc 0 pick_date)) "INSERT")  
-		 (setq  GX_list (list (assoc 0 pick_date) (assoc 2 pick_date)));å›¾å—ç±»
-		 (progn (setq  GX_list (list (assoc 0 pick_date) (assoc 8 pick_date))) (if (assoc 62 pick_date) (setq GX_list (cons  (assoc 62 pick_date) GX_list))));å…¶ä»–ç±»
+		 (setq  GX_list (list (assoc 0 pick_date) (assoc 2 pick_date)));Í¼¿éÀà
+		 (progn (setq  GX_list (list (assoc 0 pick_date) (assoc 8 pick_date))) (if (assoc 62 pick_date) (setq GX_list (cons  (assoc 62 pick_date) GX_list))));ÆäËûÀà
 		 
-		 );;æ”¶é›†å…±æ€§ç»„ç 
+		 );;ÊÕ¼¯¹²ĞÔ×éÂë
 	     
-	     (prompt "\né€‰æ‹©è¦å¤„ç†å¯¹è±¡ / å…¨é€‰<ç©ºæ ¼>ï¼š")
-	     (if (not (setq ssall (ssget GX_list))) (setq ssall (ssget "x"  GX_list)));;å…±æ€§é€‰é›†(åŒå±‚ã€åŒè‰²)
+	     (prompt "\nÑ¡ÔñÒª´¦Àí¶ÔÏó / È«Ñ¡<¿Õ¸ñ>£º")
+	     (if (not (setq ssall (ssget GX_list))) (setq ssall (ssget "x"  GX_list)));;¹²ĞÔÑ¡¼¯(Í¬²ã¡¢Í¬É«)
 	     
 	     (sssetfirst nil ssall)
 	     (setq  ss_gp (ssadd) ss (ssadd))
 	     
 	     );progn
       
-      (setq ssall (ssget) ss_gp (ssadd) ss (ssadd)));if ;ss_gp:å…¨éƒ¨å±äºç¾¤ç»„æˆå‘˜çš„é€‰é›†
+      (setq ssall (ssget) ss_gp (ssadd) ss (ssadd)));if ;ss_gp:È«²¿ÊôÓÚÈº×é³ÉÔ±µÄÑ¡¼¯
   
-  ;;åˆ¤æ–­ç¾¤ç»„
-					;â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼	 
+  ;;ÅĞ¶ÏÈº×é
+					;¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹	 
   (setq i -1 GPname_lst '()) 
   (while (setq entname (ssname ssall (setq i (1+ i))))	  
     (if (= (cdr (assoc 102 (setq entdate (entget entname)))) "{ACAD_REACTORS") (progn (setq GPname (cdr (assoc 330 entdate))) (setq ss_gp (ssadd entname ss_gp))) (setq ss (ssadd entname ss)))
-    (if (not (member GPname GPname_lst)) (setq GPname_lst (cons GPname GPname_lst)));ç¾¤ç»„åçš„è¡¨
+    (if (not (member GPname GPname_lst)) (setq GPname_lst (cons GPname GPname_lst)));Èº×éÃûµÄ±í
     );while
-					;â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼
-  ;; å•ä½“ssé€‰é›†å¤„ç†		
-  (setq p0 (getpoint "\né€‰æ‹©å¯¹é½åŸºç‚¹<é€€å‡º>: "));æ’åˆ—çš„èµ·ç‚¹
+					;¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹
+  ;; µ¥ÌåssÑ¡¼¯´¦Àí		
+  (setq p0 (getpoint "\nÑ¡Ôñ¶ÔÆë»ùµã<ÍË³ö>: "));ÅÅÁĞµÄÆğµã
   (if (not p0) (quit))
-  (setq sslst (SStoLST ss));;é€‰é›†è½¬æˆè¡¨ä»¥ä¾¿ä¸‹é¢è¿›è¡Œæ’åº
-					;ç­‰è·æ’åˆ—å…¶å®è·Ÿä¸Šé¢å¯¹é½æ“ä½œåŸç†ä¸€æ ·ï¼Œä½†æ˜¯è¦å¯¹é€‰é›†å¯¹è±¡æ’åºä¸€ä¸‹ï¼Œä¸ç„¶ä¼šä¹±ï¼Œå› ä¸ºè¿™é‡Œçš„ç§»åŠ¨ç»ˆç‚¹æ˜¯æ ¹æ®å‰å¯¹è±¡è®¡ç®—çš„ï¼Œè€Œå¯¹é½åªè¦æ ¹æ®è‡ªå·±ç‚¹ä½è®¡ç®—å°±è¡Œã€‚
+  (setq sslst (SStoLST ss));;Ñ¡¼¯×ª³É±íÒÔ±ãÏÂÃæ½øĞĞÅÅĞò
+					;µÈ¾àÅÅÁĞÆäÊµ¸úÉÏÃæ¶ÔÆë²Ù×÷Ô­ÀíÒ»Ñù£¬µ«ÊÇÒª¶ÔÑ¡¼¯¶ÔÏóÅÅĞòÒ»ÏÂ£¬²»È»»áÂÒ£¬ÒòÎªÕâÀïµÄÒÆ¶¯ÖÕµãÊÇ¸ù¾İÇ°¶ÔÏó¼ÆËãµÄ£¬¶ø¶ÔÆëÖ»Òª¸ù¾İ×Ô¼ºµãÎ»¼ÆËã¾ÍĞĞ¡£
   
-  â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– 
-  (if (= RB_paixuFS 1) (cond ((= H-S 0) (setq sslst_px (vl-sort sslst '(lambda (a b) (< (car (car (enbox a))) (car (car (enbox b))))))));;æ¨ªæ’æ—¶æŒ‰å¯¹è±¡1ç‚¹çš„xå€¼å°åˆ°å¤§æ’åºï¼Œå¾—åˆ°æ–°è¡¨
-		             ((= H-S 1) (setq sslst_px (vl-sort sslst '(lambda (a b) (< (cadr (car (enbox a))) (cadr (car (enbox b))))))));;ç«–æ’æ—¶æŒ‰å¯¹è±¡1ç‚¹çš„yå€¼å°åˆ°å¤§æ’åºï¼Œå¾—åˆ°æ–°è¡¨
-	                     );cond  è‡ªåŠ¨æ’åˆ—
+  ¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö
+  (if (= RB_paixuFS 1) (cond ((= H-S 0) (setq sslst_px (vl-sort sslst '(lambda (a b) (< (car (car (enbox a))) (car (car (enbox b))))))));;ºáÅÅÊ±°´¶ÔÏó1µãµÄxÖµĞ¡µ½´óÅÅĞò£¬µÃµ½ĞÂ±í
+		             ((= H-S 1) (setq sslst_px (vl-sort sslst '(lambda (a b) (< (cadr (car (enbox a))) (cadr (car (enbox b))))))));;ÊúÅÅÊ±°´¶ÔÏó1µãµÄyÖµĞ¡µ½´óÅÅĞò£¬µÃµ½ĞÂ±í
+	                     );cond  ×Ô¶¯ÅÅÁĞ
       
-      (setq sslst_px sslst);;æŒ‰é€‰æ‹©é¡ºåºæ’åˆ—
+      (setq sslst_px sslst);;°´Ñ¡ÔñË³ĞòÅÅÁĞ
       );if
   
   
-  â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– 	
-  (setq i 0);è¿™é‡Œå¾ªç¯è®¾çš„iæ˜¯0ï¼Œå’Œä¸Šé¢-1æ˜¯ä¸€æ ·æ•ˆæœï¼Œéƒ½æ˜¯ä»ç¼–å·0å¼€å§‹
-  (repeat (length sslst_px);è¿™é‡Œç”¨äº†repeatå‡½æ•°ï¼Œæ³¨æ„è¿™é‡Œå¯¹è±¡æ˜¯è¡¨ï¼Œå¯¹æ¯”ä¸€ä¸‹ä¸Šé¢ while çš„å¯¹è±¡æ˜¯é€‰é›†ï¼Œä¼šå‘ç°åŸç†ä¸€æ ·ï¼Œä½†ç”¨åˆ°çš„å‡½æ•°ä¸ä¸€æ ·
+  ¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö	
+  (setq i 0);ÕâÀïÑ­»·ÉèµÄiÊÇ0£¬ºÍÉÏÃæ-1ÊÇÒ»ÑùĞ§¹û£¬¶¼ÊÇ´Ó±àºÅ0¿ªÊ¼
+  (repeat (length sslst_px);ÕâÀïÓÃÁËrepeatº¯Êı£¬×¢ÒâÕâÀï¶ÔÏóÊÇ±í£¬¶Ô±ÈÒ»ÏÂÉÏÃæ while µÄ¶ÔÏóÊÇÑ¡¼¯£¬»á·¢ÏÖÔ­ÀíÒ»Ñù£¬µ«ÓÃµ½µÄº¯Êı²»Ò»Ñù
 	  (setq entname (nth i sslst_px)) 
 	  (setq ss-9 (ssadd) ss-9 (ssadd entname ss-9)
-		p1a (ss9pt ss-9 NB));ç§»åŠ¨åŸºç‚¹
+		p1a (ss9pt ss-9 NB));ÒÆ¶¯»ùµã
 	  
-	  (command "MOVE" entname "" "non" p1a "non" p0);ç§»åŠ¨å‘½ä»¤
-					;(if (not cp_dx1) (setq cp_dx1 cp_dx));è¿™æ˜¯å¯¹è¯æ¡†çš„ä¸€äº›ä»£ç 
+	  (command "MOVE" entname "" "non" p1a "non" p0);ÒÆ¶¯ÃüÁî
+					;(if (not cp_dx1) (setq cp_dx1 cp_dx));ÕâÊÇ¶Ô»°¿òµÄÒ»Ğ©´úÂë
 	  
-	  (setq p0 (polar (ss9pt ss-9 NB0) ang cp_dx) i (1+ i))	;è¿™é‡Œæ˜¯è®¡ç®—ä¸‹ä¸€ä¸ªå¯¹è±¡çš„ç§»åŠ¨ç»ˆç‚¹(p0é‡æ–°èµ‹å€¼ï¼Œå¾ªç¯ä½¿ç”¨)
+	  (setq p0 (polar (ss9pt ss-9 NB0) ang cp_dx) i (1+ i))	;ÕâÀïÊÇ¼ÆËãÏÂÒ»¸ö¶ÔÏóµÄÒÆ¶¯ÖÕµã(p0ÖØĞÂ¸³Öµ£¬Ñ­»·Ê¹ÓÃ)
 	  );repeat
-					;â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼
-  ;;ç¾¤ç»„å¯¹è±¡å¤„ç†ï¼š
+					;¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹
+  ;;Èº×é¶ÔÏó´¦Àí£º
   (if ss_gp (progn 	 																	
-	      (setq GPss_lst '());GPss_lst-å„ç»„å¯¹è±¡é€‰é›† åˆ—è¡¨ 
+	      (setq GPss_lst '());GPss_lst-¸÷×é¶ÔÏóÑ¡¼¯ ÁĞ±í 
 	      
 	      (foreach x GPname_lst
-		       (setq i -1 ss_gp_temp (ssadd)) ;ss_gp_temp-ä¸´æ—¶é€‰é›† 
+		       (setq i -1 ss_gp_temp (ssadd)) ;ss_gp_temp-ÁÙÊ±Ñ¡¼¯ 
 		       (while (setq entname (ssname ss_gp (setq i (1+ i))))      
 			 (if (equal (cdr (assoc 330  (entget entname))) x) (setq ss_gp_temp (ssadd entname ss_gp_temp)))				
 			 );while
 		       (if (/= (sslength ss_gp_temp) 0) (setq GPss_lst (cons ss_gp_temp GPss_lst)))			
 		       );foreach1																			
 	      
-	      (cond ((= H-S 0) (setq sslst_px (vl-sort GPss_lst '(lambda (a b) (< (car (ss9pt a 1)) (car (ss9pt b 1)))))));;æ¨ªæ’æ—¶æŒ‰å¯¹è±¡1ç‚¹çš„xå€¼å°åˆ°å¤§æ’åºï¼Œå¾—åˆ°æ–°è¡¨
-		    ((= H-S 1) (setq sslst_px (vl-sort GPss_lst '(lambda (a b) (< (cadr (ss9pt a 1)) (cadr (ss9pt b 1)))))));;ç«–æ’æ—¶æŒ‰å¯¹è±¡1ç‚¹çš„yå€¼å°åˆ°å¤§æ’åºï¼Œå¾—åˆ°æ–°è¡¨
+	      (cond ((= H-S 0) (setq sslst_px (vl-sort GPss_lst '(lambda (a b) (< (car (ss9pt a 1)) (car (ss9pt b 1)))))));;ºáÅÅÊ±°´¶ÔÏó1µãµÄxÖµĞ¡µ½´óÅÅĞò£¬µÃµ½ĞÂ±í
+		    ((= H-S 1) (setq sslst_px (vl-sort GPss_lst '(lambda (a b) (< (cadr (ss9pt a 1)) (cadr (ss9pt b 1)))))));;ÊúÅÅÊ±°´¶ÔÏó1µãµÄyÖµĞ¡µ½´óÅÅĞò£¬µÃµ½ĞÂ±í
 	            );cond
 	      (princ GPss_lst	) (princ)
 	      (setq i 0) 
@@ -507,17 +507,17 @@
 		      );repeat														
 	      );progn
       );if
-					;â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼â–¼			
-  (command "undo" "e");åŒä¸Š
-					;(setq cp_dx1 nil);è¿™æ˜¯å¯¹è¯æ¡†çš„
+					;¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹¨‹			
+  (command "undo" "e");Í¬ÉÏ
+					;(setq cp_dx1 nil);ÕâÊÇ¶Ô»°¿òµÄ
   (princ)
   )
 
 
-;; æ›´æ–°è¡¥å……ä»£ç 0303 â—†â—†â—†â—†â—†â—†â—†â—†â—†â—†â—†â—†â—†â—†â—†â—†â—†â—†â—†â—†â—†â—†â—†â—†â—†â—†â—†â—†â—†â—†â—†â—†â—†â—†â—†â—†â—†â—†â—†â—†â—†â—†â—†â—†â—†â—†â—†â—†â—†â—†â—†â—†â—†â—†â—†â—†â—†â—†â—†â—†â—†â—†â—†â—†
+;; ¸üĞÂ²¹³ä´úÂë0303 ¡ô¡ô¡ô¡ô¡ô¡ô¡ô¡ô¡ô¡ô¡ô¡ô¡ô¡ô¡ô¡ô¡ô¡ô¡ô¡ô¡ô¡ô¡ô¡ô¡ô¡ô¡ô¡ô¡ô¡ô¡ô¡ô¡ô¡ô¡ô¡ô¡ô¡ô¡ô¡ô¡ô¡ô¡ô¡ô¡ô¡ô¡ô¡ô¡ô¡ô¡ô¡ô¡ô¡ô¡ô¡ô¡ô¡ô¡ô¡ô¡ô¡ô¡ô¡ô
 
-;;==========================================================================è¾…åŠ©å‡½æ•°
-(DEFUN S_PGON () ;;ç±»åˆ«é€‰æ‹©å‡½æ•°
+;;==========================================================================¸¨Öúº¯Êı
+(DEFUN S_PGON () ;;Àà±ğÑ¡Ôñº¯Êı
   (COND ((= (GET_TILE "xlb1") "1") (SETQ LB_TMP 1))
 	((= (GET_TILE "xlb2") "1") (SETQ LB_TMP 2))
 	((= (GET_TILE "xlb3") "1") (SETQ LB_TMP 3))
@@ -526,7 +526,7 @@
 	)	
   )
 
-(DEFUN S_toggle () ;;é€Ÿé€‰ã€å¼‚åå—ã€ä¸å…±æ€§ã€é•¿å®½æ¯” å‹¾é€‰å¼€å…³å‡½æ•° 
+(DEFUN S_toggle () ;;ËÙÑ¡¡¢ÒìÃû¿é¡¢²»¹²ĞÔ¡¢³¤¿í±È ¹´Ñ¡¿ª¹Øº¯Êı 
   (COND ((= (GET_TILE "toggle_ymk") "1") (SETQ YMK_TMP 1))
 	((= (GET_TILE "toggle_ymk") "0") (SETQ YMK_TMP 0))
 	
@@ -545,53 +545,54 @@
 	)
   )
 
-(defun enbox (ename / ll ur);å•ä½“å¤–æ¡†å¯¹è§’ç‚¹å‡½æ•° 
+(defun enbox (ename / ll ur);µ¥ÌåÍâ¿ò¶Ô½Çµãº¯Êı
   (if (vl-catch-all-error-p
         (vl-catch-all-apply 'vla-getboundingbox (list (vlax-ename->vla-object ename) 'll 'ur)))
     (setq ll nil ur nil))
-  (mapcar 'vlax-safearray->list (list ll ur)))
+  (if ll
+      (mapcar 'vlax-safearray->list (list ll ur))))
 
-(defun DQ_BK (SS_lst H-S 9NB / i p0 p1 p2 ss-name ss-9);é€‰é›†ç±»åˆ«-å¯¹é½å‡½æ•°
+(defun DQ_BK (SS_lst H-S 9NB / i p0 p1 p2 ss-name ss-9);Ñ¡¼¯Àà±ğ-¶ÔÆëº¯Êı
   (if (setq p0 (getpoint "
-é€‰æ‹©å¯¹é½åŸºç‚¹<é€€å‡º>: "))
+Ñ¡Ôñ¶ÔÆë»ùµã<ÍË³ö>: "))
     (progn
-  (command "-layer" "u" (setq suo_str (layer_suo_str)) "");å¼€é”
+  (command "-layer" "u" (setq suo_str (layer_suo_str)) "");¿ªËø
   (setq i -1)	
-  (while (setq ss-name (car (nth (setq i (1+ i)) SS_lst)));æå–è¡¨å…ƒç´ ä¸­çš„ é€‰é›†
+  (while (setq ss-name (car (nth (setq i (1+ i)) SS_lst)));ÌáÈ¡±íÔªËØÖĞµÄ Ñ¡¼¯
     (setq ss-9 (ssadd) ss-9 (ssadd (caddr (nth i SS_lst)) ss-9))
-    (setq  p1 (ss9pt ss-9 9NB));9NBæ˜¯æ­¤å‡½æ•°å‚æ•°ä¹‹ä¸€ï¼Œå°±æ˜¯å¯¹è±¡çš„9ç‚¹ä¹‹ä¸€ï¼ˆç§»åŠ¨åŸºç‚¹p1ï¼‰ï¼Œæ ¹æ®å¯¹é½å½¢å¼é€‰å–ã€‚
-    (cond ((= H-S 0) (setq p2 (list (car p1) (cadr p0))));H-Sä¹Ÿæ˜¯å‚æ•°ä¹‹ä¸€ï¼Œæ ¹æ®ä»–æ¥è®¡ç®—ç§»åŠ¨çš„ç›®æ ‡ç‚¹ p2
+    (setq  p1 (ss9pt ss-9 9NB));9NBÊÇ´Ëº¯Êı²ÎÊıÖ®Ò»£¬¾ÍÊÇ¶ÔÏóµÄ9µãÖ®Ò»£¨ÒÆ¶¯»ùµãp1£©£¬¸ù¾İ¶ÔÆëĞÎÊ½Ñ¡È¡¡£
+    (cond ((= H-S 0) (setq p2 (list (car p1) (cadr p0))));H-SÒ²ÊÇ²ÎÊıÖ®Ò»£¬¸ù¾İËûÀ´¼ÆËãÒÆ¶¯µÄÄ¿±êµã p2
 	  ((= H-S 1) (setq p2 (list (car p0) (cadr p1))))
-	  ((= H-S 2) (setq p2 p0));åŒå‘å¯¹é½æ—¶ï¼Œé€‰çš„ç‚¹p0å°±æ˜¯ç›®æ ‡ç‚¹p2
+	  ((= H-S 2) (setq p2 p0));Ë«Ïò¶ÔÆëÊ±£¬Ñ¡µÄµãp0¾ÍÊÇÄ¿±êµãp2
 	  )
-    (command "MOVE" ss-name "" "non" p1 "non" p2);ç§»åŠ¨å‘½ä»¤å®Œæˆ
+    (command "MOVE" ss-name "" "non" p1 "non" p2);ÒÆ¶¯ÃüÁîÍê³É
     );while 	
-  (command "-layer" "lo"  suo_str  "");å›ä¸Šé”	
+  (command "-layer" "lo"  suo_str  "");»ØÉÏËø	
   )))
-(defun PL_BK (SS_lst H-S NB NB0 ang / i p0 p1a ss-name ss-9);é€‰é›†ç±»åˆ«-æ’åˆ—å‡½æ•°
+(defun PL_BK (SS_lst H-S NB NB0 ang / i p0 p1a ss-name ss-9);Ñ¡¼¯Àà±ğ-ÅÅÁĞº¯Êı
   (if (setq p0 (getpoint "
-é€‰æ‹©å¯¹é½åŸºç‚¹<é€€å‡º>: "))
+Ñ¡Ôñ¶ÔÆë»ùµã<ÍË³ö>: "))
     (progn
-  (command "-layer" "u" (setq suo_str (layer_suo_str)) "");å¼€é”	
+  (command "-layer" "u" (setq suo_str (layer_suo_str)) "");¿ªËø	
   (setq i -1)	
-  (while (setq ss-name (car (nth (setq i (1+ i)) SS_lst)));æå–è¡¨å…ƒç´ ä¸­çš„ é€‰é›†
+  (while (setq ss-name (car (nth (setq i (1+ i)) SS_lst)));ÌáÈ¡±íÔªËØÖĞµÄ Ñ¡¼¯
     (setq ss-9 (ssadd) ss-9 (ssadd (caddr (nth i SS_lst)) ss-9))
     (setq  p1a (ss9pt ss-9 NB))
     
-    (command "MOVE" ss-name "" "non" p1a "non" p0);ç§»åŠ¨å‘½ä»¤å®Œæˆ
+    (command "MOVE" ss-name "" "non" p1a "non" p0);ÒÆ¶¯ÃüÁîÍê³É
     
-					;(if (not cp_dx1) (setq cp_dx1 cp_dx));è¿™æ˜¯å¯¹è¯æ¡†çš„ä¸€äº›ä»£ç 
+					;(if (not cp_dx1) (setq cp_dx1 cp_dx));ÕâÊÇ¶Ô»°¿òµÄÒ»Ğ©´úÂë
     
-    (setq p0 (polar (ss9pt ss-9 NB0) ang cp_dx))	;è¿™é‡Œæ˜¯è®¡ç®—ä¸‹ä¸€ä¸ªå¯¹è±¡çš„ç§»åŠ¨ç»ˆç‚¹(p0é‡æ–°èµ‹å€¼ï¼Œå¾ªç¯ä½¿ç”¨)
+    (setq p0 (polar (ss9pt ss-9 NB0) ang cp_dx))	;ÕâÀïÊÇ¼ÆËãÏÂÒ»¸ö¶ÔÏóµÄÒÆ¶¯ÖÕµã(p0ÖØĞÂ¸³Öµ£¬Ñ­»·Ê¹ÓÃ)
     );while 
-  (command "-layer" "lo"  suo_str  "");å›ä¸Šé”	
+  (command "-layer" "lo"  suo_str  "");»ØÉÏËø	
   (princ)	
   )))
-(defun mid_pt (p1 p2);;ä¸­å¿ƒå‡½æ•°
+(defun mid_pt (p1 p2);;ÖĞĞÄº¯Êı
   (mapcar'*(mapcar'+ p1 p2)'(0.5 0.5 0.5))
   )
 
-(defun ckb_rec (p1 p2 / p1x p1y p2x p2y p3 rec ss-9);;æ‰‹å·¥é€‰æ‹©å‹¾é€‰é•¿å®½æ¯”å¤„ç†çŸ©å½¢å‡½æ•°
+(defun ckb_rec (p1 p2 / p1x p1y p2x p2y p3 rec ss-9);;ÊÖ¹¤Ñ¡Ôñ¹´Ñ¡³¤¿í±È´¦Àí¾ØĞÎº¯Êı
   (setq p1x (car p1) p1y (cadr p1)
 	p2x (car p2) p2y (cadr p2)
 	)
@@ -605,11 +606,11 @@
   rec	
   )
 
-(defun layer_suo_str (/ laylst_suo lays_jh str);;ä¸Šé”å›¾å±‚åå­—å­—ç¬¦ä¸²ç»„åˆ
-  (setq lays_jh (vla-get-layers (vla-get-activedocument (vlax-get-Acad-Object))));æ–‡æ¡£å›¾å±‚é›†åˆ
+(defun layer_suo_str (/ laylst_suo lays_jh str);;ÉÏËøÍ¼²ãÃû×Ö×Ö·û´®×éºÏ
+  (setq lays_jh (vla-get-layers (vla-get-activedocument (vlax-get-Acad-Object))));ÎÄµµÍ¼²ã¼¯ºÏ
   (vlax-for x lays_jh
 	    (if (= (vla-get-lock x) :vlax-true)		
-		(SETQ laylst_suo (APPEND laylst_suo (LIST (vla-get-Name x)))));ä¸Šé”çš„å›¾å±‚åè¡¨
+		(SETQ laylst_suo (APPEND laylst_suo (LIST (vla-get-Name x)))));ÉÏËøµÄÍ¼²ãÃû±í
 	    )
   (setq str "")
   (foreach x laylst_suo
@@ -618,13 +619,13 @@
   (substr str 2)
   )
 
-(defun chatukuang (tk_blfile / entname gx_list i pick_date pt scale ss_tk ss-9 ss-9a );;æ’å›¾æ¡†ä¸»å‡½æ•°
+(defun chatukuang (tk_blfile / entname gx_list i pick_date pt scale ss_tk ss-9 ss-9a );;²åÍ¼¿òÖ÷º¯Êı
   (command "undo" "be")
-					;(setq tk_BLfile (getfiled "é€‰æ‹©å›¾æ¡†æ–‡ä»¶" "" "dwg" 8))
+					;(setq tk_BLfile (getfiled "Ñ¡ÔñÍ¼¿òÎÄ¼ş" "" "dwg" 8))
   (setvar "INSUNITS" 4)
-  (setq  pick_date (entget (car (entsel "\nç‚¹é€‰çŸ©å½¢æ¡†:"))) GX_list '() GX_list (list (assoc 0 pick_date) (assoc 8 pick_date) (assoc 70 pick_date))) (if (assoc 62 pick_date) (setq GX_list (cons  (assoc 62 pick_date) GX_list)))
+  (setq  pick_date (entget (car (entsel "\nµãÑ¡¾ØĞÎ¿ò:"))) GX_list '() GX_list (list (assoc 0 pick_date) (assoc 8 pick_date) (assoc 70 pick_date))) (if (assoc 62 pick_date) (setq GX_list (cons  (assoc 62 pick_date) GX_list)))
   (if (not pick_date) (quit))
-  (prompt "\né€‰æ‹©è¦å¤„ç†å¯¹è±¡ / å…¨é€‰<ç©ºæ ¼>ï¼š")
+  (prompt "\nÑ¡ÔñÒª´¦Àí¶ÔÏó / È«Ñ¡<¿Õ¸ñ>£º")
   (if (not (setq ss_tk (ssget GX_list))) (setq ss_tk (ssget "x"  GX_list)))
   (setq i -1) 
   (while (setq entname (ssname ss_tk (setq i (1+ i))))
@@ -637,15 +638,15 @@
   (princ)
   )
 
-(defun chatukuang_tuzhong (/ entname gx_list i pick_date pt5a pt5b scale ss_tk ss-9 tukuang_block);;æ’å›¾æ¡†ä¸»å‡½æ•°-å›¾ä¸­å—
+(defun chatukuang_tuzhong (/ entname gx_list i pick_date pt5a pt5b scale ss_tk ss-9 tukuang_block);;²åÍ¼¿òÖ÷º¯Êı-Í¼ÖĞ¿é
   (command "undo" "be")
   (setq tukuang_block (ssget ":s" (list '(0 . "insert"))) pt5a (ss9pt tukuang_block 5))
   (sssetfirst nil tukuang_block) 
-  (setq  pick_date (entget (car (entsel "\nç‚¹é€‰çŸ©å½¢æ¡†:"))) GX_list '() GX_list (list (assoc 0 pick_date) (assoc 8 pick_date) (assoc 70 pick_date))) 
+  (setq  pick_date (entget (car (entsel "\nµãÑ¡¾ØĞÎ¿ò:"))) GX_list '() GX_list (list (assoc 0 pick_date) (assoc 8 pick_date) (assoc 70 pick_date))) 
   (if (not pick_date) (quit))
   (sssetfirst nil nil)
   (if (assoc 62 pick_date) (setq GX_list (cons  (assoc 62 pick_date) GX_list)))
-  (prompt "\né€‰æ‹©è¦å¤„ç†å¯¹è±¡ / å…¨é€‰<ç©ºæ ¼>ï¼š")
+  (prompt "\nÑ¡ÔñÒª´¦Àí¶ÔÏó / È«Ñ¡<¿Õ¸ñ>£º")
   (if (not (setq ss_tk (ssget GX_list))) (setq ss_tk (ssget "x"  GX_list))) 
   (setq i -1) 
   (while (setq entname (ssname ss_tk (setq i (1+ i))))
@@ -662,88 +663,88 @@
   )
 
 
-					;==========================================================================ä¸»å¤„ç†å‡½æ•°
+					;==========================================================================Ö÷´¦Àíº¯Êı
 
-;;å—å›¾æ¡†å¤„ç†ä¸»ç¨‹åº
+;;¿éÍ¼¿ò´¦ÀíÖ÷³ÌĞò
 (defun tukuang_BK (H-S 9NB NB NB0 ang / all_lst all_lst_px entname i ss_tk suo_str tk+tz tk+tz+jdpt_lst tkname) 
   (command "undo" "be")
   (if (= YMK_TMP 0)
-      (progn (setq tkname (cdr (assoc 2 (entget (setq entname (car (entsel "\nç‚¹é€‰å›¾æ¡†å—:")))))))
+      (progn (setq tkname (cdr (assoc 2 (entget (setq entname (car (entsel "\nµãÑ¡Í¼¿ò¿é:")))))))
       (if (not entname) (quit))
-      (prompt "\né€‰æ‹©è¦å¤„ç†å¯¹è±¡ / å…¨é€‰<ç©ºæ ¼>ï¼š")
-	     (if (not (setq ss_tk (ssget (list (cons 0 "INSERT") (cons 2 tkname))))) (setq ss_tk (ssget"x"  (list (cons 0 "INSERT") (cons 2 tkname)))));;å›¾æ¡†å—é€‰é›†(åŒåå—)
+      (prompt "\nÑ¡ÔñÒª´¦Àí¶ÔÏó / È«Ñ¡<¿Õ¸ñ>£º")
+	     (if (not (setq ss_tk (ssget (list (cons 0 "INSERT") (cons 2 tkname))))) (setq ss_tk (ssget"x"  (list (cons 0 "INSERT") (cons 2 tkname)))));;Í¼¿ò¿éÑ¡¼¯(Í¬Ãû¿é)
 	     )
-      (setq ss_tk (ssget (list (cons 0 "INSERT"))));å›¾æ¡†å—é€‰é›†(å¼‚åå—)
+      (setq ss_tk (ssget (list (cons 0 "INSERT"))));Í¼¿ò¿éÑ¡¼¯(ÒìÃû¿é)
       );if 
   (sssetfirst nil ss_tk)
   (setq i -1 tk+tz+jdpt_lst '() ALL_lst '()) 
   (while (setq entname (ssname ss_tk (setq i (1+ i))))
     
-    (setq 	tk+tz (ssget "c" (car (enbox entname)) (cadr (enbox entname))));å•å¼ å›¾çº¸é€‰é›†
-    (setq tk+tz+jdpt_lst	(list tk+tz (car (enbox entname)) entname));;å•å¼ å›¾çº¸é€‰é›†+å·¦ä¸‹è§’ç‚¹+æœ¬å›¾æ¡†å çš„è¡¨
-    (setq ALL_lst (cons tk+tz+jdpt_lst ALL_lst));;å„è‡ªå°è¡¨åˆå¹¶åšå¤§è¡¨
+    (setq 	tk+tz (ssget "c" (car (enbox entname)) (cadr (enbox entname))));µ¥ÕÅÍ¼Ö½Ñ¡¼¯
+    (setq tk+tz+jdpt_lst	(list tk+tz (car (enbox entname)) entname));;µ¥ÕÅÍ¼Ö½Ñ¡¼¯+×óÏÂ½Çµã+±¾Í¼¿òÃû µÄ±í
+    (setq ALL_lst (cons tk+tz+jdpt_lst ALL_lst));;¸÷×ÔĞ¡±íºÏ²¢×ö´ó±í
     
     );while
-  â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– 	
-  (if (= RB_paixuFS 1) (cond ((= H-S 0) (setq ALL_lst_px (vl-sort ALL_lst '(lambda (a b) (< (car (cadr a)) (car (cadr b)))))));;æ¨ªæ’æ—¶æŒ‰å¯¹è±¡1ç‚¹çš„xå€¼å°åˆ°å¤§æ’åºï¼Œå¾—åˆ°æ–°è¡¨
-		             ((= H-S 1) (setq ALL_lst_px (vl-sort ALL_lst '(lambda (a b) (< (cadr (cadr a)) (cadr (cadr b)))))));;ç«–æ’æ—¶æŒ‰å¯¹è±¡1ç‚¹çš„yå€¼å°åˆ°å¤§æ’åºï¼Œå¾—åˆ°æ–°è¡¨
+  ¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö	
+  (if (= RB_paixuFS 1) (cond ((= H-S 0) (setq ALL_lst_px (vl-sort ALL_lst '(lambda (a b) (< (car (cadr a)) (car (cadr b)))))));;ºáÅÅÊ±°´¶ÔÏó1µãµÄxÖµĞ¡µ½´óÅÅĞò£¬µÃµ½ĞÂ±í
+		             ((= H-S 1) (setq ALL_lst_px (vl-sort ALL_lst '(lambda (a b) (< (cadr (cadr a)) (cadr (cadr b)))))));;ÊúÅÅÊ±°´¶ÔÏó1µãµÄyÖµĞ¡µ½´óÅÅĞò£¬µÃµ½ĞÂ±í
 	                     );cond
-      (setq ALL_lst_px (reverse ALL_lst));é€‰æ‹©é¡ºåºæ’åˆ—
+      (setq ALL_lst_px (reverse ALL_lst));Ñ¡ÔñË³ĞòÅÅÁĞ
       );if
-  â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– 	
+  ¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö	
   (if (= cp_xx 0) (DQ_BK ALL_lst_px H-S 9NB) (PL_BK ALL_lst_px H-S NB NB0 ang))	
   (command "undo" "e")
   (princ)	
   )
 
 					;--------------------------------------------------------------------------------
-;;çŸ©å½¢æ¡†å¤„ç†ä¸»ç¨‹åº
+;;¾ØĞÎ¿ò´¦ÀíÖ÷³ÌĞò
 (defun juxing_WL (H-S 9NB NB NB0 ang / all_lst all_lst_px entname gx_list i pick_date ss_tk suo_str tk+tz tk+tz+jdpt_lst) 
   (command "undo" "be")
   (if (= BGX_TMP 0)
-      (progn (setq  pick_date (entget (car (entsel "\nç‚¹é€‰çŸ©å½¢æ¡†:"))) GX_list '() GX_list (list (assoc 0 pick_date) (assoc 8 pick_date) (assoc 70 pick_date))) (if (assoc 62 pick_date) (setq GX_list (cons  (assoc 62 pick_date) GX_list)))
+      (progn (setq  pick_date (entget (car (entsel "\nµãÑ¡¾ØĞÎ¿ò:"))) GX_list '() GX_list (list (assoc 0 pick_date) (assoc 8 pick_date) (assoc 70 pick_date))) (if (assoc 62 pick_date) (setq GX_list (cons  (assoc 62 pick_date) GX_list)))
       (if (not pick_date) (quit))
-      (prompt "\né€‰æ‹©è¦å¤„ç†å¯¹è±¡ / å…¨é€‰<ç©ºæ ¼>ï¼š")
-	     (if (not (setq ss_tk (ssget GX_list))) (setq ss_tk (ssget "x"  GX_list)));;çŸ©å½¢æ¡†é€‰é›†(åŒå±‚ã€åŒè‰²)
+      (prompt "\nÑ¡ÔñÒª´¦Àí¶ÔÏó / È«Ñ¡<¿Õ¸ñ>£º")
+	     (if (not (setq ss_tk (ssget GX_list))) (setq ss_tk (ssget "x"  GX_list)));;¾ØĞÎ¿òÑ¡¼¯(Í¬²ã¡¢Í¬É«)
 	     )
-      (setq ss_tk (ssget (list (cons 0 "LWPOLYLINE") (cons 70 1))));çŸ©å½¢æ¡†é€‰é›†(ä¸å…±æ€§)
+      (setq ss_tk (ssget (list (cons 0 "LWPOLYLINE") (cons 70 1))));¾ØĞÎ¿òÑ¡¼¯(²»¹²ĞÔ)
       );if 
   (sssetfirst nil ss_tk)
 
   (setq i -1 tk+tz+jdpt_lst '() ALL_lst '()) 
   (while (setq entname (ssname ss_tk (setq i (1+ i))))
     
-    (setq 	tk+tz (ssget "c" (car (enbox entname)) (cadr (enbox entname))));å•å¼ å›¾çº¸é€‰é›†
-    (setq tk+tz+jdpt_lst	(list tk+tz (car (enbox entname)) entname));;å•å¼ å›¾çº¸é€‰é›†+å·¦ä¸‹è§’ç‚¹+æœ¬å›¾æ¡†å çš„è¡¨
-    (setq ALL_lst (cons tk+tz+jdpt_lst ALL_lst));;å„è‡ªå°è¡¨åˆå¹¶åšå¤§è¡¨
+    (setq 	tk+tz (ssget "c" (car (enbox entname)) (cadr (enbox entname))));µ¥ÕÅÍ¼Ö½Ñ¡¼¯
+    (setq tk+tz+jdpt_lst	(list tk+tz (car (enbox entname)) entname));;µ¥ÕÅÍ¼Ö½Ñ¡¼¯+×óÏÂ½Çµã+±¾Í¼¿òÃû µÄ±í
+    (setq ALL_lst (cons tk+tz+jdpt_lst ALL_lst));;¸÷×ÔĞ¡±íºÏ²¢×ö´ó±í
     
     );while
-  â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– 
-  (if (= RB_paixuFS 1) (cond ((= H-S 0) (setq ALL_lst_px (vl-sort ALL_lst '(lambda (a b) (< (car (cadr a)) (car (cadr b)))))));;æ¨ªæ’æ—¶æŒ‰å¯¹è±¡1ç‚¹çš„xå€¼å°åˆ°å¤§æ’åºï¼Œå¾—åˆ°æ–°è¡¨
-		             ((= H-S 1) (setq ALL_lst_px (vl-sort ALL_lst '(lambda (a b) (< (cadr (cadr a)) (cadr (cadr b)))))));;ç«–æ’æ—¶æŒ‰å¯¹è±¡1ç‚¹çš„yå€¼å°åˆ°å¤§æ’åºï¼Œå¾—åˆ°æ–°è¡¨
+  ¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö
+  (if (= RB_paixuFS 1) (cond ((= H-S 0) (setq ALL_lst_px (vl-sort ALL_lst '(lambda (a b) (< (car (cadr a)) (car (cadr b)))))));;ºáÅÅÊ±°´¶ÔÏó1µãµÄxÖµĞ¡µ½´óÅÅĞò£¬µÃµ½ĞÂ±í
+		             ((= H-S 1) (setq ALL_lst_px (vl-sort ALL_lst '(lambda (a b) (< (cadr (cadr a)) (cadr (cadr b)))))));;ÊúÅÅÊ±°´¶ÔÏó1µãµÄyÖµĞ¡µ½´óÅÅĞò£¬µÃµ½ĞÂ±í
 	                     );cond
-      (setq ALL_lst_px (reverse ALL_lst));é€‰æ‹©é¡ºåºæ’åˆ—
+      (setq ALL_lst_px (reverse ALL_lst));Ñ¡ÔñË³ĞòÅÅÁĞ
       );if
-  â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– 
+  ¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö
   (if (= cp_xx 0) (DQ_BK ALL_lst_px H-S 9NB) (PL_BK ALL_lst_px H-S NB NB0 ang))	
   (command "undo" "e")
   (princ)	
   )
 
 					;--------------------------------------------------------------------------------
-;;æ‰‹å·¥é€‰æ‹©å¤„ç†ä¸»ç¨‹åº
+;;ÊÖ¹¤Ñ¡Ôñ´¦ÀíÖ÷³ÌĞò
 (defun select_SG (H-S 9NB NB NB0 ang / all_lst all_lst_px entname i p1 p2 rec ss_tk suo_str tk+tz tk+tz+jdpt_lst)
   (command "undo" "be")
   (setq ss_tk (ssadd))
-  (prompt "\næ¯æ¡†é€‰ä¸€æ¬¡ä¸ºä¸€å¼ å›¾ï¼Œå³é”®ç»“æŸé€‰æ‹©ï¼š")	
+  (prompt "\nÃ¿¿òÑ¡Ò»´ÎÎªÒ»ÕÅÍ¼£¬ÓÒ¼ü½áÊøÑ¡Ôñ£º")	
   (if (= CKB_TMP 0)
-      (while (setq p1 (getpoint "\nç‚¹1ï¼š"))
-	(setq p2 (getcorner p1 "\nç‚¹2ï¼š"))
+      (while (setq p1 (getpoint "\nµã1£º"))
+	(setq p2 (getcorner p1 "\nµã2£º"))
 	(command "RECTANG" "non" p1 "non" p2 "CHANGE" (setq rec (entlast)) "" "p" "c" 224 "")
 	(setq ss_tk (ssadd rec ss_tk))
 	);while
-      (while (setq p1 (getpoint "\nç‚¹1ï¼š"))
-	(setq p2 (getcorner p1 "\nç‚¹2ï¼š"))
+      (while (setq p1 (getpoint "\nµã1£º"))
+	(setq p2 (getcorner p1 "\nµã2£º"))
 	(setq ss_tk (ssadd (ckb_rec p1 p2) ss_tk))
 	)		
       );if
@@ -752,46 +753,46 @@
   (setq i -1 tk+tz+jdpt_lst '() ALL_lst '()) 
   (while (setq entname (ssname ss_tk (setq i (1+ i))))
     
-    (setq 	tk+tz (ssget "c" (car (enbox entname)) (cadr (enbox entname))));å•å¼ å›¾çº¸é€‰é›†
-    (setq tk+tz+jdpt_lst	(list tk+tz (car (enbox entname)) entname));;å•å¼ å›¾çº¸é€‰é›†+å·¦ä¸‹è§’ç‚¹+æœ¬å›¾æ¡†å çš„è¡¨
-    (setq ALL_lst (cons tk+tz+jdpt_lst ALL_lst));;å„è‡ªå°è¡¨åˆå¹¶åšå¤§è¡¨
+    (setq 	tk+tz (ssget "c" (car (enbox entname)) (cadr (enbox entname))));µ¥ÕÅÍ¼Ö½Ñ¡¼¯
+    (setq tk+tz+jdpt_lst	(list tk+tz (car (enbox entname)) entname));;µ¥ÕÅÍ¼Ö½Ñ¡¼¯+×óÏÂ½Çµã+±¾Í¼¿òÃû µÄ±í
+    (setq ALL_lst (cons tk+tz+jdpt_lst ALL_lst));;¸÷×ÔĞ¡±íºÏ²¢×ö´ó±í
     
     );while
-  â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– 
-  (if (= RB_paixuFS 1) (cond ((= H-S 0) (setq ALL_lst_px (vl-sort ALL_lst '(lambda (a b) (< (car (cadr a)) (car (cadr b)))))));;æ¨ªæ’æ—¶æŒ‰å¯¹è±¡1ç‚¹çš„xå€¼å°åˆ°å¤§æ’åºï¼Œå¾—åˆ°æ–°è¡¨
-		             ((= H-S 1) (setq ALL_lst_px (vl-sort ALL_lst '(lambda (a b) (< (cadr (cadr a)) (cadr (cadr b)))))));;ç«–æ’æ—¶æŒ‰å¯¹è±¡1ç‚¹çš„yå€¼å°åˆ°å¤§æ’åºï¼Œå¾—åˆ°æ–°è¡¨
+  ¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö
+  (if (= RB_paixuFS 1) (cond ((= H-S 0) (setq ALL_lst_px (vl-sort ALL_lst '(lambda (a b) (< (car (cadr a)) (car (cadr b)))))));;ºáÅÅÊ±°´¶ÔÏó1µãµÄxÖµĞ¡µ½´óÅÅĞò£¬µÃµ½ĞÂ±í
+		             ((= H-S 1) (setq ALL_lst_px (vl-sort ALL_lst '(lambda (a b) (< (cadr (cadr a)) (cadr (cadr b)))))));;ÊúÅÅÊ±°´¶ÔÏó1µãµÄyÖµĞ¡µ½´óÅÅĞò£¬µÃµ½ĞÂ±í
 	                     );cond
-      (setq ALL_lst_px (reverse ALL_lst));é€‰æ‹©é¡ºåºæ’åˆ—
+      (setq ALL_lst_px (reverse ALL_lst));Ñ¡ÔñË³ĞòÅÅÁĞ
       );if
-  â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– 	
+  ¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö	
   (if (= cp_xx 0) (DQ_BK ALL_lst_px H-S 9NB) (PL_BK ALL_lst_px H-S NB NB0 ang))		
   (command "undo" "e")
   (princ)	
   )
 
 					;--------------------------------------------------------------------------------
-;;è‡ªåŠ¨è¯†åˆ«å›¾æ¡†ç”»çŸ©å½¢æ¡†-å¤„ç†ä¸»ç¨‹åº
+;;×Ô¶¯Ê¶±ğÍ¼¿ò»­¾ØĞÎ¿ò-´¦ÀíÖ÷³ÌĞò
 (defun zidongshibie_WL (H-S 9NB NB NB0 ang / all_lst all_lst_px entname gx_list i pick_date ss_tk suo_str tk+tz tk+tz+jdpt_lst) 
   (command "undo" "be")
   
-  (setq ss_tk (maketukuangxian) ss_tk (quchongfu ss_tk));;è‡ªåŠ¨è¯†åˆ«å›¾æ¡†ç”»æ¡†
+  (setq ss_tk (maketukuangxian) ss_tk (quchongfu ss_tk));;×Ô¶¯Ê¶±ğÍ¼¿ò»­¿ò
   (sssetfirst nil ss_tk)	
   
   (setq i -1 tk+tz+jdpt_lst '() ALL_lst '()) 
   (while (setq entname (ssname ss_tk (setq i (1+ i))))
     
-    (setq 	tk+tz (ssget "c" (car (enbox entname)) (cadr (enbox entname))));å•å¼ å›¾çº¸é€‰é›†
-    (setq tk+tz+jdpt_lst	(list tk+tz (car (enbox entname)) entname));;å•å¼ å›¾çº¸é€‰é›†+å·¦ä¸‹è§’ç‚¹+æœ¬å›¾æ¡†å çš„è¡¨
-    (setq ALL_lst (cons tk+tz+jdpt_lst ALL_lst));;å„è‡ªå°è¡¨åˆå¹¶åšå¤§è¡¨
+    (setq 	tk+tz (ssget "c" (car (enbox entname)) (cadr (enbox entname))));µ¥ÕÅÍ¼Ö½Ñ¡¼¯
+    (setq tk+tz+jdpt_lst	(list tk+tz (car (enbox entname)) entname));;µ¥ÕÅÍ¼Ö½Ñ¡¼¯+×óÏÂ½Çµã+±¾Í¼¿òÃû µÄ±í
+    (setq ALL_lst (cons tk+tz+jdpt_lst ALL_lst));;¸÷×ÔĞ¡±íºÏ²¢×ö´ó±í
     
     );while
-  â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– 
-  (if (= RB_paixuFS 1) (cond ((= H-S 0) (setq ALL_lst_px (vl-sort ALL_lst '(lambda (a b) (< (car (cadr a)) (car (cadr b)))))));;æ¨ªæ’æ—¶æŒ‰å¯¹è±¡1ç‚¹çš„xå€¼å°åˆ°å¤§æ’åºï¼Œå¾—åˆ°æ–°è¡¨
-		             ((= H-S 1) (setq ALL_lst_px (vl-sort ALL_lst '(lambda (a b) (< (cadr (cadr a)) (cadr (cadr b)))))));;ç«–æ’æ—¶æŒ‰å¯¹è±¡1ç‚¹çš„yå€¼å°åˆ°å¤§æ’åºï¼Œå¾—åˆ°æ–°è¡¨
+  ¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö
+  (if (= RB_paixuFS 1) (cond ((= H-S 0) (setq ALL_lst_px (vl-sort ALL_lst '(lambda (a b) (< (car (cadr a)) (car (cadr b)))))));;ºáÅÅÊ±°´¶ÔÏó1µãµÄxÖµĞ¡µ½´óÅÅĞò£¬µÃµ½ĞÂ±í
+		             ((= H-S 1) (setq ALL_lst_px (vl-sort ALL_lst '(lambda (a b) (< (cadr (cadr a)) (cadr (cadr b)))))));;ÊúÅÅÊ±°´¶ÔÏó1µãµÄyÖµĞ¡µ½´óÅÅĞò£¬µÃµ½ĞÂ±í
 	                     );cond
-      (setq ALL_lst_px (reverse ALL_lst));é€‰æ‹©é¡ºåºæ’åˆ—
+      (setq ALL_lst_px (reverse ALL_lst));Ñ¡ÔñË³ĞòÅÅÁĞ
       );if
-  â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– 
+  ¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö
   (if (= cp_xx 0) (DQ_BK ALL_lst_px H-S 9NB) (PL_BK ALL_lst_px H-S NB NB0 ang))	
   (command "undo" "e")
   (if (= LB_TMP 5) (command "ERASE" ss_tk ""))
@@ -800,9 +801,9 @@
 
 
 
-;; æ›´æ–°å¢åŠ é˜µåˆ—ä»£ç 0309 â—†â—†â—†â—†â—†â—†â—†â—†â—†â—†â—†â—†â—†â—†â—†â—†â—†â—†â—†â—†â—†â—†â—†â—†â—†â—†â—†â—†â—†â—†â—†â—†â—†â—†â—†â—†â—†â—†â—†â—†â—†â—†â—†â—†â—†â—†â—†â—†â—†â—†â—†â—†â—†â—†â—†â—†â—†â—†â—†â—†â—†â—†â—†â—†
+;; ¸üĞÂÔö¼ÓÕóÁĞ´úÂë0309 ¡ô¡ô¡ô¡ô¡ô¡ô¡ô¡ô¡ô¡ô¡ô¡ô¡ô¡ô¡ô¡ô¡ô¡ô¡ô¡ô¡ô¡ô¡ô¡ô¡ô¡ô¡ô¡ô¡ô¡ô¡ô¡ô¡ô¡ô¡ô¡ô¡ô¡ô¡ô¡ô¡ô¡ô¡ô¡ô¡ô¡ô¡ô¡ô¡ô¡ô¡ô¡ô¡ô¡ô¡ô¡ô¡ô¡ô¡ô¡ô¡ô¡ô¡ô¡ô
 
-(defun zhenlie_PX (lst / zlpx_list);ä»å·¦åˆ°å³ä»ä¸Šåˆ°ä¸‹æ’åº
+(defun zhenlie_PX (lst / zlpx_list);´Ó×óµ½ÓÒ´ÓÉÏµ½ÏÂÅÅĞò
   (setq ZLPX_list (vl-sort (vl-sort lst '(lambda (s1 s2) (> (cadadr s1) (cadadr s2)))) 
 			   '(lambda (s3 s4) (if(equal (cadadr s3) (cadadr s4) 0.6)(< (caadr s3) (caadr s4))))
 			   )
@@ -812,7 +813,7 @@
   )
 
 
-(defun zuo>>you_pl (lst pt d flag / ent_pt entname entname1 i);ä»å·¦åˆ°å³æ¨ªå‘å•æ’å­å‡½æ•°
+(defun zuo>>you_pl (lst pt d flag / ent_pt entname entname1 i);´Ó×óµ½ÓÒºáÏòµ¥ÅÅ×Óº¯Êı
   (command "undo" "be") 
   (setq i -1)
   (repeat (length lst)
@@ -822,32 +823,32 @@
 		
 		);cond
 	  (command "move" entname "" "non" ent_pt  "non" pt)
-	  (cond ((= flag 1) (setq pt (polar pt 0 d))) ;ä¸­>ä¸­
-		((= flag 2) (setq pt (polar pt 0 (+ d (- (car (cadr (enbox entname))) (car (car (enbox entname))))) )))	;è¾¹>è¾¹(å•ä½“)
-		((= flag 3) (setq pt (polar pt 0 (+ d (- (car (cadr (enbox entname1))) (car (car (enbox entname1))))) )))	;è¾¹>è¾¹(é€‰é›†)
+	  (cond ((= flag 1) (setq pt (polar pt 0 d))) ;ÖĞ>ÖĞ
+		((= flag 2) (setq pt (polar pt 0 (+ d (- (car (cadr (enbox entname))) (car (car (enbox entname))))) )))	;±ß>±ß(µ¥Ìå)
+		((= flag 3) (setq pt (polar pt 0 (+ d (- (car (cadr (enbox entname1))) (car (car (enbox entname1))))) )))	;±ß>±ß(Ñ¡¼¯)
 		
 		);cond
 	  )
   (command "undo" "e") 
   )
 
-(defun zhenlie_DT (ZL_w ZL_h ZL_nb JJ_x / all_lst all_lst_px entname entname+jdpt_lst enx gx_list i ii iii p0 pick_date ss ssall x_lst);;å•ä½“é˜µåˆ—ä¸»ç¨‹åº
+(defun zhenlie_DT (ZL_w ZL_h ZL_nb JJ_x / all_lst all_lst_px entname entname+jdpt_lst enx gx_list i ii iii p0 pick_date ss ssall x_lst);;µ¥ÌåÕóÁĞÖ÷³ÌĞò
 
   (command "undo" "be") 
 					;==========================================================================
-					;å•ä½“é€‰æ‹©æ–¹å¼å¤„ç†
+					;µ¥ÌåÑ¡Ôñ·½Ê½´¦Àí
   (cond   ((= LB_TMP 1)
 	   (if (= SX_TMP 1)		    
-	       (progn (setq  pick_date (entget (car (entsel "\nç‚¹é€‰æºå¯¹è±¡:"))) GX_list '())
+	       (progn (setq  pick_date (entget (car (entsel "\nµãÑ¡Ô´¶ÔÏó:"))) GX_list '())
 	       (if (not pick_date) (quit))		      
 		      (if (= (cdr (assoc 0 pick_date)) "INSERT")  
-			  (setq  GX_list (list (assoc 0 pick_date) (assoc 2 pick_date)));å›¾å—ç±»
-			  (progn (setq  GX_list (list (assoc 0 pick_date) (assoc 8 pick_date))) (if (assoc 62 pick_date) (setq GX_list (cons  (assoc 62 pick_date) GX_list))));å…¶ä»–ç±»
+			  (setq  GX_list (list (assoc 0 pick_date) (assoc 2 pick_date)));Í¼¿éÀà
+			  (progn (setq  GX_list (list (assoc 0 pick_date) (assoc 8 pick_date))) (if (assoc 62 pick_date) (setq GX_list (cons  (assoc 62 pick_date) GX_list))));ÆäËûÀà
 			  
-			  );;æ”¶é›†å…±æ€§ç»„ç 
+			  );;ÊÕ¼¯¹²ĞÔ×éÂë
 		      
-		      (prompt "\né€‰æ‹©è¦å¤„ç†å¯¹è±¡ / å…¨é€‰<ç©ºæ ¼>ï¼š")
-		      (if (not (setq ssall (ssget GX_list))) (setq ssall (ssget "x"  GX_list)));;å…±æ€§é€‰é›†(åŒå±‚ã€åŒè‰²)
+		      (prompt "\nÑ¡ÔñÒª´¦Àí¶ÔÏó / È«Ñ¡<¿Õ¸ñ>£º")
+		      (if (not (setq ssall (ssget GX_list))) (setq ssall (ssget "x"  GX_list)));;¹²ĞÔÑ¡¼¯(Í¬²ã¡¢Í¬É«)
 		      
 		      (sssetfirst nil ssall)
 		      (setq    ss ssall)
@@ -860,14 +861,14 @@
   (setq i -1 entname+jdpt_lst '() ALL_lst '()) 
   (if (= t_tog_zhongdian 0)
       (progn (while (setq entname (ssname ss (setq i (1+ i))))			  
-	       (setq entname+jdpt_lst	(list entname (car (enbox entname))));;å•å¯¹è±¡å+å·¦ä¸‹è§’ç‚¹ çš„å°è¡¨
-	       (setq ALL_lst (cons entname+jdpt_lst ALL_lst));;å„è‡ªå°è¡¨åˆå¹¶åšå¤§è¡¨      		
+	       (setq entname+jdpt_lst	(list entname (car (enbox entname))));;µ¥¶ÔÏóÃû+×óÏÂ½Çµã µÄĞ¡±í
+	       (setq ALL_lst (cons entname+jdpt_lst ALL_lst));;¸÷×ÔĞ¡±íºÏ²¢×ö´ó±í      		
 	       );while
 	     (if (= RB_paixuFS 1) 
-		 (setq ALL_lst_px (zhenlie_PX ALL_lst));;è‡ªåŠ¨æ’åºåçš„æ€»è¡¨
-		 (setq ALL_lst_px (reverse ALL_lst));é€‰æ‹©é¡ºåºæ’åº
+		 (setq ALL_lst_px (zhenlie_PX ALL_lst));;×Ô¶¯ÅÅĞòºóµÄ×Ü±í
+		 (setq ALL_lst_px (reverse ALL_lst));Ñ¡ÔñË³ĞòÅÅĞò
 		 );if	
-	     (setq p0 (getpoint "\né€‰æ‹©é˜µåˆ—èµ·ç‚¹<é€€å‡º>: "))
+	     (setq p0 (getpoint "\nÑ¡ÔñÕóÁĞÆğµã<ÍË³ö>: "))
 	     (if (not p0) (quit))
 	     
 	     (setq ii -1 iii 0) 	
@@ -879,25 +880,25 @@
 				  )
 			     );repeat1
 		     (setq X_lst (reverse X_lst))
-		     (cond ((= JJ_x 1) (zuo>>you_pl X_lst p0 ZL_w 1) (setq p0 (polar p0  (* 1.5 pi) ZL_h)));;å¤„ç†ä¸€ä¸ªå°æ¨ªæ’å†è®¡ç®—ä¸‹ä¸€ä¸ªå°æ¨ªæ’åŸºç‚¹--ä¸­>ä¸­ çš„è·ç¦»
-			   ((= JJ_x 2) (zuo>>you_pl X_lst p0 ZL_w 2) (if  (nth  (setq iii  (+ iii ZL_nb)) ALL_lst_px) (setq p0 (polar p0  (* 1.5 pi) (+ ZL_h (- (cadr (cadr (enbox (car (nth  iii ALL_lst_px))))) (cadr (car (enbox (car (nth  iii ALL_lst_px)))))))))));è¾¹>è¾¹ çš„è·ç¦»
+		     (cond ((= JJ_x 1) (zuo>>you_pl X_lst p0 ZL_w 1) (setq p0 (polar p0  (* 1.5 pi) ZL_h)));;´¦ÀíÒ»¸öĞ¡ºáÅÅÔÙ¼ÆËãÏÂÒ»¸öĞ¡ºáÅÅ»ùµã--ÖĞ>ÖĞ µÄ¾àÀë
+			   ((= JJ_x 2) (zuo>>you_pl X_lst p0 ZL_w 2) (if  (nth  (setq iii  (+ iii ZL_nb)) ALL_lst_px) (setq p0 (polar p0  (* 1.5 pi) (+ ZL_h (- (cadr (cadr (enbox (car (nth  iii ALL_lst_px))))) (cadr (car (enbox (car (nth  iii ALL_lst_px)))))))))));±ß>±ß µÄ¾àÀë
 			   
 			   );cond			
 		     );repeat2
-	     );progn-å·¦ä¸‹è§’åŸºç‚¹
+	     );progn-×óÏÂ½Ç»ùµã
       
       
       (progn (while (setq entname (ssname ss (setq i (1+ i))))
 	       
 	       (setq ss-9 (ssadd) ss-9 (ssadd entname ss-9))	 
-	       (setq entname+jdpt_lst	(list entname (ss9pt ss-9 5)));;å•å¯¹è±¡å+ä¸­å¿ƒç‚¹ çš„å°è¡¨
-	       (setq ALL_lst (cons entname+jdpt_lst ALL_lst));;å„è‡ªå°è¡¨åˆå¹¶åšå¤§è¡¨      		
+	       (setq entname+jdpt_lst	(list entname (ss9pt ss-9 5)));;µ¥¶ÔÏóÃû+ÖĞĞÄµã µÄĞ¡±í
+	       (setq ALL_lst (cons entname+jdpt_lst ALL_lst));;¸÷×ÔĞ¡±íºÏ²¢×ö´ó±í      		
 	       );while
 	     (if (= RB_paixuFS 1) 
-		 (setq ALL_lst_px (zhenlie_PX ALL_lst));;è‡ªåŠ¨æ’åºåçš„æ€»è¡¨
-		 (setq ALL_lst_px (reverse ALL_lst));é€‰æ‹©é¡ºåºæ’åº
+		 (setq ALL_lst_px (zhenlie_PX ALL_lst));;×Ô¶¯ÅÅĞòºóµÄ×Ü±í
+		 (setq ALL_lst_px (reverse ALL_lst));Ñ¡ÔñË³ĞòÅÅĞò
 		 );if	
-	     (setq p0 (getpoint "\né€‰æ‹©é˜µåˆ—èµ·ç‚¹<é€€å‡º>: "))
+	     (setq p0 (getpoint "\nÑ¡ÔñÕóÁĞÆğµã<ÍË³ö>: "))
 	     (if (not p0) (quit))
 	     
 	     (setq ii -1 iii 0) 	
@@ -909,12 +910,12 @@
 				  )
 			     );repeat1
 		     (setq X_lst (reverse X_lst))
-		     (cond ((= JJ_x 1) (zuo>>you_pl X_lst p0 ZL_w 1) (setq p0 (polar p0  (* 1.5 pi) ZL_h)));;å¤„ç†ä¸€ä¸ªå°æ¨ªæ’å†è®¡ç®—ä¸‹ä¸€ä¸ªå°æ¨ªæ’åŸºç‚¹--ä¸­>ä¸­ çš„è·ç¦»
-			   ((= JJ_x 2) (zuo>>you_pl X_lst p0 ZL_w 2) (if  (nth  (setq iii  (+ iii ZL_nb)) ALL_lst_px) (setq p0 (polar p0  (* 1.5 pi) (+ (+ ZL_h (/ (- (cadr (cadr (enbox (car (nth  iii ALL_lst_px))))) (cadr (car (enbox (car (nth  iii ALL_lst_px)))))) 2) )  H0)))));è¾¹>è¾¹ çš„è·ç¦»
+		     (cond ((= JJ_x 1) (zuo>>you_pl X_lst p0 ZL_w 1) (setq p0 (polar p0  (* 1.5 pi) ZL_h)));;´¦ÀíÒ»¸öĞ¡ºáÅÅÔÙ¼ÆËãÏÂÒ»¸öĞ¡ºáÅÅ»ùµã--ÖĞ>ÖĞ µÄ¾àÀë
+			   ((= JJ_x 2) (zuo>>you_pl X_lst p0 ZL_w 2) (if  (nth  (setq iii  (+ iii ZL_nb)) ALL_lst_px) (setq p0 (polar p0  (* 1.5 pi) (+ (+ ZL_h (/ (- (cadr (cadr (enbox (car (nth  iii ALL_lst_px))))) (cadr (car (enbox (car (nth  iii ALL_lst_px)))))) 2) )  H0)))));±ß>±ß µÄ¾àÀë
 			   
 			   );cond			
 		     );repeat2
-	     );progn-ä¸­å¿ƒåŸºç‚¹
+	     );progn-ÖĞĞÄ»ùµã
       
       
       )
@@ -922,77 +923,77 @@
   (princ)		
   )
 
-(defun zhenlie_SS (ZL_w ZL_h ZL_nb JJ_x / all_lst all_lst_px entname enx gx_list i ii iii p0 p1 p2 pick_date rec ss ss_tk tk+tz tk+tz+jdpt_lst tkname x_lst);;é€‰é›†é˜µåˆ—ä¸»ç¨‹åº
+(defun zhenlie_SS (ZL_w ZL_h ZL_nb JJ_x / all_lst all_lst_px entname enx gx_list i ii iii p0 p1 p2 pick_date rec ss ss_tk tk+tz tk+tz+jdpt_lst tkname x_lst);;Ñ¡¼¯ÕóÁĞÖ÷³ÌĞò
   (command "undo" "be") 
 					;==========================================================================
-					;åˆ†ç±»åˆ«é€‰æ‹©å¤„ç†
+					;·ÖÀà±ğÑ¡Ôñ´¦Àí
   (cond   ((= LB_TMP 2)
 	   (if (= YMK_TMP 0)
-	       (progn (setq tkname (cdr (assoc 2 (entget (setq entname (car (entsel "\nç‚¹é€‰å›¾æ¡†å—:")))))))
+	       (progn (setq tkname (cdr (assoc 2 (entget (setq entname (car (entsel "\nµãÑ¡Í¼¿ò¿é:")))))))
 	       (if (not entname) (quit))
-	       (prompt "\né€‰æ‹©è¦å¤„ç†å¯¹è±¡ / å…¨é€‰<ç©ºæ ¼>ï¼š")
-		      (if (not (setq ss_tk (ssget (list (cons 0 "INSERT") (cons 2 tkname))))) (setq ss_tk (ssget"x"  (list (cons 0 "INSERT") (cons 2 tkname)))));;å›¾æ¡†å—é€‰é›†(åŒåå—)
+	       (prompt "\nÑ¡ÔñÒª´¦Àí¶ÔÏó / È«Ñ¡<¿Õ¸ñ>£º")
+		      (if (not (setq ss_tk (ssget (list (cons 0 "INSERT") (cons 2 tkname))))) (setq ss_tk (ssget"x"  (list (cons 0 "INSERT") (cons 2 tkname)))));;Í¼¿ò¿éÑ¡¼¯(Í¬Ãû¿é)
 		      )
-	       (setq ss_tk (ssget (list (cons 0 "INSERT"))));å›¾æ¡†å—é€‰é›†(å¼‚åå—)
+	       (setq ss_tk (ssget (list (cons 0 "INSERT"))));Í¼¿ò¿éÑ¡¼¯(ÒìÃû¿é)
 	       );if 
 	   (setq ss ss_tk)
 	   (sssetfirst nil ss)											
-	   );å›¾å—ç±»åˆ«
+	   );Í¼¿éÀà±ğ
 	  
 	  ((= LB_TMP 3)   
 	   (if (= BGX_TMP 0)
-	       (progn (setq  pick_date (entget (car (entsel "\nç‚¹é€‰çŸ©å½¢æ¡†:"))) GX_list '() GX_list (list (assoc 0 pick_date) (assoc 8 pick_date) (assoc 70 pick_date))) (if (assoc 62 pick_date) (setq GX_list (cons  (assoc 62 pick_date) GX_list)))
+	       (progn (setq  pick_date (entget (car (entsel "\nµãÑ¡¾ØĞÎ¿ò:"))) GX_list '() GX_list (list (assoc 0 pick_date) (assoc 8 pick_date) (assoc 70 pick_date))) (if (assoc 62 pick_date) (setq GX_list (cons  (assoc 62 pick_date) GX_list)))
 	       (if (not pick_date) (quit))
-	       (prompt "\né€‰æ‹©è¦å¤„ç†å¯¹è±¡ / å…¨é€‰<ç©ºæ ¼>ï¼š")
-		      (if (not (setq ss_tk (ssget GX_list))) (setq ss_tk (ssget "x"  GX_list)));;çŸ©å½¢æ¡†é€‰é›†(åŒå±‚ã€åŒè‰²)
+	       (prompt "\nÑ¡ÔñÒª´¦Àí¶ÔÏó / È«Ñ¡<¿Õ¸ñ>£º")
+		      (if (not (setq ss_tk (ssget GX_list))) (setq ss_tk (ssget "x"  GX_list)));;¾ØĞÎ¿òÑ¡¼¯(Í¬²ã¡¢Í¬É«)
 		      )
-	       (setq ss_tk (ssget (list (cons 0 "LWPOLYLINE") (cons 70 1))));çŸ©å½¢æ¡†é€‰é›†(ä¸å…±æ€§)
+	       (setq ss_tk (ssget (list (cons 0 "LWPOLYLINE") (cons 70 1))));¾ØĞÎ¿òÑ¡¼¯(²»¹²ĞÔ)
 	       );if 
 	   (setq ss ss_tk)
 	   (sssetfirst nil ss)	
-	   );çŸ©å½¢æ¡†ç±»åˆ«
+	   );¾ØĞÎ¿òÀà±ğ
 	  
 	  ((= LB_TMP 4)    
 	   (setq ss_tk (ssadd))
-	   (prompt "\næ¯æ¡†é€‰ä¸€æ¬¡ä¸ºä¸€å¼ å›¾ï¼Œå³é”®ç»“æŸé€‰æ‹©ï¼š")	
+	   (prompt "\nÃ¿¿òÑ¡Ò»´ÎÎªÒ»ÕÅÍ¼£¬ÓÒ¼ü½áÊøÑ¡Ôñ£º")	
 	   (if (= CKB_TMP 0)
-	       (while (setq p1 (getpoint "\nç‚¹1ï¼š"))
-		 (setq p2 (getcorner p1 "\nç‚¹2ï¼š"))
+	       (while (setq p1 (getpoint "\nµã1£º"))
+		 (setq p2 (getcorner p1 "\nµã2£º"))
 		 (command "RECTANG" "non" p1 "non" p2 "CHANGE" (setq rec (entlast)) "" "p" "c" 224 "")
 		 (setq ss_tk (ssadd rec ss_tk))
 		 );while
-	       (while (setq p1 (getpoint "\nç‚¹1ï¼š"))
-		 (setq p2 (getcorner p1 "\nç‚¹2ï¼š"))
+	       (while (setq p1 (getpoint "\nµã1£º"))
+		 (setq p2 (getcorner p1 "\nµã2£º"))
 		 (setq ss_tk (ssadd (ckb_rec p1 p2) ss_tk))
 		 )		
 	       );if
 	   (setq ss ss_tk)
 	   (sssetfirst nil ss)	
-	   );æ‰‹å·¥æ¡†é€‰ç±»åˆ«	
+	   );ÊÖ¹¤¿òÑ¡Àà±ğ	
 	  
 	  ((= LB_TMP 5)   
 					;(maketukuangxian)
 	   (setq ss (maketukuangxian) ss (quchongfu ss))
 	   (sssetfirst nil ss)	
-	   );è‡ªåŠ¨è¯†åˆ«ç±»åˆ«
+	   );×Ô¶¯Ê¶±ğÀà±ğ
 	  
 	  );cond
 					;==========================================================================		
 					;(setq ss (ssget))
   (setq i -1 tk+tz+jdpt_lst '() ALL_lst '()) 
   (while (setq entname (ssname ss (setq i (1+ i))))
-    (setq 	tk+tz (ssget "c" (car (enbox entname)) (cadr (enbox entname))));å›¾æ¡†,å›¾çº¸å†…å®¹é€‰é›†		
-    (setq tk+tz+jdpt_lst	(list tk+tz (car (enbox entname)) entname));;å›¾æ¡†,å›¾çº¸å†…å®¹é€‰é›†+å·¦ä¸‹è§’ç‚¹+å›¾æ¡†å›¾å…ƒå çš„å•å¼ å°è¡¨
-    (setq ALL_lst (cons tk+tz+jdpt_lst ALL_lst));;å„è‡ªå°è¡¨åˆå¹¶åšå¤§è¡¨      		
+    (setq 	tk+tz (ssget "c" (car (enbox entname)) (cadr (enbox entname))));Í¼¿ò,Í¼Ö½ÄÚÈİÑ¡¼¯		
+    (setq tk+tz+jdpt_lst	(list tk+tz (car (enbox entname)) entname));;Í¼¿ò,Í¼Ö½ÄÚÈİÑ¡¼¯+×óÏÂ½Çµã+Í¼¿òÍ¼ÔªÃû µÄµ¥ÕÅĞ¡±í
+    (setq ALL_lst (cons tk+tz+jdpt_lst ALL_lst));;¸÷×ÔĞ¡±íºÏ²¢×ö´ó±í      		
     );while
   
   (if (= RB_paixuFS 1) 
-      (setq ALL_lst_px (zhenlie_PX ALL_lst));;è‡ªåŠ¨æ’åºåçš„æ€»è¡¨
-      (setq ALL_lst_px (reverse ALL_lst));é€‰æ‹©é¡ºåºæ’åº
+      (setq ALL_lst_px (zhenlie_PX ALL_lst));;×Ô¶¯ÅÅĞòºóµÄ×Ü±í
+      (setq ALL_lst_px (reverse ALL_lst));Ñ¡ÔñË³ĞòÅÅĞò
       );if
-  (setq p0 (getpoint "\né€‰æ‹©é˜µåˆ—èµ·ç‚¹<é€€å‡º>: "))
+  (setq p0 (getpoint "\nÑ¡ÔñÕóÁĞÆğµã<ÍË³ö>: "))
   (if (not p0) (quit))
-  (command "-layer" "u" (setq suo_str (layer_suo_str)) "");å¼€é”
+  (command "-layer" "u" (setq suo_str (layer_suo_str)) "");¿ªËø
   (setq ii -1 iii 0) 	
   (repeat (fix (+ (/ (length ALL_lst_px) (float ZL_nb)) 0.999))
 	  (setq X_lst '())
@@ -1002,8 +1003,8 @@
 		       )
 		  );repeat1
 	  (setq X_lst (reverse X_lst))
-	  (cond ((= JJ_x 1) (zuo>>you_pl X_lst p0 ZL_w 1) (setq p0 (polar p0  (* 1.5 pi) ZL_h)));;å¤„ç†ä¸€ä¸ªå°æ¨ªæ’å†è®¡ç®—ä¸‹ä¸€ä¸ªå°æ¨ªæ’åŸºç‚¹--ä¸­>ä¸­ çš„è·ç¦»
-		((= JJ_x 3) (zuo>>you_pl X_lst p0 ZL_w 3) (if (nth  (setq iii (+ iii ZL_nb)) ALL_lst_px) (setq p0 (polar p0  (* 1.5 pi) (+ ZL_h (- (cadr (cadr (enbox (caddr (nth  iii ALL_lst_px))))) (cadr (car (enbox (caddr (nth  iii ALL_lst_px)))))))))));è¾¹>è¾¹ çš„è·ç¦»			
+	  (cond ((= JJ_x 1) (zuo>>you_pl X_lst p0 ZL_w 1) (setq p0 (polar p0  (* 1.5 pi) ZL_h)));;´¦ÀíÒ»¸öĞ¡ºáÅÅÔÙ¼ÆËãÏÂÒ»¸öĞ¡ºáÅÅ»ùµã--ÖĞ>ÖĞ µÄ¾àÀë
+		((= JJ_x 3) (zuo>>you_pl X_lst p0 ZL_w 3) (if (nth  (setq iii (+ iii ZL_nb)) ALL_lst_px) (setq p0 (polar p0  (* 1.5 pi) (+ ZL_h (- (cadr (cadr (enbox (caddr (nth  iii ALL_lst_px))))) (cadr (car (enbox (caddr (nth  iii ALL_lst_px)))))))))));±ß>±ß µÄ¾àÀë			
 		);cond			
 	  );repeat2	
   (command "undo" "e")
@@ -1012,20 +1013,24 @@
   (princ)		
   )
 
-(defun zhenlie_FUZHI (ZL_nby ZL_nbx ZL_h ZL_w / lastent pt0 pt1 ss);;å¤åˆ¶é˜µåˆ—ä¸»ç¨‹åº
+(defun zhenlie_FUZHI (ZL_nby ZL_nbx ZL_h ZL_w / lastent pt0 pt1 ss);;¸´ÖÆÕóÁĞÖ÷³ÌĞò
   (command "undo" "be")	
-  (setq ss (ssget) pt0 (ss9pt ss 5) pt1 (getpoint "\né€‰å–é˜µåˆ—èµ·ç‚¹/åŸä½<ç©ºæ ¼>ï¼š"))
-  (if (= RB_zhenliejianju 2) (setq ZL_h (if (>= ZL_h 0) (+ ZL_h (distance (ss9pt ss 1) (ss9pt ss 7))) (- ZL_h (distance (ss9pt ss 1) (ss9pt ss 7)))) ZL_w (if (>= ZL_w 0) (+ ZL_w (distance (ss9pt ss 1) (ss9pt ss 3))) (- ZL_w (distance (ss9pt ss 1) (ss9pt ss 3)))))) 	 
-  (if pt1 (command "move" ss "" "non" pt0 "non" pt1))	
-  (command "ARRAY" ss "" "r" ZL_nby ZL_nbx ZL_h ZL_w)
-  (command "undo" "e")
-  (princ)	
+  (if (setq ss (ssget))
+      (progn
+	(setq pt0 (ss9pt ss 5) pt1 (getpoint "\nÑ¡È¡ÕóÁĞÆğµã/Ô­Î»<¿Õ¸ñ>£º"))
+	(if (= RB_zhenliejianju 2) (setq ZL_h (if (>= ZL_h 0) (+ ZL_h (distance (ss9pt ss 1) (ss9pt ss 7))) (- ZL_h (distance (ss9pt ss 1) (ss9pt ss 7)))) ZL_w (if (>= ZL_w 0) (+ ZL_w (distance (ss9pt ss 1) (ss9pt ss 3))) (- ZL_w (distance (ss9pt ss 1) (ss9pt ss 3))))))
+	(if pt1 (command "move" ss "" "non" pt0 "non" pt1))
+	(command "ARRAY" ss "" "r" ZL_nby ZL_nbx ZL_h ZL_w)
+	(command "undo" "e")
+    )
+  )
+  (princ)
   )
 
 
-(defun maketukuangxian (/ bound e entx gx_list i lastent lst pick_date rects ss ss_last);;è‡ªåŠ¨è¯†åˆ«å›¾æ¡†ç”»çŸ©å½¢æ¡†å­å‡½æ•°
+(defun maketukuangxian (/ bound e entx gx_list i lastent lst pick_date rects ss ss_last);;×Ô¶¯Ê¶±ğÍ¼¿ò»­¾ØĞÎ¿ò×Óº¯Êı
 
-  (if (= zdSX_TMP 0) (progn (setq  pick_date (entget (car (entsel "\nç‚¹é€‰å›¾æ¡†æœ€å¤–è¾¹æ¡†:"))) GX_list '() GX_list (list (assoc 0 pick_date) (assoc 8 pick_date) ))
+  (if (= zdSX_TMP 0) (progn (setq  pick_date (entget (car (entsel "\nµãÑ¡Í¼¿ò×îÍâ±ß¿ò:"))) GX_list '() GX_list (list (assoc 0 pick_date) (assoc 8 pick_date) ))
   (if (not pick_date) (quit))
   (setq ss (ssget GX_list)));progn
       (setq ss (ssget '((0 . "LWPOLYLINE,INSERT"))))
@@ -1033,16 +1038,16 @@
   
   (repeat (setq i (sslength ss))
 	  (setq e (ssname ss (setq i (1- i))))
-	  (setq lst (cons (ebox e) lst)) ;_æå–è¾¹ç•Œå¯¹è§’ç‚¹ï¼Œä¸ç”Ÿäº§çŸ©å½¢
+	  (setq lst (cons (ebox e) lst)) ;_ÌáÈ¡±ß½ç¶Ô½Çµã£¬²»Éú²ú¾ØĞÎ
 	  )
-  (setq lst (vl-sort lst '(lambda (x1 x2) (> (area x1) (area x2))))) ;_æŒ‰é¢ç§¯å¤§å°æ’åº
+  (setq lst (vl-sort lst '(lambda (x1 x2) (> (area x1) (area x2))))) ;_°´Ãæ»ı´óĞ¡ÅÅĞò
   (while lst
-    (setq rects (cons (car lst) rects)) ;_çŸ©å½¢å¯¹è§’ç‚¹é›†
-    (setq bound (pt4 (car lst))) ;_çŸ©å½¢è¾¹ç•Œ
-    (setq lst (vl-remove-if '(lambda (x) (and (PtInPoly (car x) bound) (PtInPoly (cadr x) bound))) (cdr lst))) ;_ç§»é™¤å¤§çŸ©å½¢è¾¹ç•Œå†…çš„å°çŸ©å½¢
+    (setq rects (cons (car lst) rects)) ;_¾ØĞÎ¶Ô½Çµã¼¯
+    (setq bound (pt4 (car lst))) ;_¾ØĞÎ±ß½ç
+    (setq lst (vl-remove-if '(lambda (x) (and (PtInPoly (car x) bound) (PtInPoly (cadr x) bound))) (cdr lst))) ;_ÒÆ³ı´ó¾ØĞÎ±ß½çÄÚµÄĞ¡¾ØĞÎ
     )
   (setq lastent (entlast) ss_last (ssadd))
-  (mapcar '(lambda (x) (command "rectang" (car x) (cadr x))) rects) ;_æ‰¹é‡ç”ŸæˆçŸ©å½¢
+  (mapcar '(lambda (x) (command "rectang" (car x) (cadr x))) rects) ;_ÅúÁ¿Éú³É¾ØĞÎ
   (while (setq entx (entnext lastent))
     (setq ss_last (ssadd entx ss_last) lastent entx)
     )
@@ -1055,15 +1060,16 @@
   (and (= 'ename (type e)) (setq e (vlax-ename->vla-object e)))
   (if (vl-catch-all-error-p (vl-catch-all-apply 'vlax-invoke-method (list e 'GetBoundingBox 'pa 'pb)))
     (setq pa nil pb nil))
-  (setq pa (trans (vlax-safearray->list pa) 0 1)
-        pb (trans (vlax-safearray->list pb) 0 1)
-	)
-  (list pa pb)
+  (if pa
+      (progn
+        (setq pa (trans (vlax-safearray->list pa) 0 1)
+              pb (trans (vlax-safearray->list pb) 0 1))
+        (list pa pb)))
   )
-(defun area (pts) (apply '* (cdr (reverse (apply 'mapcar (cons '- pts)))))) ;_æ±‚é¢ç§¯
+(defun area (pts) (apply '* (cdr (reverse (apply 'mapcar (cons '- pts)))))) ;_ÇóÃæ»ı
 (defun pt4 (pt2)
   (list (car pt2) (list (caadr pt2) (cadar pt2)) (cadr pt2) (list (caar pt2) (cadadr pt2)))
-  ) ;_å¯¹è§’ç‚¹ç”Ÿæˆå››è§’ç‚¹
+  ) ;_¶Ô½ÇµãÉú³ÉËÄ½Çµã
 (defun PtInPoly (pt pts)
   (equal pi
          (abs
@@ -1071,7 +1077,7 @@
           )
          1e-6
 	 )
-  ) ;_ç‚¹æ˜¯å¦åœ¨å‡¸å¤šè¾¹å½¢å†…ï¼ˆè§’åº¦æ³•ï¼‰
+  ) ;_µãÊÇ·ñÔÚÍ¹¶à±ßĞÎÄÚ£¨½Ç¶È·¨£©
 
 (defun quchongfu (ss / ent ent1 i ii pt pt1) 
   (setq i -1 ss1 (ssadd)) 
@@ -1090,38 +1096,38 @@
 
 
 ;;;=================================================================*
-;;;ç”Ÿæˆæ—¥æœŸï¼š20200318.175218
-;;;æœ¬æ–‡ä»¶ç”±ç¨‹åºè‡ªåŠ¨ç”Ÿæˆã€‚                                           *
-;;;ç¨‹åºç”Ÿæˆå®Œæˆåéœ€å°†ä¸»ä»£ç â€œ*.lspâ€æ–‡ä»¶ä¸­çš„è¯­å¥ä¸­çš„     *
-;;; (load_dialog åŒå¼•å·*.DclåŒå¼•å·)æ”¹ä¸º(load_dialog (make-dcl)) æ–¹å¯ç”¨            *
-;;;ä¿®æ”¹åçš„ä»£ç å¯ç¼–è¾‘åˆ°ä¸»LISPç¨‹åºåæ–¹è¿è¡Œ                                                                 *
+;;;Éú³ÉÈÕÆÚ£º20200318.175218
+;;;±¾ÎÄ¼şÓÉ³ÌĞò×Ô¶¯Éú³É¡£                                           *
+;;;³ÌĞòÉú³ÉÍê³ÉºóĞè½«Ö÷´úÂë¡°*.lsp¡±ÎÄ¼şÖĞµÄÓï¾äÖĞµÄ     *
+;;; (load_dialog Ë«ÒıºÅ*.DclË«ÒıºÅ)¸ÄÎª(load_dialog (make-dcl)) ·½¿ÉÓÃ            *
+;;;ĞŞ¸ÄºóµÄ´úÂë¿É±à¼­µ½Ö÷LISP³ÌĞòºó·½ÔËĞĞ                                                                 *
 ;;;=================================================================*
-;;;ä¸ºèƒ½è®©å¤šä¸ªæœ‰æœ¬ç¨‹åºç”Ÿæˆçš„DCL.lspå¯ä»¥åŒæ—¶ä½¿ç”¨ï¼Œç”Ÿæˆç¨‹åºååº”å°†å¯¹è¯æ¡†å (make-dcl)æ”¹å   *
-;;;ä¾›éœ€ä¿®æ”¹ä¸¤å¤„åœ°æ–¹ï¼Œä¸€å¤„ä¸ºåŠ è½½çš„åœ°æ–¹(load_dialog (ï¼Ÿï¼Ÿï¼Ÿ-make-dcl)) ï¼Œå¦ä¸€å¤„ä¸º       *
-;;;å¯¹è¯æ¡†ä¸»ç¨‹åºå(defun ï¼Ÿï¼Ÿï¼Ÿ-make-dcl    ï¼Œä¸€å®šè¦ä¸€è‡´                      *
-;;;ç¤ºä¾‹ï¼š(make-dcl)                                                 *
+;;;ÎªÄÜÈÃ¶à¸öÓĞ±¾³ÌĞòÉú³ÉµÄDCL.lsp¿ÉÒÔÍ¬Ê±Ê¹ÓÃ£¬Éú³É³ÌĞòºóÓ¦½«¶Ô»°¿òÃû (make-dcl)¸ÄÃû   *
+;;;¹©ĞèĞŞ¸ÄÁ½´¦µØ·½£¬Ò»´¦Îª¼ÓÔØµÄµØ·½(load_dialog (£¿£¿£¿-make-dcl)) £¬ÁíÒ»´¦Îª       *
+;;;¶Ô»°¿òÖ÷³ÌĞòÃû(defun £¿£¿£¿-make-dcl    £¬Ò»¶¨ÒªÒ»ÖÂ                      *
+;;;Ê¾Àı£º(make-dcl)                                                 *
 (defun make-dcl-pl  (/ lst_str str file f)
   (setq lst_str '(
-		  "/*â˜…â˜…â˜…â˜…â˜…ListDCL @ fsxm.mjtd.comâ˜…â˜…â˜…â˜…â˜…*/"
+		  "/*¡ï¡ï¡ï¡ï¡ïListDCL @ fsxm.mjtd.com¡ï¡ï¡ï¡ï¡ï*/"
 		  ""
 		  "rect01:dialog {"
-		  "    label = \"ã€å¯¹é½/æ’åˆ—/å›¾æ¡†æ’ç‰ˆã€‘ST0318\" ;"
+		  "    label = \"¡¾¶ÔÆë/ÅÅÁĞ/Í¼¿òÅÅ°æ¡¿ST0318\" ;"
 		  "    :spacer {}"
 		  "    :row {"
 		  "        :boxed_column {"
 		  "            key = \"k_paixuFS\" ;"
-		  "            label = \"æ’åºæ–¹å¼\" ;"
+		  "            label = \"ÅÅĞò·½Ê½\" ;"
 		  "            :radio_button {"
 		  "                key = \"k_rb_zidong\" ;"
-		  "                label = \"è‡ªåŠ¨\" ;"
+		  "                label = \"×Ô¶¯\" ;"
 		  "            }"
 		  "            :radio_button {"
 		  "                key = \"k_rb_xuanxu\" ;"
-		  "                label = \"é€‰åº\" ;"
+		  "                label = \"Ñ¡Ğò\" ;"
 		  "            }"
 		  "        }"
 		  "        :boxed_column {"
-		  "            label = \"é€‰å–æ–¹å¼\" ;"
+		  "            label = \"Ñ¡È¡·½Ê½\" ;"
 		  "            :row {"
 		  "                key = \"k_no1\" ;"
 		  "                :spacer {"
@@ -1129,27 +1135,27 @@
 		  "                }"
 		  "                :radio_button {"
 		  "                    key = \"xlb1\" ;"
-		  "                    label = \"å•ä½“\" ;"
+		  "                    label = \"µ¥Ìå\" ;"
 		  "                }"
 		  "                :spacer {}"
 		  "                :radio_button {"
 		  "                    key = \"xlb2\" ;"
-		  "                    label = \"å—å›¾æ¡†\" ;"
+		  "                    label = \"¿éÍ¼¿ò\" ;"
 		  "                }"
 		  "                :spacer {}"
 		  "                :radio_button {"
 		  "                    key = \"xlb3\" ;"
-		  "                    label = \"çŸ©å½¢æ¡†\" ;"
+		  "                    label = \"¾ØĞÎ¿ò\" ;"
 		  "                }"
 		  "                :spacer {}"
 		  "                :radio_button {"
 		  "                    key = \"xlb4\" ;"
-		  "                    label = \"æ‰‹å·¥é€‰\" ;"
+		  "                    label = \"ÊÖ¹¤Ñ¡\" ;"
 		  "                }"
 		  "                :spacer {}"
 		  "                :radio_button {"
 		  "                    key = \"xlb5\" ;"
-		  "                    label = \"è‡ªåŠ¨\" ;"
+		  "                    label = \"×Ô¶¯\" ;"
 		  "                }"
 		  "            }"
 		  "            :row {"
@@ -1159,27 +1165,27 @@
 		  "                }"
 		  "                :toggle {"
 		  "                    key = \"toggle_sx\" ;"
-		  "                    label = \"é€Ÿé€‰\" ;"
+		  "                    label = \"ËÙÑ¡\" ;"
 		  "                }"
 		  "                :spacer {}"
 		  "                :toggle {"
 		  "                    key = \"toggle_ymk\" ;"
-		  "                    label = \"å¼‚åå—\" ;"
+		  "                    label = \"ÒìÃû¿é\" ;"
 		  "                }"
 		  "                :spacer {}"
 		  "                :toggle {"
 		  "                    key = \"toggle_bgx\" ;"
-		  "                    label = \"éå…±æ€§\" ;"
+		  "                    label = \"·Ç¹²ĞÔ\" ;"
 		  "                }"
 		  "                :spacer {}"
 		  "                :toggle {"
 		  "                    key = \"toggle_ckb\" ;"
-		  "                    label = \"è¾¹æ¡†æ¯”\" ;"
+		  "                    label = \"±ß¿ò±È\" ;"
 		  "                }"
 		  "                :spacer {}"
 		  "                :toggle {"
 		  "                    key = \"toggle_sx2\" ;"
-		  "                    label = \"é€Ÿé€‰\" ;"
+		  "                    label = \"ËÙÑ¡\" ;"
 		  "                }"
 		  "            }"
 		  "        }"
@@ -1194,80 +1200,80 @@
 		  "            :row {"
 		  "                :row {"
 		  "                    key = \"row_sxdq\" ;"
-		  "                    label = \"åŒå‘å¯¹é½\" ;"
+		  "                    label = \"Ë«Ïò¶ÔÆë\" ;"
 		  "                    :column {"
 		  "                        :button {"
 		  "                            key = \"dtpl7\" ;"
-		  "                            label = \"â•”\" ;"
+		  "                            label = \"¨X\" ;"
 		  "                        }"
 		  "                        :button {"
 		  "                            key = \"dtpl8\" ;"
-		  "                            label = \"â• \" ;"
+		  "                            label = \"¨d\" ;"
 		  "                        }"
 		  "                        :button {"
 		  "                            key = \"dtpl9\" ;"
-		  "                            label = \"â•š\" ;"
+		  "                            label = \"¨^\" ;"
 		  "                        }"
 		  "                    }"
 		  "                    :column {"
 		  "                        :button {"
 		  "                            key = \"dtpl10\" ;"
-		  "                            label = \"â•¦\" ;"
+		  "                            label = \"¨j\" ;"
 		  "                        }"
 		  "                        :button {"
 		  "                            key = \"dtpl11\" ;"
-		  "                            label = \"â•¬\" ;"
+		  "                            label = \"¨p\" ;"
 		  "                        }"
 		  "                        :button {"
 		  "                            key = \"dtpl12\" ;"
-		  "                            label = \"â•©\" ;"
+		  "                            label = \"¨m\" ;"
 		  "                        }"
 		  "                    }"
 		  "                    :column {"
 		  "                        :button {"
 		  "                            key = \"dtpl13\" ;"
-		  "                            label = \"â•—\" ;"
+		  "                            label = \"¨[\" ;"
 		  "                        }"
 		  "                        :button {"
 		  "                            key = \"dtpl14\" ;"
-		  "                            label = \"â•£\" ;"
+		  "                            label = \"¨g\" ;"
 		  "                        }"
 		  "                        :button {"
 		  "                            key = \"dtpl15\" ;"
-		  "                            label = \"â•\" ;"
+		  "                            label = \"¨a\" ;"
 		  "                        }"
 		  "                    }"
 		  "                }"
 		  "                :column {"
 		  "                    key = \"k_shuipingduiqi\" ;"
-		  "                    label = \"æ°´å¹³å¯¹é½\" ;"
+		  "                    label = \"Ë®Æ½¶ÔÆë\" ;"
 		  "                    :button {"
 		  "                        key = \"dtpl1\" ;"
-		  "                        label = \"â”³\" ;"
+		  "                        label = \"©×\" ;"
 		  "                    }"
 		  "                    :button {"
 		  "                        key = \"dtpl2\" ;"
-		  "                        label = \"â”\" ;"
+		  "                        label = \"©¥\" ;"
 		  "                    }"
 		  "                    :button {"
 		  "                        key = \"dtpl3\" ;"
-		  "                        label = \"â”»\" ;"
+		  "                        label = \"©ß\" ;"
 		  "                    }"
 		  "                }"
 		  "                :column {"
 		  "                    key = \"k_chuizhiduiqi\" ;"
-		  "                    label = \"å‚ç›´å¯¹é½\" ;"
+		  "                    label = \"´¹Ö±¶ÔÆë\" ;"
 		  "                    :button {"
 		  "                        key = \"dtpl4\" ;"
-		  "                        label = \"â”£\" ;"
+		  "                        label = \"©Ç\" ;"
 		  "                    }"
 		  "                    :button {"
 		  "                        key = \"dtpl5\" ;"
-		  "                        label = \"â”ƒ\" ;"
+		  "                        label = \"©§\" ;"
 		  "                    }"
 		  "                    :button {"
 		  "                        key = \"dtpl6\" ;"
-		  "                        label = \"â”«\" ;"
+		  "                        label = \"©Ï\" ;"
 		  "                    }"
 		  "                }"
 		  "            }"
@@ -1281,21 +1287,21 @@
 		  "                    :toggle {"
 		  "                        alignment = centered ;"
 		  "                        key = \"cp_x\" ;"
-		  "                        label = \"ç­‰è·é‡æ’\" ;"
+		  "                        label = \"µÈ¾àÖØÅÅ\" ;"
 		  "                    }"
 		  "                }"
 		  "                :column {"
 		  "                    :edit_box {"
 		  "                        alignment = top ;"
 		  "                        key = \"cp_d\" ;"
-		  "                        label = \"é—´è·:\" ;"
+		  "                        label = \"¼ä¾à:\" ;"
 		  "                    }"
 		  "                }"
 		  "                :column {"
 		  "                    :button {"
 		  "                        alignment = top ;"
 		  "                        key = \"dxjj\" ;"
-		  "                        label = \"ç‚¹é€‰å®šè·\" ;"
+		  "                        label = \"µãÑ¡¶¨¾à\" ;"
 		  "                    }"
 		  "                }"
 		  "                :spacer {}"
@@ -1303,72 +1309,72 @@
 		  "        }"
 		  "        :column {"
 		  "            :row {"
-		  "                label = \"é˜µåˆ—\" ;"
+		  "                label = \"ÕóÁĞ\" ;"
 		  "                :column {"
 		  "                    :row {"
 		  "                        :text {"
-		  "                            label = \"æ–¹å¼:\" ;"
+		  "                            label = \"·½Ê½:\" ;"
 		  "                        }"
 		  "                        :radio_button {"
 		  "                            key = \"k_rb_chongpaizhenlie\" ;"
-		  "                            label = \"é‡æ’é˜µåˆ—\" ;"
+		  "                            label = \"ÖØÅÅÕóÁĞ\" ;"
 		  "                        }"
 		  "                        :radio_button {"
 		  "                            key = \"k_rb_fuzhizhenlie\" ;"
-		  "                            label = \"å¤åˆ¶é˜µåˆ—\" ;"
+		  "                            label = \"¸´ÖÆÕóÁĞ\" ;"
 		  "                        }"
 		  "                    }"
 		  "                    :row {"
 		  "                        :edit_box {"
 		  "                            key = \"k_hengju\" ;"
-		  "                            label = \"æ¨ªè·:\" ;"
+		  "                            label = \"ºá¾à:\" ;"
 		  "                        }"
 		  "                        :edit_box {"
 		  "                            key = \"k_hengshu\" ;"
-		  "                            label = \"ä¸ªæ•°:\" ;"
+		  "                            label = \"¸öÊı:\" ;"
 		  "                        }"
 		  "                    }"
 		  "                    :row {"
 		  "                        :edit_box {"
 		  "                            key = \"k_shuju\" ;"
-		  "                            label = \"ç«–è·:\" ;"
+		  "                            label = \"Êú¾à:\" ;"
 		  "                        }"
 		  "                        :edit_box {"
 		  "                            key = \"k_shushu\" ;"
-		  "                            label = \"ä¸ªæ•°:\" ;"
+		  "                            label = \"¸öÊı:\" ;"
 		  "                        }"
 		  "                    }"
 		  "                    :spacer {}"
 		  "                    :row {"
 		  "                        :text {"
-		  "                            label = \"ç®—æ³•:\" ;"
+		  "                            label = \"Ëã·¨:\" ;"
 		  "                        }"
 		  "                        :radio_button {"
 		  "                            key = \"k_rb_zhongzhong\" ;"
-		  "                            label = \"ç‚¹<->ç‚¹\" ;"
+		  "                            label = \"µã<->µã\" ;"
 		  "                        }"
 		  "                        :spacer {}"
 		  "                        :radio_button {"
 		  "                            key = \"k_rb_bianbian\" ;"
-		  "                            label = \"è¾¹<->è¾¹\" ;"
+		  "                            label = \"±ß<->±ß\" ;"
 		  "                        }"
 		  "                        :spacer {}"
 		  "                    }"
 		  "                    :row {"
 		  "                        :text {"
-		  "                            label = \"åŸºç‚¹:\" ;"
+		  "                            label = \"»ùµã:\" ;"
 		  "                        }"
 		  "                        :toggle {"
 		  "                            key = \"k_tog_zhongdian\" ;"
-		  "                            label = \"ä¸­ç‚¹\" ;"
+		  "                            label = \"ÖĞµã\" ;"
 		  "                        }"
 		  "                        :button {"
 		  "                            key = \"k_bt_dianxuan\" ;"
-		  "                            label = \"é€‰è·\" ;"
+		  "                            label = \"Ñ¡¾à\" ;"
 		  "                        }"
 		  "                        :button {"
 		  "                            key = \"k_zlqueding\" ;"
-		  "                            label = \"ç¡®å®š\" ;"
+		  "                            label = \"È·¶¨\" ;"
 		  "                        }"
 		  "                    }"
 		  "                }"
@@ -1377,29 +1383,29 @@
 		  "    }"
 		  "    :spacer {}"
 		  "    :column {"
-		  "        label = \"æ’å›¾æ¡†\" ;"
+		  "        label = \"²åÍ¼¿ò\" ;"
 		  "        :row {"
 		  "            :spacer {}"
 		  "            :radio_button {"
 		  "                key = \"k_moren\" ;"
-		  "                label = \"é»˜è®¤å›¾å—\" ;"
+		  "                label = \"Ä¬ÈÏÍ¼¿é\" ;"
 		  "            }"
 		  "            :radio_button {"
 		  "                key = \"k_tuzhong\" ;"
-		  "                label = \"å›¾ä¸­é€‰å—\" ;"
+		  "                label = \"Í¼ÖĞÑ¡¿é\" ;"
 		  "            }"
 		  "            :radio_button {"
 		  "                key = \"k_chawenjian\" ;"
-		  "                label = \"æ’å—æ–‡ä»¶ >>>\" ;"
+		  "                label = \"²å¿éÎÄ¼ş >>>\" ;"
 		  "            }"
 		  "            :button {"
 		  "                key = \"k_liulan\" ;"
-		  "                label = \"æµè§ˆ\" ;"
+		  "                label = \"ä¯ÀÀ\" ;"
 		  "            }"
 		  "            :button {"
 		  "                alignment = right ;"
 		  "                key = \"k_ctk\" ;"
-		  "                label = \"æ’å›¾æ¡†\" ;"
+		  "                label = \"²åÍ¼¿ò\" ;"
 		  "            }"
 		  "        }"
 		  "        :text {"
@@ -1410,7 +1416,7 @@
 		  "    }"
 		  "    :row {"
 		  "        :text {"
-		  "            value = \"æ³¨:1,å›¾æ¡†ä¸èƒ½äº¤å‰.  2, æ’å…¥çš„å›¾æ¡†æ–‡ä»¶å°ºå¯¸:594x420mm.\" ;"
+		  "            value = \"×¢:1,Í¼¿ò²»ÄÜ½»²æ.  2, ²åÈëµÄÍ¼¿òÎÄ¼ş³ß´ç:594x420mm.\" ;"
 		  "        }"
 		  "        cancel_button;"
 		  "    }"
@@ -1424,6 +1430,6 @@
 	   (princ str f)
 	   )
   (close f)
-  ;;è¿”å›
+  ;;·µ»Ø
   file
   )

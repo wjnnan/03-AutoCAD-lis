@@ -1,5 +1,5 @@
 (defun re:match (pattern string / regex s pos len str l flags)
-  "æ­£åˆ™è¡¨è¾¾å¼åŒ¹é…ç´¢å­—ä¸². pattern ä¸ºä»¥/å¼€å¤´åŠä»¥/+ä¿®é¥°ç¬¦ç»“å°¾çš„å­—ä¸²ï¼Œ\\ éœ€å†™æˆ \\\\ å½¢å¼ã€‚"
+  "ÕıÔò±í´ïÊ½Æ¥ÅäË÷×Ö´®. pattern ÎªÒÔ/¿ªÍ·¼°ÒÔ/+ĞŞÊÎ·û½áÎ²µÄ×Ö´®£¬\\ ĞèĞ´³É \\\\ ĞÎÊ½¡£"
   "List"
   "(re:match \"/ab/g\" \"cabcdabcd\")"
   (setq lst-p (string:to-list pattern "/"))

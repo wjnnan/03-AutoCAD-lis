@@ -1,5 +1,5 @@
 (defun matrix:vxs (v s)
-    "å‘é‡ä¹˜æ ‡é‡(ç³»æ•°)"
+    "ÏòÁ¿³Ë±êÁ¿(ÏµÊý)"
     (mapcar (quote (lambda (n)
                 (* n s)))
         v))

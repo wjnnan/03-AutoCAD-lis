@@ -1,5 +1,5 @@
 (defun @layout:ssgetx (layout)
-  "é€‰æ‹©å¸ƒå±€ä¸­é™¤ä¸»è§†å£ä¸ªçš„æ‰€æœ‰å›¾å…ƒ"
+  "Ñ¡Ôñ²¼¾ÖÖĞ³ıÖ÷ÊÓ¿Ú¸öµÄËùÓĞÍ¼Ôª"
   (ssget "x" (list (cons 410 layout)
 		   '(-4 . "<NOT")'(-4 . "<AND")
 		   '(0 . "viewport")'(69 . 1)
@@ -22,10 +22,10 @@
 	(setq pt-lb (polar pt-lb 0(* 1.1 (- (caadr box) (caar box)))))
 	))))
 (defun @layout:merge-selelected (/ merge-layout)
-  "åˆå¹¶é€‰ä¸­çš„å¸ƒå±€å†…å®¹åˆ°é€‰ä¸­çš„ç¬¬ä¸€ä¸ªå¸ƒå±€ä¸­ã€‚"
+  "ºÏ²¢Ñ¡ÖĞµÄ²¼¾ÖÄÚÈİµ½Ñ¡ÖĞµÄµÚÒ»¸ö²¼¾ÖÖĞ¡£"
   (setq layouts (layout:vla-list))
   (setq layoutnames (mapcar 'vla-get-name layouts))
-  (setq layouts-sel (reverse(ui:select-multi"è¯·é€‰æ‹©è¦åˆå¹¶çš„å¸ƒå±€"layoutnames)))
+  (setq layouts-sel (reverse(ui:select-multi"ÇëÑ¡ÔñÒªºÏ²¢µÄ²¼¾Ö"layoutnames)))
   
   (setq layoutname1 (car layouts-sel))
   
@@ -43,17 +43,17 @@
    (@layout:inner-merge-layout layout%))
   (vla-purgeall *DOC*)
   
-  ;; æ‰“å¼€æ‰€æœ‰è§†å£
+  ;; ´ò¿ªËùÓĞÊÓ¿Ú
   (setq ss (ssget "x"
 		  (list '(0 . "viewport")
 			'(-4 . "<NOT")'(69 . 1)'(-4 . "NOT>"))))
   (mapcar '(lambda(x)
-	    (vla-put-viewporton x :vlax-true))
+	    (vl-catch-all-apply 'vla-put-viewporton (list x :vlax-true)))
 	  (pickset:to-vlalist ss))
   (setvar "ctab" layoutname1)
   (princ))
 (defun @layout:merge (/ merge-layout)
-  "åˆå¹¶å¸ƒå±€å†…å®¹åˆ°ç¬¬ä¸€ä¸ªå¸ƒå±€ä¸­ã€‚"
+  "ºÏ²¢²¼¾ÖÄÚÈİµ½µÚÒ»¸ö²¼¾ÖÖĞ¡£"
   (setq layouts (layout:vla-list))
   (setq layout1 (car layouts))
   (setq layoutnames (mapcar 'vla-get-name layouts))
@@ -68,18 +68,18 @@
    (@layout:inner-merge-layout layout%))
   (vla-purgeall *DOC*)
   
-  ;; æ‰“å¼€æ‰€æœ‰è§†å£
+  ;; ´ò¿ªËùÓĞÊÓ¿Ú
   (setq ss (ssget "x"
 		  (list '(0 . "viewport")
 			'(-4 . "<NOT")'(69 . 1)'(-4 . "NOT>"))))
   (mapcar '(lambda(x)
-	    (vla-put-viewporton x :vlax-true))
+	    (vl-catch-all-apply 'vla-put-viewporton (list x :vlax-true)))
 	  (pickset:to-vlalist ss))
   (setvar "ctab" layoutname1)
   (princ))
 
 (defun @layout:merge-next (/ merge-layout)
-  (@::prompt '("å°†å½“å‰å¸ƒå±€åé¢ç›¸é‚»çš„ç¬¬ä¸€ä¸ªå¸ƒå±€å†…å®¹ç§»åˆ°å½“å‰å¸ƒå±€ä¸­ã€‚"))
+  (@::prompt '("½«µ±Ç°²¼¾ÖºóÃæÏàÁÚµÄµÚÒ»¸ö²¼¾ÖÄÚÈİÒÆµ½µ±Ç°²¼¾ÖÖĞ¡£"))
   (setq layouts (layout:vla-list))
   (setq layoutnames (member (getvar "ctab") (mapcar 'vla-get-name layouts)))
     
@@ -102,7 +102,7 @@
 	 '(lambda () 
 	   (vla-purgeall *DOC*)))
 	
-	;; æ‰“å¼€æ‰€æœ‰è§†å£
+	;; ´ò¿ªËùÓĞÊÓ¿Ú
 	(setq ss (ssget "x"
 			(list '(0 . "viewport")
 			      '(-4 . "<NOT")'(69 . 1)'(-4 . "NOT>"))))

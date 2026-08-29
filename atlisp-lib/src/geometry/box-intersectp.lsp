@@ -1,6 +1,6 @@
 (defun geometry:box-intersectp (box1 box2)
-  "æµ‹è¯•ä¸¤ä¸ªç›’å­æ˜¯å¦äº¤å‰"
-  "T äº¤å‰ï¼Œnil ä¸äº¤å‰"
+  "²âÊÔÁ½¸öºĞ×ÓÊÇ·ñ½»²æ"
+  "T ½»²æ£¬nil ²»½»²æ"
   (not (or (< (caadr box1)
         (caar box2))
       (< (cadadr box1)

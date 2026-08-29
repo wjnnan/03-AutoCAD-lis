@@ -1,5 +1,5 @@
 (defun string:numberp (str)
-  "纭畾瀛楃涓叉槸鍚︿负鏁板瓧"
+  "确定字符串是否为数字"
   (numberp (vl-catch-all-apply (quote read)
       (list (cond ((= "."
               (substr str 1 1))

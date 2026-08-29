@@ -1,16 +1,17 @@
-;;; tb-mod-rebar-edit.lsp â€” é’¢ç­‹æ ‡æ³¨ç¼–è¾‘æ¨¡å—
-;;; ç»„åˆ rebar:* entity:* txt:* sel:* point:* åº“å‡½æ•°
-;;; æä¾›ï¼šæ™ºèƒ½ç¼–è¾‘ã€å®æ—¶é¢ç§¯ã€ç¼–å·ç®¡ç†ã€é•œåƒã€åŒå‡»ç¼–è¾‘
+;;; tb-mod-rebar-edit.lsp ¡ª ¸Ö½î±ê×¢±à¼­Ä£¿é
+;;; ×éºÏ rebar:* entity:* txt:* sel:* point:* ¿âº¯Êı
+;;; Ìá¹©£ºÖÇÄÜ±à¼­¡¢ÊµÊ±Ãæ»ı¡¢±àºÅ¹ÜÀí¡¢¾µÏñ¡¢Ë«»÷±à¼­
 
 ;; ============================================================================
-;; c:RE â€” é’¢ç­‹æ ‡æ³¨æ™ºèƒ½ç¼–è¾‘å™¨
+;; c:RE ¡ª ¸Ö½î±ê×¢ÖÇÄÜ±à¼­Æ÷
 ;; ============================================================================
 
-(defun c:RE (/ e str props d count s grade type area area-m new-str choice alt
+(defun c:RE (/ e str props d count s grade area area-m new-str choice alt
               new-count new-d new-s new-grade alts i idx new-props)
-  "æ™ºèƒ½ç¼–è¾‘é’¢ç­‹æ ‡æ³¨ã€‚é€‰æ–‡å­— â†’ è‡ªåŠ¨è§£æ â†’ äº¤äº’ä¿®æ”¹ã€‚
-   c:RED/c:REDB å¯é€šè¿‡ *RE:EDIT-ENTITY* ä¼ å…¥é¢„é€‰å®ä½“ã€‚"
-  (setq e (or *RE:EDIT-ENTITY* (car (entsel "\né€‰æ‹©é’¢ç­‹æ ‡æ³¨æ–‡å­—: ")))
+  (uc:guard-begin '())
+  "ÖÇÄÜ±à¼­¸Ö½î±ê×¢¡£Ñ¡ÎÄ×Ö ¡ú ×Ô¶¯½âÎö ¡ú ½»»¥ĞŞ¸Ä¡£
+   c:RED/c:REDB ¿ÉÍ¨¹ı *RE:EDIT-ENTITY* ´«ÈëÔ¤Ñ¡ÊµÌå¡£"
+  (setq e (or *RE:EDIT-ENTITY* (car (entsel "\nÑ¡Ôñ¸Ö½î±ê×¢ÎÄ×Ö: ")))
         *RE:EDIT-ENTITY* nil)
   (if e
     (if (wcmatch (entity:get-type e) "TEXT,MTEXT")
@@ -18,33 +19,33 @@
         (setq str   (txt:get-content e)
               props (rebar:parse-annotation str))
 
-        ;; æ˜¾ç¤ºè§£æç»“æœ
+        ;; ÏÔÊ¾½âÎö½á¹û
         (princ (strcat
-          "\nâ•â•â•â•â•â•â• é’¢ç­‹æ ‡æ³¨è§£æ â•â•â•â•â•â•â•"
-          "\n  åŸæ–‡:   " str
-          "\n  ç±»å‹:   " (cdr (assoc 'type props))
-          "\n  ç­‰çº§:   " (itoa (cdr (assoc 'grade props))) "çº§é’¢"
-          "\n  ç›´å¾„:   " (rtos (cdr (assoc 'diameter props)) 2 0) "mm"))
+          "\n¨T¨T¨T¨T¨T¨T¨T ¸Ö½î±ê×¢½âÎö ¨T¨T¨T¨T¨T¨T¨T"
+          "\n  Ô­ÎÄ:   " str
+          "\n  ÀàĞÍ:   " (cdr (assoc 'type props))
+          "\n  µÈ¼¶:   " (itoa (or (cdr (assoc 'grade props)) 0)) "¼¶¸Ö"
+          "\n  Ö±¾¶:   " (rtos (or (cdr (assoc 'diameter props)) 0) 2 0) "mm"))
 
         (if (cdr (assoc 'count props))
-          (princ (strcat "\n  æ ¹æ•°:   " (itoa (cdr (assoc 'count props))))))
+          (princ (strcat "\n  ¸ùÊı:   " (itoa (cdr (assoc 'count props))))))
 
         (if (cdr (assoc 'spacing props))
-          (princ (strcat "\n  é—´è·:   @" (itoa (cdr (assoc 'spacing props))))))
+          (princ (strcat "\n  ¼ä¾à:   @" (itoa (cdr (assoc 'spacing props))))))
 
         (if (cdr (assoc 'area props))
-          (princ (strcat "\n  æ€»é¢ç§¯: " (rtos (cdr (assoc 'area props)) 2 1) " mmÂ²")))
+          (princ (strcat "\n  ×ÜÃæ»ı: " (rtos (cdr (assoc 'area props)) 2 1) " mm^2")))
 
         (if (cdr (assoc 'area-per-m props))
-          (princ (strcat "\n  æ¯ç±³é¢ç§¯: " (rtos (cdr (assoc 'area-per-m props)) 2 1) " mmÂ²/m")))
+          (princ (strcat "\n  Ã¿Ã×Ãæ»ı: " (rtos (cdr (assoc 'area-per-m props)) 2 1) " mm^2/m")))
 
-        (princ "\nâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€")
+        (princ "\n©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤")
 
-        ;; æ¨èæ›¿ä»£æ–¹æ¡ˆ
+        ;; ÍÆ¼öÌæ´ú·½°¸
         (setq alts (rebar:suggest-alternatives props))
         (if alts
           (progn
-            (princ "\n  å¤‡é€‰æ–¹æ¡ˆï¼š")
+            (princ "\n  ±¸Ñ¡·½°¸£º")
             (setq i 0)
             (foreach alt alts
               (setq i (1+ i))
@@ -54,29 +55,29 @@
                 (if (cdr (assoc 'spacing alt))
                   (strcat "@" (itoa (cdr (assoc 'spacing alt)))))
                 "  As=" (rtos (or (cdr (assoc 'area alt))
-                                  (cdr (assoc 'area-per-m alt))) 2 1) "mmÂ²")))))
+                                  (cdr (assoc 'area-per-m alt))) 2 1) "mm^2")))))
 
-        (princ "\nâ•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•")
-        (princ "\n  [M]æ‰‹åŠ¨ä¿®æ”¹  [æ•°å­—]é€‰æ–¹æ¡ˆ  [å›è½¦]é€€å‡º")
+        (princ "\n¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T")
+        (princ "\n  [M]ÊÖ¶¯ĞŞ¸Ä  [Êı×Ö]Ñ¡·½°¸  [»Ø³µ]ÍË³ö")
 
-        ;; è·å–ç”¨æˆ·é€‰æ‹©
-        (setq choice (getstring "\né€‰æ‹©: "))
+        ;; »ñÈ¡ÓÃ»§Ñ¡Ôñ
+        (setq choice (getstring "\nÑ¡Ôñ: "))
 
         (cond
-          ;; æ‰‹åŠ¨ä¿®æ”¹
+          ;; ÊÖ¶¯ĞŞ¸Ä
           ((= (strcase choice) "M")
-           (setq new-d (safe:get-real "ç›´å¾„(mm)" (or (cdr (assoc 'diameter props)) 8)))
+           (setq new-d (safe:get-real "Ö±¾¶(mm)" (or (cdr (assoc 'diameter props)) 8)))
 
            (initget "1 2 3")
-           (setq new-grade (getint (strcat "\nç­‰çº§ [1ä¸€çº§/2äºŒçº§/3ä¸‰çº§] <"
+           (setq new-grade (getint (strcat "\nµÈ¼¶ [1Ò»¼¶/2¶ş¼¶/3Èı¼¶] <"
                                           (itoa (cdr (assoc 'grade props))) ">: ")))
            (if (not new-grade) (setq new-grade (cdr (assoc 'grade props))))
 
            (if (eq (cdr (assoc 'type props)) 'stirrup)
-             (setq new-s (safe:get-real "é—´è·(mm)" (or (cdr (assoc 'spacing props)) 200)))
-             (setq new-count (safe:get-int "æ ¹æ•°" (or (cdr (assoc 'count props)) 4))))
+             (setq new-s (safe:get-int "¼ä¾à(mm)" (or (cdr (assoc 'spacing props)) 200)))
+             (setq new-count (safe:get-int "¸ùÊı" (or (cdr (assoc 'count props)) 4))))
 
-           ;; æ„å»ºæ–°æ ‡æ³¨
+           ;; ¹¹½¨ĞÂ±ê×¢
            (setq new-props (list
              (cons 'grade new-grade)
              (cons 'diameter new-d)
@@ -85,7 +86,7 @@
              (cons 'spacing (if new-s new-s (cdr (assoc 'spacing props))))))
            (setq new-str (rebar:format-annotation new-props)))
 
-          ;; é€‰æ‹©æ›¿ä»£æ–¹æ¡ˆ
+          ;; Ñ¡ÔñÌæ´ú·½°¸
           ((and choice (numberp (read choice)))
            (setq idx (atoi choice))
            (if (and alts (>= idx 1) (<= idx (length alts)))
@@ -99,36 +100,38 @@
                  (cons 'spacing (cdr (assoc 'spacing alt)))))
                (setq new-str (rebar:format-annotation new-props)))))))
 
-        ;; åº”ç”¨ä¿®æ”¹
+        ;; Ó¦ÓÃĞŞ¸Ä
         (if new-str
           (progn
             (txt:set-content e new-str)
             (entity:update e)
-            (princ (strcat "\nå·²æ›´æ–°: " new-str)))))
+            (princ (strcat "\nÒÑ¸üĞÂ: " new-str)))))
 
-    (princ "\næ‰€é€‰ä¸æ˜¯æ–‡å­—å®ä½“ã€‚"))
-  (princ))
+    (princ "\nËùÑ¡²»ÊÇÎÄ×ÖÊµÌå¡£"))
+  (princ)
+  (uc:guard-end))
 
 
 ;; ============================================================================
-;; c:RA â€” å®æ—¶é…ç­‹é¢ç§¯æ˜¾ç¤º
+;; c:RA ¡ª ÊµÊ±Åä½îÃæ»ıÏÔÊ¾
 ;; ============================================================================
 
-(defun c:RA (/ gr pt ss e str props area type d)
-  "å®æ—¶é…ç­‹é¢ç§¯æ˜¾ç¤ºã€‚é¼ æ ‡æ‚¬åœåœ¨é’¢ç­‹æ ‡æ³¨ä¸Šï¼ŒçŠ¶æ€æ æ˜¾ç¤ºé…ç­‹é¢ç§¯ã€‚
-  æŒ‰ESCæˆ–å³é”®é€€å‡ºã€‚"
-  (princ "\n[å®æ—¶é¢ç§¯] é¼ æ ‡ç§»åŠ¨åˆ°é’¢ç­‹æ ‡æ³¨ä¸ŠæŸ¥çœ‹é…ç­‹é¢ç§¯...")
-  (princ "\n[å®æ—¶é¢ç§¯] æŒ‰ESCæˆ–é¼ æ ‡å³é”®é€€å‡ºã€‚")
+(defun c:RA (/ gr pt ss e str props area d)
+  (uc:guard-begin '())
+  "ÊµÊ±Åä½îÃæ»ıÏÔÊ¾¡£Êó±êĞüÍ£ÔÚ¸Ö½î±ê×¢ÉÏ£¬×´Ì¬À¸ÏÔÊ¾Åä½îÃæ»ı¡£
+  °´ESC»òÓÒ¼üÍË³ö¡£"
+  (princ "\n[ÊµÊ±Ãæ»ı] Êó±êÒÆ¶¯µ½¸Ö½î±ê×¢ÉÏ²é¿´Åä½îÃæ»ı...")
+  (princ "\n[ÊµÊ±Ãæ»ı] °´ESC»òÊó±êÓÒ¼üÍË³ö¡£")
 
   (setq *RA:ACTIVE* T)
   (while *RA:ACTIVE*
-    (setq gr (grread T 4 2))  ; è·Ÿè¸ªé¼ æ ‡ï¼Œå…è®¸å³é”®
+    (setq gr (grread T 4 2))  ; ¸ú×ÙÊó±ê£¬ÔÊĞíÓÒ¼ü
 
     (cond
-      ;; é¼ æ ‡ç§»åŠ¨ (code=5)
+      ;; Êó±êÒÆ¶¯ (code=5)
       ((= (car gr) 5)
        (setq pt (cadr gr))
-       ;; æ£€æµ‹å…‰æ ‡ä¸‹çš„æ–‡å­—
+       ;; ¼ì²â¹â±êÏÂµÄÎÄ×Ö
        (if (setq ss (ssget pt '((0 . "TEXT,MTEXT"))))
          (progn
            (setq e   (ssname ss 0)
@@ -137,103 +140,109 @@
 
            (if (and props (cdr (assoc 'diameter props)))
              (progn
-               (setq type (cdr (assoc 'type props))
-                     d    (cdr (assoc 'diameter props)))
+               (setq d (cdr (assoc 'diameter props)))
 
-               (princ (strcat "\r[é¢ç§¯] " str "  â†’  "))
+               (princ (strcat "\r[Ãæ»ı] " str "  ¡ú  "))
 
                (if (cdr (assoc 'area props))
-                 (princ (strcat "As=" (rtos (cdr (assoc 'area props)) 2 1) "mmÂ²")))
+                 (princ (strcat "As=" (rtos (cdr (assoc 'area props)) 2 1) "mm^2")))
 
                (if (cdr (assoc 'area-per-m props))
-                 (princ (strcat "  As/m=" (rtos (cdr (assoc 'area-per-m props)) 2 1) "mmÂ²/m")))
+                 (princ (strcat "  As/m=" (rtos (cdr (assoc 'area-per-m props)) 2 1) "mm^2/m")))
 
-               (princ "    "))  ; é˜²æ­¢æ®‹ç•™å­—ç¬¦
-             (princ (strcat "\r[é¢ç§¯] æœªè¯†åˆ«é’¢ç­‹æ ‡æ³¨    "))))))
+               (princ "    "))  ; ·ÀÖ¹²ĞÁô×Ö·û
+             (princ (strcat "\r[Ãæ»ı] Î´Ê¶±ğ¸Ö½î±ê×¢    "))))))
 
-      ;; é¼ æ ‡ç‚¹å‡» (code=3) æˆ–æŒ‰é”® â†’ é€€å‡º
+      ;; Êó±êµã»÷ (code=3) »ò°´¼ü ¡ú ÍË³ö
       ((= (car gr) 3)
        (setq *RA:ACTIVE* nil))
 
-      ((= (car gr) 2)  ; é”®ç›˜è¾“å…¥
+      ((= (car gr) 2)  ; ¼üÅÌÊäÈë
        (setq *RA:ACTIVE* nil))
 
-      ;; å³é”®æˆ– ESC
+      ;; ÓÒ¼ü»ò ESC
       ((or (= (car gr) 11) (= (car gr) 25))
        (setq *RA:ACTIVE* nil))))
-  (princ "\n[å®æ—¶é¢ç§¯] å·²é€€å‡ºã€‚")
-  (princ))
+  (princ "\n[ÊµÊ±Ãæ»ı] ÒÑÍË³ö¡£")
+  (princ)
+  (uc:guard-end))
 
 
 ;; ============================================================================
-;; c:RN â€” é’¢ç­‹ç¼–å·ç®¡ç†
+;; c:RN ¡ª ¸Ö½î±àºÅ¹ÜÀí
 ;; ============================================================================
 
 (defun c:RN (/ ss prefix start-num sort-dir e midpt num num-str existing-nums existing-texts max-num
               dupes missing sorted-nums prev ents new-str count)
-  "é’¢ç­‹ç¼–å·ç®¡ç†ç³»ç»Ÿã€‚æ¡†é€‰é’¢ç­‹æ ‡æ³¨ â†’ è‡ªåŠ¨ç¼–å· â†’ æ£€æµ‹é‡å·/æ¼å·ã€‚"
-  (princ "\n[é’¢ç­‹ç¼–å·] é€‰æ‹©è¦ç¼–å·çš„é’¢ç­‹æ ‡æ³¨æ–‡å­—...")
+  (uc:guard-begin '())
+  "¸Ö½î±àºÅ¹ÜÀíÏµÍ³¡£¿òÑ¡¸Ö½î±ê×¢ ¡ú ×Ô¶¯±àºÅ ¡ú ¼ì²âÖØºÅ/Â©ºÅ¡£"
+  (princ "\n[¸Ö½î±àºÅ] Ñ¡ÔñÒª±àºÅµÄ¸Ö½î±ê×¢ÎÄ×Ö...")
 
   (if (setq ss (ssget '((0 . "TEXT,MTEXT"))))
     (progn
-      ;; è·å–ç¼–å·å‚æ•°
-      (setq prefix (getstring T "\nç¼–å·å‰ç¼€ï¼ˆå¦‚ GJ-, RB-, å›è½¦æ— å‰ç¼€ï¼‰: "))
+      ;; »ñÈ¡±àºÅ²ÎÊı
+      (setq prefix (getstring T "\n±àºÅÇ°×º£¨Èç GJ-, RB-, »Ø³µÎŞÇ°×º£©: "))
 
-      ;; æ£€æµ‹å·²æœ‰ç¼–å·
+      ;; ¼ì²âÒÑÓĞ±àºÅ
       (setq existing-nums nil
             existing-texts nil
             max-num 0)
       (sel:for-each ss
-        '(lambda (e / str num)
+        '(lambda (e / str num num-part idx)
            (setq str (txt:get-content e))
-           ;; å°è¯•åŒ¹é…å·²æœ‰ç¼–å·æ ¼å¼ï¼šå‰ç¼€+æ•°å­—+#
+           ;; ³¢ÊÔÆ¥ÅäÒÑÓĞ±àºÅ¸ñÊ½£ºÇ°×º+Êı×Ö+#
            (if (wcmatch str "*#")
              (progn
                (setq num-str (vl-string-right-trim "#" str))
-               (if (numberp (read num-str))
+               ;; ´ÓÄ©Î²ÌáÈ¡Á¬ĞøÊı×Ö£¨Ö§³ÖÇ°×º "GJ-1" ¡ú "1"£©
+               (setq num-part "" idx (strlen num-str))
+               (while (and (> idx 0) (wcmatch (substr num-str idx 1) "[0-9]"))
+                 (setq num-part (strcat (substr num-str idx 1) num-part)
+                       idx (1- idx)))
+               (if (and (/= num-part "") (numberp (read num-part)))
                  (progn
-                   (setq num (atoi num-str))
+                   (setq num (atoi num-part))
                    (setq existing-nums (cons num existing-nums)
                          existing-texts (cons (cons num e) existing-texts))
-                   (if (> num max-num) (setq max-num num)))))))))
+                   (if (> num max-num) (setq max-num num))))))))
 
-      ;; æ£€æµ‹é—®é¢˜
+      ;; ¼ì²âÎÊÌâ
       (if existing-nums
         (progn
-          ;; æ£€æµ‹é‡å·
-          (setq dupes (duplicates existing-nums))
+          ;; ¼ì²âÖØºÅ
+          (setq dupes (rebar:duplicates existing-nums))
           (if dupes
-            (princ (strcat "\nâš  å‘ç°é‡å·: " (vl-princ-to-string dupes))))
+            (princ (strcat "\n[!] ·¢ÏÖÖØºÅ: " (vl-princ-to-string dupes))))
 
-          ;; æ£€æµ‹æ¼å·
+          ;; ¼ì²âÂ©ºÅ
           (setq sorted-nums (vl-sort existing-nums '<))
           (setq missing nil)
           (setq prev (1- (car sorted-nums)))
           (foreach n sorted-nums
             (if (> (- n prev) 1)
-              (setq missing (append missing (range (1+ prev) (1- n)))))
+              (setq missing (append missing (rebar:range (1+ prev) (1- n)))))
             (setq prev n))
           (if missing
-            (princ (strcat "\nâš  å‘ç°æ¼å·: " (vl-princ-to-string missing))))))
+            (princ (strcat "\n[!] ·¢ÏÖÂ©ºÅ: " (vl-princ-to-string missing))))))
 
-      ;; è¯¢é—®èµ·å§‹ç¼–å·
+      ;; Ñ¯ÎÊÆğÊ¼±àºÅ
       (setq start-num (safe:get-int
-        (strcat "èµ·å§‹ç¼–å· <" (itoa (if (> max-num 0) (1+ max-num) 1)) ">")
+        (strcat "ÆğÊ¼±àºÅ <" (itoa (if (> max-num 0) (1+ max-num) 1)) ">")
         (if (> max-num 0) (1+ max-num) 1)))
 
-      ;; æ’åºæ–¹å‘
+      ;; ÅÅĞò·½Ïò
       (initget "X Y L R U D")
-      (setq sort-dir (getkword "\næ’åºæ–¹å‘ [Xå·¦â†’å³/Yä¸‹â†’ä¸Š/Lå·¦â†’å³/Rå³â†’å·¦/Uä¸‹â†’ä¸Š/Dä¸Šâ†’ä¸‹] <X>: "))
+      (setq sort-dir (getkword "\nÅÅĞò·½Ïò [X×ó¡úÓÒ/YÏÂ¡úÉÏ/L×ó¡úÓÒ/RÓÒ¡ú×ó/UÏÂ¡úÉÏ/DÉÏ¡úÏÂ] <X>: "))
       (if (not sort-dir) (setq sort-dir "X"))
 
-      ;; æŒ‰ä½ç½®æ’åº
+      ;; °´Î»ÖÃÅÅĞò
       (setq ents (sel:to-list ss))
-      ;; è¿‡æ»¤å·²æœ‰ç¼–å·çš„å®ä½“
+      ;; ¹ıÂËÒÑÓĞ±àºÅµÄÊµÌå
       (setq ents (vl-remove-if
         '(lambda (e) (assoc e (mapcar '(lambda (x) (cons (cdr x) (car x))) existing-texts)))
         ents))
-      ;; æŒ‰åæ ‡æ’ï¿½ï¿½ï¿½
-      ;; vl-sort ä¼šç ´ååŸè¡¨ä¸”å»é‡ï¼Œå…ˆ copy
+      ;; °´×ø±êÅÅĞò
+      ;; vl-sort »áÆÆ»µÔ­±íÇÒÈ¥ÖØ£¬ÏÈ copy
       (setq ents
         (vl-sort (append ents nil)
           (cond
@@ -243,10 +252,10 @@
              '(lambda (e1 e2) (> (car (txt:get-inspt e1)) (car (txt:get-inspt e2)))))
             ((= sort-dir "D")
              '(lambda (e1 e2) (> (cadr (txt:get-inspt e1)) (cadr (txt:get-inspt e2)))))
-            (t  ;; Y, U: ä¸‹â†’ä¸Š (Y å€¼ä»å°åˆ°å¤§)
+            (t  ;; Y, U: ÏÂ¡úÉÏ (Y Öµ´ÓĞ¡µ½´ó)
              '(lambda (e1 e2) (< (cadr (txt:get-inspt e1)) (cadr (txt:get-inspt e2))))))))
 
-      ;; æ‰§è¡Œç¼–å·
+      ;; Ö´ĞĞ±àºÅ
       (setq num start-num
             count 0)
       (foreach e ents
@@ -257,16 +266,18 @@
         (setq num (1+ num)
               count (1+ count)))
 
-      (princ (strcat "\n[é’¢ç­‹ç¼–å·] å·²ç¼–å· " (itoa count) " ä¸ªï¼Œ"
-                     (if existing-nums (strcat "ä¿ç•™ " (itoa (length existing-nums)) " ä¸ªå·²æœ‰ç¼–å·") "")
-                     (if dupes "\n  è¯·æ‰‹åŠ¨å¤„ç†é‡å·ï¼" "")
-                     (if missing "\n  è¯·æ‰‹åŠ¨å¤„ç†æ¼å·ï¼" "")))
-    (princ "\n[é’¢ç­‹ç¼–å·] æœªé€‰æ‹©æ–‡å­—ã€‚"))
-  (princ))
+      (princ (strcat "\n[¸Ö½î±àºÅ] ÒÑ±àºÅ " (itoa count) " ¸ö£¬"
+                     (if existing-nums (strcat "±£Áô " (itoa (length existing-nums)) " ¸öÒÑÓĞ±àºÅ") "")
+                     (if dupes "\n  ÇëÊÖ¶¯´¦ÀíÖØºÅ£¡" "")
+                     (if missing "\n  ÇëÊÖ¶¯´¦ÀíÂ©ºÅ£¡" "")))
+    (princ "\n[¸Ö½î±àºÅ] Î´Ñ¡ÔñÎÄ×Ö¡£")))
+  (princ)
+  (uc:guard-end))
 
 
-;; è¾…åŠ©ï¼šæ£€æµ‹é‡å¤å…ƒç´ 
-(defun duplicates (lst / seen dups)
+;; ¸¨Öú£º¼ì²âÖØ¸´ÔªËØ
+(defun rebar:duplicates (lst / seen dups)
+  "·µ»ØÁĞ±íÖĞµÄÖØ¸´ÔªËØ¡£"
   (setq seen nil dups nil)
   (foreach x lst
     (if (member x seen)
@@ -274,8 +285,9 @@
       (setq seen (cons x seen))))
   (reverse dups))
 
-;; è¾…åŠ©ï¼šç”Ÿæˆæ•°å­—èŒƒå›´
-(defun range (from to / lst)
+;; ¸¨Öú£ºÉú³ÉÊı×Ö·¶Î§
+(defun rebar:range (from to / lst)
+  "Éú³É from µ½ to µÄÕûÊıÁĞ±í¡£"
   (while (<= from to)
     (setq lst (cons from lst)
           from (1+ from)))
@@ -283,24 +295,25 @@
 
 
 ;; ============================================================================
-;; c:RM â€” é’¢ç­‹é•œåƒï¼ˆå¼¯é’©æ–¹å‘è‡ªåŠ¨ä¿®æ­£ï¼‰
+;; c:RM ¡ª ¸Ö½î¾µÏñ£¨Íä¹³·½Ïò×Ô¶¯ĞŞÕı£©
 ;; ============================================================================
 
 (defun c:RM (/ ss p1 p2 ang)
-  "é’¢ç­‹é•œåƒã€‚é•œåƒé’¢ç­‹å¹¶è‡ªåŠ¨ä¿®æ­£å¼¯é’©æ–¹å‘ã€‚"
+  (uc:guard-begin '())
+  "¸Ö½î¾µÏñ¡£¾µÏñ¸Ö½î²¢×Ô¶¯ĞŞÕıÍä¹³·½Ïò¡£"
   (if (setq ss (ssget '((0 . "LWPOLYLINE"))))
-    (if (and (setq p1 (getpoint "\né•œåƒè½´ç¬¬ä¸€ç‚¹: "))
-             (setq p2 (getpoint p1 "\né•œåƒè½´ç¬¬äºŒç‚¹: ")))
+    (if (and (setq p1 (getpoint "\n¾µÏñÖáµÚÒ»µã: "))
+             (setq p2 (getpoint p1 "\n¾µÏñÖáµÚ¶şµã: ")))
       (progn
         (setq ang (point:angle p1 p2))
 
-        ;; é•œåƒ + è‡ªåŠ¨ä¿®æ­£å¼¯é’©
+        ;; ¾µÏñ + ×Ô¶¯ĞŞÕıÍä¹³
         (sel:for-each ss
           '(lambda (e / new-e start-hook end-hook start-sign end-sign
                        d grade width layer)
              (if (rebar:is-rebar? e)
                (progn
-                 ;; ä¿å­˜åŸå§‹å±æ€§ï¼ˆå«å¼¯é’©æ–¹å‘ç¬¦å·ï¼‰
+                 ;; ±£´æÔ­Ê¼ÊôĞÔ£¨º¬Íä¹³·½Ïò·ûºÅ£©
                  (setq start-hook (rebar:detect-hook-end e 'start)
                        end-hook   (rebar:detect-hook-end e 'end)
                        start-sign (rebar:get-hook-sign e 'start)
@@ -308,11 +321,11 @@
                        width      (rebar:get-width e)
                        layer      (entity:get-layer e))
 
-                 ;; æ‰§è¡Œé•œåƒ
+                 ;; Ö´ĞĞ¾µÏñ
                  (command "_.MIRROR" e "" p1 p2 "_N")
                  (setq new-e (entlast))
 
-                 ;; å¼¯é’©æ–¹å‘å–åï¼ˆé•œåƒ = æ‰‹æ€§ç¿»è½¬ï¼‰
+                 ;; Íä¹³·½ÏòÈ¡·´£¨¾µÏñ = ÊÖĞÔ·­×ª£©
                  (if (> start-hook 0)
                    (progn
                      (rebar:remove-hook new-e 'start)
@@ -327,20 +340,22 @@
                                    (sys:get '*SYS:REBAR-DIAMETER*)
                                    (sys:get '*SYS:REBAR-GRADE*)))))))))
 
-        (princ "\né’¢ç­‹é•œåƒå®Œæˆï¼ˆå¼¯é’©å·²è‡ªåŠ¨ä¿®æ­£ï¼‰ã€‚"))
-      (princ "\né’¢ç­‹é•œåƒå·²å–æ¶ˆã€‚"))
-    (princ "\næœªé€‰æ‹©é’¢ç­‹ã€‚"))
-  (princ))
+        (princ "\n¸Ö½î¾µÏñÍê³É£¨Íä¹³ÒÑ×Ô¶¯ĞŞÕı£©¡£"))
+      (princ "\n¸Ö½î¾µÏñÒÑÈ¡Ïû¡£"))
+    (princ "\nÎ´Ñ¡Ôñ¸Ö½î¡£"))
+  (princ)
+  (uc:guard-end))
 
 
 ;; ============================================================================
-;; c:RED â€” åŒå‡»ç¼–è¾‘ï¼ˆæ³¨å†Œä¸ºåŒå‡»åŠ¨ä½œæˆ–ç›´æ¥è°ƒç”¨ï¼‰
+;; c:RED ¡ª Ë«»÷±à¼­£¨×¢²áÎªË«»÷¶¯×÷»òÖ±½Óµ÷ÓÃ£©
 ;; ============================================================================
 
 (defun c:RED (/ e str props)
-  "åŒå‡»é’¢ç­‹æ ‡æ³¨ç¼–è¾‘ã€‚è‡ªåŠ¨è¯†åˆ«æ–‡å­—æ˜¯å¦ä¸ºé’¢ç­‹æ ‡æ³¨ã€‚
-  å¦‚ä¸ºé’¢ç­‹æ ‡æ³¨åˆ™æ‰“å¼€ç¼–è¾‘å™¨ï¼Œå¦åˆ™è°ƒç”¨æ ‡å‡† DDEDITã€‚
-  å¯åœ¨ AutoCAD CUI ä¸­å°† TEXT/MTEXT åŒå‡»åŠ¨ä½œç»‘å®šåˆ°æ­¤å‘½ä»¤ã€‚"
+  (uc:guard-begin '())
+  "Ë«»÷¸Ö½î±ê×¢±à¼­¡£×Ô¶¯Ê¶±ğÎÄ×ÖÊÇ·ñÎª¸Ö½î±ê×¢¡£
+  ÈçÎª¸Ö½î±ê×¢Ôò´ò¿ª±à¼­Æ÷£¬·ñÔòµ÷ÓÃ±ê×¼ DDEDIT¡£
+  ¿ÉÔÚ AutoCAD CUI ÖĞ½« TEXT/MTEXT Ë«»÷¶¯×÷°ó¶¨µ½´ËÃüÁî¡£"
   (if (setq e (car (entsel)))
     (if (wcmatch (entity:get-type e) "TEXT,MTEXT")
       (progn
@@ -348,18 +363,20 @@
         (if (rebar:find-code-in-str str)
           (progn (setq *RE:EDIT-ENTITY* e) (c:RE))
           (command "_.DDEDIT" e "")))
-    (princ "\nä¸æ˜¯æ–‡å­—å®ä½“ã€‚")))
-  (princ))
+    (princ "\n²»ÊÇÎÄ×ÖÊµÌå¡£")))
+  (princ)
+  (uc:guard-end))
 
 
 ;; ============================================================================
-;; c:REDB â€” åŒå‡»ç¼–è¾‘ + è‡ªåŠ¨é¢ç§¯æ¯”è¾ƒ
+;; c:REDB ¡ª Ë«»÷±à¼­ + ×Ô¶¯Ãæ»ı±È½Ï
 ;; ============================================================================
 
 (defun c:REDB (/ e str props area new-str new-props new-area)
-  "åŒå‡»ç¼–è¾‘ï¼ˆå¢å¼ºç‰ˆï¼‰ã€‚ç¼–è¾‘å‰åæ˜¾ç¤ºé¢ç§¯å˜åŒ–å¯¹æ¯”ã€‚
-  ç»‘å®šåˆ°åŒå‡»äº‹ä»¶å¯è·å¾— FoolEngineer å¼çš„äº¤äº’ä½“éªŒã€‚"
-  (if (setq e (car (entsel "\né€‰æ‹©é’¢ç­‹æ ‡æ³¨ï¼ˆåŒå‡»ç¼–è¾‘æ¨¡å¼ï¼‰: ")))
+  (uc:guard-begin '())
+  "Ë«»÷±à¼­£¨ÔöÇ¿°æ£©¡£±à¼­Ç°ºóÏÔÊ¾Ãæ»ı±ä»¯¶Ô±È¡£
+  °ó¶¨µ½Ë«»÷ÊÂ¼ş¿É»ñµÃ FoolEngineer Ê½µÄ½»»¥ÌåÑé¡£"
+  (if (setq e (car (entsel "\nÑ¡Ôñ¸Ö½î±ê×¢£¨Ë«»÷±à¼­Ä£Ê½£©: ")))
     (if (wcmatch (entity:get-type e) "TEXT,MTEXT")
       (progn
         (setq str   (txt:get-content e)
@@ -367,25 +384,26 @@
               area  (cdr (assoc 'area props)))
 
         (if area
-          (princ (strcat "\n[å½“å‰] " str "  As=" (rtos area 2 1) "mmÂ²")))
+          (princ (strcat "\n[µ±Ç°] " str "  As=" (rtos area 2 1) "mm^2")))
 
-        ;; è°ƒç”¨æ™ºèƒ½ç¼–è¾‘å™¨ï¼ˆä¼ å…¥é¢„é€‰å®ä½“ï¼‰
+        ;; µ÷ÓÃÖÇÄÜ±à¼­Æ÷£¨´«ÈëÔ¤Ñ¡ÊµÌå£©
         (setq *RE:EDIT-ENTITY* e)
         (c:RE)
 
-        ;; æ˜¾ç¤ºå¯¹æ¯”
+        ;; ÏÔÊ¾¶Ô±È
         (if area
           (progn
             (setq new-str   (txt:get-content e)
                   new-props (rebar:parse-annotation new-str)
                   new-area  (cdr (assoc 'area new-props)))
             (if new-area
-              (princ (strcat "\n[ä¿®æ”¹å] " new-str "  As=" (rtos new-area 2 1) "mmÂ²"
-                      "  (å˜åŒ–: " (if (> new-area area) "+" "")
-                      (rtos (- new-area area) 2 1) "mmÂ²)"))))))
-      (princ "\nä¸æ˜¯æ–‡å­—å®ä½“ã€‚")))
-  (princ))
+              (princ (strcat "\n[ĞŞ¸Äºó] " new-str "  As=" (rtos new-area 2 1) "mm^2"
+                      "  (±ä»¯: " (if (> new-area area) "+" "")
+                      (rtos (- new-area area) 2 1) "mm^2)"))))))
+      (princ "\n²»ÊÇÎÄ×ÖÊµÌå¡£")))
+  (princ)
+  (uc:guard-end))
 
 
-(princ "\n[TB] é’¢ç­‹ç¼–è¾‘æ¨¡å—åŠ è½½å®Œæˆ (rebar-edit: 6å‘½ä»¤)")
+(princ "\n[TB] ¸Ö½î±à¼­Ä£¿é¼ÓÔØÍê³É (rebar-edit: 6ÃüÁî)")
 (princ)

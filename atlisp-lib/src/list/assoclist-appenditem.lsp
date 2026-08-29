@@ -1,5 +1,5 @@
 (defun list:assoclist-appenditem (lst value)
-    "æ·»åŠ æˆ–æ›¿æ¢å…³è”è¡¨çš„å…ƒç´ \n åŒ assoc"
+    "Ìí¼Ó»òÌæ»»¹ØÁª±íµÄÔªËØ\n Í¬ assoc"
     (if (assoc (car value)
             lst)
         (setq lst (list:assoclist-remove lst (car value))))

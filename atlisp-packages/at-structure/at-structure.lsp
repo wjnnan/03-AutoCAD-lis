@@ -1,32 +1,32 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; è¿™æ˜¯ä½¿ç”¨å¼€å‘å·¥å…· dev-tools è‡ªåŠ¨åˆ›å»ºçš„ç¨‹åºæºæ–‡ä»¶ 
+;; ÕâÊÇÊ¹ÓÃ¿ª·¢¹¤¾ß dev-tools ×Ô¶¯´´½¨µÄ³ÌĞòÔ´ÎÄ¼ş 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; å®šä¹‰é…ç½®é¡¹ 'at-structure:first ç”¨äº åº”ç”¨åŒ… at-structure çš„ ç¬¬ä¸€ä¸ªé…ç½®é¡¹ first 
-;;(@:define-config 'at-structure:first "æˆ‘æ˜¯é…ç½®é¡¹ at-structure:first çš„å€¼" "è¿™ä¸ªé…ç½®é¡¹çš„ç”¨é€”è¯´æ˜ã€‚")
-;; (@:get-config 'at-structure:first) ;; è·å–é…ç½®é¡¶çš„å€¼
-;; (@:set-config 'at-structure:first  "æ–°è®¾çš„å€¼") ;; è®¾ç½®é…ç½®é¡¶çš„å€¼
-;; å‘ç³»ç»Ÿä¸­æ·»åŠ èœå• 
-(@:add-menu "ç»“æ„å·¥å…·" "åŠ¨æ€æŸ¥é¢ç§¯" "(at-structure:query-steelbar)" )
-(@:add-menu "ç»“æ„å·¥å…·" "æŸ¥é’¢ç­‹é¢ç§¯" "(at-structure:menu-get-area)" )
+;; ¶¨ÒåÅäÖÃÏî 'at-structure:first ÓÃÓÚ Ó¦ÓÃ°ü at-structure µÄ µÚÒ»¸öÅäÖÃÏî first 
+;;(@:define-config 'at-structure:first "ÎÒÊÇÅäÖÃÏî at-structure:first µÄÖµ" "Õâ¸öÅäÖÃÏîµÄÓÃÍ¾ËµÃ÷¡£")
+;; (@:get-config 'at-structure:first) ;; »ñÈ¡ÅäÖÃ¶¥µÄÖµ
+;; (@:set-config 'at-structure:first  "ĞÂÉèµÄÖµ") ;; ÉèÖÃÅäÖÃ¶¥µÄÖµ
+;; ÏòÏµÍ³ÖĞÌí¼Ó²Ëµ¥ 
+(@:add-menu "½á¹¹¹¤¾ß" "¶¯Ì¬²éÃæ»ı" "(at-structure:query-steelbar)" )
+(@:add-menu "½á¹¹¹¤¾ß" "²é¸Ö½îÃæ»ı" "(at-structure:menu-get-area)" )
 (defun at-structure:menu-get-area (/ steelbar-str)
-  (@:help "é€‰ä¸­é’¢ç­‹å­—ç¬¦ä¸²çš„å•è¡Œæ–‡æœ¬ï¼Œå¦‚ %%1328@100,2%%13220+3%%13222 ç­‰ï¼Œè¿”å›é’¢ç­‹é¢ç§¯ã€‚")
+  (@:help "Ñ¡ÖĞ¸Ö½î×Ö·û´®µÄµ¥ĞĞÎÄ±¾£¬Èç %%1328@100,2%%13220+3%%13222 µÈ£¬·µ»Ø¸Ö½îÃæ»ı¡£")
   (if (setq ent-sel (car (entsel)))
-    (setq steelbar-str (string:parse-by-lst (cdr (assoc 1 (entget ent-sel))) '(";" "ï¼›")))
+    (setq steelbar-str (string:parse-by-lst (cdr (assoc 1 (entget ent-sel))) '(";" "£»")))
   (foreach x steelbar-str
-	   (format t "é’¢ç­‹é¢ç§¯: ~d"
+	   (format t "¸Ö½îÃæ»ı: ~d"
 		   (at-structure:get-steel-area x))))
 
 (defun at-structure:get-steel-area (steelbar-str / steelbar-lst steelbar-to-area gujin-zhishu)
-  "è®¡ç®—é’¢ç­‹æ–‡å­—å¾—åˆ°é’¢ç­‹é¢ç§¯"
+  "¼ÆËã¸Ö½îÎÄ×ÖµÃµ½¸Ö½îÃæ»ı"
   "Real number"
   (defun steel-to-area (steelbar-str / nxd)
-    (setq nxd (string:parse-by-lst steelbar-str '("%%132" "%%130" "%%131"))) ;;é’¢ç­‹ç¬¦å·
-    (if (= 2 (length nxd )) ; nxd = (list æ ¹æ•°  ç›´å¾„)
+    (setq nxd (string:parse-by-lst steelbar-str '("%%132" "%%130" "%%131"))) ;;¸Ö½î·ûºÅ
+    (if (= 2 (length nxd )) ; nxd = (list ¸ùÊı  Ö±¾¶)
 	(cons * (list (if (= "" (car nxd)) 1.0 (atof (car nxd))) 0.25 pi (atof (cadr nxd)) (atof (cadr nxd))))))
   (setq steelbar-str (vl-string-left-trim "GN BTXY&:" steelbar-str)) 
   (if (vl-string-search "@" steelbar-str)
-      (progn;; ç®ç­‹/æ¿ç­‹/å¢™ç­‹
-	(setq steelbar-lst  (string:parse-by-lst steelbar-str '("@"))) ;; é—´è·ç¬¦å·
+      (progn;; ¹¿½î/°å½î/Ç½½î
+	(setq steelbar-lst  (string:parse-by-lst steelbar-str '("@"))) ;; ¼ä¾à·ûºÅ
 	(setq gujin-steel (string:parse-by-lst (car steelbar-lst) '("/")))
 	(if (setq gujin-zhishu 
 		  (cadr (string:parse-by-lst (cadr steelbar-lst) '("(" ")"))))
@@ -40,25 +40,25 @@
 				       (vl-remove nil (mapcar 'steel-to-area gujin-steel)))
 				 (cons (length gujin-steel) (cons (atof (cadr steelbar-lst)) (cons 0.001  nil)))))
 		     (cons gujin-zhishu nil)))))
-      (progn ;; çºµç­‹
-	;; å»æ¶ç«‹ç­‹æ‹¬å·
+      (progn ;; ×İ½î
+	;; È¥¼ÜÁ¢½îÀ¨ºÅ
 	(setq steelbar-str (string:subst-all "" ")" (string:subst-all "" "(" steelbar-str)))
 	(eval (cons +  (vl-remove nil (mapcar 'steel-to-area (string:parse-by-lst steelbar-str '("+" "/"))))))))
   )
 
 (defun at-structure:query-steelbar()
-  "åŠ¨æ€æŸ¥é’¢ç­‹é¢ç§¯ã€‚"
+  "¶¯Ì¬²é¸Ö½îÃæ»ı¡£"
   (ui:dynquery '(lambda(x)
 		 (cond
 		   ((or (= name "TEXT")(= name "TCH_TEXT"))
 		    (setq lst
 			  (mapcar '(lambda (x / area )
 				    (if (> (setq area (at-structure:get-steel-area x)) 0)
-					(format nil "é’¢ç­‹é¢ç§¯: ~d" area )
-					"éé’¢ç­‹æ–‡å­—"))
-				  (string:parse-by-lst (entity:getdxf ent 1) '(";" "ï¼›"))))
+					(format nil "¸Ö½îÃæ»ı: ~d" area )
+					"·Ç¸Ö½îÎÄ×Ö"))
+				  (string:parse-by-lst (entity:getdxf ent 1) '(";" "£»"))))
 		    (setq lst (vl-remove nil lst)))
-		   (T (setq lst (list "éæ–‡å­—" name )))
+		   (T (setq lst (list "·ÇÎÄ×Ö" name )))
 		   )
 		 lst)
   ))

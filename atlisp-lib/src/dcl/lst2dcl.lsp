@@ -1,5 +1,5 @@
 (defun dcl:lst2dcl (lst)
-  "å°† lst æ ¼å¼çš„DCL æè¿°è¡¨è¾¾å¼è½¬ä¸º DCL æ ¼å¼. lst æ ¼å¼è¯´æ˜ï¼šå½“ä¸ºç‚¹å¯¹æ—¶ï¼Œè¡¨ç¤ºä¸ºå±æ€§å€¼å¯¹ï¼Œå½“ä¸ºåˆ—è¡¨æ—¶ï¼Œç¬¬ä¸€ä¸ªå…ƒç´ ä¸º Tile åã€‚"
+  "½« lst ¸ñÊ½µÄDCL ÃèÊö±í´ïÊ½×ªÎª DCL ¸ñÊ½. lst ¸ñÊ½ËµÃ÷£ºµ±Îªµã¶ÔÊ±£¬±íÊ¾ÎªÊôĞÔÖµ¶Ô£¬µ±ÎªÁĞ±íÊ±£¬µÚÒ»¸öÔªËØÎª Tile Ãû¡£"
   "String"
   "(dcl:lst2dcl '(button (key . btn)(label . BTN)(width . 20)(height . 3)) ;; => :button {key=\"btn\";label=\"BTN\";width=20;height=3;}"
   (defun handle-value (sym)
@@ -18,7 +18,7 @@
   (if (p:stringp lst)
       lst
     (cond
-     ;; å­è¡¨è¾¾å¼ä¸ºç‚¹å¯¹è¡¨
+     ;; ×Ó±í´ïÊ½Îªµã¶Ô±í
      ((null lst) "")
      ((p:dotpairp lst)
       (strcat (vl-symbol-name (car lst))"="(handle-value (cdr lst))";"))

@@ -1,5 +1,5 @@
 (defun datetime:leap-yearp (year)
-  "åˆ¤æ–­æŸä¸ªæ˜¯å¦ä¸ºé—°å¹´ã€‚"
+  "ÅĞ¶ÏÄ³¸öÊÇ·ñÎªÈòÄê¡£"
   (if (= 0 (mod year 100))
     (if (= 0 (mod year 400))
       t nil)

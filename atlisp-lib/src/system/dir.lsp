@@ -1,5 +1,5 @@
 (defun system:dir (str)
-  "å­—ç¬¦ä¸²è·¯å¾„ç›®å½•åŒ–ï¼Œä»¥ / ç»“å°¾."
+  "×Ö·û´®Â·¾¶Ä¿Â¼»¯£¬ÒÔ / ½áÎ²."
   (if (= 92 (last (vl-string->list str)))
       str
     (strcat str "\\")))

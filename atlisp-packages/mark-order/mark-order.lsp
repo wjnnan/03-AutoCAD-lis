@@ -1,5 +1,5 @@
-(@:define-config 'mark-order:matchs "*M*,*C*" "æ¬²åŒ¹é…çš„æ–‡å­—")
-(@:define-config 'mark-order:notmatchs "*MM*,*CC*,*%C*" "ä¸èƒ½åŒ¹é…çš„æ–‡å­—")
+(@:define-config 'mark-order:matchs "*M*,*C*" "ÓûÆ¥ÅäµÄÎÄ×Ö")
+(@:define-config 'mark-order:notmatchs "*MM*,*CC*,*%C*" "²»ÄÜÆ¥ÅäµÄÎÄ×Ö")
 
 (defun mark-order:check-str (str / matchs notmatchs) 
   (setq matchs (string:to-list (@:get-config 'mark-order:matchs) ","))

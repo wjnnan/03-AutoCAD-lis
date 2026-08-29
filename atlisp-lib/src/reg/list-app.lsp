@@ -1,5 +1,5 @@
 (defun reg:list-app ()
-  "åˆ—å‡ºvlax-get-or-create-objectå¯ç”¨çš„åº”ç”¨å¯¹è±¡ "
+  "ÁĞ³övlax-get-or-create-object¿ÉÓÃµÄÓ¦ÓÃ¶ÔÏó "
   "lst"
 
   (setq axroot "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\WOW6432Node\\CLSID")

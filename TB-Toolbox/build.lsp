@@ -1,67 +1,71 @@
-;;; build.lsp â€” å»ºç­‘ç»“æ„å·¥å…·ç®± ç¼–è¯‘è„šæœ¬
-;;; ç”¨æ³•ï¼šåœ¨ AutoCAD å‘½ä»¤è¡Œæ‰§è¡Œ (load "build.lsp")
-;;; åŠŸèƒ½ï¼š
-;;;   1. æŒ‰ä¾èµ–é¡ºåºåˆå¹¶æ‰€æœ‰ .lsp æºæ–‡ä»¶ â†’ build/intermediate.lsp
-;;;   2. è°ƒç”¨ vlisp-compile ç¼–è¯‘ intermediate.lsp â†’ build/toolbox.fas
-;;;   3. è¾“å‡º VLISP "Make Application" å‘å¯¼è¯´æ˜
+;;; build.lsp ¡ª ½¨Öş½á¹¹¹¤¾ßÏä ±àÒë½Å±¾
+;;; ÓÃ·¨£ºÔÚ AutoCAD ÃüÁîĞĞÖ´ĞĞ (load "build.lsp")
+;;; ¹¦ÄÜ£º
+;;;   1. °´ÒÀÀµË³ĞòºÏ²¢ËùÓĞ .lsp Ô´ÎÄ¼ş ¡ú build/intermediate.lsp
+;;;   2. µ÷ÓÃ vlisp-compile ±àÒë intermediate.lsp ¡ú build/toolbox.fas
+;;;   3. Êä³ö VLISP "Make Application" Ïòµ¼ËµÃ÷
 ;;;
-;;; æœ€ç»ˆäº§ç‰©ï¼šç»“æ„å·¥å…·ç®±.vlxï¼ˆéœ€æ‰‹åŠ¨ç”¨ VLISP å‘å¯¼æ‰“åŒ… .fas + .dclï¼‰
+;;; ×îÖÕ²úÎï£º½á¹¹¹¤¾ßÏä.vlx£¨ĞèÊÖ¶¯ÓÃ VLISP Ïòµ¼´ò°ü .fas + .dcl£©
 
 
 ;; ============================================================================
-;; ç¬¬ä¸€èŠ‚ï¼šè·¯å¾„è®¾ç½®
+;; µÚÒ»½Ú£ºÂ·¾¶ÉèÖÃ
 ;; ============================================================================
 
-;; é€šè¿‡ findfile å®šä½è‡ªèº«æ‰€åœ¨ç›®å½•ï¼ˆç¡®ä¿æ— è®ºä»å“ªé‡ŒåŠ è½½éƒ½èƒ½æ‰¾åˆ°æºæ–‡ä»¶ï¼‰
+;; Í¨¹ı findfile ¶¨Î»×ÔÉíËùÔÚÄ¿Â¼£¨È·±£ÎŞÂÛ´ÓÄÄÀï¼ÓÔØ¶¼ÄÜÕÒµ½Ô´ÎÄ¼ş£©
 (setq *TB:BUILD-DIR*
   (vl-filename-directory (findfile "build.lsp")))
 
-;; è¾“å‡ºç›®å½•
+;; Êä³öÄ¿Â¼
 (setq *TB:OUTPUT-DIR* (strcat *TB:BUILD-DIR* "\\build"))
 
-;; åˆ›å»ºè¾“å‡ºç›®å½•ï¼ˆå¦‚æœä¸å­˜åœ¨ï¼‰
+;; ´´½¨Êä³öÄ¿Â¼£¨Èç¹û²»´æÔÚ£©
 (if (not (findfile *TB:OUTPUT-DIR*))
   (vl-mkdir *TB:OUTPUT-DIR*))
 
-(princ (strcat "\n[Build] æºæ–‡ä»¶ç›®å½•: " *TB:BUILD-DIR*))
-(princ (strcat "\n[Build] è¾“å‡ºç›®å½•:     " *TB:OUTPUT-DIR*))
+(princ (strcat "\n[Build] Ô´ÎÄ¼şÄ¿Â¼: " *TB:BUILD-DIR*))
+(princ (strcat "\n[Build] Êä³öÄ¿Â¼:     " *TB:OUTPUT-DIR*))
 
 
 ;; ============================================================================
-;; ç¬¬äºŒèŠ‚ï¼šåŠ è½½é¡ºåºå®šä¹‰
+;; µÚ¶ş½Ú£º¼ÓÔØË³Ğò¶¨Òå
 ;; ============================================================================
 
-;; ä¾èµ–è§„åˆ™ï¼š
-;;   tb-core.lsp         â€” æ— ä¾èµ–ï¼ˆå‚æ•°ã€é”™è¯¯ã€å¹³å°ï¼‰
-;;   tb-lib-point.lsp    â€” æ— ä¾èµ–
-;;   tb-lib-curve.lsp    â€” ä¾èµ– point
-;;   tb-lib-sel.lsp      â€” æ— ä¾èµ–
-;;   tb-lib-lay.lsp      â€” æ— ä¾èµ–
-;;   tb-lib-entity.lsp   â€” ä¾èµ– point, curve, lay
-;;   tb-lib-txt.lsp      â€” ä¾èµ– entity
-;;   tb-lib-blk.lsp      â€” ä¾èµ– entity
-;;   tb-lib-dim.lsp      â€” ä¾èµ– entity
-;;   tb-lib-rebar.lsp    â€” ä¾èµ– point, entity, lay
-;;   å„ tb-mod-*.lsp      â€” ä¾èµ–æ‰€æœ‰ libï¼ˆæ¨¡å—é—´æ— ä¾èµ–ï¼‰
-;;   tb-main.lsp          â€” ä¾èµ–æ‰€æœ‰ä»¥ä¸Š
+;; ÒÀÀµ¹æÔò£º
+;;   tb-core.lsp         ¡ª ÎŞÒÀÀµ£¨²ÎÊı¡¢´íÎó¡¢Æ½Ì¨£©
+;;   tb-lib-point.lsp    ¡ª ÎŞÒÀÀµ
+;;   tb-lib-curve.lsp    ¡ª ÒÀÀµ point
+;;   tb-lib-sel.lsp      ¡ª ÎŞÒÀÀµ
+;;   tb-lib-lay.lsp      ¡ª ÎŞÒÀÀµ
+;;   tb-lib-entity.lsp   ¡ª ÒÀÀµ point, curve, lay
+;;   tb-lib-txt.lsp      ¡ª ÒÀÀµ entity
+;;   tb-lib-blk.lsp      ¡ª ÒÀÀµ entity
+;;   tb-lib-dim.lsp      ¡ª ÒÀÀµ entity
+;;   tb-lib-rebar.lsp    ¡ª ÒÀÀµ point, entity, lay
+;;   ¸÷ tb-mod-*.lsp      ¡ª ÒÀÀµËùÓĞ lib£¨Ä£¿é¼äÎŞÒÀÀµ£©
+;;   tb-main.lsp          ¡ª ÒÀÀµËùÓĞÒÔÉÏ
 
 (setq *TB:LOAD-ORDER*
   '(
-    ;; === æ ¸å¿ƒ ===
+    ;; === Í³Ò»ºËĞÄ£¨ÏÈÓÚ tb-core£¬Ìá¹© uc:* º¯Êı£©===
+    "..\unified-lib\uc-core.lsp"
+    "..\unified-lib\uc-atlisp-adapter.lsp"
+    ;; === ºËĞÄ ===
     "tb-core.lsp"
-    ;; === åº“ï¼ˆåº•å±‚ï¼‰ ===
+    ;; === ¿â£¨µ×²ã£© ===
     "tb-lib-point.lsp"
     "tb-lib-curve.lsp"
     "tb-lib-sel.lsp"
     "tb-lib-lay.lsp"
-    ;; === åº“ï¼ˆä¾èµ–åº•å±‚ï¼‰ ===
+    ;; === ¿â£¨ÒÀÀµµ×²ã£© ===
     "tb-lib-entity.lsp"
     "tb-lib-txt.lsp"
     "tb-lib-blk.lsp"
     "tb-lib-dim.lsp"
     "tb-lib-rebar.lsp"
     "tb-lib-rebar-edit.lsp"
-    ;; === åº”ç”¨æ¨¡å— ===
+    "tb-lib-struct.lsp"
+    ;; === Ó¦ÓÃÄ£¿é ===
     "tb-mod-edit.lsp"
     "tb-mod-text.lsp"
     "tb-mod-dim.lsp"
@@ -78,25 +82,26 @@
     "tb-mod-rebar.lsp"
     "tb-mod-rebar-edit.lsp"
     "tb-mod-batchprint.lsp"
-    ;; === å…¥å£ ===
+    ;; === Èë¿Ú ===
     "tb-main.lsp"
+    "tb-mod-hotkey.lsp"
   ))
 
 
 ;; ============================================================================
-;; ç¬¬ä¸‰èŠ‚ï¼šåˆå¹¶æºæ–‡ä»¶
+;; µÚÈı½Ú£ººÏ²¢Ô´ÎÄ¼ş
 ;; ============================================================================
 
 (defun build:merge (/ out-file in-file in-path line-count)
-  "å°† *TB:LOAD-ORDER* ä¸­çš„æ‰€æœ‰æºæ–‡ä»¶åˆå¹¶ä¸ºä¸€ä¸ª intermediate.lspã€‚"
+  "½« *TB:LOAD-ORDER* ÖĞµÄËùÓĞÔ´ÎÄ¼şºÏ²¢ÎªÒ»¸ö intermediate.lsp¡£"
   (setq out-file (strcat *TB:OUTPUT-DIR* "\\intermediate.lsp"))
 
   (if (setq out-fp (open out-file "w"))
     (progn
-      ;; å†™å…¥æ–‡ä»¶å¤´æ³¨é‡Š
-      (write-line ";;; intermediate.lsp â€” å»ºç­‘ç»“æ„å·¥å…·ç®± åˆå¹¶ä¸­é—´æ–‡ä»¶" out-fp)
-      (write-line ";;; æ­¤æ–‡ä»¶ç”± build.lsp è‡ªåŠ¨ç”Ÿæˆï¼Œè¯·å‹¿æ‰‹åŠ¨ç¼–è¾‘ã€‚" out-fp)
-      (write-line (strcat ";;; ç”Ÿæˆæ—¶é—´: " (menucmd "M=$(edtime,$(getvar,date),YYYY-MO-DD HH:MM:SS)")) out-fp)
+      ;; Ğ´ÈëÎÄ¼şÍ·×¢ÊÍ
+      (write-line ";;; intermediate.lsp ¡ª ½¨Öş½á¹¹¹¤¾ßÏä ºÏ²¢ÖĞ¼äÎÄ¼ş" out-fp)
+      (write-line ";;; ´ËÎÄ¼şÓÉ build.lsp ×Ô¶¯Éú³É£¬ÇëÎğÊÖ¶¯±à¼­¡£" out-fp)
+      (write-line (strcat ";;; Éú³ÉÊ±¼ä: " (menucmd "M=$(edtime,$(getvar,date),YYYY-MO-DD HH:MM:SS)")) out-fp)
       (write-line "" out-fp)
 
       (setq line-count 0)
@@ -106,133 +111,134 @@
 
         (if (findfile in-path)
           (progn
-            (princ (strcat "\n[Build] åˆå¹¶: " src))
+            (princ (strcat "\n[Build] ºÏ²¢: " src))
             (write-line (strcat "\n;;" (build:repeat-str "=" 70)) out-fp)
-            (write-line (strcat ";; æºæ–‡ä»¶: " src) out-fp)
+            (write-line (strcat ";; Ô´ÎÄ¼ş: " src) out-fp)
             (write-line (strcat ";;" (build:repeat-str "=" 70)) out-fp)
             (write-line "" out-fp)
 
-            ;; é€è¡Œå¤åˆ¶ï¼Œè·³è¿‡åŸæ–‡ä»¶å¤´æ³¨é‡Š
+            ;; ÖğĞĞ¸´ÖÆ£¬Ìø¹ıÔ­ÎÄ¼şÍ·×¢ÊÍ
             (if (setq in-fp (open in-path "r"))
               (progn
                 (while (setq line (read-line in-fp))
                   (write-line line out-fp)
                   (setq line-count (1+ line-count)))
                 (close in-fp))))
-          (princ (strcat "\n[Build] è­¦å‘Š: æ‰¾ä¸åˆ°æ–‡ä»¶ " in-path))))
+          (princ (strcat "\n[Build] ¾¯¸æ: ÕÒ²»µ½ÎÄ¼ş " in-path))))
 
       (close out-fp)
-      (princ (strcat "\n[Build] åˆå¹¶å®Œæˆï¼Œå…± " (itoa line-count) " è¡Œ â†’ " out-file)))
-    (princ "\n[Build] é”™è¯¯: æ— æ³•åˆ›å»ºè¾“å‡ºæ–‡ä»¶ã€‚"))
+      (princ (strcat "\n[Build] ºÏ²¢Íê³É£¬¹² " (itoa line-count) " ĞĞ ¡ú " out-file)))
+    (princ "\n[Build] ´íÎó: ÎŞ·¨´´½¨Êä³öÎÄ¼ş¡£"))
   (princ))
 
 
 (defun build:repeat-str (char count / result)
-  "é‡å¤å­—ç¬¦ char count æ¬¡ã€‚"
+  "ÖØ¸´×Ö·û char count ´Î¡£"
   (setq result "")
   (repeat count (setq result (strcat result char)))
   result)
 
 
 ;; ============================================================================
-;; ç¬¬å››èŠ‚ï¼šç¼–è¯‘ä¸º .fas
+;; µÚËÄ½Ú£º±àÒëÎª .fas
 ;; ============================================================================
 
 (defun build:compile-to-fas (/ src-file fas-file)
-  "ä½¿ç”¨ vlisp-compile å°† intermediate.lsp ç¼–è¯‘ä¸º toolbox.fasã€‚"
+  "Ê¹ÓÃ vlisp-compile ½« intermediate.lsp ±àÒëÎª toolbox.fas¡£"
   (setq src-file (strcat *TB:OUTPUT-DIR* "\\intermediate.lsp")
         fas-file (strcat *TB:OUTPUT-DIR* "\\toolbox.fas"))
 
   (if (findfile src-file)
     (progn
-      (princ (strcat "\n[Build] æ­£åœ¨ç¼–è¯‘: " src-file))
-      (princ "\n[Build] è¯·ç¨å€™...")
+      (princ (strcat "\n[Build] ÕıÔÚ±àÒë: " src-file))
+      (princ "\n[Build] ÇëÉÔºò...")
 
       ;; vlisp-compile: 'st = standard compile
       (vlisp-compile 'st src-file fas-file)
 
       (if (findfile fas-file)
-        (princ (strcat "\n[Build] ç¼–è¯‘æˆåŠŸ â†’ " fas-file))
-        (princ "\n[Build] ç¼–è¯‘å¯èƒ½å¤±è´¥ï¼Œè¯·æ£€æŸ¥ VLISP çª—å£çš„é”™è¯¯ä¿¡æ¯ã€‚")))
-    (princ "\n[Build] é”™è¯¯: æ‰¾ä¸åˆ° intermediate.lspï¼Œè¯·å…ˆæ‰§è¡Œ build:mergeã€‚"))
+        (princ (strcat "\n[Build] ±àÒë³É¹¦ ¡ú " fas-file))
+        (princ "\n[Build] ±àÒë¿ÉÄÜÊ§°Ü£¬Çë¼ì²é VLISP ´°¿ÚµÄ´íÎóĞÅÏ¢¡£")))
+    (princ "\n[Build] ´íÎó: ÕÒ²»µ½ intermediate.lsp£¬ÇëÏÈÖ´ĞĞ build:merge¡£"))
   (princ))
 
 
 ;; ============================================================================
-;; ç¬¬äº”èŠ‚ï¼šæ‰“å° VLISP æ‰“åŒ…è¯´æ˜
+;; µÚÎå½Ú£º´òÓ¡ VLISP ´ò°üËµÃ÷
 ;; ============================================================================
 
 (defun build:print-vlx-guide nil
-  "æ‰“å° VLISP å‘å¯¼æ‰“åŒ… .vlx çš„è¯¦ç»†æ­¥éª¤ã€‚"
+  "´òÓ¡ VLISP Ïòµ¼´ò°ü .vlx µÄÏêÏ¸²½Öè¡£"
   (princ (strcat
     "\n"
-    "\nâ•”â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•—"
-    "\nâ•‘  .fas ç¼–è¯‘å®Œæˆï¼æ¥ä¸‹æ¥æ‰“åŒ… .vlxï¼š                    â•‘"
-    "\nâ• â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•£"
-    "\nâ•‘                                                      â•‘"
-    "\nâ•‘  1. åœ¨ AutoCAD å‘½ä»¤è¡Œè¾“å…¥: VLISP                      â•‘"
-    "\nâ•‘     (æ‰“å¼€ Visual LISP ç¼–è¾‘å™¨)                         â•‘"
-    "\nâ•‘                                                      â•‘"
-    "\nâ•‘  2. èœå•: æ–‡ä»¶ â†’ ç”Ÿæˆåº”ç”¨ç¨‹åº â†’ æ–°å»ºåº”ç”¨ç¨‹åºå‘å¯¼       â•‘"
-    "\nâ•‘     é€‰æ‹©ã€Œä¸“å®¶æ¨¡å¼ã€                                  â•‘"
-    "\nâ•‘                                                      â•‘"
-    "\nâ•‘  3. åº”ç”¨ç¨‹åºç›®å½•: é€‰æ‹© build æ–‡ä»¶å¤¹                    â•‘"
-    "\nâ•‘     ( " *TB:OUTPUT-DIR* " )                            â•‘"
-    "\nâ•‘                                                      â•‘"
-    "\nâ•‘  4. åº”ç”¨ç¨‹åºæ–‡ä»¶å: ç»“æ„å·¥å…·ç®±                         â•‘"
-    "\nâ•‘     æ‰©å±•å .vlx è‡ªåŠ¨æ·»åŠ                               â•‘"
-    "\nâ•‘                                                      â•‘"
-    "\nâ•‘  5. æ·»åŠ ç¼–è¯‘åçš„ .fas æ–‡ä»¶:                            â•‘"
-    "\nâ•‘     é€‰ä¸­ toolbox.fas â†’ æ·»åŠ                            â•‘"
-    "\nâ•‘                                                      â•‘"
-    "\nâ•‘  6. æ·»åŠ èµ„æº .dcl æ–‡ä»¶ï¼ˆæ‰€æœ‰ DCL éƒ½è¦åŠ å…¥ï¼‰:           â•‘"
-    "\nâ•‘     tb-dcl-launcher.dcl                              â•‘"
-    "\nâ•‘     tb-dcl-setting.dcl                               â•‘"
-    "\nâ•‘     tb-dcl-batchprint.dcl                            â•‘"
-    "\nâ•‘     (å¦‚æœè¿˜æœ‰å…¶ä»– .dcl ä¹Ÿä¸€å¹¶åŠ å…¥)                     â•‘"
-    "\nâ•‘                                                      â•‘"
-    "\nâ•‘  7. ç‚¹å‡»ã€Œç¼–è¯‘åº”ç”¨ç¨‹åºã€                              â•‘"
-    "\nâ•‘                                                      â•‘"
-    "\nâ•‘  8. è¾“å‡ºæ–‡ä»¶: ç»“æ„å·¥å…·ç®±.vlx                           â•‘"
-    "\nâ•‘     å°†æ­¤æ–‡ä»¶åˆ†å‘ç»™ç”¨æˆ·å³å¯                             â•‘"
-    "\nâ•‘                                                      â•‘"
-    "\nâ•‘  ç”¨æˆ·åŠ è½½: (load \"ç»“æ„å·¥å…·ç®±.vlx\")                    â•‘"
-    "\nâ•‘  å¯åŠ¨å‘½ä»¤: TB                                         â•‘"
-    "\nâ•šâ•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•"))
+    "\n¨X¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨["
+    "\n¨U  .fas ±àÒëÍê³É£¡½ÓÏÂÀ´´ò°ü .vlx£º                    ¨U"
+    "\n¨d¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨g"
+    "\n¨U                                                      ¨U"
+    "\n¨U  1. ÔÚ AutoCAD ÃüÁîĞĞÊäÈë: VLISP                      ¨U"
+    "\n¨U     (´ò¿ª Visual LISP ±à¼­Æ÷)                         ¨U"
+    "\n¨U                                                      ¨U"
+    "\n¨U  2. ²Ëµ¥: ÎÄ¼ş ¡ú Éú³ÉÓ¦ÓÃ³ÌĞò ¡ú ĞÂ½¨Ó¦ÓÃ³ÌĞòÏòµ¼       ¨U"
+    "\n¨U     Ñ¡Ôñ¡¸×¨¼ÒÄ£Ê½¡¹                                  ¨U"
+    "\n¨U                                                      ¨U"
+    "\n¨U  3. Ó¦ÓÃ³ÌĞòÄ¿Â¼: Ñ¡Ôñ build ÎÄ¼ş¼Ğ                    ¨U"
+    "\n¨U     ( " *TB:OUTPUT-DIR* " )                            ¨U"
+    "\n¨U                                                      ¨U"
+    "\n¨U  4. Ó¦ÓÃ³ÌĞòÎÄ¼şÃû: ½á¹¹¹¤¾ßÏä                         ¨U"
+    "\n¨U     À©Õ¹Ãû .vlx ×Ô¶¯Ìí¼Ó                              ¨U"
+    "\n¨U                                                      ¨U"
+    "\n¨U  5. Ìí¼Ó±àÒëºóµÄ .fas ÎÄ¼ş:                            ¨U"
+    "\n¨U     Ñ¡ÖĞ toolbox.fas ¡ú Ìí¼Ó                           ¨U"
+    "\n¨U                                                      ¨U"
+    "\n¨U  6. Ìí¼Ó×ÊÔ´ .dcl ÎÄ¼ş£¨ËùÓĞ DCL ¶¼Òª¼ÓÈë£©:           ¨U"
+    "\n¨U     tb-dcl-launcher.dcl                              ¨U"
+    "\n¨U     tb-dcl-setting.dcl                               ¨U"
+    "\n¨U     tb-dcl-batchprint.dcl                            ¨U"
+    "\n¨U     tb-dcl-hotkey.dcl                               ¨U"
+    "\n¨U     (Èç¹û»¹ÓĞÆäËû .dcl Ò²Ò»²¢¼ÓÈë)                     ¨U"
+    "\n¨U                                                      ¨U"
+    "\n¨U  7. µã»÷¡¸±àÒëÓ¦ÓÃ³ÌĞò¡¹                              ¨U"
+    "\n¨U                                                      ¨U"
+    "\n¨U  8. Êä³öÎÄ¼ş: ½á¹¹¹¤¾ßÏä.vlx                           ¨U"
+    "\n¨U     ½«´ËÎÄ¼ş·Ö·¢¸øÓÃ»§¼´¿É                             ¨U"
+    "\n¨U                                                      ¨U"
+    "\n¨U  ÓÃ»§¼ÓÔØ: (load \"½á¹¹¹¤¾ßÏä.vlx\")                    ¨U"
+    "\n¨U  Æô¶¯ÃüÁî: TB                                         ¨U"
+    "\n¨^¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨a"))
   (princ))
 
 
 ;; ============================================================================
-;; ç¬¬å…­èŠ‚ï¼šä¸€é”®æ„å»ºå…¥å£
+;; µÚÁù½Ú£ºÒ»¼ü¹¹½¨Èë¿Ú
 ;; ============================================================================
 
 (defun c:BUILD-TB nil
-  "ä¸€é”®æ‰§è¡Œï¼šåˆå¹¶ â†’ ç¼–è¯‘ â†’ æ‰“å°è¯´æ˜ã€‚"
-  (princ "\nâ•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•")
-  (princ "\n  å»ºç­‘ç»“æ„å·¥å…·ç®± â€” ç¼–è¯‘æ„å»º")
-  (princ "\nâ•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•")
+  "Ò»¼üÖ´ĞĞ£ººÏ²¢ ¡ú ±àÒë ¡ú ´òÓ¡ËµÃ÷¡£"
+  (princ "\n¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T")
+  (princ "\n  ½¨Öş½á¹¹¹¤¾ßÏä ¡ª ±àÒë¹¹½¨")
+  (princ "\n¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T")
 
-  ;; æ­¥éª¤ 1ï¼šåˆå¹¶æºæ–‡ä»¶
-  (princ "\n\n[1/2] åˆå¹¶æºæ–‡ä»¶...")
+  ;; ²½Öè 1£ººÏ²¢Ô´ÎÄ¼ş
+  (princ "\n\n[1/2] ºÏ²¢Ô´ÎÄ¼ş...")
   (build:merge)
 
-  ;; æ­¥éª¤ 2ï¼šç¼–è¯‘ä¸º .fas
-  (princ "\n\n[2/2] ç¼–è¯‘ .fas ...")
+  ;; ²½Öè 2£º±àÒëÎª .fas
+  (princ "\n\n[2/2] ±àÒë .fas ...")
   (build:compile-to-fas)
 
-  ;; æ­¥éª¤ 3ï¼šæ‰“å°æ‰“åŒ…è¯´æ˜
+  ;; ²½Öè 3£º´òÓ¡´ò°üËµÃ÷
   (build:print-vlx-guide)
   (princ))
 
 
 ;; ============================================================================
-;; å¯åŠ¨æç¤º
+;; Æô¶¯ÌáÊ¾
 ;; ============================================================================
 
 (princ (strcat
-  "\nâ•”â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•—"
-  "\nâ•‘   å»ºç­‘ç»“æ„å·¥å…·ç®± â€” ç¼–è¯‘ç³»ç»Ÿ          â•‘"
-  "\nâ•‘   å‘½ä»¤: BUILD-TB (å¼€å§‹ç¼–è¯‘)          â•‘"
-  "\nâ•‘   è¾“å‡º: build/toolbox.fas            â•‘"
-  "\nâ•šâ•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•"))
+  "\n¨X¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨["
+  "\n¨U   ½¨Öş½á¹¹¹¤¾ßÏä ¡ª ±àÒëÏµÍ³          ¨U"
+  "\n¨U   ÃüÁî: BUILD-TB (¿ªÊ¼±àÒë)          ¨U"
+  "\n¨U   Êä³ö: build/toolbox.fas            ¨U"
+  "\n¨^¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨a"))
 (princ)

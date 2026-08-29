@@ -1,5 +1,5 @@
 (defun string:format (str formatlist / i str-length)
-  "å­—ç¬¦ä¸²æ ¼å¼åŒ–å‡½æ•°"
+  "×Ö·û´®¸ñÊ½»¯º¯Êı"
   (if (std:stringp formatlist)
     (setq str (string:subst-all formatlist "{0}"
         str))

@@ -1,5 +1,5 @@
 (defun m:base2dec (strnum int-b / l)
-  "è¿›åˆ¶è½¬æ¢,strnum å­—ç¬¦ä¸²è¡¨ç¤ºçš„æ•°, int-b è¿›åˆ¶(2-36)"
+  "½øÖÆ×ª»»,strnum ×Ö·û´®±íÊ¾µÄÊı, int-b ½øÖÆ(2-36)"
   "fixnum"
   "(m:base2dec \"B0A1\" 16)"
   (setq strnum (strcase strnum))

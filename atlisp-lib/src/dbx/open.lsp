@@ -1,6 +1,6 @@
 (defun dbx:open (dwg-file / dbx)
-  "浠BX鏂瑰紡鎵撳紑dwg鏂囦欢"
-  "鎵撳紑鎴愬姛杩斿洖DBX瀵硅薄锛屾病鏈夊彂鐜版枃浠惰繑鍥瀗il"
+  "以DBX方式打开dwg文件"
+  "打开成功返回DBX对象，没有发现文件返回nil"
   (dbx:interface)
   (if (findfile dwg-file)
       (progn

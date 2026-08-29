@@ -1,15 +1,15 @@
 (defun @layout:divide-map (/ margin gap box width height ents pt-base)
-  (@::prompt "å•ä¸ªå›¾å½¢åˆ†å›¾åˆ°å¸ƒå±€")
+  (@::prompt "µ¥¸öÍ¼ĞÎ·ÖÍ¼µ½²¼¾Ö")
   (setq margin (@::get-config '@layout:divide-margin))
   (setq gap (@::get-config '@layout:divide-gap))
   (setq ents (pickset:to-list (ssget)))
-  ;; æ’åº
+  ;; ÅÅĞò
   (setq ents 
 	(pickset:sort-by-box ents "xy" 0))
   (or (member (@::get-config '@layout:divide-layout) (layout:list))
       (vla-add *layouts* (@::get-config '@layout:divide-layout)))
   (setvar "ctab" (@::get-config '@layout:divide-layout))
-  ;;å»æ•æ‰
+  ;;È¥²¶×½
   (std:osmode-off)
   (if(and (setq ss(@layout:ssgetx (@::get-config '@layout:divide-layout)))
 	  (setq box (pickset:getbox ss 0)))
@@ -40,7 +40,7 @@
   )
 			   
 (defun @layout:divide-cluster (/ clusters margin gap box width height ents pt-base)
-  (@::prompt "å›¾å½¢åˆ†å †ç„¶ååˆ†å›¾åˆ°å¸ƒå±€")
+  (@::prompt "Í¼ĞÎ·Ö¶ÑÈ»ºó·ÖÍ¼µ½²¼¾Ö")
   (setq margin (@::get-config '@layout:divide-margin))
   (setq gap (@::get-config '@layout:divide-gap))
 
@@ -79,7 +79,7 @@
   )
 			   
 (defun @layout:divide-rectangle (/ margin gap box width height ents pt-base pts)
-  (@::prompt "çŸ©å½¢æ¡†è½¬æ­£åˆ†å›¾åˆ°å¸ƒå±€")
+  (@::prompt "¾ØĞÎ¿ò×ªÕı·ÖÍ¼µ½²¼¾Ö")
   (setq margin (@::get-config '@layout:divide-margin))
   (setq gap (@::get-config '@layout:divide-gap))
   (setq ents (vl-remove-if-not 'curve:rectanglep (pickset:to-list (ssget '((0 . "lwpolyline")(90 . 4))))))
@@ -90,7 +90,7 @@
   (or (member (@::get-config '@layout:divide-layout) (layout:list))
       (vla-add *layouts* (@::get-config '@layout:divide-layout)))
   (setvar "ctab" (@::get-config '@layout:divide-layout))
-  ;;å»æ•æ‰
+  ;;È¥²¶×½
   (std:osmode-off)
   (if(and (setq ss(@layout:ssgetx (@::get-config '@layout:divide-layout)))
 	  (setq box (pickset:getbox ss 0)))
@@ -126,11 +126,11 @@
   (std:osmode-on)
   )
 (defun @layout:divide-insert (/ margin gap box width height ents pt-base pts)
-  (@::prompt "çŸ©å½¢æ¡†å›¾å—åˆ†å›¾åˆ°å¸ƒå±€")
+  (@::prompt "¾ØĞÎ¿òÍ¼¿é·ÖÍ¼µ½²¼¾Ö")
   (setq margin (@::get-config '@layout:divide-margin))
   (setq gap (@::get-config '@layout:divide-gap))
   (if (=  (@::get-config '@layout:blkrefname)"")
-      (progn (@::prompt "è¯·è®¾ç½®å›¾æ¡†å—å") (exit)))
+      (progn (@::prompt "ÇëÉèÖÃÍ¼¿ò¿éÃû") (exit)))
   (setq ents (pickset:to-list (ssget (list '(0 . "insert")
 					   (cons 2
 						 (@::get-config '@layout:blkrefname)
@@ -142,7 +142,7 @@
   (or (member (@::get-config '@layout:divide-layout) (layout:list))
       (vla-add *layouts* (@::get-config '@layout:divide-layout)))
   (setvar "ctab" (@::get-config '@layout:divide-layout))
-  ;;å»æ•æ‰
+  ;;È¥²¶×½
   (std:osmode-off)
   (if(and (setq ss(@layout:ssgetx (@::get-config '@layout:divide-layout)))
 	  (setq box (pickset:getbox ss 0)))

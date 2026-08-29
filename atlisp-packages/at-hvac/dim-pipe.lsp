@@ -1,7 +1,7 @@
 (defun @hvac:dim-pipe ()
-  (@:help'("æ ‡åœ°æš–ç®¡"))
-  (@:prompt "ç‚¹é€‰åœ°æš–ç®¡")
-  (if (and (setq pipe-d (car (ssnamex (ssget ":E:S" '((0 . "lwpolyline")(8 . "*åœ°æš–*"))))))
+  (@:help'("±êµØÅ¯¹Ü"))
+  (@:prompt "µãÑ¡µØÅ¯¹Ü")
+  (if (and (setq pipe-d (car (ssnamex (ssget ":E:S" '((0 . "lwpolyline")(8 . "*µØÅ¯*"))))))
 	   (p:enamep (nth 1 pipe-d)))
       (progn
 	(setq len (* 0.001 (curve:length (nth 1 pipe-d))))
@@ -11,19 +11,19 @@
 	(setq ml
 	      (entity:make-multileader
 	       (list (setq pt-b (cadr (nth 3 pipe-d)))
-		     (setq pt-c (getpoint pt-b "æ ‡æ³¨ä½ç½®")))
+		     (setq pt-c (getpoint pt-b "±ê×¢Î»ÖÃ")))
 	       (strcat "D=300mm\\PL="
 		       (string:number-format
 			(rtos len 2 1)
 			2 1 " 0")
 		       "m")))
-	(vla-put-ScaleFactor (e2o ml)
-			     (* 10 (@:get-config '@::draw-scale)))
+	(vl-catch-all-apply 'vla-put-ScaleFactor (list (e2o ml)
+			     (* 10 (@:get-config '@::draw-scale))))
 	;;(entity:putdxf ml 12 (polar pt-c pi 1000))
 	)
       ))
 (defun @hvac:move-pt-base (ent pts / dxfent)
-  "æ›´æ”¹æ›²çº¿æ§åˆ¶ç‚¹åŠç«¯ç‚¹åˆ—è¡¨ã€‚ptsä¸ºæ–°çš„ç‚¹ä½ç½®,nilä¸ºä¸æ›¿æ¢ã€‚"
+  "¸ü¸ÄÇúÏß¿ØÖÆµã¼°¶ËµãÁĞ±í¡£ptsÎªĞÂµÄµãÎ»ÖÃ,nilÎª²»Ìæ»»¡£"
   "ent"
   "(curve:put-points (car (entsel))
     '((0 0 0)))"
@@ -48,9 +48,9 @@
          (entmod dxfent)
          (entupd ent)))))
 (defun @hvac:batch-dim-pipe ()
-  (@:help'("æ‰¹é‡æ ‡åœ°æš–ç®¡çš„é—´è·å’Œåˆ†æ”¯é•¿åº¦,æœªæˆåŠŸæ ‡æ³¨çš„å°†åœ°æš–ç®¡æ”¹ä¸ºçº¢è‰²ã€‚"))
-  (@:prompt "è¯·æ¡†é€‰åœ°æš–ç®¡:")
-  (if (setq pipe-s (pickset:to-list (ssget  '((0 . "lwpolyline")(8 . "*åœ°æš–*")))))
+  (@:help'("ÅúÁ¿±êµØÅ¯¹ÜµÄ¼ä¾àºÍ·ÖÖ§³¤¶È,Î´³É¹¦±ê×¢µÄ½«µØÅ¯¹Ü¸ÄÎªºìÉ«¡£"))
+  (@:prompt "Çë¿òÑ¡µØÅ¯¹Ü:")
+  (if (setq pipe-s (pickset:to-list (ssget  '((0 . "lwpolyline")(8 . "*µØÅ¯*")))))
       (progn
 	(setq ents
 	      (vl-remove
@@ -62,7 +62,7 @@
 			(if (< (- len (fix len)) 0.4)
 			    (setq len (+ (fix len) 1.0))
 			    (setq len (+ (fix len) 1.5)))
-			;; æ‰¾æ°´å¹³çº¿çš„ä¸­ç‚¹
+			;; ÕÒË®Æ½ÏßµÄÖĞµã
 			(setq pt-s (curve:midpoint pipe-d))
 			(while (and pt-s
 				   (or
@@ -83,7 +83,7 @@
 						       '(lambda(x y)
 							 (> (cadr x)(cadr y)))))
 			      (entdel line-t)
-			      ;; è®¡ç®—é—´è·
+			      ;; ¼ÆËã¼ä¾à
 			      (setq d (if (and pt-inters
 					       (> (length pt-inters) 1))
 					  (car (stat:mode (stat:stat (mapcar 'fix (mapcar 'distance pt-inters (cdr pt-inters))))))))
@@ -95,8 +95,8 @@
 					      (rtos len 2 1)
 					      2 1 " 0")
 					     "m")))
-			      (vla-put-ScaleFactor (e2o ml)
-						   (* 10 (@:get-config '@::draw-scale)))
+			      (vl-catch-all-apply 'vla-put-ScaleFactor (list (e2o ml)
+						   (* 10 (@:get-config '@::draw-scale))))
 			      ml)
 			    (progn (entity:putdxf pipe-d 62 1) nil)
 			    ))
@@ -110,20 +110,20 @@
 		(setq gr (grread t 16))
 		(cond
 		  ((= 3 (car gr))
-		   "æŒ‰ä¸‹é¼ æ ‡å·¦é”®"
-		   ;;ç»˜åˆ¶å¹¶é€€å‡º
+		   "°´ÏÂÊó±ê×ó¼ü"
+		   ;;»æÖÆ²¢ÍË³ö
 		   (setq flag nil)
 		   )
 		  ((or (= 25 (car gr))
 		       (= 11 (car gr)))
-		   "æŒ‰ä¸‹é¼ æ ‡å³é”®"
-		   ;; åˆ é™¤å¹¶é€€å‡º
+		   "°´ÏÂÊó±êÓÒ¼ü"
+		   ;; É¾³ı²¢ÍË³ö
 		   (mapcar 'entdel ents)
 		   (setq ents  nil)
 		   (setq flag nil)
 		   )
 		  ((= 5 (car gr))
-		   "ç§»åŠ¨é¼ æ ‡"
+		   "ÒÆ¶¯Êó±ê"
 		   (mapcar (function(lambda(x)
 			     (setq pt-ml (entity:getdxf x 10))
 			     (@hvac:move-pt-base
@@ -144,7 +144,7 @@
 			   ents)
 		   ;; (setq pt-base (cadr gr))
 		   )
-		  (t "å…¶å®ƒæƒ…å†µ"
+		  (t "ÆäËüÇé¿ö"
 		     (princ gr)))
 		)
 	      ents

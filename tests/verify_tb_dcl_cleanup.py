@@ -50,7 +50,7 @@ def ensure_cleanup(func_body: str, marker: str) -> None:
 
 
 def main() -> int:
-    text = TB_MAIN.read_text(encoding="utf-8")
+    text = TB_MAIN.read_text(encoding="gbk")
     tb_body = extract_function(text, "c:TB")
     tbsetting_body = extract_function(text, "c:TBSETTING")
 

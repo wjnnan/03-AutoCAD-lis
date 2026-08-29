@@ -40,25 +40,25 @@
     (cond
      ((or (= oba "REGION") (= oba "LWPOLYLINE") (= oba "LINE") (= oba "CIRCLE") (= oba "ARC"))
       
-      (mapcar '(lambda (x y) (vla-put-LinetypeScale (vlax-ename->vla-object x) (* y bl))) list_ent list_bl)
+      (mapcar '(lambda (x y) (vl-catch-all-apply 'vla-put-LinetypeScale (list (vlax-ename->vla-object x) (* y bl)))) list_ent list_bl)
       )
      ((= oba "HATCH")
       
-      (mapcar '(lambda (x y) (vla-put-PatternScale (vlax-ename->vla-object x) (* y bl))) list_ent list_bl)
+      (mapcar '(lambda (x y) (vl-catch-all-apply 'vla-put-PatternScale (list (vlax-ename->vla-object x) (* y bl)))) list_ent list_bl)
       )
      ((= oba "INSERT")
       
-      (mapcar '(lambda (x y) (vla-put-xscalefactor (vlax-ename->vla-object x) (* y bl))) list_ent (nth 0 list_bl))
-      (mapcar '(lambda (x y) (vla-put-yscalefactor (vlax-ename->vla-object x) (* y bl))) list_ent (nth 1 list_bl))
-      (mapcar '(lambda (x y) (vla-put-zscalefactor (vlax-ename->vla-object x) (* y bl))) list_ent (nth 2 list_bl))
+      (mapcar '(lambda (x y) (vl-catch-all-apply 'vla-put-xscalefactor (list (vlax-ename->vla-object x) (* y bl)))) list_ent (nth 0 list_bl))
+      (mapcar '(lambda (x y) (vl-catch-all-apply 'vla-put-yscalefactor (list (vlax-ename->vla-object x) (* y bl)))) list_ent (nth 1 list_bl))
+      (mapcar '(lambda (x y) (vl-catch-all-apply 'vla-put-zscalefactor (list (vlax-ename->vla-object x) (* y bl)))) list_ent (nth 2 list_bl))
       
       )
      ((or (= oba "TEXT")(= oba "MTEXT"))
-      (mapcar '(lambda (x y) (vla-put-Height (vlax-ename->vla-object x) (* y bl))) list_ent list_bl)
+      (mapcar '(lambda (x y) (vl-catch-all-apply 'vla-put-Height (list (vlax-ename->vla-object x) (* y bl)))) list_ent list_bl)
       )
      ((wcmatch oba "*DIMENSION")
 					;(vla-put-ScaleFactor obj bl)
-      (mapcar '(lambda (x y) (vla-put-ScaleFactor (vlax-ename->vla-object x) (* y bl))) list_ent list_bl)
+      (mapcar '(lambda (x y) (vl-catch-all-apply 'vla-put-ScaleFactor (list (vlax-ename->vla-object x) (* y bl)))) list_ent list_bl)
       )
      )
     )

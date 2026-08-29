@@ -1,5 +1,5 @@
 (defun curve:subsegment-picked-type (curve p / pp)
-  "å¤šæ®µçº¿å­æ®µå›¾å…ƒç±»å‹"
+  "¶à¶ÎÏß×Ó¶ÎÍ¼ÔªÀàĞÍ"
   (if (listp p)
     (progn (setq pp (vlax-curve-getclosestpointto curve (trans p 1 0)))
       (setq pp (vlax-curve-getsecondderiv curve (fix (vlax-curve-getparamatpoint curve pp)))))

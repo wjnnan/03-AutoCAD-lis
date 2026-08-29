@@ -1,182 +1,488 @@
-// tb-dcl-launcher.dcl â€” å»ºç­‘ç»“æ„å·¥å…·ç®±ä¸»ç•Œé¢
-// é€‰é¡¹å¡ + æŒ‰é’®ç½‘æ ¼å¸ƒå±€
+// tb-dcl-launcher.dcl ¡ª ½¨Öş½á¹¹¹¤¾ßÏäÖ÷½çÃæ
+// 7 ¸ö¶ÀÁ¢±êÇ©Ò³ dialog£¨tb_page_0 ~ tb_page_6£©£¬Í¨¹ı done_dialog Ñ­»·ÕæÕıÇĞÒ³
+// ²¼¾ÖË¼Â·²Î¿¼¡¸¼úÈË¹¤¾ßÏä¡¹£ºboxed_row ·ÖÇø±êÌâ + ¶àÁĞ½ô´Õ°´Å¥Íø¸ñ
 
-tb_launcher:dialog{
-  label="å»ºç­‘ç»“æ„å·¥å…·ç®± v1.0";
+tb_page_0:dialog{
+  label="½¨Öş½á¹¹¹¤¾ßÏä v1.0 - »æÍ¼±à¼­";
   initial_focus="tab_edit";
 
-  // === é€‰é¡¹å¡åˆ‡æ¢ ===
   :boxed_radio_row{
     key="tabs";
-    :radio_button{label="ç»˜å›¾ç¼–è¾‘";key="tab_edit";}
-    :radio_button{label="æ–‡å­—æ ‡æ³¨";key="tab_text";}
-    :radio_button{label="å›¾å±‚å›¾å—";key="tab_layer";}
-    :radio_button{label="é’¢ç­‹å·¥å…·";key="tab_rebar";}
-    :radio_button{label="ç»“æ„å·¥å…·";key="tab_struct";}
-    :radio_button{label="å…¶ä»–å·¥å…·";key="tab_misc";}
+    :radio_button{label="»æÍ¼±à¼­";key="tab_edit";}
+    :radio_button{label="ÎÄ×Ö´¦Àí";key="tab_text";}
+    :radio_button{label="Í¼²ã¹ÜÀí";key="tab_layer";}
+    :radio_button{label="Í¼¿é¹ÜÀí";key="tab_block";}
+    :radio_button{label="±ê×¢´¦Àí";key="tab_dim";}
+    :radio_button{label="½á¹¹Í¨ÓÃ";key="tab_struct";}
+    :radio_button{label="¸¨Öú¹¦ÄÜ";key="tab_misc";}
   }
 
-  // === ç»˜å›¾ç¼–è¾‘ æ ‡ç­¾é¡µ ===
-  :boxed_row{label="ç»˜å›¾å‘½ä»¤";key="grp_edit1";
-    :row{
-      :column{
-        :button{label="ç›´çº¿ Q";key="btn_q";width=12;fixed_width=true;}
-        :button{label="ä¿®å‰ª TE";key="btn_te";width=12;fixed_width=true;}
-        :button{label="é›¶å€’è§’ FF";key="btn_ff";width=12;fixed_width=true;}
-        :button{label="è¿ç»­å¤åˆ¶ CC";key="btn_cc";width=12;fixed_width=true;}
+  :boxed_row{label="»æÍ¼±à¼­";key="grp_edit";
+    :boxed_row{label="»æÍ¼";
+      :row{
+        :column{
+          :button{label="Ö±Ïß Q";key="btn_q";width=14;fixed_width=true;}
+          :button{label="¶à¶ÎÏß QW";key="btn_qw";width=14;fixed_width=true;}
+          :button{label="Ô² WW";key="btn_ww";width=14;fixed_width=true;}
+        }
+        :column{
+          :button{label="ÍÖÔ² TY";key="btn_ty";width=14;fixed_width=true;}
+          :button{label="¾ØĞÎ QR";key="btn_qr";width=14;fixed_width=true;}
+          :button{label="µã PP";key="btn_pp";width=14;fixed_width=true;}
+        }
       }
-      :column{
-        :button{label="å¤šæ®µçº¿ QW";key="btn_qw";width=12;fixed_width=true;}
-        :button{label="å»¶ä¼¸ WE";key="btn_we";width=12;fixed_width=true;}
-        :button{label="å€’åœ†è§’ FR";key="btn_fr";width=12;fixed_width=true;}
-        :button{label="ç­‰è·å¤åˆ¶ CF";key="btn_cf";width=12;fixed_width=true;}
+    }
+    :boxed_row{label="ĞŞ¸Ä";
+      :row{
+        :column{
+          :button{label="ĞŞ¼ô TE";key="btn_te";width=14;fixed_width=true;}
+          :button{label="ÑÓÉì WE";key="btn_we";width=14;fixed_width=true;}
+          :button{label="ÒÆ¶¯ A";key="btn_a";width=14;fixed_width=true;}
+          :button{label="À­Éì S";key="btn_s";width=14;fixed_width=true;}
+        }
+        :column{
+          :button{label="Ëõ·Å SC";key="btn_sc";width=14;fixed_width=true;}
+          :button{label="Ğı×ª R";key="btn_r";width=14;fixed_width=true;}
+          :button{label="±à¼­ DE";key="btn_de";width=14;fixed_width=true;}
+          :button{label="Ñ¡ÏßĞŞ¼ô CX";key="btn_cx";width=14;fixed_width=true;}
+        }
       }
-      :column{
-        :button{label="åœ† WW";key="btn_ww";width=12;fixed_width=true;}
-        :button{label="ç§»åŠ¨ A";key="btn_a";width=12;fixed_width=true;}
-        :button{label="ç¼©æ”¾ SC";key="btn_sc";width=12;fixed_width=true;}
-        :button{label="åç§» OO";key="btn_oo";width=12;fixed_width=true;}
+    }
+    :boxed_row{label="¸´ÖÆ¡¤Ô²½Ç¡¤Æ«ÒÆ";
+      :row{
+        :column{
+          :button{label="Á¬Ğø¸´ÖÆ CC";key="btn_cc";width=14;fixed_width=true;}
+          :button{label="µÈ¾à¸´ÖÆ CF";key="btn_cf";width=14;fixed_width=true;}
+          :button{label="Ğı×ª¸´ÖÆ CR";key="btn_cr";width=14;fixed_width=true;}
+          :button{label="¸´ÖÆµ½²ã CL";key="btn_cl";width=14;fixed_width=true;}
+        }
+        :column{
+          :button{label="Áãµ¹½Ç FF";key="btn_ff";width=14;fixed_width=true;}
+          :button{label="µ¹Ô²½Ç FR";key="btn_fr";width=14;fixed_width=true;}
+          :button{label="Æ«ÒÆ OO";key="btn_oo";width=14;fixed_width=true;}
+        }
       }
-      :column{
-        :button{label="çŸ©å½¢ QR";key="btn_qr";width=12;fixed_width=true;}
-        :button{label="æ‹‰ä¼¸ S";key="btn_s";width=12;fixed_width=true;}
-        :button{label="æ—‹è½¬ R";key="btn_r";width=12;fixed_width=true;}
-        :button{label="Zå½’é›¶ Z0";key="btn_z0";width=12;fixed_width=true;}
+    }
+    :boxed_row{label="¿ì½İËõ·Å¡¤Ğı×ª";
+      :row{
+        :column{
+          :button{label="Ëõ·Å0.5¡Á S1";key="btn_s1";width=14;fixed_width=true;}
+          :button{label="Ëõ·Å2¡Á S2";key="btn_s2";width=14;fixed_width=true;}
+          :button{label="Ëõ·Å4¡Á S4";key="btn_s4";width=14;fixed_width=true;}
+        }
+        :column{
+          :button{label="Ëõ·Å5¡Á S5";key="btn_s5";width=14;fixed_width=true;}
+          :button{label="Ëõ·Å100¡Á S0";key="btn_s0";width=14;fixed_width=true;}
+          :button{label="Ëõ·Å1000¡Á S00";key="btn_s00";width=14;fixed_width=true;}
+        }
+        :column{
+          :button{label="Ë³×ª45 R4";key="btn_r4";width=14;fixed_width=true;}
+          :button{label="Ë³×ª90 R9";key="btn_r9";width=14;fixed_width=true;}
+          :button{label="Äæ×ª45 R5";key="btn_r5";width=14;fixed_width=true;}
+          :button{label="Äæ×ª90 R0";key="btn_r0";width=14;fixed_width=true;}
+        }
+      }
+    }
+    :boxed_row{label="¸ÄÉ«";
+      :row{
+        :column{
+          :button{label="ºì C1";key="btn_c1";width=14;fixed_width=true;}
+          :button{label="»Æ C2";key="btn_c2";width=14;fixed_width=true;}
+          :button{label="ÂÌ C3";key="btn_c3";width=14;fixed_width=true;}
+          :button{label="Çà C4";key="btn_c4";width=14;fixed_width=true;}
+        }
+        :column{
+          :button{label="À¶ C5";key="btn_c5";width=14;fixed_width=true;}
+          :button{label="Ñóºì C6";key="btn_c6";width=14;fixed_width=true;}
+          :button{label="°× C7";key="btn_c7";width=14;fixed_width=true;}
+          :button{label="»Ò C8";key="btn_c8";width=14;fixed_width=true;}
+        }
+      }
+    }
+    :boxed_row{label="ÊÓÍ¼¡¤ÆäËü";
+      :row{
+        :column{
+          :button{label="Z¹éÁã Z0";key="btn_z0";width=14;fixed_width=true;}
+          :button{label="·¶Î§Ëõ·Å EE";key="btn_ee";width=14;fixed_width=true;}
+          :button{label="¿ìËÙ±£´æ AS";key="btn_as";width=14;fixed_width=true;}
+        }
+        :column{
+          :button{label="µ¥ÊÓ¿Ú V1";key="btn_v1";width=14;fixed_width=true;}
+          :button{label="Ë«ÊÓ¿ÚÊú V2";key="btn_v2";width=14;fixed_width=true;}
+          :button{label="Ë«ÊÓ¿Úºá V3";key="btn_v3";width=14;fixed_width=true;}
+        }
       }
     }
   }
 
-  // === æ–‡å­—æ ‡æ³¨ æ ‡ç­¾é¡µ ===
-  :boxed_row{label="æ–‡å­—æ ‡æ³¨";key="grp_text";
-    :row{
-      :column{
-        :button{label="TSSDæ ·å¼ TSSD";key="btn_tssd";width=12;fixed_width=true;}
-        :button{label="æ”¹å®½åº¦ TTK";key="btn_ttk";width=12;fixed_width=true;}
-        :button{label="æŸ¥æ‰¾æ›¿æ¢ TH";key="btn_th";width=12;fixed_width=true;}
-      }
-      :column{
-        :button{label="æ”¹TSSD GTS";key="btn_gts";width=12;fixed_width=true;}
-        :button{label="æ”¹é«˜åº¦ TTG";key="btn_ttg";width=12;fixed_width=true;}
-        :button{label="æ–‡å­—åŠ æ¡† TJK";key="btn_tjk";width=12;fixed_width=true;}
-      }
-      :column{
-        :button{label="æ ‡æ³¨å¤ä½ FW";key="btn_fw";width=12;fixed_width=true;}
-        :button{label="æ ‡æ³¨ç­‰åˆ† BBF";key="btn_bbf";width=12;fixed_width=true;}
-        :button{label="åæ ‡æ ‡æ³¨ ZB";key="btn_zb";width=12;fixed_width=true;}
-      }
-    }
-  }
-
-  // === å›¾å±‚å›¾å— æ ‡ç­¾é¡µ ===
-  :boxed_row{label="å›¾å±‚å›¾å—";key="grp_layer";
-    :row{
-      :column{
-        :button{label="å…³å±‚ TG";key="btn_tg";width=12;fixed_width=true;}
-        :button{label="å†»å±‚ TD";key="btn_td";width=12;fixed_width=true;}
-        :button{label="é”å±‚ TS";key="btn_ts";width=12;fixed_width=true;}
-      }
-      :column{
-        :button{label="åå…³ TGF";key="btn_tgf";width=12;fixed_width=true;}
-        :button{label="åå†» TDF";key="btn_tdf";width=12;fixed_width=true;}
-        :button{label="å…¨è§£å†» TDJ";key="btn_tdj";width=12;fixed_width=true;}
-      }
-      :column{
-        :button{label="å¿«é€Ÿå»ºå— JK";key="btn_jk";width=12;fixed_width=true;}
-        :button{label="å—ç»Ÿè®¡ KTJ";key="btn_ktj";width=12;fixed_width=true;}
-        :button{label="å—æ”¹å GKM";key="btn_gkm";width=12;fixed_width=true;}
-      }
-    }
-  }
-
-  // === é’¢ç­‹å·¥å…· æ ‡ç­¾é¡µ ===
-  :boxed_row{label="é’¢ç­‹å·¥å…·";key="grp_rebar";
-    :row{
-      :column{
-        :button{label="ç”»é’¢ç­‹ RB";key="btn_rb";width=12;fixed_width=true;}
-        :button{label="åŠ å¼¯é’© RH";key="btn_rh";width=12;fixed_width=true;}
-        :button{label="åˆ å¼¯é’© RDH";key="btn_rdh";width=12;fixed_width=true;}
-      }
-      :column{
-        :button{label="ç”»ç®ç­‹ RS";key="btn_rs";width=12;fixed_width=true;}
-        :button{label="æ”¹å®½åº¦ RW";key="btn_rw";width=12;fixed_width=true;}
-        :button{label="çº¿å˜ç­‹ RL";key="btn_rl";width=12;fixed_width=true;}
-      }
-      :column{
-        :button{label="æ¿åº•ç­‹ RBR";key="btn_rbr";width=12;fixed_width=true;}
-        :button{label="æ¿è´Ÿç­‹ RBF";key="btn_rbf";width=12;fixed_width=true;}
-        :button{label="é’¢ç­‹åç§» RO";key="btn_ro";width=12;fixed_width=true;}
-      }
-      :column{
-        :button{label="é’¢ç­‹æ ‡æ³¨ RD";key="btn_rd";width=12;fixed_width=true;}
-        :button{label="é’¢ç­‹ç¼–å· RCC";key="btn_rcc";width=12;fixed_width=true;}
-      }
-    }
-    :row{
-      :column{
-        :button{label="ç¼–è¾‘æ ‡æ³¨ RE";key="btn_re";width=12;fixed_width=true;}
-        :button{label="å®æ—¶é¢ç§¯ RA";key="btn_ra";width=12;fixed_width=true;}
-      }
-      :column{
-        :button{label="é’¢ç­‹é•œåƒ RM";key="btn_rm";width=12;fixed_width=true;}
-        :button{label="ç¼–å·ç®¡ç† RN";key="btn_rn";width=12;fixed_width=true;}
-      }
-      :column{
-        :button{label="åŒå‡»ç¼–è¾‘ RED";key="btn_red";width=12;fixed_width=true;}
-      }
-    }
-  }
-
-  // === ç»“æ„å·¥å…· æ ‡ç­¾é¡µ ===
-  :boxed_row{label="ç»“æ„å·¥å…·";key="grp_struct";
-    :row{
-      :column{
-        :button{label="æŸ±æˆªé¢ DK";key="btn_dk";width=12;fixed_width=true;}
-        :button{label="å›¾åçº¿ TML";key="btn_tml";width=12;fixed_width=true;}
-        :button{label="æŠ˜æ–­çº¿ DX";key="btn_dx";width=12;fixed_width=true;}
-      }
-      :column{
-        :button{label="åœ†æˆªé¢ DKK";key="btn_dkk";width=12;fixed_width=true;}
-        :button{label="å‰–åˆ‡ç¬¦ PQ";key="btn_pq";width=12;fixed_width=true;}
-        :button{label="äº‘çº¿ RT";key="btn_rt";width=12;fixed_width=true;}
-      }
-      :column{
-        :button{label="å¢™èº« SG";key="btn_sg";width=12;fixed_width=true;}
-        :button{label="å¹³é¢å· PMH";key="btn_pmh";width=12;fixed_width=true;}
-        :button{label="ä¸­å¿ƒçº¿ CE";key="btn_ce";width=12;fixed_width=true;}
-      }
-    }
-  }
-
-  // === å…¶ä»–å·¥å…· æ ‡ç­¾é¡µ ===
-  :boxed_row{label="å…¶ä»–å·¥å…·";key="grp_misc";
-    :row{
-      :column{
-        :button{label="é€‰æ‹©æ˜“ SS";key="btn_ss";width=12;fixed_width=true;}
-        :button{label="ç´¯è®¡é•¿ LCD";key="btn_lcd";width=12;fixed_width=true;}
-        :button{label="é’¢ç­‹1â†’3";key="btn_13";width=12;fixed_width=true;}
-      }
-      :column{
-        :button{label="çƒæ ‡ QB";key="btn_qb";width=12;fixed_width=true;}
-        :button{label="ç´¯è®¡é¢ LMJ";key="btn_lmj";width=12;fixed_width=true;}
-        :button{label="é’¢ç­‹2â†’3";key="btn_23";width=12;fixed_width=true;}
-      }
-      :column{
-        :button{label="æ•æ‰ NN";key="btn_nn";width=12;fixed_width=true;}
-        :button{label="æ±‚å’Œ QH";key="btn_qh";width=12;fixed_width=true;}
-        :button{label="DXFæŸ¥è¯¢ TN";key="btn_tn";width=12;fixed_width=true;}
-      }
-      :column{
-        :button{label="æ‰¹é‡æ‰“å° BPT";key="btn_bpt";width=12;fixed_width=true;}
-      }
-    }
-  }
-
-  // === åº•éƒ¨æŒ‰é’® ===
   :row{
-    :button{label="è®¾ç½®(S)";key="settings";width=12;fixed_width=true;}
-    :button{label="å¸®åŠ©(H)";key="help";width=12;fixed_width=true;}
+    :button{label="ÉèÖÃ(S)";key="settings";width=12;fixed_width=true;}
+    :button{label="°ïÖú(H)";key="help";width=12;fixed_width=true;}
     spacer;
-    cancel_button;
-    :button{label="å…³é—­";key="close";is_default=true;width=10;fixed_width=true;}
+    :button{label="¹Ø±Õ";key="close";is_default=true;width=10;fixed_width=true;}
+  }
+}
+
+tb_page_1:dialog{
+  label="½¨Öş½á¹¹¹¤¾ßÏä v1.0 - ÎÄ×Ö´¦Àí";
+  initial_focus="tab_text";
+
+  :boxed_radio_row{
+    key="tabs";
+    :radio_button{label="»æÍ¼±à¼­";key="tab_edit";}
+    :radio_button{label="ÎÄ×Ö´¦Àí";key="tab_text";}
+    :radio_button{label="Í¼²ã¹ÜÀí";key="tab_layer";}
+    :radio_button{label="Í¼¿é¹ÜÀí";key="tab_block";}
+    :radio_button{label="±ê×¢´¦Àí";key="tab_dim";}
+    :radio_button{label="½á¹¹Í¨ÓÃ";key="tab_struct";}
+    :radio_button{label="¸¨Öú¹¦ÄÜ";key="tab_misc";}
+  }
+
+  :boxed_row{label="ÎÄ×Ö´¦Àí";key="grp_text";
+    :boxed_row{label="ÎÄ×ÖÑùÊ½";
+      :row{
+        :column{
+          :button{label="´´½¨TSSD TSSD";key="btn_tssd";width=16;fixed_width=true;}
+        }
+        :column{
+          :button{label="¸ÄTSSD GTS";key="btn_gts";width=16;fixed_width=true;}
+        }
+      }
+    }
+    :boxed_row{label="ÎÄ×Ö±à¼­";
+      :row{
+        :column{
+          :button{label="¸Ä×Ö¿í TTK";key="btn_ttk";width=14;fixed_width=true;}
+          :button{label="¸Ä×Ö¸ß TTG";key="btn_ttg";width=14;fixed_width=true;}
+          :button{label="Ğı×ª TTR";key="btn_ttr";width=14;fixed_width=true;}
+        }
+        :column{
+          :button{label="×ó¶ÔÆë TTY";key="btn_tty";width=14;fixed_width=true;}
+          :button{label="²éÕÒÌæ»» TH";key="btn_th";width=14;fixed_width=true;}
+        }
+      }
+    }
+    :boxed_row{label="ÅÅ°æ";
+      :row{
+        :column{
+          :button{label="Á¬½Ó TTJ";key="btn_ttj";width=14;fixed_width=true;}
+          :button{label="¶ÔÆë TTQ";key="btn_ttq";width=14;fixed_width=true;}
+        }
+        :column{
+          :button{label="ÎÄ×Ö¼Ó¿ò TJK";key="btn_tjk";width=14;fixed_width=true;}
+        }
+      }
+    }
+    :boxed_row{label="¸Ö½îµÈ¼¶×ª»»";
+      :row{
+        :column{
+          :button{label="Ò»¼¶¡úÈı¼¶ 13";key="btn_13";width=14;fixed_width=true;}
+          :button{label="¶ş¼¶¡úÈı¼¶ 23";key="btn_23";width=14;fixed_width=true;}
+        }
+        :column{
+          :button{label="Èı¼¶¡úÒ»¼¶ 31";key="btn_31";width=14;fixed_width=true;}
+          :button{label="Èı¼¶¡ú¶ş¼¶ 32";key="btn_32";width=14;fixed_width=true;}
+        }
+      }
+    }
+  }
+
+  :row{
+    :button{label="ÉèÖÃ(S)";key="settings";width=12;fixed_width=true;}
+    :button{label="°ïÖú(H)";key="help";width=12;fixed_width=true;}
+    spacer;
+    :button{label="¹Ø±Õ";key="close";is_default=true;width=10;fixed_width=true;}
+  }
+}
+
+tb_page_2:dialog{
+  label="½¨Öş½á¹¹¹¤¾ßÏä v1.0 - Í¼²ã¹ÜÀí";
+  initial_focus="tab_layer";
+
+  :boxed_radio_row{
+    key="tabs";
+    :radio_button{label="»æÍ¼±à¼­";key="tab_edit";}
+    :radio_button{label="ÎÄ×Ö´¦Àí";key="tab_text";}
+    :radio_button{label="Í¼²ã¹ÜÀí";key="tab_layer";}
+    :radio_button{label="Í¼¿é¹ÜÀí";key="tab_block";}
+    :radio_button{label="±ê×¢´¦Àí";key="tab_dim";}
+    :radio_button{label="½á¹¹Í¨ÓÃ";key="tab_struct";}
+    :radio_button{label="¸¨Öú¹¦ÄÜ";key="tab_misc";}
+  }
+
+  :boxed_row{label="Í¼²ã¹ÜÀí";key="grp_layer";
+    :boxed_row{label="Í¼²ã¿ª¹Ø";
+      :row{
+        :column{
+          :button{label="¹Ø²ã TG";key="btn_tg";width=14;fixed_width=true;}
+          :button{label="·´¹Ø TGF";key="btn_tgf";width=14;fixed_width=true;}
+          :button{label="¶³²ã TD";key="btn_td";width=14;fixed_width=true;}
+        }
+        :column{
+          :button{label="·´¶³ TDF";key="btn_tdf";width=14;fixed_width=true;}
+          :button{label="Ëø²ã TS";key="btn_ts";width=14;fixed_width=true;}
+          :button{label="·´Ëø TSF";key="btn_tsf";width=14;fixed_width=true;}
+        }
+      }
+    }
+    :boxed_row{label="È«²¿²Ù×÷";
+      :row{
+        :column{
+          :button{label="È«½â¶³ TDJ";key="btn_tdj";width=14;fixed_width=true;}
+          :button{label="È«½âËø TSJ";key="btn_tsj";width=14;fixed_width=true;}
+        }
+        :column{
+          :button{label="È«²¿ÏÔÊ¾ TX";key="btn_tx";width=14;fixed_width=true;}
+        }
+      }
+    }
+    :boxed_row{label="µ±Ç°²ã";
+      :row{
+        :column{
+          :button{label="ÇĞµ±Ç°²ã TQ";key="btn_tq";width=14;fixed_width=true;}
+        }
+        :column{
+          :button{label="¸Äµ½µ±Ç°²ã GTC";key="btn_gtc";width=16;fixed_width=true;}
+        }
+      }
+    }
+  }
+
+  :row{
+    :button{label="ÉèÖÃ(S)";key="settings";width=12;fixed_width=true;}
+    :button{label="°ïÖú(H)";key="help";width=12;fixed_width=true;}
+    spacer;
+    :button{label="¹Ø±Õ";key="close";is_default=true;width=10;fixed_width=true;}
+  }
+}
+
+tb_page_3:dialog{
+  label="½¨Öş½á¹¹¹¤¾ßÏä v1.0 - Í¼¿é¹ÜÀí";
+  initial_focus="tab_block";
+
+  :boxed_radio_row{
+    key="tabs";
+    :radio_button{label="»æÍ¼±à¼­";key="tab_edit";}
+    :radio_button{label="ÎÄ×Ö´¦Àí";key="tab_text";}
+    :radio_button{label="Í¼²ã¹ÜÀí";key="tab_layer";}
+    :radio_button{label="Í¼¿é¹ÜÀí";key="tab_block";}
+    :radio_button{label="±ê×¢´¦Àí";key="tab_dim";}
+    :radio_button{label="½á¹¹Í¨ÓÃ";key="tab_struct";}
+    :radio_button{label="¸¨Öú¹¦ÄÜ";key="tab_misc";}
+  }
+
+  :boxed_row{label="Í¼¿é¹ÜÀí";key="grp_block";
+    :row{
+      :column{
+        :button{label="¿ìËÙ½¨¿é JK";key="btn_jk";width=14;fixed_width=true;}
+        :button{label="¿éÍ³¼Æ KTJ";key="btn_ktj";width=14;fixed_width=true;}
+        :button{label="¿é¸ÄÃû GKM";key="btn_gkm";width=14;fixed_width=true;}
+      }
+      :column{
+        :button{label="¸Ä¿éÊôĞÔ GKS";key="btn_gks";width=14;fixed_width=true;}
+        :button{label="É¾ÖØµş¿é SK";key="btn_sk";width=14;fixed_width=true;}
+      }
+    }
+  }
+
+  :row{
+    :button{label="ÉèÖÃ(S)";key="settings";width=12;fixed_width=true;}
+    :button{label="°ïÖú(H)";key="help";width=12;fixed_width=true;}
+    spacer;
+    :button{label="¹Ø±Õ";key="close";is_default=true;width=10;fixed_width=true;}
+  }
+}
+
+tb_page_4:dialog{
+  label="½¨Öş½á¹¹¹¤¾ßÏä v1.0 - ±ê×¢´¦Àí";
+  initial_focus="tab_dim";
+
+  :boxed_radio_row{
+    key="tabs";
+    :radio_button{label="»æÍ¼±à¼­";key="tab_edit";}
+    :radio_button{label="ÎÄ×Ö´¦Àí";key="tab_text";}
+    :radio_button{label="Í¼²ã¹ÜÀí";key="tab_layer";}
+    :radio_button{label="Í¼¿é¹ÜÀí";key="tab_block";}
+    :radio_button{label="±ê×¢´¦Àí";key="tab_dim";}
+    :radio_button{label="½á¹¹Í¨ÓÃ";key="tab_struct";}
+    :radio_button{label="¸¨Öú¹¦ÄÜ";key="tab_misc";}
+  }
+
+  :boxed_row{label="±ê×¢´¦Àí";key="grp_dim";
+    :row{
+      :column{
+        :button{label="±ê×¢¸´Î» FW";key="btn_fw";width=16;fixed_width=true;}
+        :button{label="±ê×¢Ïß¶ÔÆë BBQ";key="btn_bbq";width=16;fixed_width=true;}
+        :button{label="±ê×¢µÈ·Ö BBF";key="btn_bbf";width=16;fixed_width=true;}
+        :button{label="±ê×¢ÒÆ²ã BGC";key="btn_bgc";width=16;fixed_width=true;}
+      }
+      :column{
+        :button{label="½çÏß¶ÔÆë GGB";key="btn_ggb";width=16;fixed_width=true;}
+        :button{label="¸Ä±ê×¢ÎÄ×Ö GBB";key="btn_gbb";width=16;fixed_width=true;}
+        :button{label="×ø±ê±ê×¢ ZB";key="btn_zb";width=16;fixed_width=true;}
+        :button{label="Çò±ê QB";key="btn_qb";width=16;fixed_width=true;}
+      }
+    }
+  }
+
+  :row{
+    :button{label="ÉèÖÃ(S)";key="settings";width=12;fixed_width=true;}
+    :button{label="°ïÖú(H)";key="help";width=12;fixed_width=true;}
+    spacer;
+    :button{label="¹Ø±Õ";key="close";is_default=true;width=10;fixed_width=true;}
+  }
+}
+
+tb_page_5:dialog{
+  label="½¨Öş½á¹¹¹¤¾ßÏä v1.0 - ½á¹¹Í¨ÓÃ";
+  initial_focus="tab_struct";
+
+  :boxed_radio_row{
+    key="tabs";
+    :radio_button{label="»æÍ¼±à¼­";key="tab_edit";}
+    :radio_button{label="ÎÄ×Ö´¦Àí";key="tab_text";}
+    :radio_button{label="Í¼²ã¹ÜÀí";key="tab_layer";}
+    :radio_button{label="Í¼¿é¹ÜÀí";key="tab_block";}
+    :radio_button{label="±ê×¢´¦Àí";key="tab_dim";}
+    :radio_button{label="½á¹¹Í¨ÓÃ";key="tab_struct";}
+    :radio_button{label="¸¨Öú¹¦ÄÜ";key="tab_misc";}
+  }
+
+  :boxed_row{label="½á¹¹Í¨ÓÃ";key="grp_struct";
+    :boxed_row{label="¸Ö½î»æÖÆ";
+      :row{
+        :column{
+          :button{label="»­¸Ö½î RB";key="btn_rb";width=14;fixed_width=true;}
+          :button{label="»­¹¿½î RS";key="btn_rs";width=14;fixed_width=true;}
+          :button{label="¼ÓÍä¹³ RH";key="btn_rh";width=14;fixed_width=true;}
+          :button{label="É¾Íä¹³ RDH";key="btn_rdh";width=14;fixed_width=true;}
+        }
+        :column{
+          :button{label="¸Ä¿í¶È RW";key="btn_rw";width=14;fixed_width=true;}
+          :button{label="Æ«ÒÆ¸Ö½î RO";key="btn_ro";width=14;fixed_width=true;}
+          :button{label="Ïß±ä½î RL";key="btn_rl";width=14;fixed_width=true;}
+        }
+        :column{
+          :button{label="¸Ö½î±ê×¢ RD";key="btn_rd";width=14;fixed_width=true;}
+          :button{label="¸Ö½î±àºÅ RCC";key="btn_rcc";width=14;fixed_width=true;}
+          :button{label="°åµ×½î RBR";key="btn_rbr";width=14;fixed_width=true;}
+          :button{label="°å¸º½î RBF";key="btn_rbf";width=14;fixed_width=true;}
+        }
+      }
+    }
+    :boxed_row{label="¸Ö½î±à¼­";
+      :row{
+        :column{
+          :button{label="±à¼­±ê×¢ RE";key="btn_re";width=14;fixed_width=true;}
+          :button{label="Åä½îÃæ»ı RA";key="btn_ra";width=14;fixed_width=true;}
+          :button{label="±àºÅ¹ÜÀí RN";key="btn_rn";width=14;fixed_width=true;}
+        }
+        :column{
+          :button{label="¸Ö½î¾µÏñ RM";key="btn_rm";width=16;fixed_width=true;}
+          :button{label="Ë«»÷±à¼­ RED";key="btn_red";width=16;fixed_width=true;}
+          :button{label="Ë«»÷ÔöÇ¿ REDB";key="btn_redb";width=16;fixed_width=true;}
+        }
+      }
+    }
+    :boxed_row{label="½á¹¹¹¹¼ş";
+      :row{
+        :column{
+          :button{label="¾ØĞÎÖù DK";key="btn_dk";width=14;fixed_width=true;}
+          :button{label="Ô²ĞÎÖù DKK";key="btn_dkk";width=14;fixed_width=true;}
+          :button{label="Ç½Éí·ì SG";key="btn_sg";width=14;fixed_width=true;}
+        }
+        :column{
+          :button{label="Í¼ÃûÏß TML";key="btn_tml";width=14;fixed_width=true;}
+          :button{label="ÆÊÇĞ·û PQ";key="btn_pq";width=14;fixed_width=true;}
+          :button{label="Æ½ÃæºÅ PMH";key="btn_pmh";width=14;fixed_width=true;}
+        }
+      }
+    }
+  }
+
+  :row{
+    :button{label="ÉèÖÃ(S)";key="settings";width=12;fixed_width=true;}
+    :button{label="°ïÖú(H)";key="help";width=12;fixed_width=true;}
+    spacer;
+    :button{label="¹Ø±Õ";key="close";is_default=true;width=10;fixed_width=true;}
+  }
+}
+
+tb_page_6:dialog{
+  label="½¨Öş½á¹¹¹¤¾ßÏä v1.0 - ¸¨Öú¹¦ÄÜ";
+  initial_focus="tab_misc";
+
+  :boxed_radio_row{
+    key="tabs";
+    :radio_button{label="»æÍ¼±à¼­";key="tab_edit";}
+    :radio_button{label="ÎÄ×Ö´¦Àí";key="tab_text";}
+    :radio_button{label="Í¼²ã¹ÜÀí";key="tab_layer";}
+    :radio_button{label="Í¼¿é¹ÜÀí";key="tab_block";}
+    :radio_button{label="±ê×¢´¦Àí";key="tab_dim";}
+    :radio_button{label="½á¹¹Í¨ÓÃ";key="tab_struct";}
+    :radio_button{label="¸¨Öú¹¦ÄÜ";key="tab_misc";}
+  }
+
+  :boxed_row{label="¸¨Öú¹¦ÄÜ";key="grp_misc";
+    :boxed_row{label="ÔÆÏß¼ıÍ·";
+      :row{
+        :column{
+          :button{label="ÔÆÏß RT";key="btn_rt";width=14;fixed_width=true;}
+          :button{label="ÔÆÏßÒıÏß JT";key="btn_jt";width=14;fixed_width=true;}
+        }
+        :column{
+          :button{label="³öÍ¼±ÈÀı XD";key="btn_xd";width=14;fixed_width=true;}
+        }
+      }
+    }
+    :boxed_row{label="¸¨Öú»æÍ¼";
+      :row{
+        :column{
+          :button{label="µ¥ÕÛ¶ÏÏß DX";key="btn_dx";width=14;fixed_width=true;}
+          :button{label="Ë«ÕÛ¶ÏÏß DXX";key="btn_dxx";width=14;fixed_width=true;}
+          :button{label="Ë®Æ½¶Ïµã DD";key="btn_dd";width=14;fixed_width=true;}
+          :button{label="ÊúÖ±¶Ïµã DDD";key="btn_ddd";width=14;fixed_width=true;}
+        }
+        :column{
+          :button{label="º¸¹Ü·ìÏß HGF";key="btn_hgf";width=14;fixed_width=true;}
+          :button{label="²¶×½ÉèÖÃ NN";key="btn_nn";width=14;fixed_width=true;}
+          :button{label="Í¼Ö½ÇåÀí QQ";key="btn_qq";width=14;fixed_width=true;}
+          :button{label="ËµÃ÷±êÇ© SY";key="btn_sy";width=14;fixed_width=true;}
+        }
+        :column{
+          :button{label="ÖĞĞÄÏß CE";key="btn_ce";width=14;fixed_width=true;}
+        }
+      }
+    }
+    :boxed_row{label="¼ÆËãÍ³¼Æ";
+      :row{
+        :column{
+          :button{label="ÀÛ¼Æ³¤¶È LCD";key="btn_lcd";width=14;fixed_width=true;}
+          :button{label="ÀÛ¼ÆÃæ»ı LMJ";key="btn_lmj";width=14;fixed_width=true;}
+        }
+        :column{
+          :button{label="Êı×ÖÇóºÍ QH";key="btn_qh";width=14;fixed_width=true;}
+          :button{label="DXF²éÑ¯ TN";key="btn_tn";width=14;fixed_width=true;}
+        }
+      }
+    }
+    :boxed_row{label="Ñ¡Ôñ¡¤ÅúÁ¿´òÓ¡";
+      :row{
+        :column{
+          :button{label="Ñ¡ÔñÒ× SS";key="btn_ss";width=14;fixed_width=true;}
+        }
+        :column{
+          :button{label="ÅúÁ¿´òÓ¡ BPT";key="btn_bpt";width=16;fixed_width=true;}
+          :button{label="´òÓ¡ÉèÖÃ BPSET";key="btn_bpset";width=16;fixed_width=true;}
+        }
+      }
+    }
+  }
+
+  :row{
+    :button{label="ÉèÖÃ(S)";key="settings";width=12;fixed_width=true;}
+    :button{label="°ïÖú(H)";key="help";width=12;fixed_width=true;}
+    spacer;
+    :button{label="¹Ø±Õ";key="close";is_default=true;width=10;fixed_width=true;}
   }
 }

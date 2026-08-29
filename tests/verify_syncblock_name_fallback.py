@@ -41,7 +41,7 @@ def extract_function(text: str, name: str) -> str:
 
 
 def main() -> int:
-    text = SYNCBLOCK.read_text(encoding="utf-8")
+    text = SYNCBLOCK.read_text(encoding="gbk")
     body = extract_function(text, "sb:get-effective-name")
     syncnow = extract_function(text, "c:SyncNow")
 

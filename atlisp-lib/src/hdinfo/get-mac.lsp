@@ -1,5 +1,5 @@
 (defun hdinfo:get-mac (/ i mac s str svr wmi)
-  "è·å–macåœ°å€ï¼Œä¸ä¸€å®šæœ‰ç”¨ã€‚"
+  "»ñÈ¡macµØÖ·£¬²»Ò»¶¨ÓĞÓÃ¡£"
   (vl-load-com)
   (setq wmi (vlax-create-object "WbemScripting.SWbemLocator"))
   (setq svr (vlax-invoke wmi (quote connectserver)))

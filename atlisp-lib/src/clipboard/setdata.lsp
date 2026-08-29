@@ -1,5 +1,5 @@
 (defun clipboard:setdata (str / cb)
-  "è®¾ç½®å‰ªè´´æ¿å†…å®¹ä¸º str."
+  "ÉèÖÃ¼ôÌù°åÄÚÈİÎª str."
   "-1"
   "(clipboard:setdata \"the string in clipboard.\")"
   (clipboard:init)

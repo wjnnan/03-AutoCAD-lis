@@ -1,74 +1,87 @@
-ï»¿;;; tb-mod-text.lsp â€” æ–‡å­—å¤„ç†æ¨¡å—
-;;; ç»„åˆ txt:* entity:* lay:* åº“å‡½æ•°ã€‚
-;;; åŸæ–‡ä»¶æ¥æºï¼šF:\ç»“æ„æ’ä»¶\æ–‡å­—.lspï¼ˆ35å‘½ä»¤ï¼‰â€” å»é‡æ”¹å†™
+;;; tb-mod-text.lsp ¡ª ÎÄ×Ö´¦ÀíÄ£¿é
+;;; ×éºÏ txt:* entity:* lay:* ¿âº¯Êı¡£
+;;; Ô­ÎÄ¼şÀ´Ô´£ºF:\½á¹¹²å¼ş\ÎÄ×Ö.lsp£¨35ÃüÁî£©¡ª È¥ÖØ¸ÄĞ´
 
 ;; ============================================================================
-;; æ–‡å­—æ ·å¼
+;; ÎÄ×ÖÑùÊ½
 ;; ============================================================================
 
 (defun c:tssd nil
-  "åˆ›å»ºå¹¶è®¾ä¸º TSSD_Rein æ–‡å­—æ ·å¼ï¼ˆæ¢ç´¢è€…é’¢ç­‹æ ‡å‡†ï¼‰ã€‚"
+  (uc:guard-begin '("TEXTSTYLE"))
+  "´´½¨²¢ÉèÎª TSSD_Rein ÎÄ×ÖÑùÊ½£¨Ì½Ë÷Õß¸Ö½î±ê×¼£©¡£"
   (txt:setup-tssd-style)
-  (princ))
+  (princ)
+  (uc:guard-end))
 
 (defun c:gts (/ ss)
-  "å°†æ‰€é€‰æ–‡å­—æ ·å¼æ”¹ä¸º TSSD_Reinã€‚"
-  (if (setq ss (ssget '((0 . "*TEXT"))))
+  (uc:guard-begin '())
+  "½«ËùÑ¡ÎÄ×ÖÑùÊ½¸ÄÎª TSSD_Rein¡£"
+  (if (setq ss (ssget '((0 . "TEXT"))))
     (progn
       (txt:make-style "TSSD_Rein" "tssdeng.shx" "hztxt.shx" 0.7)
       (sel:for-each ss
         '(lambda (e)
            (txt:set-style e "TSSD_Rein")
            (txt:set-width e 0.7))))
-    (princ "\næœªé€‰æ‹©æ–‡å­—ã€‚"))
-  (princ))
+    (princ "\nÎ´Ñ¡ÔñÎÄ×Ö¡£"))
+  (princ)
+  (uc:guard-end))
 
 
 ;; ============================================================================
-;; æ–‡å­—å±æ€§ä¿®æ”¹
+;; ÎÄ×ÖÊôĞÔĞŞ¸Ä
 ;; ============================================================================
 
 (defun c:ttk (/ ss w)
-  "ä¿®æ”¹æ‰€é€‰æ–‡å­—çš„å®½é«˜æ¯”ã€‚"
+  (uc:guard-begin '())
+  "ĞŞ¸ÄËùÑ¡ÎÄ×ÖµÄ¿í¸ß±È¡£"
   (if (setq ss (ssget '((0 . "TEXT"))))
     (progn
-      (setq w (safe:get-real "æ–‡å­—å®½é«˜æ¯”" (if *TMP:LAST-WIDTH* *TMP:LAST-WIDTH* 0.7)))
+      (setq w (safe:get-real "ÎÄ×Ö¿í¸ß±È" (if *TMP:LAST-WIDTH* *TMP:LAST-WIDTH* 0.7)))
       (setq *TMP:LAST-WIDTH* w)
       (sel:for-each ss '(lambda (e) (txt:set-width e w)))))
-  (princ))
+  (princ)
+  (uc:guard-end))
 
 (defun c:ttg (/ ss h)
-  "ä¿®æ”¹æ‰€é€‰æ–‡å­—çš„é«˜åº¦ã€‚"
+  (uc:guard-begin '())
+  "ĞŞ¸ÄËùÑ¡ÎÄ×ÖµÄ¸ß¶È¡£"
   (if (setq ss (ssget '((0 . "*TEXT"))))
     (progn
-      (setq h (safe:get-real "æ–‡å­—é«˜åº¦" (if *TMP:LAST-TEXT-H* *TMP:LAST-TEXT-H* 350)))
+      (setq h (safe:get-real "ÎÄ×Ö¸ß¶È" (if *TMP:LAST-TEXT-H* *TMP:LAST-TEXT-H* 350)))
       (setq *TMP:LAST-TEXT-H* h)
       (sel:for-each ss '(lambda (e) (txt:set-height e h)))))
-  (princ))
+  (princ)
+  (uc:guard-end))
 
 (defun c:ttr (/ ss ang)
-  "ä¿®æ”¹æ‰€é€‰æ–‡å­—çš„æ—‹è½¬è§’åº¦ã€‚"
+  (uc:guard-begin '())
+  "ĞŞ¸ÄËùÑ¡ÎÄ×ÖµÄĞı×ª½Ç¶È¡£"
   (if (setq ss (ssget '((0 . "TEXT"))))
     (progn
-      (setq ang (getangle "\næ—‹è½¬è§’åº¦<0>: "))
+      (setq ang (getangle "\nĞı×ª½Ç¶È<0>: "))
       (if (not ang) (setq ang 0.0))
       (sel:for-each ss '(lambda (e) (txt:set-rotation e ang)))))
-  (princ))
+  (princ)
+  (uc:guard-end))
 
 (defun c:tty nil
-  "è®¾ç½®æ‰€é€‰æ–‡å­—ä¸ºå·¦å¯¹é½ã€‚"
+  (uc:guard-begin '())
+  "ÉèÖÃËùÑ¡ÎÄ×ÖÎª×ó¶ÔÆë¡£"
   (if (setq ss (ssget '((0 . "TEXT"))))
     (sel:for-each ss 'txt:set-left-align))
-  (princ))
+  (princ)
+  (uc:guard-end))
 
 
 ;; ============================================================================
-;; æ–‡å­—å†…å®¹æ“ä½œ
+;; ÎÄ×ÖÄÚÈİ²Ù×÷
 ;; ============================================================================
 
 (defun c:ttj (/ e1 ss source-str)
-  "æ–‡å­—åˆå¹¶ï¼šå°†åç»­æ–‡å­—å†…å®¹è¿½åŠ åˆ°ç¬¬ä¸€ä¸ªæ–‡å­—ã€‚"
-  (if (setq e1 (car (entsel "\né€‰æ‹©ç›®æ ‡æ–‡å­—(å†…å®¹è¿½åŠ åˆ°æ­¤): ")))
+  (uc:guard-begin '())
+  "ÎÄ×ÖºÏ²¢£º½«ºóĞøÎÄ×ÖÄÚÈİ×·¼Óµ½µÚÒ»¸öÎÄ×Ö¡£"
+  (if (setq e1 (car (entsel "\nÑ¡ÔñÄ¿±êÎÄ×Ö(ÄÚÈİ×·¼Óµ½´Ë): ")))
     (progn
       (setq source-str (txt:get-content e1))
       (if (setq ss (ssget '((0 . "TEXT"))))
@@ -79,80 +92,96 @@
                  (progn
                    (setq source-str (strcat source-str (txt:get-content e)))
                    (entdel e)))))
-          ;; åˆå¹¶å®Œæˆåæ›´æ–°ç›®æ ‡æ–‡å­—
+          ;; ºÏ²¢Íê³Éºó¸üĞÂÄ¿±êÎÄ×Ö
           (txt:set-content e1 source-str)
           (entity:update e1)))))
-  (princ))
+  (princ)
+  (uc:guard-end))
 
 (defun c:th (/ old-str new-str ss)
-  "æ–‡å­—æŸ¥æ‰¾æ›¿æ¢ã€‚"
-  (setq old-str (getstring T "\næŸ¥æ‰¾æ–‡å­—: "))
+  (uc:guard-begin '())
+  "ÎÄ×Ö²éÕÒÌæ»»¡£"
+  (setq old-str (getstring T "\n²éÕÒÎÄ×Ö: "))
   (if (and old-str (/= old-str ""))
     (progn
-      (setq new-str (getstring T "\næ›¿æ¢ä¸º: "))
+      (setq new-str (getstring T "\nÌæ»»Îª: "))
       (if (setq ss (ssget (list '(0 . "*TEXT") (cons 1 (strcat "*" old-str "*")))))
         (sel:for-each ss
           '(lambda (e / str)
              (setq str (txt:get-content e))
-             (if (vl-string-search new-str old-str)
+             (if (vl-string-search old-str new-str)
                (if (vl-string-search old-str str)
                  (setq str (vl-string-subst new-str old-str str)))
                (while (vl-string-search old-str str)
                  (setq str (vl-string-subst new-str old-str str))))
              (txt:set-content e str)
              (entity:update e)))
-        (princ "\næœªæ‰¾åˆ°åŒ¹é…æ–‡å­—ã€‚"))))
-  (princ))
+        (princ "\nÎ´ÕÒµ½Æ¥ÅäÎÄ×Ö¡£"))))
+  (princ)
+  (uc:guard-end))
 
 
 ;; ============================================================================
-;; æ–‡å­—å¯¹é½
+;; ÎÄ×Ö¶ÔÆë
 ;; ============================================================================
 
-(defun c:ttq (/ ss ref-x)
-  "æ–‡å­—å·¦å¯¹é½åˆ°åŒä¸€ X åæ ‡ã€‚é€‰æ‹©æ–‡å­—åï¼Œå…¨éƒ¨å¯¹é½åˆ°ç¬¬ä¸€ä¸ªæ–‡å­—çš„ Xã€‚"
-  (if (setq e1 (car (entsel "\né€‰æ‹©åŸºå‡†æ–‡å­— (å¯¹é½ç›®æ ‡): ")))
+(defun c:ttq (/ ss ref-x e1)
+  (uc:guard-begin '())
+  "ÎÄ×Ö×ó¶ÔÆëµ½Í¬Ò» X ×ø±ê¡£Ñ¡ÔñÎÄ×Öºó£¬È«²¿¶ÔÆëµ½µÚÒ»¸öÎÄ×ÖµÄ X¡£"
+  (if (setq e1 (car (entsel "\nÑ¡Ôñ»ù×¼ÎÄ×Ö (¶ÔÆëÄ¿±ê): ")))
     (progn
       (setq ref-x (car (txt:get-inspt e1)))
       (if (setq ss (ssget '((0 . "TEXT"))))
         (sel:for-each ss
           '(lambda (e / pt)
              (setq pt (txt:get-inspt e))
+             ;; ÏÈÉèÎª×ó¶ÔÆë£¨×éÂë 72/73£©£¬·ñÔò×éÂë 10 ¶Ô¾ÓÖĞ/ÓÒ¶ÔÆëÎÄ×ÖÎŞĞ§
+             (txt:set-left-align e)
              (txt:set-inspt e (list ref-x (cadr pt) (caddr pt))))))))
-  (princ))
+  (princ)
+  (uc:guard-end))
 
 
 ;; ============================================================================
-;; é’¢ç­‹ç¬¦å·è½¬æ¢
+;; ¸Ö½î·ûºÅ×ª»»
 ;; ============================================================================
 
-(defun c:13 (/ ss)  ; ä¸€çº§é’¢ â†’ ä¸‰çº§é’¢
+(defun c:13 (/ ss)  (uc:guard-begin '())
+  ; Ò»¼¶¸Ö ¡ú Èı¼¶¸Ö
   (if (setq ss (ssget '((0 . "*TEXT") (1 . "*%%130*"))))
     (sel:for-each ss '(lambda (e) (txt:rebar-replace e "%%130" "%%132"))))
-  (princ))
+  (princ)
+  (uc:guard-end))
 
-(defun c:23 (/ ss)  ; äºŒçº§é’¢ â†’ ä¸‰çº§é’¢
+(defun c:23 (/ ss)  (uc:guard-begin '())
+  ; ¶ş¼¶¸Ö ¡ú Èı¼¶¸Ö
   (if (setq ss (ssget '((0 . "*TEXT") (1 . "*%%131*"))))
     (sel:for-each ss '(lambda (e) (txt:rebar-replace e "%%131" "%%132"))))
-  (princ))
+  (princ)
+  (uc:guard-end))
 
-(defun c:31 (/ ss)  ; ä¸‰çº§é’¢ â†’ ä¸€çº§é’¢
+(defun c:31 (/ ss)  (uc:guard-begin '())
+  ; Èı¼¶¸Ö ¡ú Ò»¼¶¸Ö
   (if (setq ss (ssget '((0 . "*TEXT") (1 . "*%%132*"))))
     (sel:for-each ss '(lambda (e) (txt:rebar-replace e "%%132" "%%130"))))
-  (princ))
+  (princ)
+  (uc:guard-end))
 
-(defun c:32 (/ ss)  ; ä¸‰çº§é’¢ â†’ äºŒçº§é’¢
+(defun c:32 (/ ss)  (uc:guard-begin '())
+  ; Èı¼¶¸Ö ¡ú ¶ş¼¶¸Ö
   (if (setq ss (ssget '((0 . "*TEXT") (1 . "*%%132*"))))
     (sel:for-each ss '(lambda (e) (txt:rebar-replace e "%%132" "%%131"))))
-  (princ))
+  (princ)
+  (uc:guard-end))
 
 
 ;; ============================================================================
-;; æ–‡å­—åŠ æ¡†
+;; ÎÄ×Ö¼Ó¿ò
 ;; ============================================================================
 
 (defun c:tjk (/ ss e bbox p1 p3)
-  "ä¸ºæ‰€é€‰æ–‡å­—æ·»åŠ çŸ©å½¢å¤–æ¡†ã€‚"
+  (uc:guard-begin '())
+  "ÎªËùÑ¡ÎÄ×ÖÌí¼Ó¾ØĞÎÍâ¿ò¡£"
   (if (setq ss (ssget '((0 . "TEXT"))))
     (sel:for-each ss
       '(lambda (e / bbox p1 p3 lay)
@@ -163,8 +192,9 @@
              (point:offset (car bbox) -10 -10)
              (point:offset (cadr bbox)  10  10))
            T lay))))
-  (princ))
+  (princ)
+  (uc:guard-end))
 
 
-(princ "\n[TB] æ–‡å­—å¤„ç†æ¨¡å—åŠ è½½å®Œæˆ (text: 13å‘½ä»¤)")
+(princ "\n[TB] ÎÄ×Ö´¦ÀíÄ£¿é¼ÓÔØÍê³É (text: 13ÃüÁî)")
 (princ)

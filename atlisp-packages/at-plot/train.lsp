@@ -1,16 +1,16 @@
 
-(@:add-menu  "é€šç”¨æ‰“å°" "è®­ç»ƒå­¦ä¹ " "(@plot:train)")
+(@:add-menu  "Í¨ÓÃ´òÓ¡" "ÑµÁ·Ñ§Ï°" "(@plot:train)")
 (defun @plot:train (/ pt1 pt2 hight res *error*)
   (defun *error* (msg)
     (if fp (close fp))
     (@:*error* msg))
-  (prompt "è¯·ç‚¹å‡»å›¾æ¡†çš„ä¸¤ä¸ªå¯¹è§’ç‚¹")
-  (setq pt1 (getpoint "å·¦ä¸‹è§’: "))
-  (if (null pt1) (progn (princ "\næœªé€‰æ‹©å›¾æ¡†è§’ç‚¹ -- é€€å‡º.") (quit)))
-  (setq pt2 (getpoint pt1 "å³ä¸Šè§’: "))
+  (prompt "Çëµã»÷Í¼¿òµÄÁ½¸ö¶Ô½Çµã")
+  (setq pt1 (getpoint "×óÏÂ½Ç: "))
+  (if (null pt1) (progn (princ "\nÎ´Ñ¡ÔñÍ¼¿ò½Çµã -- ÍË³ö.") (quit)))
+  (setq pt2 (getpoint pt1 "ÓÒÉÏ½Ç: "))
   (setq hight (abs (cadr (mapcar '- pt2 pt1))))
   (setq res
-	(ui:select "è¯·ç¡®è®¤å›¾æ¡†çš„å›¾å¹…åŠæ¯”ä¾‹"
+	(ui:select "ÇëÈ·ÈÏÍ¼¿òµÄÍ¼·ù¼°±ÈÀı"
 		   (mapcar (function
 			    (lambda (x y)
 			      (strcat y " 1:"
@@ -32,16 +32,16 @@
     2 7)
     fp)
   (close fp)
-  (prompt "å¢åŠ äº†ä¸€æ¡è¯†åˆ«è§„åˆ™ã€‚")
+  (prompt "Ôö¼ÓÁËÒ»ÌõÊ¶±ğ¹æÔò¡£")
   (princ)
   )
 (defun @plot:frame-recognition-by-insert (/ blks frameblks)
   ;;
-  "è¯†åˆ«å¤–éƒ¨å‚ç…§æˆ–æ— å±æ€§å—"
+  "Ê¶±ğÍâ²¿²ÎÕÕ»òÎŞÊôĞÔ¿é"
   (setq blks (block:list))
   (if(> (length  blks) 500)
      (progn
-       (@:prompt "å›¾å—å¤ªå¤šï¼Œè·³è¿‡åŒ¿åå—çš„è¯†åˆ«ã€‚")
+       (@:prompt "Í¼¿éÌ«¶à£¬Ìø¹ıÄäÃû¿éµÄÊ¶±ğ¡£")
        (setq blks (vl-remove-if '(lambda(x)(wcmatch x "*`**")) blks))))
   (setq frameblks nil)
   (foreach

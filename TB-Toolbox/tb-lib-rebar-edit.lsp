@@ -1,28 +1,28 @@
-ï»¿;;; tb-lib-rebar-edit.lsp â€” é’¢ç­‹æ ‡æ³¨è§£æä¸ç¼–è¾‘åº“
-;;; é’¢ç­‹æ ‡æ³¨è§£æã€é…ç­‹é¢ç§¯è®¡ç®—ã€ç¼–å·è§„åˆ™å¼•æ“
-;;; ä¾èµ–ï¼štb-core.lsp, tb-lib-entity.lsp, tb-lib-txt.lsp
+;;; tb-lib-rebar-edit.lsp ¡ª ¸Ö½î±ê×¢½âÎöÓë±à¼­¿â
+;;; ¸Ö½î±ê×¢½âÎö¡¢Åä½îÃæ»ı¼ÆËã¡¢±àºÅ¹æÔòÒıÇæ
+;;; ÒÀÀµ£ºtb-core.lsp, tb-lib-entity.lsp, tb-lib-txt.lsp
 ;;;
-;;; æ ‡æ³¨æ ¼å¼æ”¯æŒï¼š
-;;;   çºµç­‹: "4%%13225" â†’ 4Î¦25        è…°ç­‹: "G4%%13212" â†’ G4Î¦12
-;;;   ç®ç­‹: "%%1328@200" â†’ Î¦8@200    æ¿ç­‹: "%%13210@150" â†’ Î¦10@150
-;;;   å¤šå±‚: "4%%13225 2/2" â†’ 4Î¦25 2/2 åŠ å¯†: "%%13210@100/200"
+;;; ±ê×¢¸ñÊ½Ö§³Ö£º
+;;;   ×İ½î: "4%%13225" ¡ú 4¦µ25        Ñü½î: "G4%%13212" ¡ú G4¦µ12
+;;;   ¹¿½î: "%%1328@200" ¡ú ¦µ8@200    °å½î: "%%13210@150" ¡ú ¦µ10@150
+;;;   ¶à²ã: "4%%13225 2/2" ¡ú 4¦µ25 2/2 ¼ÓÃÜ: "%%13210@100/200"
 
 
 ;; ============================================================================
-;; é’¢ç­‹ç¬¦å·æ˜ å°„
+;; ¸Ö½î·ûºÅÓ³Éä
 ;; ============================================================================
 
 (setq *REBAR:CODES*
-  '(("%%130" . 1)   ; ä¸€çº§é’¢ Î¦ (HPB300)
-    ("%%131" . 2)   ; äºŒçº§é’¢ Î¦ (HRB335)
-    ("%%132" . 3))) ; ä¸‰çº§é’¢ Î¦ (HRB400)
+  '(("%%130" . 1)   ; Ò»¼¶¸Ö ¦µ (HPB300)
+    ("%%131" . 2)   ; ¶ş¼¶¸Ö ¦µ (HRB335)
+    ("%%132" . 3))) ; Èı¼¶¸Ö ¦µ (HRB400)
 
 (defun rebar:code-to-grade (code)
-  "é’¢ç­‹ä»£å· â†’ ç­‰çº§ã€‚\"%%130\"â†’1, \"%%131\"â†’2, \"%%132\"â†’3ã€‚"
+  "¸Ö½î´úºÅ ¡ú µÈ¼¶¡£\"%%130\"¡ú1, \"%%131\"¡ú2, \"%%132\"¡ú3¡£"
   (cdr (assoc code *REBAR:CODES*)))
 
 (defun rebar:find-code-in-str (str)
-  "åœ¨å­—ç¬¦ä¸²ä¸­æŸ¥æ‰¾é’¢ç­‹ä»£å·ï¼Œè¿”å› (code . grade) æˆ– nilã€‚"
+  "ÔÚ×Ö·û´®ÖĞ²éÕÒ¸Ö½î´úºÅ£¬·µ»Ø (code . grade) »ò nil¡£"
   (car (vl-remove nil
     (mapcar '(lambda (pair)
       (if (vl-string-search (car pair) str) pair nil))
@@ -30,7 +30,7 @@
 
 
 ;; ============================================================================
-;; æ ‡æ³¨è§£æ
+;; ±ê×¢½âÎö
 ;; ============================================================================
 
 (defun rebar:parse-annotation (str / code grade count d s top-row bot-row
@@ -38,34 +38,34 @@
                                     brace-pos brace-count d-str i at-pos
                                     slash-pos type area total-area area-per-m
                                     prefix parts)
-  "è§£æé’¢ç­‹æ ‡æ³¨æ–‡å­—ï¼Œè¿”å›å±æ€§è¡¨ã€‚
-  è¿”å›: ((type . \"longitudinal\") (count . 4) (diameter . 25) (grade . 3)
+  "½âÎö¸Ö½î±ê×¢ÎÄ×Ö£¬·µ»ØÊôĞÔ±í¡£
+  ·µ»Ø: ((type . \"longitudinal\") (count . 4) (diameter . 25) (grade . 3)
          (spacing . nil) (top-row . 2) (bot-row . 2) (waist . nil)
          (area . 1963.5) (raw . \"4%%13225\"))"
 
   (setq raw str)
 
-  ;; æŸ¥æ‰¾é’¢ç­‹ç¬¦å·
+  ;; ²éÕÒ¸Ö½î·ûºÅ
   (setq code-pair (rebar:find-code-in-str str))
   (if (not code-pair)
     (list (cons 'type "unknown") (cons 'raw str))
     (progn
       (setq code  (car code-pair)
             grade (cdr code-pair)
-            ;; å°†ç¬¦å·æ›¿æ¢ä¸ºå ä½ç¬¦æ–¹ä¾¿è§£æ
+            ;; ½«·ûºÅÌæ»»ÎªÕ¼Î»·û·½±ã½âÎö
             clean (vl-string-subst "|" code str))
 
-      ;; åˆå§‹åŒ–
+      ;; ³õÊ¼»¯
       (setq count nil d nil s nil top-row nil bot-row nil waist-type nil)
 
-      ;; æ£€æµ‹è…°ç­‹å‰ç¼€ G/N
+      ;; ¼ì²âÑü½îÇ°×º G/N
       (cond
         ((wcmatch clean "G*")
          (setq waist-type "G" clean (substr clean 2)))
         ((wcmatch clean "N*")
          (setq waist-type "N" clean (substr clean 2))))
 
-      ;; è§£ææ•°é‡å‰ç¼€ï¼ˆè·³è¿‡ "|" å ä½ç¬¦: +2 = è·³è¿‡ "|"ï¼‰
+      ;; ½âÎöÊıÁ¿Ç°×º£¨Ìø¹ı "|" Õ¼Î»·û: +2 = Ìø¹ı "|"£©
       (if (setq pos (vl-string-search "|" clean))
         (progn
           (setq prefix (substr clean 1 pos))
@@ -75,13 +75,13 @@
                   clean (substr clean (+ pos 2)))
             (setq clean (substr clean (+ pos 2))))))
 
-      ;; æ£€æµ‹ç®ç­‹è‚¢æ•° "(2)"
+      ;; ¼ì²â¹¿½îÖ«Êı "(2)"
       (if (setq brace-pos (vl-string-search "(" clean))
         (progn
           (setq brace-count (atoi (substr clean (1+ brace-pos))))
           (setq clean (substr clean 1 brace-pos))))
 
-      ;; è§£æç›´å¾„
+      ;; ½âÎöÖ±¾¶
       (setq d-str "")
       (setq i 1)
       (while (and (<= i (strlen clean))
@@ -92,11 +92,11 @@
       (if (> (strlen d-str) 0)
         (setq d (atof d-str)))
 
-      ;; è§£æé—´è· @
+      ;; ½âÎö¼ä¾à @
       (if (setq at-pos (vl-string-search "@" clean))
         (setq s (atoi (substr clean (+ at-pos 2)))))
 
-      ;; è§£æåˆ†æ’ 2/2ï¼ˆåªæœ‰ä¸åŒ…å« @ æ—¶æ‰æ˜¯åˆ†æ’æ ¼å¼ï¼‰
+      ;; ½âÎö·ÖÅÅ 2/2£¨Ö»ÓĞ²»°üº¬ @ Ê±²ÅÊÇ·ÖÅÅ¸ñÊ½£©
       (if (and (not (vl-string-search "@" clean))
                (setq slash-pos (vl-string-search "/" clean)))
         (progn
@@ -105,21 +105,21 @@
             (setq top-row (atoi (car parts))
                   bot-row (atoi (cadr parts))))))
 
-      ;; åˆ¤æ–­ç±»å‹
+      ;; ÅĞ¶ÏÀàĞÍ
       (setq type
         (cond
-          (s "stirrup")           ; æœ‰@é—´è· â†’ ç®ç­‹/æ¿ç­‹
-          (waist-type "waist")    ; G/Nè…°ç­‹
+          (s "stirrup")           ; ÓĞ@¼ä¾à ¡ú ¹¿½î/°å½î
+          (waist-type "waist")    ; G/NÑü½î
           (count (if (> count 1) "longitudinal" "single"))
           (t "longitudinal")))
 
-      ;; è®¡ç®—é¢ç§¯
+      ;; ¼ÆËãÃæ»ı
       (if d
-        (setq area (* pi 0.25 d d)                        ; å•æ ¹é¢ç§¯
-              total-area (if count (* count area) area)   ; æ€»é…ç­‹é¢ç§¯
-              area-per-m (if s (* area (/ 1000.0 s)) nil)))   ; æ¯ç±³é¢ç§¯
+        (setq area (* pi 0.25 d d)                        ; µ¥¸ùÃæ»ı
+              total-area (if count (* count area) area)   ; ×ÜÅä½îÃæ»ı
+              area-per-m (if s (* area (/ 1000.0 s)) nil)))   ; Ã¿Ã×Ãæ»ı
 
-      ;; è¿”å›å±æ€§è¡¨
+      ;; ·µ»ØÊôĞÔ±í
       (list
         (cons 'type       type)
         (cons 'grade      grade)
@@ -136,25 +136,25 @@
 
 
 ;; ============================================================================
-;; é¢ç§¯è®¡ç®—
+;; Ãæ»ı¼ÆËã
 ;; ============================================================================
 
 (defun rebar:calc-area (d)
-  "å•æ ¹é’¢ç­‹é¢ç§¯ mm2ã€‚"
+  "µ¥¸ù¸Ö½îÃæ»ı mm2¡£"
   (* pi 0.25 d d))
 
 (defun rebar:calc-total-area (n d)
-  "æ€»é…ç­‹é¢ç§¯ mm2ã€‚"
+  "×ÜÅä½îÃæ»ı mm2¡£"
   (* n (rebar:calc-area d)))
 
 (defun rebar:calc-area-per-meter (d s)
-  "æ¯ç±³é…ç­‹é¢ç§¯ mm2/mã€‚"
+  "Ã¿Ã×Åä½îÃæ»ı mm2/m¡£"
   (if (and d s (> s 0))
     (* (rebar:calc-area d) (/ 1000.0 s))
     0.0))
 
 (defun rebar:find-min-diameter (area-required grade / dias found)
-  "æ ¹æ®æ‰€éœ€é¢ç§¯åæ¨æœ€å°ç›´å¾„ã€‚å¸¸ç”¨ç›´å¾„: 6,8,10,12,14,16,18,20,22,25,28,32"
+  "¸ù¾İËùĞèÃæ»ı·´ÍÆ×îĞ¡Ö±¾¶¡£³£ÓÃÖ±¾¶: 6,8,10,12,14,16,18,20,22,25,28,32"
   (setq dias '(6 8 10 12 14 16 18 20 22 25 28 32)
         found nil)
     (foreach d dias
@@ -164,11 +164,11 @@
 
 
 ;; ============================================================================
-;; é’¢ç­‹æ ‡æ³¨æ ¼å¼åŒ–
+;; ¸Ö½î±ê×¢¸ñÊ½»¯
 ;; ============================================================================
 
 (defun rebar:format-annotation (props / code type count d s waist top bot brace)
-  "å°†è§£æåçš„å±æ€§è¡¨æ ¼å¼åŒ–ä¸ºé’¢ç­‹æ ‡æ³¨å­—ç¬¦ä¸²ã€‚"
+  "½«½âÎöºóµÄÊôĞÔ±í¸ñÊ½»¯Îª¸Ö½î±ê×¢×Ö·û´®¡£"
   (setq code (cond ((= (cdr (assoc 'grade props)) 1) "%%130")
                    ((= (cdr (assoc 'grade props)) 2) "%%131")
                    (t "%%132"))
@@ -182,24 +182,24 @@
         brace (cdr (assoc 'brace props)))
 
   (strcat
-    ;; è…°ç­‹å‰ç¼€
+    ;; Ñü½îÇ°×º
     (if waist waist "")
-    ;; æ ¹æ•° + ä»£å· + ç›´å¾„
+    ;; ¸ùÊı + ´úºÅ + Ö±¾¶
     (if count (strcat (itoa count) code (rtos d 2 0)) (strcat code (rtos d 2 0)))
-    ;; é—´è·
+    ;; ¼ä¾à
     (if s (strcat "@" (itoa s)) "")
-    ;; è‚¢æ•°
+    ;; Ö«Êı
     (if brace (strcat "(" (itoa brace) ")") "")
-    ;; åˆ†æ’
+    ;; ·ÖÅÅ
     (if (and top bot) (strcat " " (itoa top) "/" (itoa bot)) "")))
 
 
 ;; ============================================================================
-;; å¸¸ç”¨é…ç­‹æ–¹æ¡ˆæ¨è
+;; ³£ÓÃÅä½î·½°¸ÍÆ¼ö
 ;; ============================================================================
 
 (defun rebar:suggest-alternatives (props / d area type target-area n dias alts)
-  "æ ¹æ®å½“å‰é…ç­‹æ¨èæ›¿ä»£æ–¹æ¡ˆã€‚ï¼ˆæ›´å¤§/æ›´å°ç›´å¾„æˆ–ä¸åŒé—´è·ï¼‰"
+  "¸ù¾İµ±Ç°Åä½îÍÆ¼öÌæ´ú·½°¸¡££¨¸ü´ó/¸üĞ¡Ö±¾¶»ò²»Í¬¼ä¾à£©"
   (setq d    (cdr (assoc 'diameter props))
         area (cdr (assoc 'area props))
         type (cdr (assoc 'type props)))
@@ -211,14 +211,14 @@
             target-area (if area area (rebar:calc-area d)))
 
       (if (eq type 'stirrup)
-        ;; ç®ç­‹ï¼šæ¨èä¸åŒé—´è·
+        ;; ¹¿½î£ºÍÆ¼ö²»Í¬¼ä¾à
         (progn
           (foreach sp '(100 125 150 200 250)
             (setq alts (cons
               (list (cons 'diameter d) (cons 'spacing sp)
                     (cons 'area-per-m (rebar:calc-area-per-meter d sp)))
               alts))))
-        ;; çºµç­‹ï¼šæ¨èä¸åŒç›´å¾„/æ ¹æ•°
+        ;; ×İ½î£ºÍÆ¼ö²»Í¬Ö±¾¶/¸ùÊı
         (progn
           (foreach d2 dias
             (if (not (= d2 d))
@@ -232,11 +232,11 @@
 
 
 ;; ============================================================================
-;; å·¥å…·å‡½æ•°ï¼šå­—ç¬¦ä¸²åˆ†å‰²
+;; ¹¤¾ßº¯Êı£º×Ö·û´®·Ö¸î
 ;; ============================================================================
 
 (defun str:split (str delim / pos result)
-  "æŒ‰åˆ†éš”ç¬¦åˆ†å‰²å­—ç¬¦ä¸²ã€‚"
+  "°´·Ö¸ô·û·Ö¸î×Ö·û´®¡£"
   (if (= (strlen delim) 0)
     (list str)
     (progn
@@ -246,5 +246,5 @@
       (reverse (cons str result)))))
 
 
-(princ "\n[TB] é’¢ç­‹æ ‡æ³¨è§£æåº“åŠ è½½å®Œæˆ (rebar:parse/calc/format)")
+(princ "\n[TB] ¸Ö½î±ê×¢½âÎö¿â¼ÓÔØÍê³É (rebar:parse/calc/format)")
 (princ)

@@ -1,5 +1,5 @@
 (@::def-pkg '((:NAME . "game-wzq")
-        (:FULL-NAME . "五子棋")
+        (:FULL-NAME . "������")
         (:AUTHOR . "HuangBang")
         (:EMAIL . "vitalgg@gmail.com")
         (:VERSION . "0.0.7")
@@ -7,7 +7,7 @@
         (:CATEGORY . "Game")
         (:OPENSOURCE . 0)
         (:FREE . T)
-        (:DESCRIPTION . "五子棋游戏。AI 水平很低，谁都能赢。")
+        (:DESCRIPTION . "��������Ϸ��AI ˮƽ�ܵͣ�˭����Ӯ��")
         (:URL . "http://atlisp.cn")
         (:FILES "game-wzq"
             "wzq.fas"

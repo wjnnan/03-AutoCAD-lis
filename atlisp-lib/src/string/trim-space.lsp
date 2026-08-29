@@ -1,5 +1,5 @@
 (defun string:trim-space (string)
-  "åŽ»é™¤å­—ç¬¦ä¸²ä¸­çš„ç©ºæ ¼"
+  "È¥³ý×Ö·û´®ÖÐµÄ¿Õ¸ñ"
   (string:subst-all ""
     "
     "

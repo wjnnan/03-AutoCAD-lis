@@ -1,5 +1,5 @@
 (defun dcl:dialog (name)
-  "创建名为 name 的对话框文件。外部变量: dcl-tmp 含路径的文件名. dcl-fp 文件指针。 "
+  "������Ϊ name �ĶԻ����ļ����ⲿ����: dcl-tmp ��·�����ļ���. dcl-fp �ļ�ָ�롣 "
   ""
   "(dcl:dialog \"tips\")"
   (setq dcl:accept-hook nil)

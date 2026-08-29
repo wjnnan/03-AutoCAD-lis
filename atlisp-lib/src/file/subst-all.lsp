@@ -1,5 +1,5 @@
 (defun file:subst-all (newstr oldstr lspfile new-suffix / newfile vf zf text)
-    "æ›¿æ¢æ–‡ä»¶ä¸­çš„å­—ç¬¦ä¸²ã€‚"
+    "Ìæ»»ÎÄ¼şÖĞµÄ×Ö·û´®¡£"
     (setq newfile (strcat (vl-filename-directory lspfile)
             "\\"
             (vl-filename-base lspfile)

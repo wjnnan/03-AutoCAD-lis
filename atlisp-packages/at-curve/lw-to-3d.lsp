@@ -1,6 +1,6 @@
 (defun @curve:lw-to-3d (lwpl / closed pl pts points)
-  "LWpolyline è½¬ 3D polyline"
-  ;; å–lwpl é¡¶ç‚¹
+  "LWpolyline ×ª 3D polyline"
+  ;; È¡lwpl ¶¥µã
   (setq closed (entity:getdxf lwpl 70))
   (setq pts (mapcar 'point:2d->3d(curve:get-points lwpl)))
   (setq points (vlax-make-safearray vlax-vbDouble (cons 0 (1- (* 3 (length pts))))))
@@ -12,8 +12,8 @@
   pl
   )
 (defun @curve:menu-lw2pl ()
-  (@::prompt '("å°†äºŒç»´å¤šæ®µçº¿è½¬åŒ–ä¸ºä¸‰ç»´å¤šæ®µçº¿"
-	     "å¯¹äºŽæœ‰å‡¸åº¦çš„äºŒç»´çº¿å°†å°†è¡Œæ‹‰ç›´"))
+  (@::prompt '("½«¶þÎ¬¶à¶ÎÏß×ª»¯ÎªÈýÎ¬¶à¶ÎÏß"
+	     "¶ÔÓÚÓÐÍ¹¶ÈµÄ¶þÎ¬Ïß½«½«ÐÐÀ­Ö±"))
   (mapcar '@curve:lw-to-3d
 	  (pickset:to-list
 	   (ssget '((0 . "LWpolyline"))))))

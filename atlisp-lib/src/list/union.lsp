@@ -1,5 +1,5 @@
 (defun list:union (lst1 lst2 / lst)
-  "姹備袱涓泦鍚堢殑骞堕泦"
+  "求两个集合的并集"
   "list"
   (if (null *fuzz*)
       (setq *fuzz* 0.001))

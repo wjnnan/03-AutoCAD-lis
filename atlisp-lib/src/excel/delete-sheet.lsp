@@ -1,6 +1,6 @@
 (defun excel:delete-sheet (xlapp name / old rtn sh)
-  "璇存槑:鍒犻櫎宸ヤ綔琛╘n鍙傛暟:XLApp:宸叉墦寮�鐨別xcel鏂囦欢瀵硅薄\n鍙傛暟:Name:宸ヤ綔琛ㄥ悕"
-  "鎴愬姛杩斿洖t"
+  "说明:删除工作表\n参数:XLApp:已打开的excel文件对象\n参数:Name:工作表名"
+  "成功返回t"
   "(excel:deleteSheet exobj \"123\")"
   (setq rtn (excel:sheets xlapp)
     old (vlax-get-property xlapp "DisplayAlerts"))

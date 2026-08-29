@@ -1,6 +1,6 @@
 (defun curve:putclosed (obj)
-  "ä½¿å¤šæ®µçº¿å°é—­"
-  "æ— "
+  "Ê¹¶à¶ÎÏß·â±Õ"
+  "ÎÞ"
   "(curve:putClosed (car (entsel)))"
   (or (p:vlap obj)
     (setq obj (vlax-ename->vla-object obj)))

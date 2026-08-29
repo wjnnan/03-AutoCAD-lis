@@ -1,5 +1,5 @@
 (defun list:remove-front-nth (n lst)
-    "åˆ é™¤åˆ—è¡¨ä¸­è¡¨çš„å‰nä¸ªå…ƒç´ "
+    "É¾³ıÁĞ±íÖĞ±íµÄÇ°n¸öÔªËØ"
     (if (= n 0)
         lst (list:remove-front-nth (1- n)
             (cdr lst))))

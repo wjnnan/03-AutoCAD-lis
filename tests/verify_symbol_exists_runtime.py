@@ -7,40 +7,29 @@ import tempfile
 ROOT = Path(__file__).resolve().parents[1]
 UC_CORE = ROOT / "unified-lib" / "uc-core.lsp"
 TB_CORE = ROOT / "TB-Toolbox" / "tb-core.lsp"
-TB_LAY = ROOT / "TB-Toolbox" / "tb-lib-lay.lsp"
-TB_TXT = ROOT / "TB-Toolbox" / "tb-lib-txt.lsp"
 TB_BLK = ROOT / "TB-Toolbox" / "tb-lib-blk.lsp"
 
 
 def build_probe_lsp() -> str:
     uc_core = str(UC_CORE).replace("\\", "\\\\")
     tb_core = str(TB_CORE).replace("\\", "\\\\")
-    tb_lay = str(TB_LAY).replace("\\", "\\\\")
-    tb_txt = str(TB_TXT).replace("\\", "\\\\")
     tb_blk = str(TB_BLK).replace("\\", "\\\\")
     return f"""(vl-load-com)
 (load "{uc_core}")
 (load "{tb_core}")
-(load "{tb_lay}")
-(load "{tb_txt}")
 (load "{tb_blk}")
 (setq cc:missing-name "CC_DOES_NOT_EXIST_20260505")
 (entmake '((0 . "BLOCK") (2 . "CC_TEST_BLOCK_20260505") (70 . 0) (10 0.0 0.0 0.0)))
 (entmake '((0 . "ENDBLK")))
 (princ (strcat "\\n[EXISTS] layer-core=" (if (uc:layer-exists-p "0") "T" "NIL")))
-(princ (strcat "\\n[EXISTS] layer-sys=" (if (sys:layer-exists? "0") "T" "NIL")))
-(princ (strcat "\\n[EXISTS] layer-lay=" (if (lay:exists? "0") "T" "NIL")))
-(princ (strcat "\\n[EXISTS] layer-missing=" (if (sys:layer-exists? cc:missing-name) "T" "NIL")))
+(princ (strcat "\\n[EXISTS] layer-missing=" (if (uc:layer-exists-p cc:missing-name) "T" "NIL")))
 (princ (strcat "\\n[EXISTS] style-core=" (if (uc:style-exists-p (getvar "TEXTSTYLE")) "T" "NIL")))
-(princ (strcat "\\n[EXISTS] style-sys=" (if (sys:style-exists? (getvar "TEXTSTYLE")) "T" "NIL")))
-(princ (strcat "\\n[EXISTS] style-txt=" (if (txt:style-exists? (getvar "TEXTSTYLE")) "T" "NIL")))
-(princ (strcat "\\n[EXISTS] style-missing=" (if (sys:style-exists? cc:missing-name) "T" "NIL")))
+(princ (strcat "\\n[EXISTS] style-missing=" (if (uc:style-exists-p cc:missing-name) "T" "NIL")))
 (princ (strcat "\\n[EXISTS] block-core=" (if (uc:block-exists-p "CC_TEST_BLOCK_20260505") "T" "NIL")))
-(princ (strcat "\\n[EXISTS] block-sys=" (if (sys:block-exists? "CC_TEST_BLOCK_20260505") "T" "NIL")))
 (princ (strcat "\\n[EXISTS] block-blk=" (if (blk:exists? "CC_TEST_BLOCK_20260505") "T" "NIL")))
-(princ (strcat "\\n[EXISTS] block-missing=" (if (sys:block-exists? cc:missing-name) "T" "NIL")))
-(princ (strcat "\\n[EXISTS] nil-style=" (if (sys:style-exists? nil) "T" "NIL")))
-(princ (strcat "\\n[EXISTS] nil-block=" (if (sys:block-exists? nil) "T" "NIL")))
+(princ (strcat "\\n[EXISTS] block-missing=" (if (uc:block-exists-p cc:missing-name) "T" "NIL")))
+(princ (strcat "\\n[EXISTS] nil-style=" (if (uc:style-exists-p nil) "T" "NIL")))
+(princ (strcat "\\n[EXISTS] nil-block=" (if (uc:block-exists-p nil) "T" "NIL")))
 (princ)
 """
 
@@ -87,15 +76,10 @@ def main() -> int:
 
     for marker in (
         "[EXISTS] layer-core=T",
-        "[EXISTS] layer-sys=T",
-        "[EXISTS] layer-lay=T",
         "[EXISTS] layer-missing=NIL",
         "[EXISTS] style-core=T",
-        "[EXISTS] style-sys=T",
-        "[EXISTS] style-txt=T",
         "[EXISTS] style-missing=NIL",
         "[EXISTS] block-core=T",
-        "[EXISTS] block-sys=T",
         "[EXISTS] block-blk=T",
         "[EXISTS] block-missing=NIL",
         "[EXISTS] nil-style=NIL",

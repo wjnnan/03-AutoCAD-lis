@@ -1,18 +1,21 @@
-;;; tb-mod-bubble.lsp â€” çƒæ ‡ç¼–å·æ¨¡å—
-;;; åˆ›å»ºå¸¦åœ†åœˆå’Œå¼•çº¿çš„ç¼–å·æ ‡è®°ã€‚ä¸ä½¿ç”¨ååº”å™¨ï¼Œè·¨å¹³å°å…¼å®¹ã€‚
-;;; ç»„åˆ entity:* point:* curve:* åº“å‡½æ•°
+;;; tb-mod-bubble.lsp ¡ª Çò±ê±àºÅÄ£¿é
+;;; ´´½¨´øÔ²È¦ºÍÒıÏßµÄ±àºÅ±ê¼Ç¡£²»Ê¹ÓÃ·´Ó¦Æ÷£¬¿çÆ½Ì¨¼æÈİ¡£
+;;; ×éºÏ entity:* point:* curve:* ¿âº¯Êı
 
 (defun c:qb (/ pt text-h radius inspt endpt leader-en number circ-en text-en)
-  "çƒæ ‡ç¼–å·ã€‚æŒ‡å®šä½ç½® â†’ è‡ªåŠ¨åˆ›å»ºç¼–å·åœ†åœˆ + å¼•çº¿ã€‚
-æ•°å­—è‡ªåŠ¨é€’å¢ï¼ˆåŸºäºå›¾çº¸ä¸­å·²å­˜åœ¨çš„ç¼–å·å—ï¼‰ã€‚"
-  ;; åˆå§‹åŒ–å‚æ•°
+  (uc:guard-begin '())
+  "Çò±ê±àºÅ¡£Ö¸¶¨Î»ÖÃ ¡ú ×Ô¶¯´´½¨±àºÅÔ²È¦ + ÒıÏß¡£
+Êı×Ö×Ô¶¯µİÔö£¨»ùÓÚÍ¼Ö½ÖĞÒÑ´æÔÚµÄ±àºÅ¿é£©¡£"
+  ;; ³õÊ¼»¯²ÎÊı
   (setq text-h    (sys:get '*SYS:TEXT-HEIGHT*)
-        radius    (* 0.6 text-h)  ; åœ†åŠå¾„ = 0.6å€å­—é«˜
+        radius    (* 0.6 text-h)  ; Ô²°ë¾¶ = 0.6±¶×Ö¸ß
         blk-name  "TB_BUBBLE")
 
-  ;; åˆ›å»ºçƒæ ‡å—å®šä¹‰ï¼ˆå¦‚æœä¸å­˜åœ¨ï¼‰
-  (if (not (tblsearch "BLOCK" blk-name))
+  ;; ´´½¨Çò±ê¿é¶¨Òå£¨Èç¹û²»´æÔÚ£©
+  (if (not (uc:block-exists-p blk-name))
     (progn
+      ;; ÏÈÈ·±£ TSSD_Rein ÎÄ×ÖÑùÊ½´æÔÚ£¬±ÜÃâ ATTDEF ÒıÓÃÈ±Ê§ÑùÊ½
+      (entity:make-style "TSSD_Rein" "tssdeng.shx" "hztxt.shx" 0.7)
       (setq circ-en (entity:make-circle '(0 0 0) radius "0")
             text-en (entmakex (list '(0 . "ATTDEF")
                                '(100 . "AcDbEntity")
@@ -29,33 +32,44 @@
                                (cons 11 '(0.0 0.0 0.0)))))
       (if (and circ-en text-en)
         (progn
-          (entity:set-dxf text-en 72 1)  ; æ°´å¹³å±…ä¸­
-          (entity:set-dxf text-en 73 2)  ; å‚ç›´å±…ä¸­
-          (entity:set-dxf text-en 11 '(0 0 0))  ; å¯¹é½ç‚¹
-          (command "_.BLOCK" blk-name '(0 0 0)
-            (ssadd circ-en (ssadd text-en (ssadd))) "")))))
+          (entity:set-dxf text-en 72 1)  ; Ë®Æ½¾ÓÖĞ
+          (entity:set-dxf text-en 73 2)  ; ´¹Ö±¾ÓÖĞ
+          (entity:set-dxf text-en 11 '(0 0 0))  ; ¶ÔÆëµã
+          ;; ÓÃ entmake ½¨¿é£¨±ÜÃâ _.BLOCK ¶Ô»°¿òÃüÁî£©
+          (entity:make-block blk-name (list circ-en text-en) '(0 0 0))))))
 
-  ;; ç”¨æˆ·äº¤äº’
-  (if (setq inspt (getpoint "\nçƒæ ‡ä½ç½®: "))
+  ;; ÓÃ»§½»»¥
+  (if (setq inspt (getpoint "\nÇò±êÎ»ÖÃ: "))
     (progn
-      ;; è®¡ç®—ç¼–å·ï¼ˆå½“å‰å›¾çº¸ä¸­ +1ï¼‰
+      ;; ¼ÆËã±àºÅ£¨µ±Ç°Í¼Ö½ÖĞ +1£©
       (setq ss (ssget "X" (list '(0 . "INSERT") (cons 2 blk-name))))
       (setq number (1+ (sel:count ss)))
 
-      ;; æ’å…¥çƒæ ‡
-      (entity:make-insert blk-name inspt 1.0 1.0 1.0 0.0)
-      (entity:set-attrib (entlast) "NUMS" (itoa number))
+      ;; ²åÈë´øÊôĞÔµÄÇò±ê£¨entmake INSERT + ATTRIB + SEQEND£¬DXF 66=1£©
+      (if (entmakex (list '(0 . "INSERT") '(100 . "AcDbEntity")
+                          '(100 . "AcDbBlockReference") '(66 . 1)
+                          (cons 2 blk-name) (cons 10 inspt)
+                          '(41 . 1.0) '(42 . 1.0) '(43 . 1.0) '(50 . 0.0)))
+        (progn
+          (entmake (list '(0 . "ATTRIB") '(100 . "AcDbEntity")
+                         '(100 . "AcDbText") '(100 . "AcDbAttribute")
+                         (cons 10 inspt) (cons 40 text-h)
+                         (cons 1 (itoa number)) (cons 2 "NUMS")
+                         (cons 7 "TSSD_Rein") '(72 . 1) '(73 . 2)
+                         (cons 11 inspt)))
+          (entmake '((0 . "SEQEND")))))
 
-      ;; ç»˜åˆ¶å¼•çº¿
-      (if (setq endpt (getpoint inspt "\nå¼•çº¿ç»ˆç‚¹ï¼ˆå›è½¦è·³è¿‡ï¼‰: "))
+      ;; »æÖÆÒıÏß
+      (if (setq endpt (getpoint inspt "\nÒıÏßÖÕµã£¨»Ø³µÌø¹ı£©: "))
         (progn
           (setq leader-en (entity:make-line inspt endpt "0"))
-          ;; å¼•çº¿ç«¯ç‚¹ç”¨ç®­å¤´
+          ;; ÒıÏß¶ËµãÓÃ¼ıÍ·
           (command "_.LEADER" endpt (point:polar endpt (angle endpt inspt) 10) "" "_N")))
 
-      (princ (strcat "\nçƒæ ‡ç¼–å·: " (itoa number)))))
-  (princ))
+      (princ (strcat "\nÇò±ê±àºÅ: " (itoa number)))))
+  (princ)
+  (uc:guard-end))
 
 
-(princ "\n[TB] çƒæ ‡ç¼–å·æ¨¡å—åŠ è½½å®Œæˆ (bubble: 1å‘½ä»¤)")
+(princ "\n[TB] Çò±ê±àºÅÄ£¿é¼ÓÔØÍê³É (bubble: 1ÃüÁî)")
 (princ)

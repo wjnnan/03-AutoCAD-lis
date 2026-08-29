@@ -1,7 +1,7 @@
-;; å®‰å…¨åŠ è½½ COM æ”¯æŒ â€” ZWCAD æ—  COMï¼Œvl-load-com ä¼šå´©æºƒ
-(if (not (vl-catch-all-error-p
-           (vl-catch-all-apply 'vlax-get-acad-object '())))
-  (vl-load-com))
+;; °²È«¼ÓÔØ COM Ö§³Ö ¡ª ZWCAD ÎŞ COM£¬vl-load-com »áÊ§°Ü
+;; ÓÃ vl-catch-all-apply °ü¹ü£¬±ÜÃâÎŞ COM ËŞÖ÷£¨ZWCAD µÈ£©±ÀÀ£
+(if (vl-catch-all-error-p (vl-catch-all-apply 'vl-load-com '()))
+  (princ "\n[UC] COM Ö§³Ö¼ÓÔØÊ§°Ü£¨¿ÉÄÜÎªÎŞ COM ËŞÖ÷£©¡£"))
 
 (setq *UC:VERSION* "0.1.1")
 
@@ -47,7 +47,9 @@
 (defun uc:snapshot-sysvars (vars / result)
   (setq result nil)
   (foreach var vars
-    (setq result (cons (cons var (getvar var)) result)))
+    (setq result (cons (cons var
+                       (vl-catch-all-apply 'getvar (list var)))
+                       result)))
   (reverse result))
 
 (defun uc:restore-sysvars (snapshot / pair)

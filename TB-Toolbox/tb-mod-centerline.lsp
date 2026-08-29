@@ -1,19 +1,19 @@
-;;; tb-mod-centerline.lsp â€” æ™ºèƒ½ä¸­å¿ƒçº¿æ¨¡å—
-;;; è‡ªåŠ¨è¯†åˆ«å‡ ä½•å…³ç³»ï¼Œç»˜åˆ¶ä¸­å¿ƒçº¿ã€‚
-;;; æ”¯æŒï¼šå•çº¿ã€åŒå¹³è¡Œçº¿ã€åå­—çº¿ã€Låž‹ã€åœ†ã€å¼§ã€çŸ©å½¢
-;;; ç»„åˆ point:* curve:* entity:* lay:* åº“å‡½æ•°
+;;; tb-mod-centerline.lsp ¡ª ÖÇÄÜÖÐÐÄÏßÄ£¿é
+;;; ×Ô¶¯Ê¶±ð¼¸ºÎ¹ØÏµ£¬»æÖÆÖÐÐÄÏß¡£
+;;; Ö§³Ö£ºµ¥Ïß¡¢Ë«Æ½ÐÐÏß¡¢Ê®×ÖÏß¡¢LÐÍ¡¢Ô²¡¢»¡¡¢¾ØÐÎ
+;;; ×éºÏ point:* curve:* entity:* lay:* ¿âº¯Êý
 
-;; ä¸­å¿ƒçº¿å›¾å±‚å’Œæ ·å¼
+;; ÖÐÐÄÏßÍ¼²ãºÍÑùÊ½
 (setq *TB:CL-LAYER* "CENTER"
       *TB:CL-COLOR* 1
-      *TB:CL-EXTEND* 500)  ; ä¸­å¿ƒçº¿å‡ºå¤´é•¿åº¦
+      *TB:CL-EXTEND* 500)  ; ÖÐÐÄÏß³öÍ·³¤¶È
 
 ;; ============================================================================
-;; æ ¸å¿ƒç®—æ³•ï¼šä¸¤ç‚¹é—´åˆ›å»ºä¸­å¿ƒçº¿
+;; ºËÐÄËã·¨£ºÁ½µã¼ä´´½¨ÖÐÐÄÏß
 ;; ============================================================================
 
 (defun cl:make-line (pt1 pt2 / ang ext)
-  "åœ¨ pt1-pt2 åŸºç¡€ä¸Šå‘å¤–å»¶ä¼¸ *TB:CL-EXTEND* çš„ä¸­å¿ƒçº¿ã€‚"
+  "ÔÚ pt1-pt2 »ù´¡ÉÏÏòÍâÑÓÉì *TB:CL-EXTEND* µÄÖÐÐÄÏß¡£"
   (setq ang (point:angle pt1 pt2)
         ext *TB:CL-EXTEND*)
   (entity:make-line
@@ -22,16 +22,17 @@
     *TB:CL-LAYER*))
 
 ;; ============================================================================
-;; ä¸»å‘½ä»¤ c:ce
+;; Ö÷ÃüÁî c:ce
 ;; ============================================================================
 
 (defun c:ce (/ ss e1 e2 cl-enames e1p1 e1p2 e2p1 e2p2 lst cl temp)
-  "æ™ºèƒ½ä¸­å¿ƒçº¿ã€‚é€‰æ‹©å®žä½“è‡ªåŠ¨è¯†åˆ«ç±»åž‹å¹¶ç»˜åˆ¶ä¸­å¿ƒçº¿ã€‚
-æ”¯æŒï¼šLINE, LWPOLYLINE, CIRCLE, ARC, ELLIPSEã€‚
-é€‰æ‹©ä¸¤æ¡å¹³è¡Œç›´çº¿ â†’ ç»˜åˆ¶ä¸­é—´å¯¹ç§°è½´ã€‚
-é€‰æ‹©åœ†å½¢ â†’ ç»˜åˆ¶åå­—ä¸­å¿ƒçº¿ã€‚"
+  (uc:guard-begin '())
+  "ÖÇÄÜÖÐÐÄÏß¡£Ñ¡ÔñÊµÌå×Ô¶¯Ê¶±ðÀàÐÍ²¢»æÖÆÖÐÐÄÏß¡£
+Ö§³Ö£ºLINE, LWPOLYLINE, CIRCLE, ARC, ELLIPSE¡£
+Ñ¡ÔñÁ½ÌõÆ½ÐÐÖ±Ïß ¡ú »æÖÆÖÐ¼ä¶Ô³ÆÖá¡£
+Ñ¡ÔñÔ²ÐÎ ¡ú »æÖÆÊ®×ÖÖÐÐÄÏß¡£"
 
-  ;; å…ˆåŠ è½½ CENTER çº¿åž‹ï¼ˆå¹³å°è‡ªé€‚åº”çº¿åž‹æ–‡ä»¶ï¼‰ï¼Œå†åˆ›å»ºå›¾å±‚
+  ;; ÏÈ¼ÓÔØ CENTER ÏßÐÍ£¨Æ½Ì¨×ÔÊÊÓ¦ÏßÐÍÎÄ¼þ£©£¬ÔÙ´´½¨Í¼²ã
   (if (not (tblsearch "LTYPE" "CENTER"))
     (uc:command-safe
       (list "_.LINETYPE" "_L" "CENTER"
@@ -45,48 +46,52 @@
 
   (if (setq ss (ssget '((0 . "LINE,LWPOLYLINE,CIRCLE,ARC,ELLIPSE"))))
     (progn
-      ;; æ ¹æ®é€‰æ‹©æ•°é‡åˆ¤æ–­å‡ ä½•ç±»åž‹
+      ;; ¸ù¾ÝÑ¡ÔñÊýÁ¿ÅÐ¶Ï¼¸ºÎÀàÐÍ
       (cond
-        ;; é€‰æ‹©2æ¡â€”â€”æ±‚ä¸­å¿ƒå¯¹ç§°è½´
+        ;; Ñ¡Ôñ2Ìõ¡ª¡ªÇóÖÐÐÄ¶Ô³ÆÖá
         ((= (sel:count ss) 2)
          (setq lst (sel:to-list ss)
                e1  (car lst)
                e2  (cadr lst))
          (if (and (= (entity:get-type e1) "LINE")
                   (= (entity:get-type e2) "LINE"))
-           ;; ä¸¤æ¡ç›´çº¿ â†’ ä¸­å¿ƒå¯¹ç§°è½´
+           ;; Á½ÌõÖ±Ïß ¡ú ÖÐÐÄ¶Ô³ÆÖá
            (progn
              (setq e1p1 (curve:startpt e1) e1p2 (curve:endpt e1)
                    e2p1 (curve:startpt e2) e2p2 (curve:endpt e2))
-             ;; æ£€æµ‹ä¸¤ç›´çº¿æ–¹å‘ï¼šè‹¥ e2 ç»ˆç‚¹æ›´é è¿‘ e1 èµ·ç‚¹ï¼ˆåå‘ç»˜åˆ¶ï¼‰ï¼Œäº¤æ¢ e2 ç«¯ç‚¹
+             ;; ¼ì²âÁ½Ö±Ïß·½Ïò£ºÈô e2 ÖÕµã¸ü¿¿½ü e1 Æðµã£¨·´Ïò»æÖÆ£©£¬½»»» e2 ¶Ëµã
              (if (< (+ (point:dist e1p1 e2p2) (point:dist e1p2 e2p1))
                     (+ (point:dist e1p1 e2p1) (point:dist e1p2 e2p2)))
                (setq temp e2p1  e2p1 e2p2  e2p2 temp))
-             (cl:make-line
-               (point:mid e1p1 e2p1)
-               (point:mid e1p2 e2p2))))
-           ;; éžä¸¤æ¡ç›´çº¿çš„æƒ…å†µ
+             (if (or (equal (point:angle e1p1 e1p2) (point:angle e2p1 e2p2) 1e-6)
+                     (equal (abs (- (point:angle e1p1 e1p2) (point:angle e2p1 e2p2))) pi 1e-6))
+               (cl:make-line
+                 (point:mid e1p1 e2p1)
+                 (point:mid e1p2 e2p2))
+               (princ "\nËùÑ¡Á½ÌõÖ±Ïß²»Æ½ÐÐ£¬ÎÞ·¨Çó¶Ô³ÆÖá¡£"))))
+           ;; ·ÇÁ½ÌõÖ±ÏßµÄÇé¿ö
            (progn
              (setq cl-enames (list))
              (foreach e lst
                (foreach ename (cl:entity-centerline e)
                  (if ename (setq cl-enames (cons ename cl-enames))))))))
 
-        ;; é€‰æ‹©1ä¸ªæˆ–æ›´å¤šâ€”â€”é€ä¸ªå¤„ç†
+        ;; Ñ¡Ôñ1¸ö»ò¸ü¶à¡ª¡ªÖð¸ö´¦Àí
         (t
          (sel:for-each ss
            '(lambda (e)
               (cl:entity-centerline e))))))
-    (princ "\næœªé€‰æ‹©æœ‰æ•ˆå®žä½“ã€‚"))
+    (princ "\nÎ´Ñ¡ÔñÓÐÐ§ÊµÌå¡£")
+  (uc:guard-end))
   (princ)
 
 
 ;; ============================================================================
-;; å•å®žä½“ä¸­å¿ƒçº¿ç”Ÿæˆ
+;; µ¥ÊµÌåÖÐÐÄÏßÉú³É
 ;; ============================================================================
 
-(defun cl:entity-centerline (ename / typ p1 p2 center r d ang1 ang2 mid-ang mid-pt pts)
-  "æ ¹æ®å®žä½“ç±»åž‹ç”Ÿæˆä¸­å¿ƒçº¿ã€‚"
+(defun cl:entity-centerline (ename / typ p1 p2 center r d ang1 ang2 mid-ang mid-pt pts a b ang major ratio)
+  "¸ù¾ÝÊµÌåÀàÐÍÉú³ÉÖÐÐÄÏß¡£"
   (setq typ (entity:get-type ename))
   (cond
     ((= typ "LINE")
@@ -98,7 +103,7 @@
      (setq center (entity:get-dxf ename 10)
            r      (entity:get-dxf ename 40)
            d      (+ r *TB:CL-EXTEND*))
-     ;; åå­—ä¸­å¿ƒçº¿
+     ;; Ê®×ÖÖÐÐÄÏß
      (list
        (entity:make-line (list (- (car center) d) (cadr center) (caddr center))
                          (list (+ (car center) d) (cadr center) (caddr center)) *TB:CL-LAYER*)
@@ -110,17 +115,31 @@
            r      (entity:get-dxf ename 40)
            ang1   (entity:get-dxf ename 50)
            ang2   (entity:get-dxf ename 51))
-     ;; å¤„ç†å¼§è·¨è¶Š 0Â° æ–¹å‘çš„æƒ…å†µï¼ˆang2 < ang1ï¼‰
+     ;; ´¦Àí»¡¿çÔ½ 0¡ã ·½ÏòµÄÇé¿ö£¨ang2 < ang1£©
      (if (< ang2 ang1) (setq ang2 (+ ang2 (* 2 pi))))
      (setq mid-ang (+ ang1 (/ (- ang2 ang1) 2.0))
            mid-pt  (point:polar center mid-ang r))
-     ;; åœ†å¿ƒ â†’ å¼§ä¸­ç‚¹ + å‡ºå¤´
+     ;; Ô²ÐÄ ¡ú »¡ÖÐµã + ³öÍ·
      (list (entity:make-line center
              (point:polar center mid-ang (+ r *TB:CL-EXTEND*)) *TB:CL-LAYER*)))
 
+    ((= typ "ELLIPSE")
+     (setq center (entity:get-dxf ename 10)
+           major  (entity:get-dxf ename 11)   ; ³¤Öá¶Ëµã£¨Ïà¶ÔÖÐÐÄ£©
+           ratio  (entity:get-dxf ename 40))  ; ¶ÌÖá/³¤Öá±ÈÀý
+     (setq a   (sqrt (+ (expt (car major) 2) (expt (cadr major) 2)))
+           b   (* a ratio)
+           ang (angle '(0 0 0) major))
+     ;; Ê®×ÖÖÐÐÄÏß£º³¤Öá + ¶ÌÖá£¬¸÷³öÍ· *TB:CL-EXTEND*
+     (list
+       (entity:make-line (point:polar center ang (- (+ a *TB:CL-EXTEND*)))
+                         (point:polar center ang (+ a *TB:CL-EXTEND*)) *TB:CL-LAYER*)
+       (entity:make-line (point:polar center (+ ang (* pi 0.5)) (- (+ b *TB:CL-EXTEND*)))
+                         (point:polar center (+ ang (* pi 0.5)) (+ b *TB:CL-EXTEND*)) *TB:CL-LAYER*)))
+
     ((= typ "LWPOLYLINE")
      (setq pts (curve:vertices ename))
-     ;; é—­åˆå¤šæ®µçº¿ï¼šæ¯è¾¹+é¦–å°¾è¾¹éƒ½ç”»ä¸­å¿ƒçº¿ï¼›å¼€æ”¾å¤šæ®µçº¿ï¼šåªç”»å®žé™…è¾¹
+     ;; ±ÕºÏ¶à¶ÎÏß£ºÃ¿±ß+Ê×Î²±ß¶¼»­ÖÐÐÄÏß£»¿ª·Å¶à¶ÎÏß£ºÖ»»­Êµ¼Ê±ß
      (mapcar
        '(lambda (a b)
           (cl:make-line a b))
@@ -129,8 +148,8 @@
          (append (cdr pts) (list (car pts)))
          (cdr pts))))
 
-    (t (princ (strcat "\nä¸æ”¯æŒçš„å®žä½“ç±»åž‹: " typ)) nil)))
+    (t (princ (strcat "\n²»Ö§³ÖµÄÊµÌåÀàÐÍ: " typ)) nil)))
 
 
-(princ "\n[TB] æ™ºèƒ½ä¸­å¿ƒçº¿æ¨¡å—åŠ è½½å®Œæˆ (centerline: 1å‘½ä»¤)")
+(princ "\n[TB] ÖÇÄÜÖÐÐÄÏßÄ£¿é¼ÓÔØÍê³É (centerline: 1ÃüÁî)")
 (princ)

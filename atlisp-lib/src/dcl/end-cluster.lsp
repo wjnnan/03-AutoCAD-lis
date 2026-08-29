@@ -1,4 +1,4 @@
-(defun dcl:end-cluster nil "å¼€å§‹ dcl å®¹å™¨ç±»æ§ä»¶ã€‚ä¸ dcl:begin-cluster æˆå¯¹ä½¿ç”¨ã€‚"
+(defun dcl:end-cluster nil "¿ªÊ¼ dcl ÈİÆ÷Àà¿Ø¼ş¡£Óë dcl:begin-cluster ³É¶ÔÊ¹ÓÃ¡£"
   ""
   ""
   (write-line "}"

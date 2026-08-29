@@ -1,4 +1,4 @@
 (defun list:rtrim (lst m)
-    "åˆ é™¤è¡¨å°¾mé¡¹"
+    "É¾³ı±íÎ²mÏî"
     (reverse (list:ltrim (reverse lst)
             m)))

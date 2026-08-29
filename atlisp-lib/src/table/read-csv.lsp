@@ -1,6 +1,6 @@
 (defun table:read-csv (file)
-  "è¯»å– csv æ–‡ä»¶ã€‚"
-  "äºŒç»´è¡¨"
+  "¶ÁÈ¡ csv ÎÄ¼ş¡£"
+  "¶şÎ¬±í"
   (vl-remove-if (quote (lambda (x)
         (and (= 1 (length x))
           (= ""

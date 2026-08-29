@@ -1,19 +1,19 @@
 (defun cl:format (stream ctrl-string variables
 			 / flag-instruct  flag-comma number1 number2 result  to-string tmp-str init-flag)
-  ;; å†…éƒ¨å‡½æ•°æ”¯æŒ D X O B A S
-  ;; D åè¿›åˆ¶æ•´æ•° 
-  ;; -- å¤„ç†Dæ—¶çš„å‰ç½®å‚æ•°  @ å¸¦æ­£å· , : æ¯ä¸‰ä½ç”¨,å·åˆ†éš”ï¼Œå¦‚ +1,000,001 
-  ;;  $ å°æ•°ç‚¹å2ä½ï¼ŒF æµ®ç‚¹æ•° E æŒ‡æ•°å½¢å¼
-  ;; -- å¤„ç†æ•°å­—æ—¶çš„å‰ç½®å‚æ•°: v ä»å‚æ•°ä¸­å–å¾—å°æ•°çš„ä½æ•°, # å‰©ä½™çš„å‚æ•°çš„ä¸ªæ•°ä½œä¸ºå°æ•°ä½æ•°ã€‚
-  ;; A å­—ç¬¦ä¸² S å¯ read è¯»å›ã€‚
-  ;; X 16è¿›åˆ¶, O 8è¿›åˆ¶, B äºŒè¿›åˆ¶
-  ;; TODO: ~R æ•°å­—è½¬è‹±æ–‡åŸºæ•°ã€‚~:R æ•°å­—è½¬åºæ•°ï¼Œ~@R ç½—é©¬æ•°å­—ï¼Œ~:@R æ—§å¼ç½—é©¬æ•°å­—
-  ;; TODO: ~P æ˜¯å¦å¤æ•°
-  ;; ~{ ~} è¿­ä»£ (å†…éƒ¨å‡½æ•°ä¸æ”¯æŒ)
-  ;; æ¡ä»¶æ ¼å¼åŒ– ~[ ~]
+  ;; ÄÚ²¿º¯ÊıÖ§³Ö D X O B A S
+  ;; D Ê®½øÖÆÕûÊı 
+  ;; -- ´¦ÀíDÊ±µÄÇ°ÖÃ²ÎÊı  @ ´øÕıºÅ , : Ã¿ÈıÎ»ÓÃ,ºÅ·Ö¸ô£¬Èç +1,000,001 
+  ;;  $ Ğ¡Êıµãºó2Î»£¬F ¸¡µãÊı E Ö¸ÊıĞÎÊ½
+  ;; -- ´¦ÀíÊı×ÖÊ±µÄÇ°ÖÃ²ÎÊı: v ´Ó²ÎÊıÖĞÈ¡µÃĞ¡ÊıµÄÎ»Êı, # Ê£ÓàµÄ²ÎÊıµÄ¸öÊı×÷ÎªĞ¡ÊıÎ»Êı¡£
+  ;; A ×Ö·û´® S ¿É read ¶Á»Ø¡£
+  ;; X 16½øÖÆ, O 8½øÖÆ, B ¶ş½øÖÆ
+  ;; TODO: ~R Êı×Ö×ªÓ¢ÎÄ»ùÊı¡£~:R Êı×Ö×ªĞòÊı£¬~@R ÂŞÂíÊı×Ö£¬~:@R ¾ÉÊ½ÂŞÂíÊı×Ö
+  ;; TODO: ~P ÊÇ·ñ¸´Êı
+  ;; ~{ ~} µü´ú (ÄÚ²¿º¯Êı²»Ö§³Ö)
+  ;; Ìõ¼ş¸ñÊ½»¯ ~[ ~]
   ;; TODO: ~:[FAIL~;pass~]
 
-  "common lisp ä¸­ åŠŸèƒ½å¼ºå¤§çš„æ ¼å¼åŒ–è¾“å‡ºå­—ç¬¦ä¸²å‡½æ•°ã€‚"
+  "common lisp ÖĞ ¹¦ÄÜÇ¿´óµÄ¸ñÊ½»¯Êä³ö×Ö·û´®º¯Êı¡£"
   "String"
   "(cl:format \"~{~a ~}\" (list '(\"a\"\"b\"\"c\")))"
   (defun to-string (para)
@@ -35,7 +35,7 @@
   (while (/= "" ctrl-string)
     (if flag-instruct
 	(cond
-	 ;; ä¿®é¥°ç¬¦
+	 ;; ĞŞÊÎ·û
 	 ((= (ascii ",")(ascii ctrl-string))
 	  ;; comma
 	  (setq flag-comma T)
@@ -53,36 +53,36 @@
 	 
 	 ((and (> (ascii ctrl-string) 47)
 	       (> 58 (ascii ctrl-string)))
-	  ;; æ•°å­—
+	  ;; Êı×Ö
 	  (if flag-comma
 	      (setq number2 (strcat number2 (substr ctrl-string 1 1)))
 	    (setq number1 (strcat number1 (substr ctrl-string 1 1)))
 	    ))
 
-	 ((=  (ascii "~") (ascii ctrl-string)) ;; å¤„ç†æŒ‡ä»¤ï¼Œå½“è¿ç»­æ—¶ï¼Œè¾“å‡º~
+	 ((=  (ascii "~") (ascii ctrl-string)) ;; ´¦ÀíÖ¸Áî£¬µ±Á¬ĞøÊ±£¬Êä³ö~
 	  (setq result (strcat result "~"))
 	  (init-flag))
 	 ((= (ascii "%")(ascii ctrl-string))
-	  ;; æ¢è¡Œ
+	  ;; »»ĞĞ
 	  (setq result (strcat result "\n"))
 	  (init-flag))
 	 ((= (ascii "&")(ascii ctrl-string))
 	  (setq result (strcat result "\n"))
 	  (init-flag))
 	 ((= (ascii "A")(ascii (strcase (substr ctrl-string 1 1))))
-	  ;; å­—ç¬¦ä¸²
+	  ;; ×Ö·û´®
 	  (setq result (strcat result (to-string (car variables))))
 	  (setq variables (cdr variables))
 	  (init-flag))
 	 ((= (ascii "S")(ascii (strcase (substr ctrl-string 1 1))))
-	  ;; å­—ç¬¦ä¸²
+	  ;; ×Ö·û´®
 	  (setq result (strcat result (vl-prin1-to-string (car variables))))
 	  (setq variables (cdr variables))
 	  (init-flag))
 	 
 	 ((= (ascii "D")(ascii (strcase (substr ctrl-string 1 1))))
-	  ;; æ•´æ•°åŠå°æ•°
-	  (if (/= "" number1) ; å¤„ç†å ä½ç¬¦
+	  ;; ÕûÊı¼°Ğ¡Êı
+	  (if (/= "" number1) ; ´¦ÀíÕ¼Î»·û
 	      (progn 
 		(setq tmp-str  (to-string (car variables)))
 		(if (> (atoi number1)(strlen tmp-str))
@@ -93,8 +93,8 @@
 	  (setq variables (cdr variables))
 	  (init-flag))
 	 ((= (ascii "B")(ascii (strcase (substr ctrl-string 1 1))))
-	  ;; äºŒè¿›åˆ¶
-	  (if (/= "" number1) ; å¤„ç†å ä½ç¬¦
+	  ;; ¶ş½øÖÆ
+	  (if (/= "" number1) ; ´¦ÀíÕ¼Î»·û
 	      (progn 
 		(setq tmp-str  (to-string (car variables)))
 		(if (> (atoi number1)(strlen tmp-str))
@@ -105,8 +105,8 @@
 	  (setq variables (cdr variables))
 	  (init-flag))
 	 ((= (ascii "O")(ascii (strcase (substr ctrl-string 1 1))))
-	  ;; 8è¿›åˆ¶
-	  (if (/= "" number1) ; å¤„ç†å ä½ç¬¦
+	  ;; 8½øÖÆ
+	  (if (/= "" number1) ; ´¦ÀíÕ¼Î»·û
 	      (progn 
 		(setq tmp-str (to-string (car variables)))
 		(if (> (atoi number1)(strlen tmp-str))
@@ -117,8 +117,8 @@
 	  (setq variables (cdr variables))
 	  (init-flag))
 	 ((= (ascii "X")(ascii (strcase (substr ctrl-string 1 1))))
-	  ;; 16è¿›åˆ¶
-	  (if (/= "" number1) ; å¤„ç†å ä½ç¬¦
+	  ;; 16½øÖÆ
+	  (if (/= "" number1) ; ´¦ÀíÕ¼Î»·û
 	      (progn 
 		(setq tmp-str (to-string (car variables)))
 		(if (> (atoi number1)(strlen tmp-str))
@@ -131,11 +131,11 @@
 
 	 
 	 ((= (ascii "F")(ascii (strcase (substr ctrl-string 1 1))))
-	  ;; æµ®ç‚¹æ•°
+	  ;; ¸¡µãÊı
 	  (if (= "" number2)
 	      (setq tmp-str (rtos (car variables) 2 3))
 	    (setq tmp-str (rtos (car variables) 2 (atoi number2))))
-	  (if (/= "" number1) ; å¤„ç†å ä½ç¬¦
+	  (if (/= "" number1) ; ´¦ÀíÕ¼Î»·û
 	      (progn 
 		(if (> (atoi number1)(strlen tmp-str))
 		    (repeat (- (atoi number1) (strlen tmp-str))
@@ -145,11 +145,11 @@
 	  (setq variables (cdr variables))
 	  (init-flag))
 	 ((= (ascii "E")(ascii (strcase (substr ctrl-string 1 1))))
-	  ;; æŒ‡æ•°å½¢å¼
+	  ;; Ö¸ÊıĞÎÊ½
 	  (if (= "" number2)
 	      (setq tmp-str (rtos (car variables) 1 3))
 	    (setq tmp-str (rtos (car variables) 1 (atoi number2))))
-	  (if (/= "" number1) ; å¤„ç†å ä½ç¬¦
+	  (if (/= "" number1) ; ´¦ÀíÕ¼Î»·û
 	      (progn 
 		(if (>  (atoi number1)(strlen tmp-str))
 		    (repeat (- (atoi number1) (strlen tmp-str))
@@ -159,14 +159,14 @@
 	  (setq variables (cdr variables))
 	  (init-flag))	  
 	 ((= (ascii "$")(ascii (strcase (substr ctrl-string 1 1))))
-	  ;; è´§å¸
+	  ;; »õ±Ò
 	  (if (= "" number1)
 	      (setq result (strcat result (rtos (car variables) 2 2)))
 	    (setq result (strcat result (rtos (car variables) 2 (atoi number1)))))
 	  (setq variables (cdr variables))
 	  (init-flag))
 	 ((= (ascii "{")(ascii (strcase (substr ctrl-string 1 1))))
-	  ;; è¿­ä»£
+	  ;; µü´ú
 	  (setq ctrl-string (substr ctrl-string 2))
 	  (setq sub-ctrl-string "")
 	  (while (and (<= 2 (strlen ctrl-string))
@@ -182,7 +182,7 @@
 	  (setq variables (cdr variables))
 	  (init-flag))
 	 ((= (ascii "[")(ascii (strcase (substr ctrl-string 1 1))))
-	  ;; æ¡ä»¶æ ¼å¼åŒ–
+	  ;; Ìõ¼ş¸ñÊ½»¯
 	  (setq ctrl-string (substr ctrl-string 2))
 	  (setq sub-ctrl-string "")
 	  (while (and (<= 2 (strlen ctrl-string))
@@ -201,7 +201,7 @@
 	  (init-flag))
  	 )
       (cond
-       ((=  (ascii "~") (ascii ctrl-string)) ;; å¤„ç†æŒ‡ä»¤ï¼Œå½“è¿ç»­æ—¶ï¼Œè¾“å‡º~
+       ((=  (ascii "~") (ascii ctrl-string)) ;; ´¦ÀíÖ¸Áî£¬µ±Á¬ĞøÊ±£¬Êä³ö~
 	(setq flag-instruct T))	
        (t
 	(setq result (strcat result (substr ctrl-string 1 1)))

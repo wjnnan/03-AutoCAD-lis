@@ -1,5 +1,5 @@
 (defun p:vla-listp (lst)
-  "鍒ゆ柇鏄惁涓簐la瀵硅薄鍒楄〃"
+  "判断是否为vla对象列表"
   (if (and lst
 	   (listp lst))
       (apply (quote and)

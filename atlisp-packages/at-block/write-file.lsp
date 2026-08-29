@@ -1,5 +1,5 @@
 (defun @block:write-file ()
-  (@::prompt "å°†å½“å‰dwgä¸­çš„å—å¯¼å‡ºåˆ°åº“æ–‡ä»¶å¤¹")
+  (@::prompt "½«µ±Ç°dwgÖĞµÄ¿éµ¼³öµ½¿âÎÄ¼ş¼Ğ")
   (setq cmdecho (getvar "CMDECHO"))
   (setvar "CMDECHO" 0)
   (setq path (@:path-win-format (@:get-config '@block:lib)))
@@ -12,7 +12,7 @@
 	(if(null (findfile path))
 	   (@:mkdir (@:path path))
 	  )
-	(@:prompt "è¯·é€‰æ‹©è¦å†™å‡ºçš„å—:")
+	(@:prompt "ÇëÑ¡ÔñÒªĞ´³öµÄ¿é:")
 	(setq blk-lst
 	      (mapcar 
 	       '(lambda(x)
@@ -24,7 +24,7 @@
 				(wcmatch x "`**")
 				(wcmatch x "_*")))
 			     blk-lst))
-	;; TODO: å¯ä»¥åˆ—å‡ºé€‰æ‹©
+	;; TODO: ¿ÉÒÔÁĞ³öÑ¡Ôñ
 	(foreach blk lst
 		 (setq fn (strcat path (chr 92) blk))
 		 (if (findfile (strcat fn ".dwg"))

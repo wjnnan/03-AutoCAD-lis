@@ -1,20 +1,20 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; è¿™æ˜¯ä½¿ç”¨å¼€å‘å·¥å…· dev-tools è‡ªåŠ¨åˆ›å»ºçš„ç¨‹åºæºæ–‡ä»¶ 
+;; ÕâÊÇÊ¹ÓÃ¿ª·¢¹¤¾ß dev-tools ×Ô¶¯´´½¨µÄ³ÌĞòÔ´ÎÄ¼ş 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; å®šä¹‰é…ç½®é¡¹ 'at-arch:first ç”¨äº åº”ç”¨åŒ… at-arch çš„ ç¬¬ä¸€ä¸ªé…ç½®é¡¹ first 
-(@:define-config '@block:block-name "å—å" "ç”¨äºæ’å·çš„å—åç§°ã€‚")
-(@:define-config '@block:attribute-name "å±æ€§å" "ç”¨äºæ’å·çš„å—å†…å±æ€§çš„åç§°ã€‚")
-(@:define-config '@block:attribute-prefix "" "ç”¨äºæ’å·çš„å—å†…å±æ€§å€¼å‰ç¼€ã€‚")
-(@:define-config '@block:attribute-suffix "" "ç”¨äºæ’å·çš„å—å†…å±æ€§å€¼åç¼€ã€‚")
-(@::define-config '@block:overlay-index 0 "è¦†ç›–ç”¨äºæ’å·çš„å—å†…å±æ€§åŸå€¼,0å…¨è¦†ç›–;n,æ›¿æ¢åŸå†…å®¹çš„ä»¥-åˆ†éš”çš„ç¬¬néƒ¨åˆ†ã€‚") 
-(@:define-config '@block:xref-layer "xref-lock" "ç”¨äºæ”¾ç½®å¤–éƒ¨å‚ç…§çš„å›¾å±‚åã€‚")
-(@:define-config '@block:sort-order "xY" "æ’åºè§„åˆ™ã€‚xyXYä»»æ„ä¸¤ä¸¤ç»„åˆ,ä¾‹å¦‚yX,yåœ¨å‰è¡¨ç¤ºyåæ ‡ä¼˜å…ˆï¼Œå¤§Xè¡¨ç¤ºä»å³åˆ°å·¦æ’åºã€‚")
-(@:define-config '@block:sort-fuzz "10,10" "æŒ‰ä½ç½®æ’åºæ—¶ï¼Œåæ ‡çš„å®¹å·®ã€‚é€—å·ç”¨äºåˆ†éš”ä¸åŒè½´çš„å®¹å·®ã€‚")
-(@:define-config '@block:size 1000 "ç”¨äºæ£€æµ‹å—é‡å æ—¶ï¼Œå—çš„æœ€å¤§å°ºå¯¸ã€‚")
-(@:define-config '@block:lib "D:/Design/standard/lib/" "ä»¥å—æ–¹å¼ç®¡ç†çš„å›¾åº“è·¯å¾„ã€‚")
-;; (@:get-config 'at-arch:first) ;; è·å–é…ç½®é¡¶çš„å€¼
-;; (@:set-config 'at-arch:first  "æ–°è®¾çš„å€¼") ;; è®¾ç½®é…ç½®é¡¶çš„å€¼
-;; å‘ç³»ç»Ÿä¸­æ·»åŠ èœå•
+;; ¶¨ÒåÅäÖÃÏî 'at-arch:first ÓÃÓÚ Ó¦ÓÃ°ü at-arch µÄ µÚÒ»¸öÅäÖÃÏî first 
+(@:define-config '@block:block-name "¿éÃû" "ÓÃÓÚÅÅºÅµÄ¿éÃû³Æ¡£")
+(@:define-config '@block:attribute-name "ÊôĞÔÃû" "ÓÃÓÚÅÅºÅµÄ¿éÄÚÊôĞÔµÄÃû³Æ¡£")
+(@:define-config '@block:attribute-prefix "" "ÓÃÓÚÅÅºÅµÄ¿éÄÚÊôĞÔÖµÇ°×º¡£")
+(@:define-config '@block:attribute-suffix "" "ÓÃÓÚÅÅºÅµÄ¿éÄÚÊôĞÔÖµºó×º¡£")
+(@::define-config '@block:overlay-index 0 "¸²¸ÇÓÃÓÚÅÅºÅµÄ¿éÄÚÊôĞÔÔ­Öµ,0È«¸²¸Ç;n,Ìæ»»Ô­ÄÚÈİµÄÒÔ-·Ö¸ôµÄµÚn²¿·Ö¡£") 
+(@:define-config '@block:xref-layer "xref-lock" "ÓÃÓÚ·ÅÖÃÍâ²¿²ÎÕÕµÄÍ¼²ãÃû¡£")
+(@:define-config '@block:sort-order "xY" "ÅÅĞò¹æÔò¡£xyXYÈÎÒâÁ½Á½×éºÏ,ÀıÈçyX,yÔÚÇ°±íÊ¾y×ø±êÓÅÏÈ£¬´óX±íÊ¾´ÓÓÒµ½×óÅÅĞò¡£")
+(@:define-config '@block:sort-fuzz "10,10" "°´Î»ÖÃÅÅĞòÊ±£¬×ø±êµÄÈİ²î¡£¶ººÅÓÃÓÚ·Ö¸ô²»Í¬ÖáµÄÈİ²î¡£")
+(@:define-config '@block:size 1000 "ÓÃÓÚ¼ì²â¿éÖØµşÊ±£¬¿éµÄ×î´ó³ß´ç¡£")
+(@:define-config '@block:lib "D:/Design/standard/lib/" "ÒÔ¿é·½Ê½¹ÜÀíµÄÍ¼¿âÂ·¾¶¡£")
+;; (@:get-config 'at-arch:first) ;; »ñÈ¡ÅäÖÃ¶¥µÄÖµ
+;; (@:set-config 'at-arch:first  "ĞÂÉèµÄÖµ") ;; ÉèÖÃÅäÖÃ¶¥µÄÖµ
+;; ÏòÏµÍ³ÖĞÌí¼Ó²Ëµ¥
 (@:add-menus
  '((_"Block")
    ((_"Block Config") (@block:config))
@@ -29,35 +29,35 @@
    ((_"Align block base point") (@block:menu-align-base))
    ((_"Insert all block") (@block:insert-all))
    ((_"Select same block") (@block:select-same))
-   ("å—é—´å¤åˆ¶" (@block:copy-by-blk))
+   ("¿é¼ä¸´ÖÆ" (@block:copy-by-blk))
    ))
 (@:add-menus
  (list (strcat (_"Block") "2")
-   '((_"å—è§†å›¾åˆ‡æ¢") "(@block:outline-dialog)")
+   '((_"¿éÊÓÍ¼ÇĞ»»") "(@block:outline-dialog)")
    '((_"Positioning overlapping blocks") (@block:overblocks))
-   '((_"å®šä½ä»»æ„é‡å å—") (@block:overblocks2))
-   '((_"ä¸€ç‚¸åˆ°åº•") (@block:explode-all))
-   '((_"å†™å—åˆ°åº“") (@block:write-file))
-   '((_"ç‚¸å‰ªè£å—") (@block:menu-explode-cliped))
-   '((_"å±æ€§æ ·å¼åˆ·") (@block:match-att-style))
-   '((_"å¤šé‡è½¬æ™®é€š") (@block:minsert2insert))
-   '((_"ä¿æŠ¤è½¬å—") (@block:tchpr2insert))
-   '((_"åˆ†å †å»ºå—") (@block:block-cluster))
-   '((_"è®¾ç½®åˆ†å †é—´éš™") (@block:set-clustergap))
-   '((_"æŒ‰çº¿è½¬å—") (@block:rotate-blk-by-line))
+   '((_"¶¨Î»ÈÎÒâÖØµş¿é") (@block:overblocks2))
+   '((_"Ò»Õ¨µ½µ×") (@block:explode-all))
+   '((_"Ğ´¿éµ½¿â") (@block:write-file))
+   '((_"Õ¨¼ô²Ã¿é") (@block:menu-explode-cliped))
+   '((_"ÊôĞÔÑùÊ½Ë¢") (@block:match-att-style))
+   '((_"¶àÖØ×ªÆÕÍ¨") (@block:minsert2insert))
+   '((_"±£»¤×ª¿é") (@block:tchpr2insert))
+   '((_"·Ö¶Ñ½¨¿é") (@block:block-cluster))
+   '((_"ÉèÖÃ·Ö¶Ñ¼äÏ¶") (@block:set-clustergap))
+   '((_"°´Ïß×ª¿é") (@block:rotate-blk-by-line))
    ))
-;; (@:add-menu "å—æ“ä½œ" "è¿ç»­æ’å—" "(@block:menu-inserts)")
+;; (@:add-menu "¿é²Ù×÷" "Á¬Ğø²å¿é" "(@block:menu-inserts)")
 (defun @block:config (/ res) 
   (setq @::tmp-search-str "@BLOCK")
   (@::edit-config-dialog))
 (defun @block:setup (/ block-name attribute-name en0 lst-att i% opt% initget% )
-  "è®¾ç½®è¦è¿›è¡Œç¼–å·çš„å›¾å—ï¼Œé€‰æ‹©ä¸€ä¸ªå›¾å—ï¼Œè®¾ç½®è¦å¤„ç†çš„å›¾å—."
-  (if (setq en0 (car (entsel "è¯·ç‚¹é€‰ä¸€ä¸ªå±æ€§å—:"))))
+  "ÉèÖÃÒª½øĞĞ±àºÅµÄÍ¼¿é£¬Ñ¡ÔñÒ»¸öÍ¼¿é£¬ÉèÖÃÒª´¦ÀíµÄÍ¼¿é."
+  (if (setq en0 (car (entsel "ÇëµãÑ¡Ò»¸öÊôĞÔ¿é:"))))
   (if (and (= "INSERT" (entity:getdxf en0 0))
-	   (block:get-effectivename en0) ;; æœ‰å
-	   (= 1 (entity:getdxf en0 66))) ;; å±æ€§å—
+	   (block:get-effectivename en0) ;; ÓĞÃû
+	   (= 1 (entity:getdxf en0 66))) ;; ÊôĞÔ¿é
             (progn
-	      ;; æ£€æŸ¥æ˜¯å¦æœ‰ç›¸å…³å±æ€§ã€‚
+	      ;; ¼ì²éÊÇ·ñÓĞÏà¹ØÊôĞÔ¡£
 	      (setq lst-att (block:get-attributes en0))
 	      (cond
 		((= 1 (length lst-att))
@@ -66,25 +66,25 @@
 		((< 1 (length lst-att))
 		 (@:set-config '@block:block-name (block:get-effectivename en0))
 		 (if (and (setq attribute-name
-				(ui:select "è¯·é€‰æ‹©è¦è¿›è¡Œç¼–å·çš„å±æ€§:" (mapcar 'car lst-att)))
+				(ui:select "ÇëÑ¡ÔñÒª½øĞĞ±àºÅµÄÊôĞÔ:" (mapcar 'car lst-att)))
 			  (assoc attribute-name lst-att))
 		     (@:set-config '@block:attribute-name attribute-name)
-		     (alert "æ‰€è¾“å…¥çš„å±æ€§åä¸æ˜¯å½“å‰é€‰ä¸­çš„å—çš„å±æ€§ã€‚")))
+		     (alert "ËùÊäÈëµÄÊôĞÔÃû²»ÊÇµ±Ç°Ñ¡ÖĞµÄ¿éµÄÊôĞÔ¡£")))
 		)
-	      (alert (strcat "å½“å‰è¦è¿›è¡Œç¼–å·çš„å±æ€§å—ä¸º \n  " (@:get-config '@block:block-name) " \n"
-			     "å½“å‰è¦è¿›è¡Œç¼–å·çš„å±æ€§åä¸º \n  " (@:get-config '@block:attribute-name) 
+	      (alert (strcat "µ±Ç°Òª½øĞĞ±àºÅµÄÊôĞÔ¿éÎª \n  " (@:get-config '@block:block-name) " \n"
+			     "µ±Ç°Òª½øĞĞ±àºÅµÄÊôĞÔÃûÎª \n  " (@:get-config '@block:attribute-name) 
 			     ))
 	      (princ)
 	      )
-	    (progn ;; è¾“å…¥å›¾æ¡†å—å
-	      (alert "æ‰€é€‰å—å›¾å…ƒä¸æ˜¯å—ï¼Œæˆ–è€…ä¸ºåŒ¿åå—æˆ–æ— å±æ€§å—ï¼Œä¸æ»¡è¶³æœ¬ç¨‹åºè¦æ±‚ã€‚")
-	      (setq blk-name  (getstring (strcat "è¯·è¾“å…¥è¦è¿›è¡Œç¼–å·çš„å›¾å—å <" (@:get-config '@block:block-name) ">: ")))
+	    (progn ;; ÊäÈëÍ¼¿ò¿éÃû
+	      (alert "ËùÑ¡¿éÍ¼Ôª²»ÊÇ¿é£¬»òÕßÎªÄäÃû¿é»òÎŞÊôĞÔ¿é£¬²»Âú×ã±¾³ÌĞòÒªÇó¡£")
+	      (setq blk-name  (getstring (strcat "ÇëÊäÈëÒª½øĞĞ±àºÅµÄÍ¼¿éÃû <" (@:get-config '@block:block-name) ">: ")))
 	      (if (/= "" blk-name)
 		  (progn
 		    (@:set-config '@block:block-name blk-name)
-      		    (alert (strcat "å½“å‰å·¥ç¨‹ç®¡ç†çš„å›¾æ¡†å—åè®¾ç½®ä¸º \n"  (@:get-config '@pm:tukuang) " ã€‚"
-				   "\n å› ä¸ºæ˜¯æ‰‹åŠ¨è¾“å…¥çš„ï¼Œæœ‰å¯èƒ½ä¸æ»¡è¶³ç¨‹åºè¦æ±‚ã€‚"))
-		    (if (/= "" (setq attribute-name (getstring (strcat "è¯·è¾“å…¥è¦è¿›è¡Œç¼–å·çš„å›¾å—çš„å±æ€§å < " (@:get-config '@block:attribute-name) " >: "))))
+      		    (alert (strcat "µ±Ç°¹¤³Ì¹ÜÀíµÄÍ¼¿ò¿éÃûÉèÖÃÎª \n"  (@:get-config '@pm:tukuang) " ¡£"
+				   "\n ÒòÎªÊÇÊÖ¶¯ÊäÈëµÄ£¬ÓĞ¿ÉÄÜ²»Âú×ã³ÌĞòÒªÇó¡£"))
+		    (if (/= "" (setq attribute-name (getstring (strcat "ÇëÊäÈëÒª½øĞĞ±àºÅµÄÍ¼¿éµÄÊôĞÔÃû < " (@:get-config '@block:attribute-name) " >: "))))
 			(@:set-config '@block:attribute-name attribute-name))
 	      (princ))))
   
@@ -108,11 +108,11 @@
 		     (@:get-config '@block:block-name)))
 	       (pickset:to-list ss1))))
       (progn
-	;; æ’åº
+	;; ÅÅĞò
 	(sssetfirst nil (pickset:from-list ss-list))
 	(setq fuzz (mapcar 'atof (string:to-list (@:get-config '@block:sort-fuzz)",")))
 	(setq ss-list (pickset:sort ss-list (@:get-config '@block:sort-order) fuzz))
-	(setq start (getint "è¯·è¾“å…¥å—èµ·å§‹ç¼–å·<1>:"))
+	(setq start (getint "ÇëÊäÈë¿éÆğÊ¼±àºÅ<1>:"))
 	(if (null start) (setq start 1))
 	(setq num1 0)
 	(foreach en0 ss-list
@@ -123,7 +123,7 @@
 			       (@:get-config '@block:attribute-prefix)
 			       (if (= 0 (@::get-config '@block:overlay-index))
 			       	   (string:number-format (itoa (+ num1 start)) 2 0 "0")
-				   ;;,æ™ºèƒ½æ›¿æ¢åŸå†…å®¹
+				   ;;,ÖÇÄÜÌæ»»Ô­ÄÚÈİ
 				   (if (setq raw (string:to-list(cdr  (assoc (@:get-config '@block:attribute-name) (block:get-attributes en0)))"-"))
 				       (string:from-list  (list:replace-index
 							   raw
@@ -140,14 +140,14 @@
 		 (setq num1 (1+ num1))
 		 ))
       (progn
-	(alert "æœªé€‰ä¸­è®¾ç½®çš„å›¾å—ã€‚è¯·è®¾ç½®è¦è¿›è¡Œæ“ä½œçš„å›¾å—ã€‚")
+	(alert "Î´Ñ¡ÖĞÉèÖÃµÄÍ¼¿é¡£ÇëÉèÖÃÒª½øĞĞ²Ù×÷µÄÍ¼¿é¡£")
 	(@block:setup))))
 
 (defun @block:set-any-block-number (/ num1 start ss-list ss1 )
-  (@::prompt "ä»»æ„å—ç¼–å·ï¼Œå«æœ‰ç»™å®šå±æ€§çš„ä»»æ„å—ç¼–å·ã€‚")
+  (@::prompt "ÈÎÒâ¿é±àºÅ£¬º¬ÓĞ¸ø¶¨ÊôĞÔµÄÈÎÒâ¿é±àºÅ¡£")
   (if (= "" (@:get-config '@block:block-name))
       (@block:setup))
-  (if (setq ss1 (ssget ;; "_C" pt1 (getcorner pt1 "\né€‰æ‹©å¯¹è±¡:")
+  (if (setq ss1 (ssget ;; "_C" pt1 (getcorner pt1 "\nÑ¡Ôñ¶ÔÏó:")
 		 (list (cons 0 "insert"))))
       (progn
 	(setq ss-list (pickset:to-entlist ss1))
@@ -165,7 +165,7 @@
 				 T
 				 nil)
 			     ))))
-	(setq start (getint "è¯·è¾“å…¥å—èµ·å§‹ç¼–å·<1>:"))
+	(setq start (getint "ÇëÊäÈë¿éÆğÊ¼±àºÅ<1>:"))
 	(if (null start) (setq start 1))
 	(setq num1 0)
 	(foreach en0 ss-list
@@ -184,31 +184,31 @@
 		       (setq num1 (1+ num1))))
 		 ))
       (progn
-	(alert "æœªé€‰ä¸­è®¾ç½®çš„å›¾å—ã€‚è¯·è®¾ç½®è¦è¿›è¡Œæ“ä½œçš„å›¾å—ã€‚")
+	(alert "Î´Ñ¡ÖĞÉèÖÃµÄÍ¼¿é¡£ÇëÉèÖÃÒª½øĞĞ²Ù×÷µÄÍ¼¿é¡£")
 	(@block:setup))))
 
 (defun @block:subst ()
-  (@::prompt (strcat "å°†ç›®æ ‡å—æ›¿æ¢æˆæºå—. \n"
-		  "æ­¥éª¤: \n"
-		  "      1. å•é€‰æºå—ï¼›\n"
-		  "      2. æ¡†é€‰ç›®æ ‡å—ã€‚"))
+  (@::prompt (strcat "½«Ä¿±ê¿éÌæ»»³ÉÔ´¿é. \n"
+		  "²½Öè: \n"
+		  "      1. µ¥Ñ¡Ô´¿é£»\n"
+		  "      2. ¿òÑ¡Ä¿±ê¿é¡£"))
   
-  (if (setq blk-src (car (entsel "è¯·é€‰æ‹©æºå—: "))))
+  (if (setq blk-src (car (entsel "ÇëÑ¡ÔñÔ´¿é: "))))
   (princ "\n")
-  (prompt "è¯·é€‰æ‹©ç›®æ ‡å—:")
-  ;; é€‰æ‹©å—å¹¶å°†é€‰æ‹©é›†è½¬æ¢ä¸ºå—å›¾å…ƒåˆ—è¡¨
+  (prompt "ÇëÑ¡ÔñÄ¿±ê¿é:")
+  ;; Ñ¡Ôñ¿é²¢½«Ñ¡Ôñ¼¯×ª»»Îª¿éÍ¼ÔªÁĞ±í
   (setq blks-target (pickset:to-list (ssget '((0 . "insert"))))) 
-  ;; å–æºå—çš„dxf ç»„ç  2 çš„å€¼ï¼Œå¹¶å°†è¯¥å€¼ è®¾ç½®ç›®æ ‡å—çš„ç»„ç  2 çš„å€¼.
+  ;; È¡Ô´¿éµÄdxf ×éÂë 2 µÄÖµ£¬²¢½«¸ÃÖµ ÉèÖÃÄ¿±ê¿éµÄ×éÂë 2 µÄÖµ.
   (mapcar '(lambda (x) (entity:putdxf x 2
 			(entity:getdxf blk-src 2)))
 	  blks-target))
 		  
 (defun @block:explodable (/ blk )
-  (@::prompt (strcat "å°†ç›®æ ‡å—è®¾ç½®ä¸ºå¯åˆ†è§£. \n"
-		  "æ­¥éª¤: \n"
-		  "      1. å•é€‰è®¾ç½®ä¸ºå¯åˆ†è§£çš„å—ï¼›\n"))
+  (@::prompt (strcat "½«Ä¿±ê¿éÉèÖÃÎª¿É·Ö½â. \n"
+		  "²½Öè: \n"
+		  "      1. µ¥Ñ¡ÉèÖÃÎª¿É·Ö½âµÄ¿é£»\n"))
   
-  (if (setq blk (car (entsel "è¯·é€‰æ‹©å—: "))))
+  (if (setq blk (car (entsel "ÇëÑ¡Ôñ¿é: "))))
   (if (= "INSERT" (entity:getdxf blk 0))
       (vla-put-explodable
        (vla-item *BLKS* (block:get-effectivename blk))
@@ -216,11 +216,11 @@
   ))
 		  
 (defun @block:explode-disable (/ blk )
-  (@::prompt (strcat "å°†ç›®æ ‡å—è®¾ç½®ä¸ºä¸å¯åˆ†è§£. \n"
-		  "æ­¥éª¤: \n"
-		  "      1. å•é€‰è®¾ç½®ä¸ºä¸å¯åˆ†è§£çš„å—ï¼›\n"))
+  (@::prompt (strcat "½«Ä¿±ê¿éÉèÖÃÎª²»¿É·Ö½â. \n"
+		  "²½Öè: \n"
+		  "      1. µ¥Ñ¡ÉèÖÃÎª²»¿É·Ö½âµÄ¿é£»\n"))
   
-  (if (setq blk (car (entsel "è¯·é€‰æ‹©å—: "))))
+  (if (setq blk (car (entsel "ÇëÑ¡Ôñ¿é: "))))
   (if (= "INSERT" (entity:getdxf blk 0))
       (vla-put-explodable
        (vla-item *BLKS* (block:get-effectivename blk))
@@ -234,10 +234,10 @@
 			   zoom-w
 			   run-function after-panel corner
 			   page-up page-down *error*)
-  "å±æ€§å—å¤§çº²ï¼Œç”¨äºå¿«é€Ÿåˆ‡æ¢å—è§†å›¾"
-  (@::prompt "å±æ€§å—å¤§çº²ï¼Œç”¨äºå¿«é€Ÿåˆ‡æ¢å—è§†å›¾\nä¸æ”¯æŒåŠ¨æ€å—ã€‚")
+  "ÊôĞÔ¿é´ó¸Ù£¬ÓÃÓÚ¿ìËÙÇĞ»»¿éÊÓÍ¼"
+  (@::prompt "ÊôĞÔ¿é´ó¸Ù£¬ÓÃÓÚ¿ìËÙÇĞ»»¿éÊÓÍ¼\n²»Ö§³Ö¶¯Ì¬¿é¡£")
   (defun *error* (msg)
-    ;; é‡å¯åŠ¨å¤„ç† 
+    ;; ÖØÆô¶¯´¦Àí 
     (if (= 'file (type dcl_fp))
 	(close (dcl_fp)))
     (princ (strcat msg ))
@@ -275,17 +275,17 @@
     (setq after-panel-cmd corner))
   (if frames
       (progn
-	;; ç”Ÿæˆ dcl æ–‡ä»¶
+	;; Éú³É dcl ÎÄ¼ş
 	(setq dcl-tmp (strcat @:*tmp-path* "tmp-outline-panel.dcl" ))
 	(setq dcl_fp (open dcl-tmp "w"))
 	(write-line (strcat "panel : dialog {"
-			    "label = \"å±æ€§å—åˆ‡æ¢\"; ")
+			    "label = \"ÊôĞÔ¿éÇĞ»»\"; ")
 		    dcl_fp)
 	(setq i% 0)(setq bt-width 38)
 	(write-line ":image{ height=0.1; color=250; fixed_height=true;}:row{label=\"\";" dcl_fp)
 	(setq c% 0)(setq j% 0)
 	;;(setq bt-menu-column (nth (+ c% (* per-page curr-page)) menus-list))
-	;; ä¸€åˆ—æ•°æ®
+	;; Ò»ÁĞÊı¾İ
 	(foreach blk%  frames
 		 (if (= 0 (rem j% per-page))
 		     (progn
@@ -300,7 +300,7 @@
 					 ";fixed_height=true;"
 					 " key=\"c""_"(itoa (setq j% (1+ j%)))"\"; "
 					 "label=\""
-					 ;; æ˜¾ç¤ºçš„åºåˆ—æ–‡æœ¬
+					 ;; ÏÔÊ¾µÄĞòÁĞÎÄ±¾
 					 (cdr (assoc (@:get-config '@block:attribute-name) (block:get-attributes blk%)))
 					 "\"; "
 					 " action=\"(run-function \\\"(zoom-w '"
@@ -318,7 +318,7 @@
 		   )
 	(write-line "}" dcl_fp)
 	(write-line ":image{ height=0.1; color=250; fixed_height=true;}" dcl_fp)
-	;;åˆ†é¡µ
+	;;·ÖÒ³
 	;; (if (> (length frames) per-page)
 	;;      (write-line ":row{alignment=centered;children_alignment=centered;:button{label=\"<\";key=\"prev\";is_enabled=false;}:spacer{} :text_part{key=\"curr_total\"; value=\"\";alignment=\"centered\";width=10;}:button{label=\">\";key=\"next\";is_enabled=false;}}"
 	;;  		dcl_fp))
@@ -340,12 +340,12 @@
 	(after-panel after-panel-cmd))
       ))
 (defun @block:select-same (/ blk blks)
-  (@::prompt (strcat "é€‰æ‹©ä¸€ä¸ªå—ï¼Œç„¶åé€‰ä¸­é€‰å®šèŒƒå›´æˆ–å…¨éƒ¨çš„åŒåå—ã€‚"))
-  (prompt  "è¯·é€‰æ‹©ä¸€ä¸ªå—:")
+  (@::prompt (strcat "Ñ¡ÔñÒ»¸ö¿é£¬È»ºóÑ¡ÖĞÑ¡¶¨·¶Î§»òÈ«²¿µÄÍ¬Ãû¿é¡£"))
+  (prompt  "ÇëÑ¡ÔñÒ»¸ö¿é:")
   (while (null(and (setq blk (ssget "_:S:E" '((0 . "insert"))))
 		   (setq blk (ssname blk 0))))
-    (@:prompt "\næœªé€‰ä¸­å—ï¼Œè¯·é€‰æ‹©ä¸€ä¸ªå—:"))
-  (@:prompt "è¯·æ¡†é€‰èŒƒå›´.å¦‚æœæ²¡æœ‰ç»™å®šèŒƒå›´ï¼Œåˆ™é€‰ä¸­æ‰€æœ‰åŒåå—.")
+    (@:prompt "\nÎ´Ñ¡ÖĞ¿é£¬ÇëÑ¡ÔñÒ»¸ö¿é:"))
+  (@:prompt "Çë¿òÑ¡·¶Î§.Èç¹ûÃ»ÓĞ¸ø¶¨·¶Î§£¬ÔòÑ¡ÖĞËùÓĞÍ¬Ãû¿é.")
   (if (null(setq blks (pickset:to-list (ssget '((0 . "INSERT"))))))
       (setq blks (pickset:to-list (ssget "x" '((0 . "INSERT"))))))
   
@@ -367,9 +367,9 @@
 
 
 (defun @block:menu-change-base(/ blkref blkname pt pt-oldbase pt-nb v1)
-  (if (setq blkref (car (entsel "è¯·é€‰æ‹©è¦æ”¹å˜åŸºç‚¹çš„å—:"))))
+  (if (setq blkref (car (entsel "ÇëÑ¡ÔñÒª¸Ä±ä»ùµãµÄ¿é:"))))
   (setq blkname (entity:getdxf blkref 2))
-  (setq pt (getpoint (entity:getdxf blkref 10) "è¯·é€‰æ‹©ç›®æ ‡åŸºç‚¹:"))
+  (setq pt (getpoint (entity:getdxf blkref 10) "ÇëÑ¡ÔñÄ¿±ê»ùµã:"))
   (setq pt-oldbase
 	(vlax-safearray->list
 	 (vlax-variant-value (vla-get-origin (block:get-obj-by-name blkname)))))
@@ -384,8 +384,8 @@
   (vla-put-origin
    (block:get-obj-by-name blkname)
    (vlax-3d-point pt-nb))
-  ;; TODO: å¹³ç§»å·²æœ‰å—
-  (if (ui:confirm1 "æ˜¯å¦ä¿æŒå·²æœ‰å—æ˜¾ç¤ºä½ç½®ä¸å˜?" "æ˜¯-å¦")
+  ;; TODO: Æ½ÒÆÒÑÓĞ¿é
+  (if (ui:confirm1 "ÊÇ·ñ±£³ÖÒÑÓĞ¿éÏÔÊ¾Î»ÖÃ²»±ä?" "ÊÇ-·ñ")
       (mapcar
        '(lambda(blkref)
 	 (entity:putdxf
@@ -402,9 +402,9 @@
   (princ)
   )
 (defun @block:menu-align-base(/ blkref blkname pt pt-oldbase pt-nb v1)
-  (prompt  "è¯·é€‰æ‹©è¦å¯¹é½åŸºç‚¹çš„å—:")
+  (prompt  "ÇëÑ¡ÔñÒª¶ÔÆë»ùµãµÄ¿é:")
   (setq blkrefs (pickset:to-list (ssget '((0 . "insert")))))
-  (setq pt (getpoint (entity:getdxf (car blkrefs) 10) "è¯·é€‰æ‹©ç›®æ ‡åŸºç‚¹:"))
+  (setq pt (getpoint (entity:getdxf (car blkrefs) 10) "ÇëÑ¡ÔñÄ¿±ê»ùµã:"))
   (foreach blkref blkrefs
 	   (setq blkname (entity:getdxf blkref 2))
 	   (setq pt-oldbase
@@ -421,8 +421,8 @@
 	   (vla-put-origin
 	    (block:get-obj-by-name blkname)
 	    (vlax-3d-point pt-nb))
-	   ;; TODO: å¹³ç§»å·²æœ‰å—
-	   ;; (if (ui:confirm1 "æ˜¯å¦ä¿æŒå·²æœ‰å—æ˜¾ç¤ºä½ç½®ä¸å˜?" "æ˜¯-å¦")
+	   ;; TODO: Æ½ÒÆÒÑÓĞ¿é
+	   ;; (if (ui:confirm1 "ÊÇ·ñ±£³ÖÒÑÓĞ¿éÏÔÊ¾Î»ÖÃ²»±ä?" "ÊÇ-·ñ")
 	   (mapcar
 	    '(lambda(blkref)
 	      (entity:putdxf
@@ -444,16 +444,16 @@
 ;;    (vlax-3d-point pt-nb))
 ;;   )
 (defun @block:menu-inserts ( )
-  "è¿ç»­æ’å—"
-  ;; é€‰æ‹©å—åã€‚
+  "Á¬Ğø²å¿é"
+  ;; Ñ¡Ôñ¿éÃû¡£
   
   )
 (defun @block:explode-all (/ blks )
-  (@::prompt "å°†æ¡†é€‰åŒºåŸŸå†…çš„å—å…¨éƒ¨åˆ†è§£ã€‚")
-  (setq pt1 (getpoint "é€‰æ‹©ç¬¬ä¸€ç‚¹:"))
-  (setq pt2 (getcorner pt1 "è¯·é€‰æ‹©åŒºåŸŸç¬¬äºŒç‚¹"))
+  (@::prompt "½«¿òÑ¡ÇøÓòÄÚµÄ¿éÈ«²¿·Ö½â¡£")
+  (setq pt1 (getpoint "Ñ¡ÔñµÚÒ»µã:"))
+  (setq pt2 (getcorner pt1 "ÇëÑ¡ÔñÇøÓòµÚ¶şµã"))
   (while (setq blks (ssget "c" pt1 pt2 '((0 . "insert"))))
-    ;;å°†å±æ€§å˜ä¸ºæ–‡å­—
+    ;;½«ÊôĞÔ±äÎªÎÄ×Ö
     (foreach blk (pickset:to-list blks)
 	     (vla-explode (e2o blk))
 	     (vla-delete (e2o blk)))

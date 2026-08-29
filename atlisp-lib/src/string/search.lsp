@@ -1,5 +1,5 @@
 (defun string:search (pattern str / lst-pattern lst-str pos-st n)
-  "æœç´¢å­—ç¬¦ä¸²pattern æ˜¯å¦ä¸º strçš„å­ä¸²ï¼Œæ˜¯è¿”å›ä½ç½®ï¼ˆæ±‰å­—å ä¸€ä½ï¼‰ã€‚"
+  "ËÑË÷×Ö·û´®pattern ÊÇ·ñÎª strµÄ×Ó´®£¬ÊÇ·µ»ØÎ»ÖÃ£¨ºº×ÖÕ¼Ò»Î»£©¡£"
   "int"
   (setq lst-pattern (string:s2l-ansi pattern))
   (setq len-pattern (length lst-pattern))

@@ -1,6 +1,6 @@
 (defun ui:button-select (str-subject lst / dcl_fp dcl-tmp dcl_id para% result initget%)
-  "æ˜¾ç¤ºæŒ‰é’®åˆ—è¡¨é€‰æ‹©é¢æ¿ã€‚\né€‰æ‹©æ‰€éœ€é¡¹å¹¶è¿”å›ï¼Œæ— éœ€ç‚¹å‡»ç¡®å®šã€‚"
-  "é€‰ä¸­çš„å†…å®¹"
+  "ÏÔÊ¾°´Å¥ÁĞ±íÑ¡ÔñÃæ°å¡£\nÑ¡ÔñËùĞèÏî²¢·µ»Ø£¬ÎŞĞèµã»÷È·¶¨¡£"
+  "Ñ¡ÖĞµÄÄÚÈİ"
   ""
   (setq result nil)
   (if lst (if (= 1 (getvar "filedia"))
@@ -46,7 +46,7 @@
               (itoa (1+ i%))))
           (setq i% (1+ i%)))
         (initget 1 initget%)
-        (nth (1- (atoi (getkword (strcat "è¯·è¾“å…¥è¦æ“ä½œçš„åºå· : \n"
+        (nth (1- (atoi (getkword (strcat "ÇëÊäÈëÒª²Ù×÷µÄĞòºÅ : \n"
                   opt%))))
           lst)))
     (progn (alert (_ "parameter is nil."))

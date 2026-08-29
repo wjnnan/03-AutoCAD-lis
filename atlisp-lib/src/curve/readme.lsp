@@ -1,4 +1,4 @@
-(defun curve:readme nil "æ›²çº¿æ“ä½œç›¸å…³å‡½æ•°ã€‚"
-  (princ "æ›²çº¿æ“ä½œç›¸å…³å‡½æ•°ã€‚ä½¿ç”¨ (require 'curve:*)
-    åŠ è½½è¿™äº›å‡½æ•°")
+(defun curve:readme nil "ÇúÏß²Ù×÷Ïà¹Øº¯Êı¡£"
+  (princ "ÇúÏß²Ù×÷Ïà¹Øº¯Êı¡£Ê¹ÓÃ (require 'curve:*)
+    ¼ÓÔØÕâĞ©º¯Êı")
   (princ))

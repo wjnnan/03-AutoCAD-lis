@@ -1,5 +1,5 @@
 (defun base64:encode (lst-uint8 / i res lst-str rem%)
-  "å°†å­—èŠ‚åˆ—è¡¨å†…å®¹è½¬ä¸º base64 ç¼–ç ã€‚"
+  "½«×Ö½ÚÁĞ±íÄÚÈİ×ªÎª base64 ±àÂë¡£"
   "String"
   (if (and (listp lst-uint8)
       (apply (quote and)

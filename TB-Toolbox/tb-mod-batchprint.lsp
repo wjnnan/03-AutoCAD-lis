@@ -1,560 +1,739 @@
-;;; tb-mod-batchprint.lsp â€” æ‰¹é‡æ‰“å°æ¨¡å—
-;;; æ•´åˆ BatchPlot/MSteel/æºæ³‰/SmartBatchPlot çš„ä¼˜ç‚¹
-;;; æä¾›ï¼šå›¾æ¡†æ£€æµ‹ã€çº¸å¼ åŒ¹é…ã€æ¯”ä¾‹è¯†åˆ«ã€å±æ€§å‘½åã€æ‰¹é‡è¾“å‡º
-;;; å‘½ä»¤: BPT (æ‰¹é‡æ‰“å°) / BPSET (è®¾ç½®)
+;;; tb-mod-batchprint.lsp ¡ª ÅúÁ¿´òÓ¡Ä£¿é£¨ÖØĞ´°æ v2.0£©
+;;; ÒıÇæ£ºActiveX vla-PlotToFile ÓÅÏÈ£¨AutoCAD£©£¬ÎŞ COM Æ½Ì¨½µ¼¶ -PLOT ¶µµ×
+;;; Í¼¿òÊ¶±ğ£º¿é(INSERT) / ±ÕºÏ¶à¶ÎÏß / ²¼¾Ö ÈıÍ¨µÀ
+;;; Êä³ö¸ñÊ½£ºPDF / DWF / PLT / Ö±½Ó´òÓ¡£¨ÓÉ´òÓ¡»úÃû + Ğ´ÎÄ¼ş¿ª¹Ø¾ö¶¨£©
+;;; ÒÀÀµ£ºuc:* entity:* point:* sel:* curve:* sys:*
+;;; ÃüÁî£ºBPT (ÅúÁ¿´òÓ¡) / BPSET (´òÓ¡ÉèÖÃ)
 
 ;; ============================================================================
-;; å¸¸é‡å®šä¹‰
+;; ³£Á¿
 ;; ============================================================================
 
-;; æ ‡å‡†çº¸å¼ å°ºå¯¸ (mm) â€” çŸ­è¾¹åœ¨å‰ï¼ˆportraitï¼‰ï¼Œé•¿è¾¹åœ¨å
+;; ±ê×¼Ö½ÕÅ³ß´ç (mm)£¬¶Ì±ßÔÚÇ°£¨Êú·Å£©£¬³¤±ßÔÚºó
 (setq *BP:PAPER-SIZES*
-  '(("A4"      . (210.0 297.0))
-    ("A3"      . (297.0 420.0))
-    ("A2"      . (420.0 594.0))
-    ("A1"      . (594.0 841.0))
-    ("A0"      . (841.0 1189.0))
-    ("A3+"     . (297.0 440.0))
-    ("A2+"     . (420.0 620.0))
-    ("A1+"     . (594.0 880.0))
-    ("A0+"     . (841.0 1240.0))
-    ("B5"      . (176.0 250.0))
-    ("B4"      . (250.0 353.0))
-    ("B3"      . (353.0 500.0))
-    ("B2"      . (500.0 707.0))
-    ("B1"      . (707.0 1000.0))))
+  '(("A4" . (210.0 297.0))
+    ("A3" . (297.0 420.0))
+    ("A2" . (420.0 594.0))
+    ("A1" . (594.0 841.0))
+    ("A0" . (841.0 1189.0))
+    ("A3+" . (297.0 440.0))
+    ("A2+" . (420.0 620.0))
+    ("A1+" . (594.0 880.0))
+    ("A0+" . (841.0 1240.0))))
 
-;; å›¾æ¡†è¯†åˆ«æ–¹å¼
+;; ±ê×¼±ÈÀıµµ£¨¹¤³ÌÖÆÍ¼³£ÓÃ£©
+(setq *BP:STANDARD-SCALES*
+  '(1 1.5 2 2.5 3 4 5 10 15 20 25 30 40 50 100 150 200 250 300 400 500 1000))
+
+;; Í¼¿òÊ¶±ğ·½Ê½
 (setq *BP:FRAME-TYPES*
-  '(("å›¾å—è¯†åˆ«ï¼ˆæŒ‰å›¾å—åï¼‰"  . "BLOCK")
-    ("å¤šæ®µçº¿è¯†åˆ«ï¼ˆæŒ‰å›¾å±‚ï¼‰"   . "PLINE")
-    ("å¸ƒå±€ç©ºé—´"              . "LAYOUT")))
+  '(("Í¼¿ò¿é£¨°´¿éÃû£©" . "BLOCK")
+    ("Í¼¿ò¶à¶ÎÏß£¨°´Í¼²ã£©" . "PLINE")
+    ("²¼¾Ö¿Õ¼ä" . "LAYOUT")))
 
-;; æ¯”ä¾‹æ¨¡å¼
+;; ±ÈÀıÄ£Ê½
 (setq *BP:SCALE-MODES*
-  '(("è‡ªåŠ¨è¯†åˆ«æ¯”ä¾‹"      . "AUTO")
-    ("å¸ƒæ»¡å›¾çº¸"          . "FIT")
-    ("è‡ªå®šä¹‰æ¯”ä¾‹"        . "CUSTOM")))
+  '(("×Ô¶¯Æ¥Åä±ÈÀı" . "AUTO")
+    ("²¼ÂúÍ¼Ö½" . "FIT")
+    ("×Ô¶¨Òå±ÈÀı" . "CUSTOM")))
 
-;; è¾“å‡ºæ–¹å¼
+;; Êä³ö¸ñÊ½£¨¾ö¶¨Ä¬ÈÏ´òÓ¡»ú + À©Õ¹Ãû + ÊÇ·ñĞ´ÎÄ¼ş£©
 (setq *BP:OUTPUT-MODES*
-  '(("æ‰“å°åˆ°æ‰“å°æœº"      . "PRINTER")
-    ("è¾“å‡ºä¸º PDF"        . "PDF")
-    ("è¾“å‡ºä¸º PLT"        . "PLT")
-    ("è¾“å‡ºä¸º DWF"        . "DWF")))
+  '(("Êä³öÎª PDF" . "PDF")
+    ("Êä³öÎª DWF" . "DWF")
+    ("Êä³öÎª PLT" . "PLT")
+    ("Ö±½Ó´òÓ¡µ½´òÓ¡»ú" . "PRINTER")))
 
-;; é¢œè‰²æ¨¡å¼
+;; ÑÕÉ«Ä£Ê½£¨¾­ CTB ´òÓ¡ÑùÊ½±í¿ØÖÆ£©
 (setq *BP:COLOR-MODES*
-  '(("å½©è‰²"  . "C")
-    ("ç°åº¦"  . "G")
-    ("é»‘ç™½"  . "M")))
+  '(("²ÊÉ«" . "C")
+    ("»Ò¶È" . "G")
+    ("ºÚ°×" . "M")))
 
-;; å‘½åè§„åˆ™æ ‡è®°è¯´æ˜
-(setq *BP:NAME-TOKENS*
-  '(("{å›¾å·}"   . 1)
-    ("{å›¾å}"   . 2)
-    ("{æ¯”ä¾‹}"   . 3)
-    ("{æ—¥æœŸ}"   . 4)
-    ("{åºå·}"   . 5)))
+;; ÑÕÉ«Ä£Ê½ -> CTB Ó³Éä
+(setq *BP:COLOR-CTB*
+  '(("C" . "acad.ctb")
+    ("G" . "Grayscale.ctb")
+    ("M" . "monochrome.ctb")))
 
+;; AcPlotType Ã¶¾ÙÖµ£¨ActiveX£¬¿ç°æ±¾¿ÉÄÜÎ¢µ÷£©
+(setq *BP:AC-DISPLAY* 0
+      *BP:AC-EXTENTS* 1
+      *BP:AC-LIMITS*  2
+      *BP:AC-VIEW*    3
+      *BP:AC-WINDOW*  4
+      *BP:AC-LAYOUT*  5)
+
+;; µ±Ç°´òÓ¡»ú¶ÔÓ¦µÄÖ½ÕÅ canonical ÃûÁĞ±í£¨¶¯Ì¬£©
+(setq *BP:CURRENT-PAPERS* nil)
 
 ;; ============================================================================
-;; å›¾çº¸åˆ—è¡¨ç®¡ç†
+;; Í¼Ö½¼ÇÂ¼Êı¾İ½á¹¹
 ;; ============================================================================
 
-(defun bp:make-drawing (handle center w h scale paper draw-num draw-name date rotation)
-  "åˆ›å»ºå›¾çº¸è®°å½•ã€‚"
+(defun bp:make-drawing (handle center w h scale paper draw-num draw-name date rotation layout)
+  "¹¹ÔìÍ¼Ö½¼ÇÂ¼ alist¡£layout ·Ç nil ±íÊ¾²¼¾Ö´òÓ¡£¬center/w/h ºöÂÔ¡£"
   (list
-    (cons 'handle  handle)
-    (cons 'center  center)
-    (cons 'width   w)
-    (cons 'height  h)
-    (cons 'scale   scale)
-    (cons 'paper   paper)
-    (cons 'draw-num   draw-num)
-    (cons 'draw-name  draw-name)
-    (cons 'date    date)
-    (cons 'rotation rotation)))
+    (cons 'handle handle)
+    (cons 'center center)
+    (cons 'width w)
+    (cons 'height h)
+    (cons 'scale scale)
+    (cons 'paper paper)
+    (cons 'draw-num draw-num)
+    (cons 'draw-name draw-name)
+    (cons 'date date)
+    (cons 'rotation rotation)
+    (cons 'layout layout)))
 
 (defun bp:drawing-prop (drawing key)
-  "è·å–å›¾çº¸è®°å½•å±æ€§ã€‚"
+  "¶ÁÈ¡Í¼Ö½¼ÇÂ¼ÊôĞÔ¡£"
   (cdr (assoc key drawing)))
 
-
 ;; ============================================================================
-;; çº¸å¼ åŒ¹é…
+;; Ö½ÕÅÆ¥ÅäÓë±ÈÀı
 ;; ============================================================================
 
-(defun bp:match-paper (w h / best-name best-diff diff size ww hh swap-w swap-h)
-  "æ ¹æ®å›¾æ¡†å°ºå¯¸åŒ¹é…æœ€æ¥è¿‘çš„æ ‡å‡†çº¸å¼ ã€‚
-  è¿”å›: çº¸å¼ åç§° (å¦‚ \"A2\")"
-  (setq best-name "è‡ªå®šä¹‰"
-        best-diff 1e308)
+(defun bp:match-paper (w h / best-name best-diff diff size ww hh)
+  "°´Í¼¿ò³ß´çÆ¥Åä×î½Ó½üµÄ±ê×¼Ö½ÕÅÃû¡£"
+  (setq best-name "×Ô¶¨Òå" best-diff 1e308)
   (foreach paper *BP:PAPER-SIZES*
-    (setq size (cdr paper)
-          ww   (car size)
-          hh   (cadr size))
-    ;; æ¯”è¾ƒä¸¤ç§æ–¹å‘
+    (setq size (cdr paper) ww (car size) hh (cadr size))
+    ;; ÔÊĞíºáÊúÁ½ÖÖ·½Ïò
     (setq diff (min (+ (abs (- w ww)) (abs (- h hh)))
                     (+ (abs (- w hh)) (abs (- h ww)))))
     (if (< diff best-diff)
-      (setq best-diff diff
-            best-name (car paper))))
-  ;; å¦‚æœå›¾æ¡†ä¸æœ€æ¥è¿‘çº¸å¼ å·® 10% ä»¥ä¸Šï¼Œè¿”å›è‡ªå®šä¹‰
-  (if (< best-diff (* w 0.1))
-    best-name
-    "è‡ªå®šä¹‰"))
+      (setq best-diff diff best-name (car paper))))
+  (if (< best-diff (* (max w h) 0.15)) best-name "×Ô¶¨Òå"))
 
+(defun bp:nearest-standard-scale (raw / best best-diff diff s)
+  "°ÑÔ­Ê¼±ÈÀıÏòÏÂÈ¡µ½×î½üµÄ±ê×¼±ÈÀıµµ£¨±£Ö¤²»Òç³ö£©¡£"
+  (setq best 1 best-diff 1e308)
+  (foreach s *BP:STANDARD-SCALES*
+    (if (>= s raw)
+      (setq diff (- s raw))
+      (setq diff (* 2 (- raw s))))  ; ÏòÏÂÓÅÏÈ
+    (if (< diff best-diff)
+      (setq best-diff diff best s)))
+  best)
 
-;; ============================================================================
-;; æ¯”ä¾‹è¯†åˆ«
-;; ============================================================================
-
-(defun bp:detect-scale (frame-w frame-h paper-w paper-h / scale-w scale-h avg)
-  "æ ¹æ®å›¾æ¡†å°ºå¯¸å’Œçº¸å¼ å°ºå¯¸åæ¨æ¯”ä¾‹ã€‚
-  frame: å›¾æ¡†å®é™…å°ºå¯¸(ç»˜å›¾å•ä½)  paper: çº¸å¼ å°ºå¯¸(mm)
-  ä¾‹: å›¾æ¡†=42000mm, çº¸å¼ =420mm â†’ æ¯”ä¾‹=1:100"
-  (if (and frame-w frame-h paper-w paper-h (> paper-w 0))
+(defun bp:detect-scale (frame-w frame-h paper-w paper-h / scale-w scale-h)
+  "Í¼¿ò³ß´ç ¡Â Ö½ÕÅ³ß´ç·´ÍÆ±ÈÀı£¨1:N£©¡£"
+  (if (and frame-w frame-h paper-w paper-h (> paper-w 0) (> paper-h 0))
     (progn
       (setq scale-w (/ frame-w paper-w)
-            scale-h (/ frame-h paper-h)
-            avg (/ (+ frame-w frame-h) (+ paper-w paper-h)))
-      ;; å–æœ€æ¥è¿‘çš„æ•´æ•°æ¯”ä¾‹
-      (fix (+ 0.5 avg)))
+            scale-h (/ frame-h paper-h))
+      (bp:nearest-standard-scale (max scale-w scale-h)))
     100))
 
-
 ;; ============================================================================
-;; å›¾æ¡†æ£€æµ‹ â€” å—æ¨¡å¼
+;; Í¼¿òÊ¶±ğ
 ;; ============================================================================
 
-(defun bp:detect-blocks (block-name / ss blocks result)
-  "æ£€æµ‹æŒ‡å®šåç§°çš„å›¾æ¡†å—ï¼ˆæ”¯æŒé€šé…ç¬¦ *ï¼‰ã€‚"
+(defun bp:get-block-bbox (e)
+  "È¡¿éÒıÓÃµÄ°üÎ§ºĞ¡£ActiveX ÓÅÏÈ£¬ÎŞ COM ×ß´¿ Lisp µİ¹é¡£"
+  (if *SYS:HAS-ACTIVEX*
+    (entity:get-bbox e)
+    (entity:block-bbox-pure e)))
+
+(defun bp:attr-val (attrs tags)
+  "´ÓÊôĞÔ±í°´±êÇ©Ãû£¨¶à¸öºòÑ¡£©È¡µÚÒ»¸öÆ¥ÅäÖµ¡£"
+  (if (not attrs) nil
+    (car (vl-remove nil
+      (mapcar
+        '(lambda (tag)
+           (cdr (assoc (strcase tag)
+                  (mapcar '(lambda (a) (cons (strcase (car a)) (cdr a))) attrs))))
+        (mapcar 'strcase tags))))))
+
+(defun bp:detect-blocks (block-name / ss result)
+  "°´¿éÃû£¨Ö§³ÖÍ¨Åä·û£©Ñ¡ INSERT Ê¶±ğÍ¼¿ò£¬¶ÁÊôĞÔ¡£"
   (if (setq ss (ssget "_X" (list '(0 . "INSERT") (cons 2 block-name))))
     (progn
-      (setq blocks nil)
+      (setq result nil)
       (sel:for-each ss
-        '(lambda (e / bbox attrs inspt w h draw-num draw-name scale-val date)
-           (setq bbox   (entity:get-bbox e)
-                 inspt  (entity:get-dxf e 10))
-           (if bbox
+        '(lambda (e / bbox attrs w h center draw-num draw-name scale-val date paper-name)
+           (setq bbox (bp:get-block-bbox e))
+           (if (and bbox (> (distance (car bbox) (cadr bbox)) 1.0))
              (progn
                (setq w (abs (- (caadr bbox) (caar bbox)))
                      h (abs (- (cadadr bbox) (cadar bbox)))
                      center (point:mid (car bbox) (cadr bbox)))
-               ;; æå–å±æ€§
-               (setq attrs (bp:get-block-attrs e))
-               (setq draw-num  (bp:attr-val attrs '("å›¾å·" "ç¼–å·" "DRAWING_NO" "DWG_NO" "TUH")))
-               (setq draw-name (bp:attr-val attrs '("å›¾å" "å›¾çº¸åç§°" "DRAWING_NAME" "TUM")))
-               (setq scale-val (bp:attr-val attrs '("æ¯”ä¾‹" "SCALE" "BL")))
-               (setq date      (bp:attr-val attrs '("æ—¥æœŸ" "DATE" "RQ")))
-               ;; æ¯”ä¾‹å¤„ç†
+               ;; ¶ÁÍ¼¿òÊôĞÔ£¨Í¼ºÅ/Í¼Ãû/±ÈÀı/ÈÕÆÚ£©
+               (setq attrs (entity:get-attribs e))
+               (setq draw-num  (bp:attr-val attrs '("Í¼ºÅ" "Í¼Ãû" "DRAWING_NO" "DWG_NO" "TUH")))
+               (setq draw-name (bp:attr-val attrs '("Í¼Ãû" "Í¼Ö½Ãû³Æ" "DRAWING_NAME" "TUM")))
+               (setq scale-val (bp:attr-val attrs '("±ÈÀı" "SCALE" "BL")))
+               (setq date      (bp:attr-val attrs '("ÈÕÆÚ" "DATE" "RQ")))
+               ;; ½âÎö±ÈÀıÊôĞÔ "1:100" -> 100
                (if scale-val
                  (progn
                    (if (wcmatch scale-val "1:*")
-                     (progn
-                       (setq scale-val (atoi (substr scale-val 3)))
-                       (if (zerop scale-val) (setq scale-val nil))))
+                     (setq scale-val (atoi (substr scale-val 3))))
                    (if (and scale-val (not (numberp scale-val)))
                      (setq scale-val (atoi scale-val)))
-                   (if (or (not scale-val) (not (numberp scale-val)) (zerop scale-val))
+                   (if (or (not scale-val) (zerop scale-val))
                      (setq scale-val nil))))
-               ;; åˆ›å»ºè®°å½•
-               (setq blocks (cons
-                 (bp:make-drawing (entity:handle e)
-                   center w h (or scale-val (bp:detect-scale w h 420 594))
-                   (bp:match-paper w h)
-                   draw-num draw-name date 0.0)
-                 blocks))))))
-      (reverse blocks))))
-
-
-(defun bp:get-block-attrs (e / result)
-  "è·å–å—å¼•ç”¨çš„å±æ€§è¡¨ â†’ ((tag . value) ...)ã€‚"
-  (if (and (= (entity:get-type e) "INSERT")
-           (= (entity:get-dxf e 66) 1))  ; æœ‰å±æ€§è·Ÿéš
-    (progn
-      (setq e (entnext e))
-      (while (and e (= (entity:get-type e) "ATTRIB"))
-        (setq result (cons
-          (cons (entity:get-dxf e 2) (entity:get-dxf e 1))
-          result))
-        (setq e (entnext e)))
-      (reverse result))))
-
-(defun bp:attr-val (attrs tags)
-  "ä»å±æ€§è¡¨ä¸­åŒ¹é…æ ‡ç­¾åï¼Œè¿”å›ç¬¬ä¸€ä¸ªåŒ¹é…çš„å€¼ã€‚"
-  (if (not attrs) nil
-    (car (vl-remove nil
-      (mapcar '(lambda (tag)
-        (cdr (assoc (strcase tag) (mapcar '(lambda (a) (cons (strcase (car a)) (cdr a))) attrs))))
-        (mapcar 'strcase tags))))))
-
-
-;; ============================================================================
-;; å›¾æ¡†æ£€æµ‹ â€” å¤šæ®µçº¿æ¨¡å¼
-;; ============================================================================
-
-(defun bp:detect-plines (layer-name / ss result)
-  "æ£€æµ‹æŒ‡å®šå›¾å±‚çš„é—­åˆå¤šæ®µçº¿ä½œä¸ºå›¾æ¡†ã€‚"
-  (if (setq ss (ssget "_X" (list '(0 . "LWPOLYLINE") (cons 8 layer-name))))
-    (progn
-      (setq result nil)
-      (sel:for-each ss
-        '(lambda (e / bbox w h)
-           (setq bbox (entity:get-bbox e))
-           (if bbox
-             (progn
-               (setq w (abs (- (caadr bbox) (caar bbox)))
-                     h (abs (- (cadadr bbox) (cadar bbox))))
+               (setq paper-name (bp:match-paper w h))
                (setq result (cons
                  (bp:make-drawing (entity:handle e)
-                   (point:mid (car bbox) (cadr bbox))
-                   w h (bp:detect-scale w h 420 594)
-                   (bp:match-paper w h) nil nil nil 0.0)
+                   center w h
+                   (or scale-val (bp:detect-scale w h
+                     (cadr (assoc paper-name *BP:PAPER-SIZES*))
+                     (caddr (assoc paper-name *BP:PAPER-SIZES*))))
+                   paper-name
+                   draw-num draw-name date 0.0 nil)
                  result))))))
       (reverse result))))
 
-
-;; ============================================================================
-;; å›¾æ¡†æ£€æµ‹ â€” å¸ƒå±€æ¨¡å¼
-;; ============================================================================
+(defun bp:detect-plines (layer-name / ss result)
+  "°´Í¼²ãÑ¡±ÕºÏ 4 ¶¥µã¶à¶ÎÏß×÷ÎªÍ¼¿ò¡£"
+  (if (setq ss (ssget "_X" (list '(0 . "LWPOLYLINE") (cons 8 layer-name) '(70 . 1) '(90 . 4))))
+    (progn
+      (setq result nil)
+      (sel:for-each ss
+        '(lambda (e / bbox w h center paper-name)
+           (setq bbox (entity:get-bbox e))
+           (if (and bbox (> (distance (car bbox) (cadr bbox)) 1.0))
+             (progn
+               (setq w (abs (- (caadr bbox) (caar bbox)))
+                     h (abs (- (cadadr bbox) (cadar bbox)))
+                     center (point:mid (car bbox) (cadr bbox))
+                     paper-name (bp:match-paper w h))
+               (setq result (cons
+                 (bp:make-drawing (entity:handle e)
+                   center w h
+                   (bp:detect-scale w h
+                     (if (assoc paper-name *BP:PAPER-SIZES*)
+                       (cadr (assoc paper-name *BP:PAPER-SIZES*)) 420)
+                     (if (assoc paper-name *BP:PAPER-SIZES*)
+                       (caddr (assoc paper-name *BP:PAPER-SIZES*)) 594))
+                   paper-name nil nil nil 0.0 nil)
+                 result))))))
+      (reverse result))))
 
 (defun bp:detect-layouts (/ result lay-name)
-  "è·å–æ‰€æœ‰å·²åˆå§‹åŒ–çš„å¸ƒå±€ï¼ˆçº¯ AutoLISPï¼Œè·¨å¹³å°ï¼‰ã€‚"
+  "±éÀú²¼¾Ö±í£¬²ú³ö²¼¾Ö´òÓ¡¼ÇÂ¼£¨·Ç Model£©¡£"
   (setq result nil)
-  ;; éå†å¸ƒå±€è¡¨ï¼Œè·³è¿‡ "Model"
   (setq lay-name (cdr (assoc 2 (tblnext "LAYOUT" T))))
   (while lay-name
     (if (not (= (strcase lay-name) "MODEL"))
       (setq result (cons
-        (bp:make-drawing nil nil 0 0 100 "A3"
-          lay-name lay-name nil 0.0)
+        (bp:make-drawing nil nil 0 0 100 "A3" lay-name lay-name nil 0.0 lay-name)
         result)))
     (setq lay-name (cdr (assoc 2 (tblnext "LAYOUT")))))
   (reverse result))
 
-
-;; ============================================================================
-;; æ£€æµ‹å…¥å£ï¼ˆç»Ÿä¸€è°ƒåº¦ï¼‰
-;; ============================================================================
-
-(defun bp:detect-frames (frame-type frame-value include-model include-layouts
-                         / drawings)
-  "æ ¹æ®è®¾ç½®æ£€æµ‹æ‰€æœ‰å›¾æ¡†ã€‚è¿”å›å›¾çº¸åˆ—è¡¨ã€‚"
+(defun bp:detect-frames (frame-type frame-value include-model include-layouts / drawings)
+  "°´ÉèÖÃ¼ì²âÍ¼¿ò£¬·µ»ØÍ¼Ö½ÁĞ±í¡£"
   (setq drawings nil)
-  (cond
-    ((= frame-type "BLOCK")
-     (setq drawings (bp:detect-blocks frame-value)))
-    ((= frame-type "PLINE")
-     (setq drawings (bp:detect-plines frame-value)))
-    ((= frame-type "LAYOUT")
-     (setq drawings (bp:detect-layouts))))
+  (if include-model
+    (cond
+      ((= frame-type "BLOCK") (setq drawings (bp:detect-blocks frame-value)))
+      ((= frame-type "PLINE") (setq drawings (bp:detect-plines frame-value)))))
+  (if include-layouts
+    (setq drawings (append drawings (bp:detect-layouts))))
   drawings)
 
-
 ;; ============================================================================
-;; å›¾çº¸åˆ—è¡¨æ’åº
+;; ÅÅĞò£¨X / Y ÉßĞÎ£©
 ;; ============================================================================
 
-(defun bp:sort-by-x (drawings)
-  "æŒ‰ X åæ ‡ä»å·¦åˆ°å³æ’åºã€‚vl-sort å¯èƒ½å»é‡ï¼Œå…ˆ copyã€‚"
-  (vl-sort (append drawings nil)
-    '(lambda (a b) (< (car (bp:drawing-prop a 'center))
-                      (car (bp:drawing-prop b 'center))))))
-
-(defun bp:sort-by-y (drawings)
-  "æŒ‰ Y åæ ‡ä»ä¸Šåˆ°ä¸‹æ’åºã€‚vl-sort å¯èƒ½å»é‡ï¼Œå…ˆ copyã€‚"
-  (vl-sort (append drawings nil)
-    '(lambda (a b) (> (cadr (bp:drawing-prop a 'center))
-                      (cadr (bp:drawing-prop b 'center))))))
+(defun bp:sort-serpentine (drawings / row-tol rows row sorted i result)
+  "ĞĞÓÅÏÈÅÅĞò£ºY ½µĞò·ÖĞĞ£¨°ëÍ¼¿ò¸ßÈİ²î£©£¬ĞĞÄÚ X ÉıĞò£¬Å¼ÊıĞĞ·´×ª£¨ÉßĞÎ£©¡£"
+  (if (not drawings) nil
+    (progn
+      ;; ĞĞÈİ²î = Ê×Í¼¿ò¸ß¶ÈµÄÒ»°ë
+      (setq row-tol (* 0.5
+        (or (bp:drawing-prop (car drawings) 'height)
+            (bp:drawing-prop (car drawings) 'width) 0.0)))
+      (if (< row-tol 1.0) (setq row-tol 1.0))
+      ;; ÏÈ°´ Y ½µĞò¡¢X ÉıĞò´ÖÅÅ
+      (setq sorted
+        (vl-sort (append drawings nil)
+          '(lambda (a b)
+             (if (and (bp:drawing-prop a 'center) (bp:drawing-prop b 'center))
+               (if (> (abs (- (cadr (bp:drawing-prop a 'center))
+                              (cadr (bp:drawing-prop b 'center)))) row-tol)
+                 (> (cadr (bp:drawing-prop a 'center)) (cadr (bp:drawing-prop b 'center)))
+                 (< (car (bp:drawing-prop a 'center)) (car (bp:drawing-prop b 'center))))
+               T))))
+      ;; ·Ö×éµ½ĞĞ
+      (setq rows nil)
+      (foreach d sorted
+        (if (and rows
+                 (bp:drawing-prop d 'center)
+                 (bp:drawing-prop (caar rows) 'center)
+                 (<= (abs (- (cadr (bp:drawing-prop d 'center))
+                             (cadr (bp:drawing-prop (caar rows) 'center)))) row-tol))
+          (setq rows (cons (append (car rows) (list d)) (cdr rows)))
+          (setq rows (cons (list d) rows))))
+      (setq rows (reverse rows))
+      ;; Å¼ÊıĞĞ£¨´Ó 0 Æğ£©·´×ª X ÊµÏÖÉßĞÎ
+      (setq result nil)
+      (setq i 0)
+      (foreach row rows
+        (if (= (rem i 2) 1)
+          (setq row (reverse row)))
+        (foreach d row (setq result (cons d result)))
+        (setq i (1+ i)))
+      (reverse result))))
 
 (defun bp:sort-drawings (drawings method)
-  "æ’åºå›¾çº¸åˆ—è¡¨ã€‚method: 'X æˆ– 'Y"
+  "ÅÅĞò·Ö·¢¡£method: 'X ¼òµ¥×óµ½ÓÒ£¬'Y ÉÏµ½ÏÂ£¬'S ÉßĞÎ¡£"
   (cond
-    ((eq method 'X) (bp:sort-by-x drawings))
-    ((eq method 'Y) (bp:sort-by-y drawings))
+    ((eq method 'X)
+     (vl-sort (append drawings nil)
+       '(lambda (a b)
+          (if (and (bp:drawing-prop a 'center) (bp:drawing-prop b 'center))
+            (< (car (bp:drawing-prop a 'center)) (car (bp:drawing-prop b 'center)))
+            T))))
+    ((eq method 'Y)
+     (vl-sort (append drawings nil)
+       '(lambda (a b)
+          (if (and (bp:drawing-prop a 'center) (bp:drawing-prop b 'center))
+            (> (cadr (bp:drawing-prop a 'center)) (cadr (bp:drawing-prop b 'center)))
+            T))))
+    ((eq method 'S) (bp:sort-serpentine drawings))
     (t drawings)))
 
+;; ============================================================================
+;; ÃüÃû
+;; ============================================================================
 
-;; ============================================================================
-;; é‡å·æ£€æµ‹
-;; ============================================================================
+(defun bp:zero-pad (n width)
+  "ÕûÊıÁãÌî³äµ½Ö¸¶¨¿í¶È¡£"
+  (setq n (itoa n))
+  (while (< (strlen n) width) (setq n (strcat "0" n)))
+  n)
+
+(defun bp:make-filename (drawing rule index / num name scale date result)
+  "°´ÃüÃû¹æÔòÉú³ÉÎÄ¼şÃû¡£{ĞòºÅ} ÁãÌî³ä 3 Î»¡£"
+  (setq num   (or (bp:drawing-prop drawing 'draw-num) "")
+        name  (or (bp:drawing-prop drawing 'draw-name) "")
+        scale (itoa (or (bp:drawing-prop drawing 'scale) 100))
+        date  (or (bp:drawing-prop drawing 'date) ""))
+  ;; »ù´¡Ãû£ºÍ¼ºÅ-Í¼Ãû£¬È±Ïî»ØÍËĞòºÅ
+  (setq result
+    (cond
+      ((and (/= num "") (/= name "")) (strcat num "-" name))
+      ((/= num "") num)
+      ((/= name "") name)
+      (t (strcat "Í¼Ö½_" (bp:zero-pad index 3)))))
+  ;; ÓÃ»§×Ô¶¨Òå¹æÔò£¨º¬ {token} Ê±¸²¸Ç£©
+  (if (and rule (/= rule "") (wcmatch rule "*{*"))
+    (progn
+      (setq result rule)
+      (setq result (vl-string-subst (bp:zero-pad index 3) "{ĞòºÅ}" result))
+      (setq result (vl-string-subst num "{Í¼ºÅ}" result))
+      (setq result (vl-string-subst name "{Í¼Ãû}" result))
+      (setq result (vl-string-subst scale "{±ÈÀı}" result))
+      (setq result (vl-string-subst date "{ÈÕÆÚ}" result))))
+  result)
 
 (defun bp:check-duplicates (drawings / seen dups draw-num)
-  "æ£€æµ‹å›¾å·é‡å¤ï¼Œè¿”å›é‡å¤çš„å›¾å·åˆ—è¡¨ã€‚"
+  "¼ì²âÖØ¸´Í¼ºÅ¡£"
   (setq seen nil dups nil)
   (foreach d drawings
     (setq draw-num (bp:drawing-prop d 'draw-num))
     (if draw-num
       (if (member draw-num seen)
-        (if (not (member draw-num dups))
-          (setq dups (cons draw-num dups)))
+        (if (not (member draw-num dups)) (setq dups (cons draw-num dups)))
         (setq seen (cons draw-num seen)))))
   (reverse dups))
 
-
 ;; ============================================================================
-;; æ–‡ä»¶å‘½å
-;; ============================================================================
-
-(defun bp:make-filename (drawing rule index / num name scale date result)
-  "æ ¹æ®å‘½åè§„åˆ™ç”Ÿæˆæ–‡ä»¶åã€‚
-  rule: å¦‚ \"{å›¾å·}_{å›¾å}\" æˆ– \"{åºå·}_{å›¾å·}\""
-  (setq num   (or (bp:drawing-prop drawing 'draw-num) "")
-        name  (or (bp:drawing-prop drawing 'draw-name) "")
-        scale (itoa (bp:drawing-prop drawing 'scale))
-        date  (or (bp:drawing-prop drawing 'date) ""))
-  (setq result rule)
-  (setq result (vl-string-subst (itoa index) "{åºå·}" result))
-  (setq result (vl-string-subst num  "{å›¾å·}" result))
-  (setq result (vl-string-subst name "{å›¾å}" result))
-  (setq result (vl-string-subst scale "{æ¯”ä¾‹}" result))
-  (setq result (vl-string-subst date "{æ—¥æœŸ}" result))
-  result)
-
-
-;; ============================================================================
-;; æ‰“å°æ‰§è¡Œ
+;; Éè±¸ / Ö½ÕÅÃ¶¾Ù£¨Ïû³ıÓ²±àÂë£©
 ;; ============================================================================
 
-(defun bp:plot-one (drawing printer paper scale-mode custom-scale
-                    ctb color-mode output-mode output-path filename
-                    auto-rotate auto-center
-                    / center w h rot min-pt max-pt plot-scale orientation)
-  "æ‰“å°å•å¼ å›¾çº¸ã€‚ä½¿ç”¨ -PLOT å‘½ä»¤ã€‚"
-  (setq center   (bp:drawing-prop drawing 'center)
-        w        (bp:drawing-prop drawing 'width)
-        h        (bp:drawing-prop drawing 'height)
-        rot      (bp:drawing-prop drawing 'rotation)
-        min-pt   (list (- (car center) (* w 0.5))
-                        (- (cadr center) (* h 0.5)))
-        max-pt   (list (+ (car center) (* w 0.5))
-                        (+ (cadr center) (* h 0.5)))
-        plot-scale "FIT"
-        orientation "LANDSCAPE")
-    ;; æ–¹å‘åˆ¤æ–­
-    (if auto-rotate
-      (setq orientation (if (> w h) "LANDSCAPE" "PORTRAIT")))
-    ;; æ¯”ä¾‹å¤„ç†
+(defun bp:get-printers (/ doc layout lst)
+  "Ã¶¾Ù±¾»ú´òÓ¡Éè±¸£¨º¬ĞéÄâ PDF/DWF ´òÓ¡»ú£©¡£"
+  (setq lst nil)
+  (if (and *SYS:HAS-ACTIVEX* (uc:com-available-p))
+    (progn
+      (setq doc (vla-get-activedocument (vlax-get-acad-object))
+            layout (vla-get-activelayout doc))
+      (setq lst (vl-catch-all-apply
+        '(lambda nil
+           (vlax-safearray->list (vlax-variant-value (vla-GetPlotDeviceNames layout))))))
+      (if (vl-catch-all-error-p lst) (setq lst nil))))
+  (if (not lst)
+    (setq lst '("DWG To PDF.pc3" "DWF6 ePlot.pc3" "Default Windows System Printer.pc3")))
+  lst)
+
+(defun bp:get-papers (printer / doc layout lst)
+  "Ã¶¾ÙÖ¸¶¨´òÓ¡»úµÄÖ½ÕÅ£¨canonical Ãû£©¡£"
+  (setq lst nil)
+  (if (and *SYS:HAS-ACTIVEX* (uc:com-available-p))
+    (progn
+      (setq doc (vla-get-activedocument (vlax-get-acad-object))
+            layout (vla-get-activelayout doc))
+      (if (and printer (/= printer ""))
+        (progn
+          (vla-put-configname layout printer)
+          (vl-catch-all-apply 'vla-RefreshPlotDeviceInfo (list layout))
+          (setq lst (vl-catch-all-apply
+            '(lambda nil
+               (vlax-safearray->list (vlax-variant-value (vla-GetCanonicalMediaNames layout))))))
+          (if (vl-catch-all-error-p lst) (setq lst nil))))))
+  ;; »ØÍË£º±ê×¼Ö½ÕÅÃû
+  (if (not lst)
+    (setq lst (mapcar 'car *BP:PAPER-SIZES*)))
+  lst)
+
+;; ============================================================================
+;; ´òÓ¡Ö´ĞĞ
+;; ============================================================================
+
+(defun bp:plottype (key)
+  "AcPlotType ³£Á¿£¬¼æÈİ boundp Ì½²â¡£"
+  (cond
+    ((= key 'window) (if (and (boundp 'acWindow) (numberp acWindow)) acWindow *BP:AC-WINDOW*))
+    ((= key 'layout) (if (and (boundp 'acLayout) (numberp acLayout)) acLayout *BP:AC-LAYOUT*))
+    (t *BP:AC-WINDOW*)))
+
+(defun bp:plot-activex (drawing settings filename / doc layout plot printer paper
+                         scale-mode custom-scale ctb updown center w h rot
+                         min-pt max-pt target-layout)
+  "ActiveX ´òÓ¡µ¥ÕÅÍ¼Ö½£¨vla-PlotToFile / PlotToDevice£©¡£"
+  (setq doc    (vla-get-activedocument (vlax-get-acad-object))
+        layout (vla-get-activelayout doc)
+        plot   (vla-get-plot doc))
+  (setq printer     (cdr (assoc 'printer settings))
+        paper       (cdr (assoc 'paper settings))
+        scale-mode  (cdr (assoc 'scale_mode settings))
+        custom-scale (cdr (assoc 'custom_scale settings))
+        ctb         (cdr (assoc 'ctb settings))
+        updown      (= (cdr (assoc 'plot_upside_down settings)) "1"))
+  ;; ÅäÖÃ´òÓ¡»ú£¨±ØĞë RefreshPlotDeviceInfo£©
+  (vla-put-configname layout printer)
+  (vl-catch-all-apply 'vla-RefreshPlotDeviceInfo (list layout))
+  ;; Ö½ÕÅ£¨canonical Ãû£©
+  (if (and paper (/= paper ""))
+    (vl-catch-all-apply 'vla-put-canonicalmedianename (list layout paper)))
+  ;; ·½Ïò
+  (if (bp:drawing-prop drawing 'layout)
+    (vla-put-plotrotation layout (if updown 2 0))
+    (progn
+      (setq w (bp:drawing-prop drawing 'width)
+            h (bp:drawing-prop drawing 'height))
+      (setq rot (if (> w h) 0 1))  ; ºá 0 / Êú 90
+      (if updown (setq rot (+ rot 2)))
+      (vla-put-plotrotation layout rot)))
+  ;; ¾ÓÖĞ / Ïß¿í / ÑùÊ½
+  (vla-put-centerplot layout :vlax-true)
+  (vla-put-plotwithlineweights layout :vlax-true)
+  (vla-put-plotwithplotstyles layout :vlax-true)
+  (if (and ctb (/= ctb "") (/= (strcase ctb) "NONE"))
+    (vl-catch-all-apply 'vla-put-stylesheet (list layout ctb)))
+  ;; ±ÈÀı
+  (cond
+    ((= scale-mode "FIT")
+     (vla-put-usestandardscale layout :vlax-true)
+     (vla-put-standardscale layout 0))  ; acScaleToFit = 0
+    ((= scale-mode "CUSTOM")
+     (vla-put-usestandardscale layout :vlax-false)
+     (vla-SetCustomScale layout 1.0 (if custom-scale custom-scale 100)))
+    ((= scale-mode "AUTO")
+     (vla-put-usestandardscale layout :vlax-false)
+     (vla-SetCustomScale layout 1.0 (bp:drawing-prop drawing 'scale))))
+  ;; ´òÓ¡ÇøÓò£º²¼¾Ö vs ´°¿Ú
+  (if (bp:drawing-prop drawing 'layout)
+    ;; ²¼¾Ö´òÓ¡£ºacLayout ÀàĞÍ£¬ÇĞµ½¸Ã²¼¾Ö
+    (progn
+      (vla-put-plottype layout (bp:plottype 'layout))
+      (setq target-layout (vl-catch-all-apply 'vla-item
+        (list (vla-get-layouts doc) (bp:drawing-prop drawing 'layout))))
+      (if (and target-layout (not (vl-catch-all-error-p target-layout)))
+        (vl-catch-all-apply 'vla-put-activelayout (list doc target-layout))))
+    ;; ´°¿Ú´òÓ¡£ºÃ¿Ö¡µ¥¶ÀÉè´°¿Ú
+    (progn
+      (setq center (bp:drawing-prop drawing 'center)
+            w (bp:drawing-prop drawing 'width)
+            h (bp:drawing-prop drawing 'height))
+      (setq min-pt (list (- (car center) (* w 0.5)) (- (cadr center) (* h 0.5)))
+            max-pt (list (+ (car center) (* w 0.5)) (+ (cadr center) (* h 0.5))))
+      (vla-SetWindowToPlot layout (vlax-3d-point min-pt) (vlax-3d-point max-pt))
+      (vla-put-plottype layout (bp:plottype 'window))))
+  ;; Êä³ö£ºĞ´ÎÄ¼ş vs Ö±½Ó´òÓ¡
+  (if (and filename (/= filename ""))
+    (vla-PlotToFile plot filename)
+    (vla-PlotToDevice plot)))
+
+(defun bp:plot-command (drawing settings filename / printer paper orientation
+                         center w h min-pt max-pt plot-scale ctb updown)
+  "-PLOT ÃüÁî¶µµ×£¨ÎŞ COM Æ½Ì¨£©¡£¼ò»¯ĞòÁĞ£¬²¼¾Ö´òÓ¡²»Ö§³Ö¡£"
+  (setq printer (cdr (assoc 'printer settings))
+        paper   (cdr (assoc 'paper settings))
+        center  (bp:drawing-prop drawing 'center)
+        w       (bp:drawing-prop drawing 'width)
+        h       (bp:drawing-prop drawing 'height)
+        orientation (if (> w h) "LANDSCAPE" "PORTRAIT")
+        plot-scale (if (= (cdr (assoc 'scale_mode settings)) "FIT")
+                     "FIT"
+                     (strcat "1:" (itoa (bp:drawing-prop drawing 'scale))))
+        ctb     (cdr (assoc 'ctb settings))
+        updown  (if (= (cdr (assoc 'plot_upside_down settings)) "1") "Y" "N"))
+  (if (and center w h)
+    (progn
+      (setq min-pt (list (- (car center) (* w 0.5)) (- (cadr center) (* h 0.5)))
+            max-pt (list (+ (car center) (* w 0.5)) (+ (cadr center) (* h 0.5))))
+      (if (and filename (/= filename ""))
+        (command "_.-PLOT" "Y" "Model" printer paper "M" orientation updown
+          "W" min-pt max-pt plot-scale "C" "Y" (if ctb ctb "monochrome.ctb")
+          "Y" "A" "Y" filename "N" "Y")
+        (command "_.-PLOT" "Y" "Model" printer paper "M" orientation updown
+          "W" min-pt max-pt plot-scale "C" "Y" (if ctb ctb "monochrome.ctb")
+          "Y" "A" "N" "N" "Y")))))
+
+(defun bp:plot-one (drawing settings filename)
+  "´òÓ¡µ¥ÕÅÍ¼Ö½¡£ÓĞ COM ×ß ActiveX£¬ÎŞ COM ×ß -PLOT ¶µµ×¡£"
+  (if (and *SYS:HAS-ACTIVEX* (uc:com-available-p))
+    (bp:plot-activex drawing settings filename)
+    (bp:plot-command drawing settings filename)))
+
+(defun bp:execute-print (drawings settings / printer paper scale-mode custom-scale
+                          ctb output-mode output-path name-rule updown i total
+                          filename pdf-list bg-old ext)
+  "ÅúÁ¿´òÓ¡Ö÷Ñ­»·¡£"
+  (setq printer (cdr (assoc 'printer settings))
+        paper   (cdr (assoc 'paper settings))
+        scale-mode (cdr (assoc 'scale_mode settings))
+        custom-scale (cdr (assoc 'custom_scale settings))
+        ctb      (cdr (assoc 'ctb settings))
+        output-mode (cdr (assoc 'output_mode settings))
+        output-path (cdr (assoc 'output_path settings))
+        name-rule (cdr (assoc 'name_rule settings))
+        updown   (= (cdr (assoc 'plot_upside_down settings)) "1")
+        total    (length drawings)
+        i 0
+        pdf-list nil)
+  ;; Êä³öÄ¿Â¼
+  (if (and (not (= output-mode "PRINTER")) output-path (/= output-path "")
+           (not (findfile output-path)))
+    (vl-catch-all-apply 'vl-mkdir (list output-path)))
+  ;; ¹ØºóÌ¨´òÓ¡£¨±ÜÃâÒì²½²¢·¢¸²¸ÇÎÄ¼ş£©£¬½áÊøºó»Ö¸´
+  (setq bg-old (getvar "BACKGROUNDPLOT"))
+  (setvar "BACKGROUNDPLOT" 0)
+  (princ (strcat "\n[ÅúÁ¿´òÓ¡] ¿ªÊ¼£¬¹² " (itoa total) " ÕÅ..."))
+  (foreach d drawings
+    (setq i (1+ i))
+    ;; ÎÄ¼şÀ©Õ¹Ãû
     (cond
-      ((= scale-mode "FIT")
-       (setq plot-scale "FIT"))
-      ((= scale-mode "CUSTOM")
-       (setq plot-scale (strcat "1:" (itoa custom-scale))))
-      ((= scale-mode "AUTO")
-       (setq plot-scale (strcat "1:" (itoa (bp:drawing-prop drawing 'scale))))))
-    ;; è¾“å‡ºæ–‡ä»¶
-    (if (= output-mode "PRINTER")
-      ;; ç›´æ¥æ‰“å°
-      (command "_.-PLOT"
-        "Y"                   ; è¯¦ç»†é…ç½®
-        "Model"               ; å¸ƒå±€åï¼ˆå§‹ç»ˆä»æ¨¡å‹ç©ºé—´æ‰“å°ï¼‰
-        printer               ; æ‰“å°æœº
-        paper                 ; çº¸å¼ 
-        "M"                   ; æ¯«ç±³
-        orientation           ; æ–¹å‘
-        "N"                   ; åå‘æ‰“å°
-        "W"                   ; çª—å£
-        min-pt max-pt         ; æ‰“å°çª—å£
-        plot-scale            ; æ¯”ä¾‹
-        (if auto-center "C" "0,0")  ; å±…ä¸­
-        "Y"                   ; ä½¿ç”¨æ‰“å°æ ·å¼
-        (if ctb ctb "monochrome.ctb")
-        "Y"                   ; æŒ‰æ ·å¼æ‰“å°
-        color-mode            ; å½©è‰²/ç°åº¦/é»‘ç™½
-        "N"                   ; ä¸ä¿å­˜æ›´æ”¹
-        "N"                   ; æ˜¯å¦ç»§ç»­
-        "Y")                  ; ç¡®è®¤
-      ;; è¾“å‡ºåˆ°æ–‡ä»¶
-      (command "_.-PLOT"
-        "Y"
-        "Model"
-        printer
-        paper
-        "M"
-        orientation
-        "N"
-        "W"
-        min-pt max-pt
-        plot-scale
-        (if auto-center "C" "0,0")
-        "Y"
-        (if ctb ctb "monochrome.ctb")
-        "Y"
-        color-mode
-        "Y"                   ; è¾“å‡ºåˆ°æ–‡ä»¶
-        "N"                   ; ä¸ä¿å­˜æ›´æ”¹
-        (strcat output-path "\\" filename)
-        "N"
-        "Y")))
+      ((= output-mode "PDF") (setq ext ".pdf"))
+      ((= output-mode "DWF") (setq ext ".dwf"))
+      ((= output-mode "PLT") (setq ext ".plt"))
+      (t (setq ext "")))
+    ;; ÎÄ¼şÃûÓëÍêÕûÂ·¾¶
+    (setq filename
+      (if (= output-mode "PRINTER")
+        ""  ; Ö±½Ó´òÓ¡²»Ğ´ÎÄ¼ş
+        (strcat output-path "\\" (bp:make-filename d name-rule i) ext)))
+    (princ (strcat "\n  [" (itoa i) "/" (itoa total) "] "
+                   (if (= filename "") "(Ö±½Ó´òÓ¡)" filename)))
+    ;; ÊÕ¼¯ PDF ÓÃÓÚºÏ²¢
+    (if (= output-mode "PDF") (setq pdf-list (cons filename pdf-list)))
+    ;; ´òÓ¡£¨´íÎó¸ôÀë£ºµ¥ÕÅÊ§°Ü²»ÖĞ¶ÏÕûÅú£©
+    (vl-catch-all-apply 'bp:plot-one (list d settings filename)))
+  (setvar "BACKGROUNDPLOT" bg-old)
+  ;; ºÏ²¢ PDF
+  (if (and (= output-mode "PDF") (= (cdr (assoc 'merge_pdf settings)) "1")
+           pdf-list (> (length pdf-list) 1))
+    (if (bp:merge-pdfs (reverse pdf-list) (strcat output-path "\\È«²¿Í¼Ö½.pdf"))
+      (princ "\n[ÅúÁ¿´òÓ¡] ÒÑºÏ²¢Îª È«²¿Í¼Ö½.pdf")
+      (princ "\n[ÅúÁ¿´òÓ¡] PDF ºÏ²¢Ê§°Ü£¨Ğè°²×° pdftk£©")))
+  (princ (strcat "\n[ÅúÁ¿´òÓ¡] Íê³É£¬¹² " (itoa total) " ÕÅ¡£"))
+  (princ))
 
 ;; ============================================================================
-;; é…ç½®ä¿å­˜/åŠ è½½
+;; ÅäÖÃ±£´æ / ¼ÓÔØ
 ;; ============================================================================
 
 (defun bp:save-config (cfg-file settings / fp)
-  "ä¿å­˜æ‰“å°é…ç½®åˆ°æ–‡ä»¶ã€‚"
+  "±£´æ´òÓ¡ÅäÖÃµ½ÎÄ¼ş£¨key=value£¬Öµ¾­ vl-princ-to-string ¿É read »¹Ô­£©¡£"
   (if (setq fp (open cfg-file "w"))
     (progn
       (foreach pair settings
-        (write-line (strcat (car pair) "=" (cdr pair)) fp))
+        (write-line (strcat (vl-symbol-name (car pair)) "="
+                            (vl-princ-to-string (cdr pair))) fp))
       (close fp)
-      (princ (strcat "\né…ç½®å·²ä¿å­˜: " cfg-file)))
-    (princ "\næ— æ³•ä¿å­˜é…ç½®æ–‡ä»¶ã€‚")))
+      (princ (strcat "\nÅäÖÃÒÑ±£´æ: " cfg-file)))
+    (princ "\nÎŞ·¨±£´æÅäÖÃÎÄ¼ş¡£")))
 
 (defun bp:load-config (cfg-file / fp line pos key val settings)
-  "ä»æ–‡ä»¶åŠ è½½æ‰“å°é…ç½®ã€‚"
+  "´ÓÎÄ¼ş¶ÁÅäÖÃ£¬Öµ¾­ read »¹Ô­ÀàĞÍ¡£"
   (if (setq fp (open cfg-file "r"))
     (progn
+      (setq settings nil)
       (while (setq line (read-line fp))
         (if (setq pos (vl-string-search "=" line))
-          (setq key (substr line 1 pos)
-                val (substr line (+ pos 2))
-                settings (cons (cons key val) settings))))
+          (progn
+            (setq key (substr line 1 pos)
+                  val (vl-catch-all-apply 'read (list (substr line (+ pos 2)))))
+            (if (vl-catch-all-error-p val)
+              (setq val (substr line (+ pos 2))))
+            (setq settings (cons (cons key val) settings)))))
       (close fp)
       (reverse settings))
     nil))
 
+;; ============================================================================
+;; PDF ºÏ²¢£¨ÒÀÀµ pdftk£©
+;; ============================================================================
+
+(defun bp:merge-pdfs (pdf-files output-file / pdftk-exe cmd n)
+  "ÓÃ pdftk ºÏ²¢¶à¸ö PDF¡£"
+  (setq cmd (strcat
+              (apply 'strcat (mapcar '(lambda (f) (strcat "\"" f "\" ")) pdf-files))
+              "cat output \"" output-file "\""))
+  (setq pdftk-exe
+    (cond
+      ((findfile "pdftk.exe"))
+      ((findfile "C:\\Program Files (x86)\\PDFtk Server\\bin\\pdftk.exe"))
+      ((findfile "C:\\Program Files\\PDFtk Server\\bin\\pdftk.exe"))
+      (t "pdftk")))
+  (startapp "cmd.exe" (strcat "/c \"" pdftk-exe "\" " cmd))
+  (setq n 0)
+  (while (and (not (findfile output-file)) (< n 300))
+    (vl-catch-all-apply 'command (list "_.DELAY" 100))
+    (setq n (1+ n)))
+  (if (findfile output-file) T nil))
 
 ;; ============================================================================
-;; DCL å¯¹è¯æ¡†
+;; DCL ¶Ô»°¿ò
 ;; ============================================================================
+
+(defun bp:val-to-index (val lst / i result)
+  "ÔÚ alist ÖĞÕÒ cdr=val µÄË÷Òı£¨×Ö·û´®£©¡£"
+  (setq i 0 result "0")
+  (foreach item lst
+    (if (equal (cdr item) val) (setq result (itoa i)))
+    (setq i (1+ i)))
+  result)
 
 (defun bp:init-dialog (dcl-id / printers)
-  "åˆå§‹åŒ–å¯¹è¯æ¡†æ§ä»¶ã€‚"
-  ;; å›¾æ¡†ç±»å‹åˆ—è¡¨
+  "³õÊ¼»¯¶Ô»°¿ò¿Ø¼ş¡£"
+  ;; Í¼¿òÊ¶±ğ·½Ê½
   (start_list "frame_type")
-  (foreach ft *BP:FRAME-TYPES*
-    (add_list (car ft)))
+  (foreach ft *BP:FRAME-TYPES* (add_list (car ft)))
   (end_list)
   (set_tile "frame_type" "0")
-  (set_tile "frame_value" "A1,A2,A0,TK-*,å›¾æ¡†*")
-
-  ;; æ‰“å°æœºåˆ—è¡¨
+  (set_tile "frame_value" "TK-*")
+  ;; ´òÓ¡»ú£¨¶¯Ì¬Ã¶¾Ù£©
   (start_list "printer")
-  (add_list "DWG To PDF.pc3")
-  (add_list "Default Windows System Printer.pc3")
-  (add_list "Adobe PDF.pc3")
+  (foreach p (bp:get-printers) (add_list p))
   (end_list)
   (set_tile "printer" "0")
-
-  ;; çº¸å¼ åˆ—è¡¨
+  ;; Ö½ÕÅ£¨³õÊ¼Îª±ê×¼ A ÏµÁĞ£¬ÇĞ»»´òÓ¡»úºó¶¯Ì¬Ë¢ĞÂ£©
+  (setq *BP:CURRENT-PAPERS* (bp:get-papers (car (bp:get-printers))))
   (start_list "paper")
-  (foreach p *BP:PAPER-SIZES*
-    (add_list (car p)))
+  (foreach p *BP:CURRENT-PAPERS* (add_list p))
   (end_list)
-  (set_tile "paper" "3")  ; é»˜è®¤ A1
-
-  ;; æ¯”ä¾‹æ¨¡å¼
+  (set_tile "paper" "2")  ; Ä¬ÈÏ A2
+  ;; ±ÈÀıÄ£Ê½
   (start_list "scale_mode")
-  (foreach sm *BP:SCALE-MODES*
-    (add_list (car sm)))
+  (foreach sm *BP:SCALE-MODES* (add_list (car sm)))
   (end_list)
   (set_tile "scale_mode" "0")
-
-  ;; æ‰“å°æ ·å¼
+  ;; ´òÓ¡ÑùÊ½£¨CTB£©
   (start_list "ctb")
   (add_list "monochrome.ctb")
-  (add_list "acad.ctb")
   (add_list "Grayscale.ctb")
-  (add_list "DWF Virtual Pens.ctb")
+  (add_list "acad.ctb")
+  (add_list "None")
   (end_list)
   (set_tile "ctb" "0")
-
-  ;; è¾“å‡ºæ–¹å¼
+  ;; Êä³ö¸ñÊ½
   (start_list "output_mode")
-  (foreach om *BP:OUTPUT-MODES*
-    (add_list (car om)))
+  (foreach om *BP:OUTPUT-MODES* (add_list (car om)))
   (end_list)
-  (set_tile "output_mode" "1")  ; PDF
-
-  ;; é¢œè‰²æ¨¡å¼
+  (set_tile "output_mode" "0")
+  (bp:select-printer "DWG To PDF")  ; PDF
+  ;; ÑÕÉ«Ä£Ê½
   (start_list "color_mode")
-  (foreach cm *BP:COLOR-MODES*
-    (add_list (car cm)))
+  (foreach cm *BP:COLOR-MODES* (add_list (car cm)))
   (end_list)
-  (set_tile "color_mode" "2")  ; é»‘ç™½
-
-  ;; è¾“å‡ºè·¯å¾„ï¼ˆé»˜è®¤æ¡Œé¢ï¼‰
+  (set_tile "color_mode" "2")  ; ºÚ°×
+  ;; Êä³öÂ·¾¶ÓëÃüÃû
   (set_tile "output_path" (getvar "DWGPREFIX"))
-  (set_tile "name_rule" "{å›¾å·}_{å›¾å}"))
+  (set_tile "name_rule" "")
+  ;; ÅÅĞò·½Ê½
+  (start_list "sort_mode")
+  (add_list "XÅÅĞò£¨×óµ½ÓÒ£©")
+  (add_list "YÅÅĞò£¨ÉÏµ½ÏÂ£©")
+  (add_list "ÉßĞÎÅÅĞò")
+  (end_list)
+  (set_tile "sort_mode" "0")
+  (set_tile "custom_scale" "100"))
 
-(defun bp:get-settings (/ ft-idx sm-idx om-idx cm-idx)
-  "ä»å¯¹è¯æ¡†è·å–å½“å‰è®¾ç½®ã€‚"
+(defun bp:get-settings (/ ft-idx sm-idx om-idx cm-idx printer-idx paper-idx ctb-idx)
+  "´Ó¶Ô»°¿ò¶ÁÈ¡µ±Ç°ÉèÖÃ¡£"
   (setq ft-idx (atoi (get_tile "frame_type"))
         sm-idx (atoi (get_tile "scale_mode"))
         om-idx (atoi (get_tile "output_mode"))
-        cm-idx (atoi (get_tile "color_mode")))
-    (list
-      (cons 'frame_type      (cdr (nth ft-idx *BP:FRAME-TYPES*)))
-      (cons 'frame_value     (get_tile "frame_value"))
-      (cons 'include_model   (get_tile "include_model"))
-      (cons 'include_layouts (get_tile "include_layouts"))
-      (cons 'auto_rotate     (get_tile "auto_rotate"))
-      (cons 'auto_center     (get_tile "auto_center"))
-      (cons 'printer         (nth (atoi (get_tile "printer"))
-                                  '("DWG To PDF.pc3" "Default Windows System Printer.pc3" "Adobe PDF.pc3")))
-      (cons 'paper           (get_tile "paper"))
-      (cons 'scale_mode      (cdr (nth sm-idx *BP:SCALE-MODES*)))
-      (cons 'custom_scale    (atoi (get_tile "custom_scale")))
-      (cons 'ctb             (nth (atoi (get_tile "ctb"))
-                                  '("monochrome.ctb" "acad.ctb" "Grayscale.ctb" "DWF Virtual Pens.ctb")))
-      (cons 'color_mode      (cdr (nth cm-idx *BP:COLOR-MODES*)))
-      (cons 'output_mode     (cdr (nth om-idx *BP:OUTPUT-MODES*)))
-      (cons 'output_path     (get_tile "output_path"))
-      (cons 'name_rule       (get_tile "name_rule"))
-      (cons 'merge_pdf       (get_tile "merge_pdf"))))
+        cm-idx (atoi (get_tile "color_mode"))
+        printer-idx (atoi (get_tile "printer"))
+        paper-idx (atoi (get_tile "paper"))
+        ctb-idx (atoi (get_tile "ctb")))
+  (list
+    (cons 'frame_type  (cdr (nth ft-idx *BP:FRAME-TYPES*)))
+    (cons 'frame_value (get_tile "frame_value"))
+    (cons 'include_model   (get_tile "include_model"))
+    (cons 'include_layouts (get_tile "include_layouts"))
+    (cons 'plot_upside_down (get_tile "plot_upside_down"))
+    (cons 'printer (nth printer-idx (bp:get-printers)))
+    (cons 'paper   (nth paper-idx *BP:CURRENT-PAPERS*))
+    (cons 'scale_mode (cdr (nth sm-idx *BP:SCALE-MODES*)))
+    (cons 'custom_scale (atoi (get_tile "custom_scale")))
+    (cons 'ctb (nth ctb-idx '("monochrome.ctb" "Grayscale.ctb" "acad.ctb" "None")))
+    (cons 'color_mode (cdr (nth cm-idx *BP:COLOR-MODES*)))
+    (cons 'output_mode (cdr (nth om-idx *BP:OUTPUT-MODES*)))
+    (cons 'output_path (get_tile "output_path"))
+    (cons 'name_rule (get_tile "name_rule"))
+    (cons 'merge_pdf (get_tile "merge_pdf"))))
 
 (defun bp:update-list (drawings duplicates)
-  "æ›´æ–°å›¾çº¸åˆ—è¡¨æ˜¾ç¤ºã€‚é‡å¤å›¾å·æ ‡ [!] å‰ç¼€ã€‚"
+  "Ë¢ĞÂÍ¼Ö½ÁĞ±íÏÔÊ¾£¬ÖØºÅ¼Ó [!] Ç°×º¡£"
   (start_list "drawing_list")
   (mapcar 'add_list
     (mapcar
       '(lambda (d / num name scale paper dup-mark)
-         (setq num   (or (bp:drawing-prop d 'draw-num) "â€”")
-               name  (or (bp:drawing-prop d 'draw-name) "æœªå‘½å")
-               scale (itoa (bp:drawing-prop d 'scale))
+         (setq num (or (bp:drawing-prop d 'draw-num) "-")
+               name (or (bp:drawing-prop d 'draw-name) (or (bp:drawing-prop d 'layout) "Î´ÃüÃû"))
+               scale (itoa (or (bp:drawing-prop d 'scale) 100))
                paper (or (bp:drawing-prop d 'paper) "?"))
-         (if (member num duplicates)
-           (setq dup-mark "[!] ")
-           (setq dup-mark ""))
+         (if (member num duplicates) (setq dup-mark "[!] ") (setq dup-mark ""))
          (strcat dup-mark num "  " name "  1:" scale "  " paper))
       drawings))
   (end_list))
 
-
 ;; ============================================================================
-;; å‘½ä»¤: BPT â€” æ‰¹é‡æ‰“å°
+;; ÃüÁî
 ;; ============================================================================
 
-(defun c:BPT (/ dcl-fn dcl-id result done drawings settings
-               duplicates frame-type frame-value)
-  "æ‰¹é‡æ‰“å°ä¸»å‘½ä»¤ã€‚"
+(defun c:BPT (/ dcl-fn dcl-id result done drawings settings duplicates
+               frame-type frame-value d0 c0 w0 h0)
+  "ÅúÁ¿´òÓ¡Ö÷ÃüÁî¡£"
+  (uc:guard-begin '("BACKGROUNDPLOT"))
   (setq dcl-fn (findfile "tb-dcl-batchprint.dcl"))
   (if (not dcl-fn)
     (if (sys:get '*SYS:LOAD-PATH*)
-      (setq dcl-fn (strcat (sys:get '*SYS:LOAD-PATH*) "tb-dcl-batchprint.dcl"))))
-
+      (setq dcl-fn (uc:path-join (sys:get '*SYS:LOAD-PATH*) "tb-dcl-batchprint.dcl"))))
   (if (not (and dcl-fn (setq dcl-id (load_dialog dcl-fn))))
-    (princ "\n[æ‰¹é‡æ‰“å°] æ‰¾ä¸åˆ° DCL æ–‡ä»¶ã€‚")
+    (princ "\n[ÅúÁ¿´òÓ¡] ÕÒ²»µ½ DCL ÎÄ¼ş¡£")
     (if (not (new_dialog "bp_main" dcl-id))
-      (princ "\n[æ‰¹é‡æ‰“å°] æ— æ³•åˆå§‹åŒ–å¯¹è¯æ¡†ã€‚")
+      (progn (unload_dialog dcl-id) (princ "\n[ÅúÁ¿´òÓ¡] ÎŞ·¨³õÊ¼»¯¶Ô»°¿ò¡£"))
       (progn
         (bp:init-dialog dcl-id)
-        (setq drawings nil
-              done nil)
-
-        ;; === äº‹ä»¶ç»‘å®š ===
+        (setq drawings nil done nil)
         (action_tile "btn_pick"
           "(progn
-             (setq pick-ent (car (entsel \"\\næ‹¾å–å›¾æ¡†å—: \")))
+             (setq pick-ent (car (entsel \"\\nÊ°È¡Í¼¿ò: \")))
              (if pick-ent
                (progn
                  (setq pick-name (entity:get-name pick-ent))
                  (if (not pick-name) (setq pick-name \"\"))
                  (set_tile \"frame_value\" pick-name))))")
-
         (action_tile "btn_detect"
           "(progn
              (setq settings (bp:get-settings)
@@ -565,163 +744,115 @@
                                (= (cdr (assoc 'include_layouts settings)) \"1\")))
              (setq duplicates (bp:check-duplicates drawings))
              (bp:update-list drawings duplicates)
-             (set_tile \"status\"
-               (strcat \"æ£€æµ‹åˆ° \" (itoa (length drawings)) \" å¼ å›¾çº¸\"
-                       (if duplicates (strcat \"ï¼Œ[!] \" (itoa (length duplicates)) \" ä¸ªé‡å·\") \"\")))))")
-
-        (action_tile "btn_sort_x"
+             (set_tile \"status\" (strcat \"¼ì²âµ½ \" (itoa (length drawings)) \" ÕÅÍ¼Ö½\")))")
+        (action_tile "btn_sort"
           "(if drawings
              (progn
-               (setq drawings (bp:sort-drawings drawings 'X))
+               (setq drawings (bp:sort-drawings drawings (nth (atoi (get_tile \"sort_mode\")) '(X Y S))))
                (bp:update-list drawings duplicates)
-               (set_tile \"status\" \"å·²æŒ‰Xæ–¹å‘æ’åºï¼ˆå·¦â†’å³ï¼‰ã€‚\")))")
-
-        (action_tile "btn_sort_y"
-          "(if drawings
-             (progn
-               (setq drawings (bp:sort-drawings drawings 'Y))
-               (bp:update-list drawings duplicates)
-               (set_tile \"status\" \"å·²æŒ‰Yæ–¹å‘æ’åºï¼ˆä¸Šâ†’ä¸‹ï¼‰ã€‚\")))")
-
+               (set_tile \"status\" \"ÒÑ°´ËùÑ¡·½Ê½ÅÅĞò\")))")
         (action_tile "btn_remove"
           "(if drawings
              (progn
                (setq sel-idx (atoi (get_tile \"drawing_list\")))
                (if (nth sel-idx drawings)
-                 (progn
-                   (setq drawings (vl-remove (nth sel-idx drawings) drawings))
-                   (setq duplicates (bp:check-duplicates drawings))
-                   (bp:update-list drawings duplicates)
-                   (set_tile \"status\" \"å·²ç§»é™¤é€‰ä¸­å›¾çº¸ã€‚\"))))))")
-
-        (action_tile "btn_clear"
-          "(progn (setq drawings nil duplicates nil)
-                  (bp:update-list nil nil)
-                  (set_tile \"status\" \"åˆ—è¡¨å·²æ¸…ç©ºã€‚\"))")
-
+                 (progn (setq drawings (vl-remove (nth sel-idx drawings) drawings))
+                        (setq duplicates (bp:check-duplicates drawings))
+                        (bp:update-list drawings duplicates)))))")
+        (action_tile "btn_clear" "(progn (setq drawings nil duplicates nil) (bp:update-list nil nil) (set_tile \"status\" \"ÁĞ±íÒÑÇå¿Õ\"))")
         (action_tile "btn_preview"
           "(if drawings
-             (progn
-               (setq settings (bp:get-settings))
-               ;; å¯¹ç¬¬ä¸€å¼ è¿›è¡Œé¢„è§ˆï¼ˆç¼©æ”¾çª—å£åˆ°ç¬¬ä¸€ä¸ªå›¾çº¸ä½ç½®ï¼‰
-               (setq d0 (car drawings)
-                     c0 (bp:drawing-prop d0 'center)
-                     w0 (bp:drawing-prop d0 'width)
-                     h0 (bp:drawing-prop d0 'height))
-               (command \"_.ZOOM\" \"_W\"
-                 (list (- (car c0) (* w0 0.8)) (- (cadr c0) (* h0 0.8)))
-                 (list (+ (car c0) (* w0 0.8)) (+ (cadr c0) (* h0 0.8))))
-               (set_tile \"status\" (strcat \"é¢„è§ˆç¬¬1å¼ ï¼ˆç¼©æ”¾çª—å£ï¼‰\"))))")
-
+             (done_dialog 3)
+             (set_tile \"status\" \"ÇëÏÈ¼ì²âÍ¼¿ò\"))")
         (action_tile "btn_path"
-          "(progn (setq p (getfiled \"é€‰æ‹©è¾“å‡ºæ–‡ä»¶å¤¹\" (get_tile \"output_path\") \"\" 33))
+          "(progn (setq p (getfiled \"Ñ¡ÔñÊä³öÎÄ¼ş¼Ğ\" (get_tile \"output_path\") \"\" 33))
              (if p (set_tile \"output_path\" p)))")
-
         (action_tile "btn_save_cfg"
-          "(progn (setq cfg-file (getfiled \"ä¿å­˜é…ç½®\" \"\" \"cfg\" 1))
-             (if cfg-file
-               (progn
-                 (setq settings (bp:get-settings))
-                 (bp:save-config cfg-file
-                   (mapcar '(lambda (x) (cons (car x) (cdr x))) settings))
-                 (set_tile \"status\" (strcat \"é…ç½®å·²ä¿å­˜: \" cfg-file))))))")
-
+          "(progn (setq cfg-file (getfiled \"±£´æÅäÖÃ\" \"\" \"cfg\" 1))
+             (if cfg-file (bp:save-config cfg-file (bp:get-settings))))")
         (action_tile "btn_load_cfg"
-          "(progn (setq cfg-file (getfiled \"åŠ è½½é…ç½®\" \"\" \"cfg\" 4))
+          "(progn (setq cfg-file (getfiled \"¼ÓÔØÅäÖÃ\" \"\" \"cfg\" 4))
              (if cfg-file
                (progn
                  (setq cfg (bp:load-config cfg-file))
                  (if cfg
-                   (progn
-                     (foreach pair cfg
-                       (set_tile (car pair) (cdr pair)))
-                     (set_tile \"status\" (strcat \"é…ç½®å·²åŠ è½½: \" cfg-file))))))))")
-
-        (action_tile "btn_help"
+                   (foreach pair cfg
+                     (if (bp:tile-list (car pair)) (set_tile (car pair) (bp:val-to-index (cdr pair) (bp:tile-list (car pair)))) (set_tile (car pair) (vl-princ-to-string (cdr pair)))))))))")
+        (action_tile "printer"
           "(progn
-             (alert \"æ‰¹é‡æ‰“å°å¸®åŠ©:\\n\\nå›¾æ¡†è¯†åˆ«:\\n  BLOCK - æŒ‰å›¾å—å(æ”¯æŒé€šé…ç¬¦*)\\n  PLINE - æŒ‰å›¾å±‚å\\n  LAYOUT - ä½¿ç”¨å·²æœ‰å¸ƒå±€\\n\\nå‘½åè§„åˆ™æ ‡è®°:\\n  {å›¾å·} {å›¾å} {æ¯”ä¾‹} {æ—¥æœŸ} {åºå·}\\n\\næ’åº: X=å·¦â†’å³ Y=ä¸Šâ†’ä¸‹\\n\\né‡å·æ£€æµ‹: é‡å¤å›¾å·æ ‡[!]å‰ç¼€\"))")
-
+             (setq p (nth (atoi (get_tile \"printer\")) (bp:get-printers)))
+             (if p
+               (progn
+                 (setq *BP:CURRENT-PAPERS* (bp:get-papers p))
+                 (start_list \"paper\")
+                 (mapcar 'add_list *BP:CURRENT-PAPERS*)
+                 (end_list)
+                 (set_tile \"paper\" \"0\"))))")
+        (action_tile "output_mode"
+          "(progn
+             (setq om (nth (atoi (get_tile \"output_mode\")) *BP:OUTPUT-MODES*))
+             (cond
+               ((= (cdr om) \"PDF\") (bp:select-printer \"DWG To PDF\"))
+               ((= (cdr om) \"DWF\") (bp:select-printer \"DWF6 ePlot\"))))")
+        (action_tile "color_mode"
+          "(progn
+             (setq cm (nth (atoi (get_tile \"color_mode\")) *BP:COLOR-MODES*))
+             (setq ctb-name (cdr (assoc (cdr cm) *BP:COLOR-CTB*)))
+             (if ctb-name
+               (progn
+                 (setq ctb-list '(\"monochrome.ctb\" \"Grayscale.ctb\" \"acad.ctb\" \"None\"))
+                 (set_tile \"ctb\" (bp:val-to-index ctb-name
+                   (mapcar '(lambda (x) (cons x x)) ctb-list))))))")
+        (action_tile "btn_help"
+          "(alert \"ÅúÁ¿´òÓ¡ v2.0\\n\\nÍ¼¿òÊ¶±ğ:\\n  BLOCK - °´Í¼¿ò¿éÃû£¨Ö§³ÖÍ¨Åä·û *£©\\n  PLINE - °´Í¼²ã±ÕºÏ¶à¶ÎÏß\\n  LAYOUT - ²¼¾Ö¿Õ¼ä\\n\\nÊä³ö¸ñÊ½: PDF / DWF / PLT / Ö±½Ó´òÓ¡\\n\\nÃüÃû¹æÔò(¿ÉÑ¡£¬º¬ {token} ²ÅÉúĞ§):\\n  {ĞòºÅ} {Í¼ºÅ} {Í¼Ãû} {±ÈÀı} {ÈÕÆÚ}\")")
         (action_tile "btn_print"
           "(progn
              (if (not drawings)
-               (set_tile \"status\" \"é”™è¯¯: è¯·å…ˆæ£€æµ‹å›¾æ¡†ã€‚\")
-               (progn
-                 (setq settings (bp:get-settings))
-                 (done_dialog 1))))")
-
+               (set_tile \"status\" \"ÇëÏÈ¼ì²âÍ¼¿ò\")
+               (progn (setq settings (bp:get-settings)) (done_dialog 1))))")
         (action_tile "cancel" "(done_dialog 0)")
-
-        ;; å¯åŠ¨å¯¹è¯æ¡†
         (setq result (start_dialog))
         (unload_dialog dcl-id)
-
-        ;; æ‰§è¡Œæ‰“å°
+        ;; Ô¤ÀÀ
+        (if (and (= result 3) drawings)
+          (progn
+            (setq d0 (car drawings)
+                  c0 (bp:drawing-prop d0 'center)
+                  w0 (bp:drawing-prop d0 'width)
+                  h0 (bp:drawing-prop d0 'height))
+            (if (and c0 w0 h0)
+              (command "_.ZOOM" "_W"
+                (list (- (car c0) (* w0 0.8)) (- (cadr c0) (* h0 0.8)))
+                (list (+ (car c0) (* w0 0.8)) (+ (cadr c0) (* h0 0.8)))))))
+        ;; Ö´ĞĞ´òÓ¡
         (if (and (= result 1) drawings settings)
           (bp:execute-print drawings settings)))))
+  (uc:guard-end)
   (princ))
 
+(defun bp:tile-list (key)
+  "·µ»Ø popup ¶ÔÓ¦µÄºòÑ¡ÁĞ±í£¨ÓÃÓÚÅäÖÃ»ØÌî£©¡£"
+  (cond
+    ((= key "frame_type") *BP:FRAME-TYPES*)
+    ((= key "scale_mode") *BP:SCALE-MODES*)
+    ((= key "output_mode") *BP:OUTPUT-MODES*)
+    ((= key "color_mode") *BP:COLOR-MODES*)
+    ((= key "paper") (mapcar '(lambda (x) (cons (car x) (car x))) *BP:PAPER-SIZES*))
+    ((= key "printer") (mapcar '(lambda (x) (cons x x)) (bp:get-printers)))
+    (t nil)))
 
-;; ============================================================================
-;; æ‰§è¡Œæ‰“å°
-;; ============================================================================
-
-(defun bp:execute-print (drawings settings / printer paper scale-mode custom-scale
-                          ctb color-mode output-mode output-path name-rule
-                          auto-rotate auto-center merge-pdf i total filename)
-  "æ‰§è¡Œæ‰¹é‡æ‰“å°ã€‚"
-  (setq printer     (cdr (assoc 'printer settings))
-        paper       (cdr (assoc 'paper settings))
-        scale-mode  (cdr (assoc 'scale_mode settings))
-        custom-scale (cdr (assoc 'custom_scale settings))
-        ctb         (cdr (assoc 'ctb settings))
-        color-mode  (cdr (assoc 'color_mode settings))
-        output-mode (cdr (assoc 'output_mode settings))
-        output-path (cdr (assoc 'output_path settings))
-        name-rule   (cdr (assoc 'name_rule settings))
-        auto-rotate (= (cdr (assoc 'auto_rotate settings)) "1")
-        auto-center (= (cdr (assoc 'auto_center settings)) "1")
-        merge-pdf   (= (cdr (assoc 'merge_pdf settings)) "1")
-        total       (length drawings)
-        i 0)
-
-  (princ (strcat "\nâ•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•"
-                 "\n  æ‰¹é‡æ‰“å°å¼€å§‹ - å…± " (itoa total) " å¼ "
-                 "\nâ•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•"))
-
-  ;; åˆ›å»ºè¾“å‡ºç›®å½•
-  (if (and (/= output-mode "PRINTER") (not (findfile output-path)))
-    (vl-mkdir output-path))
-
-  (foreach d drawings
-    (setq i (1+ i)
-          filename (bp:make-filename d name-rule i))
-    ;; æ ¹æ®è¾“å‡ºæ–¹å¼è®¾ç½®æ‰©å±•å
-    (cond
-      ((= output-mode "PDF") (setq filename (strcat filename ".pdf")))
-      ((= output-mode "PLT") (setq filename (strcat filename ".plt")))
-      ((= output-mode "DWF") (setq filename (strcat filename ".dwf"))))
-
-    (princ (strcat "\n[" (itoa i) "/" (itoa total) "] "
-                   filename "  (1:" (itoa (bp:drawing-prop d 'scale)) ")"))
-
-    (bp:plot-one d printer paper scale-mode custom-scale
-                 ctb color-mode output-mode output-path filename
-                 auto-rotate auto-center))
-
-  (princ (strcat "\nâ•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•"
-                 "\n  æ‰“å°å®Œæˆ: " (itoa total) " å¼  â†’ " output-path
-                 "\nâ•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•"))
-  (princ))
-
-
-;; ============================================================================
-;; å‘½ä»¤: BPSET â€” å¿«é€Ÿè®¾ç½®
-;; ============================================================================
+(defun bp:select-printer (pattern / printers i p)
+  "°´Ä£Ê½£¨Ä£ºıÆ¥Åä£©Ñ¡ÖĞ´òÓ¡»úÏÂÀ­Ïî¡£"
+  (setq printers (bp:get-printers) i 0)
+  (foreach p printers
+    (if (wcmatch (strcase p) (strcat "*" (strcase pattern) "*"))
+      (set_tile "printer" (itoa i)))
+    (setq i (1+ i))))
 
 (defun c:BPSET nil
-  "å¿«é€Ÿæ‰“å¼€æ‰¹é‡æ‰“å°è®¾ç½®ï¼ˆç­‰åŒäº BPTï¼‰ã€‚"
-  (c:BPT))
+  "´ò¿ªÅúÁ¿´òÓ¡ÉèÖÃ¡£"
+  (c:BPT)
+  (princ))
 
-
-(princ "\n[TB] æ‰¹é‡æ‰“å°æ¨¡å—åŠ è½½å®Œæˆ (c:BPT, c:BPSET)")
+(princ "\n[TB] ÅúÁ¿´òÓ¡Ä£¿é¼ÓÔØÍê³É (c:BPT, c:BPSET)")
 (princ)

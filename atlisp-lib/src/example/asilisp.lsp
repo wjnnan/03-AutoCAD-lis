@@ -2,54 +2,54 @@
   (vl-catch-all-apply 'arxunload(list "asilisp"))
   (if (null asi_connect)
       (arxload "asilisp")
-      ) ;;åŠ è½½arxå‡½æ•°åº“
+      ) ;;¼ÓÔØarxº¯Êı¿â
   (SETQ udl-n "test.udl")
   (SETQ Link-F (FINDFILE "UserDataCache"))
-  (SETQ UDL-P (STRCAT Link-F "\\Data Links\\" udl-n)) ;udlè·¯å¾„
+  (SETQ UDL-P (STRCAT Link-F "\\Data Links\\" udl-n)) ;udlÂ·¾¶
   (if (findfile UDL-P)
       ()
-      (progn (alert "udlæ–‡ä»¶æ‰¾ä¸åˆ°äº†") (exit))
+      (progn (alert "udlÎÄ¼şÕÒ²»µ½ÁË") (exit))
       )
-  ;;(setq sql "update [test] set `å§“å` = 'å¼ ä¸‰' where id = '1'")
+  ;;(setq sql "update [test] set `ĞÕÃû` = 'ÕÅÈı' where id = '1'")
   (setq sql "select * from test")
-  (setq env_dsc (ASI_connect UDL-P))    ;è¿é€šæ•°æ®åº“ï¼Œè¿™é‡Œä¸ä¼ å…¥ç”¨æˆ·åå’Œå¯†ç ï¼Œå› ä¸ºudlé‡Œé¢æ˜¯é€šè¿‡ç¼–è¯‘æ³•è®¾ç½®çš„
-  (setq obj_dsc (asi_prepare env_dsc sql)) ;å‡†å¤‡sqlè¯­å¥object
+  (setq env_dsc (ASI_connect UDL-P))    ;Á¬Í¨Êı¾İ¿â£¬ÕâÀï²»´«ÈëÓÃ»§ÃûºÍÃÜÂë£¬ÒòÎªudlÀïÃæÊÇÍ¨¹ı±àÒë·¨ÉèÖÃµÄ
+  (setq obj_dsc (asi_prepare env_dsc sql)) ;×¼±¸sqlÓï¾äobject
 
-  (asi_objp obj_dsc)            ;éªŒè¯sqlè¯­å¥æ˜¯å¦åˆæ³•
-  (setq csr_dsc (asi_alloc obj_dsc "loc" 't)) ;åˆ†é…æ¸¸æ ‡
-  (setq coldsc (asi_coldsc obj_dsc))    ;è·å–åˆ—çš„æè¿°ä¿¡æ¯ï¼ˆè®¾è®¡è¡¨ã€è¡¨ä¿¡æ¯ï¼‰
-  (asi_dbms obj_dsc)            ;è·å–ä¾›åº”å•†ä¿¡æ¯
-  (asi_msg obj_dsc)            ;è·å–ä¾›åº”å•†çš„dllä¿¡æ¯
-  (asi_rowqty obj_dsc)            ;æŸ¥çœ‹ä¸€ä¸‹sqlè¯­å¥å½±å“è¡Œæ•°ï¼Œå¦‚æœæ˜¯selectçš„è¯ï¼Œå¯èƒ½æ˜¯0è¡Œæ•°ï¼›updateã€deleteã€insertè¿™ä¸‰ä¸ªå‡½æ•°æ‰ä¼šæœ‰å½±å“è¡Œæ•°å¤§äº1çš„è¿”å›
-  (asi_sql obj_dsc)            ;sqlå­—ä¸²æè¿°
-  (asi_stmtype obj_dsc)            ;è¿”å›çš„æ˜¯ä¹±ç 
-  (asi_feature obj_dsc '(30))        ;æŸ¥è¯¢ä¾›åº”å•†æ˜¯å¦æ”¯æŒå¯¹åº”å‡½æ•°(27 update;30 insert 18 Alter table)
-  (asi_open csr_dsc)            ;æ‰“å¼€æ¸¸æ ‡
-  (asi_statecsr csr_dsc)            ;æ£€æŸ¥æ¸¸æ ‡çŠ¶æ€
-;;;(SETQ csr_dsc (asi_infschema env_dsc "CHARACTER_SETS"));information_schemaè‹±è¯­å•æ¬¡çš„ç¼©å†™(LIST "SCHEMATA" "TABLES" "COLUMNS" "STATISTICS" "USER_PRIVILEGES" "SCHEMA_PRIVILEGES" "TABLE_PRIVILEGES" "COLUMN_PRIVILEGES" "CHARACTER_SETS" "COLLATIONS" "COLLATION_CHARACTER_SET_APPLICABILITY" "TABLE_CONSTRAINTS" "KEY_COLUMN_USAGE" "ROUTINES" "VIEWS" "TRIGGERS")
+  (asi_objp obj_dsc)            ;ÑéÖ¤sqlÓï¾äÊÇ·ñºÏ·¨
+  (setq csr_dsc (asi_alloc obj_dsc "loc" 't)) ;·ÖÅäÓÎ±ê
+  (setq coldsc (asi_coldsc obj_dsc))    ;»ñÈ¡ÁĞµÄÃèÊöĞÅÏ¢£¨Éè¼Æ±í¡¢±íĞÅÏ¢£©
+  (asi_dbms obj_dsc)            ;»ñÈ¡¹©Ó¦ÉÌĞÅÏ¢
+  (asi_msg obj_dsc)            ;»ñÈ¡¹©Ó¦ÉÌµÄdllĞÅÏ¢
+  (asi_rowqty obj_dsc)            ;²é¿´Ò»ÏÂsqlÓï¾äÓ°ÏìĞĞÊı£¬Èç¹ûÊÇselectµÄ»°£¬¿ÉÄÜÊÇ0ĞĞÊı£»update¡¢delete¡¢insertÕâÈı¸öº¯Êı²Å»áÓĞÓ°ÏìĞĞÊı´óÓÚ1µÄ·µ»Ø
+  (asi_sql obj_dsc)            ;sql×Ö´®ÃèÊö
+  (asi_stmtype obj_dsc)            ;·µ»ØµÄÊÇÂÒÂë
+  (asi_feature obj_dsc '(30))        ;²éÑ¯¹©Ó¦ÉÌÊÇ·ñÖ§³Ö¶ÔÓ¦º¯Êı(27 update;30 insert 18 Alter table)
+  (asi_open csr_dsc)            ;´ò¿ªÓÎ±ê
+  (asi_statecsr csr_dsc)            ;¼ì²éÓÎ±ê×´Ì¬
+;;;(SETQ csr_dsc (asi_infschema env_dsc "CHARACTER_SETS"));information_schemaÓ¢Óïµ¥´ÎµÄËõĞ´(LIST "SCHEMATA" "TABLES" "COLUMNS" "STATISTICS" "USER_PRIVILEGES" "SCHEMA_PRIVILEGES" "TABLE_PRIVILEGES" "COLUMN_PRIVILEGES" "CHARACTER_SETS" "COLLATIONS" "COLLATION_CHARACTER_SET_APPLICABILITY" "TABLE_CONSTRAINTS" "KEY_COLUMN_USAGE" "ROUTINES" "VIEWS" "TRIGGERS")
 
-  (asi_execute obj_dsc)        ;æ‰§è¡Œsqlè¯­å¥(è¿™ä¸ªå‡½æ•°æ²¡æœ‰æˆåŠŸ)
-  ;;(asi_iexecute env_dsc sql)        ;æ‰§è¡Œsqlè¯­å¥
+  (asi_execute obj_dsc)        ;Ö´ĞĞsqlÓï¾ä(Õâ¸öº¯ÊıÃ»ÓĞ³É¹¦)
+  ;;(asi_iexecute env_dsc sql)        ;Ö´ĞĞsqlÓï¾ä
 
-  ;;(asi_pardsc csr_dsc);è¿™ä¸ªæ‰§è¡Œåarxé”™è¯¯
+  ;;(asi_pardsc csr_dsc);Õâ¸öÖ´ĞĞºóarx´íÎó
 
-  (asi_fetch csr_dsc "next")        ;æ¸¸æ ‡å¾€ä¸‹
+  (asi_fetch csr_dsc "next")        ;ÓÎ±êÍùÏÂ
   (setq d1 (asi_coldsc csr_dsc))
   (setq d2(asi_coldsc obj_dsc))
-  ;;(asi_providers)          ;æ‰§è¡Œä¸€æ¬¡è¿”å›ä¸€ä¸ªæ¸¸æ ‡ï¼Œæ¯æ¬¡éƒ½ä¸åŒï¼Œå¥½å¥‡æ€ª
-  (asi_close csr_dsc)        ;å…³é—­æ¸¸æ ‡
+  ;;(asi_providers)          ;Ö´ĞĞÒ»´Î·µ»ØÒ»¸öÓÎ±ê£¬Ã¿´Î¶¼²»Í¬£¬ºÃÆæ¹Ö
+  (asi_close csr_dsc)        ;¹Ø±ÕÓÎ±ê
 
-  (asi_objlist)              ;è¿”å›æ‰€æœ‰æ‰§è¡Œè¿‡çš„sqlè¯­å¥æè¿°
-  (asi_objname obj_dsc)      ;è¿”å›çš„æ˜¯ç©ºå¼•å·ï¼Œå¥½å¥‡æ€ª
-  (asi_nexecute env_dsc sql) ;æ‰§è¡Œæœ¬æœºè¯­å¥ï¼Œä¸çŸ¥é“æ˜¯ä¸æ˜¯è¿™ä¹ˆç”¨çš„(ä¸çŸ¥é“æ˜¯ä¸æ˜¯ä¸ºäº‹åŠ¡æ³•å‡†å¤‡çš„å‡½æ•°)ï¼Œç›®å‰æˆ‘ä¼ å…¥äº†ä¸€æ¡sqlè¯­å¥ä¹Ÿè¿”å›Täº†
+  (asi_objlist)              ;·µ»ØËùÓĞÖ´ĞĞ¹ıµÄsqlÓï¾äÃèÊö
+  (asi_objname obj_dsc)      ;·µ»ØµÄÊÇ¿ÕÒıºÅ£¬ºÃÆæ¹Ö
+  (asi_nexecute env_dsc sql) ;Ö´ĞĞ±¾»úÓï¾ä£¬²»ÖªµÀÊÇ²»ÊÇÕâÃ´ÓÃµÄ(²»ÖªµÀÊÇ²»ÊÇÎªÊÂÎñ·¨×¼±¸µÄº¯Êı)£¬Ä¿Ç°ÎÒ´«ÈëÁËÒ»ÌõsqlÓï¾äÒ²·µ»ØTÁË
 
-  (vl-catch-all-apply 'asi_deallocstm(list obj_dsc)) ;å–æ¶ˆåˆ†é…çš„sqlè¯­å¥ï¼ˆåé¢å…¶ä»–å‡½æ•°å¯èƒ½ä¼šå‡ºé”™ï¼Œå› ä¸ºsqlè¯­å¥å·²ç»å–æ¶ˆäº†ï¼‰
+  (vl-catch-all-apply 'asi_deallocstm(list obj_dsc)) ;È¡Ïû·ÖÅäµÄsqlÓï¾ä£¨ºóÃæÆäËûº¯Êı¿ÉÄÜ»á³ö´í£¬ÒòÎªsqlÓï¾äÒÑ¾­È¡ÏûÁË£©
   (progn
     (setq obj_dsc nil)
     (setq env_dsc nil)
     (vl-catch-all-apply
      (function (lambda (a)
-       (asi_disconnect (list "SQLSESSION" a)) ;æ–­å¼€è¿æ¥
+       (asi_disconnect (list "SQLSESSION" a)) ;¶Ï¿ªÁ¬½Ó
        ))
      (list 1.0 2.0 3.0 4.0 5.0 6.0 7.0 8.0 9.0 10.0)
      )

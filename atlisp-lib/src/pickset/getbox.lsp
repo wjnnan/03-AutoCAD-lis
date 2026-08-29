@@ -1,6 +1,6 @@
 (defun pickset:getbox (ss offset / ptlist)
-  "获取选择集的包围盒。ss 为选择集，图元或图元列表"
-  "外框（偏移后）的左下，右上角点"
+  "��ȡѡ�񼯵İ�Χ�С�ss Ϊѡ�񼯣�ͼԪ��ͼԪ�б�"
+  "���ƫ�ƺ󣩵����£����Ͻǵ�"
   "(pickset:getbox sel 0.2)"
   (cond
    ((= 'pickset (type ss))

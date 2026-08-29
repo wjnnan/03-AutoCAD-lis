@@ -1,5 +1,5 @@
 (defun excel:aci->truecolor (aci)
-  "å°†cadé¢œè‰²ç´¢å¼•è½¬æ¢ä¸ºçœŸå½©è‰²å€¼\nå‚æ•°:aci:cadé¢œè‰²ç´¢å¼•"
-  "çœŸå½©è‰²å€¼"
+  "½«cadÑÕÉ«Ë÷Òý×ª»»ÎªÕæ²ÊÉ«Öµ\n²ÎÊý:aci:cadÑÕÉ«Ë÷Òý"
+  "Õæ²ÊÉ«Öµ"
   "(excel:ACI->Truecolor)"
   (excel:eci->truecolor (excel:aci->eci aci)))

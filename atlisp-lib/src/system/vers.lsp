@@ -1,4 +1,4 @@
-(defun system:vers nil "CADç‰ˆæœ¬å·"
+(defun system:vers nil "CAD°æ±¾ºÅ"
   (quote ((autocad (2000 . 15.0)
         (2000i . 15.1)
         (2002 . 15.2)

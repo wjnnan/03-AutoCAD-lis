@@ -1,5 +1,5 @@
 (defun string:l2s-ansi (lst-str / h% res)
-  "byte or word æ•´æ•°å€¼åˆ—è¡¨è½¬å­—ç¬¦ä¸²ã€‚\nå½“å°äº128æ—¶ï¼Œå•å­—èŠ‚ï¼Œå½“ä¸¤ä¸ªè¿ç»­çš„å¤§äº128æ—¶ï¼ŒåŒå­—èŠ‚å€¼ã€‚ç”¨äºè½¬æ¢éè‹±æ–‡å­—ä¸²æ—¶é˜²æ­¢é‡ç ã€‚\nå½“AutoCAD2021ä¸”lispsys=1æ—¶ï¼Œä¸string:s2l-ansi æˆå¯¹å…¼å®¹ unicode."
+  "byte or word ÕûÊıÖµÁĞ±í×ª×Ö·û´®¡£\nµ±Ğ¡ÓÚ128Ê±£¬µ¥×Ö½Ú£¬µ±Á½¸öÁ¬ĞøµÄ´óÓÚ128Ê±£¬Ë«×Ö½ÚÖµ¡£ÓÃÓÚ×ª»»·ÇÓ¢ÎÄ×Ö´®Ê±·ÀÖ¹ÖØÂë¡£\nµ±AutoCAD2021ÇÒlispsys=1Ê±£¬Óëstring:s2l-ansi ³É¶Ô¼æÈİ unicode."
   (if (and (getvar "lispsys")(<= 1 (getvar "lispsys")))
       (vl-list->string lst-str)
       (progn (setq h% 0)

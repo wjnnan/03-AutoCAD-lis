@@ -1,6 +1,6 @@
 (defun list:insert (lst index item)
-    "åœ¨åˆ—è¡¨lst çš„ç¬¬ index é¡¹å‰æ’å…¥é¡¹ itemã€‚"
-    "æ’å…¥é¡¹åçš„åˆ—è¡¨"
+    "ÔÚÁĞ±ílst µÄµÚ index ÏîÇ°²åÈëÏî item¡£"
+    "²åÈëÏîºóµÄÁĞ±í"
     "(list:insert '(0 1 2 3)
         1 5)"
     (if (zerop index)

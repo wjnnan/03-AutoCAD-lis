@@ -29,15 +29,6 @@
   "Create a layer or update its shared core-managed properties."
   (uc:ensure-layer name color linetype))
 
-(defun lay:exists? (name)
-  "Return T when a layer exists."
-  (cond
-    ((null name) nil)
-    ((and (uc:function-defined-p 'uc:layer-exists-p) name)
-     (uc:layer-exists-p name))
-    (t
-     (and (tblobjname "LAYER" name) T))))
-
 (defun lay:current (name)
   "Set the current layer."
   (setvar "CLAYER" name))
@@ -52,7 +43,7 @@
 ;; ============================================================================
 
 (defun lay:off (name / entry color)
-  "å…³é—­æŒ‡å®šå›¾å±‚ã€‚å¤„ç†é¢œè‰² 0(BYBLOCK)/nil ç­‰è¾¹ç•Œæƒ…å†µã€‚"
+  "¹Ø±ÕÖ¸¶¨Í¼²ã¡£´¦ÀíÑÕÉ« 0(BYBLOCK)/nil µÈ±ß½çÇé¿ö¡£"
   (if (setq entry (lay:get-entry name))
     (progn
       (setq color (cdr (assoc 62 entry)))
@@ -60,7 +51,7 @@
       (lay:set-dxf name 62 (- (abs color))))))
 
 (defun lay:on (name / entry color)
-  "æ‰“å¼€æŒ‡å®šå›¾å±‚ã€‚"
+  "´ò¿ªÖ¸¶¨Í¼²ã¡£"
   (if (setq entry (lay:get-entry name))
     (progn
       (setq color (cdr (assoc 62 entry)))
@@ -80,7 +71,7 @@
 ;; ============================================================================
 
 (defun lay:freeze (name / entry flags)
-  "å†»ç»“æŒ‡å®šå›¾å±‚ï¼ˆå½“å‰å›¾å±‚é™¤å¤–ï¼‰ã€‚ä½¿ç”¨ä½æˆ–æ“ä½œï¼Œé˜²æ­¢é‡å¤å†»ç»“ç ´åå…¶ä»–æ ‡å¿—ä½ã€‚"
+  "¶³½áÖ¸¶¨Í¼²ã£¨µ±Ç°Í¼²ã³ıÍâ£©¡£Ê¹ÓÃÎ»»ò²Ù×÷£¬·ÀÖ¹ÖØ¸´¶³½áÆÆ»µÆäËû±êÖ¾Î»¡£"
   (if (and (setq entry (lay:get-entry name))
            (not (= name (getvar "CLAYER"))))
     (progn
@@ -89,7 +80,7 @@
       (lay:set-dxf name 70 (logior flags 1)))))
 
 (defun lay:thaw (name / entry flags)
-  "è§£å†»æŒ‡å®šå›¾å±‚ã€‚ä½¿ç”¨ä½ä¸æ“ä½œæ¸…é™¤å†»ç»“ä½ã€‚"
+  "½â¶³Ö¸¶¨Í¼²ã¡£Ê¹ÓÃÎ»Óë²Ù×÷Çå³ı¶³½áÎ»¡£"
   (if (setq entry (lay:get-entry name))
     (progn
       (setq flags (cdr (assoc 70 entry)))
@@ -97,7 +88,7 @@
       (lay:set-dxf name 70 (logand flags (~ 1))))))
 
 (defun lay:thaw-all nil
-  "è§£å†»æ‰€æœ‰å›¾å±‚ã€‚"
+  "½â¶³ËùÓĞÍ¼²ã¡£"
   (lay:foreach '(lambda (layname) (lay:thaw layname))))
 
 
@@ -106,7 +97,7 @@
 ;; ============================================================================
 
 (defun lay:lock (name / entry flags)
-  "é”å®šæŒ‡å®šå›¾å±‚ã€‚ä½¿ç”¨ä½æˆ–æ“ä½œè®¾ç½®é”å®šä½ã€‚"
+  "Ëø¶¨Ö¸¶¨Í¼²ã¡£Ê¹ÓÃÎ»»ò²Ù×÷ÉèÖÃËø¶¨Î»¡£"
   (if (setq entry (lay:get-entry name))
     (progn
       (setq flags (cdr (assoc 70 entry)))
@@ -114,7 +105,7 @@
       (lay:set-dxf name 70 (logior flags 4)))))
 
 (defun lay:unlock (name / entry flags)
-  "è§£é”æŒ‡å®šå›¾å±‚ã€‚ä½¿ç”¨ä½ä¸æ“ä½œæ¸…é™¤é”å®šä½ã€‚"
+  "½âËøÖ¸¶¨Í¼²ã¡£Ê¹ÓÃÎ»Óë²Ù×÷Çå³ıËø¶¨Î»¡£"
   (if (setq entry (lay:get-entry name))
     (progn
       (setq flags (cdr (assoc 70 entry)))

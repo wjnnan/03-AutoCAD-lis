@@ -1,5 +1,5 @@
 (defun excel:get-selection (xlapp)
-  "è·å–é€‰æ‹©åŒºåŸŸçš„ç´¢å¼•\nå‚æ•°:xlapp:å·²æ‰“å¼€çš„excelæ–‡ä»¶å¯¹è±¡"
-  "A1æ ¼å¼çš„ç´¢å¼•"
+  "»ñÈ¡Ñ¡ÔñÇøÓòµÄË÷Òı\n²ÎÊı:xlapp:ÒÑ´ò¿ªµÄexcelÎÄ¼ş¶ÔÏó"
+  "A1¸ñÊ½µÄË÷Òı"
   "(excel:get-Selection exobj)"
   (excel:get-rangeindex (vlax-get-property xlapp (quote selection))))

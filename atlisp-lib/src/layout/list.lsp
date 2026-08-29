@@ -1,6 +1,6 @@
 (defun layout:list (/ a lst)
-    "æŒ‰ç…§å½“å‰å±å¹•æ˜¾ç¤ºçš„é¡ºåºè¿”å›æ‰€æœ‰å¸ƒå±€åç§°"
-    "å¸ƒå±€ååˆ—è¡¨"
+    "°´ÕÕµ±Ç°ÆÁÄ»ÏÔÊ¾µÄË³Ğò·µ»ØËùÓĞ²¼¾ÖÃû³Æ"
+    "²¼¾ÖÃûÁĞ±í"
     (vlax-for a *layouts* (setq lst (cons (list (vla-get-taborder a)
                     (vla-get-name a))
                 lst)))

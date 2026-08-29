@@ -1,5 +1,5 @@
 (defun pickset:to-list-by-ssname (ss / i lst)
-  "閫夋嫨闆嗚浆鍥惧厓琛紝ssname 鏂规硶"
+  "选择集转图元表，ssname 方法"
   "lst"
   ""
   (setq i -1)

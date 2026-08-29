@@ -4,10 +4,10 @@
         (:EMAIL . "vitalgg@gmail.com")
         (:VERSION . "0.0.1")
         (:LOCALE . "chs")
-        (:CATEGORY . "閫氱敤")
+        (:CATEGORY . "通用")
         (:REQUIRED . "base")
         (:OPENSOURCE . 0)
-        (:DESCRIPTION . "灏唖vg鐭㈤噺鏍煎紡杞负dxf鏍煎紡")
+        (:DESCRIPTION . "将svg矢量格式转为dxf格式")
         (:URL . "http://atlisp.cn")
         (:FILES "svg2dxf"
             "svg2dxf.py"

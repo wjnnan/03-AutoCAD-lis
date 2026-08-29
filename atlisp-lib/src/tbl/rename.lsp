@@ -1,10 +1,10 @@
 (defun tbl:rename (tbl-name old-name new-name) 
-  "é‡å‘½åDXFè¡¨æ ¼tblä¸­çš„é¡¹ç›®çš„åç§°ã€‚ è¡¨æ ¼ä¸º:appid,block,dimstyle,layer,ltype,style,ucs,view,vport.
-æ³¨æ„ layout ä¸å±äº tbl çš„å†…å®¹ï¼Œä½†å±æ€§å¯¹è±¡é›†åˆã€‚è¯·ä½¿ç”¨ layout:rename å‡½æ•°ã€‚
-å‚æ•°:tbl-name tblè¡¨æ ¼å, old-name åŸåç§°ï¼Œnew-name æ–°åç§°"
-  "T æˆåŠŸï¼Œnil å¤±è´¥"
-  "(tbl:rename \"layout\" \"å¸ƒå±€1\" \"æˆ‘çš„å¸ƒå±€\")"
-  ;; è¡¨æ ¼ dxf ä¸ ActiveX åç§°å¯¹ç…§è¡¨
+  "ÖØÃüÃûDXF±í¸ñtblÖĞµÄÏîÄ¿µÄÃû³Æ¡£ ±í¸ñÎª:appid,block,dimstyle,layer,ltype,style,ucs,view,vport.
+×¢Òâ layout ²»ÊôÓÚ tbl µÄÄÚÈİ£¬µ«ÊôĞÔ¶ÔÏó¼¯ºÏ¡£ÇëÊ¹ÓÃ layout:rename º¯Êı¡£
+²ÎÊı:tbl-name tbl±í¸ñÃû, old-name Ô­Ãû³Æ£¬new-name ĞÂÃû³Æ"
+  "T ³É¹¦£¬nil Ê§°Ü"
+  "(tbl:rename \"layout\" \"²¼¾Ö1\" \"ÎÒµÄ²¼¾Ö\")"
+  ;; ±í¸ñ dxf Óë ActiveX Ãû³Æ¶ÔÕÕ±í
   
   (if 
       (and

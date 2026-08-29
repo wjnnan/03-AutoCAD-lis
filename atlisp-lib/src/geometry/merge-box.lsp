@@ -1,6 +1,6 @@
 (defun geometry:merge-box (box1 box2 / ax1 ax2 ay1 ay2 bx1 bx2 by1 by2)
-  "åˆå¹¶ä¸¤ä¸ªåŒ…å›´ç›’ï¼Œä¸ç®¡ä¸¤ä¸ªç›’å­æ˜¯å¦æœ‰é‡å ã€‚"
-  "æ€»åŒ…å›´ç›’"
+  "ºÏ²¢Á½¸ö°üÎ§ºĞ£¬²»¹ÜÁ½¸öºĞ×ÓÊÇ·ñÓĞÖØµş¡£"
+  "×Ü°üÎ§ºĞ"
   (list (list (min (caar box1)
         (caar box2))
       (min (cadar box1)

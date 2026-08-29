@@ -1,5 +1,5 @@
 (defun m:fix-angle (angle0)
-  "ä½¿å¼§åº¦å€¼åœ¨ 0-2pi ä¹‹é—´ã€‚"
+  "Ê¹»¡¶ÈÖµÔÚ 0-2pi Ö®¼ä¡£"
   (while (< angle0 0)
     (setq angle0 (+ pi pi angle0)))
   (while (>= angle0 (* pi 2))

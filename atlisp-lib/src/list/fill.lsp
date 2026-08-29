@@ -1,5 +1,5 @@
 (defun list:fill (lst n element)
-  "å¯¹äºå…ƒç´ ä¸ªæ•°å°äº n çš„ lst, ç”¨element è¡¥è¶³"
+  "¶ÔÓÚÔªËØ¸öÊıĞ¡ÓÚ n µÄ lst, ÓÃelement ²¹×ã"
   "list"
   "(list:fill '(a b) 4 'c) => '(a b c c)"
   (if (and (numberp n)

@@ -1,5 +1,5 @@
 (defun m:sort-by-curve (curve lst)
-    "å‡½æ•°è¯´æ˜:æ²¿æ›²çº¿æ’åº~%è¿” å› å€¼:æ’åºåçš„ç‚¹è¡¨"
+    "º¯ÊıËµÃ÷:ÑØÇúÏßÅÅĞò~%·µ »Ø Öµ:ÅÅĞòºóµÄµã±í"
     (vl-sort lst (function (lambda (p1 p2 / m n)
                 (setq m (vlax-curve-getclosestpointto curve p1 t))
                 (setq n (vlax-curve-getclosestpointto curve p2 t))

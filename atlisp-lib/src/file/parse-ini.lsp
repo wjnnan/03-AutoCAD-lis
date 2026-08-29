@@ -1,5 +1,5 @@
 (defun-q file:parse-ini ( filename / fp  result *error*)
-  "è§£æ ini æ–‡ä»¶ã€‚"
+  "½âÎö ini ÎÄ¼ş¡£"
   "list"
   
   (defun *error* (msg)

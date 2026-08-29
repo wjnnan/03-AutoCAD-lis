@@ -1,5 +1,5 @@
 (defun block:get-dynamic-prop-cons-name-value (blkref / props n lst)
-  "è·å–åŠ¨æ€å—çš„åŠ¨æ€ç‰¹æ€§ä¸å€¼çš„ç‚¹å¯¹åˆ—è¡¨ã€‚"
+  "»ñÈ¡¶¯Ì¬¿éµÄ¶¯Ì¬ÌØĞÔÓëÖµµÄµã¶ÔÁĞ±í¡£"
   (setq props (block:get-dynamic-properties blkref))
   (setq n 0)
   (setq lst nil)

@@ -1,5 +1,5 @@
 (defun file:read-stream (filename encoding / str stream *error*)
-  "è¯»å…¥æŒ‡å®šç¼–ç çš„æ–‡ä»¶å†…å®¹"
+  "¶ÁÈëÖ¸¶¨±àÂëµÄÎÄ¼şÄÚÈİ"
   "String"
   "(file:read-stream \"d:/hzfile.txt\" \"utf-8\")"
   (defun *error*(msg)

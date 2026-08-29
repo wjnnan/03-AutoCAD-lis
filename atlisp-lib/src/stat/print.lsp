@@ -1,5 +1,5 @@
 (defun stat:print ()
-  "鎵撳嵃鏈�鍚庝竴娆＄粺璁＄殑缁撴灉"
+  "打印最后一次统计的结果"
   (princ "Item , Number\n")
   (foreach n @:tmp-stat-result
 	   (princ (car n))

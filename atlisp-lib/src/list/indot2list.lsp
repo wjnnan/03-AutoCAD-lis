@@ -1,5 +1,5 @@
 (defun list:indot->list (lst / tmplist)
-    "鍐呭祵鐐硅〃鐨勮〃杞櫘閫氳〃"
+    "内嵌点表的表转普通表"
     (setq tmplist lst)
     (foreach i tmplist (if (dotpairp i)
             (setq lst (subst (list:dot->list i)

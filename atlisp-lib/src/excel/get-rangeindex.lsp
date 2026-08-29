@@ -1,6 +1,6 @@
 (defun excel:get-rangeindex (range / str col row dx dy)
-  "è·å–rangeçš„ç´¢å¼•\nå‚æ•°:range:rangeå¯¹è±¡"
-  "A1æ ¼å¼çš„ç´¢å¼•"
+  "»ñÈ¡rangeµÄË÷Òı\n²ÎÊı:range:range¶ÔÏó"
+  "A1¸ñÊ½µÄË÷Òı"
   "(excel:get-RangeIndex xlrange)"
   (if (equal (excel:get-property range "mergecells")
       :vlax-true)

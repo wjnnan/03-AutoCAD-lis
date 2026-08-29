@@ -1,26 +1,26 @@
 (@:add-menu (_ "Color") (_ "Modify color") "(at-color:change-color)")
 (@:add-menu (_ "Color") (_ "Remove TrueColor") "(at-color:del-rgb)")
-(@:add-menu (_ "Color") (_ "å›¾å˜å•è‰²") "(at-color:one-color)")
+(@:add-menu (_ "Color") (_ "Í¼±äµ¥É«") "(at-color:one-color)")
 
 (defun at-color:one-color (/ color obj-color ents)
-  (@::prompt '("å°†å›¾çº¸å˜ä¸ºå•ä¸€é¢œè‰²" "æ‰€æœ‰å›¾å—å®šä¹‰å‡å˜è‰²" "æ‰€é€‰å›¾å…ƒå˜è‰²ï¼Œå¦‚æœæ²¡æœ‰é€‰æ‹©å›¾å…ƒï¼Œåˆ™æ•´ä¸ªdwgå‡å˜è‰²"))
+  (@::prompt '("½«Í¼Ö½±äÎªµ¥Ò»ÑÕÉ«" "ËùÓĞÍ¼¿é¶¨Òå¾ù±äÉ«" "ËùÑ¡Í¼Ôª±äÉ«£¬Èç¹ûÃ»ÓĞÑ¡ÔñÍ¼Ôª£¬ÔòÕû¸ödwg¾ù±äÉ«"))
   (setq color (acad_colordlg 252 t))
   (defun chcolor (ent)
     (cond
       ((wcmatch (entity:getdxf ent 0) "TCH_*")
-       (vla-put-truecolor (e2o ent) obj-color))
+       (vl-catch-all-apply 'vla-put-truecolor (list (e2o ent) obj-color)))
       (t (entity:putdxf ent 62 color))))
 
   (if (null color) (exit))
   (setq obj-color (vlax-create-object
                     (strcat "AutoCAD.AcCmColor." (substr (getvar "ACADVER") 1 2))))
   (vla-put-colorIndex obj-color color)
-  ;; å›¾å…ƒ
+  ;; Í¼Ôª
   (setq ents (ssget))
   (if (null ents) (setq ents (ssget "x")))
-  ;; æ‰€é€‰å›¾å…ƒå˜ 252 è‰²
+  ;; ËùÑ¡Í¼Ôª±ä 252 É«
   (mapcar 'chcolor (pickset:to-list ents))
-  ;; å—å†…å›¾å…ƒå˜ 252è‰²
+  ;; ¿éÄÚÍ¼Ôª±ä 252É«
   (setq ents (mapcar
                'block:ent-list
                (vl-remove-if
@@ -30,20 +30,22 @@
     (foreach ent lst-ent
       (chcolor ent)))
   (vla-regen *DOC* :vlax-true)
+  (if obj-color (vlax-release-object obj-color))
   (princ))
 (defun at-color:del-rgb ()
-  (@::prompt "æ¡†é€‰è¦å»é™¤çœŸå½©è‰²çš„å›¾å…ƒ,ç”¨ç´¢å¼•è‰²æ›¿æ¢ã€‚")
-  (prompt "è¯·æ¡†é€‰è¦å»é™¤çœŸå½©è‰²çš„å›¾å…ƒ:")
+  (@::prompt "¿òÑ¡ÒªÈ¥³ıÕæ²ÊÉ«µÄÍ¼Ôª,ÓÃË÷ÒıÉ«Ìæ»»¡£")
+  (prompt "Çë¿òÑ¡ÒªÈ¥³ıÕæ²ÊÉ«µÄÍ¼Ôª:")
   (entity:deldxf (ssget '((-4 . ">") (420 . 0))) 420))
 (defun at-color:change-color (/ fname fn x dclid lin)
   (setvar "cmdecho" 0)
   (vl-load-com)
   (setq fname (vl-filename-mktemp nil nil ".dcl"))
   (setq fn (open fname "w"))
+  (if (null fn) (progn (princ "\nÎŞ·¨´´½¨ÁÙÊ±DCLÎÄ¼ş -- ÍË³ö.") (quit)))
   (foreach x
-    '("buttonGL:button{horizontal_margin=none;vertical_margin=none;} //è‡ªå®šä¹‰æŒ‰é’®"
-      "  ksgs : dialog{" "  label=\"å¿«é€Ÿæ”¹è‰²\";" "     :column{"
-      ":boxed_column{label=\"æ”¹å¯¹è±¡é¢œè‰²\";" "     :row{"
+    '("buttonGL:button{horizontal_margin=none;vertical_margin=none;} //×Ô¶¨Òå°´Å¥"
+      "  ksgs : dialog{" "  label=\"¿ìËÙ¸ÄÉ«\";" "     :column{"
+      ":boxed_column{label=\"¸Ä¶ÔÏóÑÕÉ«\";" "     :row{"
       "      :image_button{key=\"1\";color=1;width=5;height=1.6;horizontal_margin=none;}"
       "      :image_button{key=\"2\";color=2;width=5;height=1.6;horizontal_margin=none;}"
       "      :image_button{key=\"3\";color=3;width=5;height=1.6;horizontal_margin=none;}"
@@ -56,10 +58,10 @@
       "      :image_button{key=\"8\";color=8;width=5;height=1.6;horizontal_margin=none;}"
       "      :image_button{key=\"9\";color=9;width=5;height=1.6;horizontal_margin=none;}"
       "  }" "     :row{"
-      "      :buttonGL{key=\"11\";label=\"éšå±‚\";width=5;height=1.6;horizontal_margin=none;}"
-      "      :buttonGL{key=\"12\";label=\"éšå—\";width=5;height=1.6;horizontal_margin=none;}"
-      "      :buttonGL{key=\"10\";label=\"å…¶å®ƒ\";width=5;height=1.6;horizontal_margin=none;}"
-      "     }" "    }" "     :column{" ":boxed_column{label=\"æ”¹å›¾å±‚é¢œè‰²\";" "     :row{"
+      "      :buttonGL{key=\"11\";label=\"Ëæ²ã\";width=5;height=1.6;horizontal_margin=none;}"
+      "      :buttonGL{key=\"12\";label=\"Ëæ¿é\";width=5;height=1.6;horizontal_margin=none;}"
+      "      :buttonGL{key=\"10\";label=\"ÆäËü\";width=5;height=1.6;horizontal_margin=none;}"
+      "     }" "    }" "     :column{" ":boxed_column{label=\"¸ÄÍ¼²ãÑÕÉ«\";" "     :row{"
       "      :image_button{key=\"51\";color=1;width=4;height=1.6;horizontal_margin=none;}"
       "      :image_button{key=\"52\";color=2;width=4;height=1.6;horizontal_margin=none;}"
       "      :image_button{key=\"53\";color=3;width=4;height=1.6;horizontal_margin=none;}"
@@ -72,7 +74,7 @@
       "      :image_button{key=\"58\";color=8;width=4;height=1.6;horizontal_margin=none;}"
       "      :image_button{key=\"59\";color=9;width=4;height=1.6;horizontal_margin=none;}"
       "  }" "     :row{"
-      "      :buttonGL{key=\"60\";label=\"å…¶å®ƒ\";width=4;height=1.6;horizontal_margin=none;}"
+      "      :buttonGL{key=\"60\";label=\"ÆäËü\";width=4;height=1.6;horizontal_margin=none;}"
       "    }" "     }" "     cancel_button;" "    }" "  }" "  }")
     (princ x fn)
     (write-line "" fn))
@@ -153,9 +155,9 @@
   (princ))
 
 ;;-----------------------------------------------------------------
-					;æ”¹å¯¹è±¡é¢œè‰²
-					;1çº¢.2é»„.3ç»¿.4é’.5è“.6å“çº¢.7ç™½.8ç°.9æµ…ç°.10ç´«è‰².11å’–è‰²		
-(defun GL:gs1 () (GL:gdxys 1));çº¢è‰²
+					;¸Ä¶ÔÏóÑÕÉ«
+					;1ºì.2»Æ.3ÂÌ.4Çà.5À¶.6Æ·ºì.7°×.8»Ò.9Ç³»Ò.10×ÏÉ«.11¿§É«		
+(defun GL:gs1 () (GL:gdxys 1));ºìÉ«
 (defun GL:gs2 () (GL:gdxys 2))
 (defun GL:gs3 () (GL:gdxys 3))
 (defun GL:gs4 () (GL:gdxys 4))
@@ -170,23 +172,23 @@
   (if (setq yanse (acad_colordlg 1))
     (GL:gdxys yanse)))
 
-;;æ”¹é¢œè‰²éšå±‚å­ç¨‹åº
+;;¸ÄÑÕÉ«Ëæ²ã×Ó³ÌĞò
 (defun GL:gssc (/ ss)
-  (princ "é¢œè‰²æ”¹ä¸ºéšå±‚")
+  (princ "ÑÕÉ«¸ÄÎªËæ²ã")
   (while (setq ss (ssget))
-    (princ (strcat (itoa (sslength ss)) "ä¸ªå¯¹è±¡çš„é¢œè‰²æ”¹ä¸ºéšå±‚"))
+    (princ (strcat (itoa (sslength ss)) "¸ö¶ÔÏóµÄÑÕÉ«¸ÄÎªËæ²ã"))
     (command "change" ss "" "P" "C" "bylayer" "")) ;while
 )
 
-;;æ”¹å¯¹è±¡é¢œè‰²å­ç¨‹åº
+;;¸Ä¶ÔÏóÑÕÉ«×Ó³ÌĞò
 (defun GL:gdxys (dxys / en i obj ss)
   (while (setq ss (ssget ":s"))
-    (princ (strcat "å…±æ”¹å˜äº†<" (itoa (sslength ss)) ">ä¸ªå¯¹è±¡çš„é¢œè‰²"))
+    (princ (strcat "¹²¸Ä±äÁË<" (itoa (sslength ss)) ">¸ö¶ÔÏóµÄÑÕÉ«"))
     (command "change" ss "" "p" "c" dxys "")) ;while
   (princ))
 
 ;;-----------------------------------------------------------------	
-;;æ”¹å›¾å±‚é¢œè‰²
+;;¸ÄÍ¼²ãÑÕÉ«
 (defun GL:gcs1 () (GL:gtcys 1))
 (defun GL:gcs2 () (GL:gtcys 2))
 (defun GL:gcs3 () (GL:gtcys 3))
@@ -201,7 +203,7 @@
 (defun GL:gcsqt (/ yanse)
   (if (setq yanse (acad_colordlg 1))
     (GL:gtcys yanse)))
-					;æ”¹å›¾å±‚é¢œè‰²å­ç¨‹åº
+					;¸ÄÍ¼²ãÑÕÉ«×Ó³ÌĞò
 (defun GL:gtcys (yanse / acaddoc acadobj en i lay layobj obj ss vlay vlay1)
   (setq AcadObj (vlax-get-Acad-object)
         AcadDoc (vla-get-ActiveDocument AcadObj)
@@ -210,18 +212,18 @@
     (progn
       (setq i 0)
       (repeat (sslength ss)
-        (setq en   (ssname ss i) ;å–å›¾å…ƒå
-              obj  (vlax-ename->vla-object en) ;è½¬æ¢å›¾å…ƒ
-              lay  (vla-get-layer obj) ;å›¾å±‚å
-              vlay (vla-item LayObj lay) ;è½¬ä¸ºVLå›¾å±‚å
+        (setq en   (ssname ss i) ;È¡Í¼ÔªÃû
+              obj  (vlax-ename->vla-object en) ;×ª»»Í¼Ôª
+              lay  (vla-get-layer obj) ;Í¼²ãÃû
+              vlay (vla-item LayObj lay) ;×ªÎªVLÍ¼²ãÃû
         )
         (if (= (equal vlay vlay1) nil)
           (progn
-            (vla-put-color vlay yanse) ;æ”¹å›¾å±‚é¢œè‰²
+            (vla-put-color vlay yanse) ;¸ÄÍ¼²ãÑÕÉ«
             (setq vlay1 vlay)))
         (setq i (1+ i)))))
   (princ))
 (defun C:shf ()
-  (princ "\nå›¾å±‚é¢œè‰²å·²æ¢å¤é»˜è®¤ï¼cecolor")
+  (princ "\nÍ¼²ãÑÕÉ«ÒÑ»Ö¸´Ä¬ÈÏ£¡cecolor")
   (setvar "cecolor" "bylayer")
   (princ));defun

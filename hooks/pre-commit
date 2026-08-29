@@ -1,0 +1,19 @@
+#!/bin/sh
+# AutoLISP 静态检查 pre-commit 钩子（由 install-hooks.bat 安装）
+# 每次 git commit 自动运行 run_tests.py --static（无需 CAD，秒级）。
+# 临时跳过: git commit --no-verify
+
+# 定位仓库根目录（钩子可能位于 .git/hooks/ 或 .git/worktrees/*/hooks/）
+ROOT=$(git rev-parse --show-toplevel) || exit 1
+cd "$ROOT" || exit 1
+
+if command -v python >/dev/null 2>&1; then
+  PY=python
+elif command -v py >/dev/null 2>&1; then
+  PY="py -3"
+else
+  echo "pre-commit: 未找到 python，跳过检查"
+  exit 0
+fi
+
+exec "$PY" run_tests.py --static

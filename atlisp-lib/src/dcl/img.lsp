@@ -1,5 +1,5 @@
 (defun dcl:img (key width height)
-  "dcl å›¾åƒæ§ä»¶ã€‚"
+  "dcl Í¼Ïñ¿Ø¼ş¡£"
   ""
   "(dcl:img \"img1 10 5)"
   (write-line (strcat ":image{key=\""

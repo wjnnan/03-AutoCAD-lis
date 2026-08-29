@@ -1,5 +1,5 @@
 (defun list:change-index (lst m n / t1 t2)
-    "äº¤æ¢åˆ—è¡¨çš„må’Œné¡¹ï¼Œç´¢å¼•ä»0å¼€å§‹"
+    "½»»»ÁĞ±íµÄmºÍnÏî£¬Ë÷Òı´Ó0¿ªÊ¼"
     (setq t1 (nth m lst)
         t2 (nth n lst))
     (list:replace-index (list:replace-index lst m t2)

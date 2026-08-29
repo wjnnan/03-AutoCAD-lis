@@ -1,4 +1,4 @@
 (defun layout:set-position (name n)
-    "æ ¹æ®æŒ‡å®šå¸ƒå±€åç§°ä¿®æ”¹å¸ƒå±€çš„ä½ç½®"
+    "¸ù¾İÖ¸¶¨²¼¾ÖÃû³ÆĞŞ¸Ä²¼¾ÖµÄÎ»ÖÃ"
     (setq vpnm1 (vla-item *layouts* name))
     (vla-put-taborder vpnm1 n))

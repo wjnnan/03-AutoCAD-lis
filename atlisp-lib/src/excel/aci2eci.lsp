@@ -1,6 +1,6 @@
 (defun excel:aci->eci (color / tmp)
-  "å°†cadé¢œè‰²ç´¢å¼•è½¬æ¢ä¸ºexcelé¢œè‰²ç´¢å¼•\nå‚æ•°:Color:cadé¢œè‰²ç´¢å¼•"
-  "excelé¢œè‰²ç´¢å¼•"
+  "½«cadÑÕÉ«Ë÷Òý×ª»»ÎªexcelÑÕÉ«Ë÷Òý\n²ÎÊý:Color:cadÑÕÉ«Ë÷Òý"
+  "excelÑÕÉ«Ë÷Òý"
   "(excel:ACI->ECI 2)"
   (if (setq tmp (vl-remove-if-not (quote (lambda (x)
             (= (cadr x)

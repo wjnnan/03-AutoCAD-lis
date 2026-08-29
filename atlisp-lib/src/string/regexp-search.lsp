@@ -1,5 +1,5 @@
 (defun string:regexp-search (string express key / regex s pos len str l)
-  "æ­£åˆ™è¡¨è¾¾å¼æœç´¢å­—ä¸². Express = æ­£åˆ™è¡¨è¾¾å¼ key = å­—æ¯ i I m M g Gçš„ç»„åˆå­—ä¸²"
+  "ÕıÔò±í´ïÊ½ËÑË÷×Ö´®. Express = ÕıÔò±í´ïÊ½ key = ×ÖÄ¸ i I m M g GµÄ×éºÏ×Ö´®"
   (setq regex (vlax-create-object "Vbscript.RegExp"))
   (if (and key (wcmatch key "*g*,*G*"))
     (vlax-put-property regex "Global"

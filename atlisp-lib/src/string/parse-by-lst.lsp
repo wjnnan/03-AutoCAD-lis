@@ -1,6 +1,6 @@
 (defun string:parse-by-lst (lstr delimlst)
-  "瀛楃涓叉寜鍒嗛殧绗﹀垪琛ㄨ浆鍒楄〃"
-  "鎷嗗垎鍚庣殑鍒楄〃"
+  "字符串按分隔符列表转列表"
+  "拆分后的列表"
   "(string:parse-by-lst \"a-b=c\"
     '(\"-\"
       \"=\"))"

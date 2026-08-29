@@ -1,5 +1,5 @@
 (defun entity:set-visible (ent bool)
-  "è®¾ç½®å›¾å…ƒçš„å¯è§æ€§"
+  "ÉèÖÃÍ¼ÔªµÄ¿É¼ûĞÔ"
   ""
   (if bool
       (vla-put-visible (e2o ent) :vlax-true)

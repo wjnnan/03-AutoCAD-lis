@@ -7,7 +7,7 @@
 ;; (@:set-config 'at-line:first  "New Value")
 ;; Add menu in @lisp panel
 (defun at-curve:link-end (/ segments segment-pts)
-  (@::prompt (strcat "è¿žæŽ¥çº¿ç«¯ç‚¹ .\n"
+  (@::prompt (strcat "Á¬½ÓÏß¶Ëµã .\n"
   	  	  ))
   (setq segments (pickset:to-list (ssget '((0 . "*LINE")))))
   (setq segment-pts (mapcar '(lambda (x)

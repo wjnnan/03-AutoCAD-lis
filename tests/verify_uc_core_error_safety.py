@@ -42,7 +42,7 @@ def extract_function(text: str, name: str) -> str:
 
 
 def main() -> int:
-    text = UC_CORE.read_text(encoding="utf-8")
+    text = UC_CORE.read_text(encoding="gbk")
 
     helper = extract_function(text, "uc:command-safe")
     undo_begin = extract_function(text, "uc:undo-begin")

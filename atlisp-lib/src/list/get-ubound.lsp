@@ -1,5 +1,5 @@
 (defun list:get-ubound (lst)
-    "寰楀埌琛ㄧ殑鍚勭淮鏁伴暱搴︼紝鏈�澶氭敮鎸佸埌涓夌淮"
+    "得到表的各维数长度，最多支持到三维"
     (if (atom lst)
         (quote (0 0 0))
         (list (vl-list-length lst)

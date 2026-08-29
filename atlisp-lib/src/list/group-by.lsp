@@ -1,5 +1,5 @@
 (defun list:group-by (lst fun / res g)
-  "å¯¹å·²æ’åºçš„åˆ—è¡¨lstè¿›è¡Œåˆ†ç»„ã€‚funä¸ºåˆ†ç»„ä¾æ®"
+  "¶ÔÒÑÅÅĞòµÄÁĞ±ílst½øĞĞ·Ö×é¡£funÎª·Ö×éÒÀ¾İ"
   "lst"
   "(list:group-by '(a a a b b c) '(lambda(x y)(= x y))) => ((a a a)(b b)(c))"
   (setq res nil)

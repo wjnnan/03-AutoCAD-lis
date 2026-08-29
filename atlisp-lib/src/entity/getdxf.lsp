@@ -1,6 +1,6 @@
 (defun entity:getdxf (ent i / getdxf result)
-  "鑾峰彇鍥惧厓鐨勭粍鐮佸�糪n鍙傛暟:\nent:鍥惧厓鍚嶆垨vla瀵硅薄鍚峔ni:缁勭爜鎴栫粍鐮佽〃"
-  "缁勭爜鍊兼垨鍒楄〃"
+  "获取图元的组码值\n参数:\nent:图元名或vla对象名\ni:组码或组码表"
+  "组码值或列表"
   "(entity:getdxf (car (entsel))
     10)"
   (defun getdxf (ent i / res)

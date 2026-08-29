@@ -1,5 +1,5 @@
 (defun m:dms (degress / d x m s)
-    "鏍规嵁缁欏畾鍗佽繘鍒惰搴﹁繑鍥炲害鍒嗙鏍煎紡鐨勮〃"
+    "根据给定十进制角度返回度分秒格式的表"
     (setq d (fix degress))
     (setq x (* (- degress d)
             60))

@@ -1,15 +1,15 @@
 (defun @block:copy-by-blk ()
-  (@::prompt '("åªæ”¯æŒxyzè½´ç¼©æ”¾å€¼ç›¸åŒçš„å—,å¦‚æœä¸åŒä»…è€ƒè™‘Xè½´çš„ç¼©æ”¾ã€‚"
-	    "æ“ä½œæ­¥éª¤ï¼š"
-	    "1ã€é€‰ä¸­è¦å¤åˆ¶çš„å›¾å½¢ï¼Œ"
-	    "2ã€é€‰æ‹©æºå—"
-	    "3ã€é€‰æ‹©ä¸€ä¸ªæˆ–å¤šä¸ªç›®æ ‡å—"
+  (@::prompt '("Ö»Ö§³ÖxyzÖáËõ·ÅÖµÏàÍ¬µÄ¿é,Èç¹û²»Í¬½ö¿¼ÂÇXÖáµÄËõ·Å¡£"
+	    "²Ù×÷²½Öè£º"
+	    "1¡¢Ñ¡ÖĞÒª¸´ÖÆµÄÍ¼ĞÎ£¬"
+	    "2¡¢Ñ¡ÔñÔ´¿é"
+	    "3¡¢Ñ¡ÔñÒ»¸ö»ò¶à¸öÄ¿±ê¿é"
 	    ))
-  (@:prompt "è¯·é€‰æ‹©è¦å¤åˆ¶çš„å›¾å½¢:")
+  (@:prompt "ÇëÑ¡ÔñÒª¸´ÖÆµÄÍ¼ĞÎ:")
   (setq ents(pickset:to-list (ssget)))
-  (@:prompt "è¯·é€‰æ‹©æºå—:")
+  (@:prompt "ÇëÑ¡ÔñÔ´¿é:")
   (setq blk-src(car (pickset:to-list(ssget ":E:S" '((0 . "insert"))))))
-  (@:prompt "è¯·é€‰æ‹©ç›®æ ‡å—:")
+  (@:prompt "ÇëÑ¡ÔñÄ¿±ê¿é:")
   (if (eq (vla-get-isdynamicblock (e2o blk-src)) :vlax-true)
       (progn 
 	(setq blk-targets
@@ -31,8 +31,8 @@
   (setq pt-base (entity:getdxf blk-src 10))
   (setq rotate-base (entity:getdxf blk-src 50))
   (setq scale-base (entity:getdxf blk-src 41));; '(41 42 43)))
-  ;; è®¡ç®—
-  ;; ç”Ÿæˆæ–°å›¾å½¢
+  ;; ¼ÆËã
+  ;; Éú³ÉĞÂÍ¼ĞÎ
   (foreach
    blk-target blk-targets
    (setq pt-target (entity:getdxf blk-target 10))

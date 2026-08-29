@@ -1,5 +1,5 @@
 (defun entity:listcollection (collection / out)
-  "åˆ—é›†åˆ"
+  "ÁĞ¼¯ºÏ"
   (vlax-for each collection (setq out (cons (vla-get-name each)
         out)))
   (reverse out))

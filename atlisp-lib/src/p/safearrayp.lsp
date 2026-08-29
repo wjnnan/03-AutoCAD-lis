@@ -1,4 +1,4 @@
 (defun p:safearrayp (x)
-  "åˆ¤æ–­æ˜¯å¦ä¸ºå®‰å…¨æ•°ç»„"
+  "ÅĞ¶ÏÊÇ·ñÎª°²È«Êı×é"
   (equal (type x)
     (quote safearray)))

@@ -1,5 +1,5 @@
 (defun music-die:undo1 (/ ctr vsize)
-  "å¯æ’¤å›ä¸€æ­¥æ“ä½œï¼Œå¹¶ä¸”ä¸ä¼šä½¿è§†å£ç§»åŠ¨"
+  "¿É³·»ØÒ»²½²Ù×÷£¬²¢ÇÒ²»»áÊ¹ÊÓ¿ÚÒÆ¶¯"
   ""
   (setq ctr (trans (getvar "VIEWCTR") 1 0))
   (setq vsize (getvar "VIEWSIZE"))

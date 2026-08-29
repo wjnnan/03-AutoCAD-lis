@@ -1,5 +1,5 @@
 (defun word:write-line (ax-doc text / end)
-  "å‘ word çš„æ–‡æ¡£å¯¹è±¡æœ€åå†™å…¥æ–‡æœ¬ã€‚"
+  "Ïò word µÄÎÄµµ¶ÔÏó×îºóĞ´ÈëÎÄ±¾¡£"
   (setq	end
 	(vlax-get-property
 	 (vlax-get-property

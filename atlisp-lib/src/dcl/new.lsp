@@ -1,9 +1,9 @@
 (defun dcl:new (name)
-  "è½½å…¥DCLï¼Œå¹¶åˆ›å»ºå¯¹è¯æ¡†åä¸º name çš„å¯¹è±¡ã€‚"
+  "ÔØÈëDCL£¬²¢´´½¨¶Ô»°¿òÃûÎª name µÄ¶ÔÏó¡£"
   ""
   (setq dcl-id (load_dialog dcl-tmp))
   (if (not (new_dialog name dcl-id))
-    (progn (princ "åˆ›å»ºå¯¹è¯æ¡†å¤±è´¥ï¼Œå¯èƒ½æ˜¯å¤ªå¤§äº†")
+    (progn (princ "´´½¨¶Ô»°¿òÊ§°Ü£¬¿ÉÄÜÊÇÌ«´óÁË")
       (exit)))
   (action_tile "accept"
     "(dcl:accept)"))

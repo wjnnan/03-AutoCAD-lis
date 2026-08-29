@@ -1,5 +1,5 @@
 (defun string:regexp-replace (string newstr express key / regex s)
-  "æ­£åˆ™è¡¨è¾¾å¼æ›¿æ¢å­—ä¸²"
+  "ÕıÔò±í´ïÊ½Ìæ»»×Ö´®"
   (setq regex (vlax-create-object "Vbscript.RegExp"))
   (if (and key (wcmatch key "*g*,*G*"))
     (vlax-put-property regex "Global"

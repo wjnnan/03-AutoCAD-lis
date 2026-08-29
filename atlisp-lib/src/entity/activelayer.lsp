@@ -1,6 +1,6 @@
 (defun entity:activelayer (name / iloc out)
-  "è®¾ç½®æŒ‡å®šå±‚ä¸ºå½“å‰å±‚.  name:å›¾å±‚å"
-  "æˆåŠŸè¿”å›tï¼Œå¤±è´¥è¿”å›nil"
+  "ÉèÖÃÖ¸¶¨²ãÎªµ±Ç°²ã.  name:Í¼²ãÃû"
+  "³É¹¦·µ»Øt£¬Ê§°Ü·µ»Ønil"
   "(entity:ActiveLayer \"layer1\")"
   (if (and (tblsearch "layer"
         name)

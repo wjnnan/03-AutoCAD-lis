@@ -1,5 +1,5 @@
 (defun m:mid (x y / a b)
-    "è®¡ç®—ä¸­ç‚¹"
+    "¼ÆËãÖÐµã"
     (mapcar (quote (lambda (a b)
                 (* (+ a b)
                     0.5)))

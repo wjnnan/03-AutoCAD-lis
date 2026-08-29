@@ -1,5 +1,5 @@
 (defun ext:probe-fun (fun / args iter iter-depth)
-  "æ¢æµ‹å‡½æ•°çš„å‚æ•°ä¸ªæ•°(æœ€å°)åŠå‚æ•°ç±»å‹ã€‚"
+  "Ì½²âº¯ÊıµÄ²ÎÊı¸öÊı(×îĞ¡)¼°²ÎÊıÀàĞÍ¡£"
   "expr or nil"
   "(ext:probe-fun 'boole)"
   (setq args '())
@@ -33,10 +33,10 @@
 	 (setq errmsg (vl-catch-all-error-message errobj)))
 	(if (< iter-depth 100)
 	    (cond
-	     ((wcmatch errmsg "*å‚æ•°å¤ªå°‘*")
+	     ((wcmatch errmsg "*²ÎÊıÌ«ÉÙ*")
 	      (setq args  (cons (read (strcat "arg" (itoa (length args)))) args))
 	      (iter))
-	     ((wcmatch errmsg "å‚æ•°ç±»å‹é”™è¯¯*")
+	     ((wcmatch errmsg "²ÎÊıÀàĞÍ´íÎó*")
 	      (@:log "INFO" errmsg)
 	      (setq typeerr (string:to-list errmsg " "))
 	      (@:log "INFO" (vl-prin1-to-string typeerr))
@@ -55,15 +55,15 @@
 		(setq args (subst ent (read (last typeerr)) args)))
 	       ((wcmatch (cadr typeerr) "VLA-OBJECT*")
 		(setq args (subst vlaobj (read (last typeerr)) args)))
-	       ((wcmatch (cadr typeerr) "äºŒç»´/ä¸‰ç»´ç‚¹*")
+	       ((wcmatch (cadr typeerr) "¶şÎ¬/ÈıÎ¬µã*")
 		(setq args (subst pt (read (last typeerr)) args)))
-	       ;; TODO å‚æ•°ç±»å‹é”™è¯¯æ‰©å±•
+	       ;; TODO ²ÎÊıÀàĞÍ´íÎóÀ©Õ¹
 	       )
 	      (iter))
 	     ((wcmatch errmsg "no function definition*")
 	      (setq args (subst 'princ (read (caddr typeerr)) args))
 	      (iter))
-	     ((wcmatch errmsg "æœªçŸ¥çš„å¼€æ”¾æ¨¡å¼*")
+	     ((wcmatch errmsg "Î´ÖªµÄ¿ª·ÅÄ£Ê½*")
 	      (@:log "INFO" "  near completed \n")
 	      (princ args)
 	      (setq args (subst 'keyword (last typeerr) args))

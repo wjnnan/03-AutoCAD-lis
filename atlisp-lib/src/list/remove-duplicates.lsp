@@ -1,5 +1,5 @@
 (defun list:remove-duplicates (lst)
-    "åˆ é™¤åˆ—è¡¨ä¸­é‡å¤çš„åŸå­ã€‚"
+    "É¾³ıÁĞ±íÖĞÖØ¸´µÄÔ­×Ó¡£"
     (if lst (cons (car lst)
             (list:remove-duplicates (vl-remove (car lst)
                     lst)))))

@@ -1,6 +1,6 @@
 (defun point:rec-2pt->4pt (pt1 pt2)
-    "æ ¹æ®çŸ©å½¢2ç‚¹è®¡ç®—çŸ©å½¢4ç‚¹"
-    "çŸ©å½¢çš„å››ç‚¹åæ ‡"
+    "¸ù¾İ¾ØĞÎ2µã¼ÆËã¾ØĞÎ4µã"
+    "¾ØĞÎµÄËÄµã×ø±ê"
     (mapcar (quote (lambda (x)
                 (mapcar (quote apply)
                     x (mapcar (quote list)

@@ -15,7 +15,7 @@ def locals_of(text: str, name: str) -> set[str]:
 
 
 def main() -> int:
-    text = DIFFCHECK.read_text(encoding="utf-8")
+    text = DIFFCHECK.read_text(encoding="gbk")
 
     offset_locals = locals_of(text, "dc:offset")
     diff_locals = locals_of(text, "dc:diff")

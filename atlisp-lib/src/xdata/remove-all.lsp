@@ -1,5 +1,5 @@
 (defun xdata:remove-all (ename / lst)
-  "åˆ é™¤å›¾å…ƒçš„æ‰€æœ‰æ‰©å±•æ•°æ®"
+  "É¾³ıÍ¼ÔªµÄËùÓĞÀ©Õ¹Êı¾İ"
   (cond
     ((p:enamep ename)
      (entmod

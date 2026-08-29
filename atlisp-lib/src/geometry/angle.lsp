@@ -1,6 +1,6 @@
 (defun geometry:angle (segment / pt1 pt2 dist-o)
-  "ç›´çº¿(çº¿æ®µ)ä¸åæ ‡è½´xyzçš„å¤¹è§’åˆ—è¡¨"
-  "ä¸¤ç‚¹ç›´çº¿ä¸x y z è½´çš„å¤¹è§’(å¼§åº¦)"
+  "Ö±Ïß(Ïß¶Î)Óë×ø±êÖáxyzµÄ¼Ğ½ÇÁĞ±í"
+  "Á½µãÖ±ÏßÓëx y z ÖáµÄ¼Ğ½Ç(»¡¶È)"
   "(geometry:angel '((0 0 0)(1 1 1)))"
   (setq pt1 (car segment)
     pt2 (cadr segment))

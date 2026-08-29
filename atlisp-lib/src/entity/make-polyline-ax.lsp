@@ -1,6 +1,6 @@
 (defun entity:make-polyline-ax (pts-3d closed? / acadobj doc modelspace pntlst2 points polyobj)
-  "æ ¹æ®ç‚¹è¡¨ç”Ÿæˆpolylineï¼Œä¸‰ç»´å¤šæ®µçº¿ã€‚å‚æ•°:closed? T or nil.ActiveX æ–¹æ³•ã€‚"
-  "ä¸‰ç»´POLYLINEå›¾å…ƒ"
+  "¸ù¾İµã±íÉú³Épolyline£¬ÈıÎ¬¶à¶ÎÏß¡£²ÎÊı:closed? T or nil.ActiveX ·½·¨¡£"
+  "ÈıÎ¬POLYLINEÍ¼Ôª"
   (setq pntlst2 (quote nil))
   (if pts-3d (progn (foreach e pts-3d (setq pntlst2 (append pntlst2 e)))
       (setq acadobj (vlax-get-acad-object))

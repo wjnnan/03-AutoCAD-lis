@@ -1,6 +1,6 @@
 (defun geometry:segment-mid (segment)
-  "æ±‚çº¿æ®µçš„ä¸­ç‚¹åæ ‡"
-  "ä¸‰ç»´åæ ‡å€¼"
+  "ÇóÏß¶ÎµÄÖĞµã×ø±ê"
+  "ÈıÎ¬×ø±êÖµ"
   (list (* 0.5 (+ (car (car segment))
         (car (cadr segment))))
     (* 0.5 (+ (cadr (car segment))

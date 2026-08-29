@@ -1,6 +1,6 @@
-(@:define-config '@text:target-lang "en" "ç¿»è¯‘æ–‡æœ¬çš„ç›®æ ‡è¯­è¨€ï¼Œæ”¯æŒen,zh,zht,jp,korç­‰")
+(@:define-config '@text:target-lang "en" "·­ÒëÎÄ±¾µÄÄ¿±êÓïÑÔ£¬Ö§³Öen,zh,zht,jp,korµÈ")
 (defun @text:translate (/ txts boxs res maxdis)
-  (@::help '("ç¿»è¯‘é€‰ä¸­çš„å•è¡Œæˆ–å¤šè¡Œæ–‡æœ¬"))
+  (@::help '("·­ÒëÑ¡ÖÐµÄµ¥ÐÐ»ò¶àÐÐÎÄ±¾"))
   (setq txts (pickset:to-list (ssget '((0 . "*text")))))
   (setq boxs(mapcar '(lambda(x)(entity:getbox x 0)) txts))
   (setq res (mapcar '(lambda(x / lst-res)
@@ -21,7 +21,7 @@
   (setq maxdis (-
 		(apply 'max (mapcar '(lambda(x)(car (cadr x))) boxs))
 		(apply 'min (mapcar '(lambda(x)(car (car x))) boxs))))
-  ;; è‹±æ–‡å­—é«˜å‡åŠ
+  ;; Ó¢ÎÄ×Ö¸ß¼õ°ë
   (mapcar
    '(lambda(x y / box)
      (setq box (entity:getbox y 0))
@@ -41,9 +41,9 @@
 	     (cadr (car box))))))
    res txts))
 (defun @text:translate-from-en (/ txts boxs res maxdis)
-  (@::help '("ç¿»è¯‘é€‰ä¸­çº¯è‹±æ–‡çš„å•è¡Œæˆ–å¤šè¡Œæ–‡æœ¬è‡³å½“å‰ç³»ç»Ÿè¯­è¨€"))
+  (@::help '("·­ÒëÑ¡ÖÐ´¿Ó¢ÎÄµÄµ¥ÐÐ»ò¶àÐÐÎÄ±¾ÖÁµ±Ç°ÏµÍ³ÓïÑÔ"))
   (setq txts (pickset:to-list (ssget '((0 . "*text")))))
-  ;;åŽ»é™¤éžè‹±æ–‡
+  ;;È¥³ý·ÇÓ¢ÎÄ
   (setq txts (vl-remove-if
 	      '(lambda(x)
 		(> 

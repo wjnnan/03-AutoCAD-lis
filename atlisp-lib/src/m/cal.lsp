@@ -1,9 +1,9 @@
 (defun m:cal (lst1 lst2 str)
-    "æ ¹æ®ç»™å®šè¡¨è¾¾å¼è®¡ç®—ç»“æœ"
+    "¸ù¾İ¸ø¶¨±í´ïÊ½¼ÆËã½á¹û"
     (if (not (list:exist (arx)
                 "geomcal.arx"))
         (arxload "geomcal"
-            "\nåŠ è½½geomcalå¤±è´¥ï¼"))
+            "\n¼ÓÔØgeomcalÊ§°Ü£¡"))
     (mapcar (quote set)
         lst1 lst2)
     (if (vl-every (quote (lambda (x)

@@ -1,5 +1,5 @@
 (defun m:calheight (pt1 pt2 podu)
-    "鐩爣鐐圭殑楂樼▼"
+    "目标点的高程"
     (subst (+ (caddr pt1)
             (* podu (distance (geometry:point-3d->2d pt1)
                     (geometry:point-3d->2d pt2))))

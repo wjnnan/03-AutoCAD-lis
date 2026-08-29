@@ -1,3 +1,3 @@
 (defun list:delnotsame (lst)
-    "æŸ¥æ‰¾è¡¨ä¸­ä¸é‡å¤å…ƒç´ ã€‚"
+    "²éÕÒ±íÖĞ²»ÖØ¸´ÔªËØ¡£"
     (m:intersect lst (list:same lst)))

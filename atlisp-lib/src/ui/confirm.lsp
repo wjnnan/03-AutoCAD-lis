@@ -1,7 +1,7 @@
 (defun ui:confirm (lst-str / *error* result dcl-fp dcl-tmp)
-  "ç¡®è®¤å¯¹è¯æ¡†. å‚æ•°ï¼šlst-str å•ä¸ªå­—ç¬¦ä¸²ï¼Œæˆ–å­—ç¬¦ä¸²åˆ—è¡¨ã€‚"
+  "È·ÈÏ¶Ô»°¿ò. ²ÎÊı£ºlst-str µ¥¸ö×Ö·û´®£¬»ò×Ö·û´®ÁĞ±í¡£"
   "T or nil"
-  "(ui:confirm \"ä½ é‡åˆ°çœŸçˆ±äº†å—?\")"
+  "(ui:confirm \"ÄãÓöµ½Õæ°®ÁËÂğ?\")"
     (defun *error* (msg)
       (if (= (quote file)
           (type dcl-fp))

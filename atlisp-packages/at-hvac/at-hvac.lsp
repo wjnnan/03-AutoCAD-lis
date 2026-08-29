@@ -1,48 +1,48 @@
 (@:add-menus
- '("@æš–é€š"
-   ("æ’å…¥è¯´æ˜" (@hvac:draw-readme))
-   ("å¹³é¢å›¾æ ·ä¾‹" (@hvac:draw-plan-example))
-   ("å¸ƒç½®é£æœºé£å£"(@hvac:insert-block "æ–¹å£å¼è½´æµé£æœº"))
-   ;; ("æ’å…¥é£æœº"(@hvac:insert-block "é£æœºç›˜ç®¡"))
-   ("æ’å…¥æ–°é£æœºç»„"(@hvac:insert-block "æ–°é£æœºç»„"))
-   ("é£æœºå‹å·è¯´æ˜"(@hvac:fengji-info))
-   ("é£æœºç»Ÿè®¡"(@hvac:stat-fengji))
-   ("æ ‡åœ°æš–ç®¡"(@hvac:dim-pipe))
-   ("æ‰¹é‡æ ‡åœ°æš–ç®¡"(@hvac:batch-dim-pipe))
-   ("åˆ†é›†æ°´å™¨å¹³è¡¡åˆ†æ"(@hvac:equip-balance))
-   ("ç»˜åˆ¶è®¾å¤‡è¡¨"(@hvac:make-equip-bom))
+ '("@Å¯Í¨"
+   ("²åÈëËµÃ÷" (@hvac:draw-readme))
+   ("Æ½ÃæÍ¼ÑùÀı" (@hvac:draw-plan-example))
+   ("²¼ÖÃ·ç»ú·ç¿Ú"(@hvac:insert-block "·½±ÚÊ½ÖáÁ÷·ç»ú"))
+   ;; ("²åÈë·ç»ú"(@hvac:insert-block "·ç»úÅÌ¹Ü"))
+   ("²åÈëĞÂ·ç»ú×é"(@hvac:insert-block "ĞÂ·ç»ú×é"))
+   ("·ç»úĞÍºÅËµÃ÷"(@hvac:fengji-info))
+   ("·ç»úÍ³¼Æ"(@hvac:stat-fengji))
+   ("±êµØÅ¯¹Ü"(@hvac:dim-pipe))
+   ("ÅúÁ¿±êµØÅ¯¹Ü"(@hvac:batch-dim-pipe))
+   ("·Ö¼¯Ë®Æ÷Æ½ºâ·ÖÎö"(@hvac:equip-balance))
+   ("»æÖÆÉè±¸±í"(@hvac:make-equip-bom))
    ))
 (setq @hvac:*fengji*
       (list
-       ;;å‹å· å…¨ç§° å†·é‡(W)  çƒ­é‡(W)  N(W)   é£é‡(m3/h)
-       '("FP51" "å§å¼æš—è£…é£æœºç›˜ç®¡FP-51" 2890  4820 59 510)
-       '("FP85" "å§å¼æš—è£…é£æœºç›˜ç®¡FP-85"4520 7670 84 850)
-       '("FP102" "å§å¼æš—è£…é£æœºç›˜ç®¡FP-102" 5420 8850 118 1020)
-       '("FP136" "å§å¼æš—è£…é£æœºç›˜ç®¡FP-136" 7200 10800 156 1360)))
+       ;;ĞÍºÅ È«³Æ ÀäÁ¿(W)  ÈÈÁ¿(W)  N(W)   ·çÁ¿(m3/h)
+       '("FP51" "ÎÔÊ½°µ×°·ç»úÅÌ¹ÜFP-51" 2890  4820 59 510)
+       '("FP85" "ÎÔÊ½°µ×°·ç»úÅÌ¹ÜFP-85"4520 7670 84 850)
+       '("FP102" "ÎÔÊ½°µ×°·ç»úÅÌ¹ÜFP-102" 5420 8850 118 1020)
+       '("FP136" "ÎÔÊ½°µ×°·ç»úÅÌ¹ÜFP-136" 7200 10800 156 1360)))
       
 (defun @hvac:fengji-info()
-  (alert "å§å¼æš—è£…é£æœºç›˜ç®¡FP-51,å†·é‡=2890W,çƒ­é‡=4820W,N=59W,é£é‡=510m3/h
-å§å¼æš—è£…é£æœºç›˜ç®¡FP-85,å†·é‡=4520W,çƒ­é‡=7670W,N=84W,é£é‡=850m3/h
-å§å¼æš—è£…é£æœºç›˜ç®¡FP-102,å†·é‡=5420W,çƒ­é‡=8850W,N=118W,é£é‡=1020m3/h
-å§å¼æš—è£…é£æœºç›˜ç®¡FP-136,å†·é‡=7200W,çƒ­é‡=10800W,N=156W,é£é‡=1360m3/h"))
+  (alert "ÎÔÊ½°µ×°·ç»úÅÌ¹ÜFP-51,ÀäÁ¿=2890W,ÈÈÁ¿=4820W,N=59W,·çÁ¿=510m3/h
+ÎÔÊ½°µ×°·ç»úÅÌ¹ÜFP-85,ÀäÁ¿=4520W,ÈÈÁ¿=7670W,N=84W,·çÁ¿=850m3/h
+ÎÔÊ½°µ×°·ç»úÅÌ¹ÜFP-102,ÀäÁ¿=5420W,ÈÈÁ¿=8850W,N=118W,·çÁ¿=1020m3/h
+ÎÔÊ½°µ×°·ç»úÅÌ¹ÜFP-136,ÀäÁ¿=7200W,ÈÈÁ¿=10800W,N=156W,·çÁ¿=1360m3/h"))
 (defun @hvac:stat-fengji (/ fengjis)
-  (@::help "ç»Ÿä¸€æ‰€é€‰é£æœºï¼Œå½¢æˆææ–™è¡¨")
-  (setq fengjis (block:ssget nil "æ–¹å£å¼è½´æµé£æœº" nil))
+  (@::help "Í³Ò»ËùÑ¡·ç»ú£¬ĞÎ³É²ÄÁÏ±í")
+  (setq fengjis (block:ssget nil "·½±ÚÊ½ÖáÁ÷·ç»ú" nil))
   (setq statres
 	(mapcar '(lambda(x)
-		   (block:get-dynprop x "å‹å·"))
+		   (block:get-dynprop x "ĞÍºÅ"))
 		(pickset:to-list fengjis)))
   ;; (princ statres)
   (setq statres (stat:stat  statres))
-  (if (assoc "æœªçŸ¥å‹å·" statres)
+  (if (assoc "Î´ÖªĞÍºÅ" statres)
       (progn
-	(alert "å‘ç°æœªçŸ¥å‹å·çš„é£æœºï¼Œå·²å®šä½ï¼Œè¯·ä¿®æ”¹ï¼")
+	(alert "·¢ÏÖÎ´ÖªĞÍºÅµÄ·ç»ú£¬ÒÑ¶¨Î»£¬ÇëĞŞ¸Ä£¡")
 	(setq fengjis
 	      (vl-remove-if-not
 	       '(lambda(x)
-		  (= "æœªçŸ¥å‹å·" (block:get-dynprop x "å‹å·")))
+		  (= "Î´ÖªĞÍºÅ" (block:get-dynprop x "ĞÍºÅ")))
 	       (pickset:to-list
-		(block:ssget "x" "æ–¹å£å¼è½´æµé£æœº" nil))))
+		(block:ssget "x" "·½±ÚÊ½ÖáÁ÷·ç»ú" nil))))
 	(sssetfirst nil (pickset:from-list fengjis))
 	)
     (progn
@@ -50,19 +50,19 @@
       (ui:dyndraw
        (table:make
 	'(0 0 0)
-	"ç©ºè°ƒç³»ç»Ÿä¸»è¦è®¾å¤‡å‚æ•°è¡¨"
-	(list  "åºå·" "" "è§„æ ¼å‹å·åŠæŠ€æœ¯å‚æ•°""å•ä½""æ•°é‡")
+	"¿Õµ÷ÏµÍ³Ö÷ÒªÉè±¸²ÎÊı±í"
+	(list  "ĞòºÅ" "" "¹æ¸ñĞÍºÅ¼°¼¼Êõ²ÎÊı""µ¥Î»""ÊıÁ¿")
 	(mapcar '(lambda(x / data )
 		   (setq data (assoc (car x) @hvac:*fengji*))
 		   (list
 		    (setq i (1+ i))
 		    (cadr  data)
 		    (strcat
-		     "å†·é‡="  (itoa (nth 2  data))"W "
-		     "çƒ­é‡="  (itoa (nth 3  data))"W "
+		     "ÀäÁ¿="  (itoa (nth 2  data))"W "
+		     "ÈÈÁ¿="  (itoa (nth 3  data))"W "
 		     "N="  (itoa (nth 4  data))"W "
-		     "é£é‡="  (itoa (nth 3  data))"mÂ³/h")
-		    "å°"
+		     "·çÁ¿="  (itoa (nth 3  data))"m^3/h")
+		    "Ì¨"
 		    (cdr x)
 		    ))
 		statres)
@@ -70,12 +70,12 @@
        '(0 0 0)
        ))))
 (defun @hvac:insert-block (dwgname / downfile)
-  (@::help "æ’å…¥å›¾å—æ¨¡æ¿")
+  (@::help "²åÈëÍ¼¿éÄ£°å")
   (setq downfile (strcat "at-hvac/" dwgname ".dwg"))
   (if (null (findfile (strcat "packages/" downfile)))
       (progn
 	(@:load-module 'pkgman)
-	(@:down-pkg-file (@:uri) downfile "stable")(@:alert (strcat "æ­£åœ¨ä¸‹è½½æ‰€éœ€çš„dwgæ–‡ä»¶, è¯·ç¨å€™ã€‚"))(sleep 5))
+	(@:down-pkg-file (@:uri) downfile "stable")(@:alert (strcat "ÕıÔÚÏÂÔØËùĞèµÄdwgÎÄ¼ş, ÇëÉÔºò¡£"))(sleep 5))
       )
   (if (findfile (strcat "packages/" downfile))
       (progn
@@ -85,7 +85,7 @@
     ))
 
 (defun @hvac:draw-readme ()
-  (@:help '("æ’å…¥æš–é€šè¯´æ˜ã€‚" ))
+  (@:help '("²åÈëÅ¯Í¨ËµÃ÷¡£" ))
   (@:load-module 'pkgman)
   (if @::require-down
       (@::require-down "at-hvac/readme-hvac.dwg"))
@@ -105,7 +105,7 @@
 		  (vla-delete (e2o readme-hvac))))))
       ))
 (defun @hvac:draw-plan-example ()
-  (@:help '("æ’å…¥æš–é€šå¹³é¢å›¾æ ·ä¾‹ã€‚"
+  (@:help '("²åÈëÅ¯Í¨Æ½ÃæÍ¼ÑùÀı¡£"
 	    ))
   (@:load-module 'pkgman)
   (if @::require-down

@@ -1,5 +1,5 @@
 (defun datetime:rfc1123-to-lisp (str)
-  "å°†RFC1123æ ¼å¼è½¬åŒ–ä¸º autolisp è¡¨æ ¼å¼"
+  "½«RFC1123¸ñÊ½×ª»¯Îª autolisp ±í¸ñÊ½"
   "list"
   "(datetime:rfc1123-to-lisp \"Mon, 12 Sep 2022 03:58:42 GMT\")"
   (setq mon '("Jan" "Feb" "Mar""Apr""May""Jun""Jul""Aug""Sep""Oct""Nov""Dec"))

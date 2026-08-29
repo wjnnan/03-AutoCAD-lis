@@ -1,5 +1,5 @@
 (defun matrix:vxv (v1 v2)
-    "å‘é‡çš„ç‚¹ç§¯"
+    "ÏòÁ¿µÄµã»ı"
     (apply (quote +)
         (mapcar (quote *)
             v1 v2)))

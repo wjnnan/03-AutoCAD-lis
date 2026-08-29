@@ -1,3 +1,3 @@
 (defun at-curve:de-chamfer ()
-  (@::prompt "åå€’è§’ï¼Œ")
+  (@::prompt "·´µ¹½Ç£¬")
   )

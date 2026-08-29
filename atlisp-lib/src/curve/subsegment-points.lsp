@@ -1,4 +1,4 @@
 (defun curve:subsegment-points (curve n)
-  "å¤šæ®µçº¿ç¬¬nå­æ®µçš„ç«¯ç‚¹åæ ‡"
+  "¶à¶ÎÏßµÚn×Ó¶ÎµÄ¶Ëµã×ø±ê"
   (list (vlax-curve-getpointatparam curve (fix n))
     (vlax-curve-getpointatparam curve (1+ (fix n)))))

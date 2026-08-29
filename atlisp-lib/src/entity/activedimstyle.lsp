@@ -1,5 +1,5 @@
 (defun entity:activedimstyle (dimname / acaddocument acadobject currdimstyle mspace)
-  "æ¿€æ´»æŒ‡å®šçš„æ ‡æ³¨æ ·å¼ã€‚dimname:æ ‡æ³¨æ ·å¼å"
+  "¼¤»îÖ¸¶¨µÄ±ê×¢ÑùÊ½¡£dimname:±ê×¢ÑùÊ½Ãû"
   ""
   "(activedimstyle \"40\")"
   (vl-load-com)

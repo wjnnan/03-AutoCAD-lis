@@ -1,5 +1,5 @@
 (defun m:dec2hex (fixnum)
-  "å°†åè¿›åˆ¶æ•´æ•°è½¬æ¢ä¸º16è¿›åˆ¶ç¬¦å· 0XABçš„å½¢å¼"
+  "½«Ê®½øÖÆÕûÊý×ª»»Îª16½øÖÆ·ûºÅ 0XABµÄÐÎÊ½"
   "symbol"
   "(m:dec2hex 45217) ;; => 0xB0A1"
   (read (strcat "0x"(m:dec->base fixnum 16))))

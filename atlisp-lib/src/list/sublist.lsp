@@ -1,6 +1,6 @@
 (defun list:sublist (lst idx len / rtn)
-    "Х▌╥Е▐√Е╜░Е┬≈Х║╗\n from leemac"
-    "Е╜░Е┬≈Х║╗"
+    "╩Ях║всап╠М\n from leemac"
+    "всап╠М"
     (setq len (if len (min len (- (length lst)
                     idx))
             (- (length lst)

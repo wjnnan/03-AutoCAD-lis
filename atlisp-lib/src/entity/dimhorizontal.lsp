@@ -1,6 +1,6 @@
 (defun entity:dimhorizontal (pt1 pt2 pt-txt)
-  "ç”Ÿæˆæ°´å¹³æ ‡æ³¨"
-  "return:æ ‡æ³¨å›¾å…ƒå"
+  "Éú³ÉË®Æ½±ê×¢"
+  "return:±ê×¢Í¼ÔªÃû"
   "example:(entity:dimhorizontal (getpoint)
     (getpoint)
     (getpoint))"

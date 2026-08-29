@@ -1,13 +1,13 @@
 (defun @block:match-att-style ()
-  (@::prompt "å°†ä¿®æ”¹çš„å±æ€§æ ·å¼åˆ·åˆ°å…¶å®ƒåŒåå—å¼•ç”¨çš„åŒåå±æ€§ä¸Šã€‚")
-  (if (setq srcatt (car (nentsel (@::prompt "è¯·é€‰æ‹©æºå±æ€§:"))))
+  (@::prompt "½«ĞŞ¸ÄµÄÊôĞÔÑùÊ½Ë¢µ½ÆäËüÍ¬Ãû¿éÒıÓÃµÄÍ¬ÃûÊôĞÔÉÏ¡£")
+  (if (setq srcatt (car (nentsel (@::prompt "ÇëÑ¡ÔñÔ´ÊôĞÔ:"))))
   (if (= "ATTRIB" (entity:getdxf srcatt 0))
       (progn
-	;;ä¸Šçº§å—å
-	(@::prompt "è¯·é€‰æ‹©ç›®æ ‡å—:")
+	;;ÉÏ¼¶¿éÃû
+	(@::prompt "ÇëÑ¡ÔñÄ¿±ê¿é:")
 	(setq bname (block:get-effectivename
 		     (setq srcblk (entity:getdxf srcatt 330))))
-	;;é€‰æ‹©ç›®æ ‡å—
+	;;Ñ¡ÔñÄ¿±ê¿é
 	(setq blks (block:ssget nil (list bname) nil))
 	(mapcar '(lambda(blk)
 		  (mapcar

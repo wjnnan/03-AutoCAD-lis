@@ -1,10 +1,10 @@
 (defun dcl:image-button (key width height style)
-  "dcl å›¾åƒæŒ‰é’®ã€‚"
+  "dcl Í¼Ïñ°´Å¥¡£"
   ""
   "(dcl:image-button \"btn1\" 30 60 nil)"
   (set (read (strcat "cb-"
 		     key))
-       (eval (read (strcat "(lambda()(alert (strcat \"éœ€è¦å®šä¹‰å›è°ƒå‡½æ•° (cb-"
+       (eval (read (strcat "(lambda()(alert (strcat \"ĞèÒª¶¨Òå»Øµ÷º¯Êı (cb-"
 			   key ")\")))"))))
   (write-line (strcat ":image_button{key=\""
 		      key "\";width="

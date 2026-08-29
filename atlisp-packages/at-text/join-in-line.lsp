@@ -1,7 +1,7 @@
 (defun @text:join-in-line ()
-  (@::prompt '("åˆå¹¶åŒä¸€è¡Œçš„å¤šä¸ªå•è¡Œæ–‡æœ¬ä¸ºä¸€ä¸ª"))
+  (@::prompt '("ºÏ²¢Í¬Ò»ĞĞµÄ¶à¸öµ¥ĞĞÎÄ±¾ÎªÒ»¸ö"))
   (if (and (setq txts (pickset:to-list (ssget '((0 . "text")))))
-  ;; æŒ‰è¡Œåˆ†ç»„
+  ;; °´ĞĞ·Ö×é
 	   (setq txts
 		 (pickset:sort txts
 			       "Yx"
@@ -23,7 +23,7 @@
 				(string:from-list
 				 (mapcar '(lambda(x)(entity:getdxf x 1)) txts%)
 				 ""))
-		 ;; åˆ é™¤åé¢çš„
+		 ;; É¾³ıºóÃæµÄ
 		 (mapcar 'entdel (cdr txts%)))
 	(princ)
 	)))

@@ -12,3 +12,22 @@ __pycache__/
 .ruff_cache/
 .git.bak/
 *.pyc
+
+# 临时修复/诊断脚本（一次性）
+_fix_*.py
+_absorb_*.py
+_verify_*.py
+_v_*.py
+_scan_*.py
+_diag_*.py
+_cnt_*.py
+_locate_*.py
+_final_*.py
+_add_*.py
+_tmp*
+# 浏览器自动化产物
+.playwright-mcp/
+# 备份文件（._ls 后缀）
+*._ls
+# 审查副本
+_codex-review/

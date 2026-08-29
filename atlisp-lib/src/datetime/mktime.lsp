@@ -1,5 +1,5 @@
 (defun datetime:mktime (lst /)
-  "è®¡ç®—æŸä¸€æ—¶é—´(åˆ—è¡¨)åˆ°1970å¹´01æœˆ01æ—¥ç»è¿‡çš„ç§’æ•°,é€‚åˆè½¬æ¢vl-file-systimeçš„ç»“æœ"
+  "¼ÆËãÄ³Ò»Ê±¼ä(ÁĞ±í)µ½1970Äê01ÔÂ01ÈÕ¾­¹ıµÄÃëÊı,ÊÊºÏ×ª»»vl-file-systimeµÄ½á¹û"
   "Timestamp"
   "(datetime:mktime (vl-file-systime (findfile \"acad.pgp\")))"
   (setq days-of-month (if (datetime:leap-yearp (nth 0 lst))

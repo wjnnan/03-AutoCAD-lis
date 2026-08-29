@@ -1,10 +1,10 @@
 (defun dcl:input (key label default style)
-  "dcl è¾“å…¥æ¡†ã€‚"
+  "dcl ÊäÈë¿ò¡£"
   ""
   "(dcl:input \"in1\" \"label\" \"3\" \"\")"
   ;; (set (read (strcat "in-"
   ;; 		     key))
-  ;;      (eval (read (strcat "(lambda()(alert (strcat \"éœ€è¦å®šä¹‰å›è°ƒå‡½æ•° (cb-"
+  ;;      (eval (read (strcat "(lambda()(alert (strcat \"ĞèÒª¶¨Òå»Øµ÷º¯Êı (cb-"
   ;; 			   key ")\")))"))))
   (write-line (strcat ": edit_box{key=\""
 		      key "\";"

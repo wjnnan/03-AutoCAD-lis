@@ -1,29 +1,29 @@
 (defun example:dcl1 (/ *error* dcl-fp dcl-tmp)
-  "MVCNIS æ³•: 6 æ­¥è¿›è¡ŒåŠ¨æ€ DCL å¼€å‘ç¤ºä¾‹1ã€‚"
+  "MVCNIS ·¨: 6 ²½½øÐÐ¶¯Ì¬ DCL ¿ª·¢Ê¾Àý1¡£"
   ""
   "(example:dcl-dialog)"
   (require (quote dcl:*))
-  "1. Model å»ºç«‹æ•°æ®æ¨¡åž‹ã€‚"
-  "2. View å»ºç«‹æ˜¾ç¤ºè§†å›¾ã€‚"
+  "1. Model ½¨Á¢Êý¾ÝÄ£ÐÍ¡£"
+  "2. View ½¨Á¢ÏÔÊ¾ÊÓÍ¼¡£"
   (dcl:dialog "example")
   (progn (dcl:hr 0.08)
     (dcl:button "btn1"
-      "æŒ‰é’®1"
+      "°´Å¥1"
       "")
     (dcl:hr 0.08)
     (dcl:button "btn2"
-      "æŒ‰é’®2"
+      "°´Å¥2"
       "")
     (dcl:hr 0.08))
   (dcl:dialog-end-ok-cancel)
-  "3. Control åˆ›å»ºæŽ§åˆ¶æµç¨‹"
-  (defun cb-btn1 nil (alert "æŒ‰ä¸‹äº†æŒ‰é’®1"))
-  (defun cb-btn2 nil (alert "æŒ‰ä¸‹äº†æŒ‰é’®2"))
-  "4. New ä¸€ä¸ªæ–°å¯¹è¯æ¡†å¯¹è±¡ã€‚"
+  "3. Control ´´½¨¿ØÖÆÁ÷³Ì"
+  (defun cb-btn1 nil (alert "°´ÏÂÁË°´Å¥1"))
+  (defun cb-btn2 nil (alert "°´ÏÂÁË°´Å¥2"))
+  "4. New Ò»¸öÐÂ¶Ô»°¿ò¶ÔÏó¡£"
   (dcl:new "example")
-  "5. Init åˆå§‹åŒ–å¯¹è¯æ¡†"
+  "5. Init ³õÊ¼»¯¶Ô»°¿ò"
   (set_tile "title"
-    "dclç¤ºä¾‹1")
-  "6. Show dialog æ˜¾ç¤ºå¹¶è¿›è¡Œäº¤äº’"
+    "dclÊ¾Àý1")
+  "6. Show dialog ÏÔÊ¾²¢½øÐÐ½»»¥"
   (dcl:show)
   (princ))

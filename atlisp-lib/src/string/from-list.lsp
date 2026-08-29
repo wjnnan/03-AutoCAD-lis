@@ -1,5 +1,5 @@
 (defun string:from-list (lst separator)
-  "鍚堝苟杩炴帴瀛楃涓茶〃"
+  "合并连接字符串表"
   "String"
   (if (cdr lst)
     (strcat (car lst)

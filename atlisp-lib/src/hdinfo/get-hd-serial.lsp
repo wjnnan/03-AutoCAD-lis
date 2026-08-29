@@ -1,5 +1,5 @@
 (defun hdinfo:get-hd-serial (/ lccon lox objw ret serx sn)
-  "è·å–ç¡¬ç›˜åºåˆ—å·"
+  "»ñÈ¡Ó²ÅÌĞòÁĞºÅ"
   (setq serx (quote nil))
   (if (setq objw (vlax-create-object "wbemscripting.swbemlocator"))
     (progn (setq lccon (vlax-invoke objw (quote connectserver)

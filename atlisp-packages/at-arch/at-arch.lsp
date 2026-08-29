@@ -1,35 +1,35 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; è¿™æ˜¯ä½¿ç”¨å¼€å‘å·¥å…· dev-tools è‡ªåŠ¨åˆ›å»ºçš„ç¨‹åºæºæ–‡ä»¶ 
+;; ÕâÊÇÊ¹ÓÃ¿ª·¢¹¤¾ß dev-tools ×Ô¶¯´´½¨µÄ³ÌĞòÔ´ÎÄ¼ş 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; å®šä¹‰é…ç½®é¡¹ 'at-arch:first ç”¨äº åº”ç”¨åŒ… at-arch çš„ ç¬¬ä¸€ä¸ªé…ç½®é¡¹ first 
-(@:define-config '@arch:parking-blk "è½¦ä½*,æœºæ¢°è½¦ä½*" "è½¦ä½å›¾å—å")
-(@:define-config '@arch:parking-number-order "Yx" "ç¼–å·æ’åºæ–¹å¼")
+;; ¶¨ÒåÅäÖÃÏî 'at-arch:first ÓÃÓÚ Ó¦ÓÃ°ü at-arch µÄ µÚÒ»¸öÅäÖÃÏî first 
+(@:define-config '@arch:parking-blk "³µÎ»*,»úĞµ³µÎ»*" "³µÎ»Í¼¿éÃû")
+(@:define-config '@arch:parking-number-order "Yx" "±àºÅÅÅĞò·½Ê½")
 
-;; (@:get-config 'at-arch:first) ;; è·å–é…ç½®é¡¶çš„å€¼
-;; (@:set-config 'at-arch:first  "æ–°è®¾çš„å€¼") ;; è®¾ç½®é…ç½®é¡¶çš„å€¼
-;; å‘ç³»ç»Ÿä¸­æ·»åŠ èœå• 
+;; (@:get-config 'at-arch:first) ;; »ñÈ¡ÅäÖÃ¶¥µÄÖµ
+;; (@:set-config 'at-arch:first  "ĞÂÉèµÄÖµ") ;; ÉèÖÃÅäÖÃ¶¥µÄÖµ
+;; ÏòÏµÍ³ÖĞÌí¼Ó²Ëµ¥ 
 (@:add-menus
- '(("@å»ºç­‘"
-    ("å»ºç­‘è®¾ç½®" "(at-arch:setup)" )
-    ("æœªå‘½åæˆ¿é—´" "(at-arch:locate-unnamed-space)" )
-    ("å®šä½æˆ¿é—´" "(at-arch:menu-locate-space)" )
-    ("æ£€æŸ¥çª—åœ°æ¯”" "(at-arch:w/space)")
-    ("é€‰æ‹©åŒå½¢æˆ¿é—´" "(at-arch:sel-same-space)")
-    ("é€‰æ‹©åŒåæˆ¿é—´" "(at-arch:sel-same-name)")
-    ("æ˜¾éšæˆ¿é—´é¢ç§¯" "(at-arch:onoff-spacearea)")
-    ("æ€»å»ºç­‘é¢ç§¯" "(at-arch:sum-spacearea)")
+ '(("@½¨Öş"
+    ("½¨ÖşÉèÖÃ" "(at-arch:setup)" )
+    ("Î´ÃüÃû·¿¼ä" "(at-arch:locate-unnamed-space)" )
+    ("¶¨Î»·¿¼ä" "(at-arch:menu-locate-space)" )
+    ("¼ì²é´°µØ±È" "(at-arch:w/space)")
+    ("Ñ¡ÔñÍ¬ĞÎ·¿¼ä" "(at-arch:sel-same-space)")
+    ("Ñ¡ÔñÍ¬Ãû·¿¼ä" "(at-arch:sel-same-name)")
+    ("ÏÔÒş·¿¼äÃæ»ı" "(at-arch:onoff-spacearea)")
+    ("×Ü½¨ÖşÃæ»ı" "(at-arch:sum-spacearea)")
     )
-   ("@å»ºç­‘è¯´æ˜"
-    ("å…¬å»ºè¯´æ˜" "(at-arch:insert-block \"å…¬å»ºè¯´æ˜\")")
-    ("ä½å®…è¯´æ˜" "(at-arch:insert-block \"ä½å®…è¯´æ˜\")")
-    ("é˜²æ°´ä¸“ç¯‡" "(at-arch:insert-block \"é˜²æ°´è®¾è®¡-ä¸“ç¯‡\")")
-    ("ç»¿å»ºä¸“ç¯‡" "(at-arch:insert-block \"ç»¿å»ºä¸“ç¯‡\")")
+   ("@½¨ÖşËµÃ÷"
+    ("¹«½¨ËµÃ÷" "(at-arch:insert-block \"¹«½¨ËµÃ÷\")")
+    ("×¡Õ¬ËµÃ÷" "(at-arch:insert-block \"×¡Õ¬ËµÃ÷\")")
+    ("·ÀË®×¨Æª" "(at-arch:insert-block \"·ÀË®Éè¼Æ-×¨Æª\")")
+    ("ÂÌ½¨×¨Æª" "(at-arch:insert-block \"ÂÌ½¨×¨Æª\")")
     )
-   ("@å»ºç­‘è½¦åº“"
-    ("æ’å…¥è½¦ä½" "(at-arch:insert-parking)" )
-    ("æ’å…¥æ— éšœç¢è½¦ä½" "(at-arch:insert-accparking)" )
-    ("æ’å…¥æœºæ¢°è½¦ä½" "(at-arch:insert-machineparking)" )
-    ("è½¦ä½ç¼–å·" "(at-arch:parking-numbering)" )
+   ("@½¨Öş³µ¿â"
+    ("²åÈë³µÎ»" "(at-arch:insert-parking)" )
+    ("²åÈëÎŞÕÏ°­³µÎ»" "(at-arch:insert-accparking)" )
+    ("²åÈë»úĞµ³µÎ»" "(at-arch:insert-machineparking)" )
+    ("³µÎ»±àºÅ" "(at-arch:parking-numbering)" )
     )
 
    ))
@@ -39,52 +39,52 @@
    (@::edit-config-dialog))
 
 (defun at-arch:insert-parking (/ downfile)
-  (setq downfile "at-arch/è½¦ä½.dwg")
+  (setq downfile "at-arch/³µÎ».dwg")
   (if (null (findfile (strcat "packages/" downfile)))
       (progn
 	(@:load-module 'pkgman)
-	(@:down-pkg-file (@:uri) downfile "stable")(@:alert (strcat "æ­£åœ¨ä¸‹è½½æ‰€éœ€çš„dwgæ–‡ä»¶, è¯·ç¨å€™ã€‚"))(sleep 5))
+	(@:down-pkg-file (@:uri) downfile "stable")(@:alert (strcat "ÕıÔÚÏÂÔØËùĞèµÄdwgÎÄ¼ş, ÇëÉÔºò¡£"))(sleep 5))
       )
   (if (findfile (strcat "packages/" downfile))
       (progn
 	(ui:dyndraw
-	 (block:insert "è½¦ä½" (@::package-path "at-arch") '(0 0 0)0 1)
+	 (block:insert "³µÎ»" (@::package-path "at-arch") '(0 0 0)0 1)
 	 '(0 0 0)))
       ))
 (defun at-arch:insert-accparking (/ downfile)
-  (setq downfile "at-arch/è½¦ä½-æ— éšœç¢.dwg")
+  (setq downfile "at-arch/³µÎ»-ÎŞÕÏ°­.dwg")
   (if (null (findfile (strcat "packages/" downfile)))
       (progn
 	(@:load-module 'pkgman)
-	(@:down-pkg-file (@:uri) downfile "stable")(@:alert (strcat "æ­£åœ¨ä¸‹è½½æ‰€éœ€çš„dwgæ–‡ä»¶, è¯·ç¨å€™ã€‚"))(sleep 5))
+	(@:down-pkg-file (@:uri) downfile "stable")(@:alert (strcat "ÕıÔÚÏÂÔØËùĞèµÄdwgÎÄ¼ş, ÇëÉÔºò¡£"))(sleep 5))
     (ui:dyndraw
-     (block:insert "è½¦ä½-æ— éšœç¢" (@::package-path "at-arch") '(0 0 0)0 1)
+     (block:insert "³µÎ»-ÎŞÕÏ°­" (@::package-path "at-arch") '(0 0 0)0 1)
      '(0 0 0))))
 (defun at-arch:insert-machineparking ()
-  (setq downfile "at-arch/æœºæ¢°è½¦ä½.dwg")
+  (setq downfile "at-arch/»úĞµ³µÎ».dwg")
   (if (null (findfile (strcat "packages/" downfile)))
       (progn
 	(@:load-module 'pkgman)
-	(@:down-pkg-file (@:uri) downfile "stable")(@:alert (strcat "æ­£åœ¨ä¸‹è½½æ‰€éœ€çš„dwgæ–‡ä»¶, è¯·ç¨å€™ã€‚"))(sleep 5))
+	(@:down-pkg-file (@:uri) downfile "stable")(@:alert (strcat "ÕıÔÚÏÂÔØËùĞèµÄdwgÎÄ¼ş, ÇëÉÔºò¡£"))(sleep 5))
     (ui:dyndraw
-     (block:insert "æœºæ¢°è½¦ä½" (@::package-path "at-arch") '(0 0 0)0 1)
+     (block:insert "»úĞµ³µÎ»" (@::package-path "at-arch") '(0 0 0)0 1)
      '(0 0 0))))
 
   
 (defun at-arch:parking-numbering (/ parkings inputint atts)
-  ;; ä»¥ä¸‹éƒ¨åˆ†ä¸ºä½ ä¸ºå®ç°æŸä¸€åŠŸèƒ½æ‰€ç¼–å†™çš„ä»£ç ã€‚
-  (@::prompt "è¯·æ¡†é€‰è¦è¿›è¡Œç¼–å·çš„è½¦ä½")
+  ;; ÒÔÏÂ²¿·ÖÎªÄãÎªÊµÏÖÄ³Ò»¹¦ÄÜËù±àĞ´µÄ´úÂë¡£
+  (@::prompt "Çë¿òÑ¡Òª½øĞĞ±àºÅµÄ³µÎ»")
   (setq parkings
 	(pickset:sort
 	 (pickset:to-list  (block:ssget  nil (@::get-config '@arch:parking-blk) nil))
 	 (@::get-config '@arch:parking-number-order) 
 	 (mapcar '@::scale '(8 8))))
 
-  ;; ç¼–å·
+  ;; ±àºÅ
 
   (if (null parking-curr-number)
       (setq parking-curr-number 0))
-  (if (setq inputint  (getint (strcat "è¯·è¾“å…¥èµ·å§‹å·<"(itoa (1+ parking-curr-number))">:")))
+  (if (setq inputint  (getint (strcat "ÇëÊäÈëÆğÊ¼ºÅ<"(itoa (1+ parking-curr-number))">:")))
       (setq parking-curr-number (1- inputint)))
   
   (foreach park% parkings
@@ -102,10 +102,10 @@
   (princ)
   )
 (defun at-arch:locate-unnamed-space (/ spaces)
-  (if (setq spaces (ssget "x" '((0 . "TCH_SPACE")(1 . "æˆ¿é—´"))))
+  (if (setq spaces (ssget "x" '((0 . "TCH_SPACE")(1 . "·¿¼ä"))))
       (if(setq corner (entity:getbox (ssname spaces 0) 100))
 	 (command "zoom" "w" (car corner) (cadr corner)))
-      (@::prompt "æ²¡æœ‰å‘ç°æœªå‘½åæˆ¿é—´ã€‚")
+      (@::prompt "Ã»ÓĞ·¢ÏÖÎ´ÃüÃû·¿¼ä¡£")
       ))
 (defun at-arch:locate-space (code / spaces)
   (if (string:numberp  code)
@@ -116,7 +116,7 @@
       (progn 
 	(if(setq corner (entity:getbox (ssname spaces 0) 100))
 	    (command "zoom" "w" (car corner) (cadr corner)))
-	(princ (strcat "é€‰ä¸­æˆ¿é—´çš„æ€»å‡€é¢ç§¯ï¼š"
+	(princ (strcat "Ñ¡ÖĞ·¿¼äµÄ×Ü¾»Ãæ»ı£º"
 		       (rtos (apply '+
 				    (mapcar
 			       '(lambda(x)
@@ -125,23 +125,23 @@
 			     2 3)
 		       ))
 	(sssetfirst nil spaces))
-      (@::prompt "æ²¡æœ‰å‘ç°ç¼–å·æˆ¿é—´ã€‚")
+      (@::prompt "Ã»ÓĞ·¢ÏÖ±àºÅ·¿¼ä¡£")
       ))
 
 (defun at-arch:menu-locate-space()
-  (@::help '("å½“è¾“å…¥æ•°å­—æ—¶ä»¥æŒ‰å®šä½ã€‚"
-	     "å½“è¾“å…¥éæ•°å­—æ—¶ï¼ŒæŒ‰åç§°å®šä½ï¼Œæ”¯æŒ*å·é€šé…ç¬¦ï¼Œå¦‚ *äº•ï¼Œ*ç”µæ¢¯* ç­‰ ã€‚"))
-  (at-arch:locate-space (getstring "è¯·è¾“å…¥æˆ¿é—´ç¼–å·æˆ–åç§°:")))
+  (@::help '("µ±ÊäÈëÊı×ÖÊ±ÒÔ°´¶¨Î»¡£"
+	     "µ±ÊäÈë·ÇÊı×ÖÊ±£¬°´Ãû³Æ¶¨Î»£¬Ö§³Ö*ºÅÍ¨Åä·û£¬Èç *¾®£¬*µçÌİ* µÈ ¡£"))
+  (at-arch:locate-space (getstring "ÇëÊäÈë·¿¼ä±àºÅ»òÃû³Æ:")))
 (defun at-arch:w/space (/ spaces)
-  (@::help '("æ£€æŸ¥çª—åœ°æ¯”,å°†ä¸æ»¡è¶³è¦æ±‚çš„æˆ¿é—´æ ‡çº¢ã€‚"
-	     "å¤©æ­£æˆ¿é—´ä¿¡æ¯ä¸ä¼šè‡ªåŠ¨æ›´æ–°ï¼Œå½“æ›´æ”¹çª—æˆ·å‹å·åï¼Œéœ€é‡æ–°æ‰§è¡Œæœç´¢æˆ¿é—´åŠŸèƒ½ã€‚"
+  (@::help '("¼ì²é´°µØ±È,½«²»Âú×ãÒªÇóµÄ·¿¼ä±êºì¡£"
+	     "ÌìÕı·¿¼äĞÅÏ¢²»»á×Ô¶¯¸üĞÂ£¬µ±¸ü¸Ä´°»§ĞÍºÅºó£¬ĞèÖØĞÂÖ´ĞĞËÑË÷·¿¼ä¹¦ÄÜ¡£"
 	     ))
   (if (setq spaces (ssget '((0 . "TCH_SPACE")(8 . "SPACE"))))
       (ui:dyndraw
        (table:make
 	'(0 0 0)
-	"çª—åœ°æ¯”æ ¸æŸ¥è¡¨"
-	(list "æˆ¿é—´ç¼–å·""æˆ¿é—´åç§°""å¤–çª—é¢ç§¯""åœ°é¢é¢ç§¯""çª—åœ°æ¯”""åˆè§„æ€§")
+	"´°µØ±ÈºË²é±í"
+	(list "·¿¼ä±àºÅ""·¿¼äÃû³Æ""Íâ´°Ãæ»ı""µØÃæÃæ»ı""´°µØ±È""ºÏ¹æĞÔ")
 	(mapcar
 	 '(lambda(x / name ewa ua w/ua)
 	   (list 
@@ -155,27 +155,23 @@
 		(progn
 		  (setq ci (color:interface))
 		  (vla-put-colorindex ci 12)
-		  (vla-put-truecolor
-		   x
-		   ci)
+		  (vl-catch-all-apply 'vla-put-truecolor (list x ci))
 		  "X")
 		(progn
 		  (setq ci (color:interface))
 		  (vla-put-colorindex ci 256)
-		  (vla-put-truecolor
-		   x
-		   ci)
+		  (vl-catch-all-apply 'vla-put-truecolor (list x ci))
 		""))
 	    ))
 	 (mapcar 'e2o (pickset:to-list spaces))))
        '(0 0 0))))
 
 (setq at-arch:w/ua
-      (list (cons "å§å®¤,èµ·å±…*,å¨æˆ¿"  (/ 1.0 7.0))
-	    (cons "è®¾è®¡*,ç»˜å›¾*" (/ 1 4.0))
-	    (cons "åŠå…¬*,ä¼šè®®*" (/ 1 5.0))
-	    (cons "å¤å°*,æ¡£æ¡ˆ*,*åŒ…é—´*" (/ 1 6.0))
-	    (cons "èµ°å»Š,èµ°é“,æ¥¼æ¢¯*,å«*" (/ 1 10.0))))
+      (list (cons "ÎÔÊÒ,Æğ¾Ó*,³ø·¿"  (/ 1.0 7.0))
+	    (cons "Éè¼Æ*,»æÍ¼*" (/ 1 4.0))
+	    (cons "°ì¹«*,»áÒé*" (/ 1 5.0))
+	    (cons "¸´Ó¡*,µµ°¸*,*°ü¼ä*" (/ 1 6.0))
+	    (cons "×ßÀÈ,×ßµÀ,Â¥Ìİ*,ÎÀ*" (/ 1 10.0))))
 (defun at-arch:check-w/ua (name res / w/ua i flag)
   (setq w/ua at-arch:w/ua)
   (setq i 0)
@@ -189,8 +185,8 @@
       (setq flag (< (cdr (nth i w/ua)) res)))
   flag)
 (defun at-arch:sel-same-space (/ ent1 s1 filters)
-  (@::help "é€‰æ‹©ç›¸åŒé¢ç§¯çš„æˆ¿é—´")
-  (@:prompt "è¯·ç‚¹é€‰ä¸€ä¸ªå›¾å½¢:")
+  (@::help "Ñ¡ÔñÏàÍ¬Ãæ»ıµÄ·¿¼ä")
+  (@:prompt "ÇëµãÑ¡Ò»¸öÍ¼ĞÎ:")
   (setq ent1 (car (pickset:to-list(ssget ":E:S" '((0 . "TCH_SPACE"))))))
   (setq filters (list
 		 (cons 0
@@ -212,8 +208,8 @@
   (sssetfirst nil (pickset:from-list s1)))
 
 (defun at-arch:sel-same-name (/ ent1 s1 filters)
-  (@::help "é€‰æ‹©ç›¸åŒåç§°çš„æˆ¿é—´")
-  (@:prompt "è¯·ç‚¹é€‰ä¸€ä¸ªå›¾å½¢:")
+  (@::help "Ñ¡ÔñÏàÍ¬Ãû³ÆµÄ·¿¼ä")
+  (@:prompt "ÇëµãÑ¡Ò»¸öÍ¼ĞÎ:")
   (setq ent1 (car (pickset:to-list(ssget ":E:S" '((0 . "TCH_SPACE"))))))
   (setq filters (list
 		 (cons 0
@@ -222,7 +218,7 @@
 	)
   (setq s1
 	(pickset:to-list(ssget "x" filters)))
-  (princ (strcat "é€‰ä¸­æˆ¿é—´çš„æ€»å‡€é¢ç§¯ï¼š"
+  (princ (strcat "Ñ¡ÖĞ·¿¼äµÄ×Ü¾»Ãæ»ı£º"
 		 (rtos (apply '+
 			      (mapcar
 			       '(lambda(x)
@@ -232,18 +228,18 @@
 		 ))
   (sssetfirst nil (pickset:from-list s1)))
 (defun  at-arch:onoff-spacearea ()
-  (@::help "åˆ‡æ¢æˆ¿é—´é¢ç§¯çš„æ˜¾ç¤º/éšè—")
-  (setq spaces (pickset:to-list (ssget "x"'((0 . "TCH_SPACE")(1 . "~*å»ºç­‘é¢ç§¯")))))
+  (@::help "ÇĞ»»·¿¼äÃæ»ıµÄÏÔÊ¾/Òş²Ø")
+  (setq spaces (pickset:to-list (ssget "x"'((0 . "TCH_SPACE")(1 . "~*½¨ÖşÃæ»ı")))))
   (mapcar
    '(lambda(x)
-     (if (= "æ˜¯" (vlax-get(e2o x) 'showarea ))
-	 (vlax-put (e2o x) 'showarea "å¦")
-	 (vlax-put (e2o x) 'showarea "æ˜¯")))
+     (if (= "ÊÇ" (vlax-get(e2o x) 'showarea ))
+	 (vlax-put (e2o x) 'showarea "·ñ")
+	 (vlax-put (e2o x) 'showarea "ÊÇ")))
    spaces)
   )
 (defun  at-arch:sum-spacearea ()
-  (@::help "æ±‚å„å•å—å»ºç­‘é¢ç§¯çš„å’Œ")
-  (setq spaces (pickset:to-list (ssget "x"'((0 . "TCH_SPACE")(1 . "*å»ºç­‘é¢ç§¯")))))
+  (@::help "Çó¸÷µ¥¿é½¨ÖşÃæ»ıµÄºÍ")
+  (setq spaces (pickset:to-list (ssget "x"'((0 . "TCH_SPACE")(1 . "*½¨ÖşÃæ»ı")))))
   (princ
    (setq res
 	 (apply '+

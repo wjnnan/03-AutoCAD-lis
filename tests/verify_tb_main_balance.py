@@ -6,7 +6,7 @@ TB_MAIN = ROOT / "TB-Toolbox" / "tb-main.lsp"
 
 
 def main() -> int:
-    text = TB_MAIN.read_text(encoding="utf-8")
+    text = TB_MAIN.read_text(encoding="gbk")
 
     left = text.count("(")
     right = text.count(")")

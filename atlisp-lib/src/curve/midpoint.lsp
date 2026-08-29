@@ -1,6 +1,6 @@
 (defun curve:midpoint (curve)
-  "æ±‚æ›²çº¿ä¸­ç‚¹"
-  "ä¸­ç‚¹åæ ‡"
+  "ÇóÇúÏßÖĞµã"
+  "ÖĞµã×ø±ê"
   "(curve:midpoint (car (entsel)))"
   (if (= 'vla-object (type curve))
       (setq curve  (o2e curve)))

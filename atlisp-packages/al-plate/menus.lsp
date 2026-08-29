@@ -6,3 +6,4 @@
     (("第二个功能" "(al-plate:hello)")
      ("第三个功能" "(al-plate:hello)")))
    )
+)))

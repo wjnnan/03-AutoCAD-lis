@@ -1,5 +1,5 @@
 (defun pickset:length (ss)
-  "杩斿洖閫夋嫨闆嗘垨鍥惧厓鍒楄〃鍐呭浘鍏冪殑涓暟銆傞潪閫夋嫨闆嗗拰鍥惧厓鍒楄〃锛屽垯杩斿洖nil"
+  "返回选择集或图元列表内图元的个数。非选择集和图元列表，则返回nil"
   (cond
     ((= 'pickset (type ss))
      (sslength ss))

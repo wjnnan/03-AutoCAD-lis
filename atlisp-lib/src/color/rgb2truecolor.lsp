@@ -1,5 +1,5 @@
 (defun color:rgb2truecolor (rgb / ci)
-  "RGB值列表转为真彩色值"
+  "RGBֵ�б�תΪ���ɫֵ"
   "long"
   "(color:rgb2truecolor (list 3 5 8))"
   (setq ci (color:interface))

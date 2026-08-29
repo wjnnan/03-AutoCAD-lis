@@ -1,5 +1,5 @@
 (defun layer:on (laylist bool-flag)
-    "å›¾å±‚åˆ—è¡¨å¼€å…³å‡½æ•°"
+    "Í¼²ãÁÐ±í¿ª¹Øº¯Êý"
     (vlax-for each (std:layers)
         (if (member (vla-get-name each)
                 (if (listp laylist)

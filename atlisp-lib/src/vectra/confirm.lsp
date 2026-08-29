@@ -1,7 +1,7 @@
 (defun vectra:confirm (msg default / r)
   (initget "Y N ")
   (if (null (setq r (getkword (strcat msg "
-            [æ˜¯(Y)/å¦(N)] <"
+            [ÊÇ(Y)/·ñ(N)] <"
             default ">:"))))
     (setq r default))
   r)

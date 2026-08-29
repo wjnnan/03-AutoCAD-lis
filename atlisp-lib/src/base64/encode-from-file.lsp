@@ -1,5 +1,5 @@
 (defun base64:encode-from-file (file / fp b)
-  "å°†æ–‡ä»¶ file è½¬ä¸º base64 ç¼–ç ã€‚æ–‡ä»¶è¿‡å¤§ä¼šè½¬æ¢å¤±è´¥ã€‚"
+  "½«ÎÄ¼ş file ×ªÎª base64 ±àÂë¡£ÎÄ¼ş¹ı´ó»á×ª»»Ê§°Ü¡£"
   "String"
   ""
   (princ "CAN NOT read long file.\n")

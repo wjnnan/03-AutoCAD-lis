@@ -1,6 +1,6 @@
 (defun system:get-folder (msg / WinShell shFolder path catchit)
-  "è°ƒç”¨Windowsé€šç”¨ç›®å½•é€‰å–å¯¹è¯æ¡†,è¿”å›é€‰ä¸­è·¯å¾„.
-å‚æ•°: msg-å¯¹è¯æ¡†æç¤ºå­—ç¬¦ä¸²"
+  "µ÷ÓÃWindowsÍ¨ÓÃÄ¿Â¼Ñ¡È¡¶Ô»°¿ò,·µ»ØÑ¡ÖĞÂ·¾¶.
+²ÎÊı: msg-¶Ô»°¿òÌáÊ¾×Ö·û´®"
   
   (vl-load-com)
   (setq winshell (vlax-create-object "Shell.Application"))

@@ -1,6 +1,6 @@
 (defun system:python (/ ps1 fp file)
-  "瀹夎python"
-  ;; 妫�鏌ユ槸鍚︽湁python
+  "安装python"
+  ;; 检查是否有python
     (setq ps1 (list
 "if (-not ( Get-Command py -errorAction SilentlyContinue)) {"
 "    winget install python.python.3.13"

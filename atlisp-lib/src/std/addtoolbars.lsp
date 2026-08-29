@@ -1,8 +1,8 @@
 (defun std:addtoolbars (menugroupname toolbaritems / flyout flyoutbutton helpstring idx items largeiconname left macro menugroupobj name smalliconname toolbar toolbaritem toolbarname toolbars top)
     (if (not (setq menugroupobj (std:catchapply vla-item (list (vla-get-menugroups (vlax-get-acad-object))
                         menugroupname))))
-        (progn (alert (strcat "鑿滃崟缁刓""
-                    menugroupname "\"涓嶅瓨鍦紒鏃犳硶鍔犺浇鑿滃崟鏉★紒"))
+        (progn (alert (strcat "菜单组\""
+                    menugroupname "\"不存在！无法加载菜单条！"))
             (exit)))
     (setq toolbars (vla-get-toolbars menugroupobj))
     (foreach items toolbaritems (setq toolbarname (car items)

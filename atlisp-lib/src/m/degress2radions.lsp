@@ -1,4 +1,4 @@
 (defun m:degress->radions (degress)
-    "è§’åº¦è½¬å¼§åº¦å‡½æ•°"
+    "½Ç¶È×ª»¡¶Èº¯Êý"
     (if (numberp degress)
         (* pi (/ degress 180.0))))

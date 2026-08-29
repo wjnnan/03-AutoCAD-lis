@@ -1,3 +1,3 @@
 (defun block:get-dynprop (blkref prp)
-  "å–åŠ¨æ€å—çš„æŸä¸€ç‰¹æ€§çš„å€¼"
+  "È¡¶¯Ì¬¿éµÄÄ³Ò»ÌØĞÔµÄÖµ"
   (cdr (assoc prp (block:get-properties blkref))))

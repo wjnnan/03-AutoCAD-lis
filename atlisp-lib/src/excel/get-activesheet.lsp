@@ -1,6 +1,6 @@
 (defun excel:get-activesheet (xlapp)
-  "è·å–å½“å‰å·¥ä½œè¡¨çš„åå­—\nå‚æ•°:XLApp:æ‰“å¼€çš„excelæ–‡ä»¶å¯¹è±¡"
-  "åå­—å­—ç¬¦ä¸²"
+  "»ñÈ¡µ±Ç°¹¤×÷±íµÄÃû×Ö\n²ÎÊı:XLApp:´ò¿ªµÄexcelÎÄ¼ş¶ÔÏó"
+  "Ãû×Ö×Ö·û´®"
   "(excel:getActiveSheet exobj)"
   (vlax-get-property (vlax-get-property (vlax-get-property xlapp (quote activeworkbook))
       (quote activesheet))

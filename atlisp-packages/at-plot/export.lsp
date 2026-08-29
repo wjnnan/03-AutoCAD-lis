@@ -1,15 +1,15 @@
 
-(@:add-menu "é€šç”¨æ‰“å°" "æ‰¹æ‰“è¾“å‡º" "(@plot:plot-all)")
+(@:add-menu "Í¨ÓÃ´òÓ¡" "Åú´òÊä³ö" "(@plot:plot-all)")
 (defun @plot:plot-all (/ tf tufu zongheng)
-  (@:help "æ‰“å°æ ‡è®°çš„å›¾æ¡†")
+  (@:help "´òÓ¡±ê¼ÇµÄÍ¼¿ò")
   
   (if (setq tf (pickset:to-list
 		(ssget "x" '((0 . "LWPOLYLINE")
 			     (90 . 4)(70 . 1)
 			     (8 . "temp-frames")))))
-      ;; æ‰“å°
+      ;; ´òÓ¡
       (progn 
-	(@:log "INFO" "æ‰“å°æ ‡è®°çš„å›¾æ¡†")
+	(@:log "INFO" "´òÓ¡±ê¼ÇµÄÍ¼¿ò")
 	(setvar "cmdecho" 0)
 
 	(setq frames (mapcar '(lambda (x)
@@ -18,7 +18,7 @@
 	(setq i% 0)
 	(foreach frame frames
 		 (setq tuming (car (@pm:pickout-maptitle-first (list (car frame) (last frame)))))
-		 ;; è¯†åˆ«å›¾å¹…ï¼Œæ¨ªç«–
+		 ;; Ê¶±ğÍ¼·ù£¬ºáÊú
 		 (if (null tuming)
 		     (setq tuming "")
 		   (setq tuming (strcat "-" tuming))

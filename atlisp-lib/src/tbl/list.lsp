@@ -1,11 +1,11 @@
 (defun tbl:list (tbl-name / tbl) 
-  "Âàó DXFË°®Ê†ºtbl‰∏≠ÁöÑÈ°πÁõÆÁöÑÂêçÁß∞„ÄÇ
-Ë°®Ê†º‰∏∫:block,dimstyle,layer,linetype,textstyle,ucs,view,vport.
-‰πüÊîØÊåÅÂè¶Á±ªÁöÑlayoutÔºålayout Êú¨Ë¥®ÊòØÂ±ûÊÄß block‰∏≠ÁöÑÂåøÂêçÂùó *Space# Á≥ªÂàó
-ÂÖ∂ËøòÊúâÁ±ª‰ºº tbl ÁöÑÂ¶Ç Materials, tablestyles,mleaderstyle,groups,dictionaries."
+  "¡– DXF±Ì∏Òtbl÷–µƒœÓƒøµƒ√˚≥∆°£
+±Ì∏ÒŒ™:block,dimstyle,layer,linetype,textstyle,ucs,view,vport.
+“≤÷ß≥÷¡Ì¿‡µƒlayout£¨layout ±æ÷  « Ù–‘ block÷–µƒƒ‰√˚øÈ *Space# œµ¡–
+∆‰ªπ”–¿‡À∆ tbl µƒ»Á Materials, tablestyles,mleaderstyle,groups,dictionaries."
   "lst"
-  "(tbl:list \"layout\") ; => (\"Model\" \"Â∏ÉÂ±Ä1\" \"Â∏ÉÂ±Ä2\")"
-  ;; Ë°®Ê†º dxf ‰∏é ActiveX ÂêçÁß∞ÂØπÁÖßË°®
+  "(tbl:list \"layout\") ; => (\"Model\" \"≤ºæ÷1\" \"≤ºæ÷2\")"
+  ;; ±Ì∏Ò dxf ”Î ActiveX √˚≥∆∂‘’’±Ì
   (setq tbl nil)
   (vlax-for item  (vlax-get-property *DOC* (tbl:dxf2obj tbl-name))
 	    (setq tbl (cons (vla-get-name item)

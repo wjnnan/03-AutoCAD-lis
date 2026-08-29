@@ -1,4 +1,4 @@
 (defun p:dotpairp (lst)
-  "鏄惁涓虹偣瀵硅〃"
+  "是否为点对表"
   (and (vl-consp lst)
     (not (vl-list-length lst))))

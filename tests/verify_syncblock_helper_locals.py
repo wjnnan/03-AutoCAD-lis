@@ -15,7 +15,7 @@ def locals_of(text: str, name: str) -> set[str]:
 
 
 def main() -> int:
-    text = SYNCBLOCK.read_text(encoding="utf-8")
+    text = SYNCBLOCK.read_text(encoding="gbk")
 
     object_array_locals = locals_of(text, "sb:object-list->safearray")
     apply_sync_locals = locals_of(text, "sb:apply-sync")

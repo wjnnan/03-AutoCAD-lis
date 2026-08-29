@@ -1,5 +1,5 @@
 (defun ext:interior-fun (fun / out lst-int ifun)
-  "è°ƒç”¨å†…éƒ¨å‡½æ•°ã€‚"
+  "µ÷ÓÃÄÚ²¿º¯Êý¡£"
   "subr"
   "((ext:interior-fun 'beep) 523 200)"
   (if (= (type fun) 'sym)(setq fun (strcase (vl-symbol-name fun) t)))

@@ -1,5 +1,5 @@
 (defun @math:unit-number (/ res lst-str)
-  (@::prompt  "ä»æ–‡å­—ä¸­æå–æœ‰ç‰©ç†é‡çš„æ•°æ®,ç»“æœä¿å­˜è‡³å˜é‡@:tmp-result")
+  (@::prompt  "´ÓÎÄ×ÖÖĞÌáÈ¡ÓĞÎïÀíÁ¿µÄÊı¾İ,½á¹û±£´æÖÁ±äÁ¿@:tmp-result")
   (setq txts (mapcar 'text:get-mtext (pickset:to-list(ssget '((0 . "*text"))))))
   (setq lst-str
 	(apply 'append 

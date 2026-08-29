@@ -1,8 +1,8 @@
 (defun @block:clip-to-blk ()
-  (@::prompt "å‰ªè£å›¾å½¢ç”Ÿæˆå—")
-  (if (and (setq pt1 (getpoint "\nç¬¬ä¸€ç‚¹: ")) (setq pt2 (getcorner pt1 "\nå¯¹è§’ç‚¹: ")))
+  (@::prompt "¼ô²ÃÍ¼ĞÎÉú³É¿é")
+  (if (and (setq pt1 (getpoint "\nµÚÒ»µã: ")) (setq pt2 (getcorner pt1 "\n¶Ô½Çµã: ")))
     (setq border (entity:make-rectangle pt1 pt2))
-  (progn (princ "\nå–æ¶ˆã€‚") (quit)))
+  (progn (princ "\nÈ¡Ïû¡£") (quit)))
   
   (setq ents (pickset:to-list(ssget "c" pt1 pt2)))
   (setq ents-new nil)
@@ -20,19 +20,19 @@
       (setq obj-trim (vl-catch-all-apply '(lambda nil (car (vlax-safearray->list (vlax-variant-value (vla-offset (e2o border) -10))))) '()))
       )
   (if (or (vl-catch-all-error-p obj-trim) (null obj-trim))
-    (progn (princ "\né”™è¯¯: æ— æ³•åç§»å‰ªè£è¾¹ç•Œã€‚") (quit)))
+    (progn (princ "\n´íÎó: ÎŞ·¨Æ«ÒÆ¼ô²Ã±ß½ç¡£") (quit)))
   (setq pts-trim (curve:get-points (o2e obj-trim)))
   (setq pts-trim (append pts-trim (list (car pts-trim))))
-  ;; å–å‰ªè£èŒƒå›´çš„å›¾å…ƒ
+  ;; È¡¼ô²Ã·¶Î§µÄÍ¼Ôª
   (setq ents-in (pickset:to-list (ssget "c" pt1 pt2)))
-  ;; å»æ‰ä¸åœ¨èŒƒå›´å†…çš„å›¾å…ƒ
+  ;; È¥µô²»ÔÚ·¶Î§ÄÚµÄÍ¼Ôª
   (if (pickset:intersect  ents-in ents-new)
       (mapcar '(lambda(x)
 		(if (not(member x ents-in))
 		    (entdel x)))
 	      ents-new))
   (group:make ents-new (strcat "g"(@::timestamp)))
-  ;; trim ç›¸äº¤ä»¥å¤–çš„å›¾å½¢
+  ;; trim Ïà½»ÒÔÍâµÄÍ¼ĞÎ
   (command "trim" "O" "S" (pickset:from-entlist ents-new) "" "t" (ssadd border) "" "f")
   (while (car pts-trim)
     (command (string:from-list (mapcar 'rtos (vl-remove 0 (car pts-trim)))","))

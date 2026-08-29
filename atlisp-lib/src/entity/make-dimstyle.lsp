@@ -1,9 +1,9 @@
 (defun entity:make-dimstyle (name / my_dimasz my_dimaunit my_dimclrd my_dimclre my_dimclrt my_dimdli my_dimdsep my_dimexe my_dimexo my_dimlfac my_dimlwd my_dimlwe my_dimscale my_dimtad my_dimtih my_dimtix my_dimtofl my_dimtoh my_dimtxt my_dimzin)
-  "åˆ›å»ºæ ‡æ³¨æ ·å¼,name:æ ‡æ³¨æ ·å¼å"
+  "´´½¨±ê×¢ÑùÊ½,name:±ê×¢ÑùÊ½Ãû"
   (entmake (list (quote (0 . "STYLE"))
       (quote (100 . "AcDbSymbolTableRecord"))
       (quote (100 . "AcDbTextStyleTableRecord"))
-      (quote (2 . "æ ‡æ³¨"))
+      (quote (2 . "±ê×¢"))
       (quote (70 . 0))
       (quote (40 . 0))
       (quote (41 . 0.8))
@@ -90,7 +90,7 @@
       (cons 371 my_dimlwd)
       (cons 372 my_dimlwe)
       (cons 340 (tblobjname "STYLE"
-          "æ ‡æ³¨"))
+          "±ê×¢"))
       (cons 342 (cdr (assoc 330 (entget (tblobjname "BLOCK"
                 "_Oblique")))))))
   (entupd (tblobjname "Dimstyle"

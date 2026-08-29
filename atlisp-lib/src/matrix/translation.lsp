@@ -1,5 +1,5 @@
 (defun matrix:translation (x y z)
-  "æ„é€ å¹³ç§»è½¬æ¢çŸ©é˜µ"
+  "¹¹ÔìÆ½ÒÆ×ª»»¾ØÕó"
   (list
    (list 1 0 0 x)
    (list 0 1 0 y)

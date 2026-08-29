@@ -1,5 +1,5 @@
 (defun @curve:spline2lwpl()
-  (setq ent (entsel "\né€‰æ‹©ä¸€ä¸ªæ ·æ¡æ›²çº¿:"))
+  (setq ent (entsel "\nÑ¡ÔñÒ»¸öÑùÌõÇúÏß:"))
   (if ent
       (progn
 	(setq layerName (cdr (ASSOC 8 (entget(car ent)))))
@@ -11,12 +11,12 @@
 	      (if(= (cdr (ASSOC 0 (entget(car ent)))) "SPLINE")
 		 (progn
 		   (initget 2 "Yes No")
-		   (setq sta (getkword "\nè¦åˆ é™¤æ ·æ¡æ›²çº¿å—? [æ˜¯(Y)/å¦(N)]:"))
+		   (setq sta (getkword "\nÒªÉ¾³ýÑùÌõÇúÏßÂð? [ÊÇ(Y)/·ñ(N)]:"))
 		   (setq obj (vlax-ename->vla-object (car ent)))
 		   (setq bisclose (vlax-curve-isclosed (car ent)))
 		   (setq param (vlax-curve-getEndParam obj))
 		   (setq pntcount (vla-get-NumberOfControlPoints obj))
-		   (setq segcount (getint (strcat "\né€‰æ‹©æ®µæ•°<" (rtos (* pntcount 8) 2 0) ">:")))
+		   (setq segcount (getint (strcat "\nÑ¡Ôñ¶ÎÊý<" (rtos (* pntcount 8) 2 0) ">:")))
 		   (if (not segcount) (setq segcount (* pntcount 8)))
 		   (setq count (1+ segcount))
 		   (if(< segcount 1) (exit))
@@ -52,7 +52,7 @@
 		       (entdel (car ent))
 		       )
 		   )
-		 (print "é€‰æ‹©çš„ä¸æ˜¯æ ·æ¡æ›²çº¿!") 
+		 (print "Ñ¡ÔñµÄ²»ÊÇÑùÌõÇúÏß!") 
 		 )
 	      )
 	    )

@@ -1,12 +1,12 @@
-;; ç”Ÿæˆæ„ä»¶å›¾
+;; Éú³É¹¹¼şÍ¼
 (defun prefabricated-building:getwalls ()
-  "é€‰æ‹©å¢™æ„ä»¶"
+  "Ñ¡ÔñÇ½¹¹¼ş"
   (pickset:to-list
    (ssget '((0 . "insert")
 	    (2 . "QN##0,QW##0")
 	    ))))
 (defun prefabricated-building:beamflag (wall / ptb rot pl pr flag-lw flag-rw w)
-  ;; è®¾ç½®æ¢æ ‡å¿—
+  ;; ÉèÖÃÁº±êÖ¾
   (setq w (cond
 	    ((wcmatch (entity:getdxf wall 2) "Q@600")
 	     295)
@@ -57,9 +57,9 @@
   (mapcar 'prefabricated-building:beamflag (prefabricated-building:getwalls))
   )
 (defun prefabricated-building:gen-order  ()
-  "å¢™æ„ä»¶ç¼–å·"
+  "Ç½¹¹¼ş±àºÅ"
   (setq walls (prefabricated-building:getwalls))
-  ;;æ’åº
+  ;;ÅÅĞò
   (setq walls (pickset:sort walls
 			    "yx" 80))
   (setq i 0)
@@ -70,9 +70,9 @@
 				"ORDER"
 				(itoa (setq i (1+ i))))))))
 
-;; ç”µæ°”ç•™ç›’åˆ†æ
+;; µçÆøÁôºĞ·ÖÎö
 (defun prefabricated-building:gen-elecdata (wall)
-  "è¿”å›å¢™æ„ä»¶ä¸Šçš„ç”µæ°”åˆ—è¡¨"
+  "·µ»ØÇ½¹¹¼şÉÏµÄµçÆøÁĞ±í"
   (setq w (cond
 	    ((wcmatch (entity:getdxf wall 2) "Q@600")
 	     300)
@@ -102,25 +102,25 @@
   )
 
 (defun prefabricated-building:elec-h (elecbox / d)
-  "æ±‚çº¿ç›’å®‰è£…é«˜åº¦"
-  (setq d 120) ;;åœ°é¢åšæ³•åšåº¦
+  "ÇóÏßºĞ°²×°¸ß¶È"
+  (setq d 120) ;;µØÃæ×ö·¨ºñ¶È
   (setq a (cdr (assoc "A"(block:get-attributes elecbox))))
   (cond
-    ((wcmatch a "*å¼€å…³") (+ d  1300))
-    ((wcmatch a "*ç©ºè°ƒ*")
+    ((wcmatch a "*¿ª¹Ø") (+ d  1300))
+    ((wcmatch a "*¿Õµ÷*")
      (cond
        ((="G" (cdr (assoc "$TEXT$"(block:get-attributes elecbox)))) (+ d 300))
        ((="C" (cdr (assoc "$TEXT$"(block:get-attributes elecbox)))) (+ d 1250))
        ((="Y" (cdr (assoc "$TEXT$"(block:get-attributes elecbox)))) (+ d 2200))
        ((="Z" (cdr (assoc "$TEXT$"(block:get-attributes elecbox)))) (+ d 600))
        (t (+ d 1800))))
-    ((wcmatch a "*çª—å¸˜*") (- 3080 44))
-    ((wcmatch a "*ä¿æŠ¤*") (+ d 1500))
-    ((and (not (wcmatch a "*ç©ºè°ƒ*,*çª—å¸˜*"))
-	  (wcmatch a "*æ’åº§"))
+    ((wcmatch a "*´°Á±*") (- 3080 44))
+    ((wcmatch a "*±£»¤*") (+ d 1500))
+    ((and (not (wcmatch a "*¿Õµ÷*,*´°Á±*"))
+	  (wcmatch a "*²å×ù"))
      (if (wcmatch a "D*") (+ d 300)
 	 (+ d 700)))
-    ((wcmatch a "*äº¤æ¥çº¿,*é…ç”µç®±") (+ d 1500))
+    ((wcmatch a "*½»½ÓÏß,*ÅäµçÏä") (+ d 1500))
     (t (+ d 700))
     ))
 (defun prefabricated-building:m-gen-elecdata ()
@@ -129,7 +129,7 @@
 	(prefabricated-building:gen-elecdata (car ent)))))
 
 (defun prefabricated-building:draw-elec (wall pt-base AorB)
-  "åœ¨å¢™ç«‹é¢å›¾ä¸Šç»˜åˆ¶ç”µç›’ï¼ŒAorB: tä¸º A"
+  "ÔÚÇ½Á¢ÃæÍ¼ÉÏ»æÖÆµçºĞ£¬AorB: tÎª A"
   (setq elecs (prefabricated-building:gen-elecdata wall))
   (setq w (cond
 	    ((wcmatch (entity:getdxf wall 2) "Q@600")
@@ -154,26 +154,26 @@
 			    (+ (* 0.5 pi)(entity:getdxf wall 50))
 			    100)
 		     nil))
-       ;; åˆ°å¢™æ„ä»¶çš„æ°´å¹³è·ç¦»
+       ;; µ½Ç½¹¹¼şµÄË®Æ½¾àÀë
        (setq dis-w (distance pt-wall-l pt-i))
        (if (< dis-w 44)(setq dis-w 44))
        (if (> dis-w (- (* 2 w) 44)) (setq dis-w (- (* 2 w) 44)))
-       ;; ç«–ç›´è·
+       ;; ÊúÖ±¾à
        (setq dis-h (prefabricated-building:elec-h elec%))
        (setq pt-center	(polar (polar pt-base 0 (if aorb dis-w
 				    (- (* 2 w) dis-w)
 				    ))
 			       (* 0.5 pi) dis-h))
-       ;;å®‰è£…ç›’
+       ;;°²×°ºĞ
        (cond
 	 ((wcmatch (cdr (assoc "A" (block:get-attributes elec%)))
-		   "*é…ç”µç®±")
+		   "*ÅäµçÏä")
 	  (entity:make-rectangle
 	   (polar pt-center pi 200)
 	   (polar (polar pt-center 0 200) (* 0.5 pi) 500)
 	   ))
 	 ((wcmatch (cdr (assoc "A" (block:get-attributes elec%)))
-		   "*äº¤æ¥çº¿")
+		   "*½»½ÓÏß")
 	  (entity:make-rectangle
 	   (polar pt-center pi 175)
 	   (polar (polar pt-center 0 175) (* 0.5 pi) 300)
@@ -183,9 +183,9 @@
 	   (polar pt-center (* 1.25 pi) (* 1.414 44))
 	   (polar pt-center (* 0.25 pi) (* 1.414 44))
 	   )))
-       ;;  TODO ç”µç®±
+       ;;  TODO µçÏä
        
-       ;;æ¥çº¿ç›’
+       ;;½ÓÏßºĞ
        (setq pt-center2	(polar (polar pt-base 0 (if aorb dis-w
 						    (- (* 2 w) dis-w)
 						    ))
@@ -210,29 +210,29 @@
 	    ((wcmatch (entity:getdxf wall 2) "Q@750")
 	     375)))
   ;; (entity:make-text
-  ;;  (strcat "æ„ä»¶å·: "
+  ;;  (strcat "¹¹¼şºÅ: "
   ;; 	   (cdr(assoc "ORDER" (block:get-attributes wall)))
-  ;; 	   " , ç±»å‹: " (entity:getdxf wall 2)
+  ;; 	   " , ÀàĞÍ: " (entity:getdxf wall 2)
   ;; 	   )
   ;;  (polar pt-base 4.25 2930)
   ;;  250 0 0.8 0 "LB")
-  ;; å›¾æ¡†
+  ;; Í¼¿ò
   
   (setq tk
 	(vla-insertblock *MS* (point:to-ax (polar pt-base 5.42698 4535))
-			 "å›¾æ¡†-å›¾é›†" 0.2 0.2 0.2 0))
-  ;; (block:insert "å›¾æ¡†-å›¾é›†" "" (polar pt-base 5.42698 4535) 0 0.2))
+			 "Í¼¿ò-Í¼¼¯" 0.2 0.2 0.2 0))
+  ;; (block:insert "Í¼¿ò-Í¼¼¯" "" (polar pt-base 5.42698 4535) 0 0.2))
   ;; (vla-update (e2o tk))
-  (block:set-attributes tk (list (cons "å›¾å" (strcat "æ„ä»¶å·: "
+  (block:set-attributes tk (list (cons "Í¼Ãû" (strcat "¹¹¼şºÅ: "
    						      (cdr(assoc "ORDER" (block:get-attributes wall)))
-   						      " , ç±»å‹: " (entity:getdxf wall 2)))))
+   						      " , ÀàĞÍ: " (entity:getdxf wall 2)))))
   
   (vla-insertblock *MS* (point:to-ax pt-base)
 			 "GJ-elec-dim" 1.0 1.0 1.0 0)
   ;; A
-  ;; ç»˜å¤–å½¢
+  ;; »æÍâĞÎ
   (entity:make-text
-   "Aé¢"
+   "AÃæ"
    (polar pt-base (* 1.5 pi) 500)
    250 0 0.8 0 "LB")
   (entity:make-lwpolyline
@@ -241,7 +241,7 @@
 	 (setq pt-rh  (polar pt-r (* 0.5 pi) 3080))
 	 (setq pt-lh (polar pt-base (* 0.5 pi) 3080)))
    nil 0 1 0)
-  ;; ç»˜æ¢èŠ±
+  ;; »æÁº»¨
   (cond
     ((= "D" (cdr(assoc "BEAM" (block:get-attributes wall))))
      (entity:make-lwpolyline
@@ -270,13 +270,13 @@
 	    (polar pt-r2 (* 1.5 pi) 380)
 	    (polar pt-rh (* 1.5 pi) 380))
       nil 0 1 0)))
-  ;; ç”µæ°”A
+  ;; µçÆøA
   (prefabricated-building:draw-elec wall pt-base t)
   ;; B
-  ;; ç»˜å¤–å½¢
+  ;; »æÍâĞÎ
   (setq pt-base (polar pt-base 0 1000))
   (entity:make-text
-   "Bé¢"
+   "BÃæ"
    (polar pt-base (* 1.5 pi) 500)
    250 0 0.8 0 "LB")
   (entity:make-lwpolyline
@@ -285,7 +285,7 @@
 	 (setq pt-rh  (polar pt-r (* 0.5 pi) 3080))
 	 (setq pt-lh (polar pt-base (* 0.5 pi) 3080)))
    nil 0 1 0)
-  ;; ç»˜æ¢èŠ±
+  ;; »æÁº»¨
   (cond
     ((= "D" (cdr(assoc "BEAM" (block:get-attributes wall))))
      (entity:make-lwpolyline
@@ -314,16 +314,16 @@
 	    (polar pt-r2 (* 1.5 pi) 380)
 	    (polar pt-rh (* 1.5 pi) 380))
       nil 0 1 0)))
-  ;; ç”µæ°”B
+  ;; µçÆøB
   (prefabricated-building:draw-elec wall pt-base nil)
   )
 (defun prefabricated-building:draw-walls  ()
   (setq walls (prefabricated-building:getwalls))
-  ;;æ’åº
+  ;;ÅÅĞò
   (setq walls (pickset:sort walls
 			    "yx" 80))
   (setq i 0)
-  (setq pt1 (getpoint  "ç»˜åˆ¶èµ·ç‚¹:"))
+  (setq pt1 (getpoint  "»æÖÆÆğµã:"))
   (foreach
    wall walls
    (prefabricated-building:draw-wall wall

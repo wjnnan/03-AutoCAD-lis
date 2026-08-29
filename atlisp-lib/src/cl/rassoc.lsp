@@ -1,5 +1,5 @@
 (defun cl:rassoc (key alist / x)
-  "åå‘æŸ¥è¯¢ alist,å³ä½¿ç”¨æ¯ä¸ªå…ƒç´ çš„CDRä¸­çš„å€¼ä½œä¸º key"
+  "·´Ïò²éÑ¯ alist,¼´Ê¹ÓÃÃ¿¸öÔªËØµÄCDRÖĞµÄÖµ×÷Îª key"
   (setq x (assoc key (mapcar '(lambda(x)(cons (cdr x)(car x))) alist)))
   (if x
       (cons (cdr x)(car x))))

@@ -1,52 +1,67 @@
-;;; tb-mod-misc.lsp â€” è¾…åŠ©ç»˜å›¾å·¥å…·æ¨¡å—
-;;; æŠ˜æ–­çº¿ã€ç„Šç®¡ç¼ã€æ–½å·¥ç¼ã€äº‘æœµã€ç»˜å›¾è¾…åŠ©ç­‰ã€‚
-;;; ç»„åˆ entity:* point:* curve:* lay:* åº“å‡½æ•°
+;;; tb-mod-misc.lsp ¡ª ¸¨Öú»æÍ¼¹¤¾ßÄ£¿é
+;;; ÕÛ¶ÏÏß¡¢º¸¹Ü·ì¡¢Ê©¹¤·ì¡¢ÔÆ¶ä¡¢»æÍ¼¸¨ÖúµÈ¡£
+;;; ×éºÏ entity:* point:* curve:* lay:* ¿âº¯Êı
 
 ;; ============================================================================
-;; æŠ˜æ–­çº¿ c:dx / c:dxx
+;; ÕÛ¶ÏÏß c:dx / c:dxx
 ;; ============================================================================
 
 (defun c:dx (/ p1 p2 ang mid p3 p4 scale)
-  "å•æŠ˜æ–­çº¿ã€‚ç»˜åˆ¶å•æ¡ Z å­—å½¢æŠ˜æ–­çº¿ã€‚"
+  (uc:guard-begin '())
+  "µ¥ÕÛ¶ÏÏß¡£»æÖÆµ¥Ìõ Z ×ÖĞÎÕÛ¶ÏÏß¡£"
   (setq scale (sys:get '*SYS:DWG-SCALE*))
-  (if (and (setq p1 (getpoint "\næŠ˜æ–­çº¿èµ·ç‚¹: "))
-           (setq p2 (getpoint p1 "\næŠ˜æ–­çº¿ç»ˆç‚¹: ")))
+  (if (and (setq p1 (getpoint "\nÕÛ¶ÏÏßÆğµã: "))
+           (setq p2 (getpoint p1 "\nÕÛ¶ÏÏßÖÕµã: ")))
     (progn
       (setq ang (point:angle p1 p2)
             mid (point:mid p1 p2))
-      ;; Z å­—æŠ˜çº¿
+      ;; Z ×ÖÕÛÏß
       (entity:make-pline
         (list p1
               (point:polar mid (+ ang (* pi 0.3)) (* 50 scale))
               (point:polar mid (- ang (* pi 0.3)) (* 50 scale))
               p2)
         nil (getvar "CLAYER"))))
-  (princ))
+  (princ)
+  (uc:guard-end))
 
-(defun c:dxx (/ p1 p2 ang off dist scale)
-  "åŒæŠ˜æ–­çº¿ã€‚åœ¨å•æŠ˜æ–­çº¿åŸºç¡€ä¸Šåç§»ç”Ÿæˆä¸¤æ¡ã€‚"
+(defun c:dxx (/ p1 p2 ang mid off scale)
+  (uc:guard-begin '())
+  "Ë«ÕÛ¶ÏÏß¡£»æÖÆÁ½ÌõÆ½ĞĞµÄ Z ×ÖĞÎÕÛ¶ÏÏß¡£"
   (setq scale (sys:get '*SYS:DWG-SCALE*))
-  (if (and (setq p1 (getpoint "\nåŒæŠ˜æ–­çº¿èµ·ç‚¹: "))
-           (setq p2 (getpoint p1 "\nåŒæŠ˜æ–­çº¿ç»ˆç‚¹: ")))
+  (if (and (setq p1 (getpoint "\nË«ÕÛ¶ÏÏßÆğµã: "))
+           (setq p2 (getpoint p1 "\nË«ÕÛ¶ÏÏßÖÕµã: ")))
     (progn
-      (setq ang  (point:angle p1 p2)
-            dist (point:dist p1 p2)
-            off  (* 30 scale))
-      (c:dx)  ; ç¬¬ä¸€æ¡
-      ;; åç§»ç¬¬äºŒæ¡
-      (command "_.OFFSET" off (entlast)
-        (point:polar p1 (+ ang (* pi 0.5)) off) "")))
-  (princ))
+      (setq ang (point:angle p1 p2)
+            mid (point:mid p1 p2)
+            off (* 30 scale))
+      ;; µÚÒ»Ìõ Z ×ÖÕÛÏß£¨ÉÏ·½ +off£©
+      (entity:make-pline
+        (list (point:polar p1 (+ ang (* pi 0.5)) off)
+              (point:polar (point:polar mid (+ ang (* pi 0.3)) (* 50 scale)) (+ ang (* pi 0.5)) off)
+              (point:polar (point:polar mid (- ang (* pi 0.3)) (* 50 scale)) (+ ang (* pi 0.5)) off)
+              (point:polar p2 (+ ang (* pi 0.5)) off))
+        nil (getvar "CLAYER"))
+      ;; µÚ¶şÌõ Z ×ÖÕÛÏß£¨ÏÂ·½ -off£©
+      (entity:make-pline
+        (list (point:polar p1 (- ang (* pi 0.5)) off)
+              (point:polar (point:polar mid (+ ang (* pi 0.3)) (* 50 scale)) (- ang (* pi 0.5)) off)
+              (point:polar (point:polar mid (- ang (* pi 0.3)) (* 50 scale)) (- ang (* pi 0.5)) off)
+              (point:polar p2 (- ang (* pi 0.5)) off))
+        nil (getvar "CLAYER"))))
+  (princ)
+  (uc:guard-end))
 
 
 ;; ============================================================================
-;; æ°´å¹³/ç«–ç›´æ–­ç‚¹ c:dd / c:ddd
+;; Ë®Æ½/ÊúÖ±¶Ïµã c:dd / c:ddd
 ;; ============================================================================
 
 (defun c:dd (/ pt scale)
-  "æ°´å¹³æ–­ç‚¹ç¬¦å·ï¼ˆVå­—å½¢ï¼‰ã€‚"
+  (uc:guard-begin '())
+  "Ë®Æ½¶Ïµã·ûºÅ£¨V×ÖĞÎ£©¡£"
   (setq scale (sys:get '*SYS:DWG-SCALE*))
-  (if (setq pt (getpoint "\næ–­ç‚¹ä¸­å¿ƒ: "))
+  (if (setq pt (getpoint "\n¶ÏµãÖĞĞÄ: "))
     (entity:make-pline
       (list (point:polar pt 0 (* -50 scale))
             pt
@@ -54,12 +69,14 @@
             pt
             (point:polar pt pi (* -50 scale)))
       nil (getvar "CLAYER")))
-  (princ))
+  (princ)
+  (uc:guard-end))
 
 (defun c:ddd (/ pt scale)
-  "ç«–ç›´æ–­ç‚¹ç¬¦å·ï¼ˆVå­—å½¢ï¼‰ã€‚"
+  (uc:guard-begin '())
+  "ÊúÖ±¶Ïµã·ûºÅ£¨V×ÖĞÎ£©¡£"
   (setq scale (sys:get '*SYS:DWG-SCALE*))
-  (if (setq pt (getpoint "\næ–­ç‚¹ä¸­å¿ƒ: "))
+  (if (setq pt (getpoint "\n¶ÏµãÖĞĞÄ: "))
     (entity:make-pline
       (list (point:polar pt (* pi 0.5) (* -50 scale))
             pt
@@ -67,67 +84,76 @@
             pt
             (point:polar pt (* pi -0.5) (* -50 scale)))
       nil (getvar "CLAYER")))
-  (princ))
+  (princ)
+  (uc:guard-end))
 
 
 ;; ============================================================================
-;; ç„Šç®¡ç¼ c:hgf
+;; º¸¹Ü·ì c:hgf
 ;; ============================================================================
 
 (defun c:hgf (/ p1 p2 p3 r)
-  "ç„Šç®¡ç¼çº¿â€”â€”ç»˜åˆ¶å¼§-å¼§ç„Šæ¥ç¼ç¬¦å·ã€‚"
-  (if (and (setq p1 (getpoint "\nç¬¬ä¸€ç‚¹: "))
-           (setq p2 (getpoint p1 "\nç¬¬äºŒç‚¹: ")))
+  (uc:guard-begin '())
+  "º¸¹Ü·ìÏß¡ª¡ª»æÖÆ»¡-»¡º¸½Ó·ì·ûºÅ¡£"
+  (if (and (setq p1 (getpoint "\nµÚÒ»µã: "))
+           (setq p2 (getpoint p1 "\nµÚ¶şµã: ")))
     (progn
-      (setq r (* 0.15 (point:dist p1 p2)))
+      (setq r (* 0.5 (point:dist p1 p2)))
       (entity:make-arc
         (point:mid p1 p2) r
         (point:angle (point:mid p1 p2) p1)
         (point:angle (point:mid p1 p2) p2)
         "THIN")))
-  (princ))
+  (princ)
+  (uc:guard-end))
 
 
 ;; ============================================================================
-;; ç»˜å›¾è¾…åŠ©
+;; »æÍ¼¸¨Öú
 ;; ============================================================================
 
 (defun c:nn nil
-  "è®¾ç½®å¸¸ç”¨å¯¹è±¡æ•æ‰ç»„åˆï¼ˆç«¯ç‚¹+ä¸­ç‚¹+åœ†å¿ƒ+äº¤ç‚¹+å‚è¶³+æœ€è¿‘ç‚¹ï¼‰ã€‚"
+  (uc:guard-begin '("OSMODE"))
+  "ÉèÖÃ³£ÓÃ¶ÔÏó²¶×½×éºÏ£¨¶Ëµã+ÖĞµã+Ô²ĞÄ+½»µã+´¹×ã+×î½üµã£©¡£"
   (setvar "osmode" 4791)
-  (princ "\næ•æ‰æ¨¡å¼: ç«¯ç‚¹/ä¸­ç‚¹/åœ†å¿ƒ/äº¤ç‚¹/å‚è¶³/æœ€è¿‘ç‚¹")
-  (princ))
+  (princ "\n²¶×½Ä£Ê½: ¶Ëµã/ÖĞµã/Ô²ĞÄ/½»µã/´¹×ã/×î½üµã")
+  (princ)
+  (uc:guard-end))
 
 (defun c:qq nil
-  "å›¾çº¸æ¸…ç†ï¼šPurge å…¨éƒ¨ + èŒƒå›´ç¼©æ”¾ + Auditã€‚"
+  (uc:guard-begin '())
+  "Í¼Ö½ÇåÀí£ºPurge È«²¿ + ·¶Î§Ëõ·Å + Audit¡£"
   (command "_.PURGE" "_A" "" "_N")
   (command "_.AUDIT" "_Y")
   (command "_.ZOOM" "_E")
-  (princ "\nå›¾çº¸å·²æ¸…ç†ã€‚")
-  (princ))
+  (princ "\nÍ¼Ö½ÒÑÇåÀí¡£")
+  (princ)
+  (uc:guard-end))
 
 
 ;; ============================================================================
-;; è¯´æ˜æ ‡ç­¾ c:sy
+;; ËµÃ÷±êÇ© c:sy
 ;; ============================================================================
 
 (defun c:sy (/ pt label scale h)
-  "å›¾çº¸è¯´æ˜æ ‡ç­¾ã€‚ç”»æ°´å¹³çº¿ + åœ†ç«¯ + æ–‡å­—ã€‚"
+  (uc:guard-begin '())
+  "Í¼Ö½ËµÃ÷±êÇ©¡£»­Ë®Æ½Ïß + Ô²¶Ë + ÎÄ×Ö¡£"
   (setq scale (sys:get '*SYS:DWG-SCALE*)
         h     (* 350 scale))
-  (if (setq pt (getpoint "\næ ‡ç­¾æ’å…¥ç‚¹: "))
+  (if (setq pt (getpoint "\n±êÇ©²åÈëµã: "))
     (progn
-      (setq label (getstring T "\næ ‡ç­¾æ–‡å­—: "))
-      (entity:make-line pt (point:polar pt 0 (* 800 scale)) "è¯´æ˜")
-      (entity:make-circle
-        (point:polar pt 0 (* 400 scale))
-        (* 30 scale) "è¯´æ˜")
+      (setq label (getstring T "\n±êÇ©ÎÄ×Ö: "))
+      (entity:make-line pt (point:polar pt 0 (* 800 scale)) "ËµÃ÷")
+      ;; Á½¶ËÔ²¶Ë
+      (entity:make-circle pt (* 30 scale) "ËµÃ÷")
+      (entity:make-circle (point:polar pt 0 (* 800 scale)) (* 30 scale) "ËµÃ÷")
       (if (and label (/= label ""))
         (entity:make-text label
           (point:polar pt (* pi 0.5) (* 100 scale))
-          h "TSSD_Rein" "è¯´æ˜"))))
-  (princ))
+          h "TSSD_Rein" "ËµÃ÷"))))
+  (princ)
+  (uc:guard-end))
 
 
-(princ "\n[TB] è¾…åŠ©ç»˜å›¾å·¥å…·æ¨¡å—åŠ è½½å®Œæˆ (misc: 8å‘½ä»¤)")
+(princ "\n[TB] ¸¨Öú»æÍ¼¹¤¾ßÄ£¿é¼ÓÔØÍê³É (misc: 8ÃüÁî)")
 (princ)

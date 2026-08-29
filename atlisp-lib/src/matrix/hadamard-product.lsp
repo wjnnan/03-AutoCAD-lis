@@ -1,5 +1,5 @@
 (defun matrix:hadamard-product (m1 m2)
-  "mxn鐭╅樀涓巑xn 鐭╅樀鐨凥adamard绉浣淎*B銆傚叾鍏冪礌瀹氫箟涓轰袱涓煩闃靛搴斿厓绱犵殑涔樼Н鐨刴脳n鐭╅樀"
+  "mxn矩阵与mxn 矩阵的Hadamard积记作A*B。其元素定义为两个矩阵对应元素的乘积的m×n矩阵"
   "matrix"
   "(matrix:hadamard-product '((1 3 2)(1 0 0)(1 2 2)) '((0 0 2)(7 5 0)(2 1 1)));;=> ((0 0 4) (7 0 0) (2 2 2))"
   (mapcar

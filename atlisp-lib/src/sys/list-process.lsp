@@ -1,5 +1,5 @@
 (defun sys:list-process (/ vlist vobj lcom lexecquery item)
-  "è·å–å½“å‰è¿è¡Œçš„è¿›ç¨‹å¯¹è±¡åˆ—è¡¨ã€‚"
+  "»ñÈ¡µ±Ç°ÔËĞĞµÄ½ø³Ì¶ÔÏóÁĞ±í¡£"
   ""
   (vl-load-com)
   (setq vlist (quote nil))

@@ -1,5 +1,5 @@
 (defun iconv:gb2312-to-quwei (sym-gb2312)
-  "灏唃b2312鐨勬満鍐呯爜杞崲涓哄尯浣嶇爜"
+  "将gb2312的机内码转换为区位码"
   "symbol"
   "(iconv:gb2312-to-quwei '0xB0A1)"
   (m:dec2hex

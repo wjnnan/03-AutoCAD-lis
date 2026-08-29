@@ -1,4 +1,4 @@
 (defun string:reverse (str)
-  "åè½¬å­—ç¬¦ä¸²,æ”¯æŒä¸­æ–‡"
+  "·´×ª×Ö·û´®,Ö§³ÖÖĞÎÄ"
   "Str"
   (string:l2s-ansi (reverse (string:s2l-ansi str))))

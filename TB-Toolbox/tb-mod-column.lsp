@@ -1,77 +1,86 @@
-;;; tb-mod-column.lsp â€” å¢™æŸ±å·¥å…·æ¨¡å—
-;;; æŸ±æˆªé¢ã€æŸ±è¡¨ã€å¢™èº«å¤§æ ·ã€‚
-;;; ç»„åˆ entity:* point:* curve:* lay:* txt:* åº“å‡½æ•°
+;;; tb-mod-column.lsp ¡ª Ç½Öù¹¤¾ßÄ£¿é
+;;; Öù½ØÃæ¡¢Öù±í¡¢Ç½Éí´óÑù¡£
+;;; ×éºÏ entity:* point:* curve:* lay:* txt:* ¿âº¯Êı
 
 ;; ============================================================================
-;; æŸ±æˆªé¢ c:dk
+;; Öù½ØÃæ c:dk
 ;; ============================================================================
 
 (defun c:dk (/ p1 p3 w h scale layer)
-  "ç»˜åˆ¶çŸ©å½¢æŸ±æˆªé¢ï¼ˆå¡«å…… SOLID å›¾æ¡ˆï¼‰ã€‚"
+  (uc:guard-begin '())
+  "»æÖÆ¾ØĞÎÖù½ØÃæ£¨Ìî³ä SOLID Í¼°¸£©¡£"
   (setq scale (sys:get '*SYS:DWG-SCALE*)
         layer (sys:get '*PRJ:COLUMN-LAYER*))
-  (lay:make layer 4 "Continuous")  ; é’è‰²
-  (if (or (and (setq p1 (getpoint "\næŸ±è§’ç‚¹: "))
-              (if (setq p3 (getcorner p1 "\nå¯¹è§’ç‚¹: "))
+  (lay:make layer 4 "Continuous")  ; ÇàÉ«
+  (if (or (and (setq p1 (getpoint "\nÖù½Çµã: "))
+              (if (setq p3 (getcorner p1 "\n¶Ô½Çµã: "))
                 T
-                (progn (princ "\næœªæŒ‡å®šå¯¹è§’ç‚¹ã€‚") nil)))
-          (and (setq p1 (getpoint "\næŸ±è§’ç‚¹: "))
-               (setq w (safe:get-real "æŸ±å®½" 400))
-               (setq h (safe:get-real "æŸ±é«˜" 400))
+                (progn (princ "\nÎ´Ö¸¶¨¶Ô½Çµã¡£") nil)))
+          (and (setq p1 (getpoint "\nÖù½Çµã: "))
+               (setq w (safe:get-real "Öù¿í" 400))
+               (setq h (safe:get-real "Öù¸ß" 400))
                (setq p3 (list (+ (car p1) w) (+ (cadr p1) h) 0.0))))
     (progn
-      ;; ç»˜åˆ¶æŸ±è½®å»“åŠå¡«å……
+      ;; »æÖÆÖùÂÖÀª¼°Ìî³ä
       (entity:make-pline (point:rect-2pt->4pt p1 p3) T layer)
-      (command "_.HATCH" "_S" "_L" "" "_P" "SOLID" 30 0 "_L" "")
-      (princ "\næŸ±æˆªé¢å·²ç»˜åˆ¶ã€‚")))
-  (princ))
+      (command "_.-HATCH" "_S" "_L" "" "_P" "SOLID" "")
+      (princ "\nÖù½ØÃæÒÑ»æÖÆ¡£")))
+  (princ)
+  (uc:guard-end))
 
 
 ;; ============================================================================
-;; åœ†å½¢æŸ±æˆªé¢ c:dkk
+;; Ô²ĞÎÖù½ØÃæ c:dkk
 ;; ============================================================================
 
 (defun c:dkk (/ pt r layer)
-  "ç»˜åˆ¶åœ†å½¢æŸ±æˆªé¢ã€‚"
+  (uc:guard-begin '())
+  "»æÖÆÔ²ĞÎÖù½ØÃæ¡£"
   (setq layer (sys:get '*PRJ:COLUMN-LAYER*))
   (lay:make layer 4)
-  (if (and (setq pt (getpoint "\nåœ†å¿ƒ: "))
-           (setq r  (safe:get-real "åŠå¾„" 200)))
+  (if (and (setq pt (getpoint "\nÔ²ĞÄ: "))
+           (setq r  (safe:get-real "°ë¾¶" 200)))
     (progn
       (entity:make-circle pt r layer)
-      (command "_.HATCH" "_S" "_L" "" "_P" "SOLID" (* r 0.02) 0 "_L" "")
-      (princ "\nåœ†å½¢æŸ±æˆªé¢å·²ç»˜åˆ¶ã€‚")))
-  (princ))
+      (command "_.-HATCH" "_S" "_L" "" "_P" "SOLID" "")
+      (princ "\nÔ²ĞÎÖù½ØÃæÒÑ»æÖÆ¡£")))
+  (princ)
+  (uc:guard-end))
 
 
 ;; ============================================================================
-;; å¢™èº«å¤§æ · c:sg
+;; Ç½Éí´óÑù c:sg
 ;; ============================================================================
 
 (defun c:sg (/ p1 p2 wall-thk len ang h)
-  "ç»˜åˆ¶å¢™èº«æ–½å·¥ç¼ç¬¦å·ï¼ˆä¸­å¿ƒè™šçº¿ + å®çº¿è¾¹ï¼‰ã€‚"
-  (if (and (setq p1 (getpoint "\nå¢™èµ·ç‚¹: "))
-           (setq p2 (getpoint p1 "\nå¢™ç»ˆç‚¹: ")))
+  (uc:guard-begin '())
+  "»æÖÆÇ½ÉíÊ©¹¤·ì·ûºÅ£¨ÖĞĞÄĞéÏß + ÊµÏß±ß£©¡£"
+  (if (and (setq p1 (getpoint "\nÇ½Æğµã: "))
+           (setq p2 (getpoint p1 "\nÇ½ÖÕµã: ")))
     (progn
-      (setq wall-thk (safe:get-real "å¢™åš" 200)
+      (setq wall-thk (safe:get-real "Ç½ºñ" 200)
             len      (point:dist p1 p2)
-            h        (* 0.5 wall-thk)  ; åŠå¢™åš
+            h        (* 0.5 wall-thk)  ; °ëÇ½ºñ
             ang      (point:angle p1 p2))
 
-      ;; ä¸­å¿ƒè™šçº¿
-      (entity:make-line p1 p2 "æ–½å·¥ç¼ä¸­å¿ƒçº¿")
+      ;; ÏÈ´´½¨Í¼²ã£¨·ñÔò entmake ÒıÓÃ²»´æÔÚµÄÍ¼²ã»áÊ§°Ü£©
+      (lay:make "Ê©¹¤·ìÖĞĞÄÏß" 8 "CENTER")
+      (lay:make "¹Ü±ß" 7 "Continuous")
+      ;; ÖĞĞÄĞéÏß
+      (entity:make-line p1 p2 "Ê©¹¤·ìÖĞĞÄÏß")
       (command "_.CHPROP" "_L" "" "_LT" "CENTER" "_C" 8 "")
 
-      ;; ä¸¤ä¾§å®çº¿
+      ;; Á½²àÊµÏß
       (entity:make-line
         (point:polar p1 (- ang (* pi 0.5)) h)
-        (point:polar p2 (- ang (* pi 0.5)) h) "ç®¡è¾¹")
+        (point:polar p2 (- ang (* pi 0.5)) h) "¹Ü±ß")
       (entity:make-line
         (point:polar p1 (+ ang (* pi 0.5)) h)
-        (point:polar p2 (+ ang (* pi 0.5)) h) "ç®¡è¾¹")
-      (princ "\nå¢™èº«å¤§æ ·å·²ç»˜åˆ¶ã€‚")))
-  (princ))
+        (point:polar p2 (+ ang (* pi 0.5)) h) "¹Ü±ß")
+      (princ "\nÇ½Éí´óÑùÒÑ»æÖÆ¡£")))
+  (princ)
+  (uc:guard-end))
 
 
-(princ "\n[TB] å¢™æŸ±å·¥å…·æ¨¡å—åŠ è½½å®Œæˆ (column: 3å‘½ä»¤)")
+(princ "\n[TB] Ç½Öù¹¤¾ßÄ£¿é¼ÓÔØÍê³É (column: 3ÃüÁî)")
 (princ)

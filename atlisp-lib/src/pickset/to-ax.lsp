@@ -1,5 +1,5 @@
 (defun pickset:to-ax (ss / ssetobj objs cnt)
-  "将选择集或图元列表转化为ActiveX选择集对象"
+  "��ѡ�񼯻�ͼԪ�б�ת��ΪActiveXѡ�񼯶���"
   "Object"
   (if (= 'pickset (type  ss))
       (setq ss (pickset:to-list ss)))

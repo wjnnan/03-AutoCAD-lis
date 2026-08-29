@@ -1,5 +1,5 @@
 (defun geometry:convexhull-by-jarvis (pts / pfirst p0 p1 pmax1 pmax2 pp)
-  "æœ€å°å‡¸åŒ…ç®—æ³•: jarvis æ­¥è¿›æ³•ï¼Œpackage wrapping or gift wrapping"
+  "×îĞ¡Í¹°üËã·¨: jarvis ²½½ø·¨£¬package wrapping or gift wrapping"
   (cond ((= (length pts)
         0)
       nil)
@@ -7,7 +7,7 @@
           1)
         (= (length pts)
           2))
-      (progn (alert "ä½ è¾“å…¥çš„ç‚¹ä¸ºä¸¤ç‚¹æˆ–ä¸€ç‚¹!")
+      (progn (alert "ÄãÊäÈëµÄµãÎªÁ½µã»òÒ»µã!")
         pts))
     (t (progn (defun det2 (p1 p2)
           (- (* (car p1)

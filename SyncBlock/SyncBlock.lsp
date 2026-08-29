@@ -1,5 +1,5 @@
-;;; SyncBlock.lsp -- å—å®šä¹‰åŒæ­¥å·¥å…·
-;;; å‘½ä»¤ï¼šSyncNow / SFM
+;;; SyncBlock.lsp -- ¿é¶¨ÒåÍ¬²½¹¤¾ß
+;;; ÃüÁî£ºSyncNow / SFM
 
 (vl-load-com)
 

@@ -1,5 +1,5 @@
 (defun string:square (int str)
-  "å­—ç¬¦ä¸²è‡ªä¹˜"
+  "×Ö·û´®×Ô³Ë"
   (if (zerop int)
     str (strcat str (string:square (1- int)
         str))))

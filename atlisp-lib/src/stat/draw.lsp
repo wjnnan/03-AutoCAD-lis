@@ -1,5 +1,5 @@
 (defun stat:draw (/ n pt ent-table *error*)
-  "缁樺埗鏈�鍚庝竴娆＄粺璁＄殑缁撴灉"
+  "绘制最后一次统计的结果"
   (defun *error*(msg)
     (if ent-table
 	(entdel ent-table))
@@ -9,9 +9,9 @@
 	 (setq pt '(0 0 0))
 	 (setq n 0)
 	 (setq ent-table
-	       (table:make pt "缁熻缁撴灉"
-			   (quote ("椤圭洰"
-				   "涓暟"))
+	       (table:make pt "统计结果"
+			   (quote ("项目"
+				   "个数"))
 			   (mapcar (quote (lambda (x)
 					    (list (car x)
 						  (cdr x))))

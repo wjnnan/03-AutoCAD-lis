@@ -1,6 +1,6 @@
 (defun entity:getbox (ent offset / lst obj p1 p2 p3 p4)
-  "å›¾å…ƒçš„æœ€å°åŒ…å›´ç›’"
-  "return:å¤–æ¡†ï¼ˆåç§»åï¼‰çš„å·¦ä¸‹ï¼Œå³ä¸Šè§’ç‚¹"
+  "Í¼ÔªµÄ×îĞ¡°üÎ§ºĞ"
+  "return:Íâ¿ò£¨Æ«ÒÆºó£©µÄ×óÏÂ£¬ÓÒÉÏ½Çµã"
   "example:(entity:getbox (car(entsel))
     0.1)"
   (if (= (quote pickset)

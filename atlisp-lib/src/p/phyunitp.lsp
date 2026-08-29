@@ -1,7 +1,7 @@
 (defun p:phyunitp (str)
-  "娴嬭瘯瀛楃涓叉槸鍚︿负鐗╃悊閲忓崟浣峉I"
+  "测试字符串是否为物理量单位SI"
   "t or nil"
-  "(p:phyunitp \"W/m虏路K\")"
+  "(p:phyunitp \"W/m^2·K\")"
   (or (member str @:*units*)
       (apply 'and
 	     (mapcar

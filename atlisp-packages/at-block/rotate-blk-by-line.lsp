@@ -1,15 +1,15 @@
 (defun @block:rotate-blk-by-line()
-  (@:prompt '("é€‰æ‹©å—å†…ä¸€æ¡ç›´çº¿ï¼ŒæŒ‰è¯¥ç›´çº¿æ°´å¹³æ—‹è½¬å—."
-	      "è¾“å…¥Yæ—‹è½¬æ‰€æœ‰åŒåå—ã€‚"
+  (@:prompt '("Ñ¡Ôñ¿éÄÚÒ»ÌõÖ±Ïß£¬°´¸ÃÖ±ÏßË®Æ½Ğı×ª¿é."
+	      "ÊäÈëYĞı×ªËùÓĞÍ¬Ãû¿é¡£"
 	      ))
   (if (and 
-       (setq lineblk (nentsel "è¯·é€‰æ‹©å—å†…ä¸€æ¡ç›´çº¿:"))
+       (setq lineblk (nentsel "ÇëÑ¡Ôñ¿éÄÚÒ»ÌõÖ±Ïß:"))
        (setq line (car lineblk))
        (setq blkref (car (last lineblk)))
        (= "INSERT" (entity:getdxf blkref 0))
        (= "LINE" (entity:getdxf line 0 )))
       (progn
-	;; é€‰æ‹©åŒåå—
+	;; Ñ¡ÔñÍ¬Ãû¿é
 	(entity:putdxf
 	 (pickset:to-list (ssget "x" (list '(0 . "insert")
 					   (cons 2 (entity:getdxf blkref 2)))))

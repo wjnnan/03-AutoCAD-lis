@@ -1,10 +1,10 @@
 (defun example:dcl-cell (/ curr-page total-page dcl-fp dcl-tmp)
-  "MVCNIS æ–¹æ³•ç¤ºä¾‹3: 6 æ­¥è¿›è¡ŒåŠ¨æ€ DCL å¼€å‘ã€‚è¡¨æ ¼ç¤ºä¾‹ã€‚Model-View-Control-New-Init-Show."
+  "MVCNIS ·½·¨Ê¾Àı3: 6 ²½½øĞĞ¶¯Ì¬ DCL ¿ª·¢¡£±í¸ñÊ¾Àı¡£Model-View-Control-New-Init-Show."
   ""
   ""
   (require (quote dcl:*))
-  "1. Model å»ºç«‹æ•°æ®æ¨¡å‹ã€‚"
-  (setq lst-cell (quote (("é‡Œç¨‹L" "é«˜ç¨‹H" "åŠå¾„R")
+  "1. Model ½¨Á¢Êı¾İÄ£ĞÍ¡£"
+  (setq lst-cell (quote (("Àï³ÌL" "¸ß³ÌH" "°ë¾¶R")
         (0.0 218.0 0.0)
         (315.589 226.02 1000)
         (815.589 261.02 1000)
@@ -50,18 +50,18 @@
   (setq lst-cellraw lst-cell)
   (setq cell1tmp-data lst-cell)
   (setq cell1curr-page 0)
-  "2. View å»ºç«‹æ˜¾ç¤ºè§†å›¾ã€‚"
+  "2. View ½¨Á¢ÏÔÊ¾ÊÓÍ¼¡£"
   (dcl:dialog "example")
   (dcl:cell "cell1"
     9 (length (car cell1tmp-data))
     t t t t)
   (dcl:dialog-end-ok-cancel)
-  "3. Control åˆ›å»ºæ§åˆ¶æµç¨‹"
+  "3. Control ´´½¨¿ØÖÆÁ÷³Ì"
   "4. New"
   (dcl:new "example")
-  "5. Init åˆå§‹åŒ–å¯¹è¯æ¡†"
+  "5. Init ³õÊ¼»¯¶Ô»°¿ò"
   (set_tile "title"
-    "Example æ ‡é¢˜")
+    "Example ±êÌâ")
   (dcl:show-celldata "cell1")
   "6. Show"
   (dcl:show))

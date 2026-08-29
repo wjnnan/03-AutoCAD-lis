@@ -1,5 +1,5 @@
 (defun excel:quit (exlobj saveyn)
-  "閫�鍑篹xcel\n鍙傛暟:ExlObj:鎵撳紑鐨別xcel瀵硅薄\n鍙傛暟:SaveYN:鏄惁淇濆瓨锛宼涓轰繚瀛橈紝nil涓轰笉淇濆瓨"
+  "退出excel\n参数:ExlObj:打开的excel对象\n参数:SaveYN:是否保存，t为保存，nil为不保存"
   (if saveyn (vlax-invoke (vlax-get-property exlobj "ActiveWorkbook")
       (quote close))
     (vlax-invoke (vlax-get-property exlobj "ActiveWorkbook")

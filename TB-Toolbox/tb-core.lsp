@@ -1,54 +1,60 @@
-ï»¿;;; tb-core.lsp â€” å»ºç­‘ç»“æ„å·¥å…·ç®± æ ¸å¿ƒç³»ç»Ÿ
-;;; åŒ…å«ï¼šå¹³å°æ£€æµ‹ã€å‚æ•°ä½“ç³»ã€é”™è¯¯å¤„ç†æ¡†æ¶ã€é€šç”¨å·¥å…·å‡½æ•°
-;;; åŠ è½½é¡ºåºï¼šå¿…é¡»ç¬¬ä¸€ä¸ªåŠ è½½
+;;; tb-core.lsp ¡ª ½¨Öş½á¹¹¹¤¾ßÏä ºËĞÄÏµÍ³
+;;; °üº¬£ºÆ½Ì¨¼ì²â¡¢²ÎÊıÌåÏµ¡¢´íÎó´¦Àí¿ò¼Ü¡¢Í¨ÓÃ¹¤¾ßº¯Êı
+;;; ¼ÓÔØË³Ğò£º±ØĞëµÚÒ»¸ö¼ÓÔØ
 
 ;; ============================================================================
-;; ç¬¬ä¸€èŠ‚ï¼šå¹³å°æ£€æµ‹
+;; µÚÒ»½Ú£ºÆ½Ì¨¼ì²â
 ;; ============================================================================
 
-;; æ£€æµ‹å½“å‰è¿è¡Œçš„ CAD å¹³å°ï¼Œè®¾ç½®å…¨å±€æ ‡è¯†å˜é‡ã€‚
-;; åªåœ¨åŠ è½½æ—¶æ‰§è¡Œä¸€æ¬¡ï¼Œç»“æœå­˜å…¥ *SYS:PLATFORM* ç­‰å˜é‡ã€‚
+;; ¼ì²âµ±Ç°ÔËĞĞµÄ CAD Æ½Ì¨£¬ÉèÖÃÈ«¾Ö±êÊ¶±äÁ¿¡£
+;; Ö»ÔÚ¼ÓÔØÊ±Ö´ĞĞÒ»´Î£¬½á¹û´æÈë *SYS:PLATFORM* µÈ±äÁ¿¡£
 (defun sys:detect-platform (/ product)
   (setq product (strcase (getvar "product")))
-  ;; å¹³å°æ ‡è¯†
+  ;; Æ½Ì¨±êÊ¶
   (setq *SYS:PLATFORM*
     (cond
-      ((wcmatch product "*ZWCAD*")    "ZWCAD")     ; ä¸­æœ›CAD
-      ((wcmatch product "*GSTARCAD*") "GSTARCAD")  ; æµ©è¾°CAD
+      ((wcmatch product "*ZWCAD*")    "ZWCAD")     ; ÖĞÍûCAD
+      ((wcmatch product "*GSTARCAD*") "GSTARCAD")  ; ºÆ³½CAD
       ((wcmatch product "*BRICSCAD*") "BRICSCAD")  ; BricsCAD
-      (t                              "AUTOCAD"))) ; AutoCAD åŠå…¶ä»–
-  ;; ActiveX COM æ”¯æŒï¼ˆZWCAD ä¸æ”¯æŒï¼‰
+      (t                              "AUTOCAD"))) ; AutoCAD ¼°ÆäËû
+  ;; ActiveX COM Ö§³Ö£¨ZWCAD ²»Ö§³Ö£©
   (setq *SYS:HAS-ACTIVEX*
-    (not (= *SYS:PLATFORM* "ZWCAD")))
-  ;; ååº”å™¨æ”¯æŒï¼ˆä»… AutoCAD å®Œæ•´æ”¯æŒï¼‰
+    (if (= *SYS:PLATFORM* "ZWCAD")
+      nil
+      (if (member "VLAX-GET-ACAD-OBJECT"
+                  (vl-catch-all-apply 'atoms-family (list 1)))
+        (not (null (vlax-get-acad-object)))
+        nil)))
+  ;; ·´Ó¦Æ÷Ö§³Ö£¨½ö AutoCAD ÍêÕûÖ§³Ö£©
   (setq *SYS:HAS-REACTORS*
     (= *SYS:PLATFORM* "AUTOCAD"))
-  ;; DWG æ ¼å¼ç‰ˆæœ¬å·
+  ;; DWG ¸ñÊ½°æ±¾ºÅ
   (setq *SYS:ACADVER* (atof (getvar "acadver")))
-  (princ (strcat "\n[TB] å¹³å°: " *SYS:PLATFORM*
-                 " | ActiveX: " (if *SYS:HAS-ACTIVEX* "æ˜¯" "å¦")
-                 " | ååº”å™¨: " (if *SYS:HAS-REACTORS* "æ˜¯" "å¦")))
+  (princ (strcat "\n[TB] Æ½Ì¨: " *SYS:PLATFORM*
+                 " | ActiveX: " (if *SYS:HAS-ACTIVEX* "ÊÇ" "·ñ")
+                 " | ·´Ó¦Æ÷: " (if *SYS:HAS-REACTORS* "ÊÇ" "·ñ")))
   (princ))
 
-;; ç«‹å³æ‰§è¡Œå¹³å°æ£€æµ‹
+;; Á¢¼´Ö´ĞĞÆ½Ì¨¼ì²â
 (sys:detect-platform)
 
 
 ;; ============================================================================
-;; ç¬¬äºŒèŠ‚ï¼šå‚æ•°ä½“ç³» â€” ç³»ç»Ÿå‚æ•° / é¡¹ç›®å‚æ•° / ä¸´æ—¶å‚æ•°
+;; µÚ¶ş½Ú£º²ÎÊıÌåÏµ ¡ª ÏµÍ³²ÎÊı / ÏîÄ¿²ÎÊı / ÁÙÊ±²ÎÊı
 ;; ============================================================================
 
-;; --- å†…éƒ¨å­˜å‚¨ ---
-;; ç³»ç»Ÿå‚æ•°å­˜äºå¤–éƒ¨æ–‡ä»¶ï¼Œå¯åŠ¨æ—¶è¯»å…¥å†…å­˜ *SYS:CONFIG*
-;; é¡¹ç›®å‚æ•°å­˜äºå›¾çº¸ LDataï¼Œæ‰“å¼€å›¾çº¸æ—¶è¯»å…¥ *PRJ:CONFIG*
-;; ä¸´æ—¶å‚æ•°åªå­˜äºå†…å­˜ *TMP:VARS*ï¼Œå‘½ä»¤ç»“æŸæ—¶æ¸…ç†
+;; --- ÄÚ²¿´æ´¢ ---
+;; ÏµÍ³²ÎÊı´æÓÚÍâ²¿ÎÄ¼ş£¬Æô¶¯Ê±¶ÁÈëÄÚ´æ *SYS:CONFIG*
+;; ÏîÄ¿²ÎÊı´æÓÚÍ¼Ö½ LData£¬´ò¿ªÍ¼Ö½Ê±¶ÁÈë *PRJ:CONFIG*
+;; ÁÙÊ±²ÎÊıÖ»´æÓÚÄÚ´æ *TMP:VARS*£¬ÃüÁî½áÊøÊ±ÇåÀí
 
-(setq *SYS:CONFIG* nil   ; ç³»ç»Ÿå‚æ•° alist
-      *PRJ:CONFIG* nil   ; é¡¹ç›®å‚æ•° alist
-      *TMP:VARS*   nil)  ; ä¸´æ—¶å‚æ•° alist
+(setq *SYS:CONFIG* nil   ; ÏµÍ³²ÎÊı alist
+      *PRJ:CONFIG* nil   ; ÏîÄ¿²ÎÊı alist
+      *TMP:VARS*   nil   ; ÁÙÊ±²ÎÊı alist
+      *SYS:CONFIG-LOADED* nil)  ; ÅäÖÃ¶èĞÔ¼ÓÔØ±êÖ¾
 
-;; ç³»ç»Ÿå‚æ•°æŒä¹…åŒ–æ–‡ä»¶è·¯å¾„ï¼ˆROAMABLEROOTPREFIX åœ¨æ—§ç‰ˆ/å›½äº§CADå¯èƒ½ä¸å­˜åœ¨ï¼Œç”¨ DWGPREFIX å…œåº•ï¼‰
-;; ç”¨ vl-catch-all-apply ä¿æŠ¤ getvarï¼Œé¿å… ZWCAD ç­‰å®¿ä¸»ç›´æ¥æŠ›é”™
+;; ÏµÍ³²ÎÊı³Ö¾Ã»¯ÎÄ¼şÂ·¾¶£¨ROAMABLEROOTPREFIX ÔÚ¾É°æ/¹ú²úCAD¿ÉÄÜ²»´æÔÚ£¬ÓÃ DWGPREFIX ¶µµ×£©
+;; ÓÃ vl-catch-all-apply ±£»¤ getvar£¬±ÜÃâ ZWCAD µÈËŞÖ÷Ö±½ÓÅ×´í
 (setq *SYS:CONFIG-FILE*
   (strcat
     (vl-string-right-trim "\\"
@@ -62,42 +68,57 @@
     "\\TB-SysConfig.cfg"))
 
 
-;; --- å‚æ•°è¯»å†™æ¥å£ ---
+;; --- ²ÎÊı¶ÁĞ´½Ó¿Ú ---
 
-;; è¯»å–ä»»æ„å±‚çº§çš„å‚æ•°å€¼ã€‚è‡ªåŠ¨åœ¨ä¸‰å±‚ä¸­æŸ¥æ‰¾ï¼šä¸´æ—¶ > é¡¹ç›® > ç³»ç»Ÿã€‚
-;; å‚æ•° key ä¸ºç¬¦å·ï¼Œå¦‚ '*SYS:DWG-SCALE*ã€‚
+;; ¶èĞÔ³õÊ¼»¯£ºÊ×´Î²ÎÊı¶ÁĞ´Ê±¼ÓÔØÅäÖÃ£¬±ÜÃâ¼ÓÔØÆÚÎÄ¼ş²Ù×÷¸ÉÈÅ AutoLISP ÄÚ²¿¼ÓÔØÁ÷¡£
+(defun sys:ensure-config nil
+  "È·±£ÏµÍ³ÅäÖÃÒÑ¼ÓÔØ¡£Ê×´Îµ÷ÓÃÊ±¶ÁÈ¡ cfg ²¢²¹ÆëÄ¬ÈÏÖµ¡£"
+  (if (not *SYS:CONFIG-LOADED*)
+    (progn
+      (setq *SYS:CONFIG-LOADED* T)
+      (vl-catch-all-apply 'sys:load-config)  ; cfg ¶ÁÈ¡Ê§°Ü²»ÖĞ¶Ï£¬Ä¬ÈÏÖµÈÔ»á²¹Æë
+      (sys:init-defaults)
+      ;; ÅäÖÃ¾ÍĞ÷ºóÓ¦ÓÃ¿ì½İ¼ü±ğÃû£¨tb-mod-hotkey ÒÑ¼ÓÔØÊ±£©
+      (if (uc:function-defined-p 'tb:apply-shortcuts)
+        (vl-catch-all-apply 'tb:apply-shortcuts))))
+  *SYS:CONFIG-LOADED*)
+
+;; ¶ÁÈ¡ÈÎÒâ²ã¼¶µÄ²ÎÊıÖµ¡£×Ô¶¯ÔÚÈı²ãÖĞ²éÕÒ£ºÁÙÊ± > ÏîÄ¿ > ÏµÍ³¡£
+;; ²ÎÊı key Îª·ûºÅ£¬Èç '*SYS:DWG-SCALE*¡£
 (defun sys:get (key / val)
-  ;; å…ˆæŸ¥ä¸´æ—¶å‚æ•°
+  (sys:ensure-config)
+  ;; ÏÈ²éÁÙÊ±²ÎÊı
   (if (setq val (cdr (assoc key *TMP:VARS*))) val
-    ;; å†æŸ¥é¡¹ç›®å‚æ•°
+    ;; ÔÙ²éÏîÄ¿²ÎÊı
     (if (setq val (cdr (assoc key *PRJ:CONFIG*))) val
-      ;; æœ€åæŸ¥ç³»ç»Ÿå‚æ•°
+      ;; ×îºó²éÏµÍ³²ÎÊı
       (cdr (assoc key *SYS:CONFIG*)))))
 
-;; å†™å…¥å‚æ•°å€¼ã€‚æ ¹æ® key å‰ç¼€è‡ªåŠ¨åˆ¤æ–­å­˜å‚¨å±‚çº§ã€‚
-;; '*SYS:* å†™å…¥ç³»ç»Ÿå‚æ•°ï¼Œ'*PRJ:* å†™å…¥é¡¹ç›®å‚æ•°ï¼Œ'*TMP:* å†™å…¥ä¸´æ—¶å‚æ•°ã€‚
+;; Ğ´Èë²ÎÊıÖµ¡£¸ù¾İ key Ç°×º×Ô¶¯ÅĞ¶Ï´æ´¢²ã¼¶¡£
+;; '*SYS:* Ğ´ÈëÏµÍ³²ÎÊı£¬'*PRJ:* Ğ´ÈëÏîÄ¿²ÎÊı£¬'*TMP:* Ğ´ÈëÁÙÊ±²ÎÊı¡£
 (defun sys:set (key value)
+  (sys:ensure-config)
   (cond
-    ;; ç³»ç»Ÿå‚æ•°
+    ;; ÏµÍ³²ÎÊı
     ((wcmatch (vl-symbol-name key) "*SYS:*")
      (setq *SYS:CONFIG* (sys:alist-put *SYS:CONFIG* key value))
-     (sys:save-config)  ; è‡ªåŠ¨æŒä¹…åŒ–
+     (sys:save-config)  ; ×Ô¶¯³Ö¾Ã»¯
      value)
-    ;; é¡¹ç›®å‚æ•°
+    ;; ÏîÄ¿²ÎÊı
     ((wcmatch (vl-symbol-name key) "*PRJ:*")
      (setq *PRJ:CONFIG* (sys:alist-put *PRJ:CONFIG* key value))
      value)
-    ;; ä¸´æ—¶å‚æ•°
+    ;; ÁÙÊ±²ÎÊı
     ((wcmatch (vl-symbol-name key) "*TMP:*")
      (setq *TMP:VARS* (sys:alist-put *TMP:VARS* key value))
      value)
-    (t (princ (strcat "\n[TB] æœªçŸ¥å‚æ•°å‰ç¼€: " (vl-symbol-name key))) nil)))
+    (t (princ (strcat "\n[TB] Î´Öª²ÎÊıÇ°×º: " (vl-symbol-name key))) nil)))
 
 
-;; --- ç³»ç»Ÿå‚æ•°æŒä¹…åŒ– ---
+;; --- ÏµÍ³²ÎÊı³Ö¾Ã»¯ ---
 
 (defun sys:save-config (/ f)
-  "å°† *SYS:CONFIG* ä¿å­˜åˆ°å¤–éƒ¨æ–‡ä»¶ã€‚æ¯è¡Œæ ¼å¼ï¼škey=valueã€‚"
+  "½« *SYS:CONFIG* ±£´æµ½Íâ²¿ÎÄ¼ş¡£Ã¿ĞĞ¸ñÊ½£ºkey=value¡£"
   (if (setq f (open *SYS:CONFIG-FILE* "w"))
     (progn
       (foreach pair *SYS:CONFIG*
@@ -106,25 +127,29 @@
                             (vl-princ-to-string (cdr pair))) f))
       (close f))))
 
-(defun sys:load-config (/ f line key val pos)
-  "ä»å¤–éƒ¨æ–‡ä»¶åŠ è½½ç³»ç»Ÿå‚æ•°åˆ° *SYS:CONFIG*ã€‚"
+(defun sys:load-config (/ f line key val val-txt pos)
+  "´ÓÍâ²¿ÎÄ¼ş¼ÓÔØÏµÍ³²ÎÊıµ½ *SYS:CONFIG*¡£"
   (if (setq f (open *SYS:CONFIG-FILE* "r"))
     (progn
       (while (setq line (read-line f))
         (if (setq pos (vl-string-search "=" line))
           (progn
             (setq key (vl-catch-all-apply 'read (list (substr line 1 pos)))
-                  val (vl-catch-all-apply 'read (list (substr line (+ pos 2)))))
+                  val-txt (substr line (+ pos 2))
+                  val (vl-catch-all-apply 'read (list val-txt)))
+            ;; º¬·´Ğ±¸ÜµÄÂ·¾¶Öµ read »á½Ø¶Ï£¬¸ÄÓÃÔ­Ñù×Ö·û´®
+            (if (vl-string-search "\\" val-txt)
+              (setq val val-txt))
             (if (and (not (vl-catch-all-error-p key))
                      (not (vl-catch-all-error-p val)))
               (setq *SYS:CONFIG* (sys:alist-put *SYS:CONFIG* key val)))))
-      (close f))))
+      (close f)))))
 
 
-;; --- ç³»ç»Ÿå‚æ•°é»˜è®¤å€¼ ---
+;; --- ÏµÍ³²ÎÊıÄ¬ÈÏÖµ ---
 
 (defun sys:init-defaults nil
-  "åˆå§‹åŒ–æ‰€æœ‰ç³»ç»Ÿå‚æ•°çš„é»˜è®¤å€¼ã€‚ä»…åœ¨é¦–æ¬¡åŠ è½½æ—¶è®¾ç½®ã€‚"
+  "³õÊ¼»¯ËùÓĞÏµÍ³²ÎÊıµÄÄ¬ÈÏÖµ¡£½öÔÚÊ×´Î¼ÓÔØÊ±ÉèÖÃ¡£"
   (or (sys:get '*SYS:DWG-SCALE*)      (sys:set '*SYS:DWG-SCALE* 100))
   (or (sys:get '*SYS:TEXT-STYLE*)     (sys:set '*SYS:TEXT-STYLE* "TSSD_Rein"))
   (or (sys:get '*SYS:TEXT-FONT*)      (sys:set '*SYS:TEXT-FONT* "tssdeng.shx"))
@@ -132,11 +157,11 @@
   (or (sys:get '*SYS:TEXT-WIDTH*)     (sys:set '*SYS:TEXT-WIDTH* 0.7))
   (or (sys:get '*SYS:TEXT-HEIGHT*)    (sys:set '*SYS:TEXT-HEIGHT* 350))
   (or (sys:get '*SYS:DIM-PRECISION*)  (sys:set '*SYS:DIM-PRECISION* 2))
-  (or (sys:get '*SYS:CLOUD-LAYER*)    (sys:set '*SYS:CLOUD-LAYER* "æ ¡å›¾äº‘çº¿"))
+  (or (sys:get '*SYS:CLOUD-LAYER*)    (sys:set '*SYS:CLOUD-LAYER* "Ğ£Í¼ÔÆÏß"))
   (or (sys:get '*SYS:CLOUD-COLOR*)    (sys:set '*SYS:CLOUD-COLOR* 6))
   (or (sys:get '*SYS:CLOUD-ARC*)      (sys:set '*SYS:CLOUD-ARC* 6))
   (or (sys:get '*SYS:CLOUD-PLOT*)     (sys:set '*SYS:CLOUD-PLOT* 0))
-  ;; å·¥å…·ç®±è·¯å¾„ï¼ˆç”¨äºæŸ¥æ‰¾ DCL ç­‰èµ„æºæ–‡ä»¶ï¼‰
+  ;; ¹¤¾ßÏäÂ·¾¶£¨ÓÃÓÚ²éÕÒ DCL µÈ×ÊÔ´ÎÄ¼ş£©
   (or (sys:get '*SYS:LOAD-PATH*)
       (sys:set '*SYS:LOAD-PATH*
         (vl-string-right-trim "\\"
@@ -144,13 +169,13 @@
             (*TB:ROOT*)
             ((uc:project-root) (uc:path-join (uc:project-root) "TB-Toolbox"))
             (t (or (getvar "DWGPREFIX") ""))))))
-  ;; ç»“æ„å›¾å±‚é»˜è®¤å€¼
+  ;; ½á¹¹Í¼²ãÄ¬ÈÏÖµ
   (or (sys:get '*PRJ:BEAM-LAYER*)     (sys:set '*PRJ:BEAM-LAYER* "S_BEAM"))
   (or (sys:get '*PRJ:COLUMN-LAYER*)   (sys:set '*PRJ:COLUMN-LAYER* "S_COL"))
   (or (sys:get '*PRJ:WALL-LAYER*)     (sys:set '*PRJ:WALL-LAYER* "S_WALL"))
   (or (sys:get '*PRJ:TEXT-LAYER*)     (sys:set '*PRJ:TEXT-LAYER* "S_TEXT"))
   (or (sys:get '*PRJ:DIM-LAYER*)      (sys:set '*PRJ:DIM-LAYER* "S_DIM"))
-  ;; é’¢ç­‹å‚æ•°é»˜è®¤å€¼
+  ;; ¸Ö½î²ÎÊıÄ¬ÈÏÖµ
   (or (sys:get '*SYS:REBAR-LAYER*)     (sys:set '*SYS:REBAR-LAYER* "S_REBAR"))
   (or (sys:get '*SYS:STIRRUP-LAYER*)   (sys:set '*SYS:STIRRUP-LAYER* "S_STIRRUP"))
   (or (sys:get '*SYS:REBAR-TEXT-LAYER*) (sys:set '*SYS:REBAR-TEXT-LAYER* "S_REBAR_TEXT"))
@@ -160,11 +185,40 @@
   (or (sys:get '*SYS:REBAR-HOOK*)      (sys:set '*SYS:REBAR-HOOK* 2))
   (or (sys:get '*SYS:REBAR-COVER*)     (sys:set '*SYS:REBAR-COVER* 25)))
 
+(defun sys:reset-defaults nil
+  "»Ö¸´ËùÓĞÏµÍ³²ÎÊıÎªÄ¬ÈÏÖµ£¨Ç¿ÖÆ¸²¸ÇÒÑÓĞÖµ£¬ÓÃÓÚÉèÖÃ¶Ô»°¿òµÄ»Ö¸´Ä¬ÈÏ£©¡£"
+  (sys:set '*SYS:DWG-SCALE* 100)
+  (sys:set '*SYS:TEXT-STYLE* "TSSD_Rein")
+  (sys:set '*SYS:TEXT-FONT* "tssdeng.shx")
+  (sys:set '*SYS:TEXT-BIGFONT* "hztxt.shx")
+  (sys:set '*SYS:TEXT-WIDTH* 0.7)
+  (sys:set '*SYS:TEXT-HEIGHT* 350)
+  (sys:set '*SYS:DIM-PRECISION* 2)
+  (sys:set '*SYS:CLOUD-LAYER* "Ğ£Í¼ÔÆÏß")
+  (sys:set '*SYS:CLOUD-COLOR* 6)
+  (sys:set '*SYS:CLOUD-ARC* 6)
+  (sys:set '*SYS:CLOUD-PLOT* 0)
+  (sys:set '*PRJ:BEAM-LAYER* "S_BEAM")
+  (sys:set '*PRJ:COLUMN-LAYER* "S_COL")
+  (sys:set '*PRJ:WALL-LAYER* "S_WALL")
+  (sys:set '*PRJ:TEXT-LAYER* "S_TEXT")
+  (sys:set '*PRJ:DIM-LAYER* "S_DIM")
+  (sys:set '*SYS:REBAR-LAYER* "S_REBAR")
+  (sys:set '*SYS:STIRRUP-LAYER* "S_STIRRUP")
+  (sys:set '*SYS:REBAR-TEXT-LAYER* "S_REBAR_TEXT")
+  (sys:set '*SYS:REBAR-WIDTH* 0.5)
+  (sys:set '*SYS:REBAR-DIAMETER* 8)
+  (sys:set '*SYS:REBAR-GRADE* 3)
+  (sys:set '*SYS:REBAR-HOOK* 2)
+  (sys:set '*SYS:REBAR-COVER* 25)
+  (princ "
+[TB] ÏµÍ³²ÎÊıÒÑ»Ö¸´Ä¬ÈÏÖµ¡£"))
 
-;; --- è¾…åŠ©å‡½æ•° ---
+
+;; --- ¸¨Öúº¯Êı ---
 
 (defun sys:alist-put (alist key value)
-  "åœ¨ alist ä¸­è®¾ç½® key çš„å€¼ã€‚ä¼˜å…ˆå¤ç”¨ç»Ÿä¸€æ ¸å¿ƒå®ç°ã€‚"
+  "ÔÚ alist ÖĞÉèÖÃ key µÄÖµ¡£ÓÅÏÈ¸´ÓÃÍ³Ò»ºËĞÄÊµÏÖ¡£"
   (cond
     ((uc:function-defined-p 'uc:alist-put)
      (uc:alist-put alist key value))
@@ -174,53 +228,51 @@
      (append alist (list (cons key value))))))
 
 (defun sys:clear-temp nil
-  "æ¸…ç†æ‰€æœ‰ä¸´æ—¶å‚æ•°ã€‚åœ¨å‘½ä»¤ç»“æŸæ—¶è°ƒç”¨ã€‚"
+  "ÇåÀíËùÓĞÁÙÊ±²ÎÊı¡£ÔÚÃüÁî½áÊøÊ±µ÷ÓÃ¡£"
   (setq *TMP:VARS* nil)
   (gc))
 
 
-;; --- åˆå§‹åŒ– ---
-(sys:load-config)
-(sys:init-defaults)
+;; ÅäÖÃ³õÊ¼»¯ÒÑ¸ÄÎª¶èĞÔ£¨sys:ensure-config Ê×´Î²ÎÊı¶ÁĞ´Ê±Ö´ĞĞ£¬¼ûÉÏÎÄ£©
 
 
 ;; ============================================================================
-;; ç¬¬ä¸‰èŠ‚ï¼šé”™è¯¯å¤„ç†æ¡†æ¶
+;; µÚÈı½Ú£º´íÎó´¦Àí¿ò¼Ü
 ;; ============================================================================
 
 ;; ============================================================================
-;; ç¬¬å››èŠ‚ï¼šå®‰å…¨å·¥å…·å‡½æ•°
+;; µÚËÄ½Ú£º°²È«¹¤¾ßº¯Êı
 ;; ============================================================================
 
-;; å®‰å…¨è·å–å®æ•°è¾“å…¥ã€‚å¦‚æœç”¨æˆ·ç›´æ¥å›è½¦ï¼Œè¿”å›é»˜è®¤å€¼ã€‚
-;; å¦‚æœè¾“å…¥éæ­£æ•°ï¼Œæç¤ºå¹¶è¿”å›é»˜è®¤å€¼ã€‚
+;; °²È«»ñÈ¡ÊµÊıÊäÈë¡£Èç¹ûÓÃ»§Ö±½Ó»Ø³µ£¬·µ»ØÄ¬ÈÏÖµ¡£
+;; Èç¹ûÊäÈë·ÇÕıÊı£¬ÌáÊ¾²¢·µ»ØÄ¬ÈÏÖµ¡£
 (defun safe:get-real (prompt default / val)
   (setq val (getreal (strcat "\n" prompt " <" (rtos (if default default 0.0) 2 2) ">:")))
   (cond
     ((null val) (if default default 0.0))
     ((> val 0) val)
-    (t (princ "\nè¾“å…¥å¿…é¡»å¤§äº0ï¼Œä½¿ç”¨é»˜è®¤å€¼ã€‚") (if default default 0.0))))
+    (t (princ "\nÊäÈë±ØĞë´óÓÚ0£¬Ê¹ÓÃÄ¬ÈÏÖµ¡£") (if default default 0.0))))
 
 (defun safe:get-int (prompt default / val)
-  "å®‰å…¨è·å–æ•´æ•°è¾“å…¥ã€‚"
+  "°²È«»ñÈ¡ÕûÊıÊäÈë¡£"
   (setq val (getint (strcat "\n" prompt " <" (itoa (if default default 0)) ">:")))
   (if (and val (> val 0)) val (if default default 0)))
 
 (defun safe:get-dist (prompt pt default / val)
-  "å®‰å…¨è·å–è·ç¦»è¾“å…¥ã€‚ä¿è¯è¿”å›æ­£å€¼ã€‚"
+  "°²È«»ñÈ¡¾àÀëÊäÈë¡£±£Ö¤·µ»ØÕıÖµ¡£"
   (setq val (if pt (getdist pt (strcat "\n" prompt)) (getdist (strcat "\n" prompt))))
   (cond
     ((null val) default)
     ((> val 0) val)
-    (t (princ "\nè·ç¦»å¿…é¡»å¤§äº0ã€‚") default)))
+    (t (princ "\n¾àÀë±ØĞë´óÓÚ0¡£") default)))
 
 
 ;; ============================================================================
-;; ç¬¬äº”èŠ‚ï¼šUndo ç®¡ç†
+;; µÚÎå½Ú£ºUndo ¹ÜÀí
 ;; ============================================================================
 
 (defun sys:undo-begin nil
-  "å¼€å§‹ä¸€ä¸ª undo ç»„ã€‚åç»­æ“ä½œå¯ä¸€é”®æ’¤é”€ã€‚"
+  "¿ªÊ¼Ò»¸ö undo ×é¡£ºóĞø²Ù×÷¿ÉÒ»¼ü³·Ïú¡£"
   (cond
     ((uc:function-defined-p 'uc:undo-begin)
      (uc:undo-begin))
@@ -235,7 +287,7 @@
      (apply 'command '("_.UNDO" "_BEGIN")))))
 
 (defun sys:undo-end nil
-  "ç»“æŸå½“å‰ undo ç»„ã€‚"
+  "½áÊøµ±Ç° undo ×é¡£"
   (cond
     ((uc:function-defined-p 'uc:undo-end)
      (uc:undo-end))
@@ -251,60 +303,14 @@
 
 
 ;; ============================================================================
-;; ç¬¬å…­èŠ‚ï¼šé€šç”¨å·¥å…·
+;; µÚÁù½Ú£ºÍ¨ÓÃ¹¤¾ß
 ;; ============================================================================
 
-;; å¦‚æœ var ä¸º nilï¼Œè¿”å› defaultï¼›å¦åˆ™è¿”å› varã€‚
-;; ç”¨äºé…ç½®å˜é‡çš„æ‡’åˆå§‹åŒ–ï¼š(setq x (sys:ifnil x 100))
+;; Èç¹û var Îª nil£¬·µ»Ø default£»·ñÔò·µ»Ø var¡£
+;; ÓÃÓÚÅäÖÃ±äÁ¿µÄÀÁ³õÊ¼»¯£º(setq x (sys:ifnil x 100))
 (defun sys:ifnil (var default)
   (if var var default))
 
-;; uc:* å‘½åç©ºé—´å…¼å®¹å±‚ â€” åŸè®¾è®¡ä¾èµ–å¤–éƒ¨ U-CORE åº“å‡½æ•°ã€‚
-;; åœ¨æ— å¤–éƒ¨åº“æ—¶æä¾›æœ¬åœ°å®ç°ã€‚
-(defun uc:function-defined-p (sym)
-  "æ£€æµ‹ç¬¦å·æ˜¯å¦ç»‘å®šä¸ºå‡½æ•°ã€‚nil=æœªå®šä¹‰æˆ–éå‡½æ•°ã€‚"
-  (and sym
-       (boundp sym)
-       (not (vl-catch-all-error-p
-              (vl-catch-all-apply 'type (list (eval sym)))))
-       (wcmatch (vl-princ-to-string (type (eval sym))) "*SUBR*")))
 
-(defun uc:command-safe (cmd-list)
-  "å®‰å…¨æ‰§è¡Œ command åˆ—è¡¨ã€‚æ•è·é”™è¯¯ï¼Œä¸ä¸­æ–­æµç¨‹ã€‚"
-  (vl-catch-all-apply 'command cmd-list))
-
-
-;; ============================================================================
-;; ç¬¬ä¸ƒèŠ‚ï¼šç¬¦å·è¡¨å¿«é€Ÿæ£€æµ‹
-;; ============================================================================
-
-(defun sys:layer-exists? (name)
-  "æ£€æµ‹å›¾å±‚æ˜¯å¦å­˜åœ¨ã€‚"
-  (cond
-    ((null name) nil)
-    ((and (uc:function-defined-p 'uc:layer-exists-p) name)
-     (uc:layer-exists-p name))
-    (t
-     (and (tblsearch "LAYER" name) T))))
-
-(defun sys:style-exists? (name)
-  "æ£€æµ‹æ–‡å­—æ ·å¼æ˜¯å¦å­˜åœ¨ã€‚"
-  (cond
-    ((null name) nil)
-    ((and (uc:function-defined-p 'uc:style-exists-p) name)
-     (uc:style-exists-p name))
-    (t
-     (and (tblsearch "STYLE" name) T))))
-
-(defun sys:block-exists? (name)
-  "æ£€æµ‹å›¾å—æ˜¯å¦å­˜åœ¨ã€‚"
-  (cond
-    ((null name) nil)
-    ((and (uc:function-defined-p 'uc:block-exists-p) name)
-     (uc:block-exists-p name))
-    (t
-     (and (tblsearch "BLOCK" name) T))))
-
-
-(princ "\n[TB] æ ¸å¿ƒç³»ç»ŸåŠ è½½å®Œæˆã€‚")
+(princ "\n[TB] ºËĞÄÏµÍ³¼ÓÔØÍê³É¡£")
 (princ)

@@ -1,37 +1,37 @@
-;;; uc-atlisp-adapter.lsp -- atlisp é€‚é…å±‚
-;;; è´Ÿè´£ï¼šæŒ‰éœ€åŠ è½½ä½ä¾èµ–å‡½æ•°ï¼Œå¹¶å‘ç»Ÿä¸€æ ¸å¿ƒæš´éœ²ç¨³å®šåŒ…è£…
+;;; uc-atlisp-adapter.lsp -- atlisp ÊÊÅä²ã
+;;; ¸ºÔğ£º°´Ğè¼ÓÔØµÍÒÀÀµº¯Êı£¬²¢ÏòÍ³Ò»ºËĞÄ±©Â¶ÎÈ¶¨°ü×°
 
 (defun uc:atlisp-root nil
-  "è¿”å› atlisp-lib æ ¹ç›®å½•ã€‚"
+  "·µ»Ø atlisp-lib ¸ùÄ¿Â¼¡£"
   (if (uc:project-root)
     (uc:path-join (uc:project-root) "atlisp-lib")
     nil))
 
 (defun uc:atlisp-file (relative)
-  "è¿”å› atlisp-lib ä¸‹æ–‡ä»¶çš„ç»å¯¹è·¯å¾„ã€‚"
+  "·µ»Ø atlisp-lib ÏÂÎÄ¼şµÄ¾ø¶ÔÂ·¾¶¡£"
   (if (uc:atlisp-root)
     (uc:path-join (uc:atlisp-root) relative)
     nil))
 
 (defun uc:load-atlisp-file (relative / path)
-  "æŒ‰éœ€åŠ è½½ atlisp æ–‡ä»¶ã€‚"
+  "°´Ğè¼ÓÔØ atlisp ÎÄ¼ş¡£"
   (setq path (uc:atlisp-file relative))
   (if (uc:file-loadable-p path)
     (load path)
     nil))
 
 (defun uc:ensure-atlisp-minimum nil
-  "åŠ è½½æœ¬è½®ä½ä¾èµ– atlisp å‡½æ•°ã€‚"
+  "¼ÓÔØ±¾ÂÖµÍÒÀÀµ atlisp º¯Êı¡£"
   (if (not (uc:function-defined-p 'point:mid))
     (uc:load-atlisp-file "src\\point\\mid.lsp"))
   T)
 
 (defun uc:midpoint (pt1 pt2)
-  "ç»Ÿä¸€ä¸­ç‚¹å‡½æ•°ã€‚"
+  "Í³Ò»ÖĞµãº¯Êı¡£"
   (uc:ensure-atlisp-minimum)
   (if (uc:function-defined-p 'point:mid)
     (point:mid pt1 pt2)
     (mapcar '(lambda (a b) (* 0.5 (+ a b))) pt1 pt2)))
 
-(princ "\n[UC] atlisp é€‚é…å±‚å·²åŠ è½½")
+(princ "\n[UC] atlisp ÊÊÅä²ãÒÑ¼ÓÔØ")
 (princ)

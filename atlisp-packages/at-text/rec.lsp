@@ -1,5 +1,5 @@
 
-;;æ ‡æ³¨æ–‡å­—åŠ åœ†æ¡†
+;;±ê×¢ÎÄ×Ö¼ÓÔ²¿ò
 (defun c:tt (/ box-pts en ss text-mid-pt text-r)
   (defun sf-dxf (ename code / ent lst a)
     (if (= (type code) 'LIST)

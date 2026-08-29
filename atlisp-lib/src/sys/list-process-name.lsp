@@ -1,4 +1,4 @@
-(defun sys:list-process-name nil "è·å–å½“å‰è¿è¡Œçš„è¿›ç¨‹å(exeæ–‡ä»¶å)ã€‚"
+(defun sys:list-process-name nil "»ñÈ¡µ±Ç°ÔËĞĞµÄ½ø³ÌÃû(exeÎÄ¼şÃû)¡£"
   "String"
   (mapcar (quote (lambda (x)
         (vlax-get x (quote name))))

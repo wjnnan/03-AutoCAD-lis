@@ -1,5 +1,5 @@
 (defun vectra:getint (msg init default / r)
-  "ä»å‘½ä»¤è¡Œè·å–æ•´æ•°ã€‚"
+  "´ÓÃüÁîĞĞ»ñÈ¡ÕûÊı¡£"
   "int"
   ""
   (if init (initget init))

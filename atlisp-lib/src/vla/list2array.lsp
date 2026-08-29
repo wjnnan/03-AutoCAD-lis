@@ -1,6 +1,6 @@
 (defun vla:list->array (nlist arraytype)
-    "è¡¨->å®‰å…¨æ•°ç»„ç±»å‹ï¼ˆä¸€ç»´æ•°ç»„ï¼‰\nå‚æ•°ï¼š\nnlist:åˆ—è¡¨ï¼Œè¦æ±‚æ•°æ®çš„ç±»å‹è¦å’Œarraytypeä¸€è‡´\narraytype:å¯æŒ‡å®šå¦‚ä¸‹å¸¸é‡ï¼šå¯ä»¥ç”¨åé¢çš„æ•°å­—ä¹Ÿå¯ä»¥ç”¨å‰é¢çš„ç±»å‹ç¬¦å·\n"
-    "ä¸€ç»´æ•°ç»„"
+    "±í->°²È«Êı×éÀàĞÍ£¨Ò»Î¬Êı×é£©\n²ÎÊı£º\nnlist:ÁĞ±í£¬ÒªÇóÊı¾İµÄÀàĞÍÒªºÍarraytypeÒ»ÖÂ\narraytype:¿ÉÖ¸¶¨ÈçÏÂ³£Á¿£º¿ÉÒÔÓÃºóÃæµÄÊı×ÖÒ²¿ÉÒÔÓÃÇ°ÃæµÄÀàĞÍ·ûºÅ\n"
+    "Ò»Î¬Êı×é"
     "(vla:list->array '(1 2 3 4)
         vlax-vbinteger)"
     (vlax-safearray-fill (vlax-make-safearray arraytype (cons 0 (1- (length nlist))))

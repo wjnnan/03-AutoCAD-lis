@@ -1,20 +1,164 @@
-;;; tb-main.lsp -- TB ä¸»å…¥å£
+;;; tb-main.lsp -- TB Ö÷Èë¿Ú
 
 (if *TB:LOADED*
-  (princ "\n[TB] å·¥å…·ç®±å·²åŠ è½½ï¼Œè·³è¿‡é‡å¤åŠ è½½ã€‚")
+  (princ "\n[TB] ¹¤¾ßÏäÒÑ¼ÓÔØ£¬Ìø¹ıÖØ¸´¼ÓÔØ¡£")
   (progn
     (setq *TB:LOADED* T
           *TB:VERSION* "1.0.0"
-          *TB:TAB-GROUPS* '("grp_edit1" "grp_text" "grp_layer" "grp_rebar" "grp_struct" "grp_misc")
+          *TB:PAGES* '("tb_page_0" "tb_page_1" "tb_page_2" "tb_page_3" "tb_page_4" "tb_page_5" "tb_page_6")
+          *TB:TAB-KEYS* '("tab_edit" "tab_text" "tab_layer" "tab_block" "tab_dim" "tab_struct" "tab_misc")
+          *TB:PAGE-BINDS* '(
+    ;; Ò³0
+    (("btn_q" . "q") ("btn_qw" . "qw") ("btn_ww" . "ww") ("btn_ty" . "ty") ("btn_qr" . "qr") ("btn_pp" . "pp") ("btn_te" . "te") ("btn_we" . "we") ("btn_a" . "a") ("btn_s" . "s") ("btn_sc" . "sc") ("btn_r" . "r") ("btn_de" . "de") ("btn_cc" . "cc") ("btn_cf" . "cf") ("btn_cr" . "cr") ("btn_cl" . "cl") ("btn_ff" . "ff") ("btn_fr" . "fr") ("btn_oo" . "oo") ("btn_cx" . "cx") ("btn_s1" . "s1") ("btn_s2" . "s2") ("btn_s4" . "s4") ("btn_s5" . "s5") ("btn_s0" . "s0") ("btn_s00" . "s00") ("btn_r4" . "r4") ("btn_r9" . "r9") ("btn_r5" . "r5") ("btn_r0" . "r0") ("btn_c1" . "C1") ("btn_c2" . "C2") ("btn_c3" . "C3") ("btn_c4" . "C4") ("btn_c5" . "C5") ("btn_c6" . "C6") ("btn_c7" . "C7") ("btn_c8" . "C8") ("btn_z0" . "z0") ("btn_ee" . "ee") ("btn_as" . "As") ("btn_v1" . "v1") ("btn_v2" . "v2") ("btn_v3" . "v3"))
+    ;; Ò³1
+    (("btn_tssd" . "tssd") ("btn_gts" . "gts") ("btn_ttk" . "ttk") ("btn_ttg" . "ttg") ("btn_ttr" . "ttr") ("btn_tty" . "tty") ("btn_th" . "th") ("btn_ttj" . "ttj") ("btn_ttq" . "ttq") ("btn_tjk" . "tjk") ("btn_13" . "13") ("btn_23" . "23") ("btn_31" . "31") ("btn_32" . "32"))
+    ;; Ò³2
+    (("btn_tg" . "tg") ("btn_tgf" . "tgf") ("btn_td" . "td") ("btn_tdf" . "tdf") ("btn_ts" . "ts") ("btn_tsf" . "tsf") ("btn_tdj" . "tdj") ("btn_tsj" . "tsj") ("btn_tx" . "tx") ("btn_tq" . "tq") ("btn_gtc" . "gtc"))
+    ;; Ò³3
+    (("btn_jk" . "jk") ("btn_ktj" . "ktj") ("btn_gkm" . "gkm") ("btn_gks" . "gks") ("btn_sk" . "sk"))
+    ;; Ò³4
+    (("btn_fw" . "fw") ("btn_bbq" . "bbq") ("btn_bbf" . "bbf") ("btn_bgc" . "bgc") ("btn_ggb" . "ggb") ("btn_gbb" . "gbb") ("btn_zb" . "zb") ("btn_qb" . "qb"))
+    ;; Ò³5
+    (("btn_rb" . "RB") ("btn_rs" . "RS") ("btn_rh" . "RH") ("btn_rdh" . "RDH") ("btn_rw" . "RW") ("btn_ro" . "RO") ("btn_rl" . "RL") ("btn_rd" . "RD") ("btn_rcc" . "RCC") ("btn_rbr" . "RBR") ("btn_rbf" . "RBF") ("btn_re" . "RE") ("btn_ra" . "RA") ("btn_rn" . "RN") ("btn_rm" . "RM") ("btn_red" . "RED") ("btn_redb" . "REDB") ("btn_dk" . "dk") ("btn_dkk" . "dkk") ("btn_sg" . "sg") ("btn_tml" . "tml") ("btn_pq" . "pq") ("btn_pmh" . "pmh"))
+    ;; Ò³6
+    (("btn_rt" . "rt") ("btn_jt" . "jt") ("btn_xd" . "xd") ("btn_dx" . "dx") ("btn_dxx" . "dxx") ("btn_dd" . "dd") ("btn_ddd" . "ddd") ("btn_hgf" . "hgf") ("btn_nn" . "nn") ("btn_qq" . "qq") ("btn_sy" . "sy") ("btn_ce" . "ce") ("btn_lcd" . "lcd") ("btn_lmj" . "lmj") ("btn_qh" . "qh") ("btn_tn" . "Tn") ("btn_ss" . "ss") ("btn_bpt" . "BPT") ("btn_bpset" . "BPSET")))
+
+
+
           *TB:BIND-ID* 10)
 
-    (defun tb:switch-tab (active-group)
-      "åˆ‡æ¢å·¥å…·ç®±æ ‡ç­¾é¡µã€‚"
-      (foreach g *TB:TAB-GROUPS*
-        (mode_tile g (if (= g active-group) 0 1))))
+(setq *TB:CMD-CATALOG* '(
+  ("btn_q" "q" "Ö±Ïß" 0)
+  ("btn_qw" "qw" "¶à¶ÎÏß" 0)
+  ("btn_ww" "ww" "Ô²" 0)
+  ("btn_ty" "ty" "ÍÖÔ²" 0)
+  ("btn_qr" "qr" "¾ØĞÎ" 0)
+  ("btn_pp" "pp" "µã" 0)
+  ("btn_te" "te" "ĞŞ¼ô" 0)
+  ("btn_we" "we" "ÑÓÉì" 0)
+  ("btn_a" "a" "ÒÆ¶¯" 0)
+  ("btn_s" "s" "À­Éì" 0)
+  ("btn_sc" "sc" "Ëõ·Å" 0)
+  ("btn_r" "r" "Ğı×ª" 0)
+  ("btn_de" "de" "±à¼­" 0)
+  ("btn_cc" "cc" "Á¬Ğø¸´ÖÆ" 0)
+  ("btn_cf" "cf" "µÈ¾à¸´ÖÆ" 0)
+  ("btn_cr" "cr" "Ğı×ª¸´ÖÆ" 0)
+  ("btn_cl" "cl" "¸´ÖÆµ½²ã" 0)
+  ("btn_ff" "ff" "Áãµ¹½Ç" 0)
+  ("btn_fr" "fr" "µ¹Ô²½Ç" 0)
+  ("btn_oo" "oo" "Æ«ÒÆ" 0)
+  ("btn_cx" "cx" "Ñ¡ÏßĞŞ¼ô" 0)
+  ("btn_s1" "s1" "Ëõ·Å0.5¡Á" 0)
+  ("btn_s2" "s2" "Ëõ·Å2¡Á" 0)
+  ("btn_s4" "s4" "Ëõ·Å4¡Á" 0)
+  ("btn_s5" "s5" "Ëõ·Å5¡Á" 0)
+  ("btn_s0" "s0" "Ëõ·Å100¡Á" 0)
+  ("btn_s00" "s00" "Ëõ·Å1000¡Á" 0)
+  ("btn_r4" "r4" "Ë³×ª45" 0)
+  ("btn_r9" "r9" "Ë³×ª90" 0)
+  ("btn_r5" "r5" "Äæ×ª45" 0)
+  ("btn_r0" "r0" "Äæ×ª90" 0)
+  ("btn_c1" "C1" "ºì" 0)
+  ("btn_c2" "C2" "»Æ" 0)
+  ("btn_c3" "C3" "ÂÌ" 0)
+  ("btn_c4" "C4" "Çà" 0)
+  ("btn_c5" "C5" "À¶" 0)
+  ("btn_c6" "C6" "Ñóºì" 0)
+  ("btn_c7" "C7" "°×" 0)
+  ("btn_c8" "C8" "»Ò" 0)
+  ("btn_z0" "z0" "Z¹éÁã" 0)
+  ("btn_ee" "ee" "·¶Î§Ëõ·Å" 0)
+  ("btn_as" "As" "¿ìËÙ±£´æ" 0)
+  ("btn_v1" "v1" "µ¥ÊÓ¿Ú" 0)
+  ("btn_v2" "v2" "Ë«ÊÓ¿ÚÊú" 0)
+  ("btn_v3" "v3" "Ë«ÊÓ¿Úºá" 0)
+  ("btn_tssd" "tssd" "´´½¨TSSD" 1)
+  ("btn_gts" "gts" "¸ÄTSSD" 1)
+  ("btn_ttk" "ttk" "¸Ä×Ö¿í" 1)
+  ("btn_ttg" "ttg" "¸Ä×Ö¸ß" 1)
+  ("btn_ttr" "ttr" "Ğı×ª" 1)
+  ("btn_tty" "tty" "×ó¶ÔÆë" 1)
+  ("btn_th" "th" "²éÕÒÌæ»»" 1)
+  ("btn_ttj" "ttj" "Á¬½Ó" 1)
+  ("btn_ttq" "ttq" "¶ÔÆë" 1)
+  ("btn_tjk" "tjk" "ÎÄ×Ö¼Ó¿ò" 1)
+  ("btn_13" "13" "Ò»¼¶¡úÈı¼¶" 1)
+  ("btn_23" "23" "¶ş¼¶¡úÈı¼¶" 1)
+  ("btn_31" "31" "Èı¼¶¡úÒ»¼¶" 1)
+  ("btn_32" "32" "Èı¼¶¡ú¶ş¼¶" 1)
+  ("btn_tg" "tg" "¹Ø²ã" 2)
+  ("btn_tgf" "tgf" "·´¹Ø" 2)
+  ("btn_td" "td" "¶³²ã" 2)
+  ("btn_tdf" "tdf" "·´¶³" 2)
+  ("btn_ts" "ts" "Ëø²ã" 2)
+  ("btn_tsf" "tsf" "·´Ëø" 2)
+  ("btn_tdj" "tdj" "È«½â¶³" 2)
+  ("btn_tsj" "tsj" "È«½âËø" 2)
+  ("btn_tx" "tx" "È«²¿ÏÔÊ¾" 2)
+  ("btn_tq" "tq" "ÇĞµ±Ç°²ã" 2)
+  ("btn_gtc" "gtc" "¸Äµ½µ±Ç°²ã" 2)
+  ("btn_jk" "jk" "¿ìËÙ½¨¿é" 3)
+  ("btn_ktj" "ktj" "¿éÍ³¼Æ" 3)
+  ("btn_gkm" "gkm" "¿é¸ÄÃû" 3)
+  ("btn_gks" "gks" "¸Ä¿éÊôĞÔ" 3)
+  ("btn_sk" "sk" "É¾ÖØµş¿é" 3)
+  ("btn_fw" "fw" "±ê×¢¸´Î»" 4)
+  ("btn_bbq" "bbq" "±ê×¢Ïß¶ÔÆë" 4)
+  ("btn_bbf" "bbf" "±ê×¢µÈ·Ö" 4)
+  ("btn_bgc" "bgc" "±ê×¢ÒÆ²ã" 4)
+  ("btn_ggb" "ggb" "½çÏß¶ÔÆë" 4)
+  ("btn_gbb" "gbb" "¸Ä±ê×¢ÎÄ×Ö" 4)
+  ("btn_zb" "zb" "×ø±ê±ê×¢" 4)
+  ("btn_qb" "qb" "Çò±ê" 4)
+  ("btn_rb" "RB" "»­¸Ö½î" 5)
+  ("btn_rs" "RS" "»­¹¿½î" 5)
+  ("btn_rh" "RH" "¼ÓÍä¹³" 5)
+  ("btn_rdh" "RDH" "É¾Íä¹³" 5)
+  ("btn_rw" "RW" "¸Ä¿í¶È" 5)
+  ("btn_ro" "RO" "Æ«ÒÆ¸Ö½î" 5)
+  ("btn_rl" "RL" "Ïß±ä½î" 5)
+  ("btn_rd" "RD" "¸Ö½î±ê×¢" 5)
+  ("btn_rcc" "RCC" "¸Ö½î±àºÅ" 5)
+  ("btn_rbr" "RBR" "°åµ×½î" 5)
+  ("btn_rbf" "RBF" "°å¸º½î" 5)
+  ("btn_re" "RE" "±à¼­±ê×¢" 5)
+  ("btn_ra" "RA" "Åä½îÃæ»ı" 5)
+  ("btn_rn" "RN" "±àºÅ¹ÜÀí" 5)
+  ("btn_rm" "RM" "¸Ö½î¾µÏñ" 5)
+  ("btn_red" "RED" "Ë«»÷±à¼­" 5)
+  ("btn_redb" "REDB" "Ë«»÷ÔöÇ¿" 5)
+  ("btn_dk" "dk" "¾ØĞÎÖù" 5)
+  ("btn_dkk" "dkk" "Ô²ĞÎÖù" 5)
+  ("btn_sg" "sg" "Ç½Éí·ì" 5)
+  ("btn_tml" "tml" "Í¼ÃûÏß" 5)
+  ("btn_pq" "pq" "ÆÊÇĞ·û" 5)
+  ("btn_pmh" "pmh" "Æ½ÃæºÅ" 5)
+  ("btn_rt" "rt" "ÔÆÏß" 6)
+  ("btn_jt" "jt" "ÔÆÏßÒıÏß" 6)
+  ("btn_xd" "xd" "³öÍ¼±ÈÀı" 6)
+  ("btn_dx" "dx" "µ¥ÕÛ¶ÏÏß" 6)
+  ("btn_dxx" "dxx" "Ë«ÕÛ¶ÏÏß" 6)
+  ("btn_dd" "dd" "Ë®Æ½¶Ïµã" 6)
+  ("btn_ddd" "ddd" "ÊúÖ±¶Ïµã" 6)
+  ("btn_hgf" "hgf" "º¸¹Ü·ìÏß" 6)
+  ("btn_nn" "nn" "²¶×½ÉèÖÃ" 6)
+  ("btn_qq" "qq" "Í¼Ö½ÇåÀí" 6)
+  ("btn_sy" "sy" "ËµÃ÷±êÇ©" 6)
+  ("btn_ce" "ce" "ÖĞĞÄÏß" 6)
+  ("btn_lcd" "lcd" "ÀÛ¼Æ³¤¶È" 6)
+  ("btn_lmj" "lmj" "ÀÛ¼ÆÃæ»ı" 6)
+  ("btn_qh" "qh" "Êı×ÖÇóºÍ" 6)
+  ("btn_tn" "Tn" "DXF²éÑ¯" 6)
+  ("btn_ss" "ss" "Ñ¡ÔñÒ×" 6)
+  ("btn_bpt" "BPT" "ÅúÁ¿´òÓ¡" 6)
+  ("btn_bpset" "BPSET" "´òÓ¡ÉèÖÃ" 6)
+))
+
+(setq *TB:PAGE-NAMES* '("»æÍ¼±à¼­" "ÎÄ×Ö´¦Àí" "Í¼²ã¹ÜÀí" "Í¼¿é¹ÜÀí" "±ê×¢´¦Àí" "½á¹¹Í¨ÓÃ" "¸¨Öú¹¦ÄÜ"))
 
     (defun tb:bind (key cmd)
-      "ç»‘å®š DCL æŒ‰é’®åˆ°å‘½ä»¤åã€‚"
+      "°ó¶¨ DCL °´Å¥µ½ÃüÁîÃû¡£"
       (setq *TB:BIND-ID* (1+ *TB:BIND-ID*))
       (action_tile key
         (strcat
@@ -22,150 +166,86 @@
           "(setq *TB:CMD* \"" cmd "\"))")))
 
     (defun tb:resolve-dcl (name / dcl-fn)
-      "è§£æ DCL æ–‡ä»¶è·¯å¾„ã€‚"
+      "½âÎö DCL ÎÄ¼şÂ·¾¶¡£ÓÅÏÈÓÃ *TB:ROOT*£¬±ÜÃâÒÀÀµ¿ÉÄÜ±» read ½Ø¶ÏµÄ LOAD-PATH¡£"
       (setq dcl-fn (findfile name))
+      (if (not dcl-fn)
+        (if *TB:ROOT*
+          (setq dcl-fn (strcat *TB:ROOT* "\\" name))))
       (if (not dcl-fn)
         (if (sys:get '*SYS:LOAD-PATH*)
           (setq dcl-fn (uc:path-join (sys:get '*SYS:LOAD-PATH*) name))))
       dcl-fn)
 
     (defun tb:run-bound-command (/ cmd-sym)
-      "æ‰§è¡ŒæŒ‰é’®ç»‘å®šçš„å‘½ä»¤ã€‚"
+      "Ö´ĞĞ°´Å¥°ó¶¨µÄÃüÁî¡£"
       (if *TB:CMD*
         (progn
           (setq cmd-sym (read (strcat "c:" (strcase *TB:CMD*))))
           (if (uc:command-defined-p cmd-sym)
             (uc:call-command cmd-sym)
-            (princ (strcat "\n[TB] æœªå®šä¹‰å‘½ä»¤: " *TB:CMD*)))
+            (princ (strcat "\n[TB] Î´¶¨ÒåÃüÁî: " *TB:CMD*)))
           (setq *TB:CMD* nil))))
 
+    (defun tb:bind-tabs nil
+      "°ó¶¨ 7 ¸ö±êÇ©Ò³ radio£¬µã»÷Ê± done_dialog 200+index ´¥·¢ÇĞÒ³¡£"
+      (foreach i '(0 1 2 3 4 5 6)
+        (action_tile (nth i *TB:TAB-KEYS*)
+          (strcat "(done_dialog " (itoa (+ 200 i)) ")"))))
+
+    (defun tb:bind-page (page-index)
+      "°ó¶¨Ö¸¶¨±êÇ©Ò³µÄ°´Å¥¡£"
+      (setq *TB:BIND-ID* 10)
+      (foreach pair (nth page-index *TB:PAGE-BINDS*)
+        (tb:bind (car pair) (cdr pair))))
+
     (defun c:TB (/ dcl-fn dcl-id result olderror)
-      "æ‰“å¼€å·¥å…·ç®±ä¸»ç•Œé¢ã€‚å¸¦é”™è¯¯ä¿æŠ¤ç¡®ä¿ DCL èµ„æºé‡Šæ”¾ã€‚"
+      "´ò¿ª¹¤¾ßÏäÖ÷½çÃæ¡£7 ¸ö±êÇ©Ò³Í¨¹ı done_dialog Ñ­»·ÕæÕıÇĞÒ³¡£"
       (setq olderror *error*
             *error* (lambda (msg)
                       (if dcl-id (vl-catch-all-apply 'unload_dialog (list dcl-id)))
                       (setq *error* olderror)
-                      (princ (strcat "\n[TB] ç•Œé¢å¼‚å¸¸: " (if msg msg "")))
+                      (princ (strcat "\n[TB] ½çÃæÒì³£: " (if msg msg "")))
                       (princ)))
       (setq dcl-fn (tb:resolve-dcl "tb-dcl-launcher.dcl"))
       (if (and dcl-fn (setq dcl-id (load_dialog dcl-fn)))
-        (if (new_dialog "tb_launcher" dcl-id)
-          (progn
-            (set_tile "tab_edit" "1")
-            (tb:switch-tab "grp_edit1")
-
-            (action_tile "tab_edit"   "(tb:switch-tab \"grp_edit1\")")
-            (action_tile "tab_text"   "(tb:switch-tab \"grp_text\")")
-            (action_tile "tab_layer"  "(tb:switch-tab \"grp_layer\")")
-            (action_tile "tab_rebar"  "(tb:switch-tab \"grp_rebar\")")
-            (action_tile "tab_struct" "(tb:switch-tab \"grp_struct\")")
-            (action_tile "tab_misc"   "(tb:switch-tab \"grp_misc\")")
-
-            (setq *TB:BIND-ID* 10)
-
-            (tb:bind "btn_q"  "q")
-            (tb:bind "btn_qw" "qw")
-            (tb:bind "btn_ww" "ww")
-            (tb:bind "btn_qr" "qr")
-            (tb:bind "btn_te" "te")
-            (tb:bind "btn_we" "we")
-            (tb:bind "btn_a"  "a")
-            (tb:bind "btn_s"  "s")
-            (tb:bind "btn_sc" "sc")
-            (tb:bind "btn_r"  "r")
-            (tb:bind "btn_ff" "ff")
-            (tb:bind "btn_fr" "fr")
-            (tb:bind "btn_cc" "cc")
-            (tb:bind "btn_cf" "cf")
-            (tb:bind "btn_oo" "oo")
-            (tb:bind "btn_z0" "z0")
-
-            (tb:bind "btn_tssd" "tssd")
-            (tb:bind "btn_gts"  "gts")
-            (tb:bind "btn_ttk"  "ttk")
-            (tb:bind "btn_ttg"  "ttg")
-            (tb:bind "btn_th"   "th")
-            (tb:bind "btn_tjk"  "tjk")
-            (tb:bind "btn_fw"   "fw")
-            (tb:bind "btn_bbf"  "bbf")
-            (tb:bind "btn_zb"   "zb")
-
-            (tb:bind "btn_tg"  "tg")
-            (tb:bind "btn_tgf" "tgf")
-            (tb:bind "btn_td"  "td")
-            (tb:bind "btn_tdf" "tdf")
-            (tb:bind "btn_ts"  "ts")
-            (tb:bind "btn_tdj" "tdj")
-            (tb:bind "btn_jk"  "jk")
-            (tb:bind "btn_ktj" "ktj")
-            (tb:bind "btn_gkm" "gkm")
-
-            (tb:bind "btn_rb"  "rb")
-            (tb:bind "btn_rs"  "rs")
-            (tb:bind "btn_rh"  "rh")
-            (tb:bind "btn_rdh" "rdh")
-            (tb:bind "btn_rw"  "rw")
-            (tb:bind "btn_ro"  "ro")
-            (tb:bind "btn_rl"  "rl")
-            (tb:bind "btn_rd"  "rd")
-            (tb:bind "btn_rcc" "rcc")
-            (tb:bind "btn_rbr" "rbr")
-            (tb:bind "btn_rbf" "rbf")
-            (tb:bind "btn_re"  "re")
-            (tb:bind "btn_ra"  "ra")
-            (tb:bind "btn_rn"  "rn")
-            (tb:bind "btn_rm"  "rm")
-            (tb:bind "btn_red" "red")
-
-            (tb:bind "btn_dk"  "dk")
-            (tb:bind "btn_dkk" "dkk")
-            (tb:bind "btn_sg"  "sg")
-            (tb:bind "btn_tml" "tml")
-            (tb:bind "btn_pq"  "pq")
-            (tb:bind "btn_pmh" "pmh")
-            (tb:bind "btn_dx"  "dx")
-            (tb:bind "btn_rt"  "rt")
-            (tb:bind "btn_ce"  "ce")
-
-            (tb:bind "btn_ss"  "ss")
-            (tb:bind "btn_qb"  "qb")
-            (tb:bind "btn_nn"  "nn")
-            (tb:bind "btn_lcd" "lcd")
-            (tb:bind "btn_lmj" "lmj")
-            (tb:bind "btn_qh"  "qh")
-            (tb:bind "btn_13"  "13")
-            (tb:bind "btn_23"  "23")
-            (tb:bind "btn_tn"  "Tn")
-            (tb:bind "btn_bpt" "bpt")
-
-            (action_tile "settings" "(done_dialog 99)")
-            (action_tile "help"     "(done_dialog 100)")
-            (action_tile "close"    "(done_dialog 0)")
-            (action_tile "cancel"   "(done_dialog 0)")
-
-            (setq result (start_dialog))
-            (unload_dialog dcl-id)
-
-            (cond
-              ((= result 99) (c:TBSETTING))
-              ((= result 100) (c:TBHELP))
-              ((= result 0)   (setq *TB:CMD* nil))
-              ((and *TB:CMD* (> result 10))
-               (tb:run-bound-command))))
-          (progn
-            (unload_dialog dcl-id)
-            (princ "\n[TB] æ— æ³•åˆå§‹åŒ–ä¸»ç•Œé¢å¯¹è¯æ¡†ã€‚")))
-        (princ "\n[TB] æ‰¾ä¸åˆ°ä¸»ç•Œé¢ DCL æ–‡ä»¶ã€‚"))
+        (progn
+          (setq *TB:CUR-PAGE* 0
+                *TB:DONE* nil)
+          (while (not *TB:DONE*)
+            (if (new_dialog (nth *TB:CUR-PAGE* *TB:PAGES*) dcl-id)
+              (progn
+                (set_tile (nth *TB:CUR-PAGE* *TB:TAB-KEYS*) "1")
+                (tb:bind-tabs)
+                (tb:bind-page *TB:CUR-PAGE*)
+                (if (uc:function-defined-p 'tb:update-page-labels)
+                  (vl-catch-all-apply 'tb:update-page-labels (list *TB:CUR-PAGE*)))
+                (action_tile "settings" "(done_dialog 99)")
+                (action_tile "help"     "(done_dialog 100)")
+                (action_tile "close"    "(done_dialog 0)")
+                (setq result (start_dialog))
+                (cond
+                  ((>= result 200) (setq *TB:CUR-PAGE* (- result 200)))
+                  ((= result 99) (c:TBSETTING2) (setq *TB:DONE* T))
+                  ((= result 100) (c:TBHELP) (setq *TB:DONE* T))
+                  ((= result 0) (setq *TB:DONE* T))
+                  ((< result 0) (setq *TB:DONE* T)) ; ESC È¡Ïû¶µµ×£¨ÒÑÒÆ³ı cancel_button£©
+                  ((and *TB:CMD* (> result 10)) (tb:run-bound-command) (setq *TB:DONE* T))))
+              (progn
+                (unload_dialog dcl-id)
+                (princ "\n[TB] ÎŞ·¨³õÊ¼»¯Ö÷½çÃæ¶Ô»°¿ò¡£")
+                (setq *TB:DONE* T))))
+          (unload_dialog dcl-id))
+        (princ "\n[TB] ÕÒ²»µ½Ö÷½çÃæ DCL ÎÄ¼ş¡£"))
       (setq *error* olderror)
       (princ))
 
     (defun c:TBSETTING (/ dcl-fn dcl-id result olderror)
-      "æ‰“å¼€ç³»ç»Ÿè®¾ç½®å¯¹è¯æ¡†ã€‚å¸¦é”™è¯¯ä¿æŠ¤ç¡®ä¿ DCL èµ„æºé‡Šæ”¾ã€‚"
+      "´ò¿ªÏµÍ³ÉèÖÃ¶Ô»°¿ò¡£´ø´íÎó±£»¤È·±£ DCL ×ÊÔ´ÊÍ·Å¡£"
       (setq olderror *error*
             *error* (lambda (msg)
                       (if dcl-id (vl-catch-all-apply 'unload_dialog (list dcl-id)))
                       (setq *error* olderror)
-                      (princ (strcat "\n[TB] è®¾ç½®ç•Œé¢å¼‚å¸¸: " (if msg msg "")))
+                      (princ (strcat "\n[TB] ÉèÖÃ½çÃæÒì³£: " (if msg msg "")))
                       (princ)))
       (setq dcl-fn (tb:resolve-dcl "tb-dcl-setting.dcl"))
       (if (and dcl-fn (setq dcl-id (load_dialog dcl-fn)))
@@ -188,6 +268,7 @@
 
             (action_tile "save"
               (strcat
+                "(if (<= 1 (atoi (get_tile \"cloud_col\")) 255)"
                 "(progn"
                 "(sys:set '*SYS:DWG-SCALE*    (atoi (get_tile \"scale\")))"
                 "(sys:set '*SYS:TEXT-HEIGHT*  (atoi (get_tile \"text_h\")))"
@@ -203,41 +284,42 @@
                 "(sys:set '*SYS:CLOUD-LAYER*  (get_tile \"cloud_lay\"))"
                 "(sys:set '*SYS:CLOUD-COLOR*  (atoi (get_tile \"cloud_col\")))"
                 "(sys:set '*SYS:CLOUD-ARC*    (atoi (get_tile \"cloud_arc\")))"
-                "(done_dialog 1))"))
+                "(done_dialog 1))(progn (alert \"ÔÆÏßÑÕÉ«ĞëÎª 1-255\") (mode_tile \"cloud_col\" 2)))"))
 
-            (action_tile "reset"  "(progn (sys:init-defaults)(done_dialog 2))")
+            (action_tile "reset"  "(progn (sys:reset-defaults)(done_dialog 2))")
             (action_tile "cancel" "(done_dialog 0)")
 
             (setq result (start_dialog))
             (unload_dialog dcl-id)
 
             (cond
-              ((= result 1) (princ "\nè®¾ç½®å·²ä¿å­˜ã€‚"))
-              ((= result 2) (princ "\nå·²æ¢å¤é»˜è®¤è®¾ç½®ã€‚"))))
+              ((= result 1) (princ "\nÉèÖÃÒÑ±£´æ¡£"))
+              ((= result 2) (princ "\nÒÑ»Ö¸´Ä¬ÈÏÉèÖÃ¡£"))))
           (progn
             (unload_dialog dcl-id)
-            (princ "\n[TB] æ— æ³•åˆå§‹åŒ–è®¾ç½®å¯¹è¯æ¡†ã€‚"))))
+            (princ "\n[TB] ÎŞ·¨³õÊ¼»¯ÉèÖÃ¶Ô»°¿ò¡£"))))
       (setq *error* olderror)
       (princ))
 
     (defun c:TBHELP ()
-      "æ˜¾ç¤ºå¸®åŠ©ä¿¡æ¯ã€‚"
+      "ÏÔÊ¾°ïÖúĞÅÏ¢¡£"
       (princ
         (strcat
           "\n=============================================="
-          "\n  å»ºç­‘ç»“æ„å·¥å…·ç®± v" *TB:VERSION*
-          "\n  å¹³å°: " *SYS:PLATFORM*
+          "\n  ½¨Öş½á¹¹¹¤¾ßÏä v" *TB:VERSION*
+          "\n  Æ½Ì¨: " *SYS:PLATFORM*
           "\n=============================================="
-          "\n  å‘½ä»¤:"
-          "\n    TB        æ‰“å¼€ä¸»ç•Œé¢"
-          "\n    TBSETTING æ‰“å¼€è®¾ç½®"
-          "\n    TBHELP    æ˜¾ç¤ºå¸®åŠ©"
+          "\n  ÃüÁî:"
+          "\n    TB        ´ò¿ªÖ÷½çÃæ"
+          "\n    TBSETTING ´ò¿ªÉèÖÃ"
+          "\n    TBSETTING2 ¿ì½İ¼üÉèÖÃ"
+          "\n    TBHELP    ÏÔÊ¾°ïÖú"
           "\n=============================================="))
       (princ))
 
     (princ
       (strcat
-        "\n[TB] å»ºç­‘ç»“æ„å·¥å…·ç®± v" *TB:VERSION* " å·²åŠ è½½"
-        "\n[TB] å‘½ä»¤: TB / TBSETTING / TBHELP"
-        "\n[TB] å¹³å°: " *SYS:PLATFORM*))
+        "\n[TB] ½¨Öş½á¹¹¹¤¾ßÏä v" *TB:VERSION* " ÒÑ¼ÓÔØ"
+        "\n[TB] ÃüÁî: TB / TBSETTING / TBHELP"
+        "\n[TB] Æ½Ì¨: " *SYS:PLATFORM*))
     (princ)))

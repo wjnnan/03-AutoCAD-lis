@@ -1,5 +1,5 @@
 (defun line:mid (ent-line)
-    "æ±‚çº¿æ®µå®ä½“ä¸­ç‚¹åæ ‡"
+    "ÇóÏß¶ÎÊµÌåÖĞµã×ø±ê"
     (polar (entity:getdxf ent-line 10)
         (apply (quote angle)
             (entity:getdxf ent-line (quote (10 11))))

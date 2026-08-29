@@ -1,13 +1,13 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; vitaltools -- å”¯ä»–å·¥å…·é›†
+;;; vitaltools -- Î¨Ëû¹¤¾ß¼¯
 ;;; Author: VitalGG<vitalgg@gmail.com>
-;;; Description: åŸºäº AutoLisp/VisualLisp å¼€å‘çš„ç»˜å›¾å·¥å…·é›†
+;;; Description: »ùÓÚ AutoLisp/VisualLisp ¿ª·¢µÄ»æÍ¼¹¤¾ß¼¯
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; æ–‡æœ¬æ“ä½œ
-;;; æ’ç‰ˆï¼Œæ‰¹é‡æ”¹å¯¹é½æ–¹å¼ï¼Œå±æ€§å˜æ–‡æœ¬ï¼Œ
-(@:define-config '@text:fonts "tssdeng.shx,tssdchn.shx" "æ–‡å­—æ ·å¼ standard çš„å­—ä½“æ–‡ä»¶")
-(@:define-config '@text:color 10 "ä¸´æ—¶ç»˜çº¿çš„é¢œè‰²å·ï¼Œæ¯æ¬¡å˜åŒ–åŠ ä»¥åŒºåˆ«")
-(@:define-config '@text:temp-layer "@temp@" "ä¸´æ—¶ç»˜çº¿çš„å›¾å±‚")
+;;; ÎÄ±¾²Ù×÷
+;;; ÅÅ°æ£¬ÅúÁ¿¸Ä¶ÔÆë·½Ê½£¬ÊôĞÔ±äÎÄ±¾£¬
+(@:define-config '@text:fonts "tssdeng.shx,tssdchn.shx" "ÎÄ×ÖÑùÊ½ standard µÄ×ÖÌåÎÄ¼ş")
+(@:define-config '@text:color 10 "ÁÙÊ±»æÏßµÄÑÕÉ«ºÅ£¬Ã¿´Î±ä»¯¼ÓÒÔÇø±ğ")
+(@:define-config '@text:temp-layer "@temp@" "ÁÙÊ±»æÏßµÄÍ¼²ã")
 
 (defun @text:setup (/ res)
    (setq @::tmp-search-str "@text")
@@ -19,16 +19,16 @@
 	       0 0.72 0 "n" "n" "n")))
 (defun @text:multi-text-align (/ A ALL B C L M N P VAL X0 XYZ_NEW Y Y0 Z)
   (@::prompt 
-   "å¯¹å¤šä¸ªä¹±åºæ’åˆ—çš„å•è¡Œæ–‡æœ¬å·¦å¯¹é½.å¹¶æŒ‰è¡Œè·æ•´é½æ’åˆ—ã€‚")
+   "¶Ô¶à¸öÂÒĞòÅÅÁĞµÄµ¥ĞĞÎÄ±¾×ó¶ÔÆë.²¢°´ĞĞ¾àÕûÆëÅÅÁĞ¡£")
   (setq a (ssget (list (cons 0 "text"))))
-  (setq n (sslength a))
+  (setq n (if a (sslength a) 0))
   (setq all nil)
   (setq m 0)
   (while (< m n)
     (setq all (append all (list (entget (ssname a m)))))
     (setq m (1+ m))
     )
-  ;; æ’åºç®—æ³•
+  ;; ÅÅĞòËã·¨
   (setq l 0)
   (setq m 1)
   (while (< l n)
@@ -50,10 +50,10 @@
     (setq m (1+ l))
     )
 
-  (setq val (getdist "\nè¡Œè·ï¼š"))
-  (if (null val) (progn (princ "\nè¡Œè·æœªè®¾ç½® -- é€€å‡º.") (quit)))
-  (setq p (getpoint "\né¦–è¡Œçš„æ’å…¥ç‚¹ï¼š"))
-  (if (null p) (progn (princ "\næ’å…¥ç‚¹æœªè®¾ç½® -- é€€å‡º.") (quit)))
+  (setq val (getdist "\nĞĞ¾à£º"))
+  (if (null val) (progn (princ "\nĞĞ¾àÎ´ÉèÖÃ -- ÍË³ö.") (quit)))
+  (setq p (getpoint "\nÊ×ĞĞµÄ²åÈëµã£º"))
+  (if (null p) (progn (princ "\n²åÈëµãÎ´ÉèÖÃ -- ÍË³ö.") (quit)))
   (setq x0 (car p))
   (setq y0 (cadr p))
 
@@ -71,11 +71,11 @@
     )
   )
 (defun @text:insert-time( / ctextstyle cl )
-  "æ’å…¥æ—¶é—´æˆ³è®°"
+  "²åÈëÊ±¼ä´Á¼Ç"
   (push-var nil)
 					;(setvar "textstyle" "vitalhz350")
-  (setq pt0 (getpoint "\nè¯·æŒ‡å®šæ’å…¥ä½ç½®ç‚¹ :"))
-  (if (null pt0) (progn (princ "\næ’å…¥ä½ç½®æœªè®¾ç½® -- é€€å‡º.") (quit)))
+  (setq pt0 (getpoint "\nÇëÖ¸¶¨²åÈëÎ»ÖÃµã :"))
+  (if (null pt0) (progn (princ "\n²åÈëÎ»ÖÃÎ´ÉèÖÃ -- ÍË³ö.") (quit)))
   (setq date0 (menucmd "M=$(edtime,$(getvar,date),YYYY.MO.DD hh:mm:ss)"))
 					;(setvar "textsize" 250)
   (setq cl (getvar "clayer"))
@@ -92,9 +92,9 @@
   )
 
 (defun @text:justify( / s1 ename ti% p11 p10 f en p11n p10n fn fn1)
-  "è°ƒæ•´å•è¡Œæ–‡æœ¬å¯¹é½æ–¹å¼(æ–‡æœ¬çš„ä½ç½®ä¸å˜)"
-  (setq s1 (ssget  '((0 . "TEXT"))))		;æ„é€ é’ˆå¯¹TEXTçš„é€‰æ‹©é›†
-  (command "justifytext" s1 "")
+  "µ÷Õûµ¥ĞĞÎÄ±¾¶ÔÆë·½Ê½(ÎÄ±¾µÄÎ»ÖÃ²»±ä)"
+  (setq s1 (ssget  '((0 . "TEXT"))))		;¹¹ÔìÕë¶ÔTEXTµÄÑ¡Ôñ¼¯
+  (if s1 (command "justifytext" s1 ""))
 ;;;  (setq ti% 0)
 ;;;   (if (/= s1 nil)
 ;;;       (progn
@@ -104,24 +104,24 @@
 ;;; 	     (- (sslength s1) 1)
 ;;; 	     )
 ;;; 	  (setq ename(ssname s1 ti%))
-;;; 	  (setq p11 nil)			;å°†p11ç½®ç©º
-;;; 	  (setq e (entget ename))		;å–å®ä½“è¡¨e
-;;; 	  (setq p11 (assoc  11 e))	;å–å¯¹é½ç‚¹
-;;; 	  (setq p10 (assoc 10 e))	;å–å…¶å§‹ç‚¹è¡¨
-;;; 	  (setq f (assoc 10 e))	;å¦‚ä¸Š
+;;; 	  (setq p11 nil)			;½«p11ÖÃ¿Õ
+;;; 	  (setq e (entget ename))		;È¡ÊµÌå±íe
+;;; 	  (setq p11 (assoc  11 e))	;È¡¶ÔÆëµã
+;;; 	  (setq p10 (assoc 10 e))	;È¡ÆäÊ¼µã±í
+;;; 	  (setq f (assoc 10 e))	;ÈçÉÏ
 ;;; 	  (setq en e)
 ;;; 	  (if (= (cdr f) 0) (setq p11n (cons 11 (cdr p10))))
 ;;; 
 ;;; 	  (if (/= (cdr f ) 0)
 ;;; 	      (progn
-;;; 		(setq p10n (cons 10 (cdr p11)))	;å°†å¯¹é½ç‚¹ä½æ„æˆå…¶å§‹ç‚¹è¡¨èµ‹ç»™p10n
-;;; 		(setq en (subst p10n p10 en))	;ç”¨æ–°çš„å…¶å§‹ç‚¹ä½æ›´æ¢æ—§çš„å…¶å§‹ ç‚¹è¡¨
+;;; 		(setq p10n (cons 10 (cdr p11)))	;½«¶ÔÆëµãÎ»¹¹³ÉÆäÊ¼µã±í¸³¸øp10n
+;;; 		(setq en (subst p10n p10 en))	;ÓÃĞÂµÄÆäÊ¼µãÎ»¸ü»»¾ÉµÄÆäÊ¼ µã±í
 ;;; 		)
 ;;; 	    )
 ;;; 	  (setq fn 0)
-;;; 	  (setq fn (cons 72 fn))			;(72 . 0) ä¸ºå·¦é½
-;;; 	  (setq fn1 (assoc 72 en))		;å–æ—§çš„å¯¹é½æ–¹å¼
-;;; 	  (setq e (subst fn fn1 e))		;æ›´æ¢æ—§çš„å¯¹é½æ–¹å¼ä¸ºå·¦é½
+;;; 	  (setq fn (cons 72 fn))			;(72 . 0) Îª×óÆë
+;;; 	  (setq fn1 (assoc 72 en))		;È¡¾ÉµÄ¶ÔÆë·½Ê½
+;;; 	  (setq e (subst fn fn1 e))		;¸ü»»¾ÉµÄ¶ÔÆë·½Ê½Îª×óÆë
 ;;; 
 ;;; 	  (entmod e)
 ;;; 	  (setq ti%(+ 1 ti%))
@@ -133,24 +133,24 @@
   )
 
 (defun @text:justifytext-left(/ s1 ename ti% p11 p10 f en p11n p10n fn fn1)
-  "è°ƒæ•´å•è¡Œæ–‡æœ¬å·¦å¯¹é½(æ–‡æœ¬çš„ä½ç½®ä¸å˜)"
-  (setq s1 (ssget  '((0 . "TEXT"))))		;æ„é€ é’ˆå¯¹TEXTçš„é€‰æ‹©é›†
-  (command "justifytext" s1 "" "L" )
+  "µ÷Õûµ¥ĞĞÎÄ±¾×ó¶ÔÆë(ÎÄ±¾µÄÎ»ÖÃ²»±ä)"
+  (setq s1 (ssget  '((0 . "TEXT"))))		;¹¹ÔìÕë¶ÔTEXTµÄÑ¡Ôñ¼¯
+  (if s1 (command "justifytext" s1 "" "L" ))
   )
 (defun @text:justifytext-right(/ s1 ename ti% p11 p10 f en p11n p10n fn fn1)
-  "è°ƒæ•´å•è¡Œæ–‡æœ¬å³å¯¹é½(æ–‡æœ¬çš„ä½ç½®ä¸å˜)"
-  (setq s1 (ssget  '((0 . "TEXT"))))		;æ„é€ é’ˆå¯¹TEXTçš„é€‰æ‹©é›†
-  (command "justifytext" s1 "" "r" )
+  "µ÷Õûµ¥ĞĞÎÄ±¾ÓÒ¶ÔÆë(ÎÄ±¾µÄÎ»ÖÃ²»±ä)"
+  (setq s1 (ssget  '((0 . "TEXT"))))		;¹¹ÔìÕë¶ÔTEXTµÄÑ¡Ôñ¼¯
+  (if s1 (command "justifytext" s1 "" "r" ))
   )
 
 (defun @text:justifytext-middle(/ s1 ename ti% p11 p10 f en p11n p10n fn fn1)
-  "è°ƒæ•´å•è¡Œæ–‡æœ¬ä¸­å¯¹é½(æ–‡æœ¬çš„ä½ç½®ä¸å˜)"
-  (setq s1 (ssget  '((0 . "TEXT"))))		;æ„é€ é’ˆå¯¹TEXTçš„é€‰æ‹©é›†
-  (command "justifytext" s1 "" "m" )
+  "µ÷Õûµ¥ĞĞÎÄ±¾ÖĞ¶ÔÆë(ÎÄ±¾µÄÎ»ÖÃ²»±ä)"
+  (setq s1 (ssget  '((0 . "TEXT"))))		;¹¹ÔìÕë¶ÔTEXTµÄÑ¡Ôñ¼¯
+  (if s1 (command "justifytext" s1 "" "m" ))
   )
 (defun @text:a2t(/ s1 ename ti% p11 p10 f en p11n p10n fn fn1 attribtext)
-  (@::prompt "å°†å±æ€§è½¬åŒ–ä¸ºå•è¡Œæ–‡æœ¬.")
-  (setq  s1  (ssget  '((0 . "ATTDEF"))))		;æ„é€ é’ˆå¯¹TEXTçš„é€‰æ‹©é›†
+  (@::prompt "½«ÊôĞÔ×ª»¯Îªµ¥ĞĞÎÄ±¾.")
+  (setq  s1  (ssget  '((0 . "ATTDEF"))))		;¹¹ÔìÕë¶ÔTEXTµÄÑ¡Ôñ¼¯
   (setq attribtext '((0 . "TEXT") (100 . "AcDbEntity") (67 . 0) (410 . "Model") (8 . "0") (100 . "AcDbText") )  ) 
   (setq ti% 0)
   (if (/= s1 nil)
@@ -161,12 +161,12 @@
 	     (- (sslength s1) 1)
 	     )
 	  (setq ename(ssname s1 ti%))
-	  (setq p11 nil)			;å°†p11ç½®ç©º
-	  (setq e (entget ename))		;å–å®ä½“è¡¨e
+	  (setq p11 nil)			;½«p11ÖÃ¿Õ
+	  (setq e (entget ename))		;È¡ÊµÌå±íe
 	  (setq en e)
-	  ;;	(setq fn (cons 0 "TEXT"))  ; (72 . 0) ä¸ºå·¦é½
-	  ;;	(setq fn1 (assoc 0 en))	   ; å–æ—§çš„å¯¹é½æ–¹å¼
-	  ;;	(setq e (subst fn fn1 e))  ; æ›´æ¢æ—§çš„å¯¹é½æ–¹å¼ä¸ºå·¦é½
+	  ;;	(setq fn (cons 0 "TEXT"))  ; (72 . 0) Îª×óÆë
+	  ;;	(setq fn1 (assoc 0 en))	   ; È¡¾ÉµÄ¶ÔÆë·½Ê½
+	  ;;	(setq e (subst fn fn1 e))  ; ¸ü»»¾ÉµÄ¶ÔÆë·½Ê½Îª×óÆë
 	  (setq e1 attribtext)
 	  (setq e1 (append e1 (list (cons 1 (cdr (assoc 2 en))) (assoc 10 en) (assoc 11 en) (assoc 7 en) (assoc 50 en) (assoc 71 en) (assoc 72 en) (assoc 73 en) (assoc 210 en) (assoc 40 en) (assoc 41 en))))
 	  ;;;(princ e1)
@@ -180,16 +180,16 @@
   (princ)
   )
 
-;;å•è¡Œæ–‡å­—ä»¥å·¦ä¸Šè§’ä¸ºåŸºç‚¹è½¬å¤šè¡Œæ–‡å­—
-;;æ ¹æ®<<åŠ¨æ€ä¿®æ”¹å•è¡Œæ–‡å­—å®½åº¦èŒƒå›´>>ä¿®æ”¹è€Œæ¥   
-;;ä¿®æ”¹ï¼šå­¤å¸†
+;;µ¥ĞĞÎÄ×ÖÒÔ×óÉÏ½ÇÎª»ùµã×ª¶àĞĞÎÄ×Ö
+;;¸ù¾İ<<¶¯Ì¬ĞŞ¸Äµ¥ĞĞÎÄ×Ö¿í¶È·¶Î§>>ĞŞ¸Ä¶øÀ´   
+;;ĞŞ¸Ä£º¹Â·«
 (defun @text:to-mtext( / #height #layer #pnt1 #read #string #text #textwidth Textwidth dl e1 e2 ell ename entext i ss text y #Pnt2)
   (setq ss (ssget '((0 . "TEXT"))) 
         i  0 
         dl nil
 	Textwidth 0
 	);setq
-					;(setq #Pnt1 (getpoint "\è¾“å…¥å·¦ä¸Šè§’æ’å…¥ç‚¹: "))
+					;(setq #Pnt1 (getpoint "\ÊäÈë×óÉÏ½Ç²åÈëµã: "))
   (if ss
       (progn 
         (repeat (sslength ss)
@@ -218,7 +218,7 @@
                 );repeat
         (command "erase" ss "")
         );progn
-      (princ "\næœªé€‰ä¸­ä»»ä½•æ–‡å­—ï¼")
+      (princ "\nÎ´Ñ¡ÖĞÈÎºÎÎÄ×Ö£¡")
       );if
   (setq #String text)
   (setq #Text (@text:MText #Pnt1 #String Textwidth #Layer 1 #Height #textstyle)) 
@@ -227,14 +227,16 @@
   (redraw)
   (princ)
   )
-;;;å–å¾—å®ä½“å¤–çŸ©å½¢æ¡†---è¿”å›ï¼ˆp1 p2ï¼‰
+;;;È¡µÃÊµÌåÍâ¾ØĞÎ¿ò---·µ»Ø£¨p1 p2£©
 (defun getbox (en / obj box-p1 box-p2)
   (setq obj (vlax-ename->vla-object en))
   (if (vl-catch-all-error-p
         (vl-catch-all-apply 'vla-getboundingbox (list obj 'box-p1 'box-p2)))
     (setq box-p1 nil box-p2 nil))
-  (setq box-p1 (vlax-safearray->list box-p1))
-  (setq box-p2 (vlax-safearray->list box-p2))
+  (if box-p1
+    (progn
+      (setq box-p1 (vlax-safearray->list box-p1))
+      (setq box-p2 (vlax-safearray->list box-p2))))
   (list box-p1 box-p2)
   )
 (defun @text:MText (#InsertionPoint #String #Width #Layer #Justification #Height  #style / #insertion #object #space)
@@ -270,14 +272,16 @@
 		   ) 
          )
 	)
-  (vla-put-StyleName #Object #style)
+  (and #style
+       (tblsearch "style" #style)
+       (vla-put-StyleName #Object #style))
   #Object
   )
 
 (defun @text:menu-add-prefix-or-suffix(/ res)
-  (setq res (ui:input "è¯·è¾“å…¥å‰åç¼€æ–‡å­—" '(("å‰ç¼€:" )("åç¼€:"))))
-  (@text:add-prefix-suffix (cdr (assoc "å‰ç¼€:" res))
-			   (cdr (assoc "åç¼€:" res))
+  (setq res (ui:input "ÇëÊäÈëÇ°ºó×ºÎÄ×Ö" '(("Ç°×º:" )("ºó×º:"))))
+  (@text:add-prefix-suffix (cdr (assoc "Ç°×º:" res))
+			   (cdr (assoc "ºó×º:" res))
 			   (pickset:to-list (ssget '((0 . "TEXT")))))
   (princ))
     
@@ -288,16 +292,16 @@
 	  lst-ent))
 
 (defun @text:find-from-line(/ s1 pt-base txt ename ti% p11 p10 f en p11n p10n fn fn1 attribtext)
-  (@::prompt "é€‰æ‹©ä¸€ä¸ªæ–‡æœ¬aï¼Œé€‰æ‹©æŸ¥æ‰¾èŒƒå›´ï¼ŒæŸ¥æ‰¾å†…å®¹ç›¸åŒçš„æ–‡æœ¬ï¼Œå¹¶è¿çº¿ã€‚")
+  (@::prompt "Ñ¡ÔñÒ»¸öÎÄ±¾a£¬Ñ¡Ôñ²éÕÒ·¶Î§£¬²éÕÒÄÚÈİÏàÍ¬µÄÎÄ±¾£¬²¢Á¬Ïß¡£")
   (if (null layer:make)(require 'layer:*))
   (if (= 'subr (type layer:make))
       (layer:make (@:get-config '@text:temp-layer) 1 nil nil))
-  (if (setq en1 (car (entsel "è¯·é€‰æ‹©ä¸€ä¸ªå•è¡Œæ–‡æœ¬:"))))
-  (setq pt-base (cdr (assoc 10 (entget en1))))
+  (if (setq en1 (car (entsel "ÇëÑ¡ÔñÒ»¸öµ¥ĞĞÎÄ±¾:")))
+      (setq pt-base (cdr (assoc 10 (entget en1)))))
   (setq txt (cdr (assoc 1 (entget en1))))
   (if (and pt-base txt)
       (progn
-	(princ "\nè¯·é€‰æ‹©éœ€è¦æŸ¥æ‰¾çš„åŒºåŸŸ:")
+	(princ "\nÇëÑ¡ÔñĞèÒª²éÕÒµÄÇøÓò:")
 	(setq s1 (ssget  (list '(0 . "text,tch_text") (cons 1 txt))))
 	(mapcar
 	 (function
@@ -317,13 +321,13 @@
   )
 
 (defun @text:menu-format-number(/ int-n int-fraction res)
-  (@::prompt '("æ ¼å¼åŒ–æ–‡æœ¬ä¸­çš„æ•°å­—."
-	       "æ³¨æ„: å¦‚æœå°æ•°ä½å¤ªå°,ä¼šä¸¢å¤±ç²¾åº¦ä¸”ä¸å¯æ¢å¤."))
-  (setq res (ui:input "è¯·è¾“å…¥æ ¼å¼åŒ–é…ç½®å‚æ•°"
-		      '(("æ•´æ•°ä½æ•°" 2)
-			("å°æ•°ä½æ•°" 3)
-			("å¡«å……å­—ç¬¦" "0"))))
-  (prompt "è¯·é€‰æ‹©è¦å¤„ç†çš„æ–‡æœ¬")
+  (@::prompt '("¸ñÊ½»¯ÎÄ±¾ÖĞµÄÊı×Ö."
+	       "×¢Òâ: Èç¹ûĞ¡ÊıÎ»Ì«Ğ¡,»á¶ªÊ§¾«¶ÈÇÒ²»¿É»Ö¸´."))
+  (setq res (ui:input "ÇëÊäÈë¸ñÊ½»¯ÅäÖÃ²ÎÊı"
+		      '(("ÕûÊıÎ»Êı" 2)
+			("Ğ¡ÊıÎ»Êı" 3)
+			("Ìî³ä×Ö·û" "0"))))
+  (prompt "ÇëÑ¡ÔñÒª´¦ÀíµÄÎÄ±¾")
   (setq txts (pickset:to-list (ssget '((0 . "text")))))
   (mapcar
    '(lambda(x)
@@ -335,9 +339,9 @@
 	    (if (string:numberp y)
 		(string:number-format
 		 (vl-string-left-trim "0 " y)
-		 (cdr (assoc "æ•´æ•°ä½æ•°" res))
-		 (cdr (assoc "å°æ•°ä½æ•°" res))
-		 (cdr (assoc "å¡«å……å­—ç¬¦" res))
+		 (cdr (assoc "ÕûÊıÎ»Êı" res))
+		 (cdr (assoc "Ğ¡ÊıÎ»Êı" res))
+		 (cdr (assoc "Ìî³ä×Ö·û" res))
 		 )
 	      y)
 	    )

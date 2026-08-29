@@ -1,15 +1,15 @@
 (defun ui:table (lst-data / tmp-data dcl-tmp dcl_fp dcl_id pkg para% curr-page per-page tbl-widths tbl-title page-up page-down *error* show-data-list callback-accept)
-  "è¡¨æ ¼ç¼–è¾‘,çº¯DCLæ–¹å¼å®ç°,ä½¿ç”¨å‰å…ˆè®¾ç½® ui:*table-title* æ ‡é¢˜ï¼Œèµ‹å€¼ç»™ ui:*table-numbers-per-page* (æ•´æ•°)ï¼Œå¯ä»¥è®¾ç½®æ¯é¡µçš„è¡Œæ•°(é»˜è®¤ä¸º20)ã€‚ui:*table-widths* ç”¨äºå®šä¹‰æ¯åˆ—çš„å®½åº¦ï¼Œé»˜è®¤æ¯åˆ—å®½åº¦ä¸º10ã€‚æœ€å¤§æ”¯æŒåˆ—æ•°ä¸º26åˆ—ã€‚"
-  "ä¿®æ”¹åçš„æ•°æ®"
-  "(setq ui:*table-title* \"æˆ‘çš„è¡¨æ ¼\")(setq ui:*table-widths* '(10 5 10 15))(ui:table '((\"å§“å\"
-        \"æ€§åˆ«\"
-        \"å¹´é¾„\"
-        \"èº«é«˜\")(\"å¼ ä¸‰\"
-        \"ç”·\"
-        18 180)(\"æå››\"
-        \"å¥³\"
-        18 170)(\"ç‹äº”\"
-        \"ç”·\"
+  "±í¸ñ±à¼­,´¿DCL·½Ê½ÊµÏÖ,Ê¹ÓÃÇ°ÏÈÉèÖÃ ui:*table-title* ±êÌâ£¬¸³Öµ¸ø ui:*table-numbers-per-page* (ÕûÊı)£¬¿ÉÒÔÉèÖÃÃ¿Ò³µÄĞĞÊı(Ä¬ÈÏÎª20)¡£ui:*table-widths* ÓÃÓÚ¶¨ÒåÃ¿ÁĞµÄ¿í¶È£¬Ä¬ÈÏÃ¿ÁĞ¿í¶ÈÎª10¡£×î´óÖ§³ÖÁĞÊıÎª26ÁĞ¡£"
+  "ĞŞ¸ÄºóµÄÊı¾İ"
+  "(setq ui:*table-title* \"ÎÒµÄ±í¸ñ\")(setq ui:*table-widths* '(10 5 10 15))(ui:table '((\"ĞÕÃû\"
+        \"ĞÔ±ğ\"
+        \"ÄêÁä\"
+        \"Éí¸ß\")(\"ÕÅÈı\"
+        \"ÄĞ\"
+        18 180)(\"ÀîËÄ\"
+        \"Å®\"
+        18 170)(\"ÍõÎå\"
+        \"ÄĞ\"
         18 180)))"
   (defun *error* (msg)
     (if (= (quote file)
@@ -180,7 +180,7 @@
     (write-line (strcat ": row { ")
       dcl_fp)
     (write-line (strcat ":edit_box{key=\"rno\";value=\"
-         è¡Œå·\";width=2;fixed_width=true;horizontal_margin=none;vertical_margin=none;is_enabled=false;}")
+         ĞĞºÅ\";width=2;fixed_width=true;horizontal_margin=none;vertical_margin=none;is_enabled=false;}")
       dcl_fp)
     (setq i% 0)
     (repeat (length (car tmp-data))

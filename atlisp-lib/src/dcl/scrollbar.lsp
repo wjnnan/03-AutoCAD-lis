@@ -2,8 +2,8 @@
   (set (read (strcat "cb-"
         key "scrollbar"))
     (lambda (key)
-      "æ»šåŠ¨æ¡äº‹ä»¶çš„å›è°ƒå‡½æ•°"
-      (alert (strcat "è¯·å®šä¹‰å›è°ƒå‡½æ•° (cb-"
+      "¹ö¶¯ÌõÊÂ¼şµÄ»Øµ÷º¯Êı"
+      (alert (strcat "Çë¶¨Òå»Øµ÷º¯Êı (cb-"
             key "scrollbar)"))))
   (if (eval (read (strcat key "total-page")))
     (write-line (strcat ":slider{action=\"(cb-"
@@ -18,5 +18,5 @@
         (itoa (1- (eval (read (strcat key "total-page")))))
         ";min_value=0;small_increment=1;}")
       dcl-fp)
-    (alert (strcat "è¯·åœ¨Modeléƒ¨å®šä¹‰ "
-        key "total-page å˜é‡ã€‚"))))
+    (alert (strcat "ÇëÔÚModel²¿¶¨Òå "
+        key "total-page ±äÁ¿¡£"))))

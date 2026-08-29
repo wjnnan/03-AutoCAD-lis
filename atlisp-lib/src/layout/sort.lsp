@@ -1,5 +1,5 @@
 (defun layout:sort (/ i layname layname-s)
-    "鑷姩鎸夊竷灞�鍚嶆帓搴忓竷灞�"
+    "自动按布局名排序布局"
     (setq layname (layout:list)
         layname-s (string:sort-by-numer layname)
         i 0)

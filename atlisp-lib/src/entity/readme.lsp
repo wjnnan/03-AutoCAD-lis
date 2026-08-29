@@ -1,4 +1,4 @@
-(defun entity:readme nil "å›¾å…ƒæ“ä½œç›¸å…³å‡½æ•°ã€‚"
-  (princ "å›¾å…ƒæ“ä½œç›¸å…³å‡½æ•°ã€‚ä½¿ç”¨ (require 'entity:*)
-    åŠ è½½è¿™äº›å‡½æ•°")
+(defun entity:readme nil "Í¼Ôª²Ù×÷Ïà¹Øº¯Êı¡£"
+  (princ "Í¼Ôª²Ù×÷Ïà¹Øº¯Êı¡£Ê¹ÓÃ (require 'entity:*)
+    ¼ÓÔØÕâĞ©º¯Êı")
   (princ))

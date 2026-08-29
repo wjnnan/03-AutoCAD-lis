@@ -1,8 +1,8 @@
 (defun dcl:set-mtext (key value / i% rows width)
-  "给 mtext 控件赋值，自动换行。当 value 的长度大于 mtext 可以容纳的长度时，结尾加 ... 号。"
+  "�� mtext �ؼ���ֵ���Զ����С��� value �ĳ��ȴ��� mtext �������ɵĳ���ʱ����β�� ... �š�"
   ""
   "(dcl:set-mtext \"mt\"
-    \"给 mtext 控件赋值，自动换行。当 value 的长度大于 mtext 可以容纳的长度时，结尾加 ... 号。\")"
+    \"�� mtext �ؼ���ֵ���Զ����С��� value �ĳ��ȴ��� mtext �������ɵĳ���ʱ����β�� ... �š�\")"
   (setq i% 0)
   (while (get_tile (strcat key (itoa (setq i% (1+ i%))))))
   (setq rows (1- i%))

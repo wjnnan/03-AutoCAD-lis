@@ -1,6 +1,6 @@
 (defun entity:make-layer (strname intcolor strltype boolecur / iloc obj out)
-  "鍒涘缓鍥惧眰\n鍙傛暟:\nstrName:鍥惧眰鍚峔nintColor:鍥惧眰棰滆壊\nstrLtype:鍥惧眰绾垮瀷\nbooleCur:鏄惁缃负褰撳墠鍥惧眰"
-  "鎴愬姛杩斿洖鍥惧眰鍚嶏紝澶辫触杩斿洖nil"
+  "创建图层\n参数:\nstrName:图层名\nintColor:图层颜色\nstrLtype:图层线型\nbooleCur:是否置为当前图层"
+  "成功返回图层名，失败返回nil"
   "(entity:make-layer \"Layer1\"
     3 \"DASHED\"
     T)"

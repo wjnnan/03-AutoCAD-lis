@@ -1,5 +1,5 @@
 (defun ini:set (lst-ini node attr value / sub)
-  "è®¾ç½® ini çš„æŸé¡¹çš„å€¼ã€‚lst-ini iniæ–‡ä»¶çš„è§£æç»“æœè¡¨, node èŠ‚ ï¼Œattr å±æ€§é¡¹, value å€¼ã€‚"
+  "ÉèÖÃ ini µÄÄ³ÏîµÄÖµ¡£lst-ini iniÎÄ¼şµÄ½âÎö½á¹û±í, node ½Ú £¬attr ÊôĞÔÏî, value Öµ¡£"
   "lst-ini"
   (setq node (strcat "["(vl-string-trim "[] " node)"]"))
   (setq sub (cdr (assoc node lst-ini)))

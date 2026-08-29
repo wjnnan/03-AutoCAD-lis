@@ -1,6 +1,6 @@
 (defun music-die:multi-element (element num / element-list)
-  "\n浣挎煇涓猯isp鍏冪礌鍑虹幇浠ュ垪琛ㄥ舰寮忓瓨鍌ㄥ浠絓nELEMENT 鍏冪礌  num 瀛樺偍浠芥暟\n浣滆�咃細MUSIC-DIE\n"
-  "\n杩斿洖鍊硷細锛坙ist element elemen element element ...锛塡n"
+  "\n使某个lisp元素出现以列表形式存储多份\nELEMENT 元素  num 存储份数\n作者：MUSIC-DIE\n"
+  "\n返回值：（list element elemen element element ...）\n"
   "(Multi-element 123 3)
   --> '(123 123 123)"
   (repeat num (setq element-list (cons element element-list))))

@@ -1,11 +1,11 @@
-(@:add-menu "@è¯•éªŒå®¤" "åŠ å›ºæ¿" '(at-lab:board))
+(@:add-menu "@ÊÔÑéÊÒ" "¼Ó¹Ì°å" '(at-lab:board))
 (defun at-lab:board (/ lines pts-b pts-t flag thickness bottom-board top-board startpt endpt rt rb db) 
-  (@::prompt '("å½“å‰ç‰ˆæœ¬åªæ”¯æŒä¸¤æ¡ç­‰é•¿çš„æ°´å¹³ç›´çº¿"))
+  (@::prompt '("µ±Ç°°æ±¾Ö»Ö§³ÖÁ½ÌõµÈ³¤µÄË®Æ½Ö±Ïß"))
   (push-var nil)
   (setvar "OSMODE" 0)
-  ;; é€‰æ‹©ä¸¤æ¡æ°´å¹³ç›´çº¿
+  ;; Ñ¡ÔñÁ½ÌõË®Æ½Ö±Ïß
   (setq lines (ssget '((0 . "LINE"))))
-  (setq lines (pickset:to-list (pickset:sort-with-dxf lines 10 1 0 nil))) ; æ’åº
+  (setq lines (pickset:to-list (pickset:sort-with-dxf lines 10 1 0 nil))) ; ÅÅĞò
   (setq pts-b (vl-sort 
                 (curve:get-points (car lines))
                 '(lambda (x y) (< (car x) (car y)))))
@@ -14,7 +14,7 @@
                 '(lambda (x y) (< (car x) (car y)))))
   (setq flag      (> (distance (car pts-b) (car pts-t)) 25)
         thickness (- (cadar pts-t) (cadar pts-b) 18))
-  ;; åº•æ¿
+  ;; µ×°å
   (setq bottom-board (entity:make-rectangle 
                        (car pts-b)
                        (setq rb (polar (last pts-b) (* 0.5 pi) 9))))
@@ -22,7 +22,7 @@
   (setvar "HPNAME" "ANSI34")
   (setvar "HPANG" 0)
   (command "-hatch" "s" bottom-board "" "")
-  ;; é¡¶æ¿
+  ;; ¶¥°å
   (setq top-board (entity:make-rectangle 
                     (car pts-t)
                     (setq rt (polar (last pts-t) (* 1.5 pi) 9))))
@@ -31,7 +31,7 @@
   (setq startpt (polar (car pts-b) (* 0.5 pi) 9)
         endpt   rt)
   (if flag 
-    ;; å¡«æ–¹
+    ;; Ìî·½
     (progn 
 
       (while (< (+ 36 (car startpt)) (car endpt)) 
@@ -42,14 +42,14 @@
       (entity:make-rectangle 
         rt
         (polar (polar rt pi 9) (* 1.5 pi) thickness))
-      ;; å µæ¿
+      ;; ¶Â°å
       (setq db (entity:make-rectangle 
                  (polar rt (* 0.5 pi) 9)
                  (polar (polar rt 0 9) (* 1.5 pi) (+ thickness 9))))
       (setvar "HPNAME" "ANSI34")
       (setvar "HPANG" 0)
       (command "-hatch" "s" db "" ""))
-    ;; å¡«æ¿
+    ;; Ìî°å
     (progn 
       (entity:putdxf 
         (setq tf (entity:make-rectangle 

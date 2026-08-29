@@ -1,5 +1,5 @@
 (defun prefabricated-building:stat-beam ()
-  "ç»Ÿè®¡æ¢é•¿"
+  "Í³¼ÆÁº³¤"
   (setq beams (pickset:to-list(ssget '((0 . "LWPOLYLINE")(8 . "GJ")))))
 
   (setq statdata (stat:stat
@@ -31,13 +31,13 @@
 		statdata))
   (setq ent-tbl
 	(table:make '(0 0 0)
-		    "æ¢ç»Ÿè®¡è¡¨"
-		    '("æ¢é•¿La""ä¸ªæ•°""å‡€è·¨L" "åº•ç­‹""å¤‡æ³¨")
+		    "ÁºÍ³¼Æ±í"
+		    '("Áº³¤La""¸öÊı""¾»¿çL" "µ×½î""±¸×¢")
 		    table-data))
   (ui:dyndraw ent-tbl '(0 0 0)))
   
 (defun prefabricated-building:dim-beam ()
-  "æ³¨æ¢å‡€è·¨"
+  "×¢Áº¾»¿ç"
   (setq beams (pickset:to-list(ssget '((0 . "LWPOLYLINE")(8 . "GJ")))))
   (mapcar '(lambda(x)
 	    (setq pts (curve:get-points x))

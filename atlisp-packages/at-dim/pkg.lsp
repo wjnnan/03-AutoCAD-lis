@@ -1,14 +1,14 @@
 (@::def-pkg '((:NAME . "at-dim")
-        (:FULL-NAME . "@lispж ‡жіЁ")
+        (:FULL-NAME . "@lisp±кЧў")
         (:AUTHOR . "VitalGG")
         (:EMAIL . "vitalgg@gmail.com")
         (:VERSION . "0.0.26")
         (:LOCALE . "CHS")
-        (:CATEGORY . "ж ‡жіЁ")
+        (:CATEGORY . "±кЧў")
         (:REQUIRED . "base")
         (:OPENSOURCE . 0)
         (:FREE . T)
-        (:DESCRIPTION . "ж ‡жіЁж–њзЋ‡пјЊзєїй•їпјЊеќђж ‡ж ‡жіЁз­‰")
+        (:DESCRIPTION . "±кЧўР±ВКЈ¬ПЯі¤Ј¬Чш±к±кЧўµИ")
         (:URL . "http://atlisp.cn")
         (:FILES "at-dim"
             "coord"

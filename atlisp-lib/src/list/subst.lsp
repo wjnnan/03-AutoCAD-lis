@@ -1,5 +1,5 @@
 (defun list:subst (n a l)
-    "ç½®æ¢è¡¨ä¸­æŒ‡å®šä½ç½®çš„å…ƒç´ "
+    "ÖÃ»»±íÖĞÖ¸¶¨Î»ÖÃµÄÔªËØ"
     (cond ((numberp n)
             (if (zerop n)
                 (append (list a)

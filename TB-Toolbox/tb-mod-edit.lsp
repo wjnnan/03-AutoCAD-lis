@@ -1,129 +1,159 @@
-;;; tb-mod-edit.lsp â€” ç»˜å›¾ç¼–è¾‘å¿«æ·å‘½ä»¤æ¨¡å—
-;;; æ‰€æœ‰å¿«æ·å‘½ä»¤ç”¨ command åŒ…è£…ï¼Œç®€å•å¯é ï¼Œè·¨å¹³å°ã€‚
-;;; ç»„åˆå‡½æ•°ï¼špoint:* entity:* sel:* lay:*
+;;; tb-mod-edit.lsp ¡ª »æÍ¼±à¼­¿ì½İÃüÁîÄ£¿é
+;;; ËùÓĞ¿ì½İÃüÁîÓÃ command °ü×°£¬¼òµ¥¿É¿¿£¬¿çÆ½Ì¨¡£
+;;; ×éºÏº¯Êı£ºpoint:* entity:* sel:* lay:*
 ;;;
-;;; åŸæ–‡ä»¶æ¥æºï¼šF:\ç»“æ„æ’ä»¶\ä¿®æ”¹.lspï¼ˆ64å‘½ä»¤ï¼‰â€” å»é‡ã€è§„èŒƒæ³¨é‡Š
+;;; Ô­ÎÄ¼şÀ´Ô´£ºF:\½á¹¹²å¼ş\ĞŞ¸Ä.lsp£¨64ÃüÁî£©¡ª È¥ÖØ¡¢¹æ·¶×¢ÊÍ
 
 ;; ============================================================================
-;; åŸºç¡€ç»˜å›¾å¿«æ·
+;; »ù´¡»æÍ¼¿ì½İ
 ;; ============================================================================
 
-(defun c:q  nil (command "_.LINE")     (princ))  ; ç›´çº¿
-(defun c:qw nil (command "_.PLINE")    (princ))  ; å¤šæ®µçº¿
-(defun c:ww nil (command "_.CIRCLE")   (princ))  ; åœ†
-(defun c:ty nil (command "_.ELLIPSE")  (princ))  ; æ¤­åœ†
-(defun c:qr nil (command "_.RECTANG")  (princ))  ; çŸ©å½¢
-(defun c:pp nil (command "_.POINT")    (princ))  ; ç‚¹
-
-
-;; ============================================================================
-;; ç¼–è¾‘æ“ä½œå¿«æ·
-;; ============================================================================
-
-(defun c:te nil (command "_.TRIM")       (princ))  ; ä¿®å‰ª
-(defun c:we nil (command "_.EXTEND")     (princ))  ; å»¶ä¼¸
-(defun c:a  nil (command "_.MOVE")       (princ))  ; ç§»åŠ¨
-(defun c:s  nil (command "_.STRETCH" "_C")(princ)) ; æ‹‰ä¼¸(äº¤å‰çª—å£)
-(defun c:sc nil (command "_.SCALE")      (princ))  ; ç¼©æ”¾
-(defun c:r  nil (command "_.ROTATE")     (princ))  ; æ—‹è½¬
-(defun c:de nil (command "_.DDEDIT")     (princ))  ; ç¼–è¾‘æ–‡å­—/å±æ€§
+(defun c:q  nil (command "_.LINE")     (princ))  ; Ö±Ïß
+(defun c:qw nil (command "_.PLINE")    (princ))  ; ¶à¶ÎÏß
+(defun c:ww nil (command "_.CIRCLE")   (princ))  ; Ô²
+(defun c:ty nil (command "_.ELLIPSE")  (princ))  ; ÍÖÔ²
+(defun c:qr nil (command "_.RECTANG")  (princ))  ; ¾ØĞÎ
+(defun c:pp nil (command "_.POINT")    (princ))  ; µã
 
 
 ;; ============================================================================
-;; å¤åˆ¶ç±»
+;; ±à¼­²Ù×÷¿ì½İ
 ;; ============================================================================
 
-(defun c:cc nil (command "_.COPY" "_M")  (princ))  ; è¿ç»­å¤åˆ¶
+(defun c:te nil (command "_.TRIM")       (princ))  ; ĞŞ¼ô
+(defun c:we nil (command "_.EXTEND")     (princ))  ; ÑÓÉì
+(defun c:a  nil (command "_.MOVE")       (princ))  ; ÒÆ¶¯
+(defun c:s  nil (command "_.STRETCH" "_C")(princ)) ; À­Éì(½»²æ´°¿Ú)
+(defun c:sc nil (command "_.SCALE")      (princ))  ; Ëõ·Å
+(defun c:r  nil (command "_.ROTATE")     (princ))  ; Ğı×ª
+(defun c:de nil (command "_.DDEDIT")     (princ))  ; ±à¼­ÎÄ×Ö/ÊôĞÔ
 
-(defun c:cf (/ ss p1 num dist)
-  "ç­‰è·å¤åˆ¶ã€‚é€‰æ‹©å¯¹è±¡ â†’ æŒ‡å®šåŸºç‚¹ â†’ æ•°é‡ â†’ é—´è·ã€‚"
+
+;; ============================================================================
+;; ¸´ÖÆÀà
+;; ============================================================================
+
+(defun c:cc nil (command "_.COPY" "_M")  (princ))  ; Á¬Ğø¸´ÖÆ
+
+(defun c:cf (/ ss p1 p2 num dist ang)
+  (uc:guard-begin '())
+  "µÈ¾à¸´ÖÆ¡£Ñ¡Ôñ¶ÔÏó ¡ú Ö¸¶¨»ùµã ¡ú ÊıÁ¿ ¡ú ¼ä¾à¡£"
   (setq ss (ssget))
-  (if (and ss (setq p1 (getpoint "\nåŸºç‚¹: ")))
+  (if (and ss (setq p1 (getpoint "\n»ùµã: ")))
     (progn
-      (setq num  (safe:get-int "å¤åˆ¶æ•°é‡" 2)
-            dist (safe:get-dist "é—´è·" nil 300))
-      (command "_.COPY" ss "" p1 "_A" num dist 0 "")))
-  (princ))
+      (setq p2   (getpoint p1 "\n¸´ÖÆ·½Ïò: ")
+            num  (safe:get-int "¸´ÖÆ·İÊı" 2)
+            dist (safe:get-dist "¼ä¾à" nil 300))
+      (if (and p2 num dist)
+        (progn
+          (setq ang (angle p1 p2))
+          ;; COPY ÕóÁĞ£ºnum ·İ£¨º¬Ô­¼ş£©£¬×îºóÒ»·İÔÚ »ùµã + ·½Ïò * dist*(num-1)
+          (command "_.COPY" ss "" p1 "_A" num
+                   (polar p1 ang (* dist (1- num))) "")))))
+  (princ)
+  (uc:guard-end))
 
-(defun c:cr (/ ss p1)
-  "æ—‹è½¬å¤åˆ¶ã€‚å…ˆåŸåœ°å¤åˆ¶ï¼Œå†æ—‹è½¬å¤åˆ¶å“ã€‚"
+(defun c:cr (/ ss p1 e-last new-ss)
+  (uc:guard-begin '())
+  "Ğı×ª¸´ÖÆ¡£ÏÈÔ­µØ¸´ÖÆ£¬ÔÙĞı×ª¸´ÖÆÆ·¡£"
   (setq ss (ssget))
-  (if (and ss (setq p1 (getpoint "\næ—‹è½¬åŸºç‚¹: ")))
+  (if (and ss (setq p1 (getpoint "\nĞı×ª»ùµã: ")))
     (progn
-      (command "_.COPY" ss "" p1 p1)     ; åŸåœ°å¤åˆ¶
-      (command "_.ROTATE" "_P" "" p1) ; ä»…æ—‹è½¬å¤åˆ¶å“
-      ))
-  (princ))
+      (setq e-last (entlast))
+      (command "_.COPY" ss "" p1 p1)     ; Ô­µØ¸´ÖÆ
+      ;; ÊÕ¼¯¸´ÖÆ³öµÄĞÂÊµÌå£¨²»ÒÀÀµ _P µÄ Previous ĞĞÎª£©
+      (setq new-ss (ssadd))
+      (while (setq e-last (entnext e-last))
+        (ssadd e-last new-ss))
+      (if (> (sslength new-ss) 0)
+        (command "_.ROTATE" new-ss "" p1))))
+  (princ)
+  (uc:guard-end))
 
-(defun c:cl (/ ss)
-  "å¤åˆ¶åˆ°å½“å‰å›¾å±‚ã€‚é€‰æ‹©çš„å®ä½“å¤åˆ¶åæ”¹åˆ°å½“å‰å±‚ã€‚"
+(defun c:cl (/ ss e-last new-ss)
+  (uc:guard-begin '())
+  "¸´ÖÆµ½µ±Ç°Í¼²ã¡£Ñ¡ÔñµÄÊµÌå¸´ÖÆºó¸Äµ½µ±Ç°²ã¡£"
   (setq ss (ssget))
   (if ss
     (progn
+      (setq e-last (entlast))
       (command "_.COPY" ss "" '(0 0 0) '(0 0 0))
-      (command "_.CHPROP" "_P" "" "_LA" (getvar "CLAYER") "")))
-  (princ))
+      (setq new-ss (ssadd))
+      (while (setq e-last (entnext e-last))
+        (ssadd e-last new-ss))
+      (if (> (sslength new-ss) 0)
+        (command "_.CHPROP" new-ss "" "_LA" (getvar "CLAYER") ""))))
+  (princ)
+  (uc:guard-end))
 
 
 ;; ============================================================================
-;; å€’è§’/å€’åœ†
+;; µ¹½Ç/µ¹Ô²
 ;; ============================================================================
 
 (defun c:ff nil
-  "é›¶å€’è§’ï¼ˆr=0 çš„åœ†è§’ï¼‰ã€‚é‡å¤æ‰§è¡Œ4æ¬¡ä»¥è¦†ç›–åå­—è·¯å£ã€‚"
+  (uc:guard-begin '("FILLETRAD"))
+  "Áãµ¹½Ç£¨r=0 µÄÔ²½Ç£©¡£ÖØ¸´Ö´ĞĞ4´ÎÒÔ¸²¸ÇÊ®×ÖÂ·¿Ú¡£"
   (setvar "FILLETRAD" 0)
   (repeat 4 (command "_.FILLET" pause pause))
-  (princ))
+  (princ)
+  (uc:guard-end))
 
 (defun c:fr (/ r)
-  "å€’åœ†è§’ï¼Œç”¨æˆ·æŒ‡å®šåŠå¾„ã€‚"
-  (setq r (safe:get-real "åœ†è§’åŠå¾„" (sys:ifnil *TMP:LAST-FILLET-R* 50)))
+  (uc:guard-begin '("FILLETRAD"))
+  "µ¹Ô²½Ç£¬ÓÃ»§Ö¸¶¨°ë¾¶¡£"
+  (setq r (safe:get-real "Ô²½Ç°ë¾¶" (sys:ifnil *TMP:LAST-FILLET-R* 50)))
   (setq *TMP:LAST-FILLET-R* r)
   (setvar "FILLETRAD" r)
   (command "_.FILLET" pause pause)
-  (princ))
+  (princ)
+  (uc:guard-end))
 
 
 ;; ============================================================================
-;; ç¼©æ”¾é¢„è®¾
+;; Ëõ·ÅÔ¤Éè
 ;; ============================================================================
 
-(defun c:s1 (/ ss pt) (if (and (setq ss (ssget)) (setq pt (getpoint "\nåŸºç‚¹: ")) (command "_.SCALE" ss "" pt 0.5)))   (princ))  ; 0.5x
-(defun c:s2 (/ ss pt) (if (and (setq ss (ssget)) (setq pt (getpoint "\nåŸºç‚¹: ")) (command "_.SCALE" ss "" pt 2)))     (princ))  ; 2x
-(defun c:s4 (/ ss pt) (if (and (setq ss (ssget)) (setq pt (getpoint "\nåŸºç‚¹: ")) (command "_.SCALE" ss "" pt 4)))     (princ))  ; 4x
-(defun c:s5 (/ ss pt) (if (and (setq ss (ssget)) (setq pt (getpoint "\nåŸºç‚¹: ")) (command "_.SCALE" ss "" pt 5)))     (princ))  ; 5x
-(defun c:s0 (/ ss pt) (if (and (setq ss (ssget)) (setq pt (getpoint))        (command "_.SCALE" ss "" pt 100)))      (princ))  ; 100x
-(defun c:s00 (/ ss pt) (if (and (setq ss (ssget)) (setq pt (getpoint)) (command "_.SCALE" ss "" pt 1000))) (princ))  ; 1000x
-
-
-;; ============================================================================
-;; æ—‹è½¬é¢„è®¾
-;; ============================================================================
-
-(defun c:r4 (/ ss pt) (if (and (setq ss (ssget)) (setq pt (getpoint "\nåŸºç‚¹: ")) (command "_.ROTATE" ss "" pt -45)))  (princ))  ; é¡ºæ—¶é’ˆ45
-(defun c:r9 (/ ss pt) (if (and (setq ss (ssget)) (setq pt (getpoint "\nåŸºç‚¹: ")) (command "_.ROTATE" ss "" pt -90)))  (princ))  ; é¡ºæ—¶é’ˆ90
-(defun c:r5 (/ ss pt) (if (and (setq ss (ssget)) (setq pt (getpoint "\nåŸºç‚¹: ")) (command "_.ROTATE" ss "" pt 45)))   (princ))  ; é€†æ—¶é’ˆ45
-(defun c:r0 (/ ss pt) (if (and (setq ss (ssget)) (setq pt (getpoint "\nåŸºç‚¹: ")) (command "_.ROTATE" ss "" pt 90)))   (princ))  ; é€†æ—¶é’ˆ90
+(defun c:s1 (/ ss pt) (if (and (setq ss (ssget)) (setq pt (getpoint "\n»ùµã: ")) (command "_.SCALE" ss "" pt 0.5)) T)   (princ))  ; 0.5x
+(defun c:s2 (/ ss pt) (if (and (setq ss (ssget)) (setq pt (getpoint "\n»ùµã: ")) (command "_.SCALE" ss "" pt 2)) T)     (princ))  ; 2x
+(defun c:s4 (/ ss pt) (if (and (setq ss (ssget)) (setq pt (getpoint "\n»ùµã: ")) (command "_.SCALE" ss "" pt 4)) T)     (princ))  ; 4x
+(defun c:s5 (/ ss pt) (if (and (setq ss (ssget)) (setq pt (getpoint "\n»ùµã: ")) (command "_.SCALE" ss "" pt 5)) T)     (princ))  ; 5x
+(defun c:s0 (/ ss pt) (if (and (setq ss (ssget)) (setq pt (getpoint))        (command "_.SCALE" ss "" pt 100)) T)      (princ))  ; 100x
+(defun c:s00 (/ ss pt) (if (and (setq ss (ssget)) (setq pt (getpoint)) (command "_.SCALE" ss "" pt 1000)) T) (princ))  ; 1000x
 
 
 ;; ============================================================================
-;; å…¶ä»–ç¼–è¾‘å·¥å…·
+;; Ğı×ªÔ¤Éè
 ;; ============================================================================
 
-(defun c:oo nil (command "_.OFFSET" pause pause pause "") (princ))  ; åç§»
+(defun c:r4 (/ ss pt) (if (and (setq ss (ssget)) (setq pt (getpoint "\n»ùµã: ")) (command "_.ROTATE" ss "" pt -45)) T)  (princ))  ; Ë³Ê±Õë45
+(defun c:r9 (/ ss pt) (if (and (setq ss (ssget)) (setq pt (getpoint "\n»ùµã: ")) (command "_.ROTATE" ss "" pt -90)) T)  (princ))  ; Ë³Ê±Õë90
+(defun c:r5 (/ ss pt) (if (and (setq ss (ssget)) (setq pt (getpoint "\n»ùµã: ")) (command "_.ROTATE" ss "" pt 45)) T)   (princ))  ; ÄæÊ±Õë45
+(defun c:r0 (/ ss pt) (if (and (setq ss (ssget)) (setq pt (getpoint "\n»ùµã: ")) (command "_.ROTATE" ss "" pt 90)) T)   (princ))  ; ÄæÊ±Õë90
 
-(defun c:cx (/ p1 p2)
-  "å•ç‚¹é€‰çº¿ä¿®å‰ªâ€”â€”ç”»ä¸´æ—¶çº¿ï¼Œä¿®å‰ªä¸ä¹‹äº¤å‰çš„å¯¹è±¡ã€‚"
-  (if (setq p1 (getpoint "\nç¬¬ä¸€ç‚¹: "))
-    (if (setq p2 (getpoint p1 "\nç¬¬äºŒç‚¹: "))
+
+;; ============================================================================
+;; ÆäËû±à¼­¹¤¾ß
+;; ============================================================================
+
+(defun c:oo nil (command "_.OFFSET" pause pause pause "") (princ))  ; Æ«ÒÆ
+
+(defun c:cx (/ p1 p2 e-tmp)
+  (uc:guard-begin '())
+  "µ¥µãÑ¡ÏßĞŞ¼ô¡ª¡ª»­ÁÙÊ±Ïß£¬ĞŞ¼ôÓëÖ®½»²æµÄ¶ÔÏó¡£"
+  (if (setq p1 (getpoint "\nµÚÒ»µã: "))
+    (if (setq p2 (getpoint p1 "\nµÚ¶şµã: "))
       (progn
         (command "_.LINE" p1 p2 "")
-        (command "_.TRIM" (entlast) "" pause)
-        (entdel (entlast)))))
-  (princ))
+        (setq e-tmp (entlast))
+        (command "_.TRIM" e-tmp "" pause "")
+        (if (entget e-tmp) (entdel e-tmp)))))
+  (princ)
+  (uc:guard-end))
 
 (defun c:z0 (/ ss ename)
-  "å°†æ‰€é€‰ç›´çº¿çš„ Z åæ ‡å½’é›¶ã€‚"
+  (uc:guard-begin '())
+  "½«ËùÑ¡Ö±ÏßµÄ Z ×ø±ê¹éÁã¡£"
   (if (setq ss (ssget '((0 . "LINE"))))
     (sel:for-each ss
       '(lambda (e / p10 p11)
@@ -131,36 +161,59 @@
                p11 (entity:get-dxf e 11))
          (entity:set-dxf e 10 (list (car p10) (cadr p10) 0.0))
          (entity:set-dxf e 11 (list (car p11) (cadr p11) 0.0)))))
-  (princ "\nZåæ ‡å·²å½’é›¶ã€‚")
+  (princ "\nZ×ø±êÒÑ¹éÁã¡£")
+  (princ)
+  (uc:guard-end))
+
+(defun c:ee nil (command "_.ZOOM" "_E") (princ))  ; ·¶Î§Ëõ·Å
+
+(defun c:As nil (command "_.QSAVE")     (princ))  ; ¿ìËÙ±£´æ
+
+
+;; ============================================================================
+;; ÑÕÉ«¿ìËÙÇĞ»»£¨ĞŞ¸Ä-51~58£©
+;; ============================================================================
+
+(defun c:C1 (/ ss) (if (setq ss (ssget)) (command "_.CHPROP" ss "" "_C" 1 ""))  (princ))  ; ºìÉ«
+(defun c:C2 (/ ss) (if (setq ss (ssget)) (command "_.CHPROP" ss "" "_C" 2 ""))  (princ))  ; »ÆÉ«
+(defun c:C3 (/ ss) (if (setq ss (ssget)) (command "_.CHPROP" ss "" "_C" 3 ""))  (princ))  ; ÂÌÉ«
+(defun c:C4 (/ ss) (if (setq ss (ssget)) (command "_.CHPROP" ss "" "_C" 4 ""))  (princ))  ; ÇàÉ«
+(defun c:C5 (/ ss) (if (setq ss (ssget)) (command "_.CHPROP" ss "" "_C" 5 ""))  (princ))  ; À¶É«
+(defun c:C6 (/ ss) (if (setq ss (ssget)) (command "_.CHPROP" ss "" "_C" 6 ""))  (princ))  ; Ñóºì
+(defun c:C7 (/ ss) (if (setq ss (ssget)) (command "_.CHPROP" ss "" "_C" 7 ""))  (princ))  ; °×/ºÚ
+(defun c:C8 (/ ss) (if (setq ss (ssget)) (command "_.CHPROP" ss "" "_C" 8 ""))  (princ))  ; »ÒÉ«
+
+
+;; ============================================================================
+;; ÊÓ¿Ú
+;; ============================================================================
+
+(defun c:v1 nil (command "_.VPORTS" "_SI") (command "_.ZOOM" "_E") (princ))  ; µ¥ÊÓ¿Ú
+(defun c:v2 nil (command "_.VPORTS" "_2" "_V") (princ))  ; Ë«ÊÓ¿Ú-´¹Ö±
+(defun c:v3 nil (command "_.VPORTS" "_2" "_H") (princ))  ; Ë«ÊÓ¿Ú-Ë®Æ½
+
+
+;; ============================================================================
+;; ÅúÁ¿ÏòÄÚÆ«ÒÆ£¨ÎüÊÕÃ÷¾­ÂÛÌ³"ÅúÁ¿Æ«ÒÆ-»­½á¹¹´óÑùÍ¼"£©
+;; ============================================================================
+
+(defun c:BOFF (/ ss d i e dir)
+  "ÅúÁ¿ÏòÄÚÆ«ÒÆ¡£Ñ¡±ÕºÏÇúÏß£¬×Ô¶¯ÏòÄÚÆ«ÒÆ£¨»­½á¹¹´óÑùÍ¼×¨ÓÃ£©¡£"
+  (if (not (and *SYS:HAS-ACTIVEX* (uc:com-available-p)))
+    (princ "\n[TB] ÅúÁ¿Æ«ÒÆĞèÒª ActiveX Ö§³Ö¡£")
+    (progn
+      (setq d (getdist "\nÆ«ÒÆ¾àÀë: "))
+      (if (and d (setq ss (ssget '((0 . "LWPOLYLINE,CIRCLE,ELLIPSE")))))
+        (progn
+          (setq i 0)
+          (repeat (sslength ss)
+            (setq e (ssname ss i)
+                  dir (if (curve:clockwise? (curve:vertices e)) -1 1))
+            (vl-catch-all-apply 'vla-offset
+              (list (vlax-ename->vla-object e) (* dir d)))
+            (setq i (1+ i)))
+          (princ (strcat "\n[TB] ÒÑÆ«ÒÆ " (itoa (sslength ss)) " ÌõÇúÏß"))))))
   (princ))
 
-(defun c:ee nil (command "_.ZOOM" "_E") (princ))  ; èŒƒå›´ç¼©æ”¾
-
-(defun c:As nil (command "_.QSAVE")     (princ))  ; å¿«é€Ÿä¿å­˜
-
-
-;; ============================================================================
-;; é¢œè‰²å¿«é€Ÿåˆ‡æ¢ï¼ˆä¿®æ”¹-51~58ï¼‰
-;; ============================================================================
-
-(defun c:C1 (/ ss) (if (setq ss (ssget)) (command "_.CHPROP" ss "" "_C" 1 ""))  (princ))  ; çº¢è‰²
-(defun c:C2 (/ ss) (if (setq ss (ssget)) (command "_.CHPROP" ss "" "_C" 2 ""))  (princ))  ; é»„è‰²
-(defun c:C3 (/ ss) (if (setq ss (ssget)) (command "_.CHPROP" ss "" "_C" 3 ""))  (princ))  ; ç»¿è‰²
-(defun c:C4 (/ ss) (if (setq ss (ssget)) (command "_.CHPROP" ss "" "_C" 4 ""))  (princ))  ; é’è‰²
-(defun c:C5 (/ ss) (if (setq ss (ssget)) (command "_.CHPROP" ss "" "_C" 5 ""))  (princ))  ; è“è‰²
-(defun c:C6 (/ ss) (if (setq ss (ssget)) (command "_.CHPROP" ss "" "_C" 6 ""))  (princ))  ; æ´‹çº¢
-(defun c:C7 (/ ss) (if (setq ss (ssget)) (command "_.CHPROP" ss "" "_C" 7 ""))  (princ))  ; ç™½/é»‘
-(defun c:C8 (/ ss) (if (setq ss (ssget)) (command "_.CHPROP" ss "" "_C" 8 ""))  (princ))  ; ç°è‰²
-
-
-;; ============================================================================
-;; è§†å£
-;; ============================================================================
-
-(defun c:v1 nil (command "_.VPORTS" "_SI") (command "_.ZOOM" "_E") (princ))  ; å•è§†å£
-(defun c:v2 nil (command "_.VPORTS" "_2" "_V") (princ))  ; åŒè§†å£-å‚ç›´
-(defun c:v3 nil (command "_.VPORTS" "_2" "_H") (princ))  ; åŒè§†å£-æ°´å¹³
-
-
-(princ "\n[TB] ç»˜å›¾ç¼–è¾‘æ¨¡å—åŠ è½½å®Œæˆ (edit: 43å‘½ä»¤)")
+(princ "\n[TB] »æÍ¼±à¼­Ä£¿é¼ÓÔØÍê³É (edit: 44ÃüÁî)")
 (princ)

@@ -1,5 +1,5 @@
 (defun curve:subsegment-length (curve pt1 pt2)
-  "澶氭绾垮瓙娈甸暱搴︼紝褰撴洸绾块棴鍚堜笖 pt2 涓庤捣鐐圭浉鍚屾椂,pt2鎸夌粓鐐硅�冭檻"
+  "多段线子段长度，当曲线闭合且 pt2 与起点相同时,pt2按终点考虑"
   (if (p:enamep curve)
       (setq curve (e2o curve)))
   (cond

@@ -1,20 +1,20 @@
 (defun @lab:stat-number-inline ()
-  (@::prompt '("ç»Ÿè®¡æ¯è¡Œä¸Šåœ†çš„æ•°é‡ï¼Œå¹¶æ ‡æ³¨åœ¨æŒ‡å®šä½ç½®å¤„"))
-  ;; é€‰æ‹©å°åœ†
+  (@::prompt '("Í³¼ÆÃ¿ĞĞÉÏÔ²µÄÊıÁ¿£¬²¢±ê×¢ÔÚÖ¸¶¨Î»ÖÃ´¦"))
+  ;; Ñ¡ÔñĞ¡Ô²
   (setq ss-c (pickset:to-list (ssget '((0 . "circle")(-4 . "<")(40 . 20)))))
-  ;; æŒ‰ Y ä»ä¸Šåˆ°ä¸‹æ’åº
+  ;; °´ Y ´ÓÉÏµ½ÏÂÅÅĞò
   (setq ss-c (pickset:sort ss-c "Yx" 0.1))
-  ;; å¯¹é€‰ä¸­çš„åœ†ä»¥Yè½´è¿›è¡Œåˆ†ç»„,æœ¬ä¾‹ä¸ºå½“ä¸¤ä¸ªåœ†çš„åœ†å¿ƒåæ ‡Yå€¼ç›¸å·®ä¸å¤§äº1/10åŠå¾„æ—¶ä¸ºä¸€ç»„ã€‚
+  ;; ¶ÔÑ¡ÖĞµÄÔ²ÒÔYÖá½øĞĞ·Ö×é,±¾ÀıÎªµ±Á½¸öÔ²µÄÔ²ĞÄ×ø±êYÖµÏà²î²»´óÓÚ1/10°ë¾¶Ê±ÎªÒ»×é¡£
   (setq group-c (list:group-by ss-c 
                 '(lambda (x y)
                    (equal
                      (cadr (entity:getdxf x 10))
                      (cadr (entity:getdxf y 10))
                      (* 0.1 (entity:getdxf x 40))))))
-  ;; æ ‡è®°æ¯ç»„åœ†çš„ä¸ªæ•°
+  ;; ±ê¼ÇÃ¿×éÔ²µÄ¸öÊı
   (if group-c
     (progn
-  (setq pt (getpoint (@:prompt "è¯·æŒ‡å®šæ ‡æ³¨åˆ—æ‰€åœ¨çš„ä½ç½®:")))
+  (setq pt (getpoint (@:prompt "ÇëÖ¸¶¨±ê×¢ÁĞËùÔÚµÄÎ»ÖÃ:")))
   (mapcar 
     '(lambda (x)
       (entity:make-text (itoa (length x))

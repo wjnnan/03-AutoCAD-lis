@@ -1,5 +1,5 @@
 (defun list:positions (item lst / res)
-  "èŽ·å–å…ƒç´  item åœ¨ è¡¨ lst ä¸­çš„æ‰€æœ‰ä½ç½®ã€‚"
+  "»ñÈ¡ÔªËØ item ÔÚ ±í lst ÖÐµÄËùÓÐÎ»ÖÃ¡£"
   "list"
   "(list:postions 'a '(a b a)) => (0 2)"
   (setq l (length lst))

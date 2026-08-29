@@ -1,5 +1,5 @@
 (defun m:mulmod (a b m / ret)
-    "蹇�熺Н姹傛ā"
+    "快速积求模"
     (setq ret 0)
     (while (not (zerop b))
         (if (not (zerop (rem b 2)))

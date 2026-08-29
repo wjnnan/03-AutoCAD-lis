@@ -1,5 +1,5 @@
 (defun list:move (lst n)
-    "鍒楄〃寰幆绉诲姩"
+    "列表循环移动"
     (repeat (abs n)
         (if (minusp n)
             (setq lst (append (list (last lst))

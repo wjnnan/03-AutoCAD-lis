@@ -1,5 +1,5 @@
 (defun list:same (lst)
-    "鏌ユ壘琛ㄤ腑閲嶅鍏冪礌"
+    "查找表中重复元素"
     (if lst (if (member (car lst)
                 (cdr lst))
             (cons (car lst)

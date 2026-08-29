@@ -1,6 +1,6 @@
 (defun block:list-blk-objs (/ res)
-  "è·å–å—å¯¹è±¡åˆ—è¡¨"
-  "è·å–å—åŠå¤–éƒ¨å‚ç…§å¯¹è±¡åˆ—è¡¨"
+  "»ñÈ¡¿é¶ÔÏóÁĞ±í"
+  "»ñÈ¡¿é¼°Íâ²¿²ÎÕÕ¶ÔÏóÁĞ±í"
   ""
   (setq res nil)
   (vlax-for blk *blks* (setq res (cons blk res)))

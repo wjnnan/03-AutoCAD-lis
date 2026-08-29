@@ -1,5 +1,5 @@
 (defun matrix:rotation-z (rz / crz srz)
-  "æ„é€ zè½´æ—‹è½¬çŸ©é˜µ"
+  "¹¹ÔìzÖáĞı×ª¾ØÕó"
   (list
    (list (setq crz(cos rz))(setq srz(sin rz)) 0 0)
    (list (- srz) crz 0 0)

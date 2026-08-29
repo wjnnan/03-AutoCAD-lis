@@ -1,6 +1,6 @@
 (defun dcl:hr (size / color)
-  "DCL 水平线,粗度 size 值 推荐为 0.08(一个像素),0.17(两个像素)."
-  "dcl格式字符串"
+  "DCL ˮƽ��,�ֶ� size ֵ �Ƽ�Ϊ 0.08(һ������),0.17(��������)."
+  "dcl��ʽ�ַ���"
   "(dcl:hr 0.08)"
   (or (setq color theme:bg-color)
     (setq color 152))

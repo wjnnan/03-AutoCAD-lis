@@ -1,10 +1,10 @@
 (defun ui:select (str-subject lst / dcl_fp dcl-tmp dcl_id para% set-result result initget%)
-  "æ˜¾ç¤ºåˆ—è¡¨é€‰æ‹©é¢æ¿ï¼Œé€‰æ‹©æ‰€éœ€é¡¹å¹¶è¿”å›ã€‚"
-  "é€‰ä¸­çš„å†…å®¹"
-  "(ui:select \"è¯·é€‰æ‹©ä½ éœ€è¦æ“ä½œçš„é¡¹\"
-    '(\"æˆ‘æ„¿æ„\"
-      \"ä¸æ„¿æ„\"
-       \"ä½ æ˜¯ä¸€ä¸ªå¥½äºº\"))"
+  "ÏÔÊ¾ÁĞ±íÑ¡ÔñÃæ°å£¬Ñ¡ÔñËùĞèÏî²¢·µ»Ø¡£"
+  "Ñ¡ÖĞµÄÄÚÈİ"
+  "(ui:select \"ÇëÑ¡ÔñÄãĞèÒª²Ù×÷µÄÏî\"
+    '(\"ÎÒÔ¸Òâ\"
+      \"²»Ô¸Òâ\"
+       \"ÄãÊÇÒ»¸öºÃÈË\"))"
   (defun set-result (/ i%)
     (setq i% 1)
     (foreach opt% lst (if (= "1"
@@ -56,7 +56,7 @@
               (itoa (1+ i%))))
           (setq i% (1+ i%)))
         (initget 1 initget%)
-        (nth (1- (atoi (getkword (strcat "è¯·è¾“å…¥è¦æ“ä½œçš„åºå· : \n"
+        (nth (1- (atoi (getkword (strcat "ÇëÊäÈëÒª²Ù×÷µÄĞòºÅ : \n"
                   opt%))))
           lst)))
     (progn (alert (_ "parameter is nil."))

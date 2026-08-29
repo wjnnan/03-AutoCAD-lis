@@ -1,5 +1,5 @@
 (defun list:member (ele lst fuzz )
-  "鏀寔娴偣鏁扮殑member"
+  "支持浮点数的member"
   (if lst
       (cond
        ((list:equal ele (car lst) fuzz)

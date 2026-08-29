@@ -1,5 +1,5 @@
 (defun point:in-box (pt1 pt-box1 pt-box2)
-    "鍒ゆ柇 pt1 鏄惁鍦ㄧ煩褰㈠唴"
+    "判断 pt1 是否在矩形内"
     "t or nil"
     (and (>= (car pt1)
             (car pt-box1))

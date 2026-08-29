@@ -1,5 +1,5 @@
 (defun entity:make-circle (pts-cen num-rad)
-  "åˆ›å»ºåœ†.å¦‚æœåœ†å¿ƒæ˜¯ç‚¹çš„åˆ—è¡¨æˆ–åŠå¾„æ˜¯æ•°å€¼çš„åˆ—è¡¨ï¼Œå¯ä»¥åŒæ—¶åˆ›å»ºå¤šä¸ªåœ†"
+  "´´½¨Ô².Èç¹ûÔ²ĞÄÊÇµãµÄÁĞ±í»ò°ë¾¶ÊÇÊıÖµµÄÁĞ±í£¬¿ÉÒÔÍ¬Ê±´´½¨¶à¸öÔ²"
   "Ename"
   "(entity:make-circle (list (getpoint)(getpoint)) '(3 5))"
   (cond
@@ -10,7 +10,7 @@
 		     (quote (100 . "AcDbCircle"))
 		     (cons 10 pts-cen)
 		     (cons 40 num-rad))))
-    ;; å¤šåœ†å¿ƒ
+    ;; ¶àÔ²ĞÄ
     ((and (listp pts-cen)
 	  (apply 'and (mapcar (function (lambda (x)
 				(= 'point (type-of x))))
@@ -19,13 +19,13 @@
 	       (entity:make-circle pt num-rad))
 	     pts-cen
 	     ))
-    ;; å¤šåŠå¾„
+    ;; ¶à°ë¾¶
     ((and (listp num-rad)
 	  (apply 'and (mapcar 'numberp
 			      num-rad)))
      (mapcar '(lambda(rad)
 	       (entity:make-circle pts-cen rad))
 	     num-rad))
-    (t (@:log "WARR" "å‚æ•°é”™è¯¯,æ— åˆ›å»ºåœ†") nil)
+    (t (@:log "WARR" "²ÎÊı´íÎó,ÎŞ´´½¨Ô²") nil)
     ))
 

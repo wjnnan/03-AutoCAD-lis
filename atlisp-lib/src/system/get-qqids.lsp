@@ -1,5 +1,5 @@
 (defun system:get-qqids ()
-  "è·å–æœ¬æœºç™»å½•è¿‡çš„QQå·"
+  "»ñÈ¡±¾»úµÇÂ¼¹ıµÄQQºÅ"
   "list"
   (setq u (getenv  "userprofile"))
   (if (vl-file-directory-p (strcat u"\\Documents\\Tencent Files"))

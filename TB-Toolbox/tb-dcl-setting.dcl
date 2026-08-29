@@ -1,51 +1,52 @@
-// tb-dcl-setting.dcl â€” å·¥å…·ç®±è®¾ç½®å¯¹è¯æ¡†
+// tb-dcl-setting.dcl ¡ª ¹¤¾ßÏäÉèÖÃ¶Ô»°¿ò
 
 tb_settings:dialog{
-  label="å»ºç­‘ç»“æ„å·¥å…·ç®± â€” ç³»ç»Ÿè®¾ç½®";
+  label="½¨Öş½á¹¹¹¤¾ßÏä ¡ª ÏµÍ³ÉèÖÃ";
+  initial_focus="scale";
 
-  :boxed_column{label="ç»˜å›¾å‚æ•°";
+  :boxed_column{label="»æÍ¼²ÎÊı";
     :row{
-      :edit_box{label="å‡ºå›¾æ¯”ä¾‹ 1:";key="scale";edit_width=10;}
-      :edit_box{label="æ–‡å­—é«˜åº¦";key="text_h";edit_width=10;}
+      :edit_box{label="³öÍ¼±ÈÀı 1:";key="scale";edit_width=10;}
+      :edit_box{label="ÎÄ×Ö¸ß¶È";key="text_h";edit_width=10;}
     }
   }
 
-  :boxed_column{label="æ–‡å­—æ ·å¼ï¼ˆTSSDæ ‡å‡†ï¼‰";
+  :boxed_column{label="ÎÄ×ÖÑùÊ½£¨TSSD±ê×¼£©";
     :row{
-      :edit_box{label="æ ·å¼å";key="style";edit_width=16;}
-      :edit_box{label="å­—ä½“";key="font";edit_width=16;}
+      :edit_box{label="ÑùÊ½Ãû";key="style";edit_width=16;}
+      :edit_box{label="×ÖÌå";key="font";edit_width=16;}
     }
     :row{
-      :edit_box{label="å¤§å­—ä½“";key="bigfont";edit_width=16;}
-      :edit_box{label="å®½é«˜æ¯”";key="width";edit_width=10;}
-    }
-  }
-
-  :boxed_column{label="å›¾å±‚è®¾ç½®";
-    :row{
-      :edit_box{label="æ¢å›¾å±‚";key="beam_lay";edit_width=16;}
-      :edit_box{label="æŸ±å›¾å±‚";key="col_lay";edit_width=16;}
-    }
-    :row{
-      :edit_box{label="å¢™å›¾å±‚";key="wall_lay";edit_width=16;}
-      :edit_box{label="æ–‡å­—å›¾å±‚";key="text_lay";edit_width=16;}
-    }
-    :row{
-      :edit_box{label="æ ‡æ³¨å›¾å±‚";key="dim_lay";edit_width=16;}
-      :edit_box{label="äº‘çº¿å›¾å±‚";key="cloud_lay";edit_width=16;}
+      :edit_box{label="´ó×ÖÌå";key="bigfont";edit_width=16;}
+      :edit_box{label="¿í¸ß±È";key="width";edit_width=10;}
     }
   }
 
-  :boxed_column{label="ä¿®è®¢äº‘çº¿";
+  :boxed_column{label="Í¼²ãÉèÖÃ";
     :row{
-      :edit_box{label="äº‘çº¿é¢œè‰²(1-255)";key="cloud_col";edit_width=10;}
-      :edit_box{label="å¼§é•¿ç³»æ•°";key="cloud_arc";edit_width=10;}
+      :edit_box{label="ÁºÍ¼²ã";key="beam_lay";edit_width=16;}
+      :edit_box{label="ÖùÍ¼²ã";key="col_lay";edit_width=16;}
+    }
+    :row{
+      :edit_box{label="Ç½Í¼²ã";key="wall_lay";edit_width=16;}
+      :edit_box{label="ÎÄ×ÖÍ¼²ã";key="text_lay";edit_width=16;}
+    }
+    :row{
+      :edit_box{label="±ê×¢Í¼²ã";key="dim_lay";edit_width=16;}
+      :edit_box{label="ÔÆÏßÍ¼²ã";key="cloud_lay";edit_width=16;}
+    }
+  }
+
+  :boxed_column{label="ĞŞ¶©ÔÆÏß";
+    :row{
+      :edit_box{label="ÔÆÏßÑÕÉ«(1-255)";key="cloud_col";edit_width=10;}
+      :edit_box{label="»¡³¤ÏµÊı";key="cloud_arc";edit_width=10;}
     }
   }
 
   :row{
-    :button{label="ä¿å­˜è®¾ç½®";key="save";is_default=true;width=14;fixed_width=true;}
-    :button{label="æ¢å¤é»˜è®¤";key="reset";width=14;fixed_width=true;}
+    :button{label="±£´æÉèÖÃ";key="save";is_default=true;width=14;fixed_width=true;}
+    :button{label="»Ö¸´Ä¬ÈÏ";key="reset";width=14;fixed_width=true;}
     cancel_button;
   }
 }

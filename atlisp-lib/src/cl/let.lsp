@@ -1,5 +1,5 @@
 (defun cl:let (bindings body)
-  "commonlispä¸­çš„letï¼Œåœ¨autolispä¸­éœ€è¦åœ¨å‚æ•°å‰åŠ quoteï¼Œå½“bodyä¸ºå¤šæ¡è¯­å¥æ—¶éœ€è¦ç”¨ progn åŒ…è£¹ã€‚"
+  "commonlispÖÐµÄlet£¬ÔÚautolispÖÐÐèÒªÔÚ²ÎÊýÇ°¼Óquote£¬µ±bodyÎª¶àÌõÓï¾äÊ±ÐèÒªÓÃ progn °ü¹ü¡£"
   "any"
   "(let '((a 3) (b 5)) '(* a b)) => 15"
   (eval

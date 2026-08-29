@@ -1,5 +1,5 @@
 (defun layer:set-color (lay int-color / lst )
-  "è®¾ç½®å›¾å±‚ lay é¢œè‰²å·ä¸º int-colorï¼Œlay æ”¯æŒæ–‡å­—åŠ*å·é€šé…ç¬¦ï¼Œæˆ–å›¾å±‚å®ä½“ç±»å‹ï¼Œint-color ä¸º 0~255 ä¹‹é—´çš„æ•´æ•°"
+  "ÉèÖÃÍ¼²ã lay ÑÕÉ«ºÅÎª int-color£¬lay Ö§³ÖÎÄ×Ö¼°*ºÅÍ¨Åä·û£¬»òÍ¼²ãÊµÌåÀàĞÍ£¬int-color Îª 0~255 Ö®¼äµÄÕûÊı"
   "ename"
   "(layer:set-color \"jz-*\" 3)"
   (setq int-color (fix int-color))

@@ -1,5 +1,5 @@
 (defun entity:make-mtext (str pt fontsize w h / ent-mtext)
-  "鍒涘缓澶氳鏂囨湰"
+  "创建多行文本"
   "ent"
   (setq ent-mtext
 	(entmakex

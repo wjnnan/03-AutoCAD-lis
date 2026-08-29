@@ -1,5 +1,5 @@
 (defun vla:put-property (sym str value / obj-tree res)
-  "ç‚¹æ“ä½œç¬¦æ–¹å¼è®¾ç½®å¯¹è±¡çš„å±æ€§ï¼Œå‚æ•°:sym vlaå¯¹è±¡çš„ç¬¦å·ï¼Œstr ç”¨ç‚¹è¡¨ç¤ºçš„CADå¯¹è±¡å±‚çº§çš„å±æ€§åã€‚"
+  "µã²Ù×÷·û·½Ê½ÉèÖÃ¶ÔÏóµÄÊôĞÔ£¬²ÎÊı:sym vla¶ÔÏóµÄ·ûºÅ£¬str ÓÃµã±íÊ¾µÄCAD¶ÔÏó²ã¼¶µÄÊôĞÔÃû¡£"
   "any"
   "(vla:put-property *ACAD* \"application.preferences.drafting.autosnapmarkersize\" 5)"
   (if (null acadobj)

@@ -1,12 +1,12 @@
 (defun example:dcl-dialog (/ *error* curr-page total-page dcl-fp dcl-tmp)
-  "MVCNIS æ³•ç¤ºä¾‹2: 6 æ­¥è¿›è¡ŒåŠ¨æ€ DCL å¼€å‘ã€‚"
+  "MVCNIS ·¨Ê¾Àı2: 6 ²½½øĞĞ¶¯Ì¬ DCL ¿ª·¢¡£"
   ""
   "(example:dcl-dialog)"
   (require (quote dcl:*))
-  "1. Model å»ºç«‹æ•°æ®æ¨¡å‹ã€‚"
+  "1. Model ½¨Á¢Êı¾İÄ£ĞÍ¡£"
   (setq curr-page 0)
   (setq total-page 1)
-  "2. View å»ºç«‹æ˜¾ç¤ºè§†å›¾ã€‚"
+  "2. View ½¨Á¢ÏÔÊ¾ÊÓÍ¼¡£"
   (dcl:dialog "example")
   (progn (dcl:hr 0.08)
     (write-line ":text{key=\"num\";}"
@@ -16,18 +16,18 @@
     (dcl:hr 0.08)
     (dcl:paging t))
   (dcl:dialog-end-ok-cancel)
-  "3. Control åˆ›å»ºæ§åˆ¶æµç¨‹"
+  "3. Control ´´½¨¿ØÖÆÁ÷³Ì"
   (defun cb-flush-page nil (set_tile "num"
       (strcat "
-         å½“å‰é¡µé¢: "
+         µ±Ç°Ò³Ãæ: "
         (itoa (1+ curr-page)))))
-  "4. New ä¸€ä¸ªæ–°å¯¹è¯æ¡†å¯¹è±¡ã€‚"
+  "4. New Ò»¸öĞÂ¶Ô»°¿ò¶ÔÏó¡£"
   (dcl:new "example")
-  "5. Init åˆå§‹åŒ–å¯¹è¯æ¡†"
+  "5. Init ³õÊ¼»¯¶Ô»°¿ò"
   (set_tile "title"
-    "Example æ ‡é¢˜")
+    "Example ±êÌâ")
   (paging-init)
   (cb-flush-page)
-  "6. Show dialog æ˜¾ç¤ºå¹¶è¿›è¡Œäº¤äº’"
+  "6. Show dialog ÏÔÊ¾²¢½øĞĞ½»»¥"
   (dcl:show)
   (princ))

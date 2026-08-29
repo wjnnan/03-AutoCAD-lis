@@ -1,5 +1,5 @@
 (defun vla:dump (obj)
-    "åˆ—å¯¹è±¡å±æ€§å’Œæ–¹æ³•ã€‚"
+    "ÁĞ¶ÔÏóÊôĞÔºÍ·½·¨¡£"
     (vlax-dump-object obj t)
     (setq atoms (atoms-family 1))
     (setq allproperties

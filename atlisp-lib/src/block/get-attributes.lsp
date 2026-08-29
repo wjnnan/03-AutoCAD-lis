@@ -1,10 +1,10 @@
 (defun block:get-attributes (blkref / lst)
-  "Ëé∑ÂèñÂùóÂ±ûÊÄß,ËøîÂõûÂ±ûÊÄßÂêçÂíåÂÄºÁöÑÁÇπÂØπÂàóË°®„ÄÇ"
+  "ªÒ»°øÈ Ù–‘,∑µªÿ Ù–‘√˚∫Õ÷µµƒµ„∂‘¡–±Ì°£"
   (if (= (quote ename)
 	 (type blkref))
       (setq blkref (e2o blkref)))
   (if (p:functionp vla-getattributes)
-      ;; vlax ÊñπÂºè
+      ;; vlax ∑Ω Ω
       (if (= 'vla-object (type blkref))
 	  (if (safearray-value (setq lst (vlax-variant-value (vla-getattributes blkref))))
 	      (mapcar (quote (lambda (x)
@@ -12,7 +12,7 @@
 				     (vla-get-textstring x))))
 		      (vlax-safearray->list lst)))
 	  nil)
-      ;; dxf ÊñπÂºè
+      ;; dxf ∑Ω Ω
       (progn
 	(setq att (entnext blkref))
 	(while (= "ATTRIB" (entity:getdxf att 0))

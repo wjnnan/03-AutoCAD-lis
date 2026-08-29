@@ -1,5 +1,5 @@
 (defun system:wscript (wscode  / wsh txt)
-  "è°ƒç”¨WScript è„šæœ¬ï¼Œå¹¶è¿”å›žè¾“å‡ºå­—ç¬¦ä¸²"
+  "µ÷ÓÃWScript ½Å±¾£¬²¢·µ»ØÊä³ö×Ö·û´®"
   (setq wsh (vlax-create-object "wscript.shell"))
   (setq txt (vlax-invoke (vlax-get (vlax-invoke wsh 'exec wscode) 'stdout) 'readall))
   (vlax-release-object wsh)

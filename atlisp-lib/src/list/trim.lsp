@@ -1,4 +1,4 @@
 (defun list:trim (lst m n)
-    "åˆ é™¤è¡¨å¤´å‰mé¡¹ï¼Œè¡¨å°¾å‰né¡¹"
+    "É¾³ı±íÍ·Ç°mÏî£¬±íÎ²Ç°nÏî"
     (list:ltrim (list:rtrim lst n)
         m))

@@ -1,5 +1,5 @@
 (defun block:get-dynamic-properties (blk / oblk props)
-  "èŽ·å–åŠ¨æ€å—çš„åŠ¨æ€ç‰¹æ€§(è‡ªå®šä¹‰)åˆ—è¡¨ï¼šç‰¹æ€§åï¼Œå½“å‰å€¼ï¼Œåªè¯»æ€§ï¼Œæ˜¯å¦æ˜¾ç¤ºï¼Œå…è®¸å€¼"
+  "»ñÈ¡¶¯Ì¬¿éµÄ¶¯Ì¬ÌØÐÔ(×Ô¶¨Òå)ÁÐ±í£ºÌØÐÔÃû£¬µ±Ç°Öµ£¬Ö»¶ÁÐÔ£¬ÊÇ·ñÏÔÊ¾£¬ÔÊÐíÖµ"
   (if (= (quote ename)
       (type blk))
     (progn (setq oblk (vl-catch-all-apply 'vlax-ename->vla-object (list blk)))

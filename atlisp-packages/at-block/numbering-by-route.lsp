@@ -1,6 +1,6 @@
 (defun @block:numbering-by-route (/  lwpl olwpl num1 start ss-list ss1)
-  (@::prompt "æŒ‰æ›²çº¿è·¯é¡ºåºå¯¹å—è¿›è¡Œé€’å¢ç¼–å·")
-  (@:prompt "è¯·é€‰æ‹©ä¸€æ¡æ›²çº¿:")
+  (@::prompt "°´ÇúÏßÂ·Ë³Ğò¶Ô¿é½øĞĞµİÔö±àºÅ")
+  (@:prompt "ÇëÑ¡ÔñÒ»ÌõÇúÏß:")
   (if (setq lwpl (ssname (ssget ":S" '((0 . "*line"))) 0))
       (progn
 	(setq olwpl (e2o lwpl))
@@ -22,7 +22,7 @@
 		     (pickset:to-list ss1))))
 	    (progn
 	      (sssetfirst nil (pickset:from-list ss-list))
-	      ;; æ’åº
+	      ;; ÅÅĞò
 	      (setq ss-list
 		    (vl-sort ss-list
 			     '(lambda(x y / fun)
@@ -32,7 +32,7 @@
 				  (vlax-curve-getClosestPointTo
 				   olwpl (entity:getdxf m 10))))
 			       (<  (fun x)(fun y)))))
-	      (setq start (getint "è¯·è¾“å…¥å—èµ·å§‹ç¼–å·<1>:"))
+	      (setq start (getint "ÇëÊäÈë¿éÆğÊ¼±àºÅ<1>:"))
 	      (if (null start) (setq start 1))
 	      (setq num1 0)
 	      (foreach en0 ss-list
@@ -48,5 +48,5 @@
 		 (setq num1 (1+ num1))
 		 ))
 	    (progn
-	      (alert "æœªé€‰ä¸­è®¾ç½®çš„å›¾å—ã€‚è¯·è®¾ç½®è¦è¿›è¡Œæ“ä½œçš„å›¾å—ã€‚")
+	      (alert "Î´Ñ¡ÖĞÉèÖÃµÄÍ¼¿é¡£ÇëÉèÖÃÒª½øĞĞ²Ù×÷µÄÍ¼¿é¡£")
 	      (@block:setup))))))

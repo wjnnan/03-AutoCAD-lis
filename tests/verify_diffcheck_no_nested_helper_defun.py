@@ -41,7 +41,7 @@ def extract_function(text: str, name: str) -> str:
 
 
 def main() -> int:
-    text = DIFFCHECK.read_text(encoding="utf-8")
+    text = DIFFCHECK.read_text(encoding="gbk")
     diff_body = extract_function(text, "dc:diff")
     helper_body = extract_function(text, "dc:collect-diff-box")
 

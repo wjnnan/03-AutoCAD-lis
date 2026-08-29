@@ -1,5 +1,5 @@
 (defun curve:similar-p (curve1 curve2 / similarity o1 o2 nolength)
-  "åˆ¤å®šä¸¤æ›²çº¿æ˜¯å¦ç›¸ä¼¼,curve1,curve2 æ›²çº¿å›¾å…ƒ,é»˜è®¤ç›¸ä¼¼åº¦:95%"
+  "ÅĞ¶¨Á½ÇúÏßÊÇ·ñÏàËÆ,curve1,curve2 ÇúÏßÍ¼Ôª,Ä¬ÈÏÏàËÆ¶È:95%"
   "bool"
   "(curve:similar-p (car(entsel))(car(entsel)))"
   (setq nolength '("CIRCLE""ARC""SPLINE""ELLIPSE""REGION"))
@@ -9,7 +9,7 @@
   (setq o1 (e2o curve1)
 	o2 (e2o curve2))
   (and
-   ;; é•¿åº¦
+   ;; ³¤¶È
    (if (or
 	(member (entity:getdxf curve1 0) nolength)
 	(member (entity:getdxf curve2 0) nolength))
@@ -22,7 +22,7 @@
 		    (float (vla-get-length o2)))
 		 1 similarity))
 	 ))
-   ;; é¢ç§¯
+   ;; Ãæ»ı
    (progn
      (setq area1 
 	   (if (= "LINE" (entity:getdxf curve1 0))

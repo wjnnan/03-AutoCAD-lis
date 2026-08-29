@@ -1,24 +1,24 @@
 (defun example:cmd-reactor()
-  "å‘½ä»¤ååº”å™¨ç¤ºä¾‹ï¼šå½“æ‰§è¡ŒLINE PLINE ARCæ—¶ï¼Œä¸´æ—¶è°ƒæ•´å¯¹è±¡æ•æ‰åŠŸèƒ½ï¼Œå®Œæˆåæ¢å¤åŸè®¾ç½®"
+  "ÃüÁî·´Ó¦Æ÷Ê¾Àı£ºµ±Ö´ĞĞLINE PLINE ARCÊ±£¬ÁÙÊ±µ÷Õû¶ÔÏó²¶×½¹¦ÄÜ£¬Íê³Éºó»Ö¸´Ô­ÉèÖÃ"
   "" ""
-  ";;åè½¬æœ€è¿‘ç‚¹æ•æ‰å‘½ä»¤ï¼Œå¯åŠ  ' è¿›è¡Œé€æ˜æ‰§è¡Œ"
+  ";;·´×ª×î½üµã²¶×½ÃüÁî£¬¿É¼Ó ' ½øĞĞÍ¸Ã÷Ö´ĞĞ"
   (defun c:switchnea ()
     (setvar "osmode"  (boole 6 (getvar  "osmode") 512))
     (if (= 0 (logand (getvar  "osmode") 512))
-	(prompt " å…³é—­æœ€è¿‘ç‚¹æ•æ‰")
-	(prompt " å¼€å¯æœ€è¿‘ç‚¹æ•æ‰"))
+	(prompt " ¹Ø±Õ×î½üµã²¶×½")
+	(prompt " ¿ªÆô×î½üµã²¶×½"))
     (princ))
-  ";;å½“æ‰§è¡Œå‘½ä»¤ line pline arc æ—¶ï¼Œä¿å­˜å½“å‰osmodeå˜é‡"
+  ";;µ±Ö´ĞĞÃüÁî line pline arc Ê±£¬±£´æµ±Ç°osmode±äÁ¿"
   (defun react-start-cmd(param1 param2)
     (if (member (car param2) '("LINE" "PLINE"  "ARC"))
 	(push-var "OSMODE"))
     (princ))
-  ";; å½“ç»“æŸå‘½ä»¤ line pline arc æ—¶ï¼Œæ¢å¤å½“å‰osmodeå˜é‡"
+  ";; µ±½áÊøÃüÁî line pline arc Ê±£¬»Ö¸´µ±Ç°osmode±äÁ¿"
   (defun react-end-cmd(param1 param2)
     (if (member (car param2) '("LINE" "PLINE" "ARC"))
 	(pop-var))
     (princ))
-  ";; å®šä¹‰å‘½ä»¤ååº”å™¨"
+  ";; ¶¨ÒåÃüÁî·´Ó¦Æ÷"
   (defun @::enable-tempvar-reactor ()
     (if (null at-tempvar-cmd-start)
 	(setq at-tempvar-cmd-start (vlr-command-reactor nil '((:vlr-commandWillStart . react-start-cmd))))

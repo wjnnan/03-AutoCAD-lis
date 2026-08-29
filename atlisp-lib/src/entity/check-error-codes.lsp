@@ -1,6 +1,6 @@
 (defun entity:check-error-codes (doc)
-  "æ¶ˆé™¤å­—ä½“ä¹±ç ï¼Œåˆ©ç”¨gbenor.shx gbcbig.shx\nå‚æ•°:\ndoc:å½“å‰æ´»åŠ¨æ–‡æ¡£"
-  "æ— "
+  "Ïû³ı×ÖÌåÂÒÂë£¬ÀûÓÃgbenor.shx gbcbig.shx\n²ÎÊı:\ndoc:µ±Ç°»î¶¯ÎÄµµ"
+  "ÎŞ"
   "(entity:Check-Error-Codes *DOC*)"
   (vlax-for txtstyle (vla-get-textstyles doc)
     (if (findfile (vla-get-fontfile txtstyle))

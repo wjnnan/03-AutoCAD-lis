@@ -1,44 +1,118 @@
-;;; tb-lib-sel.lsp -- é€‰æ‹©é›†æ“ä½œåº“
-;;; å°è£… ssget å¸¸ç”¨æ“ä½œï¼Œç»Ÿä¸€è½¬ä¸º ename åˆ—è¡¨å¤„ç†ã€‚
-;;; ä¾èµ–ï¼štb-core.lspï¼Œunified-lib/uc-core.lsp
+;;; tb-lib-sel.lsp -- Ñ¡Ôñ¼¯²Ù×÷¿â
+;;; ·â×° ssget ³£ÓÃ²Ù×÷£¬Í³Ò»×ªÎª ename ÁĞ±í´¦Àí¡£
+;;; ÒÀÀµ£ºtb-core.lsp£¬unified-lib/uc-core.lsp
 
 (defun sel:by-layer (layname / ss)
-  "é€‰æ‹©æŒ‡å®šå›¾å±‚ä¸Šçš„æ‰€æœ‰å®ä½“ã€‚"
+  "Ñ¡ÔñÖ¸¶¨Í¼²ãÉÏµÄËùÓĞÊµÌå¡£"
   (ssget "X" (list (cons 8 layname))))
 
 (defun sel:by-type (ent-type / ss)
-  "é€‰æ‹©æŒ‡å®šç±»å‹çš„æ‰€æœ‰å®ä½“ã€‚"
+  "Ñ¡ÔñÖ¸¶¨ÀàĞÍµÄËùÓĞÊµÌå¡£"
   (ssget "X" (list (cons 0 ent-type))))
 
 (defun sel:filter (alist)
-  "æŒ‰ DXF è¿‡æ»¤è¡¨é€‰æ‹©å®ä½“ã€‚"
+  "°´ DXF ¹ıÂË±íÑ¡ÔñÊµÌå¡£"
   (ssget "X" alist))
 
 (defun sel:pick (prompt filter)
-  "äº¤äº’é€‰æ‹©å®ä½“ã€‚"
+  "½»»¥Ñ¡ÔñÊµÌå¡£"
   (princ (strcat "\n" prompt))
   (ssget filter))
 
 (defun sel:to-list (ss / i lst)
-  "å°†é€‰æ‹©é›†è½¬æ¢ä¸ºå®ä½“åˆ—è¡¨ã€‚"
+  "½«Ñ¡Ôñ¼¯×ª»»ÎªÊµÌåÁĞ±í¡£"
   (uc:pickset->list ss))
 
 (defun sel:for-each (ss callback)
-  "éå†é€‰æ‹©é›†ä¸­çš„æ‰€æœ‰å®ä½“ã€‚"
+  "±éÀúÑ¡Ôñ¼¯ÖĞµÄËùÓĞÊµÌå¡£"
   (if ss
     (mapcar callback (sel:to-list ss))))
 
 (defun sel:count (ss)
-  "è¿”å›é€‰æ‹©é›†ä¸­å…ƒç´ çš„æ•°é‡ã€‚"
+  "·µ»ØÑ¡Ôñ¼¯ÖĞÔªËØµÄÊıÁ¿¡£"
   (if ss (sslength ss) 0))
 
 (defun sel:add (ss ename)
-  "å‘é€‰æ‹©é›†ä¸­æ·»åŠ ä¸€ä¸ªå®ä½“ã€‚"
+  "ÏòÑ¡Ôñ¼¯ÖĞÌí¼ÓÒ»¸öÊµÌå¡£"
   (ssadd ename ss))
 
 (defun sel:delete (ss ename)
-  "ä»é€‰æ‹©é›†ä¸­åˆ é™¤ä¸€ä¸ªå®ä½“ã€‚"
+  "´ÓÑ¡Ôñ¼¯ÖĞÉ¾³ıÒ»¸öÊµÌå¡£"
   (ssdel ename ss))
 
-(princ "\n[TB] é€‰æ‹©é›†æ“ä½œåº“åŠ è½½å®Œæˆ (sel:*)")
+;; ============================================================================
+;; °´ÑÕÉ«Ñ¡Ôñ£¨ÎüÊÕÃ÷¾­ÂÛÌ³"°´ÑÕÉ«Ñ¡Ôñ"£¬´¿ AutoLISP ¿çÆ½Ì¨£©
+;; ============================================================================
+
+(defun sel:get-color (ename / dxf col)
+  "»ñÈ¡¶ÔÏóÑÕÉ«Ë÷Òı¡£Ëæ²ã(BYLAYER)Ê±È¡Í¼²ãÑÕÉ«¡£"
+  (setq dxf (entget ename))
+  (if (setq col (cdr (assoc 62 dxf)))
+    col
+    (cdr (assoc 62 (tblsearch "layer" (cdr (assoc 8 dxf)))))))
+
+(defun sel:by-color (col / lay laystr ss)
+  "»ñÈ¡Ö¸¶¨ÑÕÉ«Ë÷ÒıµÄÑ¡Ôñ¼¯£¨º¬Ëæ²ã¶ÔÏó£©¡£col=ÑÕÉ«Ë÷Òı 1-255¡£"
+  (setq laystr "")
+  (while (setq lay (tblnext "layer" (not lay)))
+    (if (= (abs (cdr (assoc 62 lay))) col)
+      (setq laystr (strcat laystr (if (= laystr "") "" ",") (cdr (assoc 2 lay))))))
+  (if (= laystr "")
+    (ssget "X" (list (cons 62 col)))
+    (ssget "X"
+      (list '(-4 . "<OR")
+            (cons 62 col)
+            '(-4 . "<AND")
+            (cons 8 laystr)
+            '(62 . 256)
+            '(-4 . "AND>")
+            '(-4 . "OR>")))))
+
+(defun c:SSC (/ en col ss n)
+  "°´ÑÕÉ«Ñ¡Ôñ¡£µãÑ¡¶ÔÏó£¬Ñ¡ÔñËùÓĞÍ¬É«¶ÔÏó£¨º¬Ëæ²ã¡¢¿é¶ÔÏó£©¡£"
+  (if (setq en (car (entsel "\nÇëÑ¡ÔñÑÕÉ«²ÎÕÕ¶ÔÏó: ")))
+    (progn
+      (setq col (sel:get-color en)
+            ss  (sel:by-color col))
+      (if ss
+        (progn
+          (sssetfirst nil ss)
+          (setq n (sslength ss))
+          (princ (strcat "\n[TB] ÒÑÑ¡Ôñ " (itoa n) " ¸öÍ¬É«¶ÔÏó")))
+        (princ "\n[TB] Î´ÕÒµ½Í¬É«¶ÔÏó"))))
+  (princ))
+
+;; ============================================================================
+;; ÖØ¸´ÄÚÈİÑ¡ÖĞ£¨ÎüÊÕÃ÷¾­ÂÛÌ³"ÖØ¸´ÄÚÈİÑ¡ÖĞ"£¬Ñ¡ÏàÍ¬ÎÄ×Ö/¿é£©
+;; ============================================================================
+
+(defun sel:escape-wildcard (str)
+  "×ªÒå¿éÃûÖĞµÄ wcmatch Í¨Åä·û×Ö·û @ # . ~ *¡£"
+  (vl-string-subst "`@" "@"
+    (vl-string-subst "`#" "#"
+      (vl-string-subst "`." "."
+        (vl-string-subst "`~" "~"
+          (vl-string-subst "`*" "*" str))))))
+
+(defun c:SSM (/ ent dxf typ ss name)
+  "ÖØ¸´ÄÚÈİÑ¡ÖĞ¡£µãÑ¡ÎÄ×Ö/¿é£¬Ñ¡ÔñËùÓĞÏàÍ¬ÄÚÈİµÄ¶ÔÏó¡£"
+  (if (setq ent (car (entsel "\nÇëÑ¡Ôñ´ıÆ¥ÅäµÄÎÄ×Ö»ò¿é: ")))
+    (progn
+      (setq dxf (entget ent)
+            typ (cdr (assoc 0 dxf)))
+      (cond
+        ((member typ '("TEXT" "MTEXT"))
+         (setq ss (ssget "_X" (list (cons 1 (cdr (assoc 1 dxf)))))))
+        ((= typ "INSERT")
+         (setq name (sel:escape-wildcard (cdr (assoc 2 dxf)))
+               ss (ssget "_X" (list (cons 2 name)))))
+        (t (setq ss nil)))
+      (if ss
+        (progn
+          (sssetfirst nil ss)
+          (princ (strcat "\n[TB] ÒÑÑ¡Ôñ " (itoa (sslength ss)) " ¸öÏàÍ¬¶ÔÏó")))
+        (princ "\n[TB] Î´ÕÒµ½ÏàÍ¬¶ÔÏó"))))
+  (princ))
+
+(princ "\n[TB] Ñ¡Ôñ¼¯²Ù×÷¿â¼ÓÔØÍê³É (sel:*)")
 (princ)

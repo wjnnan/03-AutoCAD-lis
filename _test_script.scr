@@ -1,0 +1,5 @@
+_.new _test
+(vl-load-com)
+(load "d:/My Code/Claude Code/03-AutoCAD-lisp/_test_harness.lsp")
+(run-all-tests)
+_.quit _y

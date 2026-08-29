@@ -1,6 +1,6 @@
 (defun excel:eci->aci (color / tmp)
-  "å°†excelé¢œè‰²ç´¢å¼•è½¬æ¢ä¸ºcadé¢œè‰²ç´¢å¼•\nå‚æ•°:Color:excelé¢œè‰²ç´¢å¼•"
-  "cadé¢œè‰²ç´¢å¼•"
+  "½«excelÑÕÉ«Ë÷Òý×ª»»ÎªcadÑÕÉ«Ë÷Òý\n²ÎÊý:Color:excelÑÕÉ«Ë÷Òý"
+  "cadÑÕÉ«Ë÷Òý"
   "(Excel:ECI->ACI 6)"
   (cond ((setq tmp (assoc color *xls-color*))
       (cadr tmp))

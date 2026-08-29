@@ -1,3 +1,3 @@
 (defun group:get-by-name (name)
-    "è·å–ç¼–ç»„åä¸º name çš„ç¼–ç»„å¯¹è±¡ã€‚"
+    "»ñÈ¡±à×éÃûÎª name µÄ±à×é¶ÔÏó¡£"
     (vla-item *grps* name))

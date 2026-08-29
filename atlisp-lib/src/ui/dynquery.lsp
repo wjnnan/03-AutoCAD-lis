@@ -1,7 +1,7 @@
 (defun ui:dynquery (func / *error* dxf fx add_background add_box add_text display olderr oldos oldfill ss pd gr pt ent entold)
-  "Âä®ÊÄÅÊü•ËØ¢„ÄÇÊòæÁ§∫ func ËøîÂõûÁöÑÊñáÊú¨ÂàóË°®„ÄÇfunc ÊòØÂØπÂÖâÊ†áÊâÄÂú®ÂõæÂÖÉËøõË°åÁöÑËøêÁÆóÁªìÊûú„ÄÇ
-ÂΩ¢ÂºèÂ¶Ç '(lambda (x) (list (entity:getdxf x 0)))"
-  "nil,ÊâßË°åËøáÁ®ãÂä®ÊÄÅÊòæÁ§∫Áî®Êà∑ÂÆö‰πâÁöÑÂÜÖÂÆπ"
+  "∂ØÃ¨≤È—Ø°£œ‘ æ func ∑µªÿµƒŒƒ±æ¡–±Ì°£func  «∂‘π‚±ÍÀ˘‘⁄Õº‘™Ω¯––µƒ‘ÀÀ„Ω·π˚°£
+–Œ Ω»Á '(lambda (x) (list (entity:getdxf x 0)))"
+  "nil,÷¥––π˝≥Ã∂ØÃ¨œ‘ æ”√ªß∂®“Âµƒƒ⁄»›"
   "(ui:dynquery '(lambda (x) (list (entity:getdxf x '(0 8)))))"
   (defun *error* (msg / i%)
     (if (> (sslength ss)0)
@@ -89,7 +89,7 @@
 			 text-style))
 	(setq text-style (getvar "textstyle")))
     (setq obj (vlax-ename->vla-object ent))
-    (setq laynm (strcat "ÂõæÂ±Ç:"	(entity:getdxf ent 8)))
+    (setq laynm (strcat "Õº≤„:"	(entity:getdxf ent 8)))
     (setq name (entity:getdxf ent 0))
     (setq lst (func ent))
     (if (= (quote str)
@@ -128,7 +128,7 @@
 		   ss)))
   (push-var)
   (command "_.undo"  "_m")
-  (prompt "\n*** Move cursor to entity for show infomationÔºÅ***")
+  (prompt "\n*** Move cursor to entity for show infomation£°***")
   (setvar "osmode"  0)
   (setvar "fillmode" 1)
   (setvar "cmdecho"  0)

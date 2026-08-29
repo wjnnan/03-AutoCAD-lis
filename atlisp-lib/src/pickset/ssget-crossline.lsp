@@ -1,6 +1,6 @@
 (defun pickset:ssget-crossline (ent filter /)
-  "å–å¾—ä¸çº¿ç›¸äº¤çš„é€‰æ‹©é›†"
-  "é€‰æ‹©é›†"
+  "È¡µÃÓëÏßÏà½»µÄÑ¡Ôñ¼¯"
+  "Ñ¡Ôñ¼¯"
   (if filter (ssget "f"
       (entity:getdxf ent (quote (10 11)))
       filter)

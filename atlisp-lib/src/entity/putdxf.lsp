@@ -1,6 +1,6 @@
 (defun entity:putdxf (ename code val / ent)
-  "更新图元的组码值\n参数:\nename:图元，选择集，图元列表\ncode:组码或组码表\nval:值或者值表"
-  "更新后的图元，选择集，图元列表"
+  "����ͼԪ������ֵ\n����:\nename:ͼԪ��ѡ�񼯣�ͼԪ�б�\ncode:����������\nval:ֵ����ֵ��"
+  "���º��ͼԪ��ѡ�񼯣�ͼԪ�б�"
   "(entity:putdxf (car (entsel))
     10 '(0 0 0))"
   (cond

@@ -1,4 +1,4 @@
-(defun string:readme nil "å­—ç¬¦ä¸²æ“ä½œç›¸å…³å‡½æ•°ã€‚"
-  (princ "å­—ç¬¦ä¸²æ“ä½œç›¸å…³å‡½æ•°ã€‚ä½¿ç”¨ (require 'string:*)
-    åŠ è½½è¿™äº›å‡½æ•°")
+(defun string:readme nil "×Ö·û´®²Ù×÷Ïà¹Øº¯Êı¡£"
+  (princ "×Ö·û´®²Ù×÷Ïà¹Øº¯Êı¡£Ê¹ÓÃ (require 'string:*)
+    ¼ÓÔØÕâĞ©º¯Êı")
   (princ))

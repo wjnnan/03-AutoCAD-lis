@@ -1,6 +1,6 @@
 (defun word:new (ishide / ax-word)
-  "鏂板缓word 鏂囨。\n鍙傛暟:ishide:鏄惁鍙锛宼涓哄彲瑙侊紝nil涓轰笉鍙"
-  "涓�涓〃绀簑ord鐨剉la瀵硅薄"
+  "新建word 文档\n参数:ishide:是否可见，t为可见，nil为不可见"
+  "一个表示word的vla对象"
   "(word:New t)"
   (if (setq ax-word (vlax-get-or-create-object "Word.Application"))
       (progn (vlax-invoke (vlax-get-property ax-word (quote documents))

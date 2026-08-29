@@ -14,7 +14,7 @@
 	   "&quot;" "\""
 	   expr)))
 	
-  (@:help '("鐢熸垚 @lisp 灞忓箷鑿滃崟"))
+  (@:help '("生成 @lisp 屏幕菜单"))
   (if (and (getvar "lispsys")
 	   (> (getvar "lispsys") 0))
       (setq fp (open (strcat (@:package-path "sidebar")"Cmd_atlisp.xml")"w" "utf8"))
@@ -55,7 +55,7 @@
 	       (= 0 (getvar "lispsys")))
 	   (findfile (strcat (@:package-path "sidebar")"Cmd_atlisp-ansi.xml"))
 	   )
-      ;;杞爜
+      ;;转码
       (progn
 	(if (null (findfile "bin\\iconv.exe"))
 	    (@:down-and-unzip "archives/iconv.zip" "bin")
@@ -64,7 +64,7 @@
 			    (strcat (@:package-path "sidebar")"Cmd_atlisp-ansi.xml") "\" > \"" (strcat (@:package-path "sidebar")"Cmd_atlisp.xml")  "\""
 			    ))
 	  )))
-  (@:speak "鐐瑰嚮纭畾鏇存柊灞忓箷鑿滃崟.")
+  (@:speak "点击确定更新屏幕菜单.")
   (@:cmd "SCREENMENUSETTING")
   )
 (defun sidebar:load ()

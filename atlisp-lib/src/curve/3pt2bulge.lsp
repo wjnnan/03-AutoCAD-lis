@@ -1,5 +1,5 @@
 (defun curve:3pt2bulge(pt1 pt2 pt3 / ptm1 ptm2)
-  "ä¸‰ç‚¹æ±‚å‡¸åº¦ï¼Œä»»æ„ä¸¤ç‚¹çš„å‚çº¿çš„äº¤ç‚¹å³åœ†å¿ƒã€‚"
+  "ÈıµãÇóÍ¹¶È£¬ÈÎÒâÁ½µãµÄ´¹ÏßµÄ½»µã¼´Ô²ĞÄ¡£"
   "number"
   "(curve:3pt2bulge (getpoint)(getpoint)(getpoint))"
   (* 

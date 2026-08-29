@@ -1,3 +1,3 @@
 (defun curve:subsegments (obj)
-  "澶氭绾垮瓙娈垫暟"
+  "多段线子段数"
   (fix (vlax-curve-getendparam obj)))

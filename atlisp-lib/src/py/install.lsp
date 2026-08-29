@@ -1,5 +1,5 @@
 (defun py:install ()
-  "瀹夎Python杩愯鐜"
+  "安装Python运行环境"
   ""
   (or @::enable-start
 	  (@::check-pgp)

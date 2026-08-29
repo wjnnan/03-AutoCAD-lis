@@ -1,5 +1,5 @@
 (defun entity:get-truecolor (ent / obj-color)
-  "获取图元 RGB 真彩色"
+  "��ȡͼԪ RGB ���ɫ"
   "lst"
   (if (= 'ename (type ent))
       (setq ent (e2o ent)))

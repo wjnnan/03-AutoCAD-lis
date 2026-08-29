@@ -1,5 +1,5 @@
 (defun m:dec2base (fixnum int-b)
-  "10è¿›åˆ¶è½¬æ¢ä¸ºæŒ‡å®šè¿›åˆ¶\n fixnum æ•´æ•°å€¼, int-b è¿›åˆ¶(2-36)"
+  "10½øÖÆ×ª»»ÎªÖ¸¶¨½øÖÆ\n fixnum ÕûÊıÖµ, int-b ½øÖÆ(2-36)"
   "string"
   "(m:dec2base 3323 16)"
   (if (< fixnum int-b)

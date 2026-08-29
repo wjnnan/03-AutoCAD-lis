@@ -1,12 +1,12 @@
-;;==============================å—ç»Ÿè®¡
+;;==============================¿éÍ³¼Æ
 
 ;;;----------------------------------------------------------------------------------------------
-;;;æ£€æŸ¥è¾“å…¥çš„åŸå§‹å‚æ•°è¡¨æ˜¯å¦ä½¿ç”¨äº†ç»„ä»¶çš„åˆ«åï¼Œå¦‚æœä½¿ç”¨äº†ï¼Œä¾¿æŠŠåˆ«åæ”¹æˆç»„ä»¶å…¨åã€‚æ— è®ºæ˜¯å¦å·²ä½¿ç”¨ç»„ä»¶çš„åˆ«åï¼Œéƒ½è¿”å›å¯ä¾›åç»­ç¨‹åºä½¿ç”¨çš„å‚æ•°è¡¨ã€‚
+;;;¼ì²éÊäÈëµÄÔ­Ê¼²ÎÊı±íÊÇ·ñÊ¹ÓÃÁË×é¼şµÄ±ğÃû£¬Èç¹ûÊ¹ÓÃÁË£¬±ã°Ñ±ğÃû¸Ä³É×é¼şÈ«Ãû¡£ÎŞÂÛÊÇ·ñÒÑÊ¹ÓÃ×é¼şµÄ±ğÃû£¬¶¼·µ»Ø¿É¹©ºóĞø³ÌĞòÊ¹ÓÃµÄ²ÎÊı±í¡£
 (defun listFormatInputList (listInput             /                     listComponentAlias    listFormatedInput     listMemberOfInput
                             boolIsAlias           intDefinedAliasNumber k                     strInputComponentName strAlias
                             )
 ;;;----------------------------------------------------------------------------------------------
-;;;å®šä¹‰ç»„ä»¶åˆ«åè¡¨ï¼Œå½¢å¼ä¸º  ( (  ç»„ä»¶åˆ«å ç»„ä»¶åŸå) )
+;;;¶¨Òå×é¼ş±ğÃû±í£¬ĞÎÊ½Îª  ( (  ×é¼ş±ğÃû ×é¼şÔ­Ãû) )
   (setq listComponentAlias '(("bt" "button")
                              ("edit" "edit_box")
                              ("edit12" "edit12_box")
@@ -67,21 +67,21 @@
   listFormatedInput
   )
 ;;;----------------------------------------------------------------------------------------------
-;;;æŠŠè¾“å…¥çš„å‚æ•°è¡¨è½¬æ¢ä¸ºå­—ç¬¦ä¸²è¡¨
+;;;°ÑÊäÈëµÄ²ÎÊı±í×ª»»Îª×Ö·û´®±í
 (defun listInputToString (listInput  /  listMemberOfInput   listCdrMemberOfInput
 			  listMemberOfComponentParameters   listComponentParameters  listCadrMemberOfComponentParameters
 			  listResult   k j   boolDefinementFound strTmp  test1   test2  )
 ;;;----------------------------------------------------------------------------------------------
-;;;ç»„ä»¶å®šä¹‰å‚æ•°è¡¨ï¼Œå½¢å¼ä¸º ( ( ç»„ä»¶ååˆ—è¡¨) ( å¯¹åº”å‚æ•°ååˆ—è¡¨) )
-;;; æ— å±æ€§æ§ä»¶ï¼Œç”Ÿæˆdclæ–‡ä»¶æ—¶ï¼Œåœ¨ç»„ä»¶ååæ·»åŠ " ; â€œå³å¯ï¼›å¦‚ä¸ºâ€œendâ€,åœ¨dclæ–‡ä»¶é‡ŒåŠ ä¸Š"}"å­—ç¬¦å³å¯
-;;; å®¹å™¨æ§ä»¶åŠå¸¦å±æ€§æ§ä»¶ï¼Œéœ€è¦åœ¨åå‰æ·»åŠ â€ : "ï¼ŒåååŠ  "{"
-  (setq listComponentParameters '((("å®¹å™¨æ§ä»¶" "dialog")
+;;;×é¼ş¶¨Òå²ÎÊı±í£¬ĞÎÊ½Îª ( ( ×é¼şÃûÁĞ±í) ( ¶ÔÓ¦²ÎÊıÃûÁĞ±í) )
+;;; ÎŞÊôĞÔ¿Ø¼ş£¬Éú³ÉdclÎÄ¼şÊ±£¬ÔÚ×é¼şÃûºóÌí¼Ó" ; ¡°¼´¿É£»ÈçÎª¡°end¡±,ÔÚdclÎÄ¼şÀï¼ÓÉÏ"}"×Ö·û¼´¿É
+;;; ÈİÆ÷¿Ø¼ş¼°´øÊôĞÔ¿Ø¼ş£¬ĞèÒªÔÚÃûÇ°Ìí¼Ó¡± : "£¬Ãûºó¼Ó "{"
+  (setq listComponentParameters '((("ÈİÆ÷¿Ø¼ş" "dialog")
                                    ("label"               "key"                 "value"               "initial_focus"
                                     "height"              "width"               "children_alignment"  "children_fixed_height"
                                     "children_fixed_width"
                                     )
                                    )
-                                  (("å®¹å™¨æ§ä»¶"          "boxed_column"      "boxed_row"         "boxed_radio_column"
+                                  (("ÈİÆ÷¿Ø¼ş"          "boxed_column"      "boxed_row"         "boxed_radio_column"
                                     "boxed_radio_row"   "column"            "row"               "radio_row"         "radio_column"
                                     "concatenation"     "paragraph"
                                     )
@@ -90,72 +90,72 @@
                                     "children_alignment"  "children_fixed_height"                     "children_fixed_width"
                                     )
                                    )
-                                  (("å¸¦å±æ€§æ§ä»¶" "button")
+                                  (("´øÊôĞÔ¿Ø¼ş" "button")
                                    ("label"         "key"           "action"        "alignment"     "height"        "width" "horizontal_margin"
                                     "vertical_margin" "fixed_height"  "fixed_width"   "is_cancel"     "is_default"    "is_enabled"    "is_tab_stop"
                                     "mnemonic"
                                     )
                                    )
-                                  (("å¸¦å±æ€§æ§ä»¶" "edit_box" "edit12_box" "edit32_box" "fcf_ebox" "fcf_ebox1")
+                                  (("´øÊôĞÔ¿Ø¼ş" "edit_box" "edit12_box" "edit32_box" "fcf_ebox" "fcf_ebox1")
                                    ("label"          "key"            "value"          "action"         "alignment"      "height"
                                     "width"          "fixed_height"   "fixed_width"    "allow_accept"   "edit_limit"     "edit_width"
                                     "is_enabled"     "is_tab_stop"    "mnemonic"       "password_char"
                                     )
                                    )
-                                  (("å¸¦å±æ€§æ§ä»¶" "image" "image_block" "icon_image")
+                                  (("´øÊôĞÔ¿Ø¼ş" "image" "image_block" "icon_image")
                                    ("key"           "value"         "action"        "alignment"     "height"        "width"
                                     "fixed_height"  "fixed_width"   "is_enabled"    "is_tab_stop"   "mnemonic"      "aspect_ratio"
                                     "color"
                                     )
                                    )
-                                  (("å¸¦å±æ€§æ§ä»¶" "image_button" "swatch" "fcf_ibut" "fcf_ibut1")
+                                  (("´øÊôĞÔ¿Ø¼ş" "image_button" "swatch" "fcf_ibut" "fcf_ibut1")
                                    ("key"            "action"         "alignment"      "height"         "width"          "fixed_height"
                                     "fixed_width"    "is_enabled"     "is_tab_stop"    "mnemonic"       "allow_accept"   "aspect_ratio"
                                     "color"
                                     )
                                    )
-                                  (("å¸¦å±æ€§æ§ä»¶" "list_box")
+                                  (("´øÊôĞÔ¿Ø¼ş" "list_box")
                                    ("label"          "key"            "value"          "action"         "alignment"      "height"
                                     "width"          "fixed_height"   "fixed_width"    "allow_accept"   "fixed_width_font"
                                     "is_enabled"     "is_tab_stop"    "list"           "mnemonic"       "multiple_select"
                                     "tabs"           "tab_truncate"
                                     )
                                    )
-                                  (("å¸¦å±æ€§æ§ä»¶" "popup_list")
+                                  (("´øÊôĞÔ¿Ø¼ş" "popup_list")
                                    ("label"         "key"           "value"         "action"        "alignment"     "height"
                                     "width"         "fixed_height"  "fixed_width"   "edit_width"    "fixed_width_font"
                                     "is_enabled"    "is_tab_stop"   "list"          "mnemonic"      "tabs"          "tab_truncate"
                                     )
                                    )
-                                  (("å¸¦å±æ€§æ§ä»¶" "radio_button")
+                                  (("´øÊôĞÔ¿Ø¼ş" "radio_button")
                                    ("label"         "key"           "value"         "action"        "is_enabled"    "is_tab_stop"
                                     "mnemonic"      "alignment"     "height"        "width"         "fixed_height"  "fixed_width"
                                     )
                                    )
-                                  (("å¸¦å±æ€§æ§ä»¶" "slider")
+                                  (("´øÊôĞÔ¿Ø¼ş" "slider")
                                    ("label"         "key"           "value"         "action"        "alignment"     "height"
                                     "width"         "fixed_height"  "fixed_width"   "big_increment" "layout"        "max_value"
                                     "min_value"     "mnemonic"      "small_increment"
                                     )
                                    )
-                                  (("å¸¦å±æ€§æ§ä»¶" "spacer")
+                                  (("´øÊôĞÔ¿Ø¼ş" "spacer")
                                    ("value" "height" "width" "fixed_height" "fixed_width")
                                    )
-                                  (("å¸¦å±æ€§æ§ä»¶" "text" "text_part" "text_25")
+                                  (("´øÊôĞÔ¿Ø¼ş" "text" "text_part" "text_25")
                                    ("label" "key" "value" "alignment" "height" "width" "fixed_height" "fixed_width" "is_bold")
                                    )
-                                  (("å¸¦å±æ€§æ§ä»¶" "toggle")
+                                  (("´øÊôĞÔ¿Ø¼ş" "toggle")
                                    ("label" "key" "value" "action" "alignment" "height" "width" "fixed_height" "fixed_width" "is_enabled"
                                     "is_tab_stop")
                                    )
-                                  (("æ— å±æ€§æ§ä»¶"           "cancel_button"        "errtile"              "help_button"
+                                  (("ÎŞÊôĞÔ¿Ø¼ş"           "cancel_button"        "errtile"              "help_button"
                                     "info_button"          "ok_cancel"            "ok_cancel_help"       "ok_cancel_help_errtile"
                                     "ok_cancel_help_info"  "ok_only"              "spacer"               "spacer_0"
                                     "spacer_1"             "color_palette_1_7"    "color_palette_1_9"    "color_palette_0_9"
                                     "color_palette_250_255"                       "std_rq_color"
                                     )
                                    )
-                                  (("æ— å±æ€§æ§ä»¶" "end")) ;ä»¥"end"ä½œä¸ºå•ä¸ªç»„ä»¶å®šä¹‰çš„ç»“æŸï¼Œç”Ÿæˆdclæ–‡ä»¶æ—¶ï¼Œä»¥â€œ}â€œä»£æ›¿
+                                  (("ÎŞÊôĞÔ¿Ø¼ş" "end")) ;ÒÔ"end"×÷Îªµ¥¸ö×é¼ş¶¨ÒåµÄ½áÊø£¬Éú³ÉdclÎÄ¼şÊ±£¬ÒÔ¡°}¡°´úÌæ
                                   )
 	)
 ;;;----------------------------------------------------------------------------------------------        
@@ -167,7 +167,7 @@
 		 )
 	   (while (and (= boolDefinementFound "NotYet")
 		       (< k (length listComponentParameters))
-		       ) ;æœªæ‰¾åˆ°ç»„ä»¶å‚æ•°ååˆ—è¡¨ä¸”æœªæœç´¢å®Œç»„ä»¶é¢„å®šä¹‰åˆ—è¡¨æ—¶å¾ªç¯
+		       ) ;Î´ÕÒµ½×é¼ş²ÎÊıÃûÁĞ±íÇÒÎ´ËÑË÷Íê×é¼şÔ¤¶¨ÒåÁĞ±íÊ±Ñ­»·
 	     (setq listMemberOfComponentParameters (nth k listComponentParameters))
 	     (if (and (member (car listMemberOfInput)
 			      (car listMemberOfComponentParameters)
@@ -177,15 +177,15 @@
 			      (length listMemberOfComponentParameters)
 			      )
 			  T
-			  ) ;å› spaceræ—¢å¯ä¸ºæ— å±æ€§æ§ä»¶ä¹Ÿå¯ä¸ºå¸¦å±æ€§æ§ä»¶ï¼Œæ•…ç‰¹åˆ«å¤„ç†
+			  ) ;Òòspacer¼È¿ÉÎªÎŞÊôĞÔ¿Ø¼şÒ²¿ÉÎª´øÊôĞÔ¿Ø¼ş£¬¹ÊÌØ±ğ´¦Àí
 		      )
 		 (progn (setq boolDefinementFound  "Found"
 			      listCdrMemberOfInput (cdr listMemberOfInput)
 			      )
-			(cond ((or (= "å®¹å™¨æ§ä»¶" (car (car listMemberOfComponentParameters)))
-				   (= "å¸¦å±æ€§æ§ä»¶" (car (car listMemberOfComponentParameters)))
+			(cond ((or (= "ÈİÆ÷¿Ø¼ş" (car (car listMemberOfComponentParameters)))
+				   (= "´øÊôĞÔ¿Ø¼ş" (car (car listMemberOfComponentParameters)))
 				   )
-			       listCdrMemberOfInput ;ç»„ä»¶å‚æ•°å€¼æœ‰æ•°æ®æ—¶
+			       listCdrMemberOfInput ;×é¼ş²ÎÊıÖµÓĞÊı¾İÊ±
 			       (setq listResult (append listResult
 							(list (strcat ":" (car listMemberOfInput) "{\n"))
 							)
@@ -195,34 +195,34 @@
 				     )
 			       (while (< j (length listCdrMemberOfInput))
 				 (if (not (= "" (nth j listCdrMemberOfInput)))
-				     (progn ;å‚æ•°å€¼éç©ºæ—¶
+				     (progn ;²ÎÊıÖµ·Ç¿ÕÊ±
 				       (if (numberp (nth j listCdrMemberOfInput))
 					   (setq strTMP (strcat (nth j listCadrMemberOfComponentParameters)
 								"="
 								(rtos (nth j listCdrMemberOfInput) 2 3)
 								";\n"
 								)
-						 ) ;å‚æ•°ä¸ºæ•°å€¼æ—¶
+						 ) ;²ÎÊıÎªÊıÖµÊ±
 					   (setq strTMP (strcat (nth j listCadrMemberOfComponentParameters)
 								"=\""
 								(nth j listCdrMemberOfInput)
 								"\";\n"
 								)
-						 ) ;å‚æ•°éæ•°å€¼æ—¶
+						 ) ;²ÎÊı·ÇÊıÖµÊ±
 					   )
 				       (setq listResult (append listResult (list strTMP)))
 				       )
 				     )
 				 (setq j (1+ j))
 				 )
-			       (if (= "å¸¦å±æ€§æ§ä»¶" (car (car listMemberOfComponentParameters)))
+			       (if (= "´øÊôĞÔ¿Ø¼ş" (car (car listMemberOfComponentParameters)))
 				   (setq listResult (append listResult (list "}\n")))
-				   ) ;å¸¦å±æ€§æ§ä»¶æ—¶ï¼Œåœ¨å­—ç¬¦ä¸²æœ«å°¾åŠ ä¸Šç»„ä»¶ç»“æŸæ ‡å¿— "}"
+				   ) ;´øÊôĞÔ¿Ø¼şÊ±£¬ÔÚ×Ö·û´®Ä©Î²¼ÓÉÏ×é¼ş½áÊø±êÖ¾ "}"
 			       )
 			      ((= (car listMemberOfInput) "end")
 			       (setq listResult (append listResult (list "}\n")))
 			       )
-			      (T ;(= "æ— å±æ€§æ§ä»¶" (car (car listMemberOfComponentParameters))) ,é»˜è®¤ä¸ºæ— å±æ€§æ§ä»¶
+			      (T ;(= "ÎŞÊôĞÔ¿Ø¼ş" (car (car listMemberOfComponentParameters))) ,Ä¬ÈÏÎªÎŞÊôĞÔ¿Ø¼ş
 			       (setq listResult (append listResult
 							(list (strcat (car listMemberOfInput) ";\n"))
 							)
@@ -237,21 +237,21 @@
   listResult
   )
 ;;;----------------------------------------------------------------------------------------------
-;;;ç”Ÿæˆå¹¶æ˜¾ç¤ºè¾“å…¥å¯¹è¯æ¡†
-;;;è°ƒç”¨å½¢å¼ ( listGenerateDCL  DCLæ–‡ä»¶å(æ— è·¯å¾„åŠåç¼€)
-;;;                 è¡¨( ( ( "ç»„ä»¶åæˆ–åˆ«å")  ( å‚æ•°å€¼è¡¨ )  )   ...)
-;;;                 è¡¨( (  "ç»„ä»¶ç¼–å·"  "ç»„ä»¶åˆå§‹å€¼"  )   ...)    ;ç»„ä»¶æ˜¾ç¤ºå€¼åˆå§‹åŒ–
-;;;                 è¡¨( (  "ç»„ä»¶ç¼–å·"  "åŠ¨ä½œä»£ç "  )   ...)      ;éœ€è®¾ç½®åŠ¨ä½œçš„ç»„ä»¶åŠå¯¹åº”çš„åŠ¨ä½œ
-;;;                 è¡¨("ç»„ä»¶ç¼–å·"  ...)   )    ;ç”¨æˆ·ç‚¹â€œç¡®å®šâ€é”®æ—¶ï¼Œéœ€è·å–è¾“å…¥å€¼çš„ç»„ä»¶å
-;;;æ³¨æ„ï¼Œè°ƒç”¨å‚æ•°å‡ä¸ºå­—ç¬¦ä¸²å½¢å¼
-;;;è¿”å›å€¼ä¸ºè¡¨,å½¢å¼ä¸º ( å…³é—­å¯¹è¯æ¡†çš„æ•´æ•°ä»£ç        æŒ‡å®šç»„ä»¶è¿”å›å€¼åˆ—è¡¨)
+;;;Éú³É²¢ÏÔÊ¾ÊäÈë¶Ô»°¿ò
+;;;µ÷ÓÃĞÎÊ½ ( listGenerateDCL  DCLÎÄ¼şÃû(ÎŞÂ·¾¶¼°ºó×º)
+;;;                 ±í( ( ( "×é¼şÃû»ò±ğÃû")  ( ²ÎÊıÖµ±í )  )   ...)
+;;;                 ±í( (  "×é¼ş±àºÅ"  "×é¼ş³õÊ¼Öµ"  )   ...)    ;×é¼şÏÔÊ¾Öµ³õÊ¼»¯
+;;;                 ±í( (  "×é¼ş±àºÅ"  "¶¯×÷´úÂë"  )   ...)      ;ĞèÉèÖÃ¶¯×÷µÄ×é¼ş¼°¶ÔÓ¦µÄ¶¯×÷
+;;;                 ±í("×é¼ş±àºÅ"  ...)   )    ;ÓÃ»§µã¡°È·¶¨¡±¼üÊ±£¬Ğè»ñÈ¡ÊäÈëÖµµÄ×é¼şÃû
+;;;×¢Òâ£¬µ÷ÓÃ²ÎÊı¾ùÎª×Ö·û´®ĞÎÊ½
+;;;·µ»ØÖµÎª±í,ĞÎÊ½Îª ( ¹Ø±Õ¶Ô»°¿òµÄÕûÊı´úÂë       Ö¸¶¨×é¼ş·µ»ØÖµÁĞ±í)
 (defun listGenerateDCL (strDCLFileName      listInputDefinements                    listKeysAndValues   listKeysAndActions
                         listKeysToGetValue  /                   listFormatedInput   intDialogCloseType  listKeysValue
                         listResult          fStream             strFileFullName     objectFile          fileStream
                         templist            i                   dclid
 			)
 ;;;----------------------------------------------------------------------------------------------
-;;;æŒ‰ ( ( â€œç»„ä»¶åâ€  æ˜¾ç¤º"  ) ) è¡¨ï¼Œè®¾ç½®å„ç»„ä»¶çš„å€¼
+;;;°´ ( ( ¡°×é¼şÃû¡±  ÏÔÊ¾"  ) ) ±í£¬ÉèÖÃ¸÷×é¼şµÄÖµ
   (defun SetDCLValues (listKeysAndValues / listEachKeyAndValue)
     (foreach listEachKeyAndValue listKeysAndValues
 	     (set_tile (car listEachKeyAndValue)
@@ -260,7 +260,7 @@
 	     )
     )
 ;;;----------------------------------------------------------------------------------------------
-;;;æŒ‰ ( ( â€œç»„ä»¶åâ€  â€œåŠ¨ä½œ"  ) ) è¡¨ï¼ŒæŠŠç»„ä»¶ä¸åŠ¨ä½œå…³è”
+;;;°´ ( ( ¡°×é¼şÃû¡±  ¡°¶¯×÷"  ) ) ±í£¬°Ñ×é¼şÓë¶¯×÷¹ØÁª
   (defun SetDCLActions (listKeysAndActions / listEachKeyAndAction)
     (foreach listEachKeyAndAction listKeysAndActions
 	     (action_tile (car listEachKeyAndAction)
@@ -269,7 +269,7 @@
 	     )
     )
 ;;;----------------------------------------------------------------------------------------------
-;;;æŒ‰ ( â€œç»„ä»¶åâ€ ) è¡¨ï¼ŒæŸ¥è¯¢å„ç»„ä»¶å€¼å¹¶è¿”å›å€¼è¡¨
+;;;°´ ( ¡°×é¼şÃû¡± ) ±í£¬²éÑ¯¸÷×é¼şÖµ²¢·µ»ØÖµ±í
   (defun listGetDCLValues (listKeys / listEachKey listValues)
     (setq listValues nil)
     (foreach listEachKey listKeys
@@ -287,11 +287,11 @@
 	)
   (foreach fStream fileStream (princ fStream objectFile))
   (close objectFile)
-  ;;ä»¥ä¸Šç”Ÿæˆdclæ–‡ä»¶,ä»¥ä¸‹è°ƒç”¨DCLï¼Œè®¾ç½®ç»„ä»¶å€¼ã€å…³è”åŠ¨ä½œï¼Œè·å–è¿”å›å€¼
+  ;;ÒÔÉÏÉú³ÉdclÎÄ¼ş,ÒÔÏÂµ÷ÓÃDCL£¬ÉèÖÃ×é¼şÖµ¡¢¹ØÁª¶¯×÷£¬»ñÈ¡·µ»ØÖµ
   (setq listResult nil)
   (setq dclid (load_dialog strFileFullName))
   (if (not (new_dialog strDCLFileName dclid ""))
-      (progn (alert "å¯¹è¯æ¡†åŠ è½½å¤±è´¥!") (exit))
+      (progn (alert "¶Ô»°¿ò¼ÓÔØÊ§°Ü!") (exit))
       )
   (if listKeysAndValues
       (SetDCLValues listKeysAndValues)
@@ -315,8 +315,8 @@
 ;;;----------------------------------------------------------------------------------------------
 ;;;;funlib.lsp
 ;;; -------------------------------------------------------------------------
-;;;è®¡ç®—ä»¥å½“å‰è®¾ç½®ä¹¦å†™çš„æ–‡æœ¬å ç”¨é•¿åº¦
-;;;è°ƒç”¨å‚æ•°å½¢å¼ (  å­—ç¬¦ä¸² )
+;;;¼ÆËãÒÔµ±Ç°ÉèÖÃÊéĞ´µÄÎÄ±¾Õ¼ÓÃ³¤¶È
+;;;µ÷ÓÃ²ÎÊıĞÎÊ½ (  ×Ö·û´® )
 (defun strLength (str / sLength x1 x2 lst)
   (setq lst (textbox (list (cons 1 str))))
   (setq x1 (car (nth 0 lst))
@@ -326,17 +326,17 @@
   sLength
   )
 ;;; -------------------------------------------------------------------------
-;;;ä»¥å½“å‰è®¾ç½®åˆå§‹åŒ–æ–‡æœ¬é«˜ã€å®½
+;;;ÒÔµ±Ç°ÉèÖÃ³õÊ¼»¯ÎÄ±¾¸ß¡¢¿í
 (defun initText (/ pt str eTextN)
   (setq pt (list 0 0))
-  (setq str "åˆå§‹åŒ–")
+  (setq str "³õÊ¼»¯")
   (command "text" pt #ZiGao# 0 str)
   (setq eTextN (entlast))
   (entdel eTextN)
   )
 ;;; -------------------------------------------------------------------------
-;;; è¿”å›polylineçš„ç‚¹è¡¨
-;;;è°ƒç”¨å‚æ•°å½¢å¼ (  å¤šä¹‰çº¿å›¾å…ƒå )
+;;; ·µ»ØpolylineµÄµã±í
+;;;µ÷ÓÃ²ÎÊıĞÎÊ½ (  ¶àÒåÏßÍ¼ÔªÃû )
 (defun getplpts (pl / mark pts ver1 i ee pt)
   (if (= "POLYLINE" (cdr (assoc 0 (entget pl))))
       (progn  ; read points of ployline
@@ -372,37 +372,37 @@
 
 
 ;;;-------------------------------------------------------------
-;;;åœ¨001å›¾å±‚ã€å½“å‰ç©ºé—´ç”»ç›´çº¿
-;;;è°ƒç”¨å½¢å¼ (  AddLineone èµ·ç‚¹åæ ‡  ç»ˆç‚¹åæ ‡ )ï¼Œå¦‚æœæˆåŠŸï¼Œè¿”å›å®šä¹‰æ•°æ®çš„å›¾å…ƒè¡¨ï¼Œå¦åˆ™è¿”å› nilã€‚
+;;;ÔÚ001Í¼²ã¡¢µ±Ç°¿Õ¼ä»­Ö±Ïß
+;;;µ÷ÓÃĞÎÊ½ (  AddLineone Æğµã×ø±ê  ÖÕµã×ø±ê )£¬Èç¹û³É¹¦£¬·µ»Ø¶¨ÒåÊı¾İµÄÍ¼Ôª±í£¬·ñÔò·µ»Ø nil¡£
 (defun AddLineone (listStartPoint listEndPoint)
-  (setq clay (getvar "clayer"))    ; åŸå§‹å›¾å±‚çŠ¶æ€èµ‹å€¼ç»™oldlay
-  (if (null (tblsearch "LAYER" "001")) ; å¦‚æœè¿˜æ²¡æœ‰001å›¾å±‚
+  (setq clay (getvar "clayer"))    ; Ô­Ê¼Í¼²ã×´Ì¬¸³Öµ¸øoldlay
+  (if (null (tblsearch "LAYER" "001")) ; Èç¹û»¹Ã»ÓĞ001Í¼²ã
       (command "._layer" "m" "001" "c" "240" "" "lt" "continuous" "" "LW"
                "0.13" "" ""
 	       )
-      (setvar "clayer" "001")           ; å¦åˆ™ç›´æ¥è½¬æ¢åˆ°001å›¾å±‚
+      (setvar "clayer" "001")           ; ·ñÔòÖ±½Ó×ª»»µ½001Í¼²ã
       )
   (entmake (list '(0 . "LINE")
                  (cons 10 listStartPoint)
                  (cons 11 listEndPoint)
 		 )
 	   )
-  (while (/= 0 (getvar "cmdactive"))   ; æ²¡æœ‰å®ƒå›ä¸åˆ°åŸæ¥å›¾å±‚
+  (while (/= 0 (getvar "cmdactive"))   ; Ã»ÓĞËü»Ø²»µ½Ô­À´Í¼²ã
     (command pause)
     )
   (SETVAR "CLAYER" CLAY)
   )
 
 ;;;------------------------------------------------------------------------
-;;;åœ¨å½“å‰å›¾å±‚ã€å½“å‰ç©ºé—´ã€æŒ‰æ–‡æœ¬å±…ä¸­æ–¹å¼ï¼Œå†™å•è¡Œæ–‡æœ¬
-;;;è°ƒç”¨å½¢å¼ (  AddText_AlignmentMiddle  æ’å…¥ç‚¹åæ ‡ æ˜¾ç¤º æ–‡æœ¬æ—‹è½¬è§’åº¦(rad)  æ–‡æœ¬å†…å®¹  å®½é«˜æ¯”ä¾‹ å­—ä½“æ ·å¼å)ï¼Œå¦‚æœæˆåŠŸï¼Œè¿”å›å®šä¹‰æ•°æ®çš„å›¾å…ƒè¡¨ï¼Œå¦åˆ™è¿”å› nilã€‚
+;;;ÔÚµ±Ç°Í¼²ã¡¢µ±Ç°¿Õ¼ä¡¢°´ÎÄ±¾¾ÓÖĞ·½Ê½£¬Ğ´µ¥ĞĞÎÄ±¾
+;;;µ÷ÓÃĞÎÊ½ (  AddText_AlignmentMiddle  ²åÈëµã×ø±ê ÏÔÊ¾ ÎÄ±¾Ğı×ª½Ç¶È(rad)  ÎÄ±¾ÄÚÈİ  ¿í¸ß±ÈÀı ×ÖÌåÑùÊ½Ãû)£¬Èç¹û³É¹¦£¬·µ»Ø¶¨ÒåÊı¾İµÄÍ¼Ôª±í£¬·ñÔò·µ»Ø nil¡£
 (defun AddText_AlignmentMiddle  (listInsertPoint floatTextHigh floatRotateAngle strText floatScaleFactor  strStyleName)
-  (setq clay (getvar "clayer"))    ; åŸå§‹å›¾å±‚çŠ¶æ€èµ‹å€¼ç»™oldlay
-  (if (null (tblsearch "LAYER" "003")) ; å¦‚æœè¿˜æ²¡æœ‰003å›¾å±‚
+  (setq clay (getvar "clayer"))    ; Ô­Ê¼Í¼²ã×´Ì¬¸³Öµ¸øoldlay
+  (if (null (tblsearch "LAYER" "003")) ; Èç¹û»¹Ã»ÓĞ003Í¼²ã
       (command "._layer" "m" "003" "c" "100" "" "lt" "continuous" "" "LW"
                "0.13" "" ""
 	       )
-      (setvar "clayer" "003")           ; å¦åˆ™ç›´æ¥è½¬æ¢åˆ°003å›¾å±‚
+      (setvar "clayer" "003")           ; ·ñÔòÖ±½Ó×ª»»µ½003Í¼²ã
       )
   (entmake (list '(0 . "TEXT")
                  '(10 0 0 0)
@@ -416,7 +416,7 @@
                  '(100 . "AcDbText")
 		 )
 	   )
-  (while (/= 0 (getvar "cmdactive"))   ; æ²¡æœ‰å®ƒå›ä¸åˆ°åŸæ¥å›¾å±‚
+  (while (/= 0 (getvar "cmdactive"))   ; Ã»ÓĞËü»Ø²»µ½Ô­À´Í¼²ã
     (command pause)
     )
   (SETVAR "CLAYER" CLAY)
@@ -424,12 +424,12 @@
 
 ;;;------------------------------------------------------------------------
 (defun AddText_AlignmentMiddleone  (listInsertPointone floatTextHighone floatRotateAngleone strTextone floatScaleFactorone  strStyleNameone)
-  (setq clay (getvar "clayer"))    ; åŸå§‹å›¾å±‚çŠ¶æ€èµ‹å€¼ç»™oldlay
-  (if (null (tblsearch "LAYER" "0")) ; å¦‚æœè¿˜æ²¡æœ‰0å›¾å±‚
+  (setq clay (getvar "clayer"))    ; Ô­Ê¼Í¼²ã×´Ì¬¸³Öµ¸øoldlay
+  (if (null (tblsearch "LAYER" "0")) ; Èç¹û»¹Ã»ÓĞ0Í¼²ã
       (command "._layer" "m" "0" "c" "255" "" "lt" "continuous" "" "LW"
                "0.13" "" ""
 	       )
-      (setvar "clayer" "0")           ; å¦åˆ™ç›´æ¥è½¬æ¢åˆ°0å›¾å±‚
+      (setvar "clayer" "0")           ; ·ñÔòÖ±½Ó×ª»»µ½0Í¼²ã
       )
   (entmake (list '(0 . "TEXT")
                  '(10 0 0 0)
@@ -443,7 +443,7 @@
                  '(100 . "AcDbText")
 		 )
 	   )
-  (while (/= 0 (getvar "cmdactive"))   ; æ²¡æœ‰å®ƒå›ä¸åˆ°åŸæ¥å›¾å±‚
+  (while (/= 0 (getvar "cmdactive"))   ; Ã»ÓĞËü»Ø²»µ½Ô­À´Í¼²ã
     (command pause)
     )
   (SETVAR "CLAYER" CLAY)
@@ -451,12 +451,12 @@
 
 ;;;------------------------------------------------------------------------
 (defun AddText_AlignmentMiddletwo  (listInsertPointtwo floatTextHightwo floatRotateAngletwo strTexttwo floatScaleFactortwo  strStyleNametwo)
-  (setq clay (getvar "clayer"))    ; åŸå§‹å›¾å±‚çŠ¶æ€èµ‹å€¼ç»™oldlay
-  (if (null (tblsearch "LAYER" "004")) ; å¦‚æœè¿˜æ²¡æœ‰004å›¾å±‚
+  (setq clay (getvar "clayer"))    ; Ô­Ê¼Í¼²ã×´Ì¬¸³Öµ¸øoldlay
+  (if (null (tblsearch "LAYER" "004")) ; Èç¹û»¹Ã»ÓĞ004Í¼²ã
       (command "._layer" "m" "004" "c" "210" "" "lt" "continuous" "" "LW"
                "0.13" "" ""
 	       )
-      (setvar "clayer" "004")           ; å¦åˆ™ç›´æ¥è½¬æ¢åˆ°004å›¾å±‚
+      (setvar "clayer" "004")           ; ·ñÔòÖ±½Ó×ª»»µ½004Í¼²ã
       )
   (entmake (list '(0 . "TEXT")
                  '(10 0 0 0)
@@ -470,19 +470,19 @@
                  '(100 . "AcDbText")
 		 )
 	   )
-  (while (/= 0 (getvar "cmdactive"))   ; æ²¡æœ‰å®ƒå›ä¸åˆ°åŸæ¥å›¾å±‚
+  (while (/= 0 (getvar "cmdactive"))   ; Ã»ÓĞËü»Ø²»µ½Ô­À´Í¼²ã
     (command pause)
     )
   (SETVAR "CLAYER" CLAY)
   )
   ;;;------------------------------------------------------------------------
 (defun AddText_AlignmentMiddlethree  (listInsertPointthree floatTextHighthree floatRotateAnglethree strTextthree floatScaleFactorthree  strStyleNamethree)
-  (setq clay (getvar "clayer"))    ; åŸå§‹å›¾å±‚çŠ¶æ€èµ‹å€¼ç»™oldlay
-  (if (null (tblsearch "LAYER" "005")) ; å¦‚æœè¿˜æ²¡æœ‰005å›¾å±‚
+  (setq clay (getvar "clayer"))    ; Ô­Ê¼Í¼²ã×´Ì¬¸³Öµ¸øoldlay
+  (if (null (tblsearch "LAYER" "005")) ; Èç¹û»¹Ã»ÓĞ005Í¼²ã
       (command "._layer" "m" "005" "c" "41" "" "lt" "continuous" "" "LW"
                "0.13" "" ""
 	       )
-      (setvar "clayer" "005")           ; å¦åˆ™ç›´æ¥è½¬æ¢åˆ°005å›¾å±‚
+      (setvar "clayer" "005")           ; ·ñÔòÖ±½Ó×ª»»µ½005Í¼²ã
       )
   (entmake (list '(0 . "TEXT")
                  '(10 0 0 0)
@@ -496,15 +496,15 @@
                  '(100 . "AcDbText")
 		 )
 	   )
-  (while (/= 0 (getvar "cmdactive"))   ; æ²¡æœ‰å®ƒå›ä¸åˆ°åŸæ¥å›¾å±‚
+  (while (/= 0 (getvar "cmdactive"))   ; Ã»ÓĞËü»Ø²»µ½Ô­À´Í¼²ã
     (command pause)
     )
   (SETVAR "CLAYER" CLAY)
   )
-;;è¾“å‡ºè¡¨å¤´
+;;Êä³ö±íÍ·
 ;;;------------------------------------------------------------------------
-;;;åœ¨å½“å‰å›¾å±‚ã€å½“å‰ç©ºé—´ã€æŒ‰æ–‡æœ¬å·¦å¯¹é½æ–¹å¼ï¼Œå†™å•è¡Œæ–‡æœ¬
-;;;è°ƒç”¨å½¢å¼ (  AddText_AlignmentLeft  æ’å…¥ç‚¹åæ ‡ æ˜¾ç¤º æ–‡æœ¬æ—‹è½¬è§’åº¦(rad)  æ–‡æœ¬å†…å®¹  å®½é«˜æ¯”ä¾‹ å­—ä½“æ ·å¼å)ï¼Œå¦‚æœæˆåŠŸï¼Œè¿”å›å®šä¹‰æ•°æ®çš„å›¾å…ƒè¡¨ï¼Œå¦åˆ™è¿”å› nilã€‚
+;;;ÔÚµ±Ç°Í¼²ã¡¢µ±Ç°¿Õ¼ä¡¢°´ÎÄ±¾×ó¶ÔÆë·½Ê½£¬Ğ´µ¥ĞĞÎÄ±¾
+;;;µ÷ÓÃĞÎÊ½ (  AddText_AlignmentLeft  ²åÈëµã×ø±ê ÏÔÊ¾ ÎÄ±¾Ğı×ª½Ç¶È(rad)  ÎÄ±¾ÄÚÈİ  ¿í¸ß±ÈÀı ×ÖÌåÑùÊ½Ãû)£¬Èç¹û³É¹¦£¬·µ»Ø¶¨ÒåÊı¾İµÄÍ¼Ôª±í£¬·ñÔò·µ»Ø nil¡£
 (defun AddText_AlignmentLeft  (listInsertPoint floatTextHigh floatRotateAngle strText floatScaleFactor  strStyleName)
   (entmake (list '(0 . "TEXT")
                  (cons 10 listInsertPoint)
@@ -519,9 +519,9 @@
   )
 
 ;;;------------------------------------------------------------------------
-;;;åœ¨å½“å‰å›¾å±‚ã€å½“å‰ç©ºé—´æ’å…¥å—
-;;;è°ƒç”¨å½¢å¼ ( InsertBlock  æ˜¾ç¤º  æ’å…¥ç‚¹  æ—‹è½¬è§’åº¦ )
-;;;æˆåŠŸæ—¶ï¼Œè¿”å›dxfç»„ç ï¼Œå¦åˆ™è¿”å›nil
+;;;ÔÚµ±Ç°Í¼²ã¡¢µ±Ç°¿Õ¼ä²åÈë¿é
+;;;µ÷ÓÃĞÎÊ½ ( InsertBlock  ÏÔÊ¾  ²åÈëµã  Ğı×ª½Ç¶È )
+;;;³É¹¦Ê±£¬·µ»Ødxf×éÂë£¬·ñÔò·µ»Ønil
 (defun InsertBlock ( strBlockName listInsertPoint floatRotateAngle )
   (entmake (list '(0 . "INSERT")
 		 '(100 . "AcDbEntity")
@@ -531,12 +531,12 @@
 		 (cons 50 floatRotateAngle)))
   )
 ;;;-------------------------------------------------------------
-;;;æ ‡è®°undoç¼–ç»„å¼€å§‹ç‚¹
+;;;±ê¼Çundo±à×é¿ªÊ¼µã
 (defun BeginUndoGroup()
   (command "undo" "be")
   )
 ;;; -------------------------------------------------------------------------
-;;;æ ‡è®°undoç¼–ç»„ç»“æŸç‚¹
+;;;±ê¼Çundo±à×é½áÊøµã
 (defun EndUndoGroup()
   (command "undo" "e")
   )
@@ -545,17 +545,17 @@
 ;;; -------------------------------------------------------------------------
 ;;; -------------------------------------------------------------------------
 ;;; -------------------------------------------------------------------------
-;;å—ç»Ÿè®¡.LSP
+;;¿éÍ³¼Æ.LSP
 
 
 ;;;--------------------------------------------------------------------------------
-;;;ä»å—é€‰æ‹©é›†ä¸­é€‰æ‹©æŒ‡å®šå—åçš„å¯¹è±¡ï¼Œå¹¶è¿”å›ç»“æœé€‰æ‹©é›†
+;;;´Ó¿éÑ¡Ôñ¼¯ÖĞÑ¡ÔñÖ¸¶¨¿éÃûµÄ¶ÔÏó£¬²¢·µ»Ø½á¹ûÑ¡Ôñ¼¯
 (defun intCountSingleBlock (ssOriginal strTargetBlockName /
 			    strEntityName listEntityDXF strBlockName intSingleBlockCount k)
   (setq intSingleBlockCount 0
 	k -1 )
-  (repeat (sslength ssOriginal) ; å¾ªç¯ä¸æ‰€é€‰æ‹©çš„å¯¹è±¡æ•°é‡ç›¸ç­‰çš„æ¬¡æ•°
-	  (setq strEntityName (ssname ssOriginal (setq k (1+ k)))) ; strEntityNameï¼Œå–å¾—ç¬¬kä¸ªå¯¹è±¡å
+  (repeat (sslength ssOriginal) ; Ñ­»·ÓëËùÑ¡ÔñµÄ¶ÔÏóÊıÁ¿ÏàµÈµÄ´ÎÊı
+	  (setq strEntityName (ssname ssOriginal (setq k (1+ k)))) ; strEntityName£¬È¡µÃµÚk¸ö¶ÔÏóÃû
 	  (setq listEntityDXF (entget strEntityName))
 	  (setq strBlockName (cdr (assoc 2 listEntityDXF)))
 	  (if (= strBlockName strTargetBlockName)
@@ -565,13 +565,13 @@
   intSingleBlockCount
   )
 ;;;--------------------------------------------------------------------------------
-;;;ä»å—é€‰æ‹©é›†ä¸­åˆ é™¤æŒ‡å®šå—åçš„å¯¹è±¡ï¼Œå¹¶è¿”å›ç»“æœé€‰æ‹©é›†
+;;;´Ó¿éÑ¡Ôñ¼¯ÖĞÉ¾³ıÖ¸¶¨¿éÃûµÄ¶ÔÏó£¬²¢·µ»Ø½á¹ûÑ¡Ôñ¼¯
 (defun ssDelEntitysFromBlockSelectionSet (ssOriginal strTargetBlockName
 					  / strEntityName listEntityDXF strBlockName ssResult k)
   (setq ssResult (ssadd)
 	k -1 )
-  (repeat (sslength ssOriginal) ; å¾ªç¯ä¸æ‰€é€‰æ‹©çš„å¯¹è±¡æ•°é‡ç›¸ç­‰çš„æ¬¡æ•°
-	  (setq strEntityName (ssname ssOriginal (setq k (1+ k)))) ; strEntityNameï¼Œå–å¾—ç¬¬kä¸ªå¯¹è±¡å
+  (repeat (sslength ssOriginal) ; Ñ­»·ÓëËùÑ¡ÔñµÄ¶ÔÏóÊıÁ¿ÏàµÈµÄ´ÎÊı
+	  (setq strEntityName (ssname ssOriginal (setq k (1+ k)))) ; strEntityName£¬È¡µÃµÚk¸ö¶ÔÏóÃû
 	  (setq listEntityDXF (entget strEntityName))
 	  (setq strBlockName (cdr (assoc 2 listEntityDXF)))
 	  (if (/= strBlockName strTargetBlockName)
@@ -581,7 +581,7 @@
   ssResult
   )
 ;;;--------------------------------------------------------------------------------
-;;;æ’å…¥å—ç¼©ç•¥å›¾
+;;;²åÈë¿éËõÂÔÍ¼
 (defun PrintBlockMiniature (floatBasicPointX                  floatBasicPointY                  strBlockName
                             /                                 floatMaxBlockWidth                floatMaxBlockHigh
                             floatBlockOriginalWidth           floatBlockOriginalHigh            floatBlockWidthScale
@@ -592,8 +592,8 @@
                             strEntityName                     listInsertPoint                   floatBlockScale
                             listBlockEntityDXF                listBlockCenterPoint
                             )
-  ;; floatBasicPointX floatBasicPointY ç¼©ç•¥å›¾æ‰€åœ¨è¡¨æ ¼å•å…ƒå·¦ä¸‹è§’ç‚¹åæ ‡
-  ;;è®¡ç®—å›¾å—ç¼©ç•¥å›¾åœ¨å›¾ä¸­å…è®¸æ”¾ç½®èŒƒå›´çš„å·¦ä¸‹åŠå³ä¸Šè§’ç‚¹åæ ‡çš„Xã€Yæ•°å€¼
+  ;; floatBasicPointX floatBasicPointY ËõÂÔÍ¼ËùÔÚ±í¸ñµ¥Ôª×óÏÂ½Çµã×ø±ê
+  ;;¼ÆËãÍ¼¿éËõÂÔÍ¼ÔÚÍ¼ÖĞÔÊĞí·ÅÖÃ·¶Î§µÄ×óÏÂ¼°ÓÒÉÏ½Çµã×ø±êµÄX¡¢YÊıÖµ
   (setq floatMaxBlockWidth 21
 	floatMaxBlockHigh 8
 	)
@@ -609,13 +609,13 @@
 	)
   (setq listInsertPoint (list floatBlockBoundingBoxTargetMinPointX  floatBlockBoundingBoxTargetMinPointY  ) )
   (InsertBlock strBlockName listInsertPoint 0)
-  ;;ä»¥å—ç¼©ç•¥å›¾å…è®¸æ”¾ç½®èŒƒå›´çš„å·¦ä¸‹è§’ç‚¹ä¸ºå—ç¼©ç•¥å›¾çš„åŸºç‚¹æ’å…¥å›¾å—
+  ;;ÒÔ¿éËõÂÔÍ¼ÔÊĞí·ÅÖÃ·¶Î§µÄ×óÏÂ½ÇµãÎª¿éËõÂÔÍ¼µÄ»ùµã²åÈëÍ¼¿é
   (setq strEntityName (entlast))
   (setq objectBlockEntity (vlax-ename->vla-object strEntityName))
   (if  (vl-catch-all-error-p (vl-catch-all-apply 'vla-GetBoundingBox
                                                  (list objectBlockEntity  'listBlockBoundingBoxMinPoint 'listBlockBoundingBoxMaxPoint ))
-			     ) ;åˆ¤æ–­å—æ˜¯å¦å­˜åœ¨è¾¹æ¡†ï¼Œè‹¥å—å«æ— é™é•¿ç›´çº¿ç­‰æ—¶ï¼Œåˆ™ä¸å­˜åœ¨è¾¹æ¡†
-       (AddText_AlignmentMiddle listBlockCenterPoint 3 0 "æœ¬å—æ— ç¼©ç•¥å›¾" 0.8 "standard")
+			     ) ;ÅĞ¶Ï¿éÊÇ·ñ´æÔÚ±ß¿ò£¬Èô¿éº¬ÎŞÏŞ³¤Ö±ÏßµÈÊ±£¬Ôò²»´æÔÚ±ß¿ò
+       (AddText_AlignmentMiddle listBlockCenterPoint 3 0 "±¾¿éÎŞËõÂÔÍ¼" 0.8 "standard")
        
        (progn
 	 (setq listBlockBoundingBoxMinPoint (vlax-safearray->list listBlockBoundingBoxMinPoint) )
@@ -636,13 +636,13 @@
 		     )
 	     (setq   floatBlockHighScale 0)
 	     )
-					;è®¡ç®—å—ç¼©ç•¥å›¾å…è®¸æ”¾ç½®èŒƒå›´çš„è¾¹æ¡†é•¿å®½ä¸å—å¤–æ¡†é•¿å®½çš„æ¯”å€¼
+					;¼ÆËã¿éËõÂÔÍ¼ÔÊĞí·ÅÖÃ·¶Î§µÄ±ß¿ò³¤¿íÓë¿éÍâ¿ò³¤¿íµÄ±ÈÖµ
 	 
 	 (cond
-	   ((= (+ floatBlockWidthScale floatBlockHighScale) 0)  (setq floatBlockScale 1)) ;å—ä¸ºå•ç‚¹æ—¶,ç¼©æ”¾æ¯”ä¾‹å–ä¸º1
-	   ((=  floatBlockWidthScale 0)  (setq floatBlockScale floatBlockHighScale) ) ;å—ä¸ºç«–ç›´çŸ­çº¿æ—¶
-	   ((=  floatBlockHighScale 0)  (setq floatBlockScale floatBlockWidthScale) ) ;å—ä¸ºæ°´å¹³çŸ­çº¿æ—¶
-	   ((> floatBlockWidthScale floatBlockHighScale )  (setq floatBlockScale floatBlockHighScale) ) ;æ•°å€¼è¾ƒå°è€…ä¸ºå—çš„æ§åˆ¶ç¼©æ”¾æ¯”ä¾‹
+	   ((= (+ floatBlockWidthScale floatBlockHighScale) 0)  (setq floatBlockScale 1)) ;¿éÎªµ¥µãÊ±,Ëõ·Å±ÈÀıÈ¡Îª1
+	   ((=  floatBlockWidthScale 0)  (setq floatBlockScale floatBlockHighScale) ) ;¿éÎªÊúÖ±¶ÌÏßÊ±
+	   ((=  floatBlockHighScale 0)  (setq floatBlockScale floatBlockWidthScale) ) ;¿éÎªË®Æ½¶ÌÏßÊ±
+	   ((> floatBlockWidthScale floatBlockHighScale )  (setq floatBlockScale floatBlockHighScale) ) ;ÊıÖµ½ÏĞ¡ÕßÎª¿éµÄ¿ØÖÆËõ·Å±ÈÀı
 	   (T  (setq floatBlockScale floatBlockWidthScale) )  
 	   )
 	 (setq listBlockEntityDXF (entget strEntityName))
@@ -654,7 +654,7 @@
 	 (setq listBlockEntityDXF (entget strEntityName))
 	 (entmod (subst (cons 43 floatBlockScale) (assoc 43 listBlockEntityDXF) listBlockEntityDXF ) )
 	 (entupd strEntityName)
-	 ;;ç¼©æ”¾å—
+	 ;;Ëõ·Å¿é
 	 (vla-GetBoundingBox objectBlockEntity 'listBlockBoundingBoxMinPoint 'listBlockBoundingBoxMaxPoint)
 	 (setq listBlockBoundingBoxMinPoint (vlax-safearray->list listBlockBoundingBoxMinPoint) )
 	 (setq listBlockBoundingBoxMaxPoint (vlax-safearray->list listBlockBoundingBoxMaxPoint) )
@@ -668,11 +668,11 @@
        )
   )
 ;;;--------------------------------------------------------------------------------
-;;;æ˜¾ç¤ºç»Ÿè®¡ç»“æœè¡¨
+;;;ÏÔÊ¾Í³¼Æ½á¹û±í
 (defun PrintCountResultList (listResult  /  i  ListLength strBlockName
 			     intNumberOfSSSingleBlockName   strNumberOfSSSingleBlockName  pt pt1 pt2  pt3 pt4 pt5 pt6 pt7  x  y  x1  y1 y2
 			     x2  x3  floatTextHigh floatTextHighone  blocknumber blocknumbersum)
-  (setq pt (getpoint "\nç‚¹å–è¦æ ‡æ³¨å—ç»Ÿè®¡ç»“æœä¿¡æ¯çš„ä½ç½®:"))
+  (setq pt (getpoint "\nµãÈ¡Òª±ê×¢¿éÍ³¼Æ½á¹ûĞÅÏ¢µÄÎ»ÖÃ:"))
   (setq x (car pt)
 	y (cadr pt)
 	i 1
@@ -681,16 +681,16 @@
         floatTextHightwo 4.5
 	)
   (setq ListLength (length listResult))
-  (setq y1 (- y (* (1+ (+ 1 ListLength)) 10))) ;è¡Œé«˜å–10
+  (setq y1 (- y (* (1+ (+ 1 ListLength)) 10))) ;ĞĞ¸ßÈ¡10
   (while (<= i 2)
-    (setq x1 (+ x (* i 25))) ;åˆ—å®½å–25
+    (setq x1 (+ x (* i 25))) ;ÁĞ¿íÈ¡25
     (setq pt1 (list x1 y 0)
           pt2 (list x1 y1 0)
 	  )
     (AddLineone pt1 pt2)
     (setq i (1+ i))
     )
-;;;ç”»ç«–å‘è¡¨æ ¼çº¿
+;;;»­ÊúÏò±í¸ñÏß
   (setq i 1)
   (setq x1 (+ x (* 3 25)))
   (while (<= i (1+ ListLength))
@@ -701,14 +701,14 @@
     (AddLineone pt1 pt2)
     (setq i (1+ i))
     )
-;;;ç”»æ¨ªå‘è¡¨æ ¼çº¿
+;;;»­ºáÏò±í¸ñÏß
 ;;;------------------------------------------------------------------------
-  (setq clay (getvar "clayer"))    ; åŸå§‹å›¾å±‚çŠ¶æ€èµ‹å€¼ç»™oldlay
-  (if (null (tblsearch "LAYER" "002")) ; å¦‚æœè¿˜æ²¡æœ‰002å›¾å±‚
+  (setq clay (getvar "clayer"))    ; Ô­Ê¼Í¼²ã×´Ì¬¸³Öµ¸øoldlay
+  (if (null (tblsearch "LAYER" "002")) ; Èç¹û»¹Ã»ÓĞ002Í¼²ã
       (command "._layer" "m" "002" "c" "41" "" "lt" "continuous" "" "LW"
                "0.5" "" ""
 	       )
-      (setvar "clayer" "002")           ; å¦åˆ™ç›´æ¥è½¬æ¢åˆ°002å›¾å±‚
+      (setvar "clayer" "002")           ; ·ñÔòÖ±½Ó×ª»»µ½002Í¼²ã
       )
   (setq x1 (+ x (* 3 25))
 	y1 (- y (* 10 (+ 2 ListLength))))
@@ -719,11 +719,11 @@
 	)
   (command "pline" pt1 pt4 pt2 pt3 "c")
   (princ)
-  (while (/= 0 (getvar "cmdactive"))   ; æ²¡æœ‰å®ƒå›ä¸åˆ°åŸæ¥å›¾å±‚
+  (while (/= 0 (getvar "cmdactive"))   ; Ã»ÓĞËü»Ø²»µ½Ô­À´Í¼²ã
     (command pause)
     )
   (SETVAR "CLAYER" CLAY)
-;;;ç”»å¤–å›´çŸ©å½¢
+;;;»­ÍâÎ§¾ØĞÎ
 ;;;------------------------------------------------------------------------
   (setq x1 (+ x (* 0.5 25))
 	x2 (+ x (* 1.5 25))
@@ -736,11 +736,11 @@
 	pt3 (list x3 y1 0)
         pt8 (list x2 y2 0)
 	)
-  (AddText_AlignmentMiddlethree pt1 floatTextHigh 0 "å—ç¼©ç•¥å›¾" 0.8 "standard")
-  (AddText_AlignmentMiddlethree pt2 floatTextHigh 0 "å—åç§°" 0.8 "standard")
-  (AddText_AlignmentMiddlethree pt3 floatTextHigh 0 "å—æ•°é‡" 0.8 "standard")
-  (AddText_AlignmentMiddlethree pt8 floatTextHighone 0 "å›¾å—æ•°é‡ç»Ÿè®¡" 0.8 "standard")
-  ;;è¾“å‡ºè¡¨å¤´
+  (AddText_AlignmentMiddlethree pt1 floatTextHigh 0 "¿éËõÂÔÍ¼" 0.8 "standard")
+  (AddText_AlignmentMiddlethree pt2 floatTextHigh 0 "¿éÃû³Æ" 0.8 "standard")
+  (AddText_AlignmentMiddlethree pt3 floatTextHigh 0 "¿éÊıÁ¿" 0.8 "standard")
+  (AddText_AlignmentMiddlethree pt8 floatTextHighone 0 "Í¼¿éÊıÁ¿Í³¼Æ" 0.8 "standard")
+  ;;Êä³ö±íÍ·
 ;;;------------------------------------------------------------------------
 
   (setq i 0
@@ -761,11 +761,11 @@
     (AddText_AlignmentMiddle pt3 floatTextHigh 0 strNumberOfSSSingleBlockName 1.0 "standard")
     
     (if (vl-catch-all-error-p (vl-catch-all-apply 'PrintBlockMiniature (list x y1 strBlockName)))
-	(AddText_AlignmentLeft (list (+ x 1) (+ y1 2)) 3 0 "ç”Ÿæˆå—ç¼©ç•¥å›¾æ—¶å‡ºé”™" 0.8 "standard")
+	(AddText_AlignmentLeft (list (+ x 1) (+ y1 2)) 3 0 "Éú³É¿éËõÂÔÍ¼Ê±³ö´í" 0.8 "standard")
 	)
     (setq i (1+ i))
     )
-;;;æ˜¾ç¤ºè¡¨å†…å®¹
+;;;ÏÔÊ¾±íÄÚÈİ
   (setq i 0
 	blocknumbersum 0 )
   (while (< i ListLength)
@@ -781,11 +781,11 @@
 	pt7 (list x3 y1 0)
 	)
   (AddText_AlignmentMiddletwo pt5 floatTextHightwo 0 intNumberOfSSSingleBlockName  0.8 "standard")
-  (AddText_AlignmentMiddle pt5 floatTextHightwo 0 "å…±    ç§"  0.8 "standard")
-  (AddText_AlignmentMiddlethree pt6 floatTextHightwo 0 "æ±‡  æ€»" 0.8 "standard")
+  (AddText_AlignmentMiddle pt5 floatTextHightwo 0 "¹²    ÖÖ"  0.8 "standard")
+  (AddText_AlignmentMiddlethree pt6 floatTextHightwo 0 "»ã  ×Ü" 0.8 "standard")
   (AddText_AlignmentMiddletwo pt7 floatTextHightwo 0 strNumberOfSSSingleBlockName 0.8 "standard")
-  (AddText_AlignmentMiddle pt7 floatTextHightwo 0 "å…±    ä¸ª"  0.8 "standard")
-  ;;è¾“å‡ºè¡¨å°¾
+  (AddText_AlignmentMiddle pt7 floatTextHightwo 0 "¹²    ¸ö"  0.8 "standard")
+  ;;Êä³ö±íÎ²
 ;;;------------------------------------------------------------------------
   )
 ;;;--------------------------------------------------------------------------------
@@ -793,13 +793,13 @@
 				listDCLReturn intButtonClick strSelectRange)
   (setq strSelectRange  "UserSelection" )
   (setq strDCLFileName "BlocksSelectionRange")
-  (setq listInputDefinements '(("dialog" "æŒ‡å®šç»Ÿè®¡èŒƒå›´" "")
+  (setq listInputDefinements '(("dialog" "Ö¸¶¨Í³¼Æ·¶Î§" "")
                                ("spacer")
-                               ("radio_column" "è¿›è¡Œå—ç»Ÿè®¡çš„èŒƒå›´:")
-                               ("btRadio" "æ‰‹å·¥é€‰æ‹©" "brUserSelection")
-                               ("btRadio" "æ•´ä¸ªå›¾å½¢" "brDrawingFile")
+                               ("radio_column" "½øĞĞ¿éÍ³¼ÆµÄ·¶Î§:")
+                               ("btRadio" "ÊÖ¹¤Ñ¡Ôñ" "brUserSelection")
+                               ("btRadio" "Õû¸öÍ¼ĞÎ" "brDrawingFile")
                                ("end")
-                               ("text" "æ³¨:ä¸ç»Ÿè®¡å«æ— é™é•¿ç›´çº¿çš„å—!")
+                               ("text" "×¢:²»Í³¼Æº¬ÎŞÏŞ³¤Ö±ÏßµÄ¿é!")
                                ("spacer")
                                ("btOK")
                                ("end")
@@ -814,26 +814,26 @@
   strSelectRange
   )
 ;;;--------------------------------------------------------------------------------
-;;;å—æ•°é‡ç»Ÿè®¡
+;;;¿éÊıÁ¿Í³¼Æ
 (defun tktj (/ ssObjects  strEntityName  listEntityDXF  strBlockName
 	     listResult  intSingleBlockCount  listMinPoint listInsertPoint  floatBlockRotateAngle
-             ;;listResult ç”¨äºè®°å½•ç»Ÿè®¡ç»“æœï¼Œå½¢å¼ä¸º((  æ˜¾ç¤º  å—æ•°é‡  åŒåå—ä¸­ä¸€ä¸ªå®ä½“çš„å¯¹è±¡å )...)
+             ;;listResult ÓÃÓÚ¼ÇÂ¼Í³¼Æ½á¹û£¬ĞÎÊ½Îª((  ÏÔÊ¾  ¿éÊıÁ¿  Í¬Ãû¿éÖĞÒ»¸öÊµÌåµÄ¶ÔÏóÃû )...)
              )
 					; (initget "D S _DrawingFile UserSelection")
-					; (setq strSelectRange (getkword "\nç»Ÿè®¡å—çš„èŒƒå›´[æ˜¾ç¤º(D)/æ˜¾ç¤º(S)]<S>:"))
+					; (setq strSelectRange (getkword "\nÍ³¼Æ¿éµÄ·¶Î§[ÏÔÊ¾(D)/ÏÔÊ¾(S)]<S>:"))
   (setq strSelectRange (GetBlocksSelectionRange))
   (if (= strSelectRange "DrawingFile")
-      (setq ssObjects  (ssget "X" '((0 . "insert")(100 . "AcDbBlockReference")))) ; åˆ›å»ºé€‰æ‹©é›† ssObjects
+      (setq ssObjects  (ssget "X" '((0 . "insert")(100 . "AcDbBlockReference")))) ; ´´½¨Ñ¡Ôñ¼¯ ssObjects
       (progn
-	(princ "\nè¯·é€‰æ‹©éœ€è¦ç»Ÿè®¡çš„å—:\n")
-	(setq ssObjects (ssget '((0 . "INSERT")(100 . "AcDbBlockReference")))) ; åˆ›å»ºé€‰æ‹©é›† ssObjects
+	(princ "\nÇëÑ¡ÔñĞèÒªÍ³¼ÆµÄ¿é:\n")
+	(setq ssObjects (ssget '((0 . "INSERT")(100 . "AcDbBlockReference")))) ; ´´½¨Ñ¡Ôñ¼¯ ssObjects
 	)
       )
   (if ssObjects
       (progn
 	(setq listResult nil)
 	(while (> (sslength ssObjects) 0)
-	  (setq strEntityName (ssname ssObjects 0)) ; strEntityNameï¼Œå–å¾—ç¬¬1ä¸ªå¯¹è±¡å
+	  (setq strEntityName (ssname ssObjects 0)) ; strEntityName£¬È¡µÃµÚ1¸ö¶ÔÏóÃû
 	  (setq listEntityDXF (entget strEntityName))
 	  (setq strBlockName (cdr (assoc 2 listEntityDXF)))
 	  (setq intSingleBlockCount (intCountSingleBlock ssObjects strBlockName ) )
@@ -846,7 +846,7 @@
 	(setvar "dimzin" 8)
 	(setvar "osmode" 0)
 	(if  (tblsearch "style" "standard")
-	     ;;åˆ¤æ–­æ˜¯å¦å­˜åœ¨"standard"å­—ä½“ï¼Œæœ‰åˆ™è®¾ä¸ºå½“å‰ï¼Œæ— åˆ™åˆ›å»ºã€‚
+	     ;;ÅĞ¶ÏÊÇ·ñ´æÔÚ"standard"×ÖÌå£¬ÓĞÔòÉèÎªµ±Ç°£¬ÎŞÔò´´½¨¡£
 	     (setvar "textstyle" "standard")
 	     (command "_style" "standard" "sceie.shx,sceic.shx" 0 0.8 0 "N" "N" "N")
 	     )

@@ -1,6 +1,6 @@
 (defun pickset:delsameent (ss / list1 s9 xy)
-  "åˆ é™¤é‡å¤å›¾å…ƒ\nå‚æ•°:\nss:é€‰æ‹©é›†"
-  "æ— "
+  "É¾³ıÖØ¸´Í¼Ôª\n²ÎÊı:\nss:Ñ¡Ôñ¼¯"
+  "ÎŞ"
   "(entity:DelSameEnt (ssget))"
   (foreach e (pickset->list ss)
     (setq xy (cdr (entget e)))

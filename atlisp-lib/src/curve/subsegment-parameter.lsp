@@ -1,5 +1,5 @@
 (defun curve:subsegment-parameter (curve pt / arclength cenangle center points pt1 pt1param pt2 pt3 radius tlength xangle xbulge)
-  "å¤šæ®µçº¿å­æ®µå‚æ•°"
+  "¶à¶ÎÏß×Ó¶Î²ÎÊı"
   (setq points (curve:subsegment-picked-points curve pt)
     pt1 (car points)
     pt2 (cadr points)

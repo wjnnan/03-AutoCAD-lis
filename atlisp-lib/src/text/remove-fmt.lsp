@@ -1,6 +1,6 @@
 (defun text:remove-fmt (str-mtext / res)
-  "å»é™¤å¤šè¡Œæ–‡æœ¬ä¸­çš„æ ¼å¼åŒ–å­—ç¬¦ä¸²."
-  "ç»“æœå­—ç¬¦ä¸²"
+  "È¥³ı¶àĞĞÎÄ±¾ÖĞµÄ¸ñÊ½»¯×Ö·û´®."
+  "½á¹û×Ö·û´®"
   "(text:remove-fmt \"\\\\A1;m{\\\\H0.7x;\\\\S3^;} {\\\\H0.7x;\\\\S^2;\\\\H1.4286x; aN\\\\KN BBB\\\\k  \\\\OOO \\\\oabc  \\\\P\\\\P\\\\fSimSun|b0|i0|c134|p2;sdfaf}\")"
   (if (setq res (mapcar (quote car)
         (vl-remove-if (quote (lambda (x)

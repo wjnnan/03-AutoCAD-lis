@@ -1,8 +1,8 @@
 (defun svg:export (ss path / i out lst-ss color w h ox oy) 
-  "å°†é€‰æ‹©çš„å›¾å…ƒç”ŸæˆSVG, ss é€‰æ‹©é›†,path è¾“å‡ºæ–‡ä»¶è·¯å¾„ã€‚å½“å‰åªæ”¯æŒäºŒç»´å¤šæ®µçº¿å’Œçº¿æ®µ"
+  "½«Ñ¡ÔñµÄÍ¼ÔªÉú³ÉSVG, ss Ñ¡Ôñ¼¯,path Êä³öÎÄ¼şÂ·¾¶¡£µ±Ç°Ö»Ö§³Ö¶şÎ¬¶à¶ÎÏßºÍÏß¶Î"
   ""
   "(svg:export (ssget) \"C:/example.svg\")"
-  ;; svg æ˜¯åæ ‡ç³»Oç‚¹æ˜¯å·¦ä¸Šï¼ŒYè½´å‘ä¸‹ä¸ºæ­£ï¼Œä¸CADæ˜¯ç›¸åçš„ã€‚
+  ;; svg ÊÇ×ø±êÏµOµãÊÇ×óÉÏ£¬YÖáÏòÏÂÎªÕı£¬ÓëCADÊÇÏà·´µÄ¡£
   (setq lst-ss (pickset:to-list ss))
   ;; (setq lst-ss (vl-remove-if-not
   ;; 		'(lambda(x)

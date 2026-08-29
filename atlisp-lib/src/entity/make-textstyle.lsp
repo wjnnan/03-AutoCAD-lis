@@ -1,8 +1,8 @@
 (defun entity:make-textstyle (name / obj)
-  "åˆ›å»ºæ–‡å­—æ ·å¼ã€‚"
+  "´´½¨ÎÄ×ÖÑùÊ½¡£"
   (setq obj (vla-add (vla-get-textstyles (vla-get-activedocument (vlax-get-acad-object)))
       name))
-  (vla-setfont obj "å®‹ä½“"
+  (vla-setfont obj "ËÎÌå"
     :vlax-false :vlax-false 1 0)
   (vla-put-width obj 0.7)
   (princ))

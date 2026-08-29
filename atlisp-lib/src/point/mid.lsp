@@ -1,6 +1,6 @@
 (defun point:mid (pt1 pt2)
-    "æ±‚ä¸¤ç‚¹ pt1 pt2 çš„ä¸­ç‚¹"
-    "ä¸­ç‚¹åæ ‡"
+    "ÇóÁ½µã pt1 pt2 µÄÖĞµã"
+    "ÖĞµã×ø±ê"
     (mapcar (quote (lambda (x y)
                 (* 0.5 (+ x y))))
         pt1 pt2))

@@ -1,5 +1,5 @@
 (defun list:intersect (lst1 lst2 / res)
-  "姹備袱涓垪琛ㄩ泦鍚堢殑浜ら泦"
+  "求两个列表集合的交集"
   "List"
   (if (null *fuzz*)
       (setq *fuzz* 0.0001))

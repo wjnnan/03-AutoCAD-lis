@@ -1,5 +1,5 @@
 (defun matrix:rotation (rx ry rz)
-  "鏋勯�犱笁缁存棆杞煩闃碉紝rx/ry/rz鍒嗗埆瀵瑰簲涓変釜鍧愭爣杞寸殑杞"
+  "构造三维旋转矩阵，rx/ry/rz分别对应三个坐标轴的转角"
   (matrix:mxm (matrix:rotation-x rx)
 	      (matrix:mxm (matrix:rotation-y ry)
 			 (matrix:rotation-z rz))))

@@ -1,11 +1,11 @@
-(@::define-config '@text:en-style "Standard" "çº¯è‹±æ–‡å•è¡Œæ–‡æœ¬å­—ä½“æ ·å¼")
-(@::define-config '@text:zh-style "HZ" "ä¸­æ–‡å•è¡Œæ–‡æœ¬å­—ä½“æ ·å¼")
-(@::define-config '@text:en-font "Arial" "è‹±æ–‡å­—ä½“")
-(@::define-config '@text:zh-font "YouYuan" "ä¸­æ–‡å­—ä½“")
-(@::define-config '@text:mtext-width 1.0 "å¤šè¡Œæ–‡æœ¬é«˜å®½æ¯”")
+(@::define-config '@text:en-style "Standard" "´¿Ó¢ÎÄµ¥ĞĞÎÄ±¾×ÖÌåÑùÊ½")
+(@::define-config '@text:zh-style "HZ" "ÖĞÎÄµ¥ĞĞÎÄ±¾×ÖÌåÑùÊ½")
+(@::define-config '@text:en-font "Arial" "Ó¢ÎÄ×ÖÌå")
+(@::define-config '@text:zh-font "YouYuan" "ÖĞÎÄ×ÖÌå")
+(@::define-config '@text:mtext-width 1.0 "¶àĞĞÎÄ±¾¸ß¿í±È")
       
 (defun @text:remove-mtext-style (/ ents)
-  (@::prompt "å»é™¤å¤šè¡Œæ–‡æœ¬ä¸­çš„æ ¼å¼ï¼Œä»…ä¿ç•™æ¢è¡Œã€‚ä½¿ç”¨æ—¶æ³¨æ„ä¸Šä¸‹æ ‡æ–‡å­—ã€‚")
+  (@::prompt "È¥³ı¶àĞĞÎÄ±¾ÖĞµÄ¸ñÊ½£¬½ö±£Áô»»ĞĞ¡£Ê¹ÓÃÊ±×¢ÒâÉÏÏÂ±êÎÄ×Ö¡£")
   (setq ents (pickset:to-list (ssget '((0 . "mtext")))))
   (mapcar
    '(lambda(ent)
@@ -20,27 +20,27 @@
    ents)
   )
 (defun @text:set-style (/ ents hzstylename obj)
-  (@::prompt "ç»Ÿä¸€è®¾ç½®æ–‡æœ¬å’Œå¤šè¡Œæ–‡æœ¬ä¸­çš„å­—ä½“æ ¼å¼ã€‚")
+  (@::prompt "Í³Ò»ÉèÖÃÎÄ±¾ºÍ¶àĞĞÎÄ±¾ÖĞµÄ×ÖÌå¸ñÊ½¡£")
   (setq hzstylename (strcat "HZ" (rtos (@::get-config '@text:mtext-width)  2 3)))
   (if (null (tblsearch "style" hzstylename))
       (progn
 	(setq obj (vla-add (vla-get-textstyles (vla-get-activedocument (vlax-get-acad-object)))
 			   hzstylename))
-	(vla-setfont obj "å®‹ä½“" :vlax-false :vlax-false 1 0)
+	(vla-setfont obj "ËÎÌå" :vlax-false :vlax-false 1 0)
 	(vla-put-width obj (@::get-config '@text:mtext-width))
 	))
   (setq ents (pickset:to-list (ssget '((0 . "text,mtext")))))
   (foreach
    ent ents 
    (cond 
-     ;; å•è¡Œæ–‡æœ¬
+     ;; µ¥ĞĞÎÄ±¾
      ((= "TEXT" (entity:getdxf ent 0))
       (if (< (apply 'max (vl-string->list (entity:getdxf ent 1))) 127) 
-          (entity:putdxf ent 7 (@::get-config '@text:en-style)) ;; éœ€å»ºç«‹å°å­—ä½“ä¸ºsimplexä¸ºæ ·å¼
-          (entity:putdxf ent 7 (@::get-config '@text:zh-style)) ;; éœ€å»ºç«‹å°å­—ä½“ä¸º ä»¿å®‹.ttc å­—ä½“æ ·å¼
+          (entity:putdxf ent 7 (@::get-config '@text:en-style)) ;; Ğè½¨Á¢Ğ¡×ÖÌåÎªsimplexÎªÑùÊ½
+          (entity:putdxf ent 7 (@::get-config '@text:zh-style)) ;; Ğè½¨Á¢Ğ¡×ÖÌåÎª ·ÂËÎ.ttc ×ÖÌåÑùÊ½
 	  )
       )
-     ;; å¤šè¡Œ
+     ;; ¶àĞĞ
      ((= "MTEXT" (entity:getdxf ent 0))
       (setq res (strcat 
                  "{"

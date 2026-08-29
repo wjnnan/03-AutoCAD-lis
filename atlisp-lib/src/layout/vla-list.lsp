@@ -1,6 +1,6 @@
 (defun layout:vla-list (/ a lst)
-    "鎸夌収褰撳墠灞忓箷鏄剧ず鐨勯『搴忚繑鍥炴墍鏈夊竷灞�瀵硅薄"
-    "甯冨眬瀵硅薄鍒楄〃"
+    "按照当前屏幕显示的顺序返回所有布局对象"
+    "布局对象列表"
     (vlax-for a *layouts* (setq lst (cons (list (vla-get-taborder a)
                     a)
                 lst)))

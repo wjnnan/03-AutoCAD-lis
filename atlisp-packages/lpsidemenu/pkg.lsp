@@ -1,13 +1,13 @@
 (@::def-pkg '((:NAME . "lpsidemenu")
-        (:FULL-NAME . "LPä¾§è¾¹æ ")
-        (:AUTHOR . "æµ·è§’å¤©æ¶¯")
+        (:FULL-NAME . "LP²à±ßÀ¸")
+        (:AUTHOR . "º£½ÇÌìÑÄ")
         (:EMAIL . "vitalgg@gmail.com")
         (:VERSION . "0.0.13")
         (:LOCALE . "chs")
         (:CATEGORY . "Common")
         (:REQUIRED . "base")
         (:OPENSOURCE . 0)
-        (:DESCRIPTION . "æµ·è§’å¤©æ¶¯çš„.netä¾§è¾¹æ .æ”¯æŒè‡ªå®šä¹‰å’Œ20ä¸ªèœå•æ ‡ç­¾ã€‚")
+        (:DESCRIPTION . "º£½ÇÌìÑÄµÄ.net²à±ßÀ¸.Ö§³Ö×Ô¶¨ÒåºÍ20¸ö²Ëµ¥±êÇ©¡£")
         (:URL . "http://atlisp.cn")
         (:FILES "lpsidemenu"
             "lpsidemenu2013.dll"

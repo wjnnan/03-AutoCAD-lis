@@ -1,8 +1,8 @@
 (defun base:init nil
-  "@lisp å‡½æ•°åº“åŸºæœ¬ç¬¦å·åŠç®€åŒ–å‡½æ•°ã€‚ä¸ºäº†ä¿è¯@lispå‡½æ•°åº“èƒ½æ­£å¸¸è¿è¡Œï¼Œéœ€å…ˆæ‰§è¡Œè¯¥å‡½æ•°ã€‚è¯¥å‡½æ•°è¢« @lisp è‡ªåŠ¨è°ƒç”¨ã€‚"
+  "@lisp º¯Êý¿â»ù±¾·ûºÅ¼°¼ò»¯º¯Êý¡£ÎªÁË±£Ö¤@lispº¯Êý¿âÄÜÕý³£ÔËÐÐ£¬ÐèÏÈÖ´ÐÐ¸Ãº¯Êý¡£¸Ãº¯Êý±» @lisp ×Ô¶¯µ÷ÓÃ¡£"
   ""
   "(base:init)"
-  "å¸¸ç”¨ visuallisp å…¨å±€ç¬¦å·ã€‚"
+  "³£ÓÃ visuallisp È«¾Ö·ûºÅ¡£"
   (or (eq $platform 'linux)
       (setq *acad* (vlax-get-acad-object)
 	    *doc* (vla-get-activedocument *acad*)
@@ -23,7 +23,7 @@
 	    *DISPLAY* (vla-get-display (vla-get-preferences (vla-get-application *acad*)))
 	    ))
   
-  "ç®€åŒ–å‡½æ•°"
+  "¼ò»¯º¯Êý"
   (setq o2e vlax-vla-object->ename)
   (setq e2o vlax-ename->vla-object)
   
@@ -48,22 +48,22 @@
 	      (strcat m3 "/mol")
 	      (strcat m3 "/kg") "Hz"
 	      (strcat "kg/"m3) "kg/mol" "m/s"  "rad/s" "N"
-	      "Pa" "N/m" "NÂ·s"  "J" "NÂ·m"  "J/mol"
-	      "W""J/s""J/K" "J/(molÂ·K)" "J/(kgÂ·K)"
-	      (strcat "NÂ·s/"m2) "W/(mÂ·K)"
+	      "Pa" "N/m" "N¡¤s"  "J" "N¡¤m"  "J/mol"
+	      "W""J/s""J/K" "J/(mol¡¤K)" "J/(kg¡¤K)"
+	      (strcat "N¡¤s/"m2) "W/(m¡¤K)"
 	      (strcat m2 "/s")
-	      "C" "V" "Î©"
+	      "C" "V" "¦¸"
 	      "m"  "mm""cm" "dm""km"
 	      "g""mg"
 	      "k""M"
 	      "kN""MPa""kPa"
-	      "dB" "â„ƒ" "ppm" "äºº"
+	      "dB" "¡æ" "ppm" "ÈË"
 	      (chr 178)(chr 179)(chr 181)
-	      "/""Â·""("")"
-	      (strcat "W/"m2"Â·K")
-	      "â„‰""Bq""lx""lm""S""H""Wb""T""F""W"
+	      "/""¡¤""("")"
+	      (strcat "W/"m2"¡¤K")
+	      "¨H""Bq""lx""lm""S""H""Wb""T""F""W"
 	      ))
-  ;; Â² 178 Â³179 Âµ181
+  ;; ^2 178 ^3179 u181
 
   (setq *linefile*
 	(cond

@@ -1,106 +1,111 @@
-;;; tb-mod-cloud.lsp â€” ä¿®è®¢äº‘çº¿ä¸ç®­å¤´æ¨¡å—
-;;; ç»„åˆ point:* curve:* entity:* lay:* txt:* åº“å‡½æ•°ã€‚
-;;; åŸæ–‡ä»¶æ¥æºï¼šF:\ç»“æ„æ’ä»¶\å¸¸ç”¨.lsp (c:rt, c:jt, c:xd)
-;;; é‡å†™ï¼šå»æ‰ vla-getboundingbox/vla-IntersectWith â†’ ç”¨çº¯ Lisp æ›¿ä»£
+;;; tb-mod-cloud.lsp ¡ª ĞŞ¶©ÔÆÏßÓë¼ıÍ·Ä£¿é
+;;; ×éºÏ point:* curve:* entity:* lay:* txt:* ¿âº¯Êı¡£
+;;; Ô­ÎÄ¼şÀ´Ô´£ºF:\½á¹¹²å¼ş\³£ÓÃ.lsp (c:rt, c:jt, c:xd)
+;;; ÖØĞ´£ºÈ¥µô vla-getboundingbox/vla-IntersectWith ¡ú ÓÃ´¿ Lisp Ìæ´ú
 
 ;; ============================================================================
-;; ä¿®è®¢äº‘çº¿ c:rt
+;; ĞŞ¶©ÔÆÏß c:rt
 ;; ============================================================================
 
 (defun c:rt (/ p1 p3 ss pts lst en cloud-en mpt pt1 pt2 ang
               in_pt leader-en text-en textlst ds textpt)
-  "ä¿®è®¢äº‘çº¿æ ‡æ³¨å·¥å…·ã€‚é€‰æ‹©é—­åˆå¤šæ®µçº¿æˆ–æŒ‡å®šçŸ©å½¢ â†’ åˆ›å»ºäº‘çº¿ â†’ å¼•çº¿ â†’ æ–‡å­—ã€‚
-å…¨å±€å‚æ•°ï¼š*SYS:CLOUD-LAYER* *SYS:CLOUD-ARC* *SYS:DWG-SCALE* *SYS:TEXT-STYLE*"
+  (uc:guard-begin '())
+  "ĞŞ¶©ÔÆÏß±ê×¢¹¤¾ß¡£Ñ¡Ôñ±ÕºÏ¶à¶ÎÏß»òÖ¸¶¨¾ØĞÎ ¡ú ´´½¨ÔÆÏß ¡ú ÒıÏß ¡ú ÎÄ×Ö¡£
+È«¾Ö²ÎÊı£º*SYS:CLOUD-LAYER* *SYS:CLOUD-ARC* *SYS:DWG-SCALE* *SYS:TEXT-STYLE*"
 
-  ;; ç¡®ä¿å›¾å±‚å’Œæ ·å¼å­˜åœ¨
+  ;; È·±£Í¼²ãºÍÑùÊ½´æÔÚ
   (lay:make (sys:get '*SYS:CLOUD-LAYER*) (sys:get '*SYS:CLOUD-COLOR*))
   (txt:make-style (sys:get '*SYS:TEXT-STYLE*)
                   (sys:get '*SYS:TEXT-FONT*)
                   (sys:get '*SYS:TEXT-BIGFONT*)
                   (sys:get '*SYS:TEXT-WIDTH*))
 
-  ;; è·å–è¾¹ç•Œï¼šå¤šæ®µçº¿ æˆ– ä¸¤ç‚¹çŸ©å½¢
+  ;; »ñÈ¡±ß½ç£º¶à¶ÎÏß »ò Á½µã¾ØĞÎ
   (initget "S")
   (if (setq p1 (getpoint
-        (strcat "\nç¬¬ä¸€ç‚¹ / <Sé€‰æ‹©é—­åˆå¤šæ®µçº¿>ï¼ˆæ¯”ä¾‹ 1:"
-                (rtos (sys:get '*SYS:DWG-SCALE*) 2 0) "ï¼‰: ")))
+        (strcat "\nµÚÒ»µã / <SÑ¡Ôñ±ÕºÏ¶à¶ÎÏß>£¨±ÈÀı 1:"
+                (rtos (sys:get '*SYS:DWG-SCALE*) 2 0) "£©: ")))
     (if (= p1 "S")
-      ;; é€‰æ‹©æ¨¡å¼
+      ;; Ñ¡ÔñÄ£Ê½
       (if (setq ss (ssget ":E:S" '((0 . "LWPOLYLINE"))))
         (setq pts (curve:vertices (ssname ss 0)))
-        (progn (princ "\næœªé€‰æ‹©æœ‰æ•ˆå¤šæ®µçº¿ã€‚") (quit)))
-      ;; ä¸¤ç‚¹æ¨¡å¼
-      (if (setq p3 (getcorner p1 "\nå¯¹è§’ç‚¹: "))
+        (progn (princ "\nÎ´Ñ¡ÔñÓĞĞ§¶à¶ÎÏß¡£") (quit)))
+      ;; Á½µãÄ£Ê½
+      (if (setq p3 (getcorner p1 "\n¶Ô½Çµã: "))
         (setq pts (point:rect-pts p1 p3))
-        (progn (princ "\næœªæŒ‡å®šå¯¹è§’ç‚¹ã€‚") (quit))))
-    ;; ç©ºå›è½¦é€€å‡º
-    (progn (princ "\nå·²å–æ¶ˆã€‚") (quit)))
+        (progn (princ "\nÎ´Ö¸¶¨¶Ô½Çµã¡£") (quit))))
+    ;; ¿Õ»Ø³µÍË³ö
+    (progn (princ "\nÒÑÈ¡Ïû¡£") (quit)))
 
-  ;; åˆ›å»ºäº‘çº¿ï¼ˆç”¨ REVCLOUD å‘½ä»¤äº§ç”Ÿäº‘çº¿å¤–è§‚ï¼‰
+  ;; ´´½¨ÔÆÏß£¨ÓÃ REVCLOUD ÃüÁî²úÉúÔÆÏßÍâ¹Û£©
   (setq cloud-en (entity:make-pline pts T (sys:get '*SYS:CLOUD-LAYER*)))
   (if cloud-en
     (command "_.REVCLOUD" "_A"
       (* (sys:get '*SYS:CLOUD-ARC*) (sys:get '*SYS:DWG-SCALE*)) ""
-      "_S" "_C" "_O" "" cloud-en "_N"))
+      "_O" cloud-en "_N"))
 
-  ;; è·å–äº‘çº¿åŒ…å›´ç›’ä¸­å¿ƒ
+  ;; »ñÈ¡ÔÆÏß°üÎ§ºĞÖĞĞÄ
   (setq mpt (point:center pts))
 
-  ;; å¼•çº¿
-  (if (and cloud-en (setq pt1 (getpoint mpt "\nå¼•çº¿èµ·ç‚¹ï¼ˆæŒ‡å‘äº‘çº¿ï¼‰: "))
+  ;; ÒıÏß
+  (if (and cloud-en (setq pt1 (getpoint mpt "\nÒıÏßÆğµã£¨Ö¸ÏòÔÆÏß£©: ")))
     (progn
-      ;; å¼•çº¿èµ·ç‚¹åœ¨äº‘çº¿è¾¹ç•Œä¸Š
+      ;; ÒıÏßÆğµãÔÚÔÆÏß±ß½çÉÏ
       (setq in_pt (curve:closest-pt cloud-en pt1))
       (entity:make-line (point:mid mpt pt1) in_pt (sys:get '*SYS:CLOUD-LAYER*))
 
-      ;; æ–‡å­—æ–¹å‘
-      (if (setq pt2 (getpoint pt1 "\næ–‡å­—ä½ç½®: "))
+      ;; ÎÄ×Ö·½Ïò
+      (if (setq pt2 (getpoint pt1 "\nÎÄ×ÖÎ»ÖÃ: "))
         (progn
           (setq ang (angle pt1 pt2))
-          ;; æ–‡å­—
-          (entity:make-text "ä¿®æ”¹è¯´æ˜"
+          ;; ÎÄ×Ö
+          (entity:make-text "ĞŞ¸ÄËµÃ÷"
             (point:polar pt1 (+ ang (* pi 0.5)) (* 0.625 (sys:get '*SYS:DWG-SCALE*)))
             (* (sys:get '*SYS:TEXT-HEIGHT*) (sys:get '*SYS:DWG-SCALE*))
             (sys:get '*SYS:TEXT-STYLE*)
             (sys:get '*SYS:CLOUD-LAYER*))
-          ;; å¼•çº¿
+          ;; ÒıÏß
           (command "_.LEADER" pt1 pt2 "" "_N")
-          (princ "\nè¯·ç”¨ ddedit ä¿®æ”¹æ–‡å­—å†…å®¹ã€‚"))
-        (princ "\næœªæŒ‡å®šæ–‡å­—ä½ç½®ã€‚"))))
-  (princ))
+          (princ "\nÇëÓÃ ddedit ĞŞ¸ÄÎÄ×ÖÄÚÈİ¡£"))
+        (princ "\nÎ´Ö¸¶¨ÎÄ×ÖÎ»ÖÃ¡£"))))
+  (princ)
+  (uc:guard-end))
 
 
 ;; ============================================================================
-;; å®å¿ƒç®­å¤´ c:jt
+;; ÊµĞÄ¼ıÍ· c:jt
 ;; ============================================================================
 
 (defun c:jt (/ pt0 pt1 dis ang w pt2)
-  "ç»˜åˆ¶å®å¿ƒç®­å¤´ï¼ˆé”¥å½¢å¤šæ®µçº¿ï¼‰ã€‚èµ·ç‚¹å®½åº¦0 â†’ ç®­å¤´å°–ã€‚"
-  (if (setq pt0 (getpoint "\nç®­å¤´èµ·ç‚¹: "))
-    (if (setq pt1 (getpoint pt0 "\nç®­å¤´ç»ˆç‚¹: "))
+  (uc:guard-begin '())
+  "»æÖÆÊµĞÄ¼ıÍ·£¨×¶ĞÎ¶à¶ÎÏß£©¡£Æğµã¿í¶È0 ¡ú ¼ıÍ·¼â¡£"
+  (if (setq pt0 (getpoint "\n¼ıÍ·Æğµã: "))
+    (if (setq pt1 (getpoint pt0 "\n¼ıÍ·ÖÕµã: "))
       (progn
         (setq dis (point:dist pt0 pt1)
               ang (point:angle pt0 pt1)
-              w   (* dis 0.25)           ; ç®­å¤´å®½ = 1/4 é•¿åº¦
-              pt2 (point:polar pt0 ang (* 0.8 dis)))  ; å˜å®½ç‚¹
-        ;; ç”¨å˜å®½å¤šæ®µçº¿
-        (command "_.PLINE" pt0 "_W" 0 w pt2 "_W" 0 0 pt1 "")
-        (command "_.PEDIT" "_L" "_W" 0 ""))))
-  (princ))
+              w   (* dis 0.25)           ; ¼ıÍ·¿í = 1/4 ³¤¶È
+              pt2 (point:polar pt0 ang (* 0.8 dis)))  ; ±ä¿íµã
+        ;; ÓÃ±ä¿í¶à¶ÎÏß
+        (command "_.PLINE" pt0 "_W" 0 w pt1 ""))))
+  (princ)
+  (uc:guard-end))
 
 
 ;; ============================================================================
-;; æ¯”ä¾‹è®¾ç½® c:xd
+;; ±ÈÀıÉèÖÃ c:xd
 ;; ============================================================================
 
 (defun c:xd (/ s)
-  "è®¾ç½®äº‘çº¿å‡ºå›¾æ¯”ä¾‹ã€‚"
-  (setq s (getint (strcat "\nå‡ºå›¾æ¯”ä¾‹ 1: <" (itoa (sys:get '*SYS:DWG-SCALE*)) ">: ")))
+  (uc:guard-begin '())
+  "ÉèÖÃÔÆÏß³öÍ¼±ÈÀı¡£"
+  (setq s (getint (strcat "\n³öÍ¼±ÈÀı 1: <" (itoa (sys:get '*SYS:DWG-SCALE*)) ">: ")))
   (if (and s (> s 0))
     (sys:set '*SYS:DWG-SCALE* s))
-  (princ (strcat "\nå½“å‰å‡ºå›¾æ¯”ä¾‹: 1:" (itoa (sys:get '*SYS:DWG-SCALE*))))
-  (princ))
+  (princ (strcat "\nµ±Ç°³öÍ¼±ÈÀı: 1:" (itoa (sys:get '*SYS:DWG-SCALE*))))
+  (princ)
+  (uc:guard-end))
 
 
-(princ "\n[TB] äº‘çº¿ç®­å¤´æ¨¡å—åŠ è½½å®Œæˆ (cloud: 3å‘½ä»¤)")
+(princ "\n[TB] ÔÆÏß¼ıÍ·Ä£¿é¼ÓÔØÍê³É (cloud: 3ÃüÁî)")
 (princ)

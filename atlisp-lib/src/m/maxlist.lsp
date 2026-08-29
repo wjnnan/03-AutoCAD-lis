@@ -1,5 +1,5 @@
 (defun m:maxlist (lst)
-    "è¿”å›žæ•°å€¼åˆ—è¡¨çš„ä¸­çš„æœ€å¤§å€¼"
+    "·µ»ØÊýÖµÁÐ±íµÄÖÐµÄ×î´óÖµ"
     (if (atom lst)
         lst (apply (quote max)
             lst)))

@@ -1,5 +1,5 @@
 (defun curve:param-secondangle (obj param / pt)
-  "æ›²çº¿å‚æ•°paramå¤„çš„æ³•çº¿æ–¹å‘çš„è§’åº¦"
+  "ÇúÏß²ÎÊıparam´¦µÄ·¨Ïß·½ÏòµÄ½Ç¶È"
   (setq pt (vlax-curve-getpointatparam obj param))
   (angle (quote (0 0 0))
     (vlax-curve-getsecondderiv obj param)))

@@ -1,5 +1,5 @@
 (defun clipboard:getdata (/ cb)
-  "è·å–å‰ªè´´æ¿å†…å®¹"
+  "»ñÈ¡¼ôÌù°åÄÚÈİ"
   "string or nil"
   "(clipboard:getdata)"
   (clipboard:init)

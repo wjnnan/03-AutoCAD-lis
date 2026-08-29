@@ -1,5 +1,5 @@
 (defun list:get-front-nth (n lst)
-    "è¿”å›å‰ n ä¸ªå…ƒç´ "
+    "·µ»ØÇ° n ¸öÔªËØ"
     (if (= n 0)
         nil (cons (car lst)
             (list:get-front-nth (1- n)

@@ -1,3 +1,3 @@
-(defun std:timer-start nil "è®¡æ—¶å™¨å¼€å§‹å‡½æ•°"
-    "è®¡æ—¶å™¨å…¨å±€å˜é‡"
+(defun std:timer-start nil "¼ÆÊ±Æ÷¿ªÊ¼º¯Êı"
+    "¼ÆÊ±Æ÷È«¾Ö±äÁ¿"
     (setq @:*timer-prg* (getvar "tdusrtimer")))

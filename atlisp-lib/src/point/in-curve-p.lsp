@@ -1,37 +1,37 @@
 (defun point:in-curve-p (pt curve / pt1 pt2 pt3 cp p3 poly d3 dc )
-  "æ£€æµ‹ä¸€ç‚¹æ˜¯å¦åœ¨æ›²çº¿å†…éƒ¨"
+  "¼ì²âÒ»µãÊÇ·ñÔÚÇúÏßÄÚ²¿"
   "T or nil"
   (if (p:enamep curve) (setq curve (e2o curve)))
-  ;; æ±‚æ›²çº¿å¤–ä¸€ç‚¹ã€‚
+  ;; ÇóÇúÏßÍâÒ»µã¡£
   (if (vl-catch-all-error-p
         (vl-catch-all-apply 'vla-getboundingbox (list curve 'pt1 'pt2)))
     (setq pt1 nil pt2 nil))
   (setq
-   pt1 (vlax-safearray->list pt1) ;æ›²çº¿å¤–æ¡†å·¦ä¸‹è§’
-   pt2 (vlax-safearray->list pt2) ;æ›²çº¿å¤–æ¡†å³ä¸Šè§’
-   pt3 (mapcar '- pt1 (list 1 1)) ;æ›²çº¿å¤–ä¸€ç‚¹
+   pt1 (vlax-safearray->list pt1) ;ÇúÏßÍâ¿ò×óÏÂ½Ç
+   pt2 (vlax-safearray->list pt2) ;ÇúÏßÍâ¿òÓÒÉÏ½Ç
+   pt3 (mapcar '- pt1 (list 1 1)) ;ÇúÏßÍâÒ»µã
    pt (list (car pt) (cadr pt))
    )
   (cond
     ((or (vl-some (function <) pt pt1)
          (vl-some (function >) pt pt2)
          )
-     nil  ;ç‚¹åœ¨æ›²çº¿å¤–
+     nil  ;µãÔÚÇúÏßÍâ
      )
-    ((equal pt (setq cp (vlax-curve-getclosestpointto curve pt)) 0.000001) ;æ£€æµ‹ç‚¹åˆ°æ›²çº¿çš„æœ€è¿‘ç‚¹cp
-     (vlax-curve-getparamatpoint curve cp) ;;ç‚¹åœ¨æ›²çº¿ä¸Š
+    ((equal pt (setq cp (vlax-curve-getclosestpointto curve pt)) 0.000001) ;¼ì²âµãµ½ÇúÏßµÄ×î½üµãcp
+     (vlax-curve-getparamatpoint curve cp) ;;µãÔÚÇúÏßÉÏ
      )
     (t
      (setq
-      p3 (vlax-curve-getclosestpointto curve pt3) ;æ›²çº¿å¤–ä¸€ç‚¹åˆ°æ›²çº¿çš„æœ€è¿‘ç‚¹
-      pt3 (mapcar '- pt3 p3) ;p3 pt3å‘é‡
-      d3 (vlax-curve-getfirstderiv curve (vlax-curve-getparamatpoint curve p3)) ;p3æ–œç‡ï¼ˆå‘é‡ï¼‰
-      d3 (list (- (cadr p3)) (car p3)) ;p3æ–œç‡ï¼ˆå‘é‡ï¼‰æ—‹è½¬90åº¦
-      d3 (> (apply '+ (mapcar '* pt3 d3)) 0) ;è®¡ç®— p3 pt3å‘é‡ä¸d3å‘é‡æ–¹å‘ï¼Œå¤§äº0åŒå‘ï¼Œå°äºé›¶åå‘
-      dc (vlax-curve-getfirstderiv curve (vlax-curve-getparamatpoint curve cp)) ;æ£€æµ‹ç‚¹åˆ°æ›²çº¿çš„æœ€è¿‘ç‚¹cpæ–œç‡ï¼ˆå‘é‡ï¼‰
-      dc (list (- (cadr dc)) (car dc)) ;æ£€æµ‹ç‚¹åˆ°æ›²çº¿çš„æœ€è¿‘ç‚¹æ–œç‡ï¼ˆå‘é‡ï¼‰æ—‹è½¬90åº¦
-      pt (mapcar '- pt cp)  ;cp ptå‘é‡
-      dc (> (apply '+ (mapcar '* pt dc)) 0) ;è®¡ç®— cp ptå‘é‡ä¸dcå‘é‡æ–¹å‘ï¼Œå¤§äº0åŒå‘ï¼Œå°äºé›¶åå‘
+      p3 (vlax-curve-getclosestpointto curve pt3) ;ÇúÏßÍâÒ»µãµ½ÇúÏßµÄ×î½üµã
+      pt3 (mapcar '- pt3 p3) ;p3 pt3ÏòÁ¿
+      d3 (vlax-curve-getfirstderiv curve (vlax-curve-getparamatpoint curve p3)) ;p3Ğ±ÂÊ£¨ÏòÁ¿£©
+      d3 (list (- (cadr p3)) (car p3)) ;p3Ğ±ÂÊ£¨ÏòÁ¿£©Ğı×ª90¶È
+      d3 (> (apply '+ (mapcar '* pt3 d3)) 0) ;¼ÆËã p3 pt3ÏòÁ¿Óëd3ÏòÁ¿·½Ïò£¬´óÓÚ0Í¬Ïò£¬Ğ¡ÓÚÁã·´Ïò
+      dc (vlax-curve-getfirstderiv curve (vlax-curve-getparamatpoint curve cp)) ;¼ì²âµãµ½ÇúÏßµÄ×î½üµãcpĞ±ÂÊ£¨ÏòÁ¿£©
+      dc (list (- (cadr dc)) (car dc)) ;¼ì²âµãµ½ÇúÏßµÄ×î½üµãĞ±ÂÊ£¨ÏòÁ¿£©Ğı×ª90¶È
+      pt (mapcar '- pt cp)  ;cp ptÏòÁ¿
+      dc (> (apply '+ (mapcar '* pt dc)) 0) ;¼ÆËã cp ptÏòÁ¿ÓëdcÏòÁ¿·½Ïò£¬´óÓÚ0Í¬Ïò£¬Ğ¡ÓÚÁã·´Ïò
       )
-     (/= dc d3) ;æ£€æµ‹ç»“æœä¸æ›²çº¿å¤–ä¸€ç‚¹ç›¸åŒ
+     (/= dc d3) ;¼ì²â½á¹ûÓëÇúÏßÍâÒ»µãÏàÍ¬
      )))

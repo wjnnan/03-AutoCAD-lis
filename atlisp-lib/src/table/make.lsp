@@ -1,11 +1,11 @@
 (defun table:make (pt title headers mat-data / unit-h unit-w list-dxf i% rows columns)
-  "åˆ›å»ºè¡¨æ ¼ï¼Œå‚æ•°: \npt:ä½ç½®ç‚¹ï¼Œ\ntitle:æ ‡é¢˜ ï¼Œ \nheaders:è¡¨å¤´è¡¨\nmat-data: å•å…ƒæ•°æ®çŸ©é˜µ,ç›®å‰ä»…æ”¯æŒæ–‡å­—å‹è¡¨æ ¼"
-  "è¡¨æ ¼å›¾å…ƒ"
+  "´´½¨±í¸ñ£¬²ÎÊı: \npt:Î»ÖÃµã£¬\ntitle:±êÌâ £¬ \nheaders:±íÍ·±í\nmat-data: µ¥ÔªÊı¾İ¾ØÕó,Ä¿Ç°½öÖ§³ÖÎÄ×ÖĞÍ±í¸ñ"
+  "±í¸ñÍ¼Ôª"
   "(table:make (getpoint)
-    \"æˆ‘çš„è¡¨æ ¼\"
-    '(\"åˆ—1\"
-      \"åˆ—2\"
-      \"åˆ—3\")'((5 3 3)(2 3 3)))"
+    \"ÎÒµÄ±í¸ñ\"
+    '(\"ÁĞ1\"
+      \"ÁĞ2\"
+      \"ÁĞ3\")'((5 3 3)(2 3 3)))"
   (if mat-data
       (progn
 	(setq rows (+ 2 (length mat-data))

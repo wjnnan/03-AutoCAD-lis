@@ -1,5 +1,5 @@
 (defun string:concat (strlst)
-  "è¿æ¥å­—ç¬¦ä¸²ï¼Œè¿æ¥å‰è¿›è¡Œæ£€æµ‹ã€‚"
+  "Á¬½Ó×Ö·û´®£¬Á¬½ÓÇ°½øĞĞ¼ì²â¡£"
   (cond ((std:stringp strlst)
       strlst)
     ((std:string-listp strlst)

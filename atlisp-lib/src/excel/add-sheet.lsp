@@ -1,6 +1,6 @@
 (defun excel:add-sheet (xlapp name / rtn)
-  "娣诲姞涓伐浣滆〃\n鍙傛暟:XLApp:宸叉墦寮�鐨別xcel鏂囦欢瀵硅薄\n鍙傛暟:Name:宸ヤ綔琛ㄥ悕"
-  "鎴愬姛杩斿洖t"
+  "添加个工作表\n参数:XLApp:已打开的excel文件对象\n参数:Name:工作表名"
+  "成功返回t"
   "(excel:add-sheet exobj \"123\")"
   (if (member name (excel:sheets xlapp))
     (setq rtn nil)

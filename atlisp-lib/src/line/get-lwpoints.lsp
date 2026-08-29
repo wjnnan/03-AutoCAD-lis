@@ -1,5 +1,5 @@
 (defun line:get-lwpoints (en0 / ddlist dd1 tmplist)
-    "鐢熸垚澶氭绾跨殑鐐瑰簭"
+    "生成多段线的点序"
     (setq ddlist nil)
     (setq tmplist (entget en0))
     (repeat (cdr (assoc 90 (entget en0)))

@@ -1,5 +1,5 @@
 (defun entity:make-arrow (startpt endpt width)
-  "ç”Ÿæˆç®­å¤´,ä¸€ç«¯å®½ï¼Œä¸€ç«¯çª„çš„å¤šæ®µçº¿ã€‚\nå‚æ•°:\n   startpt:ç®­å¤´å°–åæ ‡\n   endpt:ç®­å¤´å°¾åæ ‡\n   width:ç®­å¤´å°¾å®½åº¦\nè¿”å›å€¼:\n  ç®­å¤´å›¾å…ƒå\n"
+  "Éú³É¼ıÍ·,Ò»¶Ë¿í£¬Ò»¶ËÕ­µÄ¶à¶ÎÏß¡£\n²ÎÊı:\n   startpt:¼ıÍ·¼â×ø±ê\n   endpt:¼ıÍ·Î²×ø±ê\n   width:¼ıÍ·Î²¿í¶È\n·µ»ØÖµ:\n  ¼ıÍ·Í¼ÔªÃû\n"
   (entmakex (list (quote (0 . "LWPOLYLINE"))
       (quote (100 . "AcDbEntity"))
       (quote (100 . "AcDbPolyline"))

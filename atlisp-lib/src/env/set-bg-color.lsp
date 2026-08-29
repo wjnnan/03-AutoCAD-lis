@@ -1,6 +1,6 @@
 (defun env:set-bg-color (col / display)
-    "è®¾ç½®ç»˜å›¾åŒºèƒŒæ™¯è‰²"
-    "æ— "
+    "ÉèÖÃ»æÍ¼Çø±³¾°É«"
+    "ÎŞ"
     "(env:set-bg-color 55)"
     (setq display (vla-get-display (vla-get-preferences (vla-get-application (vlax-get-acad-object)))))
     (vla-put-graphicswinlayoutbackgrndcolor display (vlax-make-variant (+ col (* col 256)

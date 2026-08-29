@@ -1,6 +1,6 @@
 (defun vla:objectvariant (lst)
-    "åˆ›å»ºvlaå¯¹è±¡è¡¨å˜ä½“.\nå‚æ•°ï¼š\nlst:vlaå¯¹è±¡è¡¨"
-    "å˜ä½“"
+    "´´½¨vla¶ÔÏó±í±äÌå.\n²ÎÊı£º\nlst:vla¶ÔÏó±í"
+    "±äÌå"
     "(vla:objectvariant lst)"
     (vlax-make-variant (vlax-safearray-fill (vlax-make-safearray vlax-vbobject (cons 0 (1- (length lst))))
             lst)))

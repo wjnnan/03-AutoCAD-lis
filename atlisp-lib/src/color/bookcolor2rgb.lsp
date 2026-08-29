@@ -1,5 +1,5 @@
 (defun color:bookcolor2rgb(bookcolor / bc ci)
-  "å°†é…è‰²ç³»ç»Ÿé¢œè‰²åè½¬ä¸ºrgbã€‚"
+  "½«ÅäÉ«ÏµÍ³ÑÕÉ«Ãû×ªÎªrgb¡£"
   "list"
   "(color:bookcolor2rgb \"DIC COLOR GUIDE(R)$DIC 4\")"
   (setq bc (string:to-list bookcolor "$"))

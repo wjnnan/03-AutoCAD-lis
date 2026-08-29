@@ -1,5 +1,5 @@
 (defun pickset:to-list-by-ssnamex (ss / i lst)
-  "閫夋嫨闆嗚浆鍥惧厓琛紝ssnamex 鏂规硶"
+  "选择集转图元表，ssnamex 方法"
   "lst"
   ""
   (setq ssx (reverse (ssnamex ss)))

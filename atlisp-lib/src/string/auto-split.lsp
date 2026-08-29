@@ -1,13 +1,13 @@
 (defun string:auto-split (str / curr-type lst tmp% res unitp)
-  "è‡ªåŠ¨åˆ†æ®µï¼ŒæŒ‰æ•°å­—-å­—æ¯-æ±‰å­—è‡ªåŠ¨æ–­å¼€å­—ç¬¦ä¸²ä¸ºå­—ç¬¦ä¸²åˆ—è¡¨ã€‚ä¸æ”¯æŒç§‘å­¦è®¡æ•°æ³•çš„æ•°å­—ã€‚"
-  "ç”±å­—ç¬¦ä¸²ç»„æˆçš„åˆ—è¡¨"
-  "(string:auto-split \"aa33.3bbæ±‰å­—\")"
+  "×Ô¶¯·Ö¶Î£¬°´Êý×Ö-×ÖÄ¸-ºº×Ö×Ô¶¯¶Ï¿ª×Ö·û´®Îª×Ö·û´®ÁÐ±í¡£²»Ö§³Ö¿ÆÑ§¼ÆÊý·¨µÄÊý×Ö¡£"
+  "ÓÉ×Ö·û´®×é³ÉµÄÁÐ±í"
+  "(string:auto-split \"aa33.3bbºº×Ö\")"
   (defun is-bracket (asc)
     (member asc (vl-string->list "()")))
   (defun is-operator (asc)
-    (member asc (vl-string->list "+-*/Â·")))
+    (member asc (vl-string->list "+-*/¡¤")))
   (defun is-unitsuffix (asc)
-    (member asc (list 178 179))) ;;å¹³æ–¹ã€ç«‹ç±³
+    (member asc (list 178 179))) ;;Æ½·½¡¢Á¢Ã×
   (defun is-unitprefix(asc)
     (member asc (list 181))) ;; miu
   (defun is-number (asc)
@@ -20,7 +20,7 @@
 	(and (>= asc 97)
              (<= asc 122))))
   (defun is-hannum (asc)
-    (member asc (string:s2l-ansi "é›¶ä¸€äºŒä¸‰å››äº”å…­ä¸ƒå…­ä¹åç™¾åƒä¸‡äº¿å£¹è´°åè‚†ä¼é™†æŸ’æŒçŽ–æ‹¾ä½°ä»Ÿ"))
+    (member asc (string:s2l-ansi "ÁãÒ»¶þÈýËÄÎåÁùÆßÁù¾ÅÊ®°ÙÇ§ÍòÒÚÒ¼·¡ÈþËÁÎéÂ½Æâ°Æ¾ÁÊ°°ÛÇª"))
     )
   (defun is-han (asc)
     (if (and (getvar "lispsys")

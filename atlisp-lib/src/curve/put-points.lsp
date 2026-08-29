@@ -1,5 +1,5 @@
 (defun curve:put-points (ent pts / dxfent)
-  "æ›´æ”¹æ›²çº¿æ§åˆ¶ç‚¹åŠç«¯ç‚¹åˆ—è¡¨ã€‚ptsä¸ºæ–°çš„ç‚¹ä½ç½®,nilä¸ºä¸æ›¿æ¢ã€‚"
+  "¸ü¸ÄÇúÏß¿ØÖÆµã¼°¶ËµãÁĞ±í¡£ptsÎªĞÂµÄµãÎ»ÖÃ,nilÎª²»Ìæ»»¡£"
   "ent"
   "(curve:put-points (car (entsel)) '((0 0 0)))"
   (if (p:vlap ent)
@@ -16,7 +16,7 @@
 				    pt)
 			      dxf1011
 			      dxfent))))
-		 (vl-remove-if-not '(lambda(x) ;; åŸæœ‰ç‚¹è¡¨
+		 (vl-remove-if-not '(lambda(x) ;; Ô­ÓĞµã±í
 				     (or
 				      (= 10 (car x))
 				      (= 11 (car x))))

@@ -1,13 +1,13 @@
 (@::def-pkg '((:NAME . "agan-cal")
-        (:FULL-NAME . "é˜¿ç”˜è®¡ç®—å™¨")
-        (:AUTHOR . "é˜¿ç”˜")
+        (:FULL-NAME . "°¢¸Ê¼ÆËãÆ÷")
+        (:AUTHOR . "°¢¸Ê")
         (:EMAIL . "vitalgg@gmail.com")
         (:VERSION . "0.0.5")
         (:LOCALE . "CHS")
-        (:CATEGORY . "å…¶å®ƒ")
+        (:CATEGORY . "ÆäËü")
         (:REQUIRED . "base")
         (:OPENSOURCE . 0)(:FREE . t)
-        (:DESCRIPTION . "é˜¿ç”˜è®¡ç®—å™¨")
+        (:DESCRIPTION . "°¢¸Ê¼ÆËãÆ÷")
         (:URL . "http://atlisp.cn")
               (:FILES "agan-cal"
                "agancal"

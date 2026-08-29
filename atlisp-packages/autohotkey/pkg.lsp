@@ -8,6 +8,6 @@
         (:REQUIRED . "base")
         (:OPENSOURCE . 0)
         (:FREE . T)
-        (:DESCRIPTION . "AutoHotKey(AHK):是简易而功能强大的热键脚本语言。使用者可将键盘、鼠标甚至游戏摇杆的移动和点击动作记录下来。")
+        (:DESCRIPTION . "AutoHotKey(AHK):�Ǽ��׶�����ǿ����ȼ��ű����ԡ�ʹ���߿ɽ����̡����������Ϸҡ�˵��ƶ��͵��������¼������")
         (:URL . "http://atlisp.cn")
         (:FILES "autohotkey")))

@@ -1,5 +1,5 @@
 (defun entity:make-point (pt)
-  "鏍规嵁鍙傛暟鍧愭爣缁樺埗涓�涓偣"
+  "根据参数坐标绘制一个点"
   "ename or nil"
   (entmakex (list (quote (0 . "POINT"))
       (quote (100 . "AcDbEntity"))

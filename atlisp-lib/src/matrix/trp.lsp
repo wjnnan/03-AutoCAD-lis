@@ -1,7 +1,7 @@
 (defun matrix:trp (m)
-  "çŸ©é˜µè½¬ç½®"
+  "¾ØÕó×ªÖÃ"
   "matrix"
-  ;; ä¸€ç»´çŸ©é˜µ
+  ;; Ò»Î¬¾ØÕó
   (apply 'mapcar
          (cons 'list
 	       m)))

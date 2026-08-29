@@ -1,5 +1,5 @@
 (defun string:realp (str)
-  "纭畾瀛楃涓叉槸鍚︿负瀹炴暟"
+  "确定字符串是否为实数"
   (and (string:numberp str)
     (or (= "."
         (substr str 1 1))

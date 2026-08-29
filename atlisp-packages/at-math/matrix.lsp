@@ -1,14 +1,14 @@
 (defun @m:get-value (en0)
   (atof (entity:getdxf en0 1)))
 (defun @m:align-number (matrix-num)
-  "æŒ‰å°æ•°ä½å¯¹é½"
+  "°´Ğ¡ÊıÎ»¶ÔÆë"
   (mapcar '(lambda (x) (list (strlen (itoa (fix(apply 'max x))))
 			     (apply 'max (mapcar '(lambda(m)(- (strlen (vl-string-right-trim "0" (rtos(- m (fix m)) 2 5))) 2))
 						 x))))
 	  (matrix:trp matrix-num)
   ))
 (defun @m:form-matrix (entlist-text / fontsize row column result matrix)
-  "é€‰æ‹©ä¸€ç»„è¡Œåˆ—æ–‡å­—ï¼Œå½¢æˆè¡Œåˆ—çŸ©é˜µã€‚"
+  "Ñ¡ÔñÒ»×éĞĞÁĞÎÄ×Ö£¬ĞÎ³ÉĞĞÁĞ¾ØÕó¡£"
   (setq fontsize (entity:getdxf (car entlist-text) 40))
   (setq  matrix nil row (list (car entlist-text)))
   (foreach en% (cdr entlist-text)
@@ -16,7 +16,7 @@
 		      (cadr (entity:getdxf en% 10))
 		      fontsize)
 	       (setq row (append row (list en% )))
-	       (progn ;; ä¸åœ¨åŒä¸€è¡Œï¼ŒåŠ å…¥åˆ—ï¼›æ¸…è¡Œã€‚
+	       (progn ;; ²»ÔÚÍ¬Ò»ĞĞ£¬¼ÓÈëÁĞ£»ÇåĞĞ¡£
 		 (setq matrix (append matrix (list row)))
 		 (setq row (list en%)))))
   (setq matrix (append matrix (list row)))
@@ -30,11 +30,11 @@
 
   (if (apply '= (mapcar 'length matrix))
       (mapcar '(lambda(x)(mapcar '@m:get-value x)) matrix)
-      (progn (alert "åˆ†æå¤±è´¥ï¼Œè¯·ç¡®è®¤è¡Œåˆ—å¯¹é½ã€‚") nil)
+      (progn (alert "·ÖÎöÊ§°Ü£¬ÇëÈ·ÈÏĞĞÁĞ¶ÔÆë¡£") nil)
       )
   )
   
-;; (@:add-menu "æ•°å­¦" "è¡Œåˆ—è®¡ç®—" "(@m:matrix-cal)") 
+;; (@:add-menu "ÊıÑ§" "ĞĞÁĞ¼ÆËã" "(@m:matrix-cal)") 
 (defun @m:sort-by-x (ss-lst)
   (vl-sort ss-lst '(lambda (x y)
 		    (> (car (entity:getdxf x 10))
@@ -44,12 +44,12 @@
 		    (> (cadr (entity:getdxf e1 10))
 		     (cadr (entity:getdxf e2 10))))))
 (defun @m:matrix-cal (/ fontsize cal-symble number-matrix ss i% res-matrix)
-  (@::prompt (strcat "é€‰æ‹©ä¸€ç»„è¡Œåˆ—å¯¹é½çš„æ•°æ®ï¼ŒæŒ‰è¾“å…¥çš„è¿ç®—ç¬¦å¯¹æ¯è¡Œè¿›è¡Œè¿ç®—ï¼Œå¾—åˆ°ç»“æœè¡¨ã€‚"))
+  (@::prompt (strcat "Ñ¡ÔñÒ»×éĞĞÁĞ¶ÔÆëµÄÊı¾İ£¬°´ÊäÈëµÄÔËËã·û¶ÔÃ¿ĞĞ½øĞĞÔËËã£¬µÃµ½½á¹û±í¡£"))
   (initget 1 "+ - * /")
-  (setq cal-symble (getkword "è¯·è¾“å…¥è¿ç®—ç¬¦ (+ - * /): "))
+  (setq cal-symble (getkword "ÇëÊäÈëÔËËã·û (+ - * /): "))
   (setq entlist-text (pickset:to-entlist (ssget '((0 . "text")))))
   ;; remove non-real&int
-  ;; æ’åº
+  ;; ÅÅĞò
   (setq fontsize (entity:getdxf (car entlist-text) 40))
   (setq entlist-text
 	(vl-sort entlist-text
@@ -70,10 +70,10 @@
   (mapcar '(lambda (x) (apply (read cal-symble) x)) number-matrix)
   )
 (defun @m:get-entmatrix ()
-  (prompt "å½“é€‰æ‹©çš„æ•°æ®è¾ƒå¤šæ—¶ï¼Œæ•°æ®åˆ†æç”¨æ—¶è¾ƒé•¿ï¼Œè¯·è€å¿ƒç­‰å¾…...")
+  (prompt "µ±Ñ¡ÔñµÄÊı¾İ½Ï¶àÊ±£¬Êı¾İ·ÖÎöÓÃÊ±½Ï³¤£¬ÇëÄÍĞÄµÈ´ı...")
   (setq entlist-text (pickset:to-list (ssget '((0 . "text")))))
   ;; remove non-real&int
-  ;; æ’åº
+  ;; ÅÅĞò
   (setq fontsize (entity:getdxf (car entlist-text) 40))
   (setq entlist-text
 	(vl-sort entlist-text
@@ -89,9 +89,9 @@
 			   T
 			   nil)
 		       )))))
-(@:add-menu "æ•°å­¦" "è¡Œåˆ—è¿ç®—" "(@m:menu-calc-matrix)") 
+(@:add-menu "ÊıÑ§" "ĞĞÁĞÔËËã" "(@m:menu-calc-matrix)") 
 (defun @m:menu-calc-matrix (/ *error* result dcl-tmp dcl-fp dcl_id matrix-num num-format column-id)
-  "å¤šåˆ—è®¡ç®—,è‡ªå®šå…¬å¼è¿›è¡Œè®¡ç®—ã€‚"
+  "¶àÁĞ¼ÆËã,×Ô¶¨¹«Ê½½øĞĞ¼ÆËã¡£"
   (defun *error* (msg)
     (if (= 'file (type dcl-fp)) (close dcl-fp))
     (vl-file-delete dcl-tmp)
@@ -114,12 +114,12 @@
   (setq dcl-fp (open dcl-tmp "w"))
   (write-line "calc :dialog{label=\"Calc\";:spacer{}:column{" dcl-fp)
   (foreach str% (list
-		 ":edit_box{label=\"å…¬å¼:\";key=\"formula\";}"
-		 ":text{label=\"æ”¯æŒè¿ç®—ç¬¦: + - * / ^ %(æ±‚ä½™) ( ) [ ] { } \";}"
-		 ":text{label=\"æ”¯æŒä¸‰è§’å‡½æ•°: sin cos tan ctan asin acos atan \";}"
-		 ":text{label=\"æ”¯æŒé«˜é˜¶å‡½æ•°: ln lg sqr e(è‡ªç„¶æŒ‡æ•°ã€æ¬§æ‹‰æ•°)  \";}"
-		 ":text{label=\"ç¤ºä¾‹: sin(A)+B-2*C , A*B-C+2*D \";}"
-		 ":text{label=\"    A B C D F ä»£è¡¨åˆ—ï¼Œåˆ—å·æ²¡æœ‰ E T ï¼Œå› ä¸º E ä»£è¡¨æ¬§æ‹‰æ•°, T ä»£è¡¨çœŸã€‚  \";}"
+		 ":edit_box{label=\"¹«Ê½:\";key=\"formula\";}"
+		 ":text{label=\"Ö§³ÖÔËËã·û: + - * / ^ %(ÇóÓà) ( ) [ ] { } \";}"
+		 ":text{label=\"Ö§³ÖÈı½Çº¯Êı: sin cos tan ctan asin acos atan \";}"
+		 ":text{label=\"Ö§³Ö¸ß½×º¯Êı: ln lg sqr e(×ÔÈ»Ö¸Êı¡¢Å·À­Êı)  \";}"
+		 ":text{label=\"Ê¾Àı: sin(A)+B-2*C , A*B-C+2*D \";}"
+		 ":text{label=\"    A B C D F ´ú±íÁĞ£¬ÁĞºÅÃ»ÓĞ E T £¬ÒòÎª E ´ú±íÅ·À­Êı, T ´ú±íÕæ¡£  \";}"
 		 ":image{ height=0.1; color=1; fixed_height=true;}"
 		 ":text{key=\"title\";}"
 		 
@@ -163,7 +163,7 @@
   (@m:draw)
   )
 (setq @m:*result* nil)
-(@:add-menu "æ•°å­¦" "ç»“æœå†™å›¾" "(@m:draw)")
+(@:add-menu "ÊıÑ§" "½á¹ûĞ´Í¼" "(@m:draw)")
 (defun @m:draw (/ pt1 pt-base ents  *error*)
   (defun *error*(msg)
     (if ents
@@ -208,4 +208,4 @@
 		  ))))
   (if ents
       (ui:dyndraw ents pt-base)
-      (@::prompt "æ²¡æœ‰å‘ç°è®¡ç®—ç»“æœã€‚")))
+      (@::prompt "Ã»ÓĞ·¢ÏÖ¼ÆËã½á¹û¡£")))

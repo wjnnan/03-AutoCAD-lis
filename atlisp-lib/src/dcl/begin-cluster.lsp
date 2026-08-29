@@ -1,5 +1,5 @@
 (defun dcl:begin-cluster (cluster-type label)
-  "å¼€å§‹ dcl å®¹å™¨ç±»æ§ä»¶ã€‚ä¸ dcl:end-cluster æˆå¯¹ä½¿ç”¨ã€‚cluster-type: row,column,boxed_row,boxed_column,boxed_radio_row,boxed_radio_column"
+  "¿ªÊ¼ dcl ÈİÆ÷Àà¿Ø¼ş¡£Óë dcl:end-cluster ³É¶ÔÊ¹ÓÃ¡£cluster-type: row,column,boxed_row,boxed_column,boxed_radio_row,boxed_radio_column"
   ""
   "(dcl:begin-cluster \"row\"
     \"\")(progn (dcl:mtext \"mt\"

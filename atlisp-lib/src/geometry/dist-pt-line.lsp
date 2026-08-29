@@ -1,5 +1,5 @@
 (defun geometry:dist-pt-line (pt segment / an)
-  "姹傜偣鍒扮嚎娈电殑璺濈"
+  "求点到线段的距离"
   "number"
   "(geometry:dist-pt-line '(0 0 0)
     '((1 0 0)(0 1 0)))"

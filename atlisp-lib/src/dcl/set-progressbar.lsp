@@ -1,5 +1,5 @@
 (defun dcl:set-progressbar (key value / w h color)
-  "è®¾ç½® dcl è¿›åº¦æ¡çš„å€¼ã€‚"
+  "ÉèÖÃ dcl ½ø¶ÈÌõµÄÖµ¡£"
   ""
   "(dcl:set-progressbar \"pbar1\"
     0.5)"

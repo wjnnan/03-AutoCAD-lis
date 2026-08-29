@@ -1,5 +1,5 @@
 (defun entity:get-linetype (ent)
-  "è·å–å›¾å…ƒçš„çº¿å‹ï¼Œå½“çº¿å‹éšå±‚æ—¶ï¼Œè¿”å›å›¾å±‚çº¿å‹ã€‚"
+  "»ñÈ¡Í¼ÔªµÄÏßĞÍ£¬µ±ÏßĞÍËæ²ãÊ±£¬·µ»ØÍ¼²ãÏßĞÍ¡£"
   "String"
   "(entity:get-linetype (car(entsel)))"
   (if (entity:getdxf ent 6)

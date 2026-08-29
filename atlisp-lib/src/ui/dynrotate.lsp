@@ -1,5 +1,5 @@
 (defun ui:dynrotate (ents pt-base / flag r)
-  "åŠ¨æ€ç»˜å›¾ï¼Œentséšå…‰æ ‡æ—‹è½¬ï¼ŒæŒ‰å·¦é”®å®šä½ï¼Œå³é”®åˆ é™¤"
+  "¶¯Ì¬»æÍ¼£¬entsËæ¹â±êĞı×ª£¬°´×ó¼ü¶¨Î»£¬ÓÒ¼üÉ¾³ı"
   ""
   "(ui:dynrotate (ssget)(getpoint))"
   (if (= 'ename (type ents))(setq ents (list ents)))
@@ -11,19 +11,19 @@
     (setq gr (grread t 16))
     (cond
       ((= 3 (car gr))
-       "æŒ‰ä¸‹é¼ æ ‡å·¦é”®"
-       ;;ç»˜åˆ¶å¹¶é€€å‡º
+       "°´ÏÂÊó±ê×ó¼ü"
+       ;;»æÖÆ²¢ÍË³ö
        (setq flag nil)
        )
       ((or (= 25 (car gr))
 	   (= 11 (car gr)))
-       "æŒ‰ä¸‹é¼ æ ‡å³é”®"
-       ;; åˆ é™¤å¹¶é€€å‡º
+       "°´ÏÂÊó±êÓÒ¼ü"
+       ;; É¾³ı²¢ÍË³ö
        (mapcar 'entdel ents)
        (setq flag nil)
        )
       ((= 5 (car gr))
-       "ç§»åŠ¨é¼ æ ‡"
+       "ÒÆ¶¯Êó±ê"
        (mapcar (function(lambda(x)
 		 (vla-rotate (e2o x)
 			     (point:to-ax pt-base)
@@ -37,8 +37,8 @@
        (princ (angtos ang-base 0 3))
        ;; (setq pt-base (cadr gr))
        )
-      (t "å…¶å®ƒæƒ…å†µ"
+      (t "ÆäËüÇé¿ö"
 	 (princ gr)))
-    ;; (princ "\næŒ‰å·¦é”®å®šä½ï¼Œå³é”®åˆ é™¤")
+    ;; (princ "\n°´×ó¼ü¶¨Î»£¬ÓÒ¼üÉ¾³ı")
     )
   (princ))

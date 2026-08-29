@@ -1,6 +1,6 @@
 (defun color:aci2rgb (num) 
-  "ç´¢å¼•è‰²è½¬rgb, num èŒƒå›´ 1 - 255"
-  "lst, çº¢ç»¿è“ä¸‰è‰²å€¼"
+  "Ë÷ÒıÉ«×ªrgb, num ·¶Î§ 1 - 255"
+  "lst, ºìÂÌÀ¶ÈıÉ«Öµ"
   (if (numberp num) 
     (setq num (fix num))
     (setq num 0))

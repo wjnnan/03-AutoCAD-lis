@@ -1,4 +1,4 @@
-(@:add-menu "通用打印" "标记图框" "(@plot:mark-frames)")
+(@:add-menu "ͨ�ô�ӡ" "���ͼ��" "(@plot:mark-frames)")
 (defun @plot:mark-frames (/ tks)
   (@plot:init)
   
@@ -22,7 +22,7 @@
   (princ)
   )
 
-(@:add-menu "通用打印" "删图框标记" "(@plot:delete-mark)")
+(@:add-menu "ͨ�ô�ӡ" "ɾͼ����" "(@plot:delete-mark)")
 (defun @plot:delete-mark (/ tf)
   (@plot:init)
   (if (setq tf (ssget "x" '((0 . "LWPOLYLINE")

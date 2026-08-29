@@ -1,103 +1,120 @@
-;;; tb-mod-block.lsp â€” å›¾å—ç®¡ç†æ¨¡å—
-;;; ç»„åˆ blk:* entity:* sel:* lay:* åº“å‡½æ•°ã€‚
-;;; åŸæ–‡ä»¶æ¥æºï¼šF:\ç»“æ„æ’ä»¶\å—.lspï¼ˆ8å‘½ä»¤ï¼‰â€” å»é‡æ”¹å†™
+;;; tb-mod-block.lsp ¡ª Í¼¿é¹ÜÀíÄ£¿é
+;;; ×éºÏ blk:* entity:* sel:* lay:* ¿âº¯Êı¡£
+;;; Ô­ÎÄ¼şÀ´Ô´£ºF:\½á¹¹²å¼ş\¿é.lsp£¨8ÃüÁî£©¡ª È¥ÖØ¸ÄĞ´
 
 ;; ============================================================================
-;; å¿«é€Ÿå»ºå—
+;; ¿ìËÙ½¨¿é
 ;; ============================================================================
 
 (defun c:jk (/ ss pt name)
-  "å¿«é€Ÿå»ºå—ï¼šé€‰æ‹©å®ä½“ â†’ æŒ‡å®šåŸºç‚¹ â†’ è‡ªåŠ¨ç”Ÿæˆå—å â†’ åŸä½æ’å…¥ã€‚"
+  (uc:guard-begin '())
+  "¿ìËÙ½¨¿é£ºÑ¡ÔñÊµÌå ¡ú Ö¸¶¨»ùµã ¡ú ×Ô¶¯Éú³É¿éÃû ¡ú Ô­Î»²åÈë¡£"
   (if (setq ss (ssget))
-    (if (setq pt (getpoint "\næ’å…¥åŸºç‚¹: "))
+    (if (setq pt (getpoint "\n²åÈë»ùµã: "))
       (progn
         (setq name (blk:quick-make ss pt))
-        (princ (strcat "\nå—å·²åˆ›å»º: " name)))
-      (princ "\nå·²å–æ¶ˆï¼ˆæœªæŒ‡å®šæ’å…¥åŸºç‚¹ï¼‰ã€‚")))
-  (princ))
+        (princ (strcat "\n¿éÒÑ´´½¨: " name)))
+      (princ "\nÒÑÈ¡Ïû£¨Î´Ö¸¶¨²åÈë»ùµã£©¡£")))
+  (princ)
+  (uc:guard-end))
 
 
 ;; ============================================================================
-;; å—ç»Ÿè®¡
+;; ¿éÍ³¼Æ
 ;; ============================================================================
 
 (defun c:ktj (/ e name count)
-  "é€‰æ‹©ä¸€ä¸ªå—ï¼Œç»Ÿè®¡å…¨å›¾åŒåå—çš„æ•°é‡ã€‚"
-  (if (setq e (car (entsel "\né€‰æ‹©å›¾å—: ")))
+  (uc:guard-begin '())
+  "Ñ¡ÔñÒ»¸ö¿é£¬Í³¼ÆÈ«Í¼Í¬Ãû¿éµÄÊıÁ¿¡£"
+  (if (setq e (car (entsel "\nÑ¡ÔñÍ¼¿é: ")))
     (if (= (entity:get-type e) "INSERT")
       (progn
         (setq name (entity:get-dxf e 2)
               count (blk:count name))
-        (princ (strcat "\nå—å: " name "  æ•°é‡: " (itoa count))))
-      (princ "\næ‰€é€‰ä¸æ˜¯å›¾å—ã€‚")))
-  (princ))
+        (princ (strcat "\n¿éÃû: " name "  ÊıÁ¿: " (itoa count))))
+      (princ "\nËùÑ¡²»ÊÇÍ¼¿é¡£")))
+  (princ)
+  (uc:guard-end))
 
 
 ;; ============================================================================
-;; å—é‡å‘½å
+;; ¿éÖØÃüÃû
 ;; ============================================================================
 
 (defun c:gkm (/ e old-name new-name)
-  "é€‰æ‹©å›¾å—ï¼Œè¾“å…¥æ–°åç§°é‡å‘½åã€‚"
-  (if (setq e (car (entsel "\né€‰æ‹©è¦æ”¹åçš„å›¾å—: ")))
+  (uc:guard-begin '())
+  "Ñ¡ÔñÍ¼¿é£¬ÊäÈëĞÂÃû³ÆÖØÃüÃû¡£"
+  (if (setq e (car (entsel "\nÑ¡ÔñÒª¸ÄÃûµÄÍ¼¿é: ")))
     (if (= (entity:get-type e) "INSERT")
       (progn
         (setq old-name (entity:get-dxf e 2))
-        (setq new-name (getstring T (strcat "\næ–°å—åï¼ˆåŸå " old-name "ï¼‰: ")))
+        (setq new-name (getstring T (strcat "\nĞÂ¿éÃû£¨Ô­Ãû " old-name "£©: ")))
         (if (and new-name (/= new-name ""))
           (if (blk:rename old-name new-name)
-            (princ (strcat "\nå·²æ”¹å: " old-name " â†’ " new-name))
-            (princ "\næ”¹åå¤±è´¥ï¼ˆå¯èƒ½æƒé™ä¸è¶³æˆ–æ–°åå·²å­˜åœ¨ï¼‰ã€‚"))))
-      (princ "\næ‰€é€‰ä¸æ˜¯å›¾å—ã€‚")))
-  (princ))
+            (princ (strcat "\nÒÑ¸ÄÃû: " old-name " ¡ú " new-name))
+            (princ "\n¸ÄÃûÊ§°Ü£¨¿ÉÄÜÈ¨ÏŞ²»×ã»òĞÂÃûÒÑ´æÔÚ£©¡£"))))
+      (princ "\nËùÑ¡²»ÊÇÍ¼¿é¡£")))
+  (princ)
+  (uc:guard-end))
 
 
 ;; ============================================================================
-;; å—å±æ€§ç¼–è¾‘
+;; ¿éÊôĞÔ±à¼­
 ;; ============================================================================
 
 (defun c:gks (/ e atts tag new-val)
-  "ä¿®æ”¹å—å±æ€§å€¼ã€‚é€‰æ‹©ä¸€ä¸ªå¸¦å±æ€§çš„å—ï¼Œä¿®æ”¹æŒ‡å®š tag çš„å€¼ã€‚"
-  (if (setq e (car (nentsel "\né€‰æ‹©å—å±æ€§: ")))
+  (uc:guard-begin '())
+  "ĞŞ¸Ä¿éÊôĞÔÖµ¡£Ñ¡ÔñÒ»¸ö´øÊôĞÔµÄ¿é£¬ĞŞ¸ÄÖ¸¶¨ tag µÄÖµ¡£"
+  (if (setq e (car (nentsel "\nÑ¡Ôñ¿éÊôĞÔ: ")))
     (if (= (entity:get-type e) "ATTRIB")
       (progn
         (setq tag (entity:get-dxf e 2))
-        (setq new-val (getstring T (strcat "\n" tag " çš„æ–°å€¼ <" (entity:get-dxf e 1) ">: ")))
+        (setq new-val (getstring T (strcat "\n" tag " µÄĞÂÖµ <" (entity:get-dxf e 1) ">: ")))
         (if (and new-val (/= new-val ""))
           (entity:set-dxf e 1 new-val)))
-      (princ "\næ‰€é€‰ä¸æ˜¯å±æ€§ã€‚")))
-  (princ))
+      (princ "\nËùÑ¡²»ÊÇÊôĞÔ¡£")))
+  (princ)
+  (uc:guard-end))
 
 
 ;; ============================================================================
-;; åˆ é™¤é‡å å—
+;; É¾³ıÖØµş¿é
 ;; ============================================================================
 
 (defun c:sk (/ ss names positions to-del)
-  "åˆ é™¤ä½ç½®å®Œå…¨é‡å çš„åŒåå—ï¼ˆä¿ç•™ä¸€ä¸ªï¼‰ã€‚"
+  (uc:guard-begin '())
+  "É¾³ıÎ»ÖÃÍêÈ«ÖØµşµÄÍ¬Ãû¿é£¨±£ÁôÒ»¸ö£©¡£"
   (if (setq ss (ssget '((0 . "INSERT"))))
     (progn
       (setq names (mapcar '(lambda (e) (entity:get-dxf e 2)) (sel:to-list ss))
             positions nil
             to-del (ssadd))
-      ;; éå†æ‰¾å‡ºé‡å å—
+      ;; ±éÀúÕÒ³öÖØµş¿é
       (sel:for-each ss
-        '(lambda (e / name pt key)
+        '(lambda (e / name pt rot sx sy sz key)
            (setq name (entity:get-dxf e 2)
                  pt   (entity:get-dxf e 10)
-                 key  (strcat name "|" (rtos (car pt) 2 3) "|" (rtos (cadr pt) 2 3)))
+                 rot  (entity:get-dxf e 50)
+                 sx   (entity:get-dxf e 41)
+                 sy   (entity:get-dxf e 42)
+                 sz   (entity:get-dxf e 43)
+                 key  (strcat name "|"
+                              (rtos (car pt) 2 3) "|" (rtos (cadr pt) 2 3) "|" (rtos (caddr pt) 2 3) "|"
+                              (rtos (if rot rot 0.0) 2 3) "|"
+                              (rtos (if sx sx 1.0) 2 3) "|" (rtos (if sy sy 1.0) 2 3) "|" (rtos (if sz sz 1.0) 2 3)))
            (if (member key positions)
              (ssadd e to-del)
              (setq positions (cons key positions)))))
-      ;; åˆ é™¤é‡å å—
+      ;; É¾³ıÖØµş¿é
       (if (> (sel:count to-del) 0)
         (progn
           (command "_.ERASE" to-del "")
-          (princ (strcat "\nå·²åˆ é™¤ " (itoa (sel:count to-del)) " ä¸ªé‡å å—ã€‚")))
-        (princ "\næœªå‘ç°é‡å å—ã€‚")))
-    (princ "\næœªé€‰æ‹©ä»»ä½•å›¾å—ã€‚"))
-  (princ))
+          (princ (strcat "\nÒÑÉ¾³ı " (itoa (sel:count to-del)) " ¸öÖØµş¿é¡£")))
+        (princ "\nÎ´·¢ÏÖÖØµş¿é¡£")))
+    (princ "\nÎ´Ñ¡ÔñÈÎºÎÍ¼¿é¡£"))
+  (princ)
+  (uc:guard-end))
 
 
-(princ "\n[TB] å›¾å—ç®¡ç†æ¨¡å—åŠ è½½å®Œæˆ (block: 5å‘½ä»¤)")
+(princ "\n[TB] Í¼¿é¹ÜÀíÄ£¿é¼ÓÔØÍê³É (block: 5ÃüÁî)")
 (princ)

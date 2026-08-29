@@ -1,7 +1,7 @@
 (defun vectra:error-handler (s)
   (if (or (= s "Function cancelled")
       (= s "quit / exit abort")
-      (= s "å‡½æ•°è¢«å–æ¶ˆ"))
+      (= s "º¯Êı±»È¡Ïû"))
     (princ)
     (princ s))
   (while (not (equal (getvar "CMDNAMES")

@@ -1,5 +1,5 @@
 (defun group:make (lst name / groupobj)
-    "å®ä½“é›†ç¼–ç»„\nlst å›¾å…ƒåˆ—è¡¨ï¼Œname ç¼–ç»„å,(åŒ¿åç»„é¦–å­—ä¸º*)."
+    "ÊµÌå¼¯±à×é\nlst Í¼ÔªÁĞ±í£¬name ±à×éÃû,(ÄäÃû×éÊ××ÖÎª*)."
     (setq groupobj (vla-add (vla-get-groups (vla-get-activedocument (vlax-get-acad-object)))
 			    name))
     (setq lst (mapcar '(lambda(x)

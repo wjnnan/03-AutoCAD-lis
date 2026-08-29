@@ -1,6 +1,6 @@
 (defun curve:pline-2dpoints (ent)
-  "å¤šæ®µçº¿ç«¯ç‚¹åˆ—è¡¨ï¼Œè¿”å›äºŒç»´ç‚¹åæ ‡,LWPOLYLINEç»„ç æœ¬æ¥å°±æ˜¯äºŒç»´ç‚¹ã€‚"
-  "äºŒç»´ç‚¹åæ ‡åˆ—è¡¨"
+  "¶à¶ÎÏß¶ËµãÁĞ±í£¬·µ»Ø¶şÎ¬µã×ø±ê,LWPOLYLINE×éÂë±¾À´¾ÍÊÇ¶şÎ¬µã¡£"
+  "¶şÎ¬µã×ø±êÁĞ±í"
   "(curve:Pline-2dpoints (car (entsel)))"
   (mapcar (quote cdr)
     (vl-remove-if-not (quote (lambda (x)

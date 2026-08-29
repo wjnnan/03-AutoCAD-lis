@@ -1,5 +1,5 @@
 (defun list:delsame (lst fuzz)
-    "鍒犻櫎琛ㄤ腑鐩稿悓椤圭洰锛屼繚鐣欑涓�娆″嚭鐜扮殑浣嶇疆锛堟敮鎸佸宸級"
+    "删除表中相同项目，保留第一次出现的位置（支持容差）"
     (if lst
 	(cons (car lst)
 	      (list:delsame

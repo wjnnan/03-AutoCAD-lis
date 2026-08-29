@@ -1,5 +1,5 @@
 (defun string:split (str separator / pos)
-  "å°†å­—ç¬¦ä¸²ç”¨separatoråˆ†éš”æˆåˆ—è¡¨ï¼Œseparator å¯ä»¥æ˜¯å­—ç¬¦æˆ–ç”±å­—ç¬¦ç»„æˆçš„è¡¨ã€‚"
+  "½«×Ö·û´®ÓÃseparator·Ö¸ô³ÉÁĞ±í£¬separator ¿ÉÒÔÊÇ×Ö·û»òÓÉ×Ö·û×é³ÉµÄ±í¡£"
   (cond
     ((= 'str (type separator))
      (string:to-list str separator))

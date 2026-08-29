@@ -1,7 +1,7 @@
 (defun ui:select-multi (str-subject lst / dcl_fp dcl-tmp dcl_id para% set-result result initget%)
-  "æ˜¾ç¤ºåˆ—è¡¨é€‰æ‹©é¢æ¿ï¼Œé€‰æ‹©å¤šä¸ªæ‰€éœ€é¡¹å¹¶è¿”å›ã€‚"
-  "é€‰ä¸­çš„å†…å®¹"
-  "(ui:select-multi \"è¯·é€‰æ‹©ä½ å–œæ¬¢çš„äºº\"
+  "ÏÔÊ¾ÁĞ±íÑ¡ÔñÃæ°å£¬Ñ¡Ôñ¶à¸öËùĞèÏî²¢·µ»Ø¡£"
+  "Ñ¡ÖĞµÄÄÚÈİ"
+  "(ui:select-multi \"ÇëÑ¡ÔñÄãÏ²»¶µÄÈË\"
     '(\"AB\"
       \"Lisa\"
        \"VitalGG\"))"

@@ -1,5 +1,5 @@
 (defun matrix:mxv (m v)
-  "å‘é‡çš„çŸ©é˜µå˜æ¢(å‘é‡ä¹˜çŸ©é˜µ)"
+  "ÏòÁ¿µÄ¾ØÕó±ä»»(ÏòÁ¿³Ë¾ØÕó)"
   (mapcar (function (lambda (r)
             (apply (quote +)
                    (mapcar (quote *)

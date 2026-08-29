@@ -1,4 +1,4 @@
-(defun layer:readme nil "å›¾å±‚æ“ä½œç›¸å…³å‡½æ•°ã€‚"
-  (princ "å›¾å±‚æ“ä½œç›¸å…³å‡½æ•°ã€‚ä½¿ç”¨ (require 'layer:*)
-    åŠ è½½è¿™äº›å‡½æ•°")
+(defun layer:readme nil "Í¼²ã²Ù×÷Ïà¹Øº¯Êı¡£"
+  (princ "Í¼²ã²Ù×÷Ïà¹Øº¯Êı¡£Ê¹ÓÃ (require 'layer:*)
+    ¼ÓÔØÕâĞ©º¯Êı")
   (princ))

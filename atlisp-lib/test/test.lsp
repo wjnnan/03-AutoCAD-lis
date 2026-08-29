@@ -1,5 +1,5 @@
 (defun c:tt () 
-  "娴嬭瘯鐢紝鐢ㄤ簬 鏂版墜缁冧範 git 鎿嶄綔"
+  "测试用，用于 新手练习 git 操作"
   (alert "string")
   (princ))
 (c:tt)

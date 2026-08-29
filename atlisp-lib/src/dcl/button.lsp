@@ -1,12 +1,12 @@
 (defun dcl:button (key label style)
-  "dcl æŒ‰é’®ã€‚"
+  "dcl °´Å¥¡£"
   ""
   "(dcl:button \"btn1\"
     \"Button1\"
     \"\")"
   (set (read (strcat "cb-"
 		     key))
-       (eval (read (strcat "(lambda()(alert (strcat \"éœ€è¦å®šä¹‰å›è°ƒå‡½æ•° (cb-"
+       (eval (read (strcat "(lambda()(alert (strcat \"ĞèÒª¶¨Òå»Øµ÷º¯Êı (cb-"
 			   key ")\")))"))))
   (write-line (strcat ":button{key=\""
 		      key "\";"

@@ -1,6 +1,6 @@
 (defun word:open (filename ishide / ax-word ax-doc)
-  "æ‰“å¼€ä¸€ä¸ªwordæ–‡ä»¶\nå‚æ•°:Filename:æ–‡ä»¶è·¯å¾„\nå‚æ•°:ishide:æ˜¯å¦å¯è§ï¼Œtä¸ºå¯è§ï¼Œnilä¸ºä¸å¯è§"
-  "ä¸€ä¸ªè¡¨ç¤ºæ‰“å¼€çš„ word æ–‡ä»¶çš„vlaå¯¹è±¡"
+  "´ò¿ªÒ»¸öwordÎÄ¼ş\n²ÎÊı:Filename:ÎÄ¼şÂ·¾¶\n²ÎÊı:ishide:ÊÇ·ñ¿É¼û£¬tÎª¿É¼û£¬nilÎª²»¿É¼û"
+  "Ò»¸ö±íÊ¾´ò¿ªµÄ word ÎÄ¼şµÄvla¶ÔÏó"
   "(word:open \"D:/1.docx\" t)"
   (if (setq ax-word (vlax-get-or-create-object "Word.Application"))
       (progn

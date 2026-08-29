@@ -1,5 +1,5 @@
 (defun list:equal (lst1 lst2 fuzz)
-  "姣旇緝鍚湁娴偣鏁扮殑鍘熷瓙鎴栬〃"
+  "比较含有浮点数的原子或表"
   "t or nil"
   "(list:equal 5.3 5.3 0.01)"
   (cond

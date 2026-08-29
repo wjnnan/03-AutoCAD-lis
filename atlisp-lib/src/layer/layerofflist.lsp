@@ -1,5 +1,5 @@
 (defun layer:layerofflist (/ each out)
-    "è¿”å›žå…³é—­çš„å›¾å±‚åˆ—è¡¨"
+    "·µ»Ø¹Ø±ÕµÄÍ¼²ãÁÐ±í"
     (vlax-for each (std:layers)
         (if (= (vla-get-layeron each)
                 :vlax-false)

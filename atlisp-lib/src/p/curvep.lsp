@@ -1,5 +1,5 @@
 (defun p:curvep (obj)
-  "æ˜¯å¦æ˜¯æ›²çº¿"
+  "ÊÇ·ñÊÇÇúÏß"
   (if (vlap obj)
     (and (member (vla-get-objectname obj)
         (quote ("AcDbPolyline"

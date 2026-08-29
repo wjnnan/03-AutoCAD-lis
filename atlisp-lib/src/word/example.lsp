@@ -1,15 +1,15 @@
 (defun word:example (filename str / ax-word ax-doc)
-  "word ç±»å‡½æ•°è°ƒç”¨ç¤ºä¾‹"
+  "word Ààº¯Êıµ÷ÓÃÊ¾Àı"
   "nil"
   ""
-  "å»ºç«‹ word app"
+  "½¨Á¢ word app"
   (setq ax-word (word:open filename nil))
-  "æ–‡æ¡£å¯¹è±¡ ax-doc"
+  "ÎÄµµ¶ÔÏó ax-doc"
   (setq ax-doc (vlax-get-property ax-word 'ActiveDocument))
-  "å‘æ–‡æ¡£å¯¹è±¡å†™å†…å®¹"
+  "ÏòÎÄµµ¶ÔÏóĞ´ÄÚÈİ"
   (word:write-line ax-doc str)
-  "å…³é—­æ–‡æ¡£"
+  "¹Ø±ÕÎÄµµ"
   (word:close ax-doc)
-  "å…³é—­ app"
+  "¹Ø±Õ app"
   (word:quit ax-word t))
   

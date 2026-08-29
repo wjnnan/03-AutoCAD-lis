@@ -1,5 +1,5 @@
 (defun entity:get-color (ent)
-  "è·å–å›¾å…ƒçš„é¢œè‰²ï¼Œå½“é¢œè‰²éšå±‚æ—¶ï¼Œè¿”å›å›¾å±‚é¢œè‰²ã€‚"
+  "»ñÈ¡Í¼ÔªµÄÑÕÉ«£¬µ±ÑÕÉ«Ëæ²ãÊ±£¬·µ»ØÍ¼²ãÑÕÉ«¡£"
   (if (entity:getdxf ent 62)
     (entity:getdxf ent 62)
     (cdr (assoc 62 (tblsearch "layer"

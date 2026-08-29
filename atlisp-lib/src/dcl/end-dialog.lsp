@@ -1,17 +1,17 @@
 (defun dcl:end-dialog (str-yes-no / para)
-  "å®Œæˆåˆ›å»ºDCLæ–‡ä»¶å¹¶å…³é—­æ–‡ä»¶æŒ‡é’ˆã€‚
-å‚æ•° str-Yes-No å­—ç¬¦ä¸²ç”¨ - åˆ†éš”æˆä¸¤éƒ¨åˆ†ï¼Œå‰é¢ä¸ºaccept,åé¢ä¸º Cancel.å¦‚ æ˜¯-å¦ï¼Œæ„¿æ„-ä¸æ„¿æ„ã€‚"
+  "Íê³É´´½¨DCLÎÄ¼ş²¢¹Ø±ÕÎÄ¼şÖ¸Õë¡£
+²ÎÊı str-Yes-No ×Ö·û´®ÓÃ - ·Ö¸ô³ÉÁ½²¿·Ö£¬Ç°ÃæÎªaccept,ºóÃæÎª Cancel.Èç ÊÇ-·ñ£¬Ô¸Òâ-²»Ô¸Òâ¡£"
   ""
   (if (null str-yes-no)
       (setq str-yes-no "Yes-No"))
   (setq para (string:to-list str-yes-no "-"))
   (cond ((= (length para)
             0)
-	 (setq para (list "æ˜¯" "å¦")))
+	 (setq para (list "ÊÇ" "·ñ")))
 	((= (length para)
             1)
 	 (setq para (list (car para)
-			  "å¦"))))
+			  "·ñ"))))
   (write-line (strcat ":spacer{} : column {: row { fixed_width = true; alignment = centered; : retirement_button { label =\""
 		      (car para)"\";key=\"accept\";is_default=true;} :spacer{ width = 2; }:retirement_button {label= \""
 		      (cadr para) "\"; key =\"cancel\"; is_cancel = true;}}}}")

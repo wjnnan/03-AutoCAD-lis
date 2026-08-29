@@ -1,5 +1,5 @@
 (defun m:minlist (lst)
-    "è¿”å›æ•°å€¼åˆ—è¡¨çš„ä¸­çš„æœ€å°å€¼"
+    "·µ»ØÊıÖµÁĞ±íµÄÖĞµÄ×îĞ¡Öµ"
     (if (atom lst)
         lst (apply (quote min)
             lst)))

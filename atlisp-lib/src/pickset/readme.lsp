@@ -1,4 +1,4 @@
-(defun pickset:readme nil "é€‰æ‹©é›†ç›¸å…³å‡½æ•°ã€‚"
-  (princ "é€‰æ‹©é›†ç›¸å…³å‡½æ•°ã€‚ä½¿ç”¨ (require 'pickset:*)
-    åŠ è½½è¿™äº›å‡½æ•°")
+(defun pickset:readme nil "Ñ¡Ôñ¼¯Ïà¹Øº¯Êı¡£"
+  (princ "Ñ¡Ôñ¼¯Ïà¹Øº¯Êı¡£Ê¹ÓÃ (require 'pickset:*)
+    ¼ÓÔØÕâĞ©º¯Êı")
   (princ))

@@ -1,3 +1,3 @@
 (defun entity:to-obj (en0)
-  "鍥惧厓绫诲瀷杞负ActiveX瀵硅薄,e2o"
+  "图元类型转为ActiveX对象,e2o"
   (vlax-ename->vla-object en0))

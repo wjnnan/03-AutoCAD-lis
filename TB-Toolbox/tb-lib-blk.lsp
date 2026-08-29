@@ -1,13 +1,13 @@
-;;; tb-lib-blk.lsp -- å›¾å—æ“ä½œåº“
-;;; å›¾å—å®šä¹‰æŸ¥è¯¢ã€å—å¼•ç”¨åˆ›å»ºã€å±æ€§ç®¡ç†ã€ç»Ÿè®¡
-;;; ä¾èµ–ï¼štb-core.lsp, tb-lib-entity.lsp, tb-lib-sel.lsp
+;;; tb-lib-blk.lsp -- Í¼¿é²Ù×÷¿â
+;;; Í¼¿é¶¨Òå²éÑ¯¡¢¿éÒıÓÃ´´½¨¡¢ÊôĞÔ¹ÜÀí¡¢Í³¼Æ
+;;; ÒÀÀµ£ºtb-core.lsp, tb-lib-entity.lsp, tb-lib-sel.lsp
 
 ;; ============================================================================
-;; å›¾å—æ£€æµ‹ä¸æŸ¥è¯¢
+;; Í¼¿é¼ì²âÓë²éÑ¯
 ;; ============================================================================
 
 (defun blk:exists? (name)
-  "æ£€æµ‹å›¾å—å®šä¹‰æ˜¯å¦å­˜åœ¨ã€‚"
+  "¼ì²âÍ¼¿é¶¨ÒåÊÇ·ñ´æÔÚ¡£"
   (cond
     ((and (uc:function-defined-p 'uc:block-exists-p) name)
      (uc:block-exists-p name))
@@ -15,7 +15,7 @@
      (and name (tblsearch "BLOCK" name) T))))
 
 (defun blk:list nil / lst blk name
-  "åˆ—å‡ºæ‰€æœ‰å›¾å—åï¼Œæ’é™¤åŒ¿åå—ä¸æ ‡æ³¨å—ã€‚"
+  "ÁĞ³öËùÓĞÍ¼¿éÃû£¬ÅÅ³ıÄäÃû¿éÓë±ê×¢¿é¡£"
   (setq lst nil
         blk nil)
   (while (setq blk (tblnext "BLOCK" (not blk)))
@@ -27,45 +27,48 @@
   (reverse lst))
 
 (defun blk:count (name)
-  "ç»Ÿè®¡æŒ‡å®šå›¾å—åœ¨æ¨¡å‹ç©ºé—´ä¸­çš„æ’å…¥æ¬¡æ•°ã€‚"
+  "Í³¼ÆÖ¸¶¨Í¼¿éÔÚÄ£ĞÍ¿Õ¼äÖĞµÄ²åÈë´ÎÊı¡£"
   (sel:count (ssget "X" (list '(0 . "INSERT") (cons 2 name)))))
 
 (defun blk:get-attribs (ename)
-  "è·å–å—å¼•ç”¨çš„å…¨éƒ¨å±æ€§ã€‚"
+  "»ñÈ¡¿éÒıÓÃµÄÈ«²¿ÊôĞÔ¡£"
   (entity:get-attribs ename))
 
 (defun blk:set-attrib (ename tag value)
-  "è®¾ç½®å—å¼•ç”¨çš„æŒ‡å®šå±æ€§å€¼ã€‚"
+  "ÉèÖÃ¿éÒıÓÃµÄÖ¸¶¨ÊôĞÔÖµ¡£"
   (entity:set-attrib ename tag value))
 
 
 ;; ============================================================================
-;; å›¾å—åˆ›å»ºä¸æ’å…¥
+;; Í¼¿é´´½¨Óë²åÈë
 ;; ============================================================================
 
 (defun blk:make (name ents basept)
-  "åˆ›å»ºå›¾å—å®šä¹‰ã€‚"
+  "´´½¨Í¼¿é¶¨Òå¡£"
   (entity:make-block name ents basept)
   name)
 
 (defun blk:insert (name inspt scale rot)
-  "æ’å…¥å›¾å—å¼•ç”¨ã€‚"
+  "²åÈëÍ¼¿éÒıÓÃ¡£"
   (entity:make-insert name inspt scale scale scale rot))
 
-(defun blk:quick-make (ss pt / name)
-  "å¿«é€Ÿå»ºå—å¹¶åœ¨åŸä½æ’å…¥ã€‚"
-  (setq name (strcat "B" (rtos (* (getvar "CDATE") 1000000.0) 2 0)))
-  (uc:command-safe (list "_BLOCK" name pt ss ""))
-  (uc:command-safe (list "_INSERT" name pt "" "" ""))
+(defun blk:quick-make (ss pt / name ents)
+  "¿ìËÙ½¨¿é²¢ÔÚÔ­Î»²åÈë£¨ÓÃ entmake£¬±ÜÃâ command-s ²»½ÓÊÜÑ¡Ôñ¼¯ / _BLOCK µ¯¶Ô»°¿ò£©¡£"
+  (setq name (strcat "B" (rtos (* (getvar "CDATE") 1000000.0) 2 0))
+        ents (sel:to-list ss))
+  (if (entity:make-block name ents pt)
+    (progn
+      (foreach e ents (entdel e))
+      (entity:make-insert name pt 1.0 1.0 1.0 0.0)))
   name)
 
 
 ;; ============================================================================
-;; å—å‚è€ƒåæ ‡å˜æ¢
+;; ¿é²Î¿¼×ø±ê±ä»»
 ;; ============================================================================
 
 (defun blk:ref-geom (ename / elst x y z)
-  "è·å–å—å¼•ç”¨çš„åæ ‡å˜æ¢å‚æ•°ã€‚ä»…å¯¹ INSERT å®ä½“æœ‰æ•ˆã€‚"
+  "»ñÈ¡¿éÒıÓÃµÄ×ø±ê±ä»»²ÎÊı¡£½ö¶Ô INSERT ÊµÌåÓĞĞ§¡£"
   (if (/= (entity:get-type ename) "INSERT")
     nil
     (progn
@@ -88,7 +91,7 @@
               (cdr (assoc 43 elst)))))))
 
 (defun blk:block->insert (pt ref)
-  "å—å®šä¹‰åæ ‡è½¬å—å¼•ç”¨åæ ‡ã€‚"
+  "¿é¶¨Òå×ø±ê×ª¿éÒıÓÃ×ø±ê¡£"
   (mapcar '+
     (nth 3 ref)
     (list (+ (* (caar ref)  (car pt)) (* (caadr ref)  (cadr pt)))
@@ -96,7 +99,7 @@
           (+ (* (caddar ref) (car pt)) (* (caddr (cadr ref)) (cadr pt))))))
 
 (defun blk:insert->block (pt ref / vec det)
-  "å—å¼•ç”¨åæ ‡è½¬å—å®šä¹‰åæ ‡ã€‚"
+  "¿éÒıÓÃ×ø±ê×ª¿é¶¨Òå×ø±ê¡£"
   (setq vec (mapcar '- pt (nth 3 ref)))
   (setq det (- (* (caar ref) (cadadr ref))
                (* (caadr ref) (cadar ref))))
@@ -111,16 +114,16 @@
           0.0)))
 
 (defun blk:rename (old-name new-name)
-  "é‡å‘½åå—å®šä¹‰ã€‚ä½¿ç”¨æ ‡å‡† RENAME å‘½ä»¤è‡ªåŠ¨å¤„ç†æ‰€æœ‰ INSERT å¼•ç”¨ã€‚"
+  "ÖØÃüÃû¿é¶¨Òå¡£Ê¹ÓÃ±ê×¼ RENAME ÃüÁî×Ô¶¯´¦ÀíËùÓĞ INSERT ÒıÓÃ¡£"
   (if (and (blk:exists? old-name)
            new-name
            (/= new-name "")
            (not (blk:exists? new-name)))
     (progn
-      (uc:command-safe (list "_.RENAME" "BLOCK" old-name new-name))
+      (uc:command-safe (list "_.-RENAME" "BLOCK" old-name new-name))
       (if (blk:exists? new-name) new-name nil))
     nil))
 
 
-(princ "\n[TB] å›¾å—æ“ä½œåº“åŠ è½½å®Œæˆ (blk:*)")
+(princ "\n[TB] Í¼¿é²Ù×÷¿â¼ÓÔØÍê³É (blk:*)")
 (princ)

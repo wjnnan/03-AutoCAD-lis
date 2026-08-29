@@ -52,7 +52,23 @@
       "Bash(python tests/verify_tb_main_defuns.py)",
       "Bash(python tests/verify_tb_rebar_edit_helper_defs.py)",
       "Bash(python tests/verify_uc_function_defined_runtime.py)",
-      "Bash(python tests/verify_tb_main_balance.py)"
+      "Bash(python tests/verify_tb_main_balance.py)",
+      "Bash(git checkout *)",
+      "Bash(ECC_GATEGUARD=off git checkout -- atlisp-packages/base/block.lsp)",
+      "Bash(git restore *)",
+      "Bash(ECC_GATEGUARD=off python -c \"exec\\(open\\('_fix_all.py','w'\\).write\\('import sys\\\\nwith open\\(\\\\\"atlisp-packages/base/block.lsp\\\\\",\\\\\"rb\\\\\"\\) as f:\\\\n data=f.read\\(\\)\\\\nold1=b\\\\\"\\(setq props \\(vlax-invoke oblk '\\\\\"'\\\\\"'getdynamicblockproperties\\)\\)\\\\\"\\\\nnew1=b\\\\\"\\(setq props \\(vl-catch-all-apply '\\\\\"'\\\\\"'vlax-invoke \\(list oblk '\\\\\"'\\\\\"'getdynamicblockproperties\\)\\)\\)\\\\\\\\r\\\\\\\\n\\\\\\\\t\\(if \\(or \\(vl-catch-all-error-p props\\) \\(not props\\)\\)\\\\\\\\r\\\\\\\\n\\\\\\\\t    nil\\\\\"\\\\nif old1 in data:\\\\n data=data.replace\\(old1,new1\\)\\\\n print\\(\\\\\"Fix1 OK\\\\\"\\)\\\\nold2=b\\\\\"\\(vlax-invoke \\(vlax-ename->vla-object blk\\) '\\\\\"'\\\\\"'getdynamicblockproperties\\)\\\\\"\\\\nnew2=b\\\\\"\\(setq _dynprops \\(vl-catch-all-apply '\\\\\"'\\\\\"'vlax-invoke \\(list \\(vlax-ename->vla-object blk\\) '\\\\\"'\\\\\"'getdynamicblockproperties\\)\\)\\)\\\\\\\\r\\\\\\\\n\\\\\\\\t   \\(if \\(or \\(vl-catch-all-error-p _dynprops\\) \\(not _dynprops\\)\\)\\\\\\\\r\\\\\\\\n\\\\\\\\t       nil\\\\\\\\r\\\\\\\\n\\\\\\\\t   \\(vl-some\\\\\"\\\\nif old2 in data:\\\\n data=data.replace\\(old2,new2\\)\\\\n print\\(\\\\\"Fix2 OK\\\\\"\\)\\\\nwith open\\(\\\\\"atlisp-packages/base/block.lsp\\\\\",\\\\\"wb\\\\\"\\) as f:\\\\n f.write\\(data\\)\\\\nprint\\(\\\\\"Done\\\\\"\\)'\\)\\)\")",
+      "Bash(ECC_GATEGUARD=off python _fix_all.py)",
+      "Bash(ECC_GATEGUARD=off cat)",
+      "Bash(python _fxblk.py)",
+      "Bash(python _fxblk2.py)",
+      "Bash(python _fxblk3.py)",
+      "Bash(python _fix_round2.py)",
+      "Bash(ECC_GATEGUARD=off git checkout -- atlisp-packages/road-cross/rd.lsp)",
+      "Bash(python _fix_rd.py)",
+      "Bash(ECC_GATEGUARD=off python -c ' *)",
+      "Bash(ECC_GATEGUARD=off git diff --stat)",
+      "Bash(python3 *)",
+      "Bash(python *)"
     ]
   }
 }

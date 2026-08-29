@@ -1,8 +1,8 @@
 (defun block:bcs2wcs (pt pt-base pt-ins ang scale)
-  "å°†å—å®šä¹‰å†…çš„åæ ‡è½¬ä¸ºå—å¼•ç”¨ä¸­çš„å®é™…çš„ä¸–ç•Œåæ ‡"
-  "åæ ‡å€¼"
+  "½«¿é¶¨ÒåÄÚµÄ×ø±ê×ªÎª¿éÒıÓÃÖĞµÄÊµ¼ÊµÄÊÀ½ç×ø±ê"
+  "×ø±êÖµ"
   (setq pt (mapcar '- pt pt-base))
-  ;; çŸ¢é‡è¿ç®—
+  ;; Ê¸Á¿ÔËËã
   (m:coordinate pt-ins
 		(m:coordinate-scale
 		 (m:coordinate-rotate pt ang) scale)))

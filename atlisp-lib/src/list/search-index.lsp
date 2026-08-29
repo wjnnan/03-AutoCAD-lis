@@ -1,6 +1,6 @@
 (defun list:search-index (lst index)
-    "浠ョ储寮曟煡鎵捐〃涓厓绱燶n鍙傛暟锛歕n  lst:鍒楄〃\n  index:绱㈠紩鎴栬�呯储寮曡〃"
-    "鏌ユ壘鍒扮殑鍏冪礌缁勬垚鐨勮〃"
+    "以索引查找表中元素\n参数：\n  lst:列表\n  index:索引或者索引表"
+    "查找到的元素组成的表"
     "(list:search-index '(1 2 3 4)
         3)"
     (mapcar (quote (lambda (x)

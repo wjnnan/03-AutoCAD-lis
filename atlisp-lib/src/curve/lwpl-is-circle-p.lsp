@@ -1,5 +1,5 @@
 (defun curve:lwpl-is-circle-p (ent / vertexs bulges flag o)
-  "妫�娴嬪娈电嚎鏄惁涓哄渾"
+  "检测多段线是否为圆"
   "T or nil"
   (setq vertexs (curve:pline-3dpoints ent))
   (setq bulges (curve:pline-convexity ent))

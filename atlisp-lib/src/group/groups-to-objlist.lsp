@@ -1,5 +1,5 @@
 (defun group:groups-to-objlist (/ i obj-g)
-    "灏嗙紪缁勯泦杞负缂栫粍瀵硅薄鍒楄〃."
+    "将编组集转为编组对象列表."
     (setq i 0)
     (setq obj-g (quote nil))
     (while (< i (vla-get-count *grps*))

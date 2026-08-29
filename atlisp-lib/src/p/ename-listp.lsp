@@ -1,5 +1,5 @@
 (defun p:ename-listp (lst)
-  "鍒ゆ柇鏄惁涓哄浘鍏冨悕鍒楄〃"
+  "判断是否为图元名列表"
   (if (and
        lst
        (listp lst))

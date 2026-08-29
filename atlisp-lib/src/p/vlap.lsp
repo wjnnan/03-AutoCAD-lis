@@ -1,4 +1,4 @@
 (defun p:vlap (obj)
-  "Е┬╓Ф√╜Ф≤╞Е░╕vlaЕ╞╧Х╠║."
+  "еп╤ойг╥Яvla╤тоС."
   (equal (type obj)
     (quote vla-object)))

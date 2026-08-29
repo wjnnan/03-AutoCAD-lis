@@ -1,6 +1,6 @@
 (defun pickset:from-list (lstent / ss)
-  "æŠŠå›¾å…ƒåˆ—è¡¨è½¬åŒ–æˆé€‰æ‹©é›†ï¼Œå‚æ•°"
-  "é€‰æ‹©é›†"
+  "°ÑÍ¼ÔªÁĞ±í×ª»¯³ÉÑ¡Ôñ¼¯£¬²ÎÊı"
+  "Ñ¡Ôñ¼¯"
   (setq ss (ssadd))
   (foreach i lstent (ssadd i ss))
   ss)

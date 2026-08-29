@@ -1,89 +1,111 @@
-;;; tb-mod-calc.lsp â€” æµ‹é‡è®¡ç®—æ¨¡å—
-;;; ç´¯è®¡é•¿åº¦ã€ç´¯è®¡é¢ç§¯ã€æ•°å­—æ±‚å’Œã€å®ä½“ä¿¡æ¯æŸ¥è¯¢ã€‚
-;;; ç»„åˆ curve:* sel:* entity:* åº“å‡½æ•°
+;;; tb-mod-calc.lsp ¡ª ²âÁ¿¼ÆËãÄ£¿é
+;;; ÀÛ¼Æ³¤¶È¡¢ÀÛ¼ÆÃæ»ı¡¢Êı×ÖÇóºÍ¡¢ÊµÌåĞÅÏ¢²éÑ¯¡£
+;;; ×éºÏ curve:* sel:* entity:* ¿âº¯Êı
 
 ;; ============================================================================
-;; ç´¯è®¡é•¿åº¦ c:lcd
+;; ÀÛ¼Æ³¤¶È c:lcd
 ;; ============================================================================
 
 (defun c:lcd (/ ss total)
-  "é€‰æ‹©çº¿æ¡ï¼Œè®¡ç®—ç´¯è®¡æ€»é•¿åº¦ã€‚æ”¯æŒ LINE, LWPOLYLINE, POLYLINE, ARC, SPLINEã€‚"
+  (uc:guard-begin '())
+  "Ñ¡ÔñÏßÌõ£¬¼ÆËãÀÛ¼Æ×Ü³¤¶È¡£Ö§³Ö LINE, LWPOLYLINE, POLYLINE, ARC, SPLINE¡£"
   (if (setq ss (ssget '((0 . "LINE,LWPOLYLINE,POLYLINE,ARC,SPLINE,CIRCLE"))))
     (progn
       (setq total 0.0)
       (sel:for-each ss
         '(lambda (e)
            (setq total (+ total (curve:length e)))))
-      (princ (strcat "\nç´¯è®¡é•¿åº¦: " (rtos total 2 2) " mm"
+      (princ (strcat "\nÀÛ¼Æ³¤¶È: " (rtos total 2 2) " mm"
                      "  (" (rtos (/ total 1000.0) 2 2) " m)"))
-      ;; åœ¨å›¾çº¸ä¸Šå†™å…¥æ–‡å­—
-      (if (setq pt (getpoint "\næ–‡å­—æ’å…¥ç‚¹ï¼ˆå›è½¦è·³è¿‡ï¼‰: "))
+      ;; ÔÚÍ¼Ö½ÉÏĞ´ÈëÎÄ×Ö
+      (if (setq pt (getpoint "\nÎÄ×Ö²åÈëµã£¨»Ø³µÌø¹ı£©: "))
         (entity:make-text
           (strcat "L=" (rtos (/ total 1000.0) 2 2) "m")
           pt (* 350 (sys:get '*SYS:DWG-SCALE*))
           (sys:get '*SYS:TEXT-STYLE*) (getvar "CLAYER")))))
-  (princ))
+  (princ)
+  (uc:guard-end))
 
 
 ;; ============================================================================
-;; ç´¯è®¡é¢ç§¯ c:lmj
+;; ÀÛ¼ÆÃæ»ı c:lmj
 ;; ============================================================================
 
 (defun c:lmj (/ ss total)
-  "é€‰æ‹©é—­åˆåŒºåŸŸï¼Œè®¡ç®—ç´¯è®¡æ€»é¢ç§¯ã€‚"
+  (uc:guard-begin '())
+  "Ñ¡Ôñ±ÕºÏÇøÓò£¬¼ÆËãÀÛ¼Æ×ÜÃæ»ı¡£"
   (if (setq ss (ssget '((0 . "LWPOLYLINE,POLYLINE,CIRCLE,ELLIPSE,HATCH"))))
     (progn
       (setq total 0.0)
       (sel:for-each ss
-        '(lambda (e)
-           (setq total (+ total (curve:area e)))))
-      (princ (strcat "\nç´¯è®¡é¢ç§¯: " (rtos total 2 2) " mmÂ²"
-                     "  (" (rtos (/ total 1000000.0) 2 3) " mÂ²)"))
-      (if (setq pt (getpoint "\næ–‡å­—æ’å…¥ç‚¹ï¼ˆå›è½¦è·³è¿‡ï¼‰: "))
+        '(lambda (e / typ)
+           (setq typ (entity:get-type e))
+           ;; Ö»¼ÆËã±ÕºÏÇøÓò£ºÔ²/ÍÖÔ²/Ìî³ä£¬»ò±ÕºÏ¶à¶ÎÏß
+           (if (or (= typ "CIRCLE") (= typ "ELLIPSE") (= typ "HATCH")
+                   (and (wcmatch typ "LWPOLYLINE,POLYLINE") (curve:closed? e)))
+             (setq total (+ total (curve:area e))))))
+      (princ (strcat "\nÀÛ¼ÆÃæ»ı: " (rtos total 2 2) " mm^2"
+                     "  (" (rtos (/ total 1000000.0) 2 3) " m^2)"))
+      (if (setq pt (getpoint "\nÎÄ×Ö²åÈëµã£¨»Ø³µÌø¹ı£©: "))
         (entity:make-text
-          (strcat "A=" (rtos (/ total 1000000.0) 2 3) "mÂ²")
+          (strcat "A=" (rtos (/ total 1000000.0) 2 3) "m^2")
           pt (* 350 (sys:get '*SYS:DWG-SCALE*))
           (sys:get '*SYS:TEXT-STYLE*) (getvar "CLAYER")))))
-  (princ))
+  (princ)
+  (uc:guard-end))
 
 
 ;; ============================================================================
-;; æ•°å­—æ±‚å’Œ c:qh
+;; Êı×ÖÇóºÍ c:qh
 ;; ============================================================================
 
 (defun c:qh (/ ss total)
-  "æå–æ‰€é€‰æ–‡å­—/æ ‡æ³¨ä¸­çš„æ•°å­—å¹¶æ±‚å’Œã€‚"
+  (uc:guard-begin '())
+  "ÌáÈ¡ËùÑ¡ÎÄ×Ö/±ê×¢ÖĞµÄÊı×Ö²¢ÇóºÍ¡£"
   (if (setq ss (ssget '((0 . "TEXT,MTEXT,DIMENSION"))))
     (progn
       (setq total 0.0)
       (sel:for-each ss
-        '(lambda (e / str val)
+        '(lambda (e / str val i num-str)
            (setq str (cond
                        ((= (entity:get-type e) "DIMENSION")
                         (rtos (entity:get-dxf e 42) 2 2))
                        (t (entity:get-dxf e 1))))
-           (setq val (atof str))
+           ;; ÌáÈ¡×Ö·û´®ÖĞµÚÒ»¸öÁ¬ĞøÊı×Ö£¨Ö§³Ö "L=12.5"¡¢"¼ä¾à300"£©
+           (setq i 1 num-str "")
+           (while (and (<= i (strlen str)) (= num-str ""))
+             (if (wcmatch (substr str i 1) "[0-9]")
+               (progn
+                 (while (and (<= i (strlen str))
+                             (wcmatch (substr str i 1) "[0-9.]"))
+                   (setq num-str (strcat num-str (substr str i 1))
+                         i (1+ i)))))
+             (setq i (1+ i)))
+           (setq val (if (= num-str "") 0.0 (atof num-str)))
            (if (not (zerop val))
              (setq total (+ total val))))))
-    (princ (strcat "\næ•°å­—æ±‚å’Œ: " (rtos total 2 2))))
-  (princ))
+    (princ (strcat "\nÊı×ÖÇóºÍ: " (rtos total 2 2))))
+  (princ)
+  (uc:guard-end))
 
 
 ;; ============================================================================
-;; DXF æŸ¥è¯¢ c:Tn
+;; DXF ²éÑ¯ c:Tn
 ;; ============================================================================
 
 (defun c:Tn (/ e)
-  "æŸ¥çœ‹æ‰€é€‰å®ä½“çš„å…¨éƒ¨ DXF ç»„ç ã€‚"
-  (if (setq e (car (entsel "\né€‰æ‹©å®ä½“æŸ¥çœ‹DXF: ")))
+  (uc:guard-begin '())
+  "²é¿´ËùÑ¡ÊµÌåµÄÈ«²¿ DXF ×éÂë¡£"
+  (if (setq e (car (entsel "\nÑ¡ÔñÊµÌå²é¿´DXF: ")))
     (progn
-      (princ "\n--- DXF ç»„ç åˆ—è¡¨ ---")
+      (princ "\n--- DXF ×éÂëÁĞ±í ---")
       (foreach pair (entget e)
         (princ (strcat "\n  " (itoa (car pair)) "  =  "
                        (vl-princ-to-string (cdr pair)))))
-      (princ "\n--- ç»“æŸ ---")))
-  (princ))
+      (princ "\n--- ½áÊø ---")))
+  (princ)
+  (uc:guard-end))
 
 
-(princ "\n[TB] æµ‹é‡è®¡ç®—æ¨¡å—åŠ è½½å®Œæˆ (calc: 4å‘½ä»¤)")
+(princ "\n[TB] ²âÁ¿¼ÆËãÄ£¿é¼ÓÔØÍê³É (calc: 4ÃüÁî)")
 (princ)

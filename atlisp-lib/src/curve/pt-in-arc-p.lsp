@@ -1,5 +1,5 @@
 (defun curve:pt-in-arc-p (pt pt1 pt2 convexity / o ang1 ang2 ang)
-  "åˆ¤æ–­ ç‚¹ pt æ˜¯å¦åœ¨ pt1 pt2 åŠ å‡¸åº¦ è¡¨ç¤ºçš„åœ†å¼§ä¸Šã€‚"
+  "ÅĞ¶Ï µã pt ÊÇ·ñÔÚ pt1 pt2 ¼° Í¹¶È ±íÊ¾µÄÔ²»¡ÉÏ¡£"
   (if (equal 0 convexity 0.001)
     (progn (equal (angle pt1 pt)
         (angle pt pt2)

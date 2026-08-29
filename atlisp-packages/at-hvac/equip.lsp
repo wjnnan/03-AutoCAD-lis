@@ -1,26 +1,26 @@
 (defun @hvac:equip-balance ()
-  (@::help '("åˆ†é›†æ°´å™¨å¹³è¡¡åˆ†æ"))
+  (@::help '("·Ö¼¯Ë®Æ÷Æ½ºâ·ÖÎö"))
   (setq hequips (pickset:to-list (ssget '((0  . "TCH_DBHEQUIPMENT")))))
   (setq hvac-jfsqs
 	(vl-remove-if-not '(lambda(x)
 			    (equal (vlax-get-property (e2o x) 'hvac_s5)
-			     "é‡‡æš–åˆ†é›†æ°´å™¨"))
+			     "²ÉÅ¯·Ö¼¯Ë®Æ÷"))
 			  hequips))
-  (@:prompt (strcat "é€‰ä¸­"(itoa(length hvac-jfsqs))"ä¸ªé‡‡æš–åˆ†é›†æ°´å™¨"))
+  (@:prompt (strcat "Ñ¡ÖĞ"(itoa(length hvac-jfsqs))"¸ö²ÉÅ¯·Ö¼¯Ë®Æ÷"))
   (setq i 0)
   (mapcar '(lambda(x / box lens)
 	    (setq box (entity:getbox x 100))
-	    (prompt (strcat "åˆ†é›†æ°´å™¨ " (itoa (setq i (1+ i)))" . "))
-	    (setq pipes (pickset:to-list(ssget "c" (car box)(cadr box)'((0 . "lwpolyline")(8 . "*åœ°æš–*")))))
+	    (prompt (strcat "·Ö¼¯Ë®Æ÷ " (itoa (setq i (1+ i)))" . "))
+	    (setq pipes (pickset:to-list(ssget "c" (car box)(cadr box)'((0 . "lwpolyline")(8 . "*µØÅ¯*")))))
 	    (setq lens (mapcar '(lambda(x)(* 0.001(curve:length  x))) pipes))
-	    (prompt (strcat "å›è·¯æ•°: "(itoa (length lens))" ä¸ª; "))
-	    (prompt (strcat "æ€»é•¿: "(rtos (apply '+ lens) 2 1)"m; "))
-	    (prompt (strcat "æœ€é•¿: "(rtos (setq pmax (apply 'max lens)) 2 1)"m; "))
-	    (prompt (strcat "æœ€çŸ­: "(rtos (setq pmin (apply 'min lens)) 2 1)"m; "))
-	    (prompt (strcat "æœ€å¤§å·®å€¼: "(rtos (setq diff (- pmax pmin)) 2 1)"m; "))
+	    (prompt (strcat "»ØÂ·Êı: "(itoa (length lens))" ¸ö; "))
+	    (prompt (strcat "×Ü³¤: "(rtos (apply '+ lens) 2 1)"m; "))
+	    (prompt (strcat "×î³¤: "(rtos (setq pmax (apply 'max lens)) 2 1)"m; "))
+	    (prompt (strcat "×î¶Ì: "(rtos (setq pmin (apply 'min lens)) 2 1)"m; "))
+	    (prompt (strcat "×î´ó²îÖµ: "(rtos (setq diff (- pmax pmin)) 2 1)"m; "))
 	    (if (> diff 15)
 		(progn
-		  (@::prompt " å·²äº®æ˜¾å·®å€¼è¶…è¿‡15mçš„ç®¡é“ç»„")
+		  (@::prompt " ÒÑÁÁÏÔ²îÖµ³¬¹ı15mµÄ¹ÜµÀ×é")
 		  (sssetfirst nil (pickset:from-list pipes)))
 		(prompt "\n"))
 	    )
@@ -29,20 +29,20 @@
     
     
 (defun @hvac:make-equip-bom ()
-  (@::help '("ç”Ÿæˆè®¾å¤‡è¡¨"))
+  (@::help '("Éú³ÉÉè±¸±í"))
   (setq hequips (pickset:to-list (ssget '((0  . "TCH_DBHEQUIPMENT")))))
   (setq hvac-jfsqs
 	(vl-remove-if-not '(lambda(x)
 			    (equal (vlax-get-property (e2o x) 'hvac_s5)
-			     "é‡‡æš–åˆ†é›†æ°´å™¨"))
+			     "²ÉÅ¯·Ö¼¯Ë®Æ÷"))
 			  hequips))
-  (@:prompt (strcat "é€‰ä¸­"(itoa(length hvac-jfsqs))"ä¸ªé‡‡æš–åˆ†é›†æ°´å™¨"))
+  (@:prompt (strcat "Ñ¡ÖĞ"(itoa(length hvac-jfsqs))"¸ö²ÉÅ¯·Ö¼¯Ë®Æ÷"))
   (setq i 0)
   (if (setq bom
 	(stat:stat
 	 (mapcar '(lambda(x / box lens)
 		   (setq box (entity:getbox x 100))
-		   (setq pipes (pickset:to-list(ssget "c" (car box)(cadr box)'((0 . "lwpolyline")(8 . "*åœ°æš–*")))))
+		   (setq pipes (pickset:to-list(ssget "c" (car box)(cadr box)'((0 . "lwpolyline")(8 . "*µØÅ¯*")))))
 		   (setq lens (mapcar '(lambda(x)(* 0.001(curve:length  x))) pipes))
 		   (strcat "FPQ-" (itoa (length lens)))
 		   )
@@ -52,15 +52,15 @@
 	(setq tbl 
 	      (table:make
 	       '(0 0 0)
-	       "ä¸»è¦è®¾å¤‡è¡¨"
-	       '("ç¼–å·""åç§°""è§„æ ¼å‹å·""å•ä½""æ•°é‡""å¤‡æ³¨")
+	       "Ö÷ÒªÉè±¸±í"
+	       '("±àºÅ""Ãû³Æ""¹æ¸ñĞÍºÅ""µ¥Î»""ÊıÁ¿""±¸×¢")
 	       (mapcar 'list
 		       '(1 2 3 4 5)
-		       '("åˆ†ã€é›†æ°´å™¨""åˆ†ã€é›†æ°´å™¨""åˆ†ã€é›†æ°´å™¨""åˆ†ã€é›†æ°´å™¨""åˆ†ã€é›†æ°´å™¨")
+		       '("·Ö¡¢¼¯Ë®Æ÷""·Ö¡¢¼¯Ë®Æ÷""·Ö¡¢¼¯Ë®Æ÷""·Ö¡¢¼¯Ë®Æ÷""·Ö¡¢¼¯Ë®Æ÷")
 		       (mapcar 'car bom)
-		       '("ä¸ª""ä¸ª""ä¸ª""ä¸ª""ä¸ª")
+		       '("¸ö""¸ö""¸ö""¸ö""¸ö")
 		       (mapcar 'cdr bom)
-		 '("é“œåˆ¶""é“œåˆ¶""é“œåˆ¶""é“œåˆ¶""é“œåˆ¶""é“œåˆ¶"))))
+		 '("Í­ÖÆ""Í­ÖÆ""Í­ÖÆ""Í­ÖÆ""Í­ÖÆ""Í­ÖÆ"))))
 	(ui:dyndraw tbl '(0 0 0)))))
   
     

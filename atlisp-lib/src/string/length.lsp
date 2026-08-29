@@ -1,6 +1,6 @@
 (defun string:length (str)
-  "å­—ç¬¦ä¸²é•¿åº¦ï¼Œä¸€ä¸ªæ±‰å­—å 1ä½ã€‚"
+  "×Ö·û´®³¤¶È£¬Ò»¸öºº×ÖÕ¼1Î»¡£"
   "int"
-  "(string:length \"ä¸­å›½a\")
+  "(string:length \"ÖÐ¹úa\")
   => 3"
   (length (string:s2l-ansi str)))

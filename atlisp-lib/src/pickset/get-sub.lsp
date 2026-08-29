@@ -1,6 +1,6 @@
 (defun pickset:get-sub (ss filter / stack-logic state-compare ss-mid to-filter compares)
-  "ä»é€‰æ‹©é›†æˆ–å›¾å…ƒè¡¨ä¸­æŒ‰ filter è§„åˆ™è¿‡æ»¤. å½“å‰ç‰ˆæœ¬ä¸æ”¯æŒ XOR å’Œ é€»è¾‘åµŒå¥—ã€‚"
-  "è¿‡æ»¤åçš„å›¾å…ƒè¡¨"
+  "´ÓÑ¡Ôñ¼¯»òÍ¼Ôª±íÖĞ°´ filter ¹æÔò¹ıÂË. µ±Ç°°æ±¾²»Ö§³Ö XOR ºÍ Âß¼­Ç¶Ì×¡£"
+  "¹ıÂËºóµÄÍ¼Ôª±í"
   "(pickset:get-sub ss '((-4 . \"<OR\")(1 . \"1*\")(-4 . \">\")(1 . \"7\")(-4 . \"<\")(1 . \"4\")(-4 . \"OR>\")))"
   (if (= (quote pickset)
       (type ss))

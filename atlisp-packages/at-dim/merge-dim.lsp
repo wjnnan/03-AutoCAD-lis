@@ -3,9 +3,9 @@
         xl (entget (entity:getdxf (tblsearch "block" (entity:getdxf x 2)) -2))
         A  (angle (entity:getdxf xl 10) (entity:getdxf xl 11)))
   (cond 
-    ((equal (abs (sin A)) 1 1e-6) ;;æ°´å¹³
+    ((equal (abs (sin A)) 1 1e-6) ;;Ë®Æ½
      (list (cadr xy) (sin A)))
-    ((equal (sin A) 0 1e-6) ;;åž‚ç›´
+    ((equal (sin A) 0 1e-6) ;;´¹Ö±
      (list (car xy) (sin A)))
     (t
      (setq B  (+ A (* 0.5 pi))
@@ -31,8 +31,8 @@
      (setq Lt (vl-sort LT (function (lambda (e1 e2) (< (cadr e1) (cadr e2)))))))))
 
 (defun @dim:merge-dim (/ ss ic xic aa bb n ent1) 
-  (@:help "åˆå¹¶å¤šä¸ªè¿žç»­çš„æ ‡æ³¨ä¸ºä¸€ä¸ª")
-  (@:prompt "è¯·é€‰æ‹©éœ€è¦åˆå¹¶çš„è¿žç»­çš„æ ‡æ³¨")
+  (@:help "ºÏ²¢¶à¸öÁ¬ÐøµÄ±ê×¢ÎªÒ»¸ö")
+  (@:prompt "ÇëÑ¡ÔñÐèÒªºÏ²¢µÄÁ¬ÐøµÄ±ê×¢")
   (setq ss   (ssget '((0 . "DIMENSION")))
         sumn (sslength ss)
         n    0
@@ -40,7 +40,7 @@
         aa   '())
   (repeat sumn 
     (setq xss (cons (ssname ss n) xss)
-          n   (1+ n))) ;;é€‰æ‹©é›†æ”¹è¡¨
+          n   (1+ n))) ;;Ñ¡Ôñ¼¯¸Ä±í
   (while (car xss) 
     (setq bb  '()
           bb  (cons (car xss) bb)

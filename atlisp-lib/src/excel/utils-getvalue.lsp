@@ -1,6 +1,6 @@
 (defun excel:utils-getvalue (var)
-  "璇存槑:宸ュ叿鍑芥暟锛岃幏鍙栧彉浣撶殑鍊糪n鍙傛暟:var:鍙樹綋"
-  "鍊煎垪琛紝鍏朵腑鏁板瓧鍏ㄩ儴杞崲涓哄瓧绗︿覆"
+  "说明:工具函数，获取变体的值\n参数:var:变体"
+  "值列表，其中数字全部转换为字符串"
   "(excel:Utils-GetValue obj)"
   (cond ((= (quote list)
         (type var))

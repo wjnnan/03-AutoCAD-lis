@@ -1,5 +1,5 @@
 (defun word:quit (ax-word saveyn)
-  "閫�鍑篧ord\n鍙傛暟:ax-word:鎵撳紑鐨剋ord瀵硅薄\n鍙傛暟:SaveYN:鏄惁淇濆瓨锛宼涓轰繚瀛橈紝nil涓轰笉淇濆瓨"
+  "退出Word\n参数:ax-word:打开的word对象\n参数:SaveYN:是否保存，t为保存，nil为不保存"
   (if (> (vlax-get-property (vlax-get-property ax-word 'documents) 'count)
      0)
       (if saveyn (vlax-invoke (vlax-get-property ax-word "ActiveDocument")

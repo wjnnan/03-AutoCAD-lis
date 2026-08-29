@@ -1,28 +1,28 @@
 (defun block:get-clip-boundary (blkref / ent-sf boundary-in-blk mt ms mr)
-  "å–å‰ªè£å—å‚ç…§çš„è¾¹ç•Œçº¿ç‚¹WCSåæ ‡"
+  "È¡¼ô²Ã¿é²ÎÕÕµÄ±ß½çÏßµãWCS×ø±ê"
   "list"
   "(block:get-clip-boundary (car(ensel)))"
-  ;; ent-sf ä¸ºå‰ªè£è¾¹ç•Œçº¿å›¾å…ƒ
+  ;; ent-sf Îª¼ô²Ã±ß½çÏßÍ¼Ôª
   (if (setq ent-sf (entity:getdxf (entity:getdxf (entity:getdxf blkref 360) 360)360))
       (progn
-	(setq matrixs (list:split (entity:getdxf ent-sf 40)  12)) ;; å–WCSåˆ°OCS(å—å†…)åæ ‡å˜æ¢çŸ©é˜µ
-	;; å–è¾¹ç•Œé¡¶ç‚¹åæ ‡
+	(setq matrixs (list:split (entity:getdxf ent-sf 40)  12)) ;; È¡WCSµ½OCS(¿éÄÚ)×ø±ê±ä»»¾ØÕó
+	;; È¡±ß½ç¶¥µã×ø±ê
 	(setq pts (entity:getdxf ent-sf 10))
-	;; å¤„ç†çŸ©å½¢ä¸¤ç‚¹å˜å››ç‚¹
+	;; ´¦Àí¾ØĞÎÁ½µã±äËÄµã
 	(if (= 2 (length pts))
 	    (setq pts  (apply 'point:rec-2pt->4pt pts)))
-	;; è¿›è¡Œ WCSåˆ°OCS(å—å†…)åæ ‡å˜æ¢ï¼Œå¾—åˆ°è¾¹ç•Œé¡¶ç‚¹åœ¨å—å†…çš„åæ ‡ã€‚
+	;; ½øĞĞ WCSµ½OCS(¿éÄÚ)×ø±ê±ä»»£¬µÃµ½±ß½ç¶¥µãÔÚ¿éÄÚµÄ×ø±ê¡£
 	(setq boundary-in-blk
 	      (mapcar'(lambda(x)(matrix:mxp (list:split (car matrixs) 4) x)) pts))
-	;; æ„é€ å—å‚ç…§çš„å¹³ç§»å˜æ¢çŸ©é˜µ
+	;; ¹¹Ôì¿é²ÎÕÕµÄÆ½ÒÆ±ä»»¾ØÕó
 	(setq mt (apply 'matrix:translation (entity:getdxf blkref 10)))
-	;; æ„é€ å—å‚ç…§çš„ç¼©æ”¾å˜æ¢çŸ©é˜µ
+	;; ¹¹Ôì¿é²ÎÕÕµÄËõ·Å±ä»»¾ØÕó
 	(setq ms (matrix:scale (entity:getdxf  blkref 41)
 			       (entity:getdxf  blkref 42)
 			       (entity:getdxf  blkref 43)))
-	;; æ„é€ å—å‚ç…§çš„æ—‹è½¬å˜æ¢çŸ©é˜µ
+	;; ¹¹Ôì¿é²ÎÕÕµÄĞı×ª±ä»»¾ØÕó
 	(setq mr (matrix:rotation-z (- (*  2 pi)(entity:getdxf blkref 50))))
-	;; OCSåˆ°å—å‚ç…§çš„WCSåæ ‡å˜æ¢
+	;; OCSµ½¿é²ÎÕÕµÄWCS×ø±ê±ä»»
 	(mapcar '(lambda(x)
 		  (matrix:transform
 		   mt ms mr x))

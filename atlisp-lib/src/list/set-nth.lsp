@@ -1,5 +1,5 @@
 (defun list:set-nth (value n lst)
-    "鏇存柊lst琛ㄧ殑绗琻涓厓绱犱负value"
+    "更新lst表的第n个元素为value"
     (if (= n 0)
         (cons value (cdr lst))
         (cons (car lst)

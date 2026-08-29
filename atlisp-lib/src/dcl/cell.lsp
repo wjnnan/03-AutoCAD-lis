@@ -1,15 +1,15 @@
 (defun dcl:cell (key rows columns show-line-number? show-column-number? show-scrollbar? header-title? / tbl-widths *error*)
-  "åˆ›å»º DCL å¯ç¼–è¾‘è¡¨æ ¼.\nå‚æ•°: 1. key: æ ‡è¯†\n      2. rows:æ˜¾ç¤ºè¡Œæ•°ï¼Œ\n      3. columns æ˜¾ç¤ºåˆ—æ•°(ä¸å¤§äº26), \n      4. show-line-number? : æ˜¯å¦æ˜¾ç¤ºè¡Œå·ï¼Œ \n      5. show-column-number?  : æ˜¯å¦æ˜¾ç¤ºåˆ—å·A~Zï¼Œ\n      6. show-scrollbar? : æ˜¯å¦æ˜¾ç¤ºç«–å‘æ»šåŠ¨æ¡. \n      7. fixed-title? ,åœ¨ç¬¬ä¸€è¡Œå›ºå®šæ˜¾ç¤ºæ ‡é¢˜ã€‚\n\ntile-key: scrollbar header1 header2 headern, A1 B1 ... Z1 , A2 B2 ... Z2 , A99 B99 ... Z99 ......\nModeléƒ¨: tbl-widths: åˆ—å®½è¡¨;cell-data åˆ—è¡¨æ•°æ®;\nControléƒ¨: (cb-scrollbar)"
-  "DCLæ ¼å¼å­—ç¬¦ä¸²"
+  "´´½¨ DCL ¿É±à¼­±í¸ñ.\n²ÎÊı: 1. key: ±êÊ¶\n      2. rows:ÏÔÊ¾ĞĞÊı£¬\n      3. columns ÏÔÊ¾ÁĞÊı(²»´óÓÚ26), \n      4. show-line-number? : ÊÇ·ñÏÔÊ¾ĞĞºÅ£¬ \n      5. show-column-number?  : ÊÇ·ñÏÔÊ¾ÁĞºÅA~Z£¬\n      6. show-scrollbar? : ÊÇ·ñÏÔÊ¾ÊúÏò¹ö¶¯Ìõ. \n      7. fixed-title? ,ÔÚµÚÒ»ĞĞ¹Ì¶¨ÏÔÊ¾±êÌâ¡£\n\ntile-key: scrollbar header1 header2 headern, A1 B1 ... Z1 , A2 B2 ... Z2 , A99 B99 ... Z99 ......\nModel²¿: tbl-widths: ÁĞ¿í±í;cell-data ÁĞ±íÊı¾İ;\nControl²¿: (cb-scrollbar)"
+  "DCL¸ñÊ½×Ö·û´®"
   "(dcl:cell \"cell1\"
     10 8 t t t t)"
   (defun *error* (msg)
     (if (/= (quote file)
         (type dcl-fp))
-      (alert "è¯·å…ˆè¿è¡Œ (dcl:dialog  ...)"))
+      (alert "ÇëÏÈÔËĞĞ (dcl:dialog  ...)"))
     (@:*error* msg))
   (defun dcl:get-celldata (key /)
-    "è¿”å›cell è¡¨æ ¼çš„ç»“æœï¼Œä¼šå‚ç…§åŸå§‹è¡¨è¿›è¡Œæ•°æ®è½¬æ¢ã€‚"
+    "·µ»Øcell ±í¸ñµÄ½á¹û£¬»á²ÎÕÕÔ­Ê¼±í½øĞĞÊı¾İ×ª»»¡£"
     ""
     ""
     (set (read (strcat key "-data"))
@@ -22,7 +22,7 @@
         (dcl:save-celldata key)
         lst-cellraw)))
   (defun dcl:save-celldata (key / lst-dcl per-page% curr-page% tmp-data% tmp-data-pre tmp-data-last)
-    "ä¿å­˜ cell è¡¨çš„ç»“æœåˆ°ä¸´æ—¶è¡¨ *key*tmp-data ä¸­ã€‚æœªè¿›è¡Œç±»å‹è½¬æ¢ï¼ŒæŸ¥çœ‹è¿‡çš„å‡ä¸ºå­—ç¬¦ä¸²ç±»å‹ã€‚"
+    "±£´æ cell ±íµÄ½á¹ûµ½ÁÙÊ±±í *key*tmp-data ÖĞ¡£Î´½øĞĞÀàĞÍ×ª»»£¬²é¿´¹ıµÄ¾ùÎª×Ö·û´®ÀàĞÍ¡£"
     ""
     ""
     (setq per-page% (eval (read (strcat key "per-page")))
@@ -131,7 +131,7 @@
   (set (read (strcat "cb-"
         key "scrollbar"))
     (lambda (key)
-      "æ»šåŠ¨æ¡äº‹ä»¶çš„å›è°ƒå‡½æ•°"
+      "¹ö¶¯ÌõÊÂ¼şµÄ»Øµ÷º¯Êı"
       (dcl:save-celldata key)
       (set (read (strcat key "curr-page"))
         (- (1- (eval (read (strcat key "total-page"))))

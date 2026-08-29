@@ -1,5 +1,5 @@
 (defun @dim:sum-dim(/ total dims)
-  "选择要求和的尺寸"
+  "ѡ��Ҫ��͵ĳߴ�"
   (setq dims (pickset:to-list(ssget '(( 0 . "dimension")))))
   ;; Measurement
 
@@ -8,7 +8,7 @@
 	 (mapcar (function (lambda(x)
 			   (vla-get-measurement (e2o x))))
 		 dims)))
-  (princ (strcat "所选尺寸值的和:"
+  (princ (strcat "��ѡ�ߴ�ֵ�ĺ�:"
 		 (rtos total 2 3)))
   (princ))
   

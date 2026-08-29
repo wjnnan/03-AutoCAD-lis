@@ -1,5 +1,5 @@
 (defun curve:3pt2o(pt1 pt2 pt3 / ptm1 ptm2)
-  "ä¸‰ç‚¹æ±‚åœ†å¿ƒï¼Œä»»æ„ä¸¤ç‚¹çš„å‚çº¿çš„äº¤ç‚¹å³åœ†å¿ƒã€‚"
+  "ÈıµãÇóÔ²ĞÄ£¬ÈÎÒâÁ½µãµÄ´¹ÏßµÄ½»µã¼´Ô²ĞÄ¡£"
   "number"
   "(curve:3pt2o (getpoint)(getpoint)(getpoint))"
   (inters

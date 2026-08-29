@@ -1,5 +1,5 @@
 (defun-q ini:get (lst-ini node attr )
-  "å– ini çš„æŸé¡¹çš„å€¼ã€‚lst-ini iniæ–‡ä»¶çš„è§£æç»“æœè¡¨, node èŠ‚ ï¼Œattr å±æ€§é¡¹"
+  "È¡ ini µÄÄ³ÏîµÄÖµ¡£lst-ini iniÎÄ¼şµÄ½âÎö½á¹û±í, node ½Ú £¬attr ÊôĞÔÏî"
   "String"
   (setq node (strcat "["(vl-string-trim "[] " node)"]"))
   (cdr (assoc attr (cdr (assoc node lst-ini))))

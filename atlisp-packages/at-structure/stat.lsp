@@ -1,7 +1,7 @@
-;; ç»Ÿè®¡æ¢æˆªé¢
-(@:add-menu "ç»“æ„" "ç»Ÿè®¡æ¢æˆªé¢" "(at-structure:stat-beam-size)")
+;; Í³¼ÆÁº½ØÃæ
+(@:add-menu "½á¹¹" "Í³¼ÆÁº½ØÃæ" "(at-structure:stat-beam-size)")
 (defun at-structure:stat-beam-size(/ txts res)
-  (@:help '("é€‰æ‹©æ¢å¹³æ³•æ–‡å­—ï¼Œç»Ÿè®¡æ¢æˆªé¢"))
+  (@:help '("Ñ¡ÔñÁºÆ½·¨ÎÄ×Ö£¬Í³¼ÆÁº½ØÃæ"))
   (setq txts (pickset:to-list (ssget (list '(0 . "*text")
 					   (cons 8 (@:get-config
 						    '@structure:layer-beam))
@@ -17,9 +17,9 @@
 				    txts))))
 	 '<))
   (setq n 0)
-  (table:make (getpoint (@:prompt "è¯·ç»™å‡ºç»˜åˆ¶ç‚¹:"))
-	      "æ¢æˆªé¢ç»Ÿè®¡è¡¨"
-	      '("åºå·""æ¢æˆªé¢å°ºå¯¸")
+  (table:make (getpoint (@:prompt "Çë¸ø³ö»æÖÆµã:"))
+	      "Áº½ØÃæÍ³¼Æ±í"
+	      '("ĞòºÅ""Áº½ØÃæ³ß´ç")
 	      (mapcar '(lambda(x)
 			(list
 			 (setq n (1+ n))

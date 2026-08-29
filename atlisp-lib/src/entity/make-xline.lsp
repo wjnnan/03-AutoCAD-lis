@@ -1,5 +1,5 @@
 (defun entity:make-xline (pt-base unit-vector)
-  "ä¸¤ç‚¹æ„é€ çº¿ã€‚pt-base åŸºç‚¹ï¼Œunit-vector ç©ºé—´å•ä½çŸ¢é‡ï¼Œå½“ä¸ºä¸€ä¸ªæ•°å€¼æ—¶ï¼Œè¡¨ç¤ºä¸ºå¼§åº¦ã€‚"
+  "Á½µã¹¹ÔìÏß¡£pt-base »ùµã£¬unit-vector ¿Õ¼äµ¥Î»Ê¸Á¿£¬µ±ÎªÒ»¸öÊıÖµÊ±£¬±íÊ¾Îª»¡¶È¡£"
   ""
   ""
   (if (numberp unit-vector)

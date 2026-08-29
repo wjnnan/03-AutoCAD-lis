@@ -1,5 +1,5 @@
 (defun curve:circle2pts (ent-circle int / pt-center r pts bulge convexity ent i)
-  "æ±‚åœ†ä¸Š int ä¸ªå‡åˆ†çš„ç‚¹ã€‚"
+  "ÇóÔ²ÉÏ int ¸ö¾ù·ÖµÄµã¡£"
   "list"
   (setq int (fix int))
   (if (< (fix int)

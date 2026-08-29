@@ -1,18 +1,18 @@
-(@:define-config '@curve:gap 100 "æ’çº¿é—´è·")
-(@:define-config '@curve:pin-length 200 "å¼•è„šé•¿åº¦ï¼Œç‰©ä½“å¤–ä¼¸çš„ç›´çº¿é•¿åº¦")
-(@:define-config '@curve:pin-width 50 "å¼•çº¿å®½åº¦ï¼Œå¤šæ®µçº¿çš„å®½åº¦")
+(@:define-config '@curve:gap 100 "ÅÅÏß¼ä¾à")
+(@:define-config '@curve:pin-length 200 "Òı½Å³¤¶È£¬ÎïÌåÍâÉìµÄÖ±Ïß³¤¶È")
+(@:define-config '@curve:pin-width 50 "ÒıÏß¿í¶È£¬¶à¶ÎÏßµÄ¿í¶È")
 (defun @curve:link-obj (/ gap)
-  (@::prompt  '("ç”¨æ°´å¹³åŠå‚ç›´è·¯å¾„çº¿è¿æ¥åŸç‰©ä½“åˆ°ç›®æ ‡ç‰©ä½“ã€‚å½“å‰åªæ”¯æŒ1å¯¹å¤šçš„å…³ç³»"))
+  (@::prompt  '("ÓÃË®Æ½¼°´¹Ö±Â·¾¶ÏßÁ¬½ÓÔ­ÎïÌåµ½Ä¿±êÎïÌå¡£µ±Ç°Ö»Ö§³Ö1¶Ô¶àµÄ¹ØÏµ"))
   (setq gap (@:get-config '@curve:gap))
 
-  (@:prompt "é€‰æ‹©æºç‰©ä½“:")
+  (@:prompt "Ñ¡ÔñÔ´ÎïÌå:")
   (setq ss-src (ssget))
   (setq box-src (pickset:getbox ss-src 0))
   (setq obj-src (pickset:sort-by-box
 		 ss-src
 		 (if (< (apply 'angle box-src) (* 0.25 pi)) "xy" "yx")
 		 0))
-  (@:prompt "é€‰æ‹©ç›®æ ‡ç‰©ä½“:")
+  (@:prompt "Ñ¡ÔñÄ¿±êÎïÌå:")
   (setq ss-target (ssget))
   (setq box-target (pickset:getbox ss-target 0))
   (setq obj-target (pickset:sort-by-box
@@ -20,7 +20,7 @@
 		    (if (< (apply 'angle box-target) (* 0.25 pi)) "xy" "yx")
 		    0))
 
-  ;;è®¡ç®—ä¸­å¿ƒç‚¹
+  ;;¼ÆËãÖĞĞÄµã
   (cond
    ((= (length obj-src) 1)
     (setq pt-center
@@ -69,7 +69,7 @@
 	   (list
 	    (point:centroid box-src)(point:centroid box-target))))
     ))
-  ;; å„ä½“ä¸ä¸­å¿ƒç‚¹çš„ä½ç½®å…³ç³»
+  ;; ¸÷ÌåÓëÖĞĞÄµãµÄÎ»ÖÃ¹ØÏµ
   (setq n-less
 	(length
 	 (vl-remove nil
@@ -120,7 +120,7 @@
 		     (-(car startpt)
 		       (car (car inbox))))))))
     (setq pts (cons pt-box pts))
-    ;; è¾…åŠ©å‚æ•°
+    ;; ¸¨Öú²ÎÊı
     (setq sign
 	  (if (< (apply 'angle inbox) (* 0.25 pi))
 	      (if (< (car startpt) (car pt-center))
@@ -138,7 +138,7 @@
 	    (if (member obj obj-target)
 		(vl-position obj obj-target))))
 
-    ;; å¼•è„šç‚¹æˆ–å‡ºå…¥å£ç«¯ç‚¹;; ç‰©ä½“ä¸ºåŒæ•°æ—¶
+    ;; Òı½Åµã»ò³öÈë¿Ú¶Ëµã;; ÎïÌåÎªË«ÊıÊ±
     (setq pts (cons
 	       (polar
 		pt-box
@@ -151,7 +151,7 @@
 			   (- order n-less)))
 		   ))
 	       pts))
-    ;; åˆ°é›†æŸæ’çš„ç‚¹
+    ;; µ½¼¯ÊøÅÅµÄµã
     (setq pts (cons
 	       (if (< (apply 'angle inbox) (* 0.25 pi))
 		   (list
@@ -173,7 +173,7 @@
 		      )
 		    0))
 	       pts))
-    ;; åˆ°ä¸­å¿ƒä½ç½®çš„ç‚¹
+    ;; µ½ÖĞĞÄÎ»ÖÃµÄµã
     (setq pts (cons
 	       (if (< (apply 'angle inbox) (* 0.25 pi))
 		   (list

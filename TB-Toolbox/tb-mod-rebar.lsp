@@ -1,75 +1,78 @@
-;;; tb-mod-rebar.lsp â€” é’¢ç­‹ç»˜åˆ¶å‘½ä»¤æ¨¡å—
-;;; ç»„åˆ rebar:* entity:* point:* sel:* lay:* txt:* åº“å‡½æ•°
-;;; æä¾›ï¼šç”»é’¢ç­‹ã€ç”»ç®ç­‹ã€åŠ å¼¯é’©ã€åˆ å¼¯é’©ã€çº¿å˜é’¢ç­‹ã€é’¢ç­‹æ ‡æ³¨
+;;; tb-mod-rebar.lsp ¡ª ¸Ö½î»æÖÆÃüÁîÄ£¿é
+;;; ×éºÏ rebar:* entity:* point:* sel:* lay:* txt:* ¿âº¯Êı
+;;; Ìá¹©£º»­¸Ö½î¡¢»­¹¿½î¡¢¼ÓÍä¹³¡¢É¾Íä¹³¡¢Ïß±ä¸Ö½î¡¢¸Ö½î±ê×¢
 
 ;; ============================================================================
-;; c:RB â€” ç”»ä»»æ„é’¢ç­‹
+;; c:RB ¡ª »­ÈÎÒâ¸Ö½î
 ;; ============================================================================
 
 (defun c:RB (/ d grade hs he hdir pt pts width layer)
-  "ç”»ä»»æ„é’¢ç­‹ï¼ˆç‚¹å–è·¯å¾„ï¼Œè‡ªåŠ¨åŠ å¼¯é’©ï¼‰ã€‚"
-  ;; å‚æ•°è¾“å…¥
-  (setq d     (safe:get-real "é’¢ç­‹ç›´å¾„(mm)" (sys:get '*SYS:REBAR-DIAMETER*))
-        grade (safe:get-int  "é’¢ç­‹ç­‰çº§(1=HPB300 2=HRB335 3=HRB400)"
+  (uc:guard-begin '())
+  "»­ÈÎÒâ¸Ö½î£¨µãÈ¡Â·¾¶£¬×Ô¶¯¼ÓÍä¹³£©¡£"
+  ;; ²ÎÊıÊäÈë
+  (setq d     (safe:get-real "¸Ö½îÖ±¾¶(mm)" (sys:get '*SYS:REBAR-DIAMETER*))
+        grade (safe:get-int  "¸Ö½îµÈ¼¶(1=HPB300 2=HRB335 3=HRB400)"
                 (sys:get '*SYS:REBAR-GRADE*)))
   (initget "0 1 2 3")
-  (setq hs (getint (strcat "\nèµ·å§‹å¼¯é’© [0æ— /1åœ†é’©180Â°/2æ–œé’©135Â°/3ç›´é’©90Â°] <"
+  (setq hs (getint (strcat "\nÆğÊ¼Íä¹³ [0ÎŞ/1Ô²¹³180¡ã/2Ğ±¹³135¡ã/3Ö±¹³90¡ã] <"
                            (itoa (sys:get '*SYS:REBAR-HOOK*)) ">: ")))
   (if (not hs) (setq hs (sys:get '*SYS:REBAR-HOOK*)))
   (initget "0 1 2 3")
-  (setq he (getint (strcat "\næœ«ç«¯å¼¯é’© [0æ— /1åœ†é’©180Â°/2æ–œé’©135Â°/3ç›´é’©90Â°] <"
+  (setq he (getint (strcat "\nÄ©¶ËÍä¹³ [0ÎŞ/1Ô²¹³180¡ã/2Ğ±¹³135¡ã/3Ö±¹³90¡ã] <"
                            (itoa (sys:get '*SYS:REBAR-HOOK*)) ">: ")))
   (if (not he) (setq he (sys:get '*SYS:REBAR-HOOK*)))
   (initget "L R")
-  (setq hdir-str (getkword "\nå¼¯é’©æ–¹å‘ [Lå·¦/Rå³] <L>: "))
+  (setq hdir-str (getkword "\nÍä¹³·½Ïò [L×ó/RÓÒ] <L>: "))
   (setq hdir (if (or (not hdir-str) (= hdir-str "L")) 1 -1))
 
-  ;; ä¿å­˜ä¸ºé»˜è®¤å€¼
+  ;; ±£´æÎªÄ¬ÈÏÖµ
   (sys:set '*SYS:REBAR-DIAMETER* d)
   (sys:set '*SYS:REBAR-GRADE* grade)
   (sys:set '*SYS:REBAR-HOOK* (max hs he))
 
-  ;; å–ç‚¹
+  ;; È¡µã
   (setq width (* d (sys:get '*SYS:DWG-SCALE*) 0.01)
         layer (sys:get '*SYS:REBAR-LAYER*))
-  (princ "\nå–é’¢ç­‹è·¯å¾„ç‚¹ï¼ˆå›è½¦ç»“æŸï¼‰:")
-  (setq pt (getpoint "\nç¬¬1ç‚¹: "))
+  (princ "\nÈ¡¸Ö½îÂ·¾¶µã£¨»Ø³µ½áÊø£©:")
+  (setq pt (getpoint "\nµÚ1µã: "))
   (while pt
     (setq pts (cons pt pts))
-    ;; é¢„è§ˆ
+    ;; Ô¤ÀÀ
     (if (> (length pts) 1)
       (grdraw (cadr pts) (car pts) 1 1))
-    (setq pt (getpoint (if pt pt '(0 0 0)) "\nä¸‹ä¸€ç‚¹ï¼ˆå›è½¦ç»“æŸï¼‰: ")))
+    (setq pt (getpoint (if pt pt '(0 0 0)) "\nÏÂÒ»µã£¨»Ø³µ½áÊø£©: ")))
   (setq pts (reverse pts))
 
   (if (>= (length pts) 2)
     (progn
       (rebar:make-bar pts hs he d grade hdir width layer)
-      (princ (strcat "\né’¢ç­‹å·²ç»˜åˆ¶ã€‚D=" (rtos d 2 0) " ç­‰çº§=" (itoa grade)
-                     " å¼¯é’©: å§‹=" (nth hs '("æ— " "åœ†" "æ–œ" "ç›´"))
-                     " æœ«=" (nth he '("æ— " "åœ†" "æ–œ" "ç›´")))))
-    (princ "\nè‡³å°‘éœ€è¦2ä¸ªç‚¹ã€‚"))
-  (princ))
+      (princ (strcat "\n¸Ö½îÒÑ»æÖÆ¡£D=" (rtos d 2 0) " µÈ¼¶=" (itoa grade)
+                     " Íä¹³: Ê¼=" (nth hs '("ÎŞ" "Ô²" "Ğ±" "Ö±"))
+                     " Ä©=" (nth he '("ÎŞ" "Ô²" "Ğ±" "Ö±")))))
+    (princ "\nÖÁÉÙĞèÒª2¸öµã¡£"))
+  (princ)
+  (uc:guard-end))
 
 
 ;; ============================================================================
-;; c:RS â€” ç”»ç®ç­‹
+;; c:RS ¡ª »­¹¿½î
 ;; ============================================================================
 
 (defun c:RS (/ d grade hook-type hdir mode p1 p3 e boundary-pts width layer)
-  "ç”»ç®ç­‹ï¼ˆçŸ©å½¢å¯¹è§’ç‚¹æˆ–é€‰é—­åˆå¤šæ®µçº¿è¾¹ç•Œï¼‰ã€‚"
-  (setq d         (safe:get-real "ç®ç­‹ç›´å¾„(mm)" (sys:get '*SYS:REBAR-DIAMETER*))
-        grade     (safe:get-int  "é’¢ç­‹ç­‰çº§(1/2/3)" (sys:get '*SYS:REBAR-GRADE*)))
+  (uc:guard-begin '())
+  "»­¹¿½î£¨¾ØĞÎ¶Ô½Çµã»òÑ¡±ÕºÏ¶à¶ÎÏß±ß½ç£©¡£"
+  (setq d         (safe:get-real "¹¿½îÖ±¾¶(mm)" (sys:get '*SYS:REBAR-DIAMETER*))
+        grade     (safe:get-int  "¸Ö½îµÈ¼¶(1/2/3)" (sys:get '*SYS:REBAR-GRADE*)))
   (initget "0 1 2 3")
-  (setq hook-type (getint (strcat "\nå¼¯é’©ç±»å‹ [0æ— /1åœ†é’©/2æ–œé’©/3ç›´é’©] <"
+  (setq hook-type (getint (strcat "\nÍä¹³ÀàĞÍ [0ÎŞ/1Ô²¹³/2Ğ±¹³/3Ö±¹³] <"
                                   (itoa (sys:get '*SYS:REBAR-HOOK*)) ">: ")))
   (if (not hook-type) (setq hook-type (sys:get '*SYS:REBAR-HOOK*)))
   (initget "L R")
-  (setq hdir-str (getkword "\nå¼¯é’©æ–¹å‘ [Lå·¦/Rå³] <L>: "))
+  (setq hdir-str (getkword "\nÍä¹³·½Ïò [L×ó/RÓÒ] <L>: "))
   (setq hdir (if (or (not hdir-str) (= hdir-str "L")) 1 -1))
 
   (initget "R P")
-  (setq mode (getkword "\né€‰æ‹©æ–¹å¼ [RçŸ©å½¢å¯¹è§’/Pé€‰å¤šæ®µçº¿è¾¹ç•Œ] <R>: "))
+  (setq mode (getkword "\nÑ¡Ôñ·½Ê½ [R¾ØĞÎ¶Ô½Ç/PÑ¡¶à¶ÎÏß±ß½ç] <R>: "))
   (if (not mode) (setq mode "R"))
 
   (setq width (* d (sys:get '*SYS:DWG-SCALE*) 0.01)
@@ -77,145 +80,157 @@
 
   (cond
     ((= mode "R")
-     (if (and (setq p1 (getpoint "\nç®ç­‹å·¦ä¸‹è§’: "))
-              (setq p3 (getcorner p1 "\nç®ç­‹å³ä¸Šè§’: ")))
+     (if (and (setq p1 (getpoint "\n¹¿½î×óÏÂ½Ç: "))
+              (setq p3 (getcorner p1 "\n¹¿½îÓÒÉÏ½Ç: ")))
        (progn
          (rebar:make-stirrup p1 p3 hook-type d grade hdir width layer)
-         (princ (strcat "\nçŸ©å½¢ç®ç­‹å·²ç»˜åˆ¶ã€‚D=" (rtos d 2 0)
-                        " å¼¯é’©=" (nth hook-type '("æ— " "åœ†é’©" "æ–œé’©" "ç›´é’©")))))))
+         (princ (strcat "\n¾ØĞÎ¹¿½îÒÑ»æÖÆ¡£D=" (rtos d 2 0)
+                        " Íä¹³=" (nth hook-type '("ÎŞ" "Ô²¹³" "Ğ±¹³" "Ö±¹³")))))))
 
     ((= mode "P")
-     (if (setq e (car (entsel "\né€‰æ‹©é—­åˆå¤šæ®µçº¿ä½œä¸ºç®ç­‹è¾¹ç•Œ: ")))
+     (if (setq e (car (entsel "\nÑ¡Ôñ±ÕºÏ¶à¶ÎÏß×÷Îª¹¿½î±ß½ç: ")))
        (if (curve:closed? e)
          (progn
            (setq boundary-pts (curve:vertices e))
            (rebar:make-poly-stirrup boundary-pts hook-type d grade hdir width layer)
-           (princ (strcat "\nå¤šè¾¹å½¢ç®ç­‹å·²ç»˜åˆ¶ã€‚D=" (rtos d 2 0))))
-         (princ "\næ‰€é€‰å¤šæ®µçº¿æœªé—­åˆã€‚")))))
-  (princ))
+           (princ (strcat "\n¶à±ßĞÎ¹¿½îÒÑ»æÖÆ¡£D=" (rtos d 2 0))))
+         (princ "\nËùÑ¡¶à¶ÎÏßÎ´±ÕºÏ¡£")))))
+  (princ)
+  (uc:guard-end))
 
 
 ;; ============================================================================
-;; c:RH â€” æ·»åŠ å¼¯é’©
+;; c:RH ¡ª Ìí¼ÓÍä¹³
 ;; ============================================================================
 
 (defun c:RH (/ e hook-type hdir d grade end-str end)
-  "ä¸ºå·²æœ‰é’¢ç­‹æ·»åŠ æˆ–ä¿®æ”¹å¼¯é’©ã€‚"
-  (if (setq e (car (entsel "\né€‰æ‹©é’¢ç­‹: ")))
+  (uc:guard-begin '())
+  "ÎªÒÑÓĞ¸Ö½îÌí¼Ó»òĞŞ¸ÄÍä¹³¡£"
+  (if (setq e (car (entsel "\nÑ¡Ôñ¸Ö½î: ")))
     (if (rebar:is-rebar? e)
       (progn
         (initget "0 1 2 3")
-        (setq hook-type (getint "\nå¼¯é’©ç±»å‹ [0=åˆ é™¤ 1=åœ†é’© 2=æ–œé’© 3=ç›´é’©] <2>: "))
+        (setq hook-type (getint "\nÍä¹³ÀàĞÍ [0=É¾³ı 1=Ô²¹³ 2=Ğ±¹³ 3=Ö±¹³] <2>: "))
         (if (not hook-type) (setq hook-type 2))
 
         (initget "S E")
-        (setq end-str (getkword "\nåŠ åœ¨å“ªç«¯ [Sèµ·ç‚¹/Eç»ˆç‚¹] <E>: "))
+        (setq end-str (getkword "\n¼ÓÔÚÄÄ¶Ë [SÆğµã/EÖÕµã] <E>: "))
         (setq end (if (or (not end-str) (= end-str "E")) 'end 'start))
 
         (initget "L R")
-        (setq hdir-str (getkword "\nå¼¯é’©æ–¹å‘ [Lå·¦/Rå³] <L>: "))
+        (setq hdir-str (getkword "\nÍä¹³·½Ïò [L×ó/RÓÒ] <L>: "))
         (setq hdir (if (or (not hdir-str) (= hdir-str "L")) 1 -1))
 
-        (setq d (safe:get-real "é’¢ç­‹ç›´å¾„(mm)" (sys:get '*SYS:REBAR-DIAMETER*))
-              grade (safe:get-int "é’¢ç­‹ç­‰çº§(1/2/3)" (sys:get '*SYS:REBAR-GRADE*)))
+        (setq d (safe:get-real "¸Ö½îÖ±¾¶(mm)" (sys:get '*SYS:REBAR-DIAMETER*))
+              grade (safe:get-int "¸Ö½îµÈ¼¶(1/2/3)" (sys:get '*SYS:REBAR-GRADE*)))
 
         (if (= hook-type 0)
-          ;; åˆ é™¤å¼¯é’©
+          ;; É¾³ıÍä¹³
           (if (> (rebar:detect-hook-end e end) 0)
             (progn
               (rebar:remove-hook e end)
-              (princ "\nå¼¯é’©å·²åˆ é™¤ã€‚"))
-            (princ "\nè¯¥ç«¯æ²¡æœ‰å¼¯é’©ã€‚"))
-          ;; æ·»åŠ å¼¯é’©
+              (princ "\nÍä¹³ÒÑÉ¾³ı¡£"))
+            (princ "\n¸Ã¶ËÃ»ÓĞÍä¹³¡£"))
+          ;; Ìí¼ÓÍä¹³
           (progn
             (rebar:add-hook e end hook-type hdir d grade)
-            (princ (strcat "\nå¼¯é’©å·²æ·»åŠ /æ›´æ–°ã€‚ç±»å‹="
-                           (nth hook-type '("" "åœ†é’©" "æ–œé’©" "ç›´é’©")))))))
-      (princ "\næ‰€é€‰å®ä½“ä¸æ˜¯é’¢ç­‹ï¼ˆç¼ºå°‘å¸¸é‡çº¿å®½ï¼‰ã€‚"))
-    (princ "\næœªé€‰æ‹©å®ä½“ã€‚"))
-  (princ))
+            (princ (strcat "\nÍä¹³ÒÑÌí¼Ó/¸üĞÂ¡£ÀàĞÍ="
+                           (nth hook-type '("" "Ô²¹³" "Ğ±¹³" "Ö±¹³")))))))
+      (princ "\nËùÑ¡ÊµÌå²»ÊÇ¸Ö½î£¨È±ÉÙ³£Á¿Ïß¿í£©¡£"))
+    (princ "\nÎ´Ñ¡ÔñÊµÌå¡£"))
+  (princ)
+  (uc:guard-end))
 
 
 ;; ============================================================================
-;; c:RDH â€” åˆ é™¤å¼¯é’©
+;; c:RDH ¡ª É¾³ıÍä¹³
 ;; ============================================================================
 
 (defun c:RDH (/ e end-str end)
-  "åˆ é™¤é’¢ç­‹æŒ‡å®šç«¯çš„å¼¯é’©ã€‚"
-  (if (setq e (car (entsel "\né€‰æ‹©é’¢ç­‹: ")))
+  (uc:guard-begin '())
+  "É¾³ı¸Ö½îÖ¸¶¨¶ËµÄÍä¹³¡£"
+  (if (setq e (car (entsel "\nÑ¡Ôñ¸Ö½î: ")))
     (if (rebar:is-rebar? e)
       (progn
         (initget "S E B")
-        (setq end-str (getkword "\nåˆ é™¤å“ªç«¯ [Sèµ·ç‚¹/Eç»ˆç‚¹/Bä¸¤ç«¯] <B>: "))
+        (setq end-str (getkword "\nÉ¾³ıÄÄ¶Ë [SÆğµã/EÖÕµã/BÁ½¶Ë] <B>: "))
         (if (or (not end-str) (= end-str "B"))
           (progn
             (setq e (rebar:remove-hook e 'start))
             (rebar:remove-hook e 'end)
-            (princ "\nä¸¤ç«¯å¼¯é’©å·²å…¨éƒ¨åˆ é™¤ã€‚"))
+            (princ "\nÁ½¶ËÍä¹³ÒÑÈ«²¿É¾³ı¡£"))
           (progn
             (setq end (if (= end-str "S") 'start 'end))
             (rebar:remove-hook e end)
-            (princ "\nå¼¯é’©å·²åˆ é™¤ã€‚"))))
-      (princ "\næ‰€é€‰å®ä½“ä¸æ˜¯é’¢ç­‹ã€‚"))
-    (princ "\næœªé€‰æ‹©å®ä½“ã€‚"))
-  (princ))
+            (princ "\nÍä¹³ÒÑÉ¾³ı¡£"))))
+      (princ "\nËùÑ¡ÊµÌå²»ÊÇ¸Ö½î¡£"))
+    (princ "\nÎ´Ñ¡ÔñÊµÌå¡£"))
+  (princ)
+  (uc:guard-end))
 
 
 ;; ============================================================================
-;; c:RW â€” æ”¹é’¢ç­‹çº¿å®½
+;; c:RW ¡ª ¸Ä¸Ö½îÏß¿í
 ;; ============================================================================
 
 (defun c:RW (/ ss w)
-  "ä¿®æ”¹æ‰€é€‰é’¢ç­‹çš„å¤šæ®µçº¿å®½ã€‚"
+  (uc:guard-begin '())
+  "ĞŞ¸ÄËùÑ¡¸Ö½îµÄ¶à¶ÎÏß¿í¡£"
   (if (setq ss (ssget '((0 . "LWPOLYLINE"))))
     (progn
-      (setq w (safe:get-real "æ–°çº¿å®½(mm)" 0.5))
+      (setq w (safe:get-real "ĞÂÏß¿í(mm)" 0.5))
       (sel:for-each ss
         '(lambda (e)
            (if (rebar:is-rebar? e)
              (rebar:set-width e w)))))
-    (princ "\næœªé€‰æ‹©é’¢ç­‹ã€‚"))
-  (princ))
+    (princ "\nÎ´Ñ¡Ôñ¸Ö½î¡£"))
+  (princ)
+  (uc:guard-end))
 
 
 ;; ============================================================================
-;; c:RO â€” åç§»é’¢ç­‹
+;; c:RO ¡ª Æ«ÒÆ¸Ö½î
 ;; ============================================================================
 
 (defun c:RO (/ e dist side pt)
-  "åç§»é’¢ç­‹ï¼ˆä¿æŒé’¢ç­‹å±æ€§ï¼‰ã€‚"
-  (if (setq e (car (entsel "\né€‰æ‹©è¦åç§»çš„é’¢ç­‹: ")))
+  (uc:guard-begin '())
+  "Æ«ÒÆ¸Ö½î£¨±£³Ö¸Ö½îÊôĞÔ£©¡£"
+  (if (setq e (car (entsel "\nÑ¡ÔñÒªÆ«ÒÆµÄ¸Ö½î: ")))
     (progn
-      (setq dist (safe:get-real "åç§»è·ç¦»(mm)" 100)
-            pt   (getpoint "\nåç§»æ–¹å‘ç‚¹: "))
+      (setq dist (safe:get-real "Æ«ÒÆ¾àÀë(mm)" 100)
+            pt   (getpoint "\nÆ«ÒÆ·½Ïòµã: "))
       (if pt
         (progn
-          (vl-catch-all-apply (quote (lambda nil (command "_.OFFSET" dist e pt ""))))
-          (princ "\né’¢ç­‹å·²åç§»ã€‚"))
-        (princ "\næœªæŒ‡å®šåç§»æ–¹å‘ã€‚"))))
-  (princ))
+          (if (vl-catch-all-error-p
+                (vl-catch-all-apply (quote (lambda nil (command "_.OFFSET" dist e pt "")))))
+            (princ "\nÆ«ÒÆÊ§°Ü£¬Çë¼ì²é¸Ö½îºÍÆ«ÒÆ¾àÀë¡£")
+            (princ "\n¸Ö½îÒÑÆ«ÒÆ¡£")))
+        (princ "\nÎ´Ö¸¶¨Æ«ÒÆ·½Ïò¡£"))))
+  (princ)
+  (uc:guard-end))
 
 
 ;; ============================================================================
-;; c:RL â€” çº¿å˜é’¢ç­‹
+;; c:RL ¡ª Ïß±ä¸Ö½î
 ;; ============================================================================
 
 (defun c:RL (/ ss d grade hs he hdir width layer pts e ent new-e)
-  "å°† LINE/LWPOLYLINE è½¬æ¢ä¸ºé’¢ç­‹ï¼ˆæ·»åŠ çº¿å®½å’Œå¯é€‰å¼¯é’©ï¼‰ã€‚"
+  (uc:guard-begin '())
+  "½« LINE/LWPOLYLINE ×ª»»Îª¸Ö½î£¨Ìí¼ÓÏß¿íºÍ¿ÉÑ¡Íä¹³£©¡£"
   (if (setq ss (ssget '((0 . "LINE,LWPOLYLINE,POLYLINE"))))
     (progn
-      (setq d     (safe:get-real "é’¢ç­‹ç›´å¾„(mm)" (sys:get '*SYS:REBAR-DIAMETER*))
-            grade (safe:get-int  "é’¢ç­‹ç­‰çº§(1/2/3)" (sys:get '*SYS:REBAR-GRADE*)))
+      (setq d     (safe:get-real "¸Ö½îÖ±¾¶(mm)" (sys:get '*SYS:REBAR-DIAMETER*))
+            grade (safe:get-int  "¸Ö½îµÈ¼¶(1/2/3)" (sys:get '*SYS:REBAR-GRADE*)))
       (initget "0 1 2 3")
-      (setq hs (getint (strcat "\nèµ·å§‹å¼¯é’© [0æ— /1åœ†é’©/2æ–œé’©/3ç›´é’©] <"
+      (setq hs (getint (strcat "\nÆğÊ¼Íä¹³ [0ÎŞ/1Ô²¹³/2Ğ±¹³/3Ö±¹³] <"
                                (itoa (sys:get '*SYS:REBAR-HOOK*)) ">: ")))
       (if (not hs) (setq hs (sys:get '*SYS:REBAR-HOOK*)))
       (initget "0 1 2 3")
-      (setq he (getint (strcat "\næœ«ç«¯å¼¯é’© [0æ— /1åœ†é’©/2æ–œé’©/3ç›´é’©] <"
+      (setq he (getint (strcat "\nÄ©¶ËÍä¹³ [0ÎŞ/1Ô²¹³/2Ğ±¹³/3Ö±¹³] <"
                                (itoa (sys:get '*SYS:REBAR-HOOK*)) ">: ")))
       (if (not he) (setq he (sys:get '*SYS:REBAR-HOOK*)))
       (initget "L R")
-      (setq hdir-str (getkword "\nå¼¯é’©æ–¹å‘ [Lå·¦/Rå³] <L>: "))
+      (setq hdir-str (getkword "\nÍä¹³·½Ïò [L×ó/RÓÒ] <L>: "))
       (setq hdir (if (or (not hdir-str) (= hdir-str "L")) 1 -1))
 
       (setq width (* d (sys:get '*SYS:DWG-SCALE*) 0.01)
@@ -231,30 +246,34 @@
              (t (curve:vertices e))))
            (if (>= (length pts) 2)
              (if (rebar:make-bar pts hs he d grade hdir width layer)
-               (entdel e))))))  ; ä»…åœ¨æ–°é’¢ç­‹åˆ›å»ºæˆåŠŸååˆ é™¤åŸçº¿
-      (princ (strcat "\nå·²è½¬æ¢ " (itoa (sel:count ss)) " æ¡çº¿ä¸ºé’¢ç­‹ã€‚")))
-    (princ "\næœªé€‰æ‹©çº¿æ¡ã€‚"))
-  (princ))
+               (entdel e)))))  ; ½öÔÚĞÂ¸Ö½î´´½¨³É¹¦ºóÉ¾³ıÔ­Ïß
+      (princ (strcat "\nÒÑ×ª»» " (itoa (sel:count ss)) " ÌõÏßÎª¸Ö½î¡£")))
+    (princ "\nÎ´Ñ¡ÔñÏßÌõ¡£"))
+  (princ)
+  (uc:guard-end))
 
 
 ;; ============================================================================
-;; c:RD â€” é’¢ç­‹æ ‡æ³¨
+;; c:RD ¡ª ¸Ö½î±ê×¢
 ;; ============================================================================
 
-(defun c:RD (/ e d pt num-str spacing-str text-h text-str)
-  "é’¢ç­‹æ ‡æ³¨ï¼šåœ¨é’¢ç­‹ä¸Šæ ‡æ³¨ç›´å¾„ã€æ•°é‡ã€é—´è·ã€‚"
-  (if (setq e (car (entsel "\né€‰æ‹©è¦æ ‡æ³¨çš„é’¢ç­‹: ")))
+(defun c:RD (/ e d grade grade-sym pt num-str spacing-str text-h text-str)
+  (uc:guard-begin '())
+  "¸Ö½î±ê×¢£ºÔÚ¸Ö½îÉÏ±ê×¢Ö±¾¶¡¢ÊıÁ¿¡¢¼ä¾à¡£"
+  (if (setq e (car (entsel "\nÑ¡ÔñÒª±ê×¢µÄ¸Ö½î: ")))
     (progn
-      (setq d (safe:get-real "é’¢ç­‹ç›´å¾„(mm)" (sys:get '*SYS:REBAR-DIAMETER*))
-            text-h (* (or (sys:get '*SYS:TEXT-HEIGHT*) 350) (or (sys:get '*SYS:DWG-SCALE*) 100) 0.01))
+      (setq d         (safe:get-real "¸Ö½îÖ±¾¶(mm)" (sys:get '*SYS:REBAR-DIAMETER*))
+            grade     (safe:get-int "¸Ö½îµÈ¼¶(1/2/3)" (sys:get '*SYS:REBAR-GRADE*))
+            grade-sym (nth (1- (if grade grade (sys:get '*SYS:REBAR-GRADE*))) '("%%130" "%%131" "%%132"))
+            text-h    (* (or (sys:get '*SYS:TEXT-HEIGHT*) 350) (or (sys:get '*SYS:DWG-SCALE*) 100) 0.01))
 
-      (setq num-str (getstring (strcat "\né’¢ç­‹æ ¹æ•°ï¼ˆå›è½¦è·³è¿‡ï¼‰: ")))
-      (setq spacing-str (getstring "\né—´è·@ï¼ˆå›è½¦è·³è¿‡ï¼‰: "))
-      (setq pt (getpoint "\næ–‡å­—æ’å…¥ç‚¹: "))
+      (setq num-str (getstring (strcat "\n¸Ö½î¸ùÊı£¨»Ø³µÌø¹ı£©: ")))
+      (setq spacing-str (getstring "\n¼ä¾à@£¨»Ø³µÌø¹ı£©: "))
+      (setq pt (getpoint "\nÎÄ×Ö²åÈëµã: "))
 
-      ;; æ„é€ æ ‡æ³¨æ–‡å­—
+      ;; ¹¹Ôì±ê×¢ÎÄ×Ö
       (setq text-str (strcat
-        (if (and num-str (/= num-str "")) (strcat num-str "%%132") "")
+        (if (and num-str (/= num-str "")) (strcat num-str grade-sym) "")
         (rtos d 2 0)
         (if (and spacing-str (/= spacing-str "")) (strcat "@" spacing-str) "")))
 
@@ -263,53 +282,66 @@
           (entity:make-text text-str pt text-h
             (sys:get '*SYS:TEXT-STYLE*)
             (sys:get '*SYS:REBAR-TEXT-LAYER*))
-          (princ (strcat "\né’¢ç­‹æ ‡æ³¨: " text-str)))))
-    (princ "\næœªé€‰æ‹©å®ä½“ã€‚"))
-  (princ))
+          (princ (strcat "\n¸Ö½î±ê×¢: " text-str)))))
+    (princ "\nÎ´Ñ¡ÔñÊµÌå¡£"))
+  (princ)
+  (uc:guard-end))
 
 
 ;; ============================================================================
-;; c:RCC â€” é’¢ç­‹ç¼–å·
+;; c:RCC ¡ª ¸Ö½î±àºÅ
 ;; ============================================================================
 
-(defun c:RCC (/ ss num count text-h layer)
-  "æ¡†é€‰é’¢ç­‹ï¼ŒæŒ‰é¡ºåºè‡ªåŠ¨ç¼–å·ã€‚"
+(defun c:RCC (/ ss num count text-h layer ents sort-dir)
+  (uc:guard-begin '())
+  "¿òÑ¡¸Ö½î£¬°´¿Õ¼äË³Ğò×Ô¶¯±àºÅ¡£"
   (if (setq ss (ssget '((0 . "LWPOLYLINE"))))
     (progn
-      (setq num    (safe:get-int "èµ·å§‹ç¼–å·" 1)
+      (setq num    (safe:get-int "ÆğÊ¼±àºÅ" 1)
             count  0
             text-h (* (or (sys:get '*SYS:TEXT-HEIGHT*) 350) (or (sys:get '*SYS:DWG-SCALE*) 100) 0.01)
             layer  (sys:get '*SYS:REBAR-TEXT-LAYER*))
-      (lay:make layer 2)  ; é»„è‰²
+      (lay:make layer 2)  ; »ÆÉ«
 
-      (sel:for-each ss
-        '(lambda (e / midpt)
-           (if (rebar:is-rebar? e)
-             (progn
-               (setq midpt (curve:midpt e))
-               (entity:make-text
-                 (strcat (itoa num) "#")
-                 (point:polar midpt (* pi 0.5) (* 0.5 text-h))
-                 text-h (sys:get '*SYS:TEXT-STYLE*) layer)
-               (setq num (1+ num)
-                     count (1+ count))))))
-      (princ (strcat "\nå·²ç¼–å· " (itoa count) " æ ¹é’¢ç­‹ã€‚")))
-    (princ "\næœªé€‰æ‹©é’¢ç­‹ã€‚"))
-  (princ))
+      ;; ÅÅĞò·½Ïò
+      (initget "X Y")
+      (setq sort-dir (getkword "\nÅÅĞò·½Ïò [XË®Æ½/Y´¹Ö±] <X>: "))
+      (if (not sort-dir) (setq sort-dir "X"))
+      ;; °´×ø±êÅÅĞò£¨Ìæ´úÑ¡Ôñ¼¯Ë³Ğò£¬±£Ö¤±àºÅ¿Õ¼äÓĞĞò£©
+      (setq ents
+        (vl-sort (append (sel:to-list ss) nil)
+          (if (= sort-dir "X")
+            '(lambda (a b) (< (car (curve:midpt a)) (car (curve:midpt b))))
+            '(lambda (a b) (> (cadr (curve:midpt a)) (cadr (curve:midpt b)))))))
+      (foreach e ents
+        (if (rebar:is-rebar? e)
+          (progn
+            (setq midpt (curve:midpt e))
+            (entity:make-text
+              (strcat (itoa num) "#")
+              (point:polar midpt (* pi 0.5) (* 0.5 text-h))
+              text-h (sys:get '*SYS:TEXT-STYLE*) layer)
+            (setq num (1+ num)
+                  count (1+ count)))))
+      (princ (strcat "\nÒÑ±àºÅ " (itoa count) " ¸ù¸Ö½î¡£")))
+    (princ "\nÎ´Ñ¡Ôñ¸Ö½î¡£"))
+  (princ)
+  (uc:guard-end))
 
 
 ;; ============================================================================
-;; c:RBR â€” æ¿åº•ç­‹
+;; c:RBR ¡ª °åµ×½î
 ;; ============================================================================
 
-(defun c:RBR (/ p1 p3 d spacing grade pts n-pts width layer x1 y1 x3 y3 y count)
-  "ç»˜åˆ¶æ¿åº•ç­‹åŒºåŸŸã€‚é€‰æ‹©çŸ©å½¢åŒºåŸŸï¼Œè‡ªåŠ¨ç”Ÿæˆåˆ†å¸ƒç­‹ã€‚"
-  (setq d       (safe:get-real "é’¢ç­‹ç›´å¾„(mm)" (sys:get '*SYS:REBAR-DIAMETER*))
-        spacing (max 1 (safe:get-real "é’¢ç­‹é—´è·(mm)" 200))
-        grade   (safe:get-int  "é’¢ç­‹ç­‰çº§(1/2/3)" (sys:get '*SYS:REBAR-GRADE*)))
+(defun c:RBR (/ p1 p3 d spacing grade pts n-pts width layer x1 y1 x3 y3 y x count)
+  (uc:guard-begin '())
+  "»æÖÆ°åµ×½îÇøÓò¡£Ñ¡Ôñ¾ØĞÎÇøÓò£¬×Ô¶¯Éú³É·Ö²¼½î¡£"
+  (setq d       (safe:get-real "¸Ö½îÖ±¾¶(mm)" (sys:get '*SYS:REBAR-DIAMETER*))
+        spacing (max 1 (safe:get-real "¸Ö½î¼ä¾à(mm)" 200))
+        grade   (safe:get-int  "¸Ö½îµÈ¼¶(1/2/3)" (sys:get '*SYS:REBAR-GRADE*)))
 
-  (if (and (setq p1 (getpoint "\næ¿ç­‹åŒºåŸŸå·¦ä¸‹è§’: "))
-           (setq p3 (getcorner p1 "\næ¿ç­‹åŒºåŸŸå³ä¸Šè§’: ")))
+  (if (and (setq p1 (getpoint "\n°å½îÇøÓò×óÏÂ½Ç: "))
+           (setq p3 (getcorner p1 "\n°å½îÇøÓòÓÒÉÏ½Ç: ")))
     (progn
       (setq width  (* d (sys:get '*SYS:DWG-SCALE*) 0.01)
             layer  (sys:get '*SYS:REBAR-LAYER*)
@@ -318,40 +350,50 @@
             y y1
             count 0)
       (lay:make layer 1)
-      ;; æ°´å¹³åº•ç­‹ï¼Œä»ä¸‹åˆ°ä¸Šæ¯éš” spacing ç”»ä¸€æ ¹
-      (while (<= y y3)
+      ;; Ë®Æ½µ×½î£¨X Ïò£©£¬´ÓÏÂµ½ÉÏ
+      (while (and (<= y y3) (< count 5000))
         (rebar:make-bar
           (list (list x1 y 0.0) (list x3 y 0.0))
-          0 0 d grade 1 width layer)  ; æ— å¼¯é’©
+          0 0 d grade 1 width layer)  ; ÎŞÍä¹³
         (setq y (+ y spacing)
               count (1+ count)))
-      (princ (strcat "\næ¿åº•ç­‹å·²ç»˜åˆ¶ã€‚D=" (rtos d 2 0) "@" (rtos spacing 2 0)
-                     " å…± " (itoa count) " æ ¹"))))
-  (princ))
+      ;; ´¹Ö±µ×½î£¨Y Ïò£©£¬´Ó×óµ½ÓÒ£¨°åµ×½îÎªË«ÏòÍøÆ¬£©
+      (setq x x1)
+      (while (and (<= x x3) (< count 10000))
+        (rebar:make-bar
+          (list (list x y1 0.0) (list x y3 0.0))
+          0 0 d grade 1 width layer)  ; ÎŞÍä¹³
+        (setq x (+ x spacing)
+              count (1+ count)))
+      (princ (strcat "\n°åµ×½îÒÑ»æÖÆ¡£D=" (rtos d 2 0) "@" (rtos spacing 2 0)
+                     " ¹² " (itoa count) " ¸ù"))))
+  (princ)
+  (uc:guard-end))
 
 
 ;; ============================================================================
-;; c:RBF â€” æ¿è´Ÿç­‹
+;; c:RBF ¡ª °å¸º½î
 ;; ============================================================================
 
 (defun c:RBF (/ p1 p2 d spacing grade left-len right-len hdir hook-type
                ang width layer count perp-dir p-start p-end dist len base-pt)
-  "ç»˜åˆ¶æ¿æ”¯åº§è´Ÿç­‹ã€‚é€‰æ‹©æ”¯åº§çº¿ï¼Œè¾“å…¥å·¦å³ä¼¸å‡ºé•¿åº¦ã€‚"
-  (setq d         (safe:get-real "é’¢ç­‹ç›´å¾„(mm)" (sys:get '*SYS:REBAR-DIAMETER*))
-        spacing   (max 1 (safe:get-real "é’¢ç­‹é—´è·(mm)" 200))
-        grade     (safe:get-int  "é’¢ç­‹ç­‰çº§(1/2/3)" (sys:get '*SYS:REBAR-GRADE*))
-        left-len  (safe:get-real "å·¦ä¾§ä¼¸å‡ºé•¿åº¦(mm)" 1000)
-        right-len (safe:get-real "å³ä¾§ä¼¸å‡ºé•¿åº¦(mm)" 1000))
+  (uc:guard-begin '())
+  "»æÖÆ°åÖ§×ù¸º½î¡£Ñ¡ÔñÖ§×ùÏß£¬ÊäÈë×óÓÒÉì³ö³¤¶È¡£"
+  (setq d         (safe:get-real "¸Ö½îÖ±¾¶(mm)" (sys:get '*SYS:REBAR-DIAMETER*))
+        spacing   (max 1 (safe:get-real "¸Ö½î¼ä¾à(mm)" 200))
+        grade     (safe:get-int  "¸Ö½îµÈ¼¶(1/2/3)" (sys:get '*SYS:REBAR-GRADE*))
+        left-len  (safe:get-real "×ó²àÉì³ö³¤¶È(mm)" 1000)
+        right-len (safe:get-real "ÓÒ²àÉì³ö³¤¶È(mm)" 1000))
   (initget "0 1 2 3")
-  (setq hook-type (getint (strcat "\nå¼¯é’©ç±»å‹ [0æ— /1åœ†é’©/2æ–œé’©/3ç›´é’©] <"
+  (setq hook-type (getint (strcat "\nÍä¹³ÀàĞÍ [0ÎŞ/1Ô²¹³/2Ğ±¹³/3Ö±¹³] <"
                                   (itoa (sys:get '*SYS:REBAR-HOOK*)) ">: ")))
-  (if (not hook-type) (setq hook-type 3))  ; è´Ÿç­‹é»˜è®¤ç›´é’©
+  (if (not hook-type) (setq hook-type 3))  ; ¸º½îÄ¬ÈÏÖ±¹³
   (initget "L R")
-  (setq hdir-str (getkword "\nå¼¯é’©æ–¹å‘ [Lå·¦/Rå³] <L>: "))
+  (setq hdir-str (getkword "\nÍä¹³·½Ïò [L×ó/RÓÒ] <L>: "))
   (setq hdir (if (or (not hdir-str) (= hdir-str "L")) 1 -1))
 
-  (if (and (setq p1 (getpoint "\næ”¯åº§çº¿èµ·ç‚¹: "))
-           (setq p2 (getpoint p1 "\næ”¯åº§çº¿ç»ˆç‚¹: ")))
+  (if (and (setq p1 (getpoint "\nÖ§×ùÏßÆğµã: "))
+           (setq p2 (getpoint p1 "\nÖ§×ùÏßÖÕµã: ")))
     (progn
       (setq ang    (point:angle p1 p2)
             width  (* d (sys:get '*SYS:DWG-SCALE*) 0.01)
@@ -360,12 +402,12 @@
             count  0)
       (lay:make layer 1)
 
-      ;; æ²¿æ”¯åº§çº¿æ¯éš” spacing æ”¾ä¸€æ ¹è´Ÿç­‹
+      ;; ÑØÖ§×ùÏßÃ¿¸ô spacing ·ÅÒ»¸ù¸º½î
       (setq dist 0.0
             len (point:dist p1 p2))
-      (while (<= dist len)
+      (while (and (<= dist len) (< count 5000))
         (setq base-pt (point:polar p1 ang dist)
-              ;; è´Ÿç­‹ä»å·¦ç«¯åˆ°å³ç«¯
+              ;; ¸º½î´Ó×ó¶Ëµ½ÓÒ¶Ë
               p-start (point:polar base-pt (+ perp-dir pi) left-len)
               p-end   (point:polar base-pt perp-dir right-len))
         (rebar:make-bar
@@ -373,11 +415,12 @@
           hook-type hook-type d grade hdir width layer)
         (setq dist (+ dist spacing)
               count (1+ count)))
-      (princ (strcat "\næ¿è´Ÿç­‹å·²ç»˜åˆ¶ã€‚D=" (rtos d 2 0) "@" (rtos spacing 2 0)
-                     " å·¦=" (rtos left-len 2 0) " å³=" (rtos right-len 2 0)
-                     " å…± " (itoa count) " æ ¹"))))
-  (princ))
+      (princ (strcat "\n°å¸º½îÒÑ»æÖÆ¡£D=" (rtos d 2 0) "@" (rtos spacing 2 0)
+                     " ×ó=" (rtos left-len 2 0) " ÓÒ=" (rtos right-len 2 0)
+                     " ¹² " (itoa count) " ¸ù"))))
+  (princ)
+  (uc:guard-end))
 
 
-(princ "\n[TB] é’¢ç­‹å‘½ä»¤æ¨¡å—åŠ è½½å®Œæˆ (rebar: 9å‘½ä»¤)")
+(princ "\n[TB] ¸Ö½îÃüÁîÄ£¿é¼ÓÔØÍê³É (rebar: 9ÃüÁî)")
 (princ)

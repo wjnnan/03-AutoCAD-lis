@@ -1,7 +1,7 @@
 (defun point:div ( pt1 pt2 n / pt)
-  "å°† pt1 pt2 ä¹‹é—´ç­‰åˆ† n ä»½åŽæ¯ä¸ªç‚¹çš„åæ ‡(ä¸å«pt1 pt2)"
-  "ç‚¹åæ ‡è¡¨"
-  "(point:div (getpoint(@:speak\"èµ·ç‚¹:\")) (getpoint(@:speak\"ç»ˆç‚¹:\")) 5)"
+  "½« pt1 pt2 Ö®¼äµÈ·Ö n ·ÝºóÃ¿¸öµãµÄ×ø±ê(²»º¬pt1 pt2)"
+  "µã×ø±ê±í"
+  "(point:div (getpoint(@:speak\"Æðµã:\")) (getpoint(@:speak\"ÖÕµã:\")) 5)"
   (setq n (fix n))
   (if (and (> n 1)
 	   (= 'point (type-of pt1))

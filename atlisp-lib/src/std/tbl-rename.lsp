@@ -1,9 +1,9 @@
 (defun std:tbl-rename (tbl-name old-name new-name) 
-  "é‡å‘½åDXFè¡¨æ ¼ä¸­çš„é¡¹ç›®çš„åç§°ã€‚ è¡¨æ ¼ä¸º:block,dimstyle,layer,layout,linetype,textstyle,view,vport. 
-  å‚æ•°:tbl-name tblè¡¨æ ¼å, old-name åŸåç§°ï¼Œnew-name æ–°åç§°"
-  "T æˆåŠŸï¼Œnil å¤±è´¥"
+  "ÖØÃüÃûDXF±í¸ñÖĞµÄÏîÄ¿µÄÃû³Æ¡£ ±í¸ñÎª:block,dimstyle,layer,layout,linetype,textstyle,view,vport. 
+  ²ÎÊı:tbl-name tbl±í¸ñÃû, old-name Ô­Ãû³Æ£¬new-name ĞÂÃû³Æ"
+  "T ³É¹¦£¬nil Ê§°Ü"
   ""
-  ;; è¡¨æ ¼ dxf ä¸ ActiveX åç§°å¯¹ç…§è¡¨
+  ;; ±í¸ñ dxf Óë ActiveX Ãû³Æ¶ÔÕÕ±í
   (defun tbl-dxf2obj (tbl-name) 
     (cond 
       ((string-equal tbl-name "LTYPE") "linetypes")

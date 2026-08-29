@@ -60,7 +60,7 @@
             '(100 . "AcDbLayerTableRecord")
             (cons 2 new-name)
             '(70 . 0)
-            (cons 62 (- demo-clr))     ; è´Ÿå€¼ = å…³é—­é¢œè‰²
+            (cons 62 (- demo-clr))     ; ¸ºÖµ = ¹Ø±ÕÑÕÉ«
             (cons 6 ltype)
           )
           (if (and lweight (>= lweight 0))

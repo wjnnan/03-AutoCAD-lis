@@ -1,5 +1,5 @@
 (defun block:set-attributes (blkref lst / n atts)
-  "è®¾ç½®å—å±æ€§å€¼ï¼Œblkref ä¸ºå—å‚ç…§çš„å›¾å…ƒåï¼Œlst ä¸ºå¤šä¸ªå±æ€§åå’Œå±æ€§å€¼ç»„æˆçš„ç‚¹å¯¹è¡¨ã€‚"
+  "ÉèÖÃ¿éÊôĞÔÖµ£¬blkref Îª¿é²ÎÕÕµÄÍ¼ÔªÃû£¬lst Îª¶à¸öÊôĞÔÃûºÍÊôĞÔÖµ×é³ÉµÄµã¶Ô±í¡£"
   ""
   "(block:set-attributes blkref '((\"att1\" . \"value1\")(\"att2\" . \"value2\")))"
   (if (= (quote ename)

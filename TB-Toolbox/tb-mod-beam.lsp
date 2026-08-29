@@ -1,47 +1,54 @@
-;;; tb-mod-beam.lsp â€” æ¢å¹³æ³•å·¥å…·æ¨¡å—
-;;; æ¢æˆªé¢ç¬¦å·ã€å‰–åˆ‡ç¬¦å·ã€å›¾åçº¿ã€‚
-;;; ç»„åˆ point:* curve:* entity:* txt:* lay:* åº“å‡½æ•°
+;;; tb-mod-beam.lsp ¡ª ÁºÆ½·¨¹¤¾ßÄ£¿é
+;;; Áº½ØÃæ·ûºÅ¡¢ÆÊÇĞ·ûºÅ¡¢Í¼ÃûÏß¡£
+;;; ×éºÏ point:* curve:* entity:* txt:* lay:* ¿âº¯Êı
 
 ;; ============================================================================
-;; å›¾åçº¿ c:tml
+;; Í¼ÃûÏß c:tml
 ;; ============================================================================
 
 (defun c:tml (/ e pts ang w p1 p2 inspt en1 en2)
-  "å›¾åçº¿ï¼šåœ¨æ‰€é€‰æ–‡å­—ä¸‹æ–¹ç»˜åˆ¶åŒä¸‹åˆ’çº¿ã€‚"
-  (if (setq e (car (entsel "\né€‰æ‹©å›¾åå­—: ")))
+  (uc:guard-begin '())
+  "Í¼ÃûÏß£ºÔÚËùÑ¡ÎÄ×ÖÏÂ·½»æÖÆË«ÏÂ»®Ïß¡£"
+  (if (setq e (car (entsel "\nÑ¡ÔñÍ¼Ãû×Ö: ")))
     (if (wcmatch (entity:get-type e) "TEXT")
       (progn
         (setq pts   (entity:get-bbox e 0)
               ang   (txt:get-rotation e)
               inspt (txt:get-inspt e)
-              w     (- (caadr pts) (caar pts))   ; æ–‡å­—å®½åº¦
-              p1    (point:polar inspt (+ ang (* pi 0.5)) 50)  ; çº¿ä¸‹åç§»
+              w     (- (caadr pts) (caar pts))   ; ÎÄ×Ö¿í¶È
+              p1    (point:polar inspt (- ang (* pi 0.5)) 50)  ; ÏßÏÂÆ«ÒÆ
               p2    (point:polar p1 ang w))
-        ;; ç¬¬ä¸€é“çº¿ï¼ˆç²—ï¼‰
+        ;; µÚÒ»µÀÏß£¨´Ö£©
         (if (setq en1 (entity:make-pline (list p1 p2) nil (entity:get-layer e)))
           (command "_.PEDIT" en1 "_W" 30 ""))
-        ;; ç¬¬äºŒé“çº¿ï¼ˆç»†ï¼‰
+        ;; µÚ¶şµÀÏß£¨Ï¸£©
         (setq p1 (point:polar p1 (+ ang (* pi 0.5)) 60)
               p2 (point:polar p1 ang w))
         (entity:make-pline (list p1 p2) nil (entity:get-layer e)))
-      (princ "\næ‰€é€‰ä¸æ˜¯å•è¡Œæ–‡å­—ã€‚")))
-  (princ))
+      (princ "\nËùÑ¡²»ÊÇµ¥ĞĞÎÄ×Ö¡£")))
+  (princ)
+  (uc:guard-end))
 
 
 ;; ============================================================================
-;; å‰–åˆ‡ç¬¦å· c:pq
+;; ÆÊÇĞ·ûºÅ c:pq
 ;; ============================================================================
 
-(defun c:pq (/ p1 p2 ang mid label scale en1 en2 en3)
-  "å‰–åˆ‡ç¬¦å·ã€‚é€‰æ‹©å‰–åˆ‡ä½ç½®ï¼Œè‡ªåŠ¨ç”Ÿæˆå‰–é¢ç¼–å·å’Œæ–¹å‘çº¿ã€‚"
+(defun c:pq (/ p1 p2 ang mid label scale en0 en1 en2 en3)
+  (uc:guard-begin '())
+  "ÆÊÇĞ·ûºÅ¡£Ñ¡ÔñÆÊÇĞÎ»ÖÃ£¬×Ô¶¯Éú³ÉÆÊÃæ±àºÅºÍ·½ÏòÏß¡£"
   (setq scale (sys:get '*SYS:DWG-SCALE*))
-  (if (setq p1 (getpoint "\nå‰–åˆ‡èµ·ç‚¹: "))
-    (if (setq p2 (getpoint p1 "\nå‰–åˆ‡ç»ˆç‚¹: "))
+  (if (setq p1 (getpoint "\nÆÊÇĞÆğµã: "))
+    (if (setq p2 (getpoint p1 "\nÆÊÇĞÖÕµã: "))
       (progn
         (setq ang  (point:angle p1 p2)
               mid  (point:mid p1 p2))
 
-        ;; å‰–åˆ‡çº¿ï¼ˆç²—çº¿ï¼‰
+        ;; ÆÊÇĞÎ»ÖÃÏß£¨p1¡úp2 ´ÖÏß£©
+        (if (setq en0 (entity:make-pline (list p1 p2) nil (getvar "CLAYER")))
+          (command "_.PEDIT" en0 "_W" (* 2 scale) ""))
+
+        ;; Á½¶Ë·½ÏòÏß£¨´¹Ö±ÓÚÆÊÇĞÎ»ÖÃµÄ¶Ì´ÖÏß£©
         (if (setq en1 (entity:make-pline
               (list p1 (point:polar p1 (+ ang (* pi 0.5)) (* 100 scale)))
               nil (getvar "CLAYER")))
@@ -57,42 +64,77 @@
               nil (getvar "CLAYER")))
           (command "_.PEDIT" en3 "_W" (* 2 scale) ""))
 
-        ;; æ–¹å‘ç®­å¤´
+        ;; ·½Ïò¼ıÍ·
         (command "_.LEADER" mid
           (point:polar mid (+ ang (* pi 0.5)) (* 500 scale)) "" "_N")
 
-        ;; æ–‡å­—æ ‡ç­¾
+        ;; ÎÄ×Ö±êÇ©
         (entity:make-text "A"
           (point:polar mid (- ang (* pi 0.5)) (* 80 scale))
           (* 350 scale) (sys:get '*SYS:TEXT-STYLE*) (getvar "CLAYER")))))
-  (princ))
+  (princ)
+  (uc:guard-end))
 
 
 ;; ============================================================================
-;; å¹³é¢å· c:pmh
+;; Æ½ÃæºÅ c:pmh
 ;; ============================================================================
 
-(defun c:pmh (/ pt label h scale en)
-  "å¹³é¢å·æ ‡æ³¨ï¼šåœ¨æŒ‡å®šä½ç½®ç»˜åˆ¶æ ‡é«˜/å¹³é¢å·ç¬¦å·ã€‚"
+(defun c:pmh (/ pt label h scale en base)
+  (uc:guard-begin '())
+  "Æ½ÃæºÅ±ê×¢£ºÔÚÖ¸¶¨Î»ÖÃ»æÖÆ±ê¸ß/Æ½ÃæºÅ·ûºÅ¡£"
   (setq scale (sys:get '*SYS:DWG-SCALE*)
         h     (* 350 scale))
-  (if (setq pt (getpoint "\nç¬¦å·æ’å…¥ç‚¹: "))
+  (if (setq pt (getpoint "\n·ûºÅ²åÈëµã: "))
     (progn
-      (setq label (getstring T "\næ¥¼å±‚æ ‡ç­¾ï¼ˆå¦‚ 3Fï¼‰: "))
-      ;; å€’ä¸‰è§’
+      (setq label (getstring T "\nÂ¥²ã±êÇ©£¨Èç 3F£©: ")
+            base  (point:polar pt (* pi 0.5) (* 300 scale)))
+      ;; µ¹Èı½Ç
       (if (setq en (entity:make-pline
             (list pt
-                  (point:polar pt pi (* 200 scale))
-                  (point:polar pt 0  (* 200 scale)))
+                  (point:polar base pi (* 200 scale))
+                  (point:polar base 0  (* 200 scale)))
             T (getvar "CLAYER")))
         (command "_.PEDIT" en "_W" 0 ""))
-      ;; æ–‡å­—
+      ;; ÎÄ×Ö
       (if (and label (/= label ""))
         (entity:make-text label
           (point:polar pt (* pi 0.5) (* 100 scale))
           h (sys:get '*SYS:TEXT-STYLE*) (getvar "CLAYER")))))
+  (princ)
+  (uc:guard-end))
+
+
+;; ============================================================================
+;; »­½á¹¹¶´¿Ú£¨ÎüÊÕÕÅºÍÆ½¹¤¾ßÏä"»­¶´¿Ú"£©
+;; ============================================================================
+
+(defun c:HOLE (/ ms p1 p3 x1 y1 x3 y3 p2 p4 x5 y5 p5)
+  "»­½á¹¹¶´¿Ú£¨¾ØĞÎ+¶Ô½ÇÏß£©¡£A¿ª¶´/B²»¿ª¶´/C¿ª¶´²¢Ìî³ä¡£"
+  (uc:guard-begin '("OSMODE" "BLIPMODE" "CMDECHO" "CLAYER"))
+  (setvar "cmdecho" 0)
+  (setvar "blipmode" 0)
+  (setq ms (getstring "\n(A)¿ª¶´(Ä¬ÈÏ)/(B)²»¿ª¶´/(C)¿ª¶´²¢Ìî³ä: "))
+  (if (= ms "") (setq ms "A"))
+  (if (and (setq p1 (getpoint "\nÊäÈë¾ØĞÎ¶´¿Ú½Çµã: "))
+           (setq p3 (getcorner p1 "\nÊäÈëÁíÒ»½Çµã: ")))
+    (progn
+      (setq x1 (car p1) y1 (cadr p1) x3 (car p3) y3 (cadr p3)
+            p2 (list x3 y1) p4 (list x1 y3)
+            x5 (+ x1 (* 0.15 (- x3 x1)))
+            y5 (+ y1 (* 0.85 (- y3 y1)))
+            p5 (list x5 y5))
+      (setvar "osmode" 0)
+      (cond
+        ((or (= ms "A") (= ms "a")) (lay:make "½á¶´¿ÚÊµ" 7 "continuous"))
+        ((or (= ms "B") (= ms "b")) (lay:make "½á¶´¿ÚĞé" 7 "dash"))
+        (t (lay:make "½á¶´¿ÚÊµ" 7 "continuous")))
+      (command "line" p1 p2 p3 p4 p1 "")
+      (command "line" p1 p5 p3 "")
+      (if (or (= ms "C") (= ms "c"))
+        (command "solid" p1 p4 p5 p3 ""))))
+  (uc:guard-end)
   (princ))
 
-
-(princ "\n[TB] æ¢å¹³æ³•å·¥å…·æ¨¡å—åŠ è½½å®Œæˆ (beam: 3å‘½ä»¤)")
+(princ "\n[TB] ÁºÆ½·¨¹¤¾ßÄ£¿é¼ÓÔØÍê³É (beam: 4ÃüÁî)")
 (princ)

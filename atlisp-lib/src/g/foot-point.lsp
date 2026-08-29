@@ -1,10 +1,10 @@
 (defun g:foot-point (line pt / dis dot-product foot projection v-p v-w)
-  "æ±‚ç‚¹åˆ°ç›´çº¿çš„å‚è¶³çš„åæ ‡ï¼Œline ä¸ºä¸¤ç‚¹åæ ‡ç»„æˆçš„åˆ—è¡¨ï¼Œpt ä¸ºä¸€ç‚¹åæ ‡"
-  "åæ ‡"
+  "Çóµãµ½Ö±ÏßµÄ´¹×ãµÄ×ø±ê£¬line ÎªÁ½µã×ø±ê×é³ÉµÄÁĞ±í£¬pt ÎªÒ»µã×ø±ê"
+  "×ø±ê"
   "(g:foot-point (list (getpoint)(getpoint)) (getpoint))"
-  (setq v-w (mapcar '- (cadr line) (car line))) ; ç›´çº¿å‘é‡
-  (setq v-p (mapcar '- pt (car line))) ; å¤–ç‚¹åˆ°ç›´çº¿èµ·ç‚¹çš„å‘é‡
-  ;; è®¡ç®—ç‚¹åˆ°ç›´çº¿çš„æŠ•å½±æ¯”ä¾‹
+  (setq v-w (mapcar '- (cadr line) (car line))) ; Ö±ÏßÏòÁ¿
+  (setq v-p (mapcar '- pt (car line))) ; Íâµãµ½Ö±ÏßÆğµãµÄÏòÁ¿
+  ;; ¼ÆËãµãµ½Ö±ÏßµÄÍ¶Ó°±ÈÀı
   (setq dot-product (g:dot-product v-w v-p))
   (setq dis (apply 'distance line))
   (setq projection (/ dot-product (expt dis 2)))

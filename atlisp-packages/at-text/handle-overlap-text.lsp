@@ -1,8 +1,8 @@
 (defun @text:locate-overlay-text(/ txts box)
-  (@::prompt "é«˜äº®æ˜¾ç¤ºæœ‰é‡å çš„æ–‡å­—ã€‚")
+  (@::prompt "¸ßÁÁÏÔÊ¾ÓĞÖØµşµÄÎÄ×Ö¡£")
   (if(null (setq txts (pickset:to-list (ssget '((0 . "text"))))))
      (setq txts (pickset:to-list (ssget "x" '((0 . "text"))))))
-  ;; ç²—è¿‡æ»¤
+  ;; ´Ö¹ıÂË
   (setq txts (vl-remove-if
 	      '(lambda(x / box)
 		(setq box (entity:getbox x 0))
@@ -19,13 +19,13 @@
 	(command "zoom" "w" (car corner) (cadr corner))
 	;;(sssetfirst nil (ssadd (ssname txts 0)))
 	(sssetfirst nil txts))
-      (@:prompt "æ²¡æœ‰å‘ç°é‡å æ–‡å­—")
+      (@:prompt "Ã»ÓĞ·¢ÏÖÖØµşÎÄ×Ö")
       ))
 (defun @text:delete-overlay-sametext(/ txts box sames same1)
-  (@::prompt "åˆ é™¤å†…å®¹ç›¸åŒä¸”é‡å çš„æ–‡å­—ã€‚")
+  (@::prompt "É¾³ıÄÚÈİÏàÍ¬ÇÒÖØµşµÄÎÄ×Ö¡£")
   (if(null (setq txts (pickset:to-list (ssget '((0 . "*text"))))))
      (setq txts (pickset:to-list (ssget "x" '((0 . "*text"))))))
-  ;; ç²—è¿‡æ»¤
+  ;; ´Ö¹ıÂË
   ;; (setq txts (vl-remove-if
   ;; 	      '(lambda(x / box)
   ;; 		(setq box (entity:getbox x 0))
@@ -51,15 +51,15 @@
     )
   (if (and sames)
       (mapcar 'vla-delete (mapcar 'e2o sames))
-      (@:prompt "æ²¡æœ‰å‘ç°ç›¸åŒçš„é‡å æ–‡å­—ã€‚")
+      (@:prompt "Ã»ÓĞ·¢ÏÖÏàÍ¬µÄÖØµşÎÄ×Ö¡£")
       ))
 
 (defun @text:handle-overlay-text (/ txts box ots box1 box2 tbox1 tbox2 w1 w2 h1 h2 o1 o2 dis)
-  ;; é¿è®©åŸåˆ™ï¼šç«–å‘é¿æ°´å¹³ï¼Œæ°´å¹³å‘å³é”™ã€‚
-  (@::prompt "æ–‡å­—é¿è®©ï¼Œå¤„ç†é‡å çš„å•è¡Œæ–‡æœ¬,é¿è®©æˆåŠŸè®¾ä¸ºç»¿è‰²ï¼Œä¸æˆåŠŸè®¾ä¸ºé»„è‰²(é¢œè‰²ç´¢å¼•å·ä¸º50)ã€‚")
+  ;; ±ÜÈÃÔ­Ôò£ºÊúÏò±ÜË®Æ½£¬Ë®Æ½ÏòÓÒ´í¡£
+  (@::prompt "ÎÄ×Ö±ÜÈÃ£¬´¦ÀíÖØµşµÄµ¥ĞĞÎÄ±¾,±ÜÈÃ³É¹¦ÉèÎªÂÌÉ«£¬²»³É¹¦ÉèÎª»ÆÉ«(ÑÕÉ«Ë÷ÒıºÅÎª50)¡£")
   (setq txts (pickset:to-list (ssget  '((0 . "text")))))
-  ;;å»é™¤ä¸é‡å çš„æ–‡å­—
-  ;; ç²—è¿‡æ»¤
+  ;;È¥³ı²»ÖØµşµÄÎÄ×Ö
+  ;; ´Ö¹ıÂË
   (setq txts (vl-remove-if
 	      '(lambda(x / box)
 		(setq box (entity:getbox x 0))
@@ -77,7 +77,7 @@
    (setq ots (vl-remove txt (pickset:to-list (ssget "cp" (text:box txt) '((0 . "text"))))))
    (foreach
     ot ots
-    ;; æ¯”è¾ƒ ot ä¸ txtçš„ä½ç½®å…³ç³»ï¼Œç¡®å®šé¿è®©è§„åˆ™
+    ;; ±È½Ï ot Óë txtµÄÎ»ÖÃ¹ØÏµ£¬È·¶¨±ÜÈÃ¹æÔò
     (if  (and
 	  (setq box1 (text:box txt))
 	  (setq box2 (text:box ot))
@@ -90,7 +90,7 @@
 	  (setq o1 (point:centroid box1))
 	  (setq o2 (point:centroid box2)))
     (cond
-      ;; ä¸¤è€…å¹³è¡Œä¸”å…±çº¿
+      ;; Á½ÕßÆ½ĞĞÇÒ¹²Ïß
       ((and (equal r1 r2 0.5)
 	    (or (equal r1 (angle o1 o2) 0.2)
 		(equal r1 (angle o2 o1) 0.2)))
@@ -103,7 +103,7 @@
 	   (entity:putdxf txt 62 50)
 	   )
        )
-      ;; ä¸¤è€…å¹³è¡Œä¸å…±çº¿
+      ;; Á½ÕßÆ½ĞĞ²»¹²Ïß
       ((and (equal r1 r2 0.5)
 	    (null (and (equal r1 (angle o1 o2) 0.2)
 		       (equal r1 (angle o2 o1) 0.2))))
@@ -116,7 +116,7 @@
 	   (entity:putdxf txt 62 50)
 	   )
        )
-      ;; ä¸¤è€…å‚ç›´ï¼›åŠ¨Yå‘
+      ;; Á½Õß´¹Ö±£»¶¯YÏò
       ((null (equal r1 r2 0.5))
        (if (< (abs (sin r1))(abs(sin r2)))
 	   (progn
@@ -133,7 +133,7 @@
 	     )
        ))
       ))
-    ;; æˆåŠŸè®¾ç»¿,ä¸æˆåŠŸè®¾é»„
+    ;; ³É¹¦ÉèÂÌ,²»³É¹¦Éè»Æ
     (if (and (setq i (pickset:length (ssget "cp" (text:box ot) '((0 . "text")))))
 	     (<= i 1))
 	(entity:putdxf ot 62 3)
@@ -141,10 +141,10 @@
 	)
     )))
 (defun @text:locate-overline-text(/ txts box)
-  (@::prompt "é«˜äº®æ˜¾ç¤ºå‹çº¿çš„å•è¡Œæ–‡æœ¬ã€‚")
+  (@::prompt "¸ßÁÁÏÔÊ¾Ñ¹ÏßµÄµ¥ĞĞÎÄ±¾¡£")
   (if(null (setq txts (pickset:to-list (ssget '((0 . "text"))))))
      (setq txts (pickset:to-list (ssget "x" '((0 . "text"))))))
-  ;; ç²—è¿‡æ»¤
+  ;; ´Ö¹ıÂË
   (setq txts (vl-remove-if
 	      '(lambda(x / box)
 		(setq box (entity:getbox x 0))
@@ -161,5 +161,5 @@
 	(command "zoom" "w" (car corner) (cadr corner))
 	;;(sssetfirst nil (ssadd (ssname txts 0)))
 	(sssetfirst nil txts))
-      (@:prompt "æ²¡æœ‰å‘ç°å‹çº¿çš„æ–‡å­—")
+      (@:prompt "Ã»ÓĞ·¢ÏÖÑ¹ÏßµÄÎÄ×Ö")
   ))

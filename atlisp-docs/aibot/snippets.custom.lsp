@@ -1,13 +1,13 @@
 (exit)  
-;;; è¯´æ˜ï¼š
-;;; 4ä¸ªåˆ†å·å¼€å¤´çš„è¡Œæ˜¯æ¯ä¸ªä»£ç ç‰‡æ®µçš„å¼€å§‹ï¼Œåˆ†å·åä¸ºä»£ç ç‰‡æ®µçš„keyï¼Œ
-;;; ä»£ç ç‰‡æ®µå†…å®¹ä¸ºå½“å‰keyåˆ°ä¸‹ä¸€ä¸ªkeyä¹‹é—´çš„å†…å®¹
-;;; ä»£ç ç‰‡æ®µä¸­çš„$(n:*)æˆ–$nè¡¨ç¤ºå…‰æ ‡åœ¨ç‰‡æ®µä¸­è·³è½¬ä½ç½®
+;;; ËµÃ÷£º
+;;; 4¸ö·ÖºÅ¿ªÍ·µÄĞĞÊÇÃ¿¸ö´úÂëÆ¬¶ÎµÄ¿ªÊ¼£¬·ÖºÅºóÎª´úÂëÆ¬¶ÎµÄkey£¬
+;;; ´úÂëÆ¬¶ÎÄÚÈİÎªµ±Ç°keyµ½ÏÂÒ»¸ökeyÖ®¼äµÄÄÚÈİ
+;;; ´úÂëÆ¬¶ÎÖĞµÄ$(n:*)»ò$n±íÊ¾¹â±êÔÚÆ¬¶ÎÖĞÌø×ªÎ»ÖÃ
 ;;;;IFP
 ;;; if + progn
 (if (${1:TEST}) 
   (progn 
-    ;ä½ çš„ç¨‹åº
+    ;ÄãµÄ³ÌĞò
     $2))
 
 ;;;;RES
@@ -17,80 +17,80 @@
         obj (vlax-ename->vla-object en)
         ent (entget en))
   (progn 
-    ;ä½ çš„ç¨‹åº
+    ;ÄãµÄ³ÌĞò
     $3))
 
 ;;;;WHF
 ;;; loop by flag
 (setq ${1:Flag} T)
-(while $1  ;ç¬¬ä¸€æ¬¡è¿›å…¥å¾ªç¯
-  (if (${2:TEST})  ;å¦‚æœæ¡ä»¶æˆç«‹
+(while $1  ;µÚÒ»´Î½øÈëÑ­»·
+  (if (${2:TEST})  ;Èç¹ûÌõ¼ş³ÉÁ¢
     (progn 
-      ;ä½ çš„ç¨‹åº
+      ;ÄãµÄ³ÌĞò
       $3
-      (setq $1 Nil) ;é€€å‡ºå¾ªç¯
+      (setq $1 Nil) ;ÍË³öÑ­»·
     )))
 
 ;;;;WHP1
 (while  ;get*
   (progn 
-    (initget (+ 2 4) "S") ;éé›¶éè´Ÿå…³é”®è¯
-    (setq TmpPT (getpoint (strcat "\nâ†’è¯·æŒ‡å®šç‚¹[è®¾ç½®(S)]")))
+    (initget (+ 2 4) "S") ;·ÇÁã·Ç¸º¹Ø¼ü´Ê
+    (setq TmpPT (getpoint (strcat "\n¡úÇëÖ¸¶¨µã[ÉèÖÃ(S)]")))
     (cond 
-      (TmpPT ;ç‚¹å­˜åœ¨
-      ;ä½ çš„ç¨‹åº
-      $1 T ;ç»§ç»­å¾ªç¯
+      (TmpPT ;µã´æÔÚ
+      ;ÄãµÄ³ÌĞò
+      $1 T ;¼ÌĞøÑ­»·
       )
-      ((and (eq (type TmpVar) 'STR) (eq (strcase TmpVar) "S")) ;å­—æ¯Ss
-       ;ä½ çš„ç¨‹åº
+      ((and (eq (type TmpVar) 'STR) (eq (strcase TmpVar) "S")) ;×ÖÄ¸Ss
+       ;ÄãµÄ³ÌĞò
        $2
-       T ;ç»§ç»­å¾ªç¯
+       T ;¼ÌĞøÑ­»·
       )
       (T
-       (princ "\nâ€”â€”â˜…â˜…â˜… è¯·è¾“å…¥æ­£ç¡®çš„å…³é”®è¯æˆ– ESCé€€å‡ºï¼ â˜…â˜…â˜…â€”â€”\n")
-       T ;ç»§ç»­å¾ªç¯
+       (princ "\n¡ª¡ª¡ï¡ï¡ï ÇëÊäÈëÕıÈ·µÄ¹Ø¼ü´Ê»ò ESCÍË³ö£¡ ¡ï¡ï¡ï¡ª¡ª\n")
+       T ;¼ÌĞøÑ­»·
       ))))
 
 ;;;;WHP2
 (while  ;Grread
   (progn 
-    (princ (strcat "\nâ†’è¯·æŒ‡å®šç‚¹[è®¾ç½®(S)]"))
+    (princ (strcat "\n¡úÇëÖ¸¶¨µã[ÉèÖÃ(S)]"))
     (while (and (setq Code (grread T (+ 1 4 8) 2)) (eq (car Code) 5)))
     (setq Key (cadr Code))
     (cond 
-      ((and (eq (car Code) 3) (eq (type Key) 'LIST)) ;ç‚¹é€‰
-       ;ä½ çš„ç¨‹åº
+      ((and (eq (car Code) 3) (eq (type Key) 'LIST)) ;µãÑ¡
+       ;ÄãµÄ³ÌĞò
        $1
-       Nil ;é€€å‡ºå¾ªç¯
+       Nil ;ÍË³öÑ­»·
       )
-      ((or (eq Key 13) (eq Key 32)) ;å›è½¦æˆ–ç©ºæ ¼
-       ;ä½ çš„ç¨‹åº
+      ((or (eq Key 13) (eq Key 32)) ;»Ø³µ»ò¿Õ¸ñ
+       ;ÄãµÄ³ÌĞò
        $2
-       T ;ç»§ç»­å¾ªç¯
+       T ;¼ÌĞøÑ­»·
       )
-      ((or (eq Key 83) (eq Key (+ 83 32))) ;å­—æ¯S
-       ;ä½ çš„ç¨‹åº
+      ((or (eq Key 83) (eq Key (+ 83 32))) ;×ÖÄ¸S
+       ;ÄãµÄ³ÌĞò
        $3
-       T ;ç»§ç»­å¾ªç¯
+       T ;¼ÌĞøÑ­»·
       )
       (T
-       (princ "\nâ€”â€”â˜…â˜…â˜… è¯·è¾“å…¥æ­£ç¡®çš„å…³é”®è¯æˆ– ESCé€€å‡ºï¼ â˜…â˜…â˜…â€”â€”\n")
-       T ;ç»§ç»­å¾ªç¯
+       (princ "\n¡ª¡ª¡ï¡ï¡ï ÇëÊäÈëÕıÈ·µÄ¹Ø¼ü´Ê»ò ESCÍË³ö£¡ ¡ï¡ï¡ï¡ª¡ª\n")
+       T ;¼ÌĞøÑ­»·
       ))))
 ;;;;DFTT
 (if (null vlax-dump-object) (vl-load-com));
 (defun C:TT (/ *error* CurDoc) 
   (setq CurDoc (vla-get-activedocument (vlax-get-acad-object)))
-  (defun *error* (x)  ;å‡ºé”™å‡½æ•°
-    (vla-endundomark CurDoc) ;é”™è¯¯æ—¶ç»“æŸç¼–ç»„
+  (defun *error* (x)  ;³ö´íº¯Êı
+    (vla-endundomark CurDoc) ;´íÎóÊ±½áÊø±à×é
   )
 
   (while (eq 8 (logand 8 (getvar 'undoctl))) 
-    (vla-endundomark CurDoc)) ;å…³é—­ä»¥å‰çš„ç¼–ç»„
-  (vla-startundomark CurDoc) ;è®°å½•ç¼–ç»„
-  ;ä½ çš„ç¨‹åº
+    (vla-endundomark CurDoc)) ;¹Ø±ÕÒÔÇ°µÄ±à×é
+  (vla-startundomark CurDoc) ;¼ÇÂ¼±à×é
+  ;ÄãµÄ³ÌĞò
   $1
-  (vla-endundomark CurDoc) ;ç»“æŸç¼–ç»„
+  (vla-endundomark CurDoc) ;½áÊø±à×é
   (command "redraw")
   (princ))
 

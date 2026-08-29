@@ -1,8 +1,8 @@
 (defun block:wcs2bcs (pt pt-base pt-ins ang scale / v1)
-  "å°†ç›¸å¯¹äºå—å¼•ç”¨æ’å…¥ç‚¹çš„ä¸–ç•Œåæ ‡è½¬ä¸ºå—å®šä¹‰å†…çš„åæ ‡ã€‚pt-base åŸºç‚¹ï¼Œpt-ins æ’å…¥ç‚¹ï¼Œangå—è½¬è§’ï¼Œscalcå—ç¼©æ”¾å€¼ã€‚"
-  "åæ ‡å€¼"
+  "½«Ïà¶ÔÓÚ¿éÒıÓÃ²åÈëµãµÄÊÀ½ç×ø±ê×ªÎª¿é¶¨ÒåÄÚµÄ×ø±ê¡£pt-base »ùµã£¬pt-ins ²åÈëµã£¬ang¿é×ª½Ç£¬scalc¿éËõ·ÅÖµ¡£"
+  "×ø±êÖµ"
   (setq v1 (mapcar '- pt pt-ins))
-  ;; çŸ¢é‡è¿ç®—
+  ;; Ê¸Á¿ÔËËã
   (m:coordinate (mapcar '* pt-base '(1 1 1))
 		(m:coordinate-scale
 		 (m:coordinate-rotate v1 (- (* 2 pi) ang))

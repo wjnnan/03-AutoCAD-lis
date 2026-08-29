@@ -1,5 +1,5 @@
 (defun datetime:mktime1900 (timestamp)
-  "unix timestamp è½¬ åˆ°1900å¹´01æœˆ01æ—¥ç»è¿‡çš„ç§’æ•°."
+  "unix timestamp ×ª µ½1900Äê01ÔÂ01ÈÕ¾­¹ıµÄÃëÊı."
   "real"
   "(datetime:mktime1900 (datetime:mktime (vl-file-systime (findfile \"acad.pgp\"))))"
   (+ (* 22089.0 100000.0)

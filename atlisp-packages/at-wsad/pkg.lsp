@@ -1,13 +1,13 @@
 (@::def-pkg '((:NAME . "at-wsad")
-        (:FULL-NAME . "@lispГ╩≥Ф▌▓Ф╟╢")
+        (:FULL-NAME . "@lisp╦Ьеек╝")
         (:AUTHOR . "VitalGG")
         (:EMAIL . "vitalgg@gmail.com")
         (:VERSION . "0.0.3")
         (:LOCALE . "chs")
-        (:CATEGORY . "Г╩≥Ф▌▓Ф╟╢")
+        (:CATEGORY . "╦Ьеек╝")
         (:REQUIRED . "at-pm")
         (:OPENSOURCE . 0)
-        (:DESCRIPTION . "Е╩╨Г╜▒Г╩≥Ф▌▓Ф╟╢Д╦⌠Д╦ И─ Г■╗Г╝║Г░├ГЁ╩Г╩÷")
+        (:DESCRIPTION . "╫╗жЧ╦Ьеек╝в╗р╣м╗сц╧эюМо╣мЁ")
         (:URL . "http://atlisp.cn")
         (:FILES "at-wsad"
             "readme-wsad.dwg"

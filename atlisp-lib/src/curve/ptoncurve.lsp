@@ -1,5 +1,5 @@
 (defun curve:ptoncurve (pt curve)
-  "åˆ¤æ–­ç‚¹æ˜¯å¦åœ¨æ›²çº¿ä¸Š"
+  "ÅĞ¶ÏµãÊÇ·ñÔÚÇúÏßÉÏ"
   "T or nil"
   "(curve:PtOnCurve (getpoint)
     (car (entsel)))"

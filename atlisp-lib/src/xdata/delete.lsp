@@ -1,5 +1,5 @@
 (defun xdata:delete (ename / lst)
-  "åˆ é™¤å›¾å…ƒçš„æ‰©å±•æ•°æ®"
+  "É¾³ıÍ¼ÔªµÄÀ©Õ¹Êı¾İ"
   (cond
    ((p:enamep ename)
     (entmod

@@ -1,5 +1,5 @@
 (defun list:item-num (lst / l2 tmp tmp1)
-    "è¡¨ä¸­å…ƒç´ åŠæ•°é‡"
+    "±íÖĞÔªËØ¼°ÊıÁ¿"
     (while (setq l2 (cons (list (setq tmp1 (car lst))
                     (- (length lst)
                         (length (setq tmp (vl-remove tmp1 lst)))))

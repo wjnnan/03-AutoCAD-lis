@@ -1,5 +1,5 @@
 (defun curve:point-firstangle (obj pt / param)
-  "æ›²çº¿ä¸€ç‚¹çš„åˆ‡çº¿æ–¹å‘çš„è§’åº¦"
+  "ÇúÏßÒ»µãµÄÇĞÏß·½ÏòµÄ½Ç¶È"
   (setq param (vlax-curve-getparamatpoint obj pt))
   (angle (quote (0 0 0))
     (vlax-curve-getfirstderiv obj param)))

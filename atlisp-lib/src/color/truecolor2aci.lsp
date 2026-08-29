@@ -1,5 +1,5 @@
 (defun color:truecolor2aci (long / ci)
-  "çœŸå½©è‰²å·è½¬ä¸ºè¿‘ä¼¼çš„ç´¢å¼•è‰²å·"
+  "Õæ²ÊÉ«ºÅ×ªÎª½üËÆµÄË÷ÒýÉ«ºÅ"
   "int"
   "(color:truecolor2aci 2076128) => 142"
   (setq ci (color:interface))

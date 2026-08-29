@@ -130,12 +130,12 @@
       (progn ;;引线
 	;;(if (= "RB"  txtdq) ;;修正 txt 的点
 	;;    (setq pt-c (polar pt-c pi  (distance pt-b pt-c))))
-	(vla-put-ScaleFactor
-	 (e2o(entity:make-multileader (list pt-b pt-c)
+	(vl-catch-all-apply 'vla-put-ScaleFactor
+	 (list (e2o(entity:make-multileader (list pt-b pt-c)
 				 (string:from-list
 				  (vl-remove nil
 					     (list strx stry strh))
 				  "\\P")))
-	 (* 10 (@:get-config '@dim:scale)))
+	       (* 10 (@:get-config '@dim:scale))))
 	)
       ))

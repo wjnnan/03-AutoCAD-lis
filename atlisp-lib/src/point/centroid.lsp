@@ -1,5 +1,5 @@
 (defun point:centroid (pts)
-  "æ±‚å¤šä¸ªç‚¹çš„å‡ ä½•å½¢å¿ƒ"
+  "Çó¶à¸öµãµÄ¼¸ºÎÐÎÐÄ"
   "POINT"
   (if (> (length pts) 0)
       (mapcar

@@ -1,5 +1,5 @@
 (defun json:decode-json-from-string (str)
-  "å°†jsonå­—ç¬¦ä¸²è§£ç æˆlist"
+  "½«json×Ö·û´®½âÂë³Élist"
   "list"
   (read (@::post (strcat (@::uri)"/api/decode-json")
 	   str)))

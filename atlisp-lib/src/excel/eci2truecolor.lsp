@@ -1,6 +1,6 @@
 (defun excel:eci->truecolor (color / tmp)
-  "å°†excelé¢œè‰²ç´¢å¼•è½¬æ¢ä¸ºçœŸå½©è‰²å€¼\nå‚æ•°:Color:excelé¢œè‰²ç´¢å¼•"
-  "çœŸå½©è‰²å€¼"
+  "½«excelÑÕÉ«Ë÷Òý×ª»»ÎªÕæ²ÊÉ«Öµ\n²ÎÊý:Color:excelÑÕÉ«Ë÷Òý"
+  "Õæ²ÊÉ«Öµ"
   "(excel:ECI->Truecolor 6)"
   (cond ((setq tmp (assoc color *xls-color*))
       (caddr tmp))

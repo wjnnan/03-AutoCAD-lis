@@ -1,5 +1,5 @@
 (defun timer:begin ()
-  "è®¡æ—¶å™¨å¼€å§‹"
+  "¼ÆÊ±Æ÷¿ªÊ¼"
   (if (> (@::acadver) 21.9)
       (setq *timer* (getvar "millisecs"))
       (setq *timer* (getvar "TDUSRTIMER"))))

@@ -1,5 +1,5 @@
 (defun list:rm-m2n (lst m n / len i)
-    "鍒犻櫎鍒楄〃鐨勭m鑷硁椤癸紝绱㈠紩鍊间粠0璁＄畻"
+    "删除列表的第m至n项，索引值从0计算"
     (cond ((< m 0)
             (setq m 0))
         ((> n (setq len (length lst)))

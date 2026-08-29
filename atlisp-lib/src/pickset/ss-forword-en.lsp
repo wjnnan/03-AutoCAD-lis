@@ -1,5 +1,5 @@
 (defun pickset:ss-forword-en (en / ss)
-  "å°†å›¾å…ƒ ent ä¹‹åçš„æ‰€æœ‰å›¾å…ƒå½¢æˆçš„é€‰æ‹©é›†"
+  "½«Í¼Ôª ent Ö®ºóµÄËùÓĞÍ¼ÔªĞÎ³ÉµÄÑ¡Ôñ¼¯"
   "pickset"
   (if en (progn (setq ss (ssadd))
       (while (setq en (entnext en))

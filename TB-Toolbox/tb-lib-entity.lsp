@@ -124,7 +124,7 @@
       (entmakex '((0 . "ENDBLK")))
       name)
     (progn
-      (princ (strcat "\n[TB] åˆ›å»ºå—å®šä¹‰å¤±è´¥: " name))
+      (princ (strcat "\n[TB] ´´½¨¿é¶¨ÒåÊ§°Ü: " name))
       nil)))
 
 (defun entity:make-insert (name inspt xscale yscale zscale rot)
@@ -140,7 +140,7 @@
           (cons 50 (if rot rot 0.0)))))
 
 (defun entity:get-bbox (ename offset / result)
-  "è·å–å®ä½“åŒ…å›´ç›’ï¼Œç»Ÿä¸€åœ¨ ActiveX å’Œçº¯ Lisp è·¯å¾„ä¸Šåº”ç”¨åç§»é‡ã€‚"
+  "»ñÈ¡ÊµÌå°üÎ§ºĞ£¬Í³Ò»ÔÚ ActiveX ºÍ´¿ Lisp Â·¾¶ÉÏÓ¦ÓÃÆ«ÒÆÁ¿¡£"
   (setq result
     (if *SYS:HAS-ACTIVEX*
       (progn
@@ -180,8 +180,78 @@
            (list (vlax-safearray->list minpt)
                  (vlax-safearray->list maxpt))))))))
 
+(defun entity:block-def-bbox (block-name / ename sub-box minpt maxpt sub-name sub-ins)
+  "±éÀú¿é¶¨ÒåÄÚÊµÌå£¬µİ¹é¼ÆËã¿é¶¨Òå×ø±êÏµµÄºÏ²¢°üÎ§ºĞ¡£"
+  (setq ename (tblobjname "BLOCK" block-name))
+  (if (not ename) nil
+    (progn
+      (setq minpt nil maxpt nil)
+      (setq ename (entnext ename))
+      (while (and ename (/= (entity:get-type ename) "ENDBLK"))
+        ;; Ç¶Ì×¿é£ºµİ¹éÈ¡¿é¶¨Òå bbox ºóÆ½ÒÆ£¨¼ò»¯£ººöÂÔÇ¶Ì×Ëõ·Å/Ğı×ª£©
+        (if (= (entity:get-type ename) "INSERT")
+          (progn
+            (setq sub-name (entity:get-name ename)
+                  sub-ins  (entity:get-dxf ename 10))
+            (setq sub-box (entity:block-def-bbox sub-name))
+            (if (and sub-box sub-ins)
+              (setq sub-box
+                (list
+                  (mapcar '+ (car sub-box) sub-ins)
+                  (mapcar '+ (cadr sub-box) sub-ins)))))
+          (setq sub-box (entity:bbox-pure ename)))
+        (if sub-box
+          (progn
+            (if (null minpt)
+              (setq minpt (car sub-box) maxpt (cadr sub-box))
+              (progn
+                (setq minpt (mapcar 'min minpt (car sub-box))
+                      maxpt (mapcar 'max maxpt (cadr sub-box)))))))
+        (setq ename (entnext ename)))
+      (if minpt (list minpt maxpt) nil))))
+
+(defun entity:block-bbox-pure (ename / name inspt xscale yscale rot def-box p1 p2 corners)
+  "´¿ Lisp ¼ÆËã INSERT ¿éÒıÓÃµÄ°üÎ§ºĞ£¨ÎŞ COM Æ½Ì¨ÓÃ£©¡£
+  ±éÀú¿é¶¨ÒåÈ¡¿é×ø±ê bbox£¬Ó¦ÓÃËõ·Å + 90 ¶È±¶ÊıĞı×ª + Æ½ÒÆ±ä»»¡£"
+  (setq name   (entity:get-name ename)
+        inspt  (entity:get-dxf ename 10)
+        xscale (if (entity:get-dxf ename 41) (entity:get-dxf ename 41) 1.0)
+        yscale (if (entity:get-dxf ename 42) (entity:get-dxf ename 42) 1.0)
+        rot    (if (entity:get-dxf ename 50) (entity:get-dxf ename 50) 0.0))
+  (setq def-box (entity:block-def-bbox name))
+  (if (not def-box)
+    (list inspt inspt)
+    (progn
+      (setq p1 (list (* (caar def-box) xscale) (* (cadar def-box) yscale))
+            p2 (list (* (caadr def-box) xscale) (* (cadadr def-box) yscale)))
+      ;; Ëõ·ÅºóµÄ 4 ¸ö½Çµã
+      (setq corners
+        (list (list (car p1) (cadr p1))
+              (list (car p2) (cadr p1))
+              (list (car p2) (cadr p2))
+              (list (car p1) (cadr p2))))
+      ;; 90 ¶È±¶ÊıĞı×ª + Æ½ÒÆ
+      (setq corners
+        (mapcar
+          '(lambda (c / r)
+             (setq r
+               (cond
+                 ((equal (rem rot pi) 0 1e-8) c)  ; 0/180 ¶È£º²»±ä
+                 ((equal (rem rot (* pi 0.5)) 0 1e-8)  ; 90/270 ¶È£º½»»»×ø±ê
+                  (list (- (cadr c)) (car c)))
+                 (t c)))  ; ·ÇÖ±½Ç£º½üËÆ²»Ğı×ª
+             (mapcar '+ r inspt))
+          corners))
+      (list
+        (list (apply 'min (mapcar 'car corners))
+              (apply 'min (mapcar 'cadr corners))
+              0.0)
+        (list (apply 'max (mapcar 'car corners))
+              (apply 'max (mapcar 'cadr corners))
+              0.0)))))
+
 (defun entity:bbox-pure (ename / typ pts pt inspt)
-  "çº¯ Lisp åŒ…å›´ç›’è®¡ç®—ã€‚TEXT çš„ textbox è¿”å›ç›¸å¯¹åæ ‡ï¼Œé¡»åŠ ä¸Šæ’å…¥ç‚¹è½¬ä¸ºä¸–ç•Œåæ ‡ã€‚"
+  "´¿ Lisp °üÎ§ºĞ¼ÆËã¡£TEXT µÄ textbox ·µ»ØÏà¶Ô×ø±ê£¬Ğë¼ÓÉÏ²åÈëµã×ªÎªÊÀ½ç×ø±ê¡£"
   (setq typ (entity:get-type ename))
   (cond
     ((null typ) (list '(0 0 0) '(0 0 0)))
@@ -195,8 +265,7 @@
     ((wcmatch typ "LWPOLYLINE,LINE,CIRCLE,ARC,*POLYLINE,ELLIPSE,SPLINE")
      (point:bbox (curve:vertices ename)))
     ((= typ "INSERT")
-     (setq pt (entity:get-dxf ename 10))
-     (list pt pt))
+     (entity:block-bbox-pure ename))
     (t
      (list '(0 0 0) '(0 0 0)))))
 
@@ -205,7 +274,7 @@
 
 (defun entity:set-attrib (ename tag value)
   (if (and (= (entity:get-type ename) "INSERT")
-           (= (entity:get-dxf ename 66) 1))  ; 66=1 è¡¨ç¤ºæœ‰å±æ€§è·Ÿéš
+           (= (entity:get-dxf ename 66) 1))  ; 66=1 ±íÊ¾ÓĞÊôĞÔ¸úËæ
     (while (and (setq ename (entnext ename))
                 (= (entity:get-type ename) "ATTRIB"))
       (if (= (entity:get-dxf ename 2) tag)

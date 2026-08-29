@@ -1,5 +1,5 @@
 (defun string:escape (str escape-chr chars-need-to)
-  "å¯¹å­—ç¬¦ä¸² str ä¸­çš„ chars-need-to å­—ç¬¦è¿›è¡Œè½¬ä¹‰ï¼Œè½¬ä¹‰ç¬¦ä¸ºescape-chrã€‚å¦‚æžœéœ€è½¬ä¹‰çš„å­—ç¬¦ä¸­å«è½¬ä¹‰ç¬¦ï¼Œéœ€å°†å…¶æ”¾åœ¨é¦–ä½ã€‚"
+  "¶Ô×Ö·û´® str ÖÐµÄ chars-need-to ×Ö·û½øÐÐ×ªÒå£¬×ªÒå·ûÎªescape-chr¡£Èç¹ûÐè×ªÒåµÄ×Ö·ûÖÐº¬×ªÒå·û£¬Ðè½«Æä·ÅÔÚÊ×Î»¡£"
   "string"
   "(string:escape \"@*\" \"`\" \"@*\") => \"`@`*\""
   (foreach chr (string:s2l-ansi chars-need-to)

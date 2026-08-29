@@ -1,6 +1,6 @@
 (defun pickset:cluster (ss gap / a b c ca cc flag l l1 lst n)
-  "å¯¹å›¾å…ƒè¿›è¡Œèšç±»åˆ†æï¼ŒæŒ‰ç‰‡åŒºæ±‚å›¾å…ƒé›†çš„åŒ…å›´ç›’ã€‚"
-  "å„å›¾å…ƒç¾¤çš„åŒ…å›´ç›’(ä¸¤ç‚¹åæ ‡), ç»„æˆçš„åˆ—è¡¨"
+  "¶ÔÍ¼Ôª½øĞĞ¾ÛÀà·ÖÎö£¬°´Æ¬ÇøÇóÍ¼Ôª¼¯µÄ°üÎ§ºĞ¡£"
+  "¸÷Í¼ÔªÈºµÄ°üÎ§ºĞ(Á½µã×ø±ê), ×é³ÉµÄÁĞ±í"
   (if ss (progn (setq l (vl-sort (pickset:boxs ss)
           (quote (lambda (box1 box2 / ax1 ax2 ay1 bx1 bx2 by1)
               (if (equal (setq ax1 (caar box1))

@@ -1,5 +1,5 @@
 (defun at-text:att-on-line (blk)
-  "å±æ€§å€¼ç¼©åˆ°è¡¨æ ¼å†…ï¼Œä¸€æ¬¡ä¸€é€‰ä»£ç "
+  "ÊôĞÔÖµËõµ½±í¸ñÄÚ£¬Ò»´ÎÒ»Ñ¡´úÂë"
   (if (setq blk (car(entsel))))
   (setq flag t)
   (while flag

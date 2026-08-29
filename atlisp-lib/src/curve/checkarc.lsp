@@ -1,5 +1,5 @@
 (defun curve:checkarc (en / g)
-  "Е┬╓Ф√╜Е╓ Ф╝╣Г╨©Ф≤╞Е░╕Ф°┴Е°├Е╪╖(Е┤╦Е╨╕/=0)Г └Е╜░Ф╝╣"
+  "еп╤о╤Ю╤ноъйг╥Яспт╡╩║(м╧╤х/=0)╣двс╤н"
   (setq g (vl-remove-if-not (quote (lambda (x)
           (= (car x)
             42)))

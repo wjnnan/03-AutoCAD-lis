@@ -1,5 +1,5 @@
 (defun list:ltrim (lst m)
-    "åˆ é™¤è¡¨å¤´å‰mé¡¹"
+    "É¾³ý±íÍ·Ç°mÏî"
     (cond ((or (zerop m)
                 (minusp m)
                 (>= m (length lst)))

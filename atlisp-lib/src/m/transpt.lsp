@@ -1,5 +1,5 @@
 (defun m:transpt (base usrpt transpt ang)
-    "æ ¹æ®å·²çŸ¥ä¸–ç•Œåæ ‡å’Œç”¨æˆ·åæ ‡çš„åŸºå‡†ç‚¹ï¼Œè®¡ç®—ä¸–ç•Œåæ ‡å¯¹åº”çš„ç”¨æˆ·åæ ‡"
+    "¸ù¾İÒÑÖªÊÀ½ç×ø±êºÍÓÃ»§×ø±êµÄ»ù×¼µã£¬¼ÆËãÊÀ½ç×ø±ê¶ÔÓ¦µÄÓÃ»§×ø±ê"
     (car (geometry:rotatebymatrix (geometry:translatebymatrix (list transpt)
                 base usrpt)
             usrpt (- ang))))

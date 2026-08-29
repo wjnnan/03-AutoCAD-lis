@@ -1,10 +1,10 @@
 (defun curve:rectanglep (ent)
-  "æµ‹è¯•ä¸€ä¸ªå¤šæ®µçº¿æ˜¯å¦ä¸ºçŸ©å½¢,åˆ¤æ–­çŸ©å½¢"
+  "²âÊÔÒ»¸ö¶à¶ÎÏßÊÇ·ñÎª¾ØĞÎ,ÅĞ¶Ï¾ØĞÎ"
   "T or nil"
   (and
    (= 'ename (type ent))
-   (wcmatch (entity:getdxf ent 0) "*POLYLINE") ;; æ˜¯å¤šæ®µçº¿
-   (or ;; 4ç‚¹ä¸”é—­åˆ æˆ– 5ç‚¹é¦–å°¾ç‚¹ç›¸åŒ
+   (wcmatch (entity:getdxf ent 0) "*POLYLINE") ;; ÊÇ¶à¶ÎÏß
+   (or ;; 4µãÇÒ±ÕºÏ »ò 5µãÊ×Î²µãÏàÍ¬
     (and (= (entity:getdxf ent 90) 4)
 	 (= (entity:getdxf ent 70) 1))
     (and (= (entity:getdxf ent 90) 5)
@@ -17,7 +17,7 @@
 	    (- (angle (nth 0 pts)(nth 1 pts))
 	       (angle (nth 1 pts)(nth 2 pts)))))
      (if (> ang pi)(setq ang (- ang pi)))
-     ;; é‚»è¾¹å‚ç›´,å¯¹è¾¹ç›¸ç­‰ä¸”å¯¹è§’é•¿åº¦ç›¸ç­‰
+     ;; ÁÚ±ß´¹Ö±,¶Ô±ßÏàµÈÇÒ¶Ô½Ç³¤¶ÈÏàµÈ
      (and
       (equal ang (* pi 0.5) 1e-6)
       (equal (distance (nth 0 pts)(nth 1 pts))
@@ -26,7 +26,7 @@
       (equal (distance (nth 0 pts)(nth 2 pts))
 	     (distance (nth 1 pts)(nth 3 pts))
 	     1e-6)
-      (if (nth 4 pts) ;; å­˜åœ¨ç¬¬5ç‚¹æ—¶ï¼Œç¬¬5ç‚¹åŒç¬¬1ç‚¹
+      (if (nth 4 pts) ;; ´æÔÚµÚ5µãÊ±£¬µÚ5µãÍ¬µÚ1µã
 	  (< (distance (nth 0 pts)(nth 4 pts)) 1e-6)
 	t)
       ))))

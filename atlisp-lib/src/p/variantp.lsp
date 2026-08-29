@@ -1,4 +1,4 @@
 (defun p:variantp (arg)
-  "åˆ¤æ–­æ˜¯å¦å˜ä½“"
+  "ÅĞ¶ÏÊÇ·ñ±äÌå"
   (equal (type arg)
     (quote variant)))

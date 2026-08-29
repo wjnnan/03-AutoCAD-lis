@@ -1,5 +1,5 @@
 (defun layer:plottable (laylist bool-flag)
-    "å›¾å±‚æ‰“å°å¼€å…³å‡½æ•°"
+    "Í¼²ã´òÓ¡¿ª¹Øº¯Êı"
     (vlax-for each (std:layers)
         (if (member (vla-get-name each)
                 (if (listp laylist)

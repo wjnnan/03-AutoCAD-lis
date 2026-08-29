@@ -1,6 +1,6 @@
 (defun curve:pline-convexity (ent / i lst v)
-  "å¤šæ®µçº¿å‡¸åº¦åˆ—è¡¨ã€‚"
-  "æ•°å€¼åˆ—è¡¨"
+  "¶à¶ÎÏßÍ¹¶ÈÁÐ±í¡£"
+  "ÊýÖµÁÐ±í"
   "(curve:pline-convexity (car (entsel)))"
   (cond ((and (= (quote ename)
           (type ent))

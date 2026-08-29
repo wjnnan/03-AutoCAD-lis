@@ -1,9 +1,9 @@
 (defun @text:sort-serial-number (/ sp txts) 
   (@::prompt 
-   '("é‡æ–°ç¼–æ’æ–‡å­—å‰é¢çš„åºå·ã€‚" "æ”¯æŒ å•ä¸ªæ•°å­— n. æˆ– n.n å½¢å¼å¼€å¤´çš„æ–‡æœ¬ã€‚"))
+   '("ÖØĞÂ±àÅÅÎÄ×ÖÇ°ÃæµÄĞòºÅ¡£" "Ö§³Ö µ¥¸öÊı×Ö n. »ò n.n ĞÎÊ½¿ªÍ·µÄÎÄ±¾¡£"))
   (setq txts (pickset:to-list (ssget '((0 . "text,mtext")))))
   (setq txts (pickset:sort txts "Yx" 10))
-  ;; è·³è¿‡æ— åºå·çš„æ–‡æœ¬
+  ;; Ìø¹ıÎŞĞòºÅµÄÎÄ±¾
   (while 
       (and txts
 	   (cond 
@@ -18,7 +18,7 @@
 		(setq mtxts (cdr mtxts)))
               (null mtxts))))
     (setq txts (cdr txts)))
-  ;; å–ç¬¬ä¸€ä¸ªåºå·
+  ;; È¡µÚÒ»¸öĞòºÅ
   (if 
    (and 
     txts

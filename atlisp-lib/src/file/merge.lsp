@@ -1,5 +1,5 @@
 (defun file:merge (dist lst-files / fp-out fp-in ln)
-  "åˆå¹¶å¤šä¸ªæ–‡ä»¶å†…å®¹åˆ° dist æ–‡ä»¶ä¸­ã€‚"
+  "ºÏ²¢¶à¸öÎÄ¼şÄÚÈİµ½ dist ÎÄ¼şÖĞ¡£"
   (if (and (getvar "lispsys")
 	   (> (getvar "lispssy") 0))
       (setq fp-out (open dist "w" "utf8"))

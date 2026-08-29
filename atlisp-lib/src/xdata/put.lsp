@@ -1,5 +1,5 @@
 (defun xdata:put (ename appid values / xdata xdata-new )
-  "å‘å›¾å…ƒ ename é™„åŠ æ‰©å±•æ•°æ® values,values ä¸ºä¸€ä¸ªå€¼æˆ–ä¸€äº›å€¼çš„åˆ—è¡¨"
+  "ÏòÍ¼Ôª ename ¸½¼ÓÀ©Õ¹Êı¾İ values,values ÎªÒ»¸öÖµ»òÒ»Ğ©ÖµµÄÁĞ±í"
   "ename"
   "(xdata:put(car(entsel)) \"atlisp\"  '(10 100))"
   (setq appid (strcase appid))

@@ -1,13 +1,13 @@
 (defun example:dcl-multirb (/ dcl-fp rbn group-rb rb-value) 
-  "å¤šè¡Œå¤šåˆ—æ— çº¿æŒ‰é’®çš„é€‰å–"
-  "é€‰ä¸­çš„æŒ‰é’®çš„key"
+  "¶àĞĞ¶àÁĞÎŞÏß°´Å¥µÄÑ¡È¡"
+  "Ñ¡ÖĞµÄ°´Å¥µÄkey"
   "(example:dcl-multirb)"
   ;;;; Model
-  (setq rbn 0) ;; ç”¨äºè®°å½•æ— çº¿æŒ‰é’®æ€»æ•°
-  (setq group-rb "slt") ;; ç”¨äºæ§åˆ¶ rb ç³»åˆ—çš„ç»„å
-  (setq rb-value nil) ;; ç”¨äºæœ€åé€‰ä¸­çš„ rb å·
+  (setq rbn 0) ;; ÓÃÓÚ¼ÇÂ¼ÎŞÏß°´Å¥×ÜÊı
+  (setq group-rb "slt") ;; ÓÃÓÚ¿ØÖÆ rb ÏµÁĞµÄ×éÃû
+  (setq rb-value nil) ;; ÓÃÓÚ×îºóÑ¡ÖĞµÄ rb ºÅ
   ;;;; View
-  ;; ç”Ÿæˆ DCL å¯¹è¯æ¡†æ–‡ä»¶ï¼Œä½ ä¹Ÿå¯ä»¥ç”¨è‡ªå·±çš„æ–¹æ³•ç”Ÿæˆã€‚ç”Ÿæˆçš„ dcl æ–‡ä»¶åœ¨ temp æ–‡ä»¶å¤¹ä¸‹ã€‚
+  ;; Éú³É DCL ¶Ô»°¿òÎÄ¼ş£¬ÄãÒ²¿ÉÒÔÓÃ×Ô¼ºµÄ·½·¨Éú³É¡£Éú³ÉµÄ dcl ÎÄ¼şÔÚ temp ÎÄ¼ş¼ĞÏÂ¡£
   (dcl:dialog "buttons")
   (dcl:begin-cluster "radio_row" "")
   (repeat 3 
@@ -29,7 +29,7 @@
   (dcl:end-cluster)
   (dcl:end-dialog str-yes-no)
   ;;;; Control
-  ;; æ§åˆ¶ å¤šè¡Œå¤šåˆ—æ— çº¿æŒ‰é’®çš„é€‰ä¸­ä¸å¦
+  ;; ¿ØÖÆ ¶àĞĞ¶àÁĞÎŞÏß°´Å¥µÄÑ¡ÖĞÓë·ñ
   (defun cb-rb (key / i) 
     (print key)
     (setq i 0)
@@ -38,11 +38,11 @@
         (set_tile (strcat group-rb (itoa i)) "0")
         (set_tile (strcat group-rb (itoa i)) "1");;
       ))
-    (setq rb-value key) ;; æœ€ç»ˆé€‰ä¸­çš„ rb
+    (setq rb-value key) ;; ×îÖÕÑ¡ÖĞµÄ rb
   )
   ;;;; New
   (dcl:new "buttons")
-  ;;;; Init è¯¥ç¨‹åºä¸éœ€è¦
+  ;;;; Init ¸Ã³ÌĞò²»ĞèÒª
   ;;;; Show
   (dcl:show)
   rb-value

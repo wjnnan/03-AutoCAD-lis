@@ -1,5 +1,5 @@
 (defun block:attach (path pt ang scale)
-  "é™„ç€å¤–éƒ¨å‚ç…§ã€‚æµ©è¾°CAD,ä¸­æœ›CADä»¥å—æ–¹å¼æ’å…¥ã€‚"
+  "¸½×ÅÍâ²¿²ÎÕÕ¡£ºÆ³½CAD,ÖĞÍûCADÒÔ¿é·½Ê½²åÈë¡£"
   ""
   "(block:attach \"D:/a.dwg\"
     (getpoint)

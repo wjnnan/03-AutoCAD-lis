@@ -1,15 +1,15 @@
 (defun @block:overblocks (/ *error* blkname ss-blk blks blkent blkname box)
-  (@::prompt "å®šä½ç›¸äº’é‡å çš„åŒåå—")
+  (@::prompt "¶¨Î»Ïà»¥ÖØµşµÄÍ¬Ãû¿é")
   (defun *error* (msg)
-    ;; é‡å¯åŠ¨å¤„ç† 
+    ;; ÖØÆô¶¯´¦Àí 
     (if (= 'file (type dcl_fp))
 	(close (dcl_fp)))
     (princ (strcat msg ))
     (princ))
-  (prompt  "è¯·é€‰æ‹©ä¸€ä¸ªå—:")
+  (prompt  "ÇëÑ¡ÔñÒ»¸ö¿é:")
   (while (null(and (setq blkent (ssget "_:S:E" '((0 . "insert"))))
 		   (setq blkent (ssname blkent 0))))
-    (@:prompt "\næœªé€‰ä¸­å—ï¼Œè¯·é€‰æ‹©ä¸€ä¸ªå—:"))
+    (@:prompt "\nÎ´Ñ¡ÖĞ¿é£¬ÇëÑ¡ÔñÒ»¸ö¿é:"))
   (if blkent
       (progn
 	(setq blks (pickset:to-list (ssget "x" '((0 . "INSERT")))))
@@ -38,18 +38,18 @@
 	      (setq corner (pickset:getbox (pickset:from-list blks-overed) 100))
 	      (command "zoom" "w" (car corner) (cadr corner))
 	      (sssetfirst nil (pickset:from-list blks-overed)))
-	    (princ (@:speak "æ²¡æœ‰å‘ç°é‡å å—ã€‚"))
+	    (princ (@:speak "Ã»ÓĞ·¢ÏÖÖØµş¿é¡£"))
 	    )))
   (princ))
 (defun @block:overblocks2 (/ *error* blkname ss-blk blks blkent blkname box)
-  (@::prompt "å®šä½ç›¸äº’é‡å çš„å—(å—å¤–å›´å°ºå¯¸å¯¹è§’çº¿é•¿åº¦ä¸å¤§äºè®¾å®šå€¼)")
+  (@::prompt "¶¨Î»Ïà»¥ÖØµşµÄ¿é(¿éÍâÎ§³ß´ç¶Ô½ÇÏß³¤¶È²»´óÓÚÉè¶¨Öµ)")
   (defun *error* (msg)
-    ;; é‡å¯åŠ¨å¤„ç† 
+    ;; ÖØÆô¶¯´¦Àí 
     (if (= 'file (type dcl_fp))
 	(close (dcl_fp)))
     (princ (strcat msg ))
     (princ))
-  (@:prompt "è¯·æ¡†é€‰è¦æ£€æµ‹çš„èŒƒå›´:")
+  (@:prompt "Çë¿òÑ¡Òª¼ì²âµÄ·¶Î§:")
   (if (null (setq blks (pickset:to-list (ssget '((0 . "INSERT"))))))
       (setq blks (pickset:to-list (ssget "x" '((0 . "INSERT"))))))
   (setq blks (vl-remove-if '(lambda (x / box)
@@ -68,7 +68,7 @@
 	(setq corner (pickset:getbox ss-blk 10))
 	(command "zoom" "w" (car corner) (cadr corner))
 	(sssetfirst nil (ssadd (ssname ss-blk 0))))
-      (princ (@:speak "æ²¡æœ‰å‘ç°é‡å å—ã€‚"))
+      (princ (@:speak "Ã»ÓĞ·¢ÏÖÖØµş¿é¡£"))
       )
   (princ))
   

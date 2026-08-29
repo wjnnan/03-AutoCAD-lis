@@ -4,7 +4,7 @@
   (princ)
   )
 (defun makepl (argments)
-  ;;argments==>(list pts é—­åˆæ ‡å¿— å…¨å±€å®½åº¦ çº¿å®½ å›¾å±‚ é¢œè‰² åšåº¦ çº¿å‹)ptsä»¥åå¯çœç•¥
+  ;;argments==>(list pts ±ÕºÏ±êÖ¾ È«¾Ö¿í¶È Ïß¿í Í¼²ã ÑÕÉ« ºñ¶È ÏßĞÍ)ptsÒÔºó¿ÉÊ¡ÂÔ
   (entmakex
    (append (mapcar 'cons
 		   '(0 100 100 43 370 8 62 39 6)
@@ -26,7 +26,7 @@
    )
   )
 (defun poinpl (p pt)
-  ;;:ç‚¹æ˜¯å¦åœ¨æŒ‡å®šç‚¹è¡¨?
+  ;;:µãÊÇ·ñÔÚÖ¸¶¨µã±í?
   (equal
    (abs
     (apply '+
@@ -46,7 +46,7 @@
 	  )
   )
 (defun SsgetW (arg / a)
-  ;;é€‰æ‹©æŒ‡å®šçŸ©å½¢åŒºåŸŸ?(ä¸é™å±å¹•èŒƒå›´)
+  ;;Ñ¡ÔñÖ¸¶¨¾ØĞÎÇøÓò?(²»ÏŞÆÁÄ»·¶Î§)
   (ssget "X"
 	 (apply	'append
 		(list '((-4 . "<and") (-4 . ">=,>="))
@@ -66,7 +66,7 @@
 	 )
   )
 (defun SsgetCP (arg / a i pt s b)
-  ;;æ ¹æ®å¤šçº¿æ®µå›¾å…ƒåæˆ–è€…å…¶åæ ‡ç‚¹è¡¨è¿›è¡Œ(ssget"CP"...)ä½†ä¸é™å±å¹•èŒƒå›´
+  ;;¸ù¾İ¶àÏß¶ÎÍ¼ÔªÃû»òÕßÆä×ø±êµã±í½øĞĞ(ssget"CP"...)µ«²»ÏŞÆÁÄ»·¶Î§
   (if (listp (setq a (car arg)))
       (setq pt a
 	    a  (vlax-ename->vla-object (makepl (list pt)))
@@ -122,7 +122,7 @@
   s
   )
 (defun SsgetWP (arg / a i pt s b)
-  ;;æ ¹æ®å¤šçº¿æ®µå›¾å…ƒåæˆ–è€…å…¶åæ ‡ç‚¹è¡¨è¿›è¡Œ(ssget"WP"...)ä½†ä¸é™å±å¹•èŒƒå›´
+  ;;¸ù¾İ¶àÏß¶ÎÍ¼ÔªÃû»òÕßÆä×ø±êµã±í½øĞĞ(ssget"WP"...)µ«²»ÏŞÆÁÄ»·¶Î§
   (if (listp (setq a (car arg)))
       (setq pt a
 	    a  (vlax-ename->vla-object (makepl (list pt)))

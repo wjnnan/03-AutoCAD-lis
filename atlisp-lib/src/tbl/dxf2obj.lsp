@@ -1,5 +1,5 @@
 (defun tbl:dxf2obj (tbl-name)
-  "å°† tbl åç§°è½¬åŒ–ä¸º ActiveX å¯¹è±¡ Document çš„å±æ€§å(æŒ‡å‘å¯¹è±¡é›†çš„)."
+  "½« tbl Ãû³Æ×ª»¯Îª ActiveX ¶ÔÏó Document µÄÊôĞÔÃû(Ö¸Ïò¶ÔÏó¼¯µÄ)."
   "symbol"
   "(tbl:dxf2obj \"layer\")"
   (read

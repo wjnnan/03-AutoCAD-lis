@@ -1,11 +1,11 @@
-(@:define-config '@text:box-type 1 "æœ‰æ•ˆå€¼: 1 çŸ©å½¢ï¼Œ2 åœ† ")
-(@:define-config '@text:box-linewidth 0.5 "æ¡†çº¿å®½åº¦")
-(@:define-config '@text:box-offset 1.0 "æ¡†çº¿åç§»å€¼")
-(@:define-config '@text:box-color  1 "æ¡†çº¿é¢œè‰²å·")
-(@:define-config '@text:box-layer  "textbox" "æ¡†çº¿å›¾å±‚")
+(@:define-config '@text:box-type 1 "ÓĞĞ§Öµ: 1 ¾ØĞÎ£¬2 Ô² ")
+(@:define-config '@text:box-linewidth 0.5 "¿òÏß¿í¶È")
+(@:define-config '@text:box-offset 1.0 "¿òÏßÆ«ÒÆÖµ")
+(@:define-config '@text:box-color  1 "¿òÏßÑÕÉ«ºÅ")
+(@:define-config '@text:box-layer  "textbox" "¿òÏßÍ¼²ã")
 
 (defun @text:draw-box (ent / box newent)
-  ;; æ–‡æœ¬åŠ æ¡†
+  ;; ÎÄ±¾¼Ó¿ò
   (if (list:member
        (entity:getdxf ent 50)
        (list 0 pi (* 0.5 pi) (* 1.5 pi))
@@ -29,7 +29,7 @@
 						       (@:get-config '@text:box-offset)))))) '()))
 	  (if (or (vl-catch-all-error-p newent1) (null newent1))
 	    (progn (princ "
-æ–‡æœ¬æ¡†åç§»å¤±è´¥ã€‚") (setq newent nil))
+ÎÄ±¾¿òÆ«ÒÆÊ§°Ü¡£") (setq newent nil))
 	    (progn
 	  (entdel newent)
 	  
@@ -59,7 +59,7 @@
 						       (@:get-config '@text:box-offset)))))) '()))
 	  (if (or (vl-catch-all-error-p newent1) (null newent1))
 	    (progn (princ "
-æ–‡æœ¬æ¡†åç§»å¤±è´¥ã€‚") (setq newent nil))
+ÎÄ±¾¿òÆ«ÒÆÊ§°Ü¡£") (setq newent nil))
 	    (progn
 	  (entdel newent)
 	  (vla-move newent1
@@ -81,23 +81,23 @@
 	    (setq newent (entity:putdxf newent 43 (@:get-config '@text:box-linewidth))))
 	(setq newent (entity:putdxf newent 62 (@:get-config '@text:box-color)))
 	(if (/= "" (@:get-config '@text:box-layer))
-	    ;; åˆ›å»ºå›¾å±‚
+	    ;; ´´½¨Í¼²ã
 	    (entity:putdxf newent 8 (@:get-config '@text:box-layer)))
 	)
     )
   )
 (defun @text:menu-draw-box (/ txt s1)
-  (@::prompt "é€‰æ‹©æˆ–è¾“å…¥æ–‡æœ¬ï¼Œé€‰æ‹©æŸ¥æ‰¾èŒƒå›´ï¼ŒæŸ¥æ‰¾å†…å®¹ç›¸åŒçš„æ–‡æœ¬å¹¶åŠ æ¡†ã€‚")
+  (@::prompt "Ñ¡Ôñ»òÊäÈëÎÄ±¾£¬Ñ¡Ôñ²éÕÒ·¶Î§£¬²éÕÒÄÚÈİÏàÍ¬µÄÎÄ±¾²¢¼Ó¿ò¡£")
   (if (null layer:make)(require 'layer:*))
   (if (= 'subr (type layer:make))
       (layer:make (@:get-config '@text:box-layer) 1 nil nil))
-  ;; (setq en1 (car (entsel "è¯·é€‰æ‹©ä¸€ä¸ªå•è¡Œæ–‡æœ¬:")))
+  ;; (setq en1 (car (entsel "ÇëÑ¡ÔñÒ»¸öµ¥ĞĞÎÄ±¾:")))
   ;; (setq pt-base (cdr (assoc 10 (entget en1))))
-  (setq txt (ui:getstring "è¾“å…¥è¦åŒ¹é…çš„æ–‡å­—(æ”¯æŒé€šé…ç¬¦)æˆ–ç‚¹é€‰æ–‡å­—:"))
+  (setq txt (ui:getstring "ÊäÈëÒªÆ¥ÅäµÄÎÄ×Ö(Ö§³ÖÍ¨Åä·û)»òµãÑ¡ÎÄ×Ö:"))
   ;; (sleep 0.1)
   (if (and txt)
       (progn
-	(@:prompt "\nè¯·é€‰æ‹©éœ€è¦æŸ¥æ‰¾çš„åŒºåŸŸ(å›è½¦æˆ–å³é”®å…¨é€‰):")
+	(@:prompt "\nÇëÑ¡ÔñĞèÒª²éÕÒµÄÇøÓò(»Ø³µ»òÓÒ¼üÈ«Ñ¡):")
 	(if (null (setq s1 (ssget (list '(0 . "text") (cons 1 txt)))))
 	    (setq s1 (ssget "x" (list '(0 . "text") (cons 1 txt)))))
 	(mapcar
@@ -105,8 +105,8 @@
 	 (pickset:to-list s1))
 	)))
 (defun @text:menu-remove-box ()
-  (@::prompt '("åˆ é™¤æ–‡æœ¬æ¡†"))
-  (@:prompt "è¯·é€‰æ‹©éœ€è¦åˆ é™¤çš„åŒºåŸŸ(å›è½¦æˆ–å³é”®å…¨é€‰):")
+  (@::prompt '("É¾³ıÎÄ±¾¿ò"))
+  (@:prompt "ÇëÑ¡ÔñĞèÒªÉ¾³ıµÄÇøÓò(»Ø³µ»òÓÒ¼üÈ«Ñ¡):")
   (setq boxs (pickset:to-list
 	      (ssget (list '(0 . "lwpolyline,circle")
 			   (cons 8 (@:get-config '@text:box-layer))))))

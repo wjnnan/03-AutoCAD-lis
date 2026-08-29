@@ -1,6 +1,6 @@
 (defun excel:save (xlsapp)
-  "ä¿å­˜å½“å‰å·¥ä½œç°¿\nå‚æ•°:xlsApp:å½“å‰å·¥ä½œç°¿å¯¹è±¡"
-  "æ­£ç¡®ä¿å­˜åº”è¯¥è¿”å›tï¼Œé”™è¯¯è¿”å›nil"
+  "±£´æµ±Ç°¹¤×÷²¾\n²ÎÊı:xlsApp:µ±Ç°¹¤×÷²¾¶ÔÏó"
+  "ÕıÈ·±£´æÓ¦¸Ã·µ»Øt£¬´íÎó·µ»Ønil"
   "(excel:save xlsobj)"
   (equal (vlax-invoke-method (vlax-get-property xlsapp "ActiveWorkbook")
       "Save")

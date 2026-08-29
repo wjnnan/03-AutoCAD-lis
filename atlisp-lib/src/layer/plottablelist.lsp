@@ -1,5 +1,5 @@
 (defun layer:plottablelist (/ each out)
-    "è¿”å›å¯æ‰“å°å›¾å±‚åˆ—è¡¨"
+    "·µ»Ø¿É´òÓ¡Í¼²ãÁĞ±í"
     (vlax-for each (std:layers)
         (if (= (vla-get-plottable each)
                 :vlax-true)

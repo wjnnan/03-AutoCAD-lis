@@ -1,5 +1,5 @@
 (defun ini:parse ( filename / fp  result *error*)
-  "è§£æiniæ–‡ä»¶ã€‚"
+  "½âÎöiniÎÄ¼ş¡£"
   "list"
   
   (defun *error* (msg)

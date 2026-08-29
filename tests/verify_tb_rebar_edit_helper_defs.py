@@ -6,7 +6,7 @@ REBAR_EDIT = ROOT / "TB-Toolbox" / "tb-mod-rebar-edit.lsp"
 
 
 def main() -> int:
-    text = REBAR_EDIT.read_text(encoding="utf-8")
+    text = REBAR_EDIT.read_text(encoding="gbk")
 
     depth = 0
     in_string = False

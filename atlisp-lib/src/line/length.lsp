@@ -1,4 +1,4 @@
 (defun line:length (ent-line)
-    "æ±‚çº¿æ®µå®ä½“é•¿åº¦"
+    "ÇóÏß¶ÎÊµÌå³¤¶È"
     (apply (quote distance)
         (entity:getdxf ent-line (quote (10 11)))))

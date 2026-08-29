@@ -1,4 +1,4 @@
 (defun m:length (start end)
-    "涓ょ偣闀垮害(璺濈)锛岀瓑鍚屼簬涓ょ偣鍚戦噺鐨勬ā"
+    "两点长度(距离)，等同于两点向量的模"
     (vector:norm (mapcar (quote -)
             end start)))

@@ -1,8 +1,8 @@
 (defun @m:cal (str / arxs)
   (setq arxs (arx))
-  ;; æ›¿æ¢å¤§æ‹¬å·
-  (setq lq (mapcar '(lambda(x)(string:l2s-ansi (list x))) (string:s2l-ansi "ï¼ˆï½›{ï¼»["))
-	rq (mapcar '(lambda(x)(string:l2s-ansi (list x))) (string:s2l-ansi "ï¼‰ï½ï¼½}]")))
+  ;; Ìæ»»´óÀ¨ºÅ
+  (setq lq (mapcar '(lambda(x)(string:l2s-ansi (list x))) (string:s2l-ansi "£¨£û{£Û["))
+	rq (mapcar '(lambda(x)(string:l2s-ansi (list x))) (string:s2l-ansi "£©£ı£İ}]")))
   (mapcar '(lambda(x)
 	    (setq str
 	     (string:subst-all "(" x str)))
@@ -18,7 +18,7 @@
 
       
 (defun @m:cal-text ()
-  (@::prompt "é€‰æ‹©ä¸€ä¸ªå…¬å¼æ–‡å­—ï¼Œå¹¶è¿›è¡Œè®¡ç®—ã€‚")
+  (@::prompt "Ñ¡ÔñÒ»¸ö¹«Ê½ÎÄ×Ö£¬²¢½øĞĞ¼ÆËã¡£")
   (setq @m:*result*
 	(@m:cal
 	 (text:remove-fmt

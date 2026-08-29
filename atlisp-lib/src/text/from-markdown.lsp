@@ -1,5 +1,5 @@
 (defun text:from-markdown (str / lst-str str-tmp)
-  "å°† markdown æ ¼å¼çš„æ–‡æœ¬è½¬åŒ–ä¸ºmtextæ ¼å¼"
+  "½« markdown ¸ñÊ½µÄÎÄ±¾×ª»¯Îªmtext¸ñÊ½"
   "String"
   (setq lst-str (string:to-list str "\n"))
   (defun handle-strong (str / tmp i res)
@@ -19,13 +19,13 @@
   (defun handle-header (str )
     (cond
       ((= "* "(substr str 1 2))
-       (strcat "\\C2;Â· \\C3;" (substr str 3)))
+       (strcat "\\C2;¡¤ \\C3;" (substr str 3)))
       ((= "** "(substr str 1 3))
-       (strcat "\\C2;Â·Â· \\C3;" (substr str 4)))
+       (strcat "\\C2;¡¤¡¤ \\C3;" (substr str 4)))
       ((= "*** "(substr str 1 4))
-       (strcat "\\C2;Â·Â·Â· \\C3;" (substr str 5)))
+       (strcat "\\C2;¡¤¡¤¡¤ \\C3;" (substr str 5)))
       ((= "**** "(substr str 1 5))
-       (strcat "\\C2;Â·Â·Â·Â· \\C3;" (substr str 6)))
+       (strcat "\\C2;¡¤¡¤¡¤¡¤ \\C3;" (substr str 6)))
       (t str)))
 
 

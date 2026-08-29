@@ -1,5 +1,5 @@
 (defun ini:save (lst-ini filename / *error* fp)
-  "ä¿å­˜ lst-ini è¡¨ åˆ° ini æ–‡ä»¶ã€‚"
+  "±£´æ lst-ini ±í µ½ ini ÎÄ¼ş¡£"
   "T or nil"
   (defun *error* (msg)
     (if (= 'file (type fp))(close fp))

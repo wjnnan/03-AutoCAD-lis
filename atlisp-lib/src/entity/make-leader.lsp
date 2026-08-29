@@ -1,5 +1,5 @@
 (defun entity:make-leader (startpt endpt)
-  "鍒涘缓鏃犳爣璁扮殑绠ご鏍囨敞"
+  "创建无标记的箭头标注"
   (entmake (list (quote (0 . "leader"))
       (quote (100 . "AcDbEntity"))
       (quote (100 . "AcDbLeader"))

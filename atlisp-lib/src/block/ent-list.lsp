@@ -1,7 +1,7 @@
 (defun block:ent-list (blkname / blk)
-  "杩斿洖鍧楀唴鍚勫浘鍏冪殑鍒楄〃"
-  "鍥惧厓鍒楄〃"
-  "(block:ent-list \"鍥炬\")"
+  "返回块内各图元的列表"
+  "图元列表"
+  "(block:ent-list \"图框\")"
   (if (setq blk (tblobjname "block"
         blkname))
     (progn (setq ent blk)

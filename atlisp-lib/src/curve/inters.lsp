@@ -1,14 +1,14 @@
 (defun curve:inters (obj1 obj2 mode / getinterpts inter-objlist inter-objlists inter-ss-obj res)
-  "è·å–å¯¹è±¡äº¤ç‚¹åˆ—è¡¨
-å‚æ•° obj1 obj2 : é€‰æ‹©é›†ï¼Œvlaå¯¹è±¡ï¼Œå›¾å…ƒåï¼Œvlaå¯¹è±¡è¡¨ï¼Œå›¾å…ƒè¡¨ï¼Œnil
-å‚æ•° mode: è¯¥å‚æ•°åªæœ‰obj1ã€obj2ä¸ºå›¾å…ƒæˆ–vlaå¯¹è±¡æ—¶ï¼Œæœä»ä¸‹åˆ—è®¾ç½®ï¼Œå…¶ä»–æƒ…å†µå‡é»˜è®¤å¯¹è±¡ä¸å»¶ä¼¸
-     obj1 å’Œ obj2 å‚æ•°å¯ä»»æ„ç»„åˆï¼Œä½†ä¸èƒ½å…¨ä¸ºnil
-     acExtendNone å¯¹è±¡ä¸å»¶ä¼¸
-     acExtendThisEntity å»¶ä¼¸obj1
-     acExtendOtherEntity å»¶ä¼¸obj2
-     acExtendBoth å¯¹è±¡éƒ½å»¶ä¼¸
-     nil = acExtendNone å¯¹è±¡ä¸å»¶ä¼¸"
-  "å¯¹è±¡äº¤ç‚¹åˆ—è¡¨"
+  "»ñÈ¡¶ÔÏó½»µãÁĞ±í
+²ÎÊı obj1 obj2 : Ñ¡Ôñ¼¯£¬vla¶ÔÏó£¬Í¼ÔªÃû£¬vla¶ÔÏó±í£¬Í¼Ôª±í£¬nil
+²ÎÊı mode: ¸Ã²ÎÊıÖ»ÓĞobj1¡¢obj2ÎªÍ¼Ôª»òvla¶ÔÏóÊ±£¬·ş´ÓÏÂÁĞÉèÖÃ£¬ÆäËûÇé¿ö¾ùÄ¬ÈÏ¶ÔÏó²»ÑÓÉì
+     obj1 ºÍ obj2 ²ÎÊı¿ÉÈÎÒâ×éºÏ£¬µ«²»ÄÜÈ«Îªnil
+     acExtendNone ¶ÔÏó²»ÑÓÉì
+     acExtendThisEntity ÑÓÉìobj1
+     acExtendOtherEntity ÑÓÉìobj2
+     acExtendBoth ¶ÔÏó¶¼ÑÓÉì
+     nil = acExtendNone ¶ÔÏó²»ÑÓÉì"
+  "¶ÔÏó½»µãÁĞ±í"
   "(curve:inters obj1 obj2 acExtendNone)"
   (or mode (setq mode acextendnone))
   (defun getinterpts (obj1 obj2 mode / iplist)
@@ -16,11 +16,13 @@
 	(setq obj1 (e2o obj1)))
     (or (p:vlap obj2)
 	(setq obj2 (e2o obj2)))
-    (setq iplist (vl-catch-all-apply (quote vlax-safearray->list)
-				     (list (vlax-variant-value (vla-intersectwith obj1 obj2 mode)))))
+    (setq iplist (vl-catch-all-apply 'vla-intersectwith (list obj1 obj2 mode)))
+    (if (not (vl-catch-all-error-p iplist))
+	(setq iplist (vl-catch-all-apply 'vlax-safearray->list
+					 (list (vlax-variant-value iplist)))))
     (if (vl-catch-all-error-p iplist)
 	nil (list:split-3d iplist)))
-  ;; å¤šå¯¹1
+  ;; ¶à¶Ô1
   (defun inter-ss-obj (ss obj / res1)
     (cond
       ((p:picksetp ss)
@@ -31,7 +33,7 @@
      i ss
      (setq res1 (append res1 (getinterpts i obj acextendnone))))
     res1)
-  ;; è‡ªäº¤
+  ;; ×Ô½»
   (defun inter-objlist (lst / ob1 rtn)
     (cond
       ((= 'pickset (type lst))
@@ -45,18 +47,18 @@
 			       rtn))))
     (apply (quote append)
 	   (reverse rtn)))
-  ;; å¤šå¯¹å¤š
+  ;; ¶à¶Ô¶à
   (defun inter-objlists (ol1 ol2 / rtn)
     (cond
       ((= 'pickset (type ol1))
        (setq ol1 (pickset:to-vlalist ol1)))
-      ((p:ename-listp ol1)
+      ((p:ename-listp ol2)
        (setq ol1 (mapcar 'e2o ol1)))
       )
     (cond
       ((= 'pickset (type ol2))
        (setq ol2 (pickset:to-vlalist ol2)))
-      ((p:ename-listp ol1)
+      ((p:ename-listp ol2)
        (setq ol2 (mapcar 'e2o ol2)))
       )
     (foreach ob1 ol1
@@ -67,13 +69,13 @@
 	   (reverse rtn)))
 
   (cond
-    ;;å•å¯¹å•
+    ;;µ¥¶Ôµ¥
     ((and (or (p:vlap obj1)
 	      (p:enamep obj1))
           (or (p:vlap obj2)
 	      (p:enamep obj2)))
      (setq res (getinterpts obj1 obj2 mode)))
-    ;; å¤šå¯¹å•
+    ;; ¶à¶Ôµ¥
     ((and (or (p:vlap obj1)
 	      (p:enamep obj1))
 	  (or (p:picksetp obj2)
@@ -86,7 +88,7 @@
           (p:picksetp obj1))
      (setq res (inter-ss-obj obj1 obj2)))
     
-    ;; è‡ªäº¤
+    ;; ×Ô½»
     ((and (not obj1)
 	  (or (p:picksetp obj2)
 	      (p:ename-listp obj2)
@@ -98,7 +100,7 @@
 	      (p:vla-listp obj1)))
      (setq res (inter-objlist obj1)))
 
-    ;; å¤šå¯¹å¤š
+    ;; ¶à¶Ô¶à
     ((and(or (p:vla-listp obj1)
 	     (p:picksetp obj1)
 	     (p:ename-listp obj1)

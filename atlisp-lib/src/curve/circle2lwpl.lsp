@@ -1,6 +1,6 @@
 (defun curve:circle2lwpl (ent-circle int / pt-center r pts bulge convexity ent i)
-  "å°†åœ†è½¬æ¢æˆ ç”± int æ®µç»„æˆçš„å¤šæ®µçº¿ã€‚"
-  "å¤šæ®µçº¿å›¾å…ƒ"
+  "½«Ô²×ª»»³É ÓÉ int ¶Î×é³ÉµÄ¶à¶ÎÏß¡£"
+  "¶à¶ÎÏßÍ¼Ôª"
   (setq int (fix int))
   (if (< (fix int) 2)(setq int 2))
   (setq pt-center (entity:getdxf ent-circle 10)

@@ -1,5 +1,5 @@
 (defun string:align-by-length (str len / flag)
-  "å°†å­—èŠ‚é•¿åº¦å°äºŽ len çš„å­—ç¬¦ä¸²å‰åŽå¢žåŠ ç©ºæ ¼ï¼Œä½¿å…¶é•¿åº¦ç­‰äºŽ lenã€‚å¯ç”¨äºŽDCLä¸­çš„å­—ç¬¦å¯¹é½ã€‚"
+  "½«×Ö½Ú³¤¶ÈÐ¡ÓÚ len µÄ×Ö·û´®Ç°ºóÔö¼Ó¿Õ¸ñ£¬Ê¹Æä³¤¶ÈµÈÓÚ len¡£¿ÉÓÃÓÚDCLÖÐµÄ×Ö·û¶ÔÆë¡£"
   "String"
   "(string:align-by-length \"abc\" 8) => \"   abc  \""
   (if (null str)(setq str ""))

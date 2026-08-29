@@ -1,6 +1,6 @@
 (defun excel:new (ishide / rtn)
-  "鏂板缓Excel宸ヤ綔绨縗n鍙傛暟:ishide:鏄惁鍙锛宼涓哄彲瑙侊紝nil涓轰笉鍙"
-  "涓�涓〃绀篍xcel宸ヤ綔绨跨殑vla瀵硅薄"
+  "新建Excel工作簿\n参数:ishide:是否可见，t为可见，nil为不可见"
+  "一个表示Excel工作簿的vla对象"
   "(excel:New t)"
   (if (setq rtn (vlax-get-or-create-object "Excel.Application"))
     (progn (vlax-invoke (vlax-get-property rtn (quote workbooks))

@@ -1,7 +1,7 @@
 (defun entity:make-text (str pt1 fontsize ang kgb qx dqys / y1 y2)
-  "ç”Ÿæˆä¸€ä¸ªTEXTå•è¡Œæ–‡æœ¬.\nå‚æ•°è¯´æ˜ï¼š\nfontsize: å­—é«˜\nang: è§’åº¦\nkgb: å®½é«˜æ¯”\nqx: å€¾æ–œè§’\ndqys: å¯¹é½æ–¹å¼ï¼ŒL å·¦ M ä¸­ R å³ï¼ŒT ä¸Š M ä¸­ B ä¸‹ã€‚\n"
-  "return:æ–‡å­—å›¾å…ƒå"
-  "example:(entity:make-text \"æ–‡å­—\"
+  "Éú³ÉÒ»¸öTEXTµ¥ĞĞÎÄ±¾.\n²ÎÊıËµÃ÷£º\nfontsize: ×Ö¸ß\nang: ½Ç¶È\nkgb: ¿í¸ß±È\nqx: ÇãĞ±½Ç\ndqys: ¶ÔÆë·½Ê½£¬L ×ó M ÖĞ R ÓÒ£¬T ÉÏ M ÖĞ B ÏÂ¡£\n"
+  "return:ÎÄ×ÖÍ¼ÔªÃû"
+  "example:(entity:make-text \"ÎÄ×Ö\"
     (getpoint)
     3 0 0.8 0 \"LB\")"
   (if (= (quote str)

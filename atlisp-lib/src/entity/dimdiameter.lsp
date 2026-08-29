@@ -1,6 +1,6 @@
 (defun entity:dimdiameter (pt1 pt2 pt-txt)
-  "ç”Ÿæˆç›´å¾„æ ‡æ³¨"
-  "return:æ ‡æ³¨å›¾å…ƒå"
+  "Éú³ÉÖ±¾¶±ê×¢"
+  "return:±ê×¢Í¼ÔªÃû"
   "example:(entity:dimdiameter (getpoint)
     (getpoint)(getpoint))"
   (entmakex (list (quote (0 . "DIMENSION"))

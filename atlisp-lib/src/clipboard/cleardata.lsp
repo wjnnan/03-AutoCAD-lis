@@ -1,5 +1,5 @@
 (defun clipboard:cleardata (/ cb)
-  "æ¸…ç©ºå‰ªè´´æ¿å†…å®¹"
+  "Çå¿Õ¼ôÌù°åÄÚÈİ"
   "-1"
   "(clipboard:cleardata)"
   (clipboard:init)

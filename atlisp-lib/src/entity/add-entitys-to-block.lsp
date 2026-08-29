@@ -1,5 +1,5 @@
 (defun entity:add-entitys-to-block (block ss / lst mat)
-  "æ·»åŠ é€‰æ‹©é›†åˆ°å—å®šä¹‰ã€‚"
+  "Ìí¼ÓÑ¡Ôñ¼¯µ½¿é¶¨Òå¡£"
   (setq lst (pickset->vlalist ss)
     mat (entity:reference->definition block)
     mat (vlax-tmatrix (append (mapcar (quote append)

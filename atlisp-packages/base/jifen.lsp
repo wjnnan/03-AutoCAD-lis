@@ -1,18 +1,18 @@
-  1.;;;ç”¨å„ç§æ–¹æ³•æ±‚ç§¯åˆ†çš„ç¨‹åº
-   2.;;;ä¸»ç¨‹åº
+  1.;;;ÓÃ¸÷ÖÖ·½·¨Çó»ı·ÖµÄ³ÌĞò
+   2.;;;Ö÷³ÌĞò
    3.(vl-load-com)
    4.;;(arxload "geomcal.arx")
-   5.(prompt "è¯·è¾“å…¥CCCå‘½ä»¤!")
+   5.(prompt "ÇëÊäÈëCCCÃüÁî!")
    6.(defun C:ccc (/ F ID N OK X1 X2)
    7.  (setq id (load_dialog "integration.dcl"))
    8.  (setq ok 2)
    9.  (if (new_dialog "dcl_Integration" id)
  10.    (progn
- 11.      (action_tile "F" "(setq f $value)") 			;ä»å¯¹è¯æ¡†ä¸­å¾—åˆ°è¡¨è¾¾å¼
- 12.      (action_tile "X1" "(setq x1 (myread $value))")		;ä»å¯¹è¯æ¡†ä¸­å¾—åˆ°ä¸‹å±Š
- 13.      (action_tile "X2" "(setq x2 (myread $value))")		;ä»å¯¹è¯æ¡†ä¸­å¾—åˆ°ä¸Šå±Š
- 14.      (action_tile "N" "(setq n (myread $value))") 		;ä»å¯¹è¯æ¡†ä¸­å¾—åˆ°ç²¾åº¦
- 15.      (action_tile "help" "(choose 1)")				;å¸®åŠ©
+ 11.      (action_tile "F" "(setq f $value)") 			;´Ó¶Ô»°¿òÖĞµÃµ½±í´ïÊ½
+ 12.      (action_tile "X1" "(setq x1 (myread $value))")		;´Ó¶Ô»°¿òÖĞµÃµ½ÏÂ½ì
+ 13.      (action_tile "X2" "(setq x2 (myread $value))")		;´Ó¶Ô»°¿òÖĞµÃµ½ÉÏ½ì
+ 14.      (action_tile "N" "(setq n (myread $value))") 		;´Ó¶Ô»°¿òÖĞµÃµ½¾«¶È
+ 15.      (action_tile "help" "(choose 1)")				;°ïÖú
  16.      (action_tile "S1" "(Read_DLg_Data x1 x2 n f \"S1\")")
  17.      (action_tile "S2" "(Read_DLg_Data x1 x2 n f \"S2\")")
  18.      (action_tile "S3" "(Read_DLg_Data x1 x2 n f \"S3\")")
@@ -23,7 +23,7 @@
  23.  (unload_dialog ID)
  24.  (princ)
  25.)
- 26.;;;è¯»æ•°æ®å¹¶æ±‚è§£
+ 26.;;;¶ÁÊı¾İ²¢Çó½â
  27.(defun Read_DLg_Data (x1 x2 n f key / EPS RET T0 E)
  28.  (if (and x1 x2 n f)
  29.    (progn
@@ -40,55 +40,55 @@
  40.	((= key "S1")
  41.	 (setq ret (rtos (romberg x1 x2 eps) 2 20))
  42.	 (set_tile "R1" ret)
- 43.	 (princ "\né¾™è´æ ¼ç§¯åˆ†æ³•ä¸º:")
+ 43.	 (princ "\nÁú±´¸ñ»ı·Ö·¨Îª:")
  44.	)
  45.	((= key "S2")
  46.	 (setq ret (rtos (simpson x1 x2 eps) 2 20))
  47.	 (set_tile "R2" ret)
- 48.	 (princ "\nè¾›æ™®æ£®ç§¯åˆ†æ³•ä¸º:")
+ 48.	 (princ "\nĞÁÆÕÉ­»ı·Ö·¨Îª:")
  49.	)
  50.	((= key "S3")
  51.	 (setq ret (rtos (Atrapezia x1 x2 1e-4 eps) 2 20))
  52.	 (set_tile "R3" ret)
- 53.	 (princ "\nè‡ªé€‚åº”ç§¯åˆ†æ³•ä¸º:")
+ 53.	 (princ "\n×ÔÊÊÓ¦»ı·Ö·¨Îª:")
  54.	)
  55.	((= key "S4")
  56.	 (setq ret (rtos (Trapezia x1 x2 eps) 2 20))
- 57.	 (princ "\nå˜æ­¥é•¿ç§¯åˆ†æ³•ä¸º:")
+ 57.	 (princ "\n±ä²½³¤»ı·Ö·¨Îª:")
  58.	 (set_tile "R4" ret)
  59.	)
  60.      )
  61.      (princ ret)
- 62.      (princ "\nç”¨æ—¶:")
+ 62.      (princ "\nÓÃÊ±:")
  63.      (princ (* (- (getvar "TDUSRTIMER") t0) 86400))
- 64.      (princ "ç§’")
+ 64.      (princ "Ãë")
  65.      (princ)
  66.    )
- 67.    (alert "æ— æ•ˆçš„è¾“å…¥æˆ–æœ‰ç©ºè¾“å…¥!")
+ 67.    (alert "ÎŞĞ§µÄÊäÈë»òÓĞ¿ÕÊäÈë!")
  68.  )
  69.)
  70.(defun myread (str / e)
  71.  (setq e (exp 1))
  72.  (eval (trans_format str))
  73.)
- 74.;;;å¸®åŠ©è¯´æ˜å‡½æ•°
+ 74.;;;°ïÖúËµÃ÷º¯Êı
  75.(defun choose (n)
  76.  (if (= n 1)
  77.    (alert
- 78.    "æ–¹ç¨‹å¼åªæ¥å—x(å°å†™)ä¸ºå˜é‡,ä¸è§„èŒƒå¾ˆå¯èƒ½å‡ºé”™!
- 79.    "\né¾™è´æ ¼æ•ˆç‡æœ€é«˜ï¼Œå˜æ­¥é•¿æ³•æ•ˆç‡æœ€ä½(æ…ç”¨).
- 80.       "\nå»ºè®®ä¸è¦å¼€å§‹æŠŠç²¾åº¦è®¾ç½®å¾ˆé«˜ï¼Œç‰¹åˆ«å¯¹äºå˜æ­¥é•¿æ³•.
- 81.    " \nç¨‹åºé‡‡ç”¨å¤šç§æ–¹æ³•æ±‚ç§¯,ä¸ä¿è¯æ¯ä¸ªæ–¹ç¨‹éƒ½æœ‰æ•ˆ!
- 82.	 "\næœ‰ä»€ä¹ˆé—®é¢˜email: highflybird@qq.com"
+ 78.    "·½³ÌÊ½Ö»½ÓÊÜx(Ğ¡Ğ´)Îª±äÁ¿,²»¹æ·¶ºÜ¿ÉÄÜ³ö´í!
+ 79.    "\nÁú±´¸ñĞ§ÂÊ×î¸ß£¬±ä²½³¤·¨Ğ§ÂÊ×îµÍ(É÷ÓÃ).
+ 80.       "\n½¨Òé²»Òª¿ªÊ¼°Ñ¾«¶ÈÉèÖÃºÜ¸ß£¬ÌØ±ğ¶ÔÓÚ±ä²½³¤·¨.
+ 81.    " \n³ÌĞò²ÉÓÃ¶àÖÖ·½·¨Çó»ı,²»±£Ö¤Ã¿¸ö·½³Ì¶¼ÓĞĞ§!
+ 82.	 "\nÓĞÊ²Ã´ÎÊÌâemail: highflybird@qq.com"
  83.    )
- 84.    (set_tile "error" "æ–¹ç¨‹å¼åªæ¥å—x(å°å†™)ä¸ºå˜é‡.")
+ 84.    (set_tile "error" "·½³ÌÊ½Ö»½ÓÊÜx(Ğ¡Ğ´)Îª±äÁ¿.")
  85.  )
  86.)
- 87.;;;ç”¨æ–¹å¼1å®šä¹‰è¡¨è¾¾å¼æ±‚å€¼å‡½æ•°
+ 87.;;;ÓÃ·½Ê½1¶¨Òå±í´ïÊ½ÇóÖµº¯Êı
  88.(defun func1 (x)
  89.  (cal f)
  90.)
- 91.;;; é¾™è´æ ¼ç§¯åˆ†æ³•
+ 91.;;; Áú±´¸ñ»ı·Ö·¨
  92.(defun Romberg (a b eps / EP H I K M N P Q S X Y Y0)
  93.  (setq h (- b a))
  94.  (setq y nil)
@@ -130,7 +130,7 @@
  130.  )
  131.  q
  132.)
- 133.;;; è¾›æ™®æ£®ç§¯åˆ†æ³•
+ 133.;;; ĞÁÆÕÉ­»ı·Ö·¨
  134.(defun Simpson (a b eps / EP H ITER K N P S1 S2 T1 T2 X)
  135.  (setq n 1)
  136.  (setq h (- b a))
@@ -157,7 +157,7 @@
  157.  )
  158.  s2
  159.)
- 160.;;; å˜æ­¥é•¿æ¢¯å½¢æ±‚ç§¯åˆ†æ³•
+ 160.;;; ±ä²½³¤ÌİĞÎÇó»ı·Ö·¨
  161.(defun Trapezia	(a b eps / H K N P S T1 T2 X iter)
  162.  (setq n 1)
  163.  (setq h (- b a))
@@ -181,7 +181,7 @@
  181.  )
  182.  t2
  183.)
- 184.;;; æ­¥é•¿ç§¯åˆ†æ³•
+ 184.;;; ²½³¤»ı·Ö·¨
  185.(defun trapzd (a b n / DEL IT SUM TNM X)
  186.  (if (= n 1)
  187.    (setq s (* 0.5 (- b a) (+ (func a) (func b))))
@@ -203,7 +203,7 @@
  203.  )
  204.)
  205.
- 206.;;; è‡ªé€‚åº”æ±‚ç§¯åˆ†æ³•
+ 206.;;; ×ÔÊÊÓ¦Çó»ı·Ö·¨
  207.(defun Atrapezia (a b d eps / F0 F1 H S T0 TT)
  208.  (setq h (- b a))
  209.  (setq TT '(0. . 0.))
@@ -237,6 +237,6 @@
 (DEFUN c:SAPI ()
   (setq sapi (vlax-create-object "Sapi.SpVoice"))
   ;;(vlax-invoke sapi "Speak" "Would you like to play Global Thermo Nuclear War ?" 0) ;;;
-  (vlax-invoke sapi "Speak" "ç¨‹åºç°åœ¨å¼€å§‹!" 0)
+  (vlax-invoke sapi "Speak" "³ÌĞòÏÖÔÚ¿ªÊ¼!" 0)
   (vlax-release-object sapi)
 )

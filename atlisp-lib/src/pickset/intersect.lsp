@@ -1,6 +1,6 @@
 (defun pickset:intersect (ss1 ss2)
-  "æ±‚ä¸¤ä¸ªé€‰æ‹©é›†çš„äº¤é›†ï¼Œss1,ss2 ä¸ºé€‰æ‹©é›†ï¼Œå›¾å…ƒåˆ—è¡¨ã€‚"
-  "å›¾å…ƒåˆ—è¡¨"
+  "ÇóÁ½¸öÑ¡Ôñ¼¯µÄ½»¼¯£¬ss1,ss2 ÎªÑ¡Ôñ¼¯£¬Í¼ÔªÁÐ±í¡£"
+  "Í¼ÔªÁÐ±í"
   "(pickset:intersect (ssget)(ssget))"
   (if (p:picksetp ss1)
       (setq ss1 (pickset:to-list ss1)))

@@ -1,5 +1,5 @@
 (defun list:insert-nth (value n lst)
-    "æ’å…¥å…ƒç´ vaåˆ°lstè¡¨çš„ç¬¬nä½"
+    "²åÈëÔªËØvaµ½lst±íµÄµÚnÎ»"
     (if (= n 0)
         (cons value lst)
         (cons (car lst)

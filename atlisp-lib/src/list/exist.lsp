@@ -1,6 +1,6 @@
 (defun list:exist (lst item)
-    "鍒ゆ柇item鏄惁鍦ㄥ垪琛ㄥ唴"
-    "瀛樺湪t锛屽弽涔媙il"
+    "判断item是否在列表内"
+    "存在t，反之nil"
     "(list:exist '(1 2 3 4)
         3)"
     (apply (quote or)

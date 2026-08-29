@@ -1,6 +1,6 @@
 (defun entity:change-textstyle (textstylename fontname bigfontname / txtstyle)
-  "æ›´æ”¹æŒ‡å®šå­—ä½“æ ·å¼çš„å­—ä½“\nå‚æ•°:\nTextStyleName:å­—ä½“æ ·å¼åç§°\nFontName:å­—ä½“åå­—\nBigFontName:å¤§å­—ä½“åå­—"
-  "æ— "
+  "¸ü¸ÄÖ¸¶¨×ÖÌåÑùÊ½µÄ×ÖÌå\n²ÎÊı:\nTextStyleName:×ÖÌåÑùÊ½Ãû³Æ\nFontName:×ÖÌåÃû×Ö\nBigFontName:´ó×ÖÌåÃû×Ö"
+  "ÎŞ"
   "(entity:ChangeTextStyle \"STANDARD\"
     \"SIMfang.TTF\"
     \"\")\n(entity:Change-TextStyle \"STANDARD\"

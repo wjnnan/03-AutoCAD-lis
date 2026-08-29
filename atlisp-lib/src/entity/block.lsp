@@ -1,5 +1,5 @@
 (defun entity:block (ss name insertionpoint / block)
-  "å°†é€‰æ‹©é›†ã€å›¾å…ƒè¡¨ã€å¯¹è±¡è¡¨åˆ›å»ºä¸ºå—ã€‚"
+  "½«Ñ¡Ôñ¼¯¡¢Í¼Ôª±í¡¢¶ÔÏó±í´´½¨Îª¿é¡£"
   (cond
    ((p:ename-listp ss)
     (setq ss (vla:objarray (mapcar (quote vlax-ename->vla-object)

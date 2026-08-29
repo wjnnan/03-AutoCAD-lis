@@ -1,8 +1,8 @@
-(@:define-config 'prefabricated-building:layer-of-steelfoundation "基础插筋" "基础插筋图层")
+(@:define-config 'prefabricated-building:layer-of-steelfoundation "�������" "�������ͼ��")
 (defun prefabricated-building:make-steel-in-foundation ()
-  ;; 从构件生成基础插筋
-  ;; 选择构件
-  ;; 逐个在指定图层生成点
+  ;; �ӹ������ɻ������
+  ;; ѡ�񹹼�
+  ;; �����ָ��ͼ�����ɵ�
   (layer:make (@:get-config 'prefabricated-building:layer-of-steelfoundation) 1 nil nil)
   (setq components-of-wall (pickset:to-list(ssget '((0 . "insert")(2 . "*Q@##0")))))
   (foreach
@@ -43,7 +43,7 @@
        8 (@:get-config 'prefabricated-building:layer-of-steelfoundation))))))
 	
 (defun prefabricated-building:draw-steel-in-foundation ()
-  (@:help (list "点位绘筋"))
+  (@:help (list "��λ���"))
   (setq pts
 	(mapcar '(lambda(x)
 		  (entity:getdxf x 10))
@@ -65,9 +65,9 @@
 
   )
 (defun prefabricated-building:dim-steel-in-foundation ()
-  (@:help (list "定位插筋"))
-  (@:prompt "请选择一行或一列插筋点:")
+  (@:help (list "��λ���"))
+  (@:prompt "��ѡ��һ�л�һ�в���:")
   (setq ss (ssget (list '(0 . "point")
 			(cons 8 (@:get-config 'prefabricated-building:layer-of-steelfoundation)))))
-  (command "qdim" ss )
+  (if ss (command "qdim" ss ))
   )

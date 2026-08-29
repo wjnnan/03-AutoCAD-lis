@@ -1,6 +1,6 @@
-(@:define-config '@text:order-prefix "" "æ–‡å­—å‰ç¼€å†…å®¹")
-(@:define-config '@text:order-suffix "" "æ–‡å­—åç¼€å†…å®¹")
-(@:define-config '@text:order-startnum "1" "æ–‡å­—èµ·å§‹åºå·")
+(@:define-config '@text:order-prefix "" "ÎÄ×ÖÇ°×ºÄÚÈİ")
+(@:define-config '@text:order-suffix "" "ÎÄ×Öºó×ºÄÚÈİ")
+(@:define-config '@text:order-startnum "1" "ÎÄ×ÖÆğÊ¼ĞòºÅ")
 
 (defun @text:menu-add-order (/ *error* @dclfiled @dclfiledame @dclid ent errorsave k 
                              loop mod1 mod2 mod3 mod4 num num_ obj return# ss str1 str 
@@ -27,18 +27,18 @@
         @dclfiled    (open @dclfiledame "w")
   )
   (write-line 
-    "dzmjjsbdc:dialog { label = \"æ–‡æœ¬åŠ å‰åç¼€\" ;
-                            :row {:edit_box {key=\"textaddstring1\";label=\"å‰ç¼€\";width=10;}
-                                    :edit_box {key=\"textaddstring2\";label=\"åç¼€\";width=10;}
-                                    :edit_box {key=\"textaddstring3\";label=\"èµ·å§‹åºå·\";width=10;value=1;}
+    "dzmjjsbdc:dialog { label = \"ÎÄ±¾¼ÓÇ°ºó×º\" ;
+                            :row {:edit_box {key=\"textaddstring1\";label=\"Ç°×º\";width=10;}
+                                    :edit_box {key=\"textaddstring2\";label=\"ºó×º\";width=10;}
+                                    :edit_box {key=\"textaddstring3\";label=\"ÆğÊ¼ĞòºÅ\";width=10;value=1;}
                                    }
                               :spacer{hight=10;} :spacer{hight=10;}
                               :boxed_radio_column
-                             {label=\"æ’åºæ–¹å¼\";
-                                :radio_button{label=\"åºå· å‰ç¼€ æ–‡å­— åç¼€\";key=\"x1\";value=0;}
-                                :radio_button{label=\"å‰ç¼€ åºå· æ–‡å­— åç¼€\";key=\"x2\";value=0;}
-                                :radio_button{label=\"å‰ç¼€ æ–‡å­— åºå· åç¼€\";key=\"x3\";value=0;}
-                                :radio_button{label=\"å‰ç¼€ æ–‡å­— åç¼€ åºå·\";key=\"x4\";value=1;}
+                             {label=\"ÅÅĞò·½Ê½\";
+                                :radio_button{label=\"ĞòºÅ Ç°×º ÎÄ×Ö ºó×º\";key=\"x1\";value=0;}
+                                :radio_button{label=\"Ç°×º ĞòºÅ ÎÄ×Ö ºó×º\";key=\"x2\";value=0;}
+                                :radio_button{label=\"Ç°×º ÎÄ×Ö ĞòºÅ ºó×º\";key=\"x3\";value=0;}
+                                :radio_button{label=\"Ç°×º ÎÄ×Ö ºó×º ĞòºÅ\";key=\"x4\";value=1;}
                              }ok_cancel;}"
 
 
@@ -85,7 +85,7 @@
      )
      (setq loop t)
      (while loop 
-       (princ "\né€‰æ‹©æ–‡æœ¬<é€€å‡º>")
+       (princ "\nÑ¡ÔñÎÄ±¾<ÍË³ö>")
        (cond 
          ((setq ss (ssget ":s" '((0 . "text"))))
           (repeat (setq k (sslength ss)) 

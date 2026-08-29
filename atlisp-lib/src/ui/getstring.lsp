@@ -1,5 +1,5 @@
 (defun ui:getstring (msg / flag sn ents ss)
-  "å½“æŒ‰ä¸‹é”®ç›˜å­—ç¬¦é”®æ—¶ï¼Œè¿”å›žå­—ç¬¦ä¸²ï¼Œå½“é¼ æ ‡å·¦é”®ç‚¹å–æ–‡å­—æˆ–æ ‡æ³¨æ—¶ï¼Œå–æ–‡å­—æˆ–æ ‡æ³¨çš„å€¼ã€‚"
+  "µ±°´ÏÂ¼üÅÌ×Ö·û¼üÊ±£¬·µ»Ø×Ö·û´®£¬µ±Êó±ê×ó¼üµãÈ¡ÎÄ×Ö»ò±ê×¢Ê±£¬È¡ÎÄ×Ö»ò±ê×¢µÄÖµ¡£"
   "String"
   "(ui:getstring \"Please input string or select text/dimension\")"
   (princ msg)
@@ -7,17 +7,17 @@
   (setq flag t)
   (while flag
     (setq gr (grread t 16))
-    "å¤„ç†è¾“å…¥"
+    "´¦ÀíÊäÈë"
     (cond ((= 2 (car gr))
-	   "æŒ‰ä¸‹äº†é”®ç›˜æŒ‰é”®"
+	   "°´ÏÂÁË¼üÅÌ°´¼ü"
 	   (cond
 	    ((member (cadr gr) '(13 32))
-	     "å›žè½¦ æˆ–ç©ºæ ¼ï¼Œè¿”å›žè¾“å…¥çš„å€¼"
+	     "»Ø³µ »ò¿Õ¸ñ£¬·µ»ØÊäÈëµÄÖµ"
 	     (princ "\n")
 	     (setq flag nil)
 	     )
 	    (t
-	     "æŒç»­è¾“å…¥å­—ç¬¦"
+	     "³ÖÐøÊäÈë×Ö·û"
 	     (setq sn (strcat (chr (cadr gr))(getstring (chr (cadr gr)))))
 	     (setq flag nil)
 	     ;;(setq sn (strcat sn (chr (cadr gr))))
@@ -25,7 +25,7 @@
 	    )
 	    ))
 	  ((= 3 (car gr))
-	   "æŒ‰ä¸‹é¼ æ ‡å·¦é”®ï¼Œé€‰ä¸­å›¾å…ƒï¼Œè¯»å€¼"
+	   "°´ÏÂÊó±ê×ó¼ü£¬Ñ¡ÖÐÍ¼Ôª£¬¶ÁÖµ"
 	   (setq ents (pickset:to-list (ssget (cadr gr) '((0 . "DIM*,TEXT")))))
 	   (if ents
 	       (progn
@@ -36,7 +36,7 @@
 		 (if (> (strlen sn) 0) (setq flag nil))
 		 )))
 	  ((= 5 (car gr))
-           "ç§»åŠ¨é¼ æ ‡,é«˜äº®å›¾å…ƒ"
+           "ÒÆ¶¯Êó±ê,¸ßÁÁÍ¼Ôª"
 	   (if ss(redraw (ssname ss 0) 4))
 	   (setq ss (ssget (cadr gr) '((0 . "DIM*,TEXT"))))
 	   (if ss(redraw (ssname ss 0) 3))

@@ -1,10 +1,10 @@
 (defun dcl:text (key label style)
-  "dcl æ˜¾ç¤ºæ–‡æœ¬ã€‚"
+  "dcl ÏÔÊ¾ÎÄ±¾¡£"
   ""
   "(dcl:text \"text1\" \"text string\" \"\")"
   ;; (set (read (strcat "in-"
   ;; 		     key))
-  ;;      (eval (read (strcat "(lambda()(alert (strcat \"éœ€è¦å®šä¹‰å›è°ƒå‡½æ•° (cb-"
+  ;;      (eval (read (strcat "(lambda()(alert (strcat \"ĞèÒª¶¨Òå»Øµ÷º¯Êı (cb-"
   ;; 			   key ")\")))"))))
   (write-line (strcat ": text{key=\""
 		      key "\";"

@@ -1,5 +1,5 @@
 (defun curve:pickclosepointto (obj pt / p1 p2 pp)
-  "å¤šæ®µçº¿ä¸Šè·ç¦»ptç‚¹æœ€è¿‘çš„ä¸€ä¸ªé¡¶ç‚¹"
+  "¶à¶ÎÏßÉÏ¾àÀëptµã×î½üµÄÒ»¸ö¶¥µã"
   (setq pp (curve:subsegment-picked-points obj pt))
   (setq p1 (car pp))
   (setq p2 (cadr pp))

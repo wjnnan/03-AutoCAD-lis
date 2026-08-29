@@ -1,5 +1,5 @@
 (defun entity:make-lines (pts)
-  "鎸夊涓偣鍧愭爣鍒涘缓杩炵画鐩寸嚎"
+  "按多个点坐标创建连续直线"
   (mapcar (quote entity:make-line)
     (list:rtrim pts 1)
     (cdr pts)))

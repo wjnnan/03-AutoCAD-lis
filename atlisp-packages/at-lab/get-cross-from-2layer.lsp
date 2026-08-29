@@ -1,19 +1,19 @@
-(@:add-menu "@è¯•éªŒå®¤" "å±‚é—´çº¿äº¤ç‚¹" '(@lab:get-cross-from-2layer))
+(@:add-menu "@ÊÔÑéÊÒ" "²ã¼äÏß½»µã" '(@lab:get-cross-from-2layer))
 (defun @lab:get-cross-from-2layer (/ layer1 layer2 pt1 pt2 ents1 ents2 res)
-  (@::prompt '("æ±‚ä¸¤ä¸ªå›¾å±‚çš„çº¿çš„äº¤ç‚¹å½¢æˆåœ†"
-            " æ“ä½œï¼šé€‰æ‹©ç¬¬ä¸€ä¸ªå›¾å±‚ï¼Œç„¶åæç¤ºé€‰æ‹©ç¬¬äºŒä¸ªå›¾å±‚ï¼Œç„¶åé€‰æ‹©å›¾çº¸èŒƒå›´ï¼ŒèŒƒå›´å†…çš„å›¾å±‚ä¸€å’Œå›¾å±‚äºŒçš„çº¿çš„äº¤ç‚¹å½¢æˆåœ†å½¢"))
-  ;; å–ç¬¬ä¸€ã€äºŒä¸ªå›¾å±‚å
+  (@::prompt '("ÇóÁ½¸öÍ¼²ãµÄÏßµÄ½»µãĞÎ³ÉÔ²"
+            " ²Ù×÷£ºÑ¡ÔñµÚÒ»¸öÍ¼²ã£¬È»ºóÌáÊ¾Ñ¡ÔñµÚ¶ş¸öÍ¼²ã£¬È»ºóÑ¡ÔñÍ¼Ö½·¶Î§£¬·¶Î§ÄÚµÄÍ¼²ãÒ»ºÍÍ¼²ã¶şµÄÏßµÄ½»µãĞÎ³ÉÔ²ĞÎ"))
+  ;; È¡µÚÒ»¡¢¶ş¸öÍ¼²ãÃû
   (if (setq ent1 (car (entsel)))
     (setq layer1 (entity:get-layer ent1))
   (if (setq ent2 (car (entsel)))
     (setq layer2 (entity:get-layer ent2))
-  ;; å–å›¾çº¸èŒƒå›´
-  (setq pt1 (getpoint "å–å›¾çº¸èŒƒå›´çš„ç¬¬ä¸€ä¸ªç‚¹"))
-  (if (null pt1) (progn (princ "\næœªé€‰æ‹©å›¾çº¸èŒƒå›´ -- é€€å‡º.") (quit)))
-  ;; ä¸ºäº†ç›´è§‚äº›ï¼Œæˆ‘ä»¬ä½¿ç”¨ getcorner å‡½æ•°
-  (setq pt2 (getcorner pt1 "å–å›¾çº¸èŒƒå›´çš„ç¬¬äºŒä¸ªç‚¹"))
+  ;; È¡Í¼Ö½·¶Î§
+  (setq pt1 (getpoint "È¡Í¼Ö½·¶Î§µÄµÚÒ»¸öµã"))
+  (if (null pt1) (progn (princ "\nÎ´Ñ¡ÔñÍ¼Ö½·¶Î§ -- ÍË³ö.") (quit)))
+  ;; ÎªÁËÖ±¹ÛĞ©£¬ÎÒÃÇÊ¹ÓÃ getcorner º¯Êı
+  (setq pt2 (getcorner pt1 "È¡Í¼Ö½·¶Î§µÄµÚ¶ş¸öµã"))
 
-  ;; éœ€æ±‚ä¸­è¦æ±‚ä¸éœ€è¦åŒä¸€å›¾å±‚çš„æ›²çº¿
+  ;; ĞèÇóÖĞÒªÇó²»ĞèÒªÍ¬Ò»Í¼²ãµÄÇúÏß
   (setq res nil)
   (foreach ent1 (pickset:to-list
                  (ssget "c" pt1 pt2  (list (cons 0 (@:get-config '@curve:types))(cons 8 layer1))))
@@ -22,8 +22,8 @@
                     (setq res (append res
                                       (curve:inters ent1 ent2 acextendnone)
                                       ))))
-  ;; å»æ‰ç©ºå€¼
+  ;; È¥µô¿ÕÖµ
   (setq res (vl-remove nil res))
-  ;; ç”»åœ†,åŠå¾„ 50
+  ;; »­Ô²,°ë¾¶ 50
   (entity:make-circle res 50)
   )

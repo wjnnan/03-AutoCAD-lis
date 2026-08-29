@@ -1,4 +1,4 @@
 (defun cl:acons (key value alist)
-  "å‘ alist å‰æ·»åŠ é”®å€¼å¯¹ã€‚"
+  "Ïò alist Ç°Ìí¼Ó¼üÖµ¶Ô¡£"
   "alist"
   (cons (cons key value) alist))

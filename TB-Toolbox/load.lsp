@@ -1,7 +1,7 @@
-;;; load.lsp -- TB-Toolbox ç»Ÿä¸€åŠ è½½å…¥å£
+;;; load.lsp -- TB-Toolbox Í³Ò»¼ÓÔØÈë¿Ú
 
 (defun tb:resolve-root (/ found)
-  "å®šä½å·¥å…·ç®±ç›®å½•ã€‚"
+  "¶¨Î»¹¤¾ßÏäÄ¿Â¼¡£"
   (cond
     (*TB:PATH* *TB:PATH*)
     ((and *UC:ROOT* (findfile (strcat *UC:ROOT* "\\TB-Toolbox\\tb-core.lsp")))
@@ -14,11 +14,11 @@
 
 (if (not *TB:ROOT*)
   (progn
-    (princ "\n[TB] æ— æ³•è‡ªåŠ¨å®šä½å·¥å…·ç®±ç›®å½•ã€‚")
-    (princ "\n[TB] è¯·å…ˆè®¾ç½® *TB:PATH*ï¼Œæˆ–å°† TB-Toolbox åŠ å…¥æ”¯æŒæ–‡ä»¶æœç´¢è·¯å¾„ã€‚")
+    (princ "\n[TB] ÎÞ·¨×Ô¶¯¶¨Î»¹¤¾ßÏäÄ¿Â¼¡£")
+    (princ "\n[TB] ÇëÏÈÉèÖÃ *TB:PATH*£¬»ò½« TB-Toolbox ¼ÓÈëÖ§³ÖÎÄ¼þËÑË÷Â·¾¶¡£")
     (princ))
   (progn
-    ;; ç»Ÿä¸€æ ¸å¿ƒæŒ‰ä»“åº“æ ¹ç›®å½•åŠ è½½
+    ;; Í³Ò»ºËÐÄ°´²Ö¿â¸ùÄ¿Â¼¼ÓÔØ
     (setq *UC:ROOT* (vl-filename-directory *TB:ROOT*))
 
     (setq *TB:FILES*
@@ -36,6 +36,7 @@
         "tb-lib-dim.lsp"
         "tb-lib-rebar.lsp"
         "tb-lib-rebar-edit.lsp"
+        "tb-lib-struct.lsp"
         "tb-mod-edit.lsp"
         "tb-mod-text.lsp"
         "tb-mod-dim.lsp"
@@ -53,9 +54,10 @@
         "tb-mod-rebar-edit.lsp"
         "tb-mod-batchprint.lsp"
         "tb-main.lsp"
+        "tb-mod-hotkey.lsp"
       ))
 
-    (princ (strcat "\n[TB] å·¥å…·ç®±ç›®å½•: " *TB:ROOT*))
+    (princ (strcat "\n[TB] ¹¤¾ßÏäÄ¿Â¼: " *TB:ROOT*))
     (setq *TB:OK* 0
           *TB:FAIL* 0)
 
@@ -66,25 +68,25 @@
           (strcat *TB:ROOT* "\\" fname)))
       (if (findfile fpath)
         (progn
-          (princ (strcat "\n[TB] åŠ è½½: " fname))
+          (princ (strcat "\n[TB] ¼ÓÔØ: " fname))
           (if (vl-catch-all-error-p
                 (setq *TB:LOAD-ERR*
                   (vl-catch-all-apply 'load (list fpath))))
             (progn
-              (princ (strcat " -> å¤±è´¥: " (vl-catch-all-error-message *TB:LOAD-ERR*)))
+              (princ (strcat " -> Ê§°Ü: " (vl-catch-all-error-message *TB:LOAD-ERR*)))
               (setq *TB:FAIL* (1+ *TB:FAIL*)))
             (setq *TB:OK* (1+ *TB:OK*))))
         (progn
-          (princ (strcat "\n[TB] ç¼ºå¤±æ–‡ä»¶: " fpath))
+          (princ (strcat "\n[TB] È±Ê§ÎÄ¼þ: " fpath))
           (setq *TB:FAIL* (1+ *TB:FAIL*)))))
 
     (princ
       (strcat
-        "\n[TB] åŠ è½½å®Œæˆ: "
+        "\n[TB] ¼ÓÔØÍê³É: "
         (itoa *TB:OK*)
-        " æˆåŠŸ"
+        " ³É¹¦"
         (if (> *TB:FAIL* 0)
-          (strcat " / " (itoa *TB:FAIL*) " å¤±è´¥")
+          (strcat " / " (itoa *TB:FAIL*) " Ê§°Ü")
           "")))
 
     (setq *TB:FILES* nil

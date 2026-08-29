@@ -1,5 +1,5 @@
 (defun curve:3pt2bulge-plus (pt1 pt2 pt3)
-  "pt2æ˜¯å¦åœ¨åœ†å¼§ä¸Šçš„ä¸‰ç‚¹æ±‚å‡¸åº¦ï¼Œä»»æ„ä¸¤ç‚¹çš„å‚çº¿çš„äº¤ç‚¹å³åœ†å¿ƒã€‚"
+  "pt2ÊÇ·ñÔÚÔ²»¡ÉÏµÄÈıµãÇóÍ¹¶È£¬ÈÎÒâÁ½µãµÄ´¹ÏßµÄ½»µã¼´Ô²ĞÄ¡£"
   "number"
   "(curve:3pt2bulge-plus (getpoint)(getpoint)(getpoint))"
   (if (curve:pt-in-arc-p pt2 pt1 pt3 (curve:3pt2bulge pt1 pt2 pt3))

@@ -1,6 +1,6 @@
 (defun at-dim:make-deviation (/ anzhuangfeng)
-  (@::prompt "è°ƒæ•´å°ºå¯¸äº§ç”Ÿåå·®ã€‚")
-  (setq anzhuangfeng (getint "è¯·è¾“å…¥è¦è°ƒæ•´å°ºå¯¸åå·®å€¼ï¼Œå‡å°‘è¾“å…¥-å·:"))
+  (@::prompt "µ÷Õû³ß´ç²úÉúÆ«²î¡£")
+  (setq anzhuangfeng (getint "ÇëÊäÈëÒªµ÷Õû³ß´çÆ«²îÖµ£¬¼õÉÙÊäÈë-ºÅ:"))
   (mapcar
    '(lambda(x)
      (entity:putdxf
@@ -9,7 +9,7 @@
       (itoa (fix (+ anzhuangfeng (entity:getdxf x 42))))))
    (pickset:to-list (ssget '((0 . "DIMENSION"))))))
 (defun at-dim:true-value ()
-  (@::prompt "æ˜¾ç¤ºä¸ºå°ºå¯¸çš„å®é™…å€¼ã€‚")
+  (@::prompt "ÏÔÊ¾Îª³ß´çµÄÊµ¼ÊÖµ¡£")
   (mapcar
    '(lambda(x)
      (entity:putdxf

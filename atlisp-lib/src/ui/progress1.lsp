@@ -1,12 +1,12 @@
 (defun ui:progress1 (ratio)
-  "åŸºäºŽ ACET çš„çŠ¶æ€æ è¿›åº¦æ¡."
+  "»ùÓÚ ACET µÄ×´Ì¬À¸½ø¶ÈÌõ."
   ""
   "(ui:progress1 30)"
   (if (type acet-ui-progress)
     (progn (if (null progress)
-        (setq progress (acet-ui-progress "å·²ç»å®Œæˆ"
+        (setq progress (acet-ui-progress "ÒÑ¾­Íê³É"
             100)))
       (acet-ui-progress ratio)
       (if (>= ratio 100)
         (setq progress (acet-ui-progress))))
-    (princ "æ²¡æœ‰å®‰è£… ExpressTools")))
+    (princ "Ã»ÓÐ°²×° ExpressTools")))

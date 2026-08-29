@@ -1,5 +1,5 @@
 (defun excel:set-backcolor (xlapp index colorindex)
-  "è®¾ç½®å……å¡«è‰²\nå‚æ•°:xlapp:å·²æ‰“å¼€çš„excelæ–‡ä»¶å¯¹è±¡\nå‚æ•°:index:åŒºåŸŸç´¢å¼•ï¼ŒA1å¼•ç”¨æ ¼å¼æˆ–è€…è¡Œåˆ—è¡¨\nå‚æ•°:colorindex:é¢œè‰²ç´¢å¼•0-56å·"
+  "ÉèÖÃ³äÌîÉ«\n²ÎÊı:xlapp:ÒÑ´ò¿ªµÄexcelÎÄ¼ş¶ÔÏó\n²ÎÊı:index:ÇøÓòË÷Òı£¬A1ÒıÓÃ¸ñÊ½»òÕßĞĞÁĞ±í\n²ÎÊı:colorindex:ÑÕÉ«Ë÷Òı0-56ºÅ"
   (vlax-put-property (vlax-get-property (excel:get-range xlapp index)
       (quote interior))
     (quote colorindex)

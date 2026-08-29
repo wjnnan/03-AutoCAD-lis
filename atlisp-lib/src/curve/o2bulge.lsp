@@ -1,5 +1,5 @@
 (defun curve:o2bulge (pt1 pt2 o / l)
-  "æ±‚ä¸¤ç‚¹ pt1 pt2 å’Œ åœ†å¿ƒ O è¡¨ç¤ºçš„é€†æ—¶é’ˆå¼§çš„å‡¸åº¦ã€‚"
+  "ÇóÁ½µã pt1 pt2 ºÍ Ô²ÐÄ O ±íÊ¾µÄÄæÊ±Õë»¡µÄÍ¹¶È¡£"
   (/ (if (> (geometry:turn-right-p pt1 o pt2)
             0)
       (+ (distance o pt1)

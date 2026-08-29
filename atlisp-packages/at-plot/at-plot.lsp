@@ -9,7 +9,7 @@
 (defun @plot:hello ()
   (@:help (strcat "The content can show in user interface .\n"))
   (princ))
-;; å›¾æ¡†å¯ç”¨æ¯”ä¾‹
-(@:define-config '@plot:scale-of-frame "100 50 30 25 20 150 120 200 500 1 5.996" "å›¾å¹…æ¯”ä¾‹ï¼Œä»¥é€—å·æˆ–ç©ºæ ¼åˆ†éš”")
-(@:define-config '@plot:layers "*" "å›¾æ¡†æ‰€åœ¨å›¾å±‚ï¼Œå¤šä¸ªå›¾å±‚ä»¥ ',' è¿›è¡Œåˆ†éš”ã€‚æ”¯æŒ * é€šé…ç¬¦ã€‚")
-(@:define-config '@plot:export-path "D:\\output\\" "æ‰“å°è¾“å‡ºè·¯å¾„ã€‚")
+;; Í¼¿ò¿ÉÓÃ±ÈÀı
+(@:define-config '@plot:scale-of-frame "100 50 30 25 20 150 120 200 500 1 5.996" "Í¼·ù±ÈÀı£¬ÒÔ¶ººÅ»ò¿Õ¸ñ·Ö¸ô")
+(@:define-config '@plot:layers "*" "Í¼¿òËùÔÚÍ¼²ã£¬¶à¸öÍ¼²ãÒÔ ',' ½øĞĞ·Ö¸ô¡£Ö§³Ö * Í¨Åä·û¡£")
+(@:define-config '@plot:export-path "D:\\output\\" "´òÓ¡Êä³öÂ·¾¶¡£")

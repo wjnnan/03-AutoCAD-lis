@@ -1,5 +1,5 @@
 (defun datetime:get-internal-real-time (/ cdate year mon day h m s)
-  "è·å–æœ¬åœ°å®æ—¶æ—¶é—´ï¼Œå•ä½ä¸ºç§’"
+  "»ñÈ¡±¾µØÊµÊ±Ê±¼ä£¬µ¥Î»ÎªÃë"
   "Int"
   (setq cdate (getvar "cdate"))
   (datetime:mktime

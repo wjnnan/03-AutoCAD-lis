@@ -1,5 +1,5 @@
 (defun m:trim (realnum / dimzin1 result)
-    "鏁板�煎悗缁浂娓呴櫎"
+    "数值后续零清除"
     (setq dimzin1 (getvar "dimzin"))
     (setvar "dimzin"
         8)

@@ -363,10 +363,9 @@
 		  (strcat value "-PIPE")
 		)
 	      )
-	      (vla-put-layer
-		(p-ensure-object en)
-		$addnew-layer
-	      )
+	      (vl-catch-all-apply 'vla-put-layer
+		(list (p-ensure-object en)
+		      $addnew-layer))
 	    )
 	 )
        )
@@ -984,10 +983,9 @@
                          (strcat serv "-PIPE")
                       )
                     )
-                    (vla-put-layer
-                      (p-ensure-object (psk-comp-getename comp))
-                      $addnew-layer
-                    )
+                    (vl-catch-all-apply 'vla-put-layer
+                      (list (p-ensure-object (psk-comp-getename comp))
+                            $addnew-layer))
                   )
                )
                ;; D DN W 属性设置额外处理TODO

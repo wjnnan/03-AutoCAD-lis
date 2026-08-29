@@ -1,7 +1,7 @@
 (defun pickset:ssget (msg params / sel)
-  "è‡ªå®šä¹‰å¸¦æç¤ºç¬¦çš„ssget "
-  "é€‰æ‹©é›†"
-  "(pickset:ssget \"é€‰æ‹©å¯¹è±¡ï¼š\"
+  "×Ô¶¨Òå´øÌáÊ¾·ûµÄssget "
+  "Ñ¡Ôñ¼¯"
+  "(pickset:ssget \"Ñ¡Ôñ¶ÔÏó£º\"
     '(\"_WP\"
       pt_list ((0 . \"LINE\")
         (62 . 5))))"

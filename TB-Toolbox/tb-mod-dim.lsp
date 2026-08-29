@@ -1,54 +1,59 @@
-;;; tb-mod-dim.lsp â€” æ ‡æ³¨å¤„ç†æ¨¡å—
-;;; ç»„åˆ dim:* entity:* sel:* åº“å‡½æ•°ã€‚
-;;; åŸæ–‡ä»¶æ¥æºï¼šF:\ç»“æ„æ’ä»¶\æ ‡æ³¨.lspï¼ˆ8å‘½ä»¤ï¼‰â€” å»é‡æ”¹å†™
+;;; tb-mod-dim.lsp ¡ª ±ê×¢´¦ÀíÄ£¿é
+;;; ×éºÏ dim:* entity:* sel:* ¿âº¯Êı¡£
+;;; Ô­ÎÄ¼şÀ´Ô´£ºF:\½á¹¹²å¼ş\±ê×¢.lsp£¨8ÃüÁî£©¡ª È¥ÖØ¸ÄĞ´
 
 ;; ============================================================================
-;; æ ‡æ³¨å½’ä½
+;; ±ê×¢¹éÎ»
 ;; ============================================================================
 
 (defun c:fw (/ ss)
-  "æ ‡æ³¨å¤ä½ï¼šå°†é€‰ä¸­æ ‡æ³¨æ–‡å­—å›åˆ°é»˜è®¤ä½ç½®ã€‚"
+  (uc:guard-begin '())
+  "±ê×¢¸´Î»£º½«Ñ¡ÖĞ±ê×¢ÎÄ×Ö»Øµ½Ä¬ÈÏÎ»ÖÃ¡£"
   (if (setq ss (ssget '((0 . "DIMENSION"))))
     (dim:home-selection ss))
-  (princ "\næ ‡æ³¨å·²å¤ä½ã€‚")
-  (princ))
+  (princ "\n±ê×¢ÒÑ¸´Î»¡£")
+  (princ)
+  (uc:guard-end))
 
 
 ;; ============================================================================
-;; æ ‡æ³¨å–é½
+;; ±ê×¢È¡Æë
 ;; ============================================================================
 
 (defun c:bbq (/ ss p0 p00)
-  "æ ‡æ³¨å–é½ï¼šå°†æ ‡æ³¨çº¿å¯¹é½åˆ°æŒ‡å®šä½ç½®ã€‚
-ç¬¬ä¸€æ¬¡ç‚¹å‡»=æ ‡æ³¨çº¿ä½ç½®ï¼Œç¬¬äºŒæ¬¡ç‚¹å‡»=å°ºå¯¸ç•Œçº¿ä½ç½®ã€‚"
+  (uc:guard-begin '())
+  "±ê×¢È¡Æë£º½«±ê×¢Ïß¶ÔÆëµ½Ö¸¶¨Î»ÖÃ¡£
+µÚÒ»´Îµã»÷=±ê×¢ÏßÎ»ÖÃ£¬µÚ¶ş´Îµã»÷=³ß´ç½çÏßÎ»ÖÃ¡£"
   (if (setq ss (ssget '((0 . "DIMENSION"))))
     (progn
-      (if (setq p0 (getpoint "\næ ‡æ³¨çº¿å¯¹é½ä½ç½®ï¼ˆå›è½¦è·³è¿‡ï¼‰: "))
+      (if (setq p0 (getpoint "\n±ê×¢Ïß¶ÔÆëÎ»ÖÃ£¨»Ø³µÌø¹ı£©: "))
         (sel:for-each ss
           '(lambda (e / p10 p11 ent)
              (setq ent (entget e)
                    p10 (cdr (assoc 10 ent))
                    p11 (cdr (assoc 11 ent)))
-             (entity:set-dxf e 10 (list (car p10) (cadr p0) 0.0))
-             (entity:set-dxf e 11 (list (car p11) (cadr p0) 0.0)))))
-      (if (setq p00 (getpoint "\nå°ºå¯¸ç•Œçº¿ä½ç½®ï¼ˆå›è½¦è·³è¿‡ï¼‰: "))
+             (entity:set-dxf e 10 (list (car p10) (cadr p0) (caddr p10)))
+             (entity:set-dxf e 11 (list (car p11) (+ (cadr p0) (- (cadr p11) (cadr p10))) (caddr p11))))))
+      (if (setq p00 (getpoint "\n³ß´ç½çÏßÎ»ÖÃ£¨»Ø³µÌø¹ı£©: "))
         (sel:for-each ss
           '(lambda (e / p13 p14 ent)
              (setq ent (entget e)
                    p13 (cdr (assoc 13 ent))
                    p14 (cdr (assoc 14 ent)))
-             (entity:set-dxf e 13 (list (car p13) (cadr p00) 0.0))
-             (entity:set-dxf e 14 (list (car p14) (cadr p00) 0.0)))))))
-  (princ))
+             (entity:set-dxf e 13 (list (car p13) (cadr p00) (caddr p13)))
+             (entity:set-dxf e 14 (list (car p14) (cadr p00) (caddr p14))))))))
+  (princ)
+  (uc:guard-end))
 
 
 ;; ============================================================================
-;; æ ‡æ³¨ç­‰åˆ†
+;; ±ê×¢µÈ·Ö
 ;; ============================================================================
 
 (defun c:bbf (/ ss parts-val)
-  "å°†æ ‡æ³¨æ–‡å­—æ˜¾ç¤ºä¸ºç­‰åˆ†æ ¼å¼ã€‚ä¾‹ï¼š3000 â†’ 3000/2=1500ã€‚"
-  (setq parts-val (max 2 (safe:get-int "ç­‰åˆ†æ•°" (sys:ifnil *TMP:LAST-DIM-DIV* 2))))
+  (uc:guard-begin '())
+  "½«±ê×¢ÎÄ×ÖÏÔÊ¾ÎªµÈ·Ö¸ñÊ½¡£Àı£º3000 ¡ú 3000/2=1500¡£"
+  (setq parts-val (max 2 (safe:get-int "µÈ·ÖÊı" (sys:ifnil *TMP:LAST-DIM-DIV* 2))))
   (setq *TMP:LAST-DIM-DIV* parts-val)
   (if (setq ss (ssget '((0 . "DIMENSION"))))
     (sel:for-each ss
@@ -58,57 +63,70 @@
            (strcat (rtos meas 2 (sys:get '*SYS:DIM-PRECISION*))
                    "/" (itoa parts-val)
                    "=" (rtos (/ meas parts-val) 2 (sys:get '*SYS:DIM-PRECISION*)))))))
-  (princ))
+  (princ)
+  (uc:guard-end))
 
 
 ;; ============================================================================
-;; æ ‡æ³¨å±‚/æ ·å¼ç®¡ç†
+;; ±ê×¢²ã/ÑùÊ½¹ÜÀí
 ;; ============================================================================
 
 (defun c:bgc (/ ss layer)
-  "æ ‡æ³¨å½’å±‚ï¼šå°†æ‰€æœ‰æ ‡æ³¨ç§»åˆ° S_DIM å›¾å±‚ã€‚"
+  (uc:guard-begin '())
+  "±ê×¢¹é²ã£º½«ËùÓĞ±ê×¢ÒÆµ½ S_DIM Í¼²ã¡£"
   (setq layer (or (sys:get '*PRJ:DIM-LAYER*) "S_DIM"))
-  (lay:make layer 3)  ; ç»¿è‰²
+  (lay:make layer 3)  ; ÂÌÉ«
   (if (setq ss (ssget '((0 . "DIMENSION"))))
     (lay:move-selection ss layer))
-  (princ (strcat "\næ ‡æ³¨å·²ç§»è‡³å›¾å±‚: " layer))
-  (princ))
+  (princ (strcat "\n±ê×¢ÒÑÒÆÖÁÍ¼²ã: " layer))
+  (princ)
+  (uc:guard-end))
 
 (defun c:ggb (/ ss h)
-  "ä¿®æ”¹æ ‡æ³¨æ–‡å­—é«˜åº¦ã€‚"
+  (uc:guard-begin '())
+  "ĞŞ¸Ä±ê×¢ÎÄ×Ö¸ß¶È¡£"
   (if (setq ss (ssget '((0 . "DIMENSION"))))
     (progn
-      (setq h (safe:get-real "æ ‡æ³¨æ–‡å­—é«˜åº¦" (sys:ifnil *TMP:LAST-DIM-H* 350)))
+      (setq h (safe:get-real "±ê×¢ÎÄ×Ö¸ß¶È" (sys:ifnil *TMP:LAST-DIM-H* 350)))
       (setq *TMP:LAST-DIM-H* h)
       (sel:for-each ss '(lambda (e) (dim:set-height e h)))))
-  (princ))
+  (princ)
+  (uc:guard-end))
 
 (defun c:gbb (/ ss val)
-  "ä¿®æ”¹æ ‡æ³¨æ–‡å­—å€¼ï¼ˆè¦†å†™ï¼‰ã€‚"
-  (setq val (getstring T "\næ–°æ–‡å­—å€¼ï¼ˆå›è½¦æ¢å¤é»˜è®¤ï¼‰: "))
+  (uc:guard-begin '())
+  "ĞŞ¸Ä±ê×¢ÎÄ×ÖÖµ£¨¸²Ğ´£©¡£"
+  (setq val (getstring T "\nĞÂÎÄ×ÖÖµ£¨»Ø³µ»Ö¸´Ä¬ÈÏ£©: "))
   (if (setq ss (ssget '((0 . "DIMENSION"))))
     (if (= val "")
       (sel:for-each ss 'dim:reset-text)
       (sel:for-each ss '(lambda (e) (dim:set-text e val)))))
-  (princ))
+  (princ)
+  (uc:guard-end))
 
 
 ;; ============================================================================
-;; åæ ‡æ ‡æ³¨
+;; ×ø±ê±ê×¢
 ;; ============================================================================
 
 (defun c:zb (/ pt h)
-  "åœ¨æŒ‡å®šç‚¹åˆ›å»ºåæ ‡æ ‡æ³¨ï¼ˆX,Yï¼‰ã€‚"
+  (uc:guard-begin '())
+  "ÔÚÖ¸¶¨µã´´½¨×ø±ê±ê×¢£¨X,Y£©¡£"
   (entity:make-style "TSSD_Rein" "tssdeng.shx" "hztxt.shx" 0.7)
   (setq h  (or (sys:get '*SYS:TEXT-HEIGHT*) 350)
-        pt (getpoint "\næ ‡æ³¨ç‚¹: "))
+        pt (getpoint "\n±ê×¢µã: "))
   (if pt
     (progn
       (entity:make-text
-        (strcat "X=" (rtos (car pt) 2 0) "\nY=" (rtos (cadr pt) 2 0))
-        pt h "TSSD_Rein" (getvar "CLAYER"))))
-  (princ))
+        (strcat "X=" (rtos (car pt) 2 0))
+        pt h "TSSD_Rein" (getvar "CLAYER"))
+      (entity:make-text
+        (strcat "Y=" (rtos (cadr pt) 2 0))
+        (list (car pt) (- (cadr pt) (* 1.5 h)) (caddr pt))
+        h "TSSD_Rein" (getvar "CLAYER"))))
+  (princ)
+  (uc:guard-end))
 
 
-(princ "\n[TB] æ ‡æ³¨å¤„ç†æ¨¡å—åŠ è½½å®Œæˆ (dim: 7å‘½ä»¤)")
+(princ "\n[TB] ±ê×¢´¦ÀíÄ£¿é¼ÓÔØÍê³É (dim: 7ÃüÁî)")
 (princ)

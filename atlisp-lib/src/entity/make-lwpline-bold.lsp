@@ -1,11 +1,11 @@
 (defun entity:make-lwpline-bold (plist convexity elevation closed bold / lst-dxf i)
-  "生成固定宽度的二维多段线.LWPOLYLINE
-参数:
-   plist:端点坐标点表，如：((x1 y1 z1)(x2 y2 z2)(x2 y2 z2))或((x1 y1)(x2 y2)(x2 y2))
-   convexity:各点与下一点的凸度(个数同坐标点表)，可为nil
-   elevation:标高
-   closed:是否闭合，1:闭合，0：不闭合"
-  "返回值: 生成的多段线的图元名"
+  "���ɹ̶����ȵĶ�ά�����.LWPOLYLINE
+����:
+   plist:�˵����������磺((x1 y1 z1)(x2 y2 z2)(x2 y2 z2))��((x1 y1)(x2 y2)(x2 y2))
+   convexity:��������һ���͹��(����ͬ������)����Ϊnil
+   elevation:���
+   closed:�Ƿ�պϣ�1:�պϣ�0�����պ�"
+  "����ֵ: ���ɵĶ���ߵ�ͼԪ��"
   (setq lst-dxf
 	(list (quote (0 . "LWPOLYLINE"))
 	      (quote (100 . "AcDbEntity"))

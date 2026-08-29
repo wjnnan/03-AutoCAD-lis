@@ -1,7 +1,7 @@
 (defun entity:reference->definition (ent / a n xs ys zs)
-  "è®¡ç®—å—å‚ç…§ä¸Žå—å®šä¹‰çš„å˜æ¢çŸ©é˜µ"
-  "è¿” å›ž å€¼:3x3çŸ©é˜µå’Œå‘é‡ç»„æˆçš„è¡¨"
-  "ç¤º    ä¾‹:(entity:Reference->Definition e)"
+  "¼ÆËã¿é²ÎÕÕÓë¿é¶¨ÒåµÄ±ä»»¾ØÕó"
+  "·µ »Ø Öµ:3x3¾ØÕóºÍÏòÁ¿×é³ÉµÄ±í"
+  "Ê¾    Àý:(entity:Reference->Definition e)"
   (setq a (vla-get-rotation e)
     n (vla:getvalue (vla-get-normal e))
     xs (max (abs (vla-get-xscalefactor e)) 1e-12)

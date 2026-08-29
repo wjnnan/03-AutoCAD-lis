@@ -1,5 +1,5 @@
 (defun json:parse (str)
-  "Json å­—ç¬¦ä¸²è½¬åŒ–ä¸º lisp åˆ—è¡¨ã€‚"
+  "Json ×Ö·û´®×ª»¯Îª lisp ÁĞ±í¡£"
   "list"
   (setq lst-str (vl-string->list str))
   (setq flag-escape nil)
@@ -28,7 +28,7 @@
 	  (setq atom-str-lst (cons curr-char atom-str-lst))
 	  (cond
 	   ((= (ascii "{") curr-char)
-	    ;;å¯¹è±¡ key/value mode
+	    ;;¶ÔÏó key/value mode
 	    (setq flag-keylevel (1+ flag-keylevel))
 	    (setq atom-str-lst (cons (ascii "(") atom-str-lst))
 	    )
@@ -40,7 +40,7 @@
 	      (setq atom-str-lst (cons (ascii "(") atom-str-lst)))
 	    )
 	   ((= (ascii "}") curr-char)
-	    ;;å¯¹è±¡ key/value mode
+	    ;;¶ÔÏó key/value mode
 	    (setq flag-keylevel (1- flag-keylevel))
 	    (setq atom-str-lst (cons (ascii ")") atom-str-lst))
 	    )
@@ -50,7 +50,7 @@
 	    (setq atom-str-lst (cons (ascii ")") atom-str-lst)))
 	   
 	   ((= (ascii ":") curr-char)
-	    ;; å¤„ç† key
+	    ;; ´¦Àí key
 	    (setq atom-str-lst
 		  (cons (ascii " ")
 			(cons (ascii ".")

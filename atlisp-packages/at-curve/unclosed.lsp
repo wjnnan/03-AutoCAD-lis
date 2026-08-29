@@ -1,4 +1,4 @@
-;;æ‚¬ç©ºçº¿æ£€æŸ¥
+;;Ðü¿ÕÏß¼ì²é
 (defun at-curve:noclosed-endpt (/ expert i pts-end n n100 nn pp pt1 pt2 pts ss-curves sslast)
   (if(null (tblsearch "layer" "@temp"))
      (progn
@@ -11,7 +11,7 @@
 				   (vlax-curve-getStartPoint x)
 				   (vlax-curve-getEndPoint x)))
 		       (pickset:to-vlalist ss-curves))))
-  ;; æ•æ‰å½±å“ï¼Œéœ€è¦ç¼©æ”¾
+  ;; ²¶×½Ó°Ïì£¬ÐèÒªËõ·Å
   (foreach pt pts-end 
 	   (setq pp pts-end
 		 n100 (if (> n 0)(rem (setq i(1+ i)) n)1))
@@ -29,7 +29,7 @@
 	  flags)
   (pickset:zoom (pickset:from-list flags))
   (sssetfirst nil (pickset:from-list flags))
-  (princ (strcat "\næ‰¾åˆ°å­¤ç‚¹" (itoa (length pts))"ä¸ªã€‚"))
+  (princ (strcat "\nÕÒµ½¹Âµã" (itoa (length pts))"¸ö¡£"))
   (princ)
   )
 (defun at-curve:rm-flagpts ()

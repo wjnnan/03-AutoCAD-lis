@@ -1,5 +1,5 @@
 (defun vla:prototype (obj)
-  "返回对象类、属性和方法组成的列表。"
+  "���ض����ࡢ���Ժͷ�����ɵ��б���"
   "list"
   "(vla:prototype *DOC*)"
   ;; (vlax-dump-object obj t)

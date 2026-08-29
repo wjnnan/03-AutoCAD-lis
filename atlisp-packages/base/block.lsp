@@ -1,11 +1,11 @@
 
 
 (defun block:get-effectivename (blk / tem blkname)
-  "取得块真实名称，支持 MAC"
+  "??????????????? MAC"
   (if (= 'ename (type blk))
       (progn
-	(setq blkname (cdr (assoc 2 (entget blk))));;取得当前动态块名
-	(if (wcmatch blkname "`**");;如果是匿名块
+	(setq blkname (cdr (assoc 2 (entget blk))));;????????????
+	(if (wcmatch blkname "`**");;???????????
 	    (if (and
 		 (setq tem
 		       (cdadr
@@ -14,8 +14,8 @@
 				(cdr
 				 (assoc 330
 					(entget
-					 (tblobjname "block" blkname);;根据动态块名称取得图元名
-					 );;根据图元名取得实体
+					 (tblobjname "block" blkname);;???????????????????
+					 );;??????????????
 					)
 				 )
 				'("AcDbBlockRepBTag")
@@ -33,7 +33,7 @@
       nil))
 
 (defun block:get-attributes (blk / lst)
-  "获取块属性,返回属性名和值的点对列表。"
+  "?????????,??????????????????б???"
   (if (= 'ename (type blk))
       (if (safearray-value (setq lst (vlax-variant-value (vla-getattributes (vlax-ename->vla-object blk)))))
 	  (mapcar '(lambda (x) (cons (vla-get-tagstring x) (vla-get-textstring x)))
@@ -44,7 +44,7 @@
 )
 
 (defun block:set-attributes (blk lst / n atts)
-  "设置块属性值"
+  "??????????"
   (if (= 'ename (type blk))
       (if (safearray-value (setq atts (vlax-variant-value (vla-getattributes (vlax-ename->vla-object blk)))))
 	  (progn (foreach n lst
@@ -63,22 +63,24 @@
   )
 
 (defun block:get-dynamic-properties (blk / oblk props)
-  "获取动态块的动态属性列表：属性名，当前值，只读性，是否显示，允许值"
+  "????????????????б????????????????????????????????????"
   (if (= 'ename (type blk))
       (progn
 	(setq oblk  (vlax-ename->vla-object blk))
-	;;获取动态块的属性
-	(setq props (vlax-invoke oblk 'getdynamicblockproperties))
-	;;获取属性名
+	;;?????????????
+	(setq props (vl-catch-all-apply 'vlax-invoke (list oblk 'getdynamicblockproperties)))
+	(if (or (vl-catch-all-error-p props) (not props))
+	    nil
+	;;?????????
 	(list 
 	 (mapcar '(lambda (x) (vlax-get x 'propertyName)) props)
-	 ;;获取所有属性的当前值
+	 ;;???????????????
 	 (mapcar '(lambda (x) (vlax-get x 'Value)) props)
-	 ;;获取属性是否为只读
+	 ;;??????????????
 	 (mapcar 'vla-get-readOnly props)
-	 ;;获取属性是否显示
+	 ;;?????????????
 	 (mapcar 'vla-get-show props)
-	 ;;获取所有属性的允许值
+	 ;;?????????????????
 	 (mapcar '(lambda (x) (vlax-get x 'allowedValues)) props)
 	 ))
       nil)
@@ -93,9 +95,12 @@
   lst)
   
 (defun block:set-dynprop (blk prp val)
-  "设置动态块特性值"
+  "?????????????"
   (setq prp (strcase prp))
-  (vl-some
+  (setq _dynprops (vl-catch-all-apply 'vlax-invoke (list (vlax-ename->vla-object blk) 'getdynamicblockproperties)))
+  (if (or (vl-catch-all-error-p _dynprops) (not _dynprops))
+      nil
+      (vl-some
    '(lambda (x)
      (if (= prp (strcase (vla-get-propertyname x)))
          (progn
@@ -112,9 +117,8 @@
            )
 	 )
      )
-   (vlax-invoke (vlax-ename->vla-object blk) 'getdynamicblockproperties)
-   )
-  )
+       _dynprops)))
+
 (defun block:insert()
   "demo create a block containing a circle"
   ;; This example creates a block containing a circle.
@@ -138,3 +142,4 @@
   
   (vla-ZoomAll acadObj)
   )
+)

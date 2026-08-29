@@ -1,6 +1,6 @@
 (defun curve:join (entlst fuzz)
-  "åˆå¹¶å¤šæ®µçº¿å‡½æ•°"
-  "return:åˆå¹¶åçš„å¤šæ®µçº¿å›¾å…ƒå"
+  "ºÏ²¢¶à¶ÎÏßº¯Êı"
+  "return:ºÏ²¢ºóµÄ¶à¶ÎÏßÍ¼ÔªÃû"
   "example:(curve:join '(ent1 ent2 ent3 ..)
     0.000001)\n   (curve:join (ssget)
     0.000001)\n"

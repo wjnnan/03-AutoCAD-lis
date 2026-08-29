@@ -1,10 +1,10 @@
-(@:define-config '@curve:radius 30.0 "è‡ªåŠ¨åœ†è§’çš„åŠå¾„")
-(@:define-config '@curve:maxlength-corner 80.0 "è‡ªåŠ¨åœ†è§’çš„åŸå§‹å€’è§’æœ€å¤§çº¿é•¿")
-(@:define-config '@curve:max-angle "110.0" "è‡ªåŠ¨åœ†è§’çš„é“è·¯è½¬è§’æœ€å¤§è§’åº¦")
-(@:define-config '@curve:min-angle "70.0" "è‡ªåŠ¨åœ†è§’çš„é“è·¯è½¬è§’æœ€å°è§’åº¦")
+(@:define-config '@curve:radius 30.0 "×Ô¶¯Ô²½ÇµÄ°ë¾¶")
+(@:define-config '@curve:maxlength-corner 80.0 "×Ô¶¯Ô²½ÇµÄÔ­Ê¼µ¹½Ç×î´óÏß³¤")
+(@:define-config '@curve:max-angle "110.0" "×Ô¶¯Ô²½ÇµÄµÀÂ·×ª½Ç×î´ó½Ç¶È")
+(@:define-config '@curve:min-angle "70.0" "×Ô¶¯Ô²½ÇµÄµÀÂ·×ª½Ç×îĞ¡½Ç¶È")
 
 (defun at-curve:fillet (ent / segs res n1 n2 n3 n4 fuzz rad max-angle min-angle maxlength-corner)
-  "è·¯å£åœ†è§’"
+  "Â·¿ÚÔ²½Ç"
   (setq rad (@:get-config '@curve:radius)
       maxlength-corner  (@:get-config  '@curve:maxlength-corner)
       max-angle (angtof (@:get-config '@curve:max-angle))
@@ -164,10 +164,10 @@
 	   ))
      ((and (= 0 (cdr n1))
 	   (= 0 (cdr n3))
-	  ;; ;; n2 çŸ­
+	  ;; ;; n2 ¶Ì
 	  (< (distance (car n2)
 		       (car n3))
-	     maxlength-corner) ;; ;; è§’åº¦
+	     maxlength-corner) ;; ;; ½Ç¶È
 	  (< min-angle
 	     (progn(setq ang
 			 (abs (- (angle (car n1)
@@ -231,10 +231,10 @@
 	   ))
      ((and (= 0 (cdr n1))
 	   (= 0 (cdr n3))
-	   ;; ;; n2 çŸ­
+	   ;; ;; n2 ¶Ì
 	   (< (distance (car n2)
 			(car n3))
-	      maxlength-corner) ;; ;; è§’åº¦
+	      maxlength-corner) ;; ;; ½Ç¶È
 	   (< min-angle
 	      (progn(setq ang
 			  (abs (- (angle (car n1)
@@ -272,6 +272,6 @@
   )
 
 (defun at-curve:fillet-road ()
-  (@::prompt '("æ ¹æ®è®¾å®šçš„è½¬å¼¯åŠå¾„å’Œé“è·¯è½¬è§’èŒƒå›´ï¼Œå¹³æ»‘é“è·¯çš„è½¬è§’ã€‚"))
+  (@::prompt '("¸ù¾İÉè¶¨µÄ×ªÍä°ë¾¶ºÍµÀÂ·×ª½Ç·¶Î§£¬Æ½»¬µÀÂ·µÄ×ª½Ç¡£"))
   (setq lwpls (pickset:to-list(ssget '((0 . "lwpolyline")(62 . 1)))))
   (mapcar 'at-curve:fillet  lwpls))

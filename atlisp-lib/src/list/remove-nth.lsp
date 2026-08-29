@@ -1,5 +1,5 @@
 (defun list:remove-nth (n lst)
-    "åˆ é™¤lstè¡¨çš„ç¬¬nä¸ªå…ƒç´ "
+    "É¾³ýlst±íµÄµÚn¸öÔªËØ"
     (if (= n 0)
         (cdr lst)
         (cons (car lst)

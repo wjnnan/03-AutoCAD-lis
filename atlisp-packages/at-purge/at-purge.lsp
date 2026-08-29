@@ -21,7 +21,7 @@
 (@:add-menu "实体" "分解重块" "(@:explode-minsert)")
 (defun @:explode-minsert (/ en ent)
   "分解多重插入块 "
-  (vlax-for blk *blks* (if(=""(vla-get-name blk)) (vla-put-name blk "ttt")))
+  (vlax-for blk *blks* (if(=""(vla-get-name blk)) (vl-catch-all-apply 'vla-put-name (list blk "ttt"))))
   
   (setq en (entsel "n请选择多重插入块:"))
   (if en

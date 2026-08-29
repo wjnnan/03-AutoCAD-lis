@@ -1,5 +1,5 @@
 (defun ext:interior (fun / out lst-int ifun)
-  "æ˜¾åŒ–å†…éƒ¨ç¬¦å·æˆ–å‡½æ•°ã€‚"
+  "ÏÔ»¯ÄÚ²¿·ûºÅ»òº¯Êı¡£"
   "subr"
   "(ext:interior 'beep)"
   (cond 

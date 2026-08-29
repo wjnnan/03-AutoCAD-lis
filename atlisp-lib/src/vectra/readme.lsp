@@ -1,1 +1,1 @@
-(defun vectra:readme nil "æ¥æºäºæ˜ç»å¤§ä½¬ vectra å¼€æºçš„ 152ä¸ªå‡½æ•°.")
+(defun vectra:readme nil "À´Ô´ÓÚÃ÷¾­´óÀĞ vectra ¿ªÔ´µÄ 152¸öº¯Êı.")

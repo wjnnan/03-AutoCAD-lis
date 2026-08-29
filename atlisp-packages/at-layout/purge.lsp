@@ -1,5 +1,5 @@
 (defun @layout:purge ()
-  (@::prompt "æ¸…ç†ç©ºå¸ƒå±€ã€‚")
+  (@::prompt "ÇåÀí¿Õ²¼¾Ö¡£")
   (mapcar '(lambda(x)
 	     (if (null
 		  (ssget "x"

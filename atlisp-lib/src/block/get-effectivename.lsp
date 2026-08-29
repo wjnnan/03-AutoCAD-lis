@@ -1,8 +1,8 @@
-ï»¿;; @param blk å—å›¾å…ƒ
+;; @param blk ¿éÍ¼Ôª
 (defun block:get-effectivename (blkref / tem blkname *error*)
-  "å–å¾—å—çœŸå®åç§°ï¼Œæ”¯æŒ MAC"
+  "È¡µÃ¿éÕæÊµÃû³Æ£¬Ö§³Ö MAC"
   (defun *error* (msg)
-    (princ "å›¾å—å®šä¹‰å¼‚å¸¸")
+    (princ "Í¼¿é¶¨ÒåÒì³£")
     "")
   (cond ((and (= (quote ename)
 		 (type blkref))

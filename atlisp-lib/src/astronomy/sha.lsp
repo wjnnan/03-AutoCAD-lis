@@ -1,3 +1,3 @@
 (defun astronomy:sha (st)
-  "å¤ªé˜³æ—¶è§’ï¼Œsolar hour angleï¼Œstä¸ºçœŸå¤ªé˜³æ—¶ã€‚"
+  "Ì«ÑôÊ±½Ç£¬solar hour angle£¬stÎªÕæÌ«ÑôÊ±¡£"
   (* 15.0 (- st 12)))

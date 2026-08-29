@@ -1,4 +1,4 @@
 (defun p:intp (x)
-  "åˆ¤æ–­æ˜¯å¦æ•´æ•°"
+  "ÅĞ¶ÏÊÇ·ñÕûÊı"
   (equal (type x)
     (quote int)))

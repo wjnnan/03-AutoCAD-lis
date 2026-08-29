@@ -35,7 +35,7 @@
 		  3)))))
 
 (defun @math:mark-in-lwpl (/ ent-nums) 
-  (@::prompt '("åŒºåŸŸæ ‡æ•°ï¼šç­›åˆ†å¤šæ®µçº¿åŒºåŸŸä¸­çš„æœ€å¤§æœ€å°æ•°ï¼Œå¤§æ•°ç”¨çº¢åœˆï¼Œå°æ•°ç”¨ç»¿åœˆã€‚"))
+  (@::prompt '("ÇøÓò±êÊı£ºÉ¸·Ö¶à¶ÎÏßÇøÓòÖĞµÄ×î´ó×îĞ¡Êı£¬´óÊıÓÃºìÈ¦£¬Ğ¡ÊıÓÃÂÌÈ¦¡£"))
   (setq zone (pickset:to-list (ssget (list '(0 . "lwpolyline")
 					   (cons 8 (@:get-config '@math:layer-of-zone))))))
   (foreach
@@ -44,7 +44,7 @@
                       (ssget "wp" (curve:get-points lwpl) '((0 . "text")))))
        (@math:mark-in-ss  ent-nums))))
 (defun @math:mark-in-w ()
-  (@::prompt '("ç­›åˆ†æ¡†é€‰çš„æœ€å¤§æœ€å°æ•°ï¼Œå¤§æ•°ç”¨çº¢åœˆï¼Œå°æ•°ç”¨ç»¿åœˆã€‚"))
+  (@::prompt '("É¸·Ö¿òÑ¡µÄ×î´ó×îĞ¡Êı£¬´óÊıÓÃºìÈ¦£¬Ğ¡ÊıÓÃÂÌÈ¦¡£"))
   (if (setq ent-nums (pickset:to-list 
                       (ssget '((0 . "text")))))
       (@math:mark-in-ss ent-nums))

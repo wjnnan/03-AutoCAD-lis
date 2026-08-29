@@ -1,9 +1,9 @@
 (defun system:winget-src (uri)
-  "å½“uriä¸º nilæ—¶é‡ç½®ä¸ºå®˜æ–¹æº."
+  "µ±uriÎª nilÊ±ÖØÖÃÎª¹Ù·½Ô´."
   ""
   "(system:winget-src  \"https://mirrors.ustc.edu.cn/winget-source\")"
   (if (not (string-equal "administrator"(getenv"username")))
-      (@::prompt "æœ¬å‡½æ•°éœ€è¦ç®¡ç†å‘˜æƒé™"))
+      (@::prompt "±¾º¯ÊıĞèÒª¹ÜÀíÔ±È¨ÏŞ"))
   (or @::enable-start
       (@::check-pgp)
       (@::patch-pgp) 

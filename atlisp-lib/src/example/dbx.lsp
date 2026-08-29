@@ -1,18 +1,18 @@
 (defun example:dbx ()
-  "ç”¨DBXæ–¹å¼åˆ é™¤dwgæ–‡ä»¶ä¸­çš„å›¾æ¡†ç­¾åå’Œæ‰‹å†™ç­¾åå—"
+  "ÓÃDBX·½Ê½É¾³ıdwgÎÄ¼şÖĞµÄÍ¼¿òÇ©ÃûºÍÊÖĞ´Ç©Ãû¿é"
   ""
   ""
-  "ä¿®æ”¹ä»¥ä¸‹é…ç½®ä¿¡æ¯==================================="
-  (setq framename "å›¾æ¡†å—å") ;; ä½ çš„å›¾æ¡†å—å
-  (setq signs '("ç­¾å1" "ç­¾å2")) ; æ‰‹å†™ç­¾åå—çš„åç§°
+  "ĞŞ¸ÄÒÔÏÂÅäÖÃĞÅÏ¢==================================="
+  (setq framename "Í¼¿ò¿éÃû") ;; ÄãµÄÍ¼¿ò¿éÃû
+  (setq signs '("Ç©Ãû1" "Ç©Ãû2")) ; ÊÖĞ´Ç©Ãû¿éµÄÃû³Æ
   " =================================================="
   (defun dbx-clean-att (dwg-file / blk-obj blk3)
-    "æ‰“å¼€å¤–éƒ¨dwgçš„DBXå¯¹è±¡. å‡å®šæ–‡ä»¶ä¸º D:/abc.dwg"
+    "´ò¿ªÍâ²¿dwgµÄDBX¶ÔÏó. ¼Ù¶¨ÎÄ¼şÎª D:/abc.dwg"
     (setq dwg-file (findfile dwg-file))
     (dbx:open dwg-file)
-    "å–dbxä¸­çš„æ¨¡å‹ç©ºé—´ä¸­çš„å®ä½“"
+    "È¡dbxÖĞµÄÄ£ĞÍ¿Õ¼äÖĞµÄÊµÌå"
     (setq dbx-ms(vla-get-modelspace *DBX*))
-    "å–dbxå—é›†ä¸­çš„ç¬¬4ä¸ªå—å®šä¹‰å¯¹è±¡ï¼ˆå‰å‡ ä¸ªæ˜¯model-space paper-spaceä¹‹ç±»çš„ï¼‰"
+    "È¡dbx¿é¼¯ÖĞµÄµÚ4¸ö¿é¶¨Òå¶ÔÏó£¨Ç°¼¸¸öÊÇmodel-space paper-spaceÖ®ÀàµÄ£©"
     (setq n 0)
     (repeat (vla-get-count dbx-ms)
 	    (setq obj% (vla-item dbx-ms n))
@@ -22,7 +22,7 @@
 		    (= (vla-get-HasAttributes obj%) :vlax-true)
 		    (= (vla-get-effectivename obj%) framename)
 		  )
-	       (block:set-attributes obj% '(("è®¾è®¡" . "")("æ ¡å¯¹" . ""))))
+	       (block:set-attributes obj% '(("Éè¼Æ" . "")("Ğ£¶Ô" . ""))))
 	      ((and (= (vla-get-objectname obj%) "AcDbBlockReference")
 		    (member (vla-get-effectivename obj%)
 			    signs

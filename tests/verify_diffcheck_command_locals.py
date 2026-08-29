@@ -7,7 +7,7 @@ DIFFCHECK = ROOT / "DiffCheck" / "DiffCheck.lsp"
 
 
 def main() -> int:
-    text = DIFFCHECK.read_text(encoding="utf-8")
+    text = DIFFCHECK.read_text(encoding="gbk")
 
     assert re.search(r"\(defun\s+c:DFCC\s+\(/\s+ss\s*\)", text), "c:DFCC 必须将 ss 声明为局部变量"
     assert re.search(r"\(defun\s+c:DFCT\s+\(/\s+v\s*\)", text), "c:DFCT 必须将 v 声明为局部变量"

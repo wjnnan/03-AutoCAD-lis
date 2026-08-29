@@ -1,8 +1,8 @@
-(defun std:timer-end nil "è®¡æ—¶å™¨ç»“æŸå‡½æ•°"
-    (princ "\n    ç”¨æ—¶")
+(defun std:timer-end nil "¼ÆÊ±Æ÷½áÊøº¯Êı"
+    (princ "\n    ÓÃÊ±")
     (princ (* (- (getvar "tdusrtimer")
                 @:*timer-prg*)
             86400))
-    (princ "ç§’\n")
+    (princ "Ãë\n")
     (setq @:*timer-prg* nil)
     (princ))

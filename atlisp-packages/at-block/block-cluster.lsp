@@ -1,16 +1,16 @@
 (defun @block:set-clustergap ()
-  (setq @:cluster-gap (getdist "è¾“å…¥é€‚å½“çš„åˆ†å †é—´éš™å€¼:")))
+  (setq @:cluster-gap (getdist "ÊäÈëÊÊµ±µÄ·Ö¶Ñ¼äÏ¶Öµ:")))
 (defun @block:block-cluster (/ gap)
-  (@::prompt "åˆ†å †å»ºå—")
+  (@::prompt "·Ö¶Ñ½¨¿é")
   (or @:cluster-gap
-      (setq @:cluster-gap (getdist "è¾“å…¥é€‚å½“çš„åˆ†å †é—´éš™å€¼:")))
+      (setq @:cluster-gap (getdist "ÊäÈëÊÊµ±µÄ·Ö¶Ñ¼äÏ¶Öµ:")))
   (setq gap
 	(if (and (numberp @:cluster-gap)
 		 (> @:cluster-gap 0))
 	    @:cluster-gap
 	  1))
   (setq clusters (pickset:cluster (ssget) gap))
-  ;;æ˜¾ç¤ºåˆ†å †ç»“æœã€‚å¦‚æœä¸æ­£ç¡®ï¼Œé‡æ–°è®¾ç½®é—´éš™é‡æ’ã€‚
+  ;;ÏÔÊ¾·Ö¶Ñ½á¹û¡£Èç¹û²»ÕıÈ·£¬ÖØĞÂÉèÖÃ¼äÏ¶ÖØÅÅ¡£
   ;;(setq pt-s (getpoint))
   ;; (setq aim-boxs (mapcar '(lambda(x)
   ;; 			   (entity:make-rectangle

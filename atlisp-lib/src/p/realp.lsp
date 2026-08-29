@@ -1,4 +1,4 @@
 (defun p:realp (arg)
-  "åˆ¤æ–­æ˜¯å¦å®æ•°"
+  "ÅĞ¶ÏÊÇ·ñÊµÊı"
   (equal (type arg)
     (quote real)))

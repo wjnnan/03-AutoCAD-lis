@@ -1,5 +1,5 @@
 (defun file:remove-lines (file lines / tmpfp)
-  "åˆ é™¤æ–‡ä»¶ file ä¸­ æŸå‡ è¡Œçš„å†…å®¹ï¼Œæˆ–å†…å®¹ä¸º lines çš„è¡Œ"
+  "É¾³ıÎÄ¼ş file ÖĞ Ä³¼¸ĞĞµÄÄÚÈİ£¬»òÄÚÈİÎª lines µÄĞĞ"
   (if (atom lines)
       (setq lines (list lines)))
   (if (findfile file)

@@ -1,5 +1,5 @@
 (defun p:listp (lst)
-  "åˆ¤æ–­æ˜¯å¦ä¸ºé“¾è¡¨ã€‚æ³¨æ„'(a b . c)ä¸æ˜¯é“¾è¡¨"
+  "ÅĞ¶ÏÊÇ·ñÎªÁ´±í¡£×¢Òâ'(a b . c)²»ÊÇÁ´±í"
   "T or nil"
   (and (listp lst)
        (vl-list-length lst)))

@@ -1,4 +1,4 @@
-(defun layout:readme nil "å¸ƒå±€æ“ä½œç›¸å…³å‡½æ•°ã€‚"
-  (princ "å¸ƒå±€æ“ä½œç›¸å…³å‡½æ•°ã€‚ä½¿ç”¨ (require 'layout:*)
-    åŠ è½½è¿™äº›å‡½æ•°")
+(defun layout:readme nil "²¼¾Ö²Ù×÷Ïà¹Øº¯Êı¡£"
+  (princ "²¼¾Ö²Ù×÷Ïà¹Øº¯Êı¡£Ê¹ÓÃ (require 'layout:*)
+    ¼ÓÔØÕâĞ©º¯Êı")
   (princ))

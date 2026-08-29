@@ -1,6 +1,6 @@
 (defun excel:get-rangevalue (xlapp index)
-  "è·å–å•å…ƒæ ¼æˆ–åŒºåŸŸçš„å€¼\nå‚æ•°:XLApp:å·²æ‰“å¼€çš„excelæ–‡ä»¶å¯¹è±¡\nå‚æ•°:index:ä½ç½®ä¿¡æ¯ï¼Œå¦‚\"A1\"æˆ–è€…'(1 1), \"A1:B2\"æˆ–è€…'(1 1 2 2)"
-  "å€¼çš„åˆ—è¡¨"
+  "»ñÈ¡µ¥Ôª¸ñ»òÇøÓòµÄÖµ\n²ÎÊı:XLApp:ÒÑ´ò¿ªµÄexcelÎÄ¼ş¶ÔÏó\n²ÎÊı:index:Î»ÖÃĞÅÏ¢£¬Èç\"A1\"»òÕß'(1 1), \"A1:B2\"»òÕß'(1 1 2 2)"
+  "ÖµµÄÁĞ±í"
   "(excel:get-RangeValue exobj \"A1:B2\")"
   (excel:utils-getvalue (vlax-get-property (excel:get-range xlapp index)
       (quote value2))))

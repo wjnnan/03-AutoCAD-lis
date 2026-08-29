@@ -1,7 +1,7 @@
 (defun entity:addtext (str pt zg ang dq)
-  "ç”Ÿæˆä¸€ä¸ªTEXTå®ä½“,entity:make-textå‚æ•°ç®€åŒ–ç‰ˆ"
-  "return:æ–‡å­—å›¾å…ƒå"
-  "example:(entity:addtext \"æ–‡å­—\"
+  "Éú³ÉÒ»¸öTEXTÊµÌå,entity:make-text²ÎÊı¼ò»¯°æ"
+  "return:ÎÄ×ÖÍ¼ÔªÃû"
+  "example:(entity:addtext \"ÎÄ×Ö\"
     (getpoint)
     3 0 11)"
   (entity:make-text str pt zg ang 0.8 0 dq))

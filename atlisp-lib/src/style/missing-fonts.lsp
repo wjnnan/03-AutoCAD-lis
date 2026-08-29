@@ -1,6 +1,6 @@
 (defun style:missing-fonts (/ lst-missing st)
-  "妫�鏌ョ己灏戠殑瀛椾綋锛屽鏋滄湁杩斿洖瀛椾綋鏂囦欢鍚嶇粍鎴愮殑鍒楄〃锛屾病鏈夎繑鍥瀗il"
-  "瀛椾綋鏂囦欢鍚嶇粍鎴愮殑鍒楄〃,鎴杗il"
+  "检查缺少的字体，如果有返回字体文件名组成的列表，没有返回nil"
+  "字体文件名组成的列表,或nil"
   ""
   (setq st (tblnext "style"
       t))

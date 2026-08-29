@@ -1,5 +1,5 @@
 (defun block:list (/ res name)
-  "åˆ—å—çš„åç§°"
+  "ÁĞ¿éµÄÃû³Æ"
   "list"
   (if (setq name (cdr (assoc 2 (tblnext "block" t))))
       (setq res (cons name nil)))

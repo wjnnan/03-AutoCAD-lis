@@ -1,7 +1,7 @@
 (defun curve:bulge2o (pt1 pt2 bulge / b x1 y1 x2 y2)
-  "æ±‚å‡¸åº¦bulge å’Œä¸¤ç‚¹ pt1 pt2 è¡¨ç¤ºçš„å¼§çš„åœ†å¿ƒã€‚"
+  "ÇóÍ¹¶Èbulge ºÍÁ½µã pt1 pt2 ±íÊ¾µÄ»¡µÄÔ²ÐÄ¡£"
   (if (equal bulge 0.0 1e-12)
-    nil  ; ç›´çº¿æ®µæ— åœ†å¿ƒ
+    nil  ; Ö±Ïß¶ÎÎÞÔ²ÐÄ
     (progn
       (setq b (* 0.5 (- (/ 1.0 bulge) bulge)))
   (setq x1 (car pt1)

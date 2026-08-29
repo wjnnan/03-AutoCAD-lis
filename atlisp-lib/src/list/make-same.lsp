@@ -1,5 +1,5 @@
 (defun list:make-same (element num / lst)
-  "ç”Ÿæˆnumä¸ªç›¸åŒå…ƒç´  element çš„åˆ—è¡¨"
+  "Éú³Énum¸öÏàÍ¬ÔªËØ element µÄÁĞ±í"
   "list"
   "(list:make-same 'a 5)"
   (repeat (fix num)

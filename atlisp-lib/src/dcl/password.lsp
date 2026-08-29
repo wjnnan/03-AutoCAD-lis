@@ -1,10 +1,10 @@
 (defun dcl:password (key label default style)
-  "dcl å¯†ç è¾“å…¥æ¡†ã€‚"
+  "dcl ÃÜÂëÊäÈë¿ò¡£"
   ""
   "(dcl:password \"pw1\" \"label\" \"abc\" \"\")"
   ;; (set (read (strcat "in-"
   ;; 		     key))
-  ;;      (eval (read (strcat "(lambda()(alert (strcat \"éœ€è¦å®šä¹‰å›è°ƒå‡½æ•° (cb-"
+  ;;      (eval (read (strcat "(lambda()(alert (strcat \"ĞèÒª¶¨Òå»Øµ÷º¯Êı (cb-"
   ;; 			   key ")\")))"))))
   (write-line (strcat ": edit_box{key=\""
 		      key "\";"

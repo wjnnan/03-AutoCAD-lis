@@ -1,98 +1,90 @@
-;;; tb-lib-txt.lsp -- æ–‡å­—æ“ä½œåº“
-;;; æ–‡å­—æ ·å¼ç®¡ç†ã€æ–‡å­—å†…å®¹è¯»å†™ã€é’¢ç­‹ç¬¦å·è½¬æ¢
-;;; ä¾èµ–ï¼štb-core.lsp, tb-lib-entity.lsp
+;;; tb-lib-txt.lsp -- ÎÄ×Ö²Ù×÷¿â
+;;; ÎÄ×ÖÑùÊ½¹ÜÀí¡¢ÎÄ×ÖÄÚÈİ¶ÁĞ´¡¢¸Ö½î·ûºÅ×ª»»
+;;; ÒÀÀµ£ºtb-core.lsp, tb-lib-entity.lsp
 
 ;; ============================================================================
-;; æ–‡å­—æ ·å¼
+;; ÎÄ×ÖÑùÊ½
 ;; ============================================================================
-
-(defun txt:style-exists? (name)
-  "æ£€æµ‹æ–‡å­—æ ·å¼æ˜¯å¦å­˜åœ¨ã€‚"
-  (cond
-    ((and (uc:function-defined-p 'uc:style-exists-p) name)
-     (uc:style-exists-p name))
-    (t
-     (and name (tblsearch "STYLE" name) T))))
 
 (defun txt:make-style (name font bigfont width)
-  "åˆ›å»ºæ–‡å­—æ ·å¼ï¼›è‹¥å·²å­˜åœ¨åˆ™ç›´æ¥å¤ç”¨ã€‚"
+  "´´½¨ÎÄ×ÖÑùÊ½£»ÈôÒÑ´æÔÚÔòÖ±½Ó¸´ÓÃ¡£"
   (entity:make-style name font bigfont width))
 
 (defun txt:get-current-style nil
-  "è·å–å½“å‰æ–‡å­—æ ·å¼åç§°ã€‚"
+  "»ñÈ¡µ±Ç°ÎÄ×ÖÑùÊ½Ãû³Æ¡£"
   (getvar "TEXTSTYLE"))
 
 
 ;; ============================================================================
-;; TSSD é’¢ç­‹æ–‡å­—æ ·å¼
+;; TSSD ¸Ö½îÎÄ×ÖÑùÊ½
 ;; ============================================================================
 
 (defun txt:setup-tssd-style nil
-  "åˆ›å»ºå¹¶è®¾ä¸º TSSD_Rein æ–‡å­—æ ·å¼ã€‚"
+  "´´½¨²¢ÉèÎª TSSD_Rein ÎÄ×ÖÑùÊ½¡£"
   (entity:make-style "TSSD_Rein" "tssdeng.shx" "hztxt.shx" 0.7)
   (setvar "TEXTSTYLE" "TSSD_Rein")
-  (princ "\næ–‡å­—æ ·å¼å·²è®¾ä¸º TSSD_Rein (tssdeng.shx + hztxt.shx)"))
+  (princ "\nÎÄ×ÖÑùÊ½ÒÑÉèÎª TSSD_Rein (tssdeng.shx + hztxt.shx)"))
 
 
 ;; ============================================================================
-;; æ–‡å­—å†…å®¹è¯»å†™
+;; ÎÄ×ÖÄÚÈİ¶ÁĞ´
 ;; ============================================================================
 
 (defun txt:get-content (ename)
-  "è·å–æ–‡å­—å†…å®¹ã€‚æ”¯æŒ TEXTã€MTEXTã€ATTRIBã€ATTDEFã€‚"
+  "»ñÈ¡ÎÄ×ÖÄÚÈİ¡£Ö§³Ö TEXT¡¢MTEXT¡¢ATTRIB¡¢ATTDEF¡£"
   (entity:get-dxf ename 1))
 
 (defun txt:set-content (ename str)
-  "è®¾ç½®æ–‡å­—å†…å®¹ã€‚"
+  "ÉèÖÃÎÄ×ÖÄÚÈİ¡£"
   (entity:set-dxf ename 1 str))
 
 (defun txt:get-height (ename)
-  "è·å–æ–‡å­—é«˜åº¦ã€‚"
+  "»ñÈ¡ÎÄ×Ö¸ß¶È¡£"
   (entity:get-dxf ename 40))
 
 (defun txt:set-height (ename h)
-  "è®¾ç½®æ–‡å­—é«˜åº¦ã€‚"
+  "ÉèÖÃÎÄ×Ö¸ß¶È¡£"
   (entity:set-dxf ename 40 h))
 
 (defun txt:get-width (ename)
-  "è·å–æ–‡å­—å®½é«˜æ¯”ã€‚"
+  "»ñÈ¡ÎÄ×Ö¿í¸ß±È¡£"
   (entity:get-dxf ename 41))
 
 (defun txt:set-width (ename w)
-  "è®¾ç½®æ–‡å­—å®½é«˜æ¯”ã€‚"
+  "ÉèÖÃÎÄ×Ö¿í¸ß±È¡£"
   (entity:set-dxf ename 41 w))
 
 (defun txt:get-rotation (ename)
-  "è·å–æ–‡å­—æ—‹è½¬è§’ã€‚"
+  "»ñÈ¡ÎÄ×ÖĞı×ª½Ç¡£"
   (entity:get-dxf ename 50))
 
 (defun txt:set-rotation (ename ang)
-  "è®¾ç½®æ–‡å­—æ—‹è½¬è§’ã€‚"
+  "ÉèÖÃÎÄ×ÖĞı×ª½Ç¡£"
   (entity:set-dxf ename 50 ang))
 
 (defun txt:get-style (ename)
-  "è·å–æ–‡å­—æ ·å¼åç§°ã€‚"
+  "»ñÈ¡ÎÄ×ÖÑùÊ½Ãû³Æ¡£"
   (entity:get-dxf ename 7))
 
 (defun txt:set-style (ename style)
-  "è®¾ç½®æ–‡å­—æ ·å¼ã€‚"
+  "ÉèÖÃÎÄ×ÖÑùÊ½¡£"
   (entity:set-dxf ename 7 style))
 
 (defun txt:get-inspt (ename)
-  "è·å–æ–‡å­—æ’å…¥ç‚¹ã€‚"
+  "»ñÈ¡ÎÄ×Ö²åÈëµã¡£"
   (entity:get-dxf ename 10))
 
 (defun txt:set-inspt (ename pt)
-  "è®¾ç½®æ–‡å­—æ’å…¥ç‚¹ã€‚"
+  "ÉèÖÃÎÄ×Ö²åÈëµã¡£"
   (entity:set-dxf ename 10 pt))
 
 
 ;; ============================================================================
-;; å¯¹é½
+;; ¶ÔÆë
 ;; ============================================================================
 
 (defun txt:set-left-align (ename)
-  "è®¾ç½®å•è¡Œæ–‡å­—ä¸ºå·¦å¯¹é½ã€‚åŒæ­¥ DXF 10/11 é˜²æ­¢æ–‡å­—ç§»ä½ã€‚"
+  "ÉèÖÃµ¥ĞĞÎÄ×ÖÎª×ó¶ÔÆë¡£Í¬²½ DXF 10/11 ·ÀÖ¹ÎÄ×ÖÒÆÎ»¡£"
   (entity:set-dxf ename 72 0)
   (entity:set-dxf ename 73 0)
   (if (not (equal (entity:get-dxf ename 11) '(0.0 0.0 0.0) 1e-8))
@@ -102,7 +94,7 @@
   ename)
 
 (defun txt:set-center-align (ename)
-  "è®¾ç½®å•è¡Œæ–‡å­—ä¸ºæ°´å¹³å±…ä¸­ã€‚å°†æ’å…¥ç‚¹å¤åˆ¶åˆ°å¯¹é½ç‚¹ã€‚"
+  "ÉèÖÃµ¥ĞĞÎÄ×ÖÎªË®Æ½¾ÓÖĞ¡£½«²åÈëµã¸´ÖÆµ½¶ÔÆëµã¡£"
   (entity:set-dxf ename 72 1)
   (entity:set-dxf ename 73 0)
   (if (equal (entity:get-dxf ename 11) '(0.0 0.0 0.0) 1e-8)
@@ -110,7 +102,7 @@
   ename)
 
 (defun txt:set-middle-align (ename)
-  "è®¾ç½®å•è¡Œæ–‡å­—ä¸ºå±…ä¸­å¯¹é½ã€‚å°†æ’å…¥ç‚¹å¤åˆ¶åˆ°å¯¹é½ç‚¹ã€‚"
+  "ÉèÖÃµ¥ĞĞÎÄ×ÖÎª¾ÓÖĞ¶ÔÆë¡£½«²åÈëµã¸´ÖÆµ½¶ÔÆëµã¡£"
   (entity:set-dxf ename 72 1)
   (entity:set-dxf ename 73 2)
   (if (equal (entity:get-dxf ename 11) '(0.0 0.0 0.0) 1e-8)
@@ -119,30 +111,30 @@
 
 
 ;; ============================================================================
-;; é’¢ç­‹æ–‡å­—æ›¿æ¢
+;; ¸Ö½îÎÄ×ÖÌæ»»
 ;; ============================================================================
 
 (defun txt:rebar-replace (ename old new / str)
-  "æ›¿æ¢é’¢ç­‹æ–‡å­—ä¸­çš„ç›®æ ‡ç‰‡æ®µã€‚
-è‹¥ new åŒ…å« old å­ä¸²åˆ™åªæ›¿æ¢é¦–æ¬¡å‡ºç°ï¼Œé˜²æ­¢æ­»å¾ªç¯ï¼›
-å¦åˆ™å¾ªç¯æ›¿æ¢ç›´è‡³å…¨éƒ¨åŒ¹é…è¢«æ›¿æ¢ã€‚"
+  "Ìæ»»¸Ö½îÎÄ×ÖÖĞµÄÄ¿±êÆ¬¶Î¡£
+Èô new °üº¬ old ×Ó´®ÔòÖ»Ìæ»»Ê×´Î³öÏÖ£¬·ÀÖ¹ËÀÑ­»·£»
+·ñÔòÑ­»·Ìæ»»Ö±ÖÁÈ«²¿Æ¥Åä±»Ìæ»»¡£"
   (setq str (txt:get-content ename))
   (if (and str old new (/= old ""))
     (progn
       (if (vl-string-search old new)
-        ;; new åŒ…å« oldï¼Œåªæ›¿æ¢ä¸€æ¬¡é˜²æ­¢æ­»å¾ªç¯
+        ;; new °üº¬ old£¬Ö»Ìæ»»Ò»´Î·ÀÖ¹ËÀÑ­»·
         (if (vl-string-search old str)
           (setq str (vl-string-subst new old str)))
-        ;; å®‰å…¨æƒ…å†µï¼šå¯å¾ªç¯æ›¿æ¢æ‰€æœ‰å‡ºç°
+        ;; °²È«Çé¿ö£º¿ÉÑ­»·Ìæ»»ËùÓĞ³öÏÖ
         (while (vl-string-search old str)
           (setq str (vl-string-subst new old str))))
       (txt:set-content ename str)))
   ename)
 
 (defun txt:rebar-normalize (str)
-  "é¢„ç•™çš„é’¢ç­‹æ–‡å­—è§„èŒƒåŒ–å…¥å£ï¼›å½“å‰ä¿æŒåŸæ ·è¿”å›ã€‚"
+  "Ô¤ÁôµÄ¸Ö½îÎÄ×Ö¹æ·¶»¯Èë¿Ú£»µ±Ç°±£³ÖÔ­Ñù·µ»Ø¡£"
   str)
 
 
-(princ "\n[TB] æ–‡å­—æ“ä½œåº“åŠ è½½å®Œæˆ (txt:*)")
+(princ "\n[TB] ÎÄ×Ö²Ù×÷¿â¼ÓÔØÍê³É (txt:*)")
 (princ)

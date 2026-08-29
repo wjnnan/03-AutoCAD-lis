@@ -1,6 +1,6 @@
 (defun text:box (ent-text / tbox box mrz mt)
-  "鑾峰彇鍗曡鏂囨湰鐨勬枃鏈"
-  "4鐐圭煩褰㈡"
+  "获取单行文本的文本框"
+  "4点矩形框"
   (setq tbox(apply 'point:rec-2pt->4pt (textbox(entget ent-text))))
   (setq r1 (- (entity:getdxf ent-text 50)))
   (setq pt-base (entity:getdxf ent-text 10))

@@ -43,9 +43,9 @@ def extract_function(text: str, name: str) -> str:
 
 
 def main() -> int:
-    uc_core = UC_CORE.read_text(encoding="utf-8")
-    tb_lay = TB_LAY.read_text(encoding="utf-8")
-    tb_entity = TB_ENTITY.read_text(encoding="utf-8")
+    uc_core = UC_CORE.read_text(encoding="gbk")
+    tb_lay = TB_LAY.read_text(encoding="gbk")
+    tb_entity = TB_ENTITY.read_text(encoding="gbk")
 
     ensure_layer = extract_function(uc_core, "uc:ensure-layer")
     lay_make = extract_function(tb_lay, "lay:make")

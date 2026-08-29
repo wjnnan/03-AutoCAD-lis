@@ -1,22 +1,22 @@
 (defun @curve:inters-number ()
-  (@::prompt "ä¸€æ¡æ›²çº¿ä¸Šä¸å…¶ä»–å¤šæ®µçº¿çš„äº¤ç‚¹è¿›è¡Œé€’å¢ç¼–å·")
-  (@:prompt "è¯·é€‰æ‹©ä¸€æ¡æ›²çº¿:")
+  (@::prompt "Ò»ÌõÇúÏßÉÏÓëÆäËû¶à¶ÎÏßµÄ½»µã½øĞĞµİÔö±àºÅ")
+  (@:prompt "ÇëÑ¡ÔñÒ»ÌõÇúÏß:")
   (if (setq lwpl (ssname (ssget ":S" '((0 . "*line"))) 0))
       (progn
 	(setq box (entity:getbox lwpl 0))
 	(setq lwpls (ssget "c" (car box)(cadr box) '((0 . "*line"))))
 	(setq lwpls (ssdel lwpl lwpls))
 	;;(setq lwpls (vl-remove lwpl lwpls))
-	;; å¤šæ®µçº¿çš„ç›¸äº¤ç‚¹
+	;; ¶à¶ÎÏßµÄÏà½»µã
 	
 	(setq pts (curve:inters lwpl lwpls acExtendNone))
-	;; å¯¹äº¤ç‚¹æ’åº
+	;; ¶Ô½»µãÅÅĞò
 	(setq pts
 	      (vl-sort pts
 		       '(lambda(x y)
 			 (< (vlax-curve-getDistAtPoint (e2o lwpl) x)
 			  (vlax-curve-getDistAtPoint (e2o lwpl) y)))))
-	;; æ ‡åºå·
+	;; ±êĞòºÅ
 	(setq i 0)
 	(foreach pt pts
 		 (entity:putdxf

@@ -1,5 +1,5 @@
 (defun string:from-lst (lst separator)
-  "åˆ—è¡¨è½¬æˆå­—ç¬¦ä¸²"
+  "ÁĞ±í×ª³É×Ö·û´®"
   (if (cdr lst)
     (strcat (car lst)
       separator (string:from-lst (cdr lst)

@@ -1,4 +1,4 @@
 (defun m:asin (x)
-    "arcsin,arsin,è®¡ç®—åæ­£å¼¦å€¼"
+    "arcsin,arsin,¼ÆËã·´ÕıÏÒÖµ"
     (if (<= -1.0 x 1.0)
         (atan x (sqrt (- 1.0 (* x x))))))

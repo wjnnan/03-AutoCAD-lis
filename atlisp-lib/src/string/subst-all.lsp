@@ -1,6 +1,6 @@
 (defun string:subst-all (str-new str-old str / inc len)
-  "ç”¨ str-new æ›¿æ¢ å­—ç¬¦ä¸²str ä¸­æ‰€æœ‰çš„ str-old"
-  "ç»“æžœå­—ç¬¦ä¸²"
+  "ÓÃ str-new Ìæ»» ×Ö·û´®str ÖÐËùÓÐµÄ str-old"
+  "½á¹û×Ö·û´®"
   "(string:subst-all \"qwe\" \"abc\" \"mabcpoildabce\")  => \"mqwepoildqwee\""
   (if (> (strlen str-old) 0)
       (progn

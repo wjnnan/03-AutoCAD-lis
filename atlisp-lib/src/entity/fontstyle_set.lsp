@@ -1,7 +1,7 @@
 (defun entity:fontstyle_set (st_name h / sty)
-  "楠岃瘉瀛椾綋鏍峰紡鏄惁瀛樺湪锛岃嫢涓嶅瓨鍦紝鍒欐柊寤哄瓧浣撴牱寮廫n鍙傛暟锛歕nst_name : 鏂囧瓧鏍峰紡鍚峔nh : 瀛楅珮"
+  "验证字体样式是否存在，若不存在，则新建字体样式\n参数：\nst_name : 文字样式名\nh : 字高"
   ""
-  "(fontstyle_set \"浠垮畫_GB2312\"
+  "(fontstyle_set \"仿宋_GB2312\"
     0)"
   (setq sty (tblobjname "style"
       st_name))

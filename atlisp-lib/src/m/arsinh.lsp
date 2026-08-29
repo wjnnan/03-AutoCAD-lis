@@ -1,3 +1,3 @@
 (defun m:arsinh (x)
-    "arcsinh,asinh,è®¡ç®—ååŒæ›²æ­£å¼¦å€¼"
+    "arcsinh,asinh,¼ÆËã·´Ë«ÇúÕıÏÒÖµ"
     (log (+ x (sqrt (1+ (* x x))))))

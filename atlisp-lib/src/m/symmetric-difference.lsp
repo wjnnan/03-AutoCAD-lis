@@ -1,5 +1,5 @@
 (defun m:symmetric-difference (l1 l2)
-    "鍒楄〃瀵圭О宸泦"
+    "列表对称差集"
     (append (vl-remove-if (quote (lambda (x)
                     (member x l2)))
             l1)

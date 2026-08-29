@@ -1,15 +1,17 @@
-(@:define-config '@dim:dimarc-gap 1000 "å¼§é•¿æ ‡æ³¨åˆ°å¼§çº¿çš„è·ç¦»")
+(@:define-config '@dim:dimarc-gap 1000 "»¡³¤±ê×¢µ½»¡ÏßµÄ¾àÀë")
 (defun at-dim:dimarc (pt-cen pt1 pt2 pt-arc)
-  "æ ‡æ³¨å¼§é•¿"
+  "±ê×¢»¡³¤"
   (vla-adddimarc  *ms*
 	       (point:to-ax  pt-cen)
 	       (point:to-ax  pt1)
 	       (point:to-ax  pt2)
 	       (point:to-ax pt-arc)))
 (defun at-dim:menu-dimarc-div ()
-  (@:help "ç­‰åˆ†æ ‡æ³¨åœ†å¼§")
+  (@:help "µÈ·Ö±ê×¢Ô²»¡")
   (setq arc (car(pickset:to-list (ssget ":S:E" '((0 . "ARC"))))))
-  (setq n (getint (@:speak "è¯·è¾“å…¥è¦ç­‰åˆ†çš„æ•°é‡:")))
+  (setq n (getint (@:speak "ÇëÊäÈëÒªµÈ·ÖµÄÊıÁ¿:")))
+  (if (or (null n) (<= n 0)) (progn (princ "
+µÈ·ÖÊıÁ¿±ØĞëÎªÕıÕûÊı -- ÍË³ö.") (quit)))
   (setq ang-s (entity:getdxf arc 50))
   (setq arc-r (entity:getdxf arc 40))
   (setq pt-c (entity:getdxf arc 10))
@@ -26,7 +28,7 @@
 	(- (entity:getdxf arc 51)
 	   (entity:getdxf arc 50)))
   (if (< ang-all 0)
-      (setq ang-all (+ pi ang-all)))
+      (setq ang-all (+ (* 2 pi) ang-all)))
   (setq ang-per (/ ang-all n))
   (setq i 0)
   (repeat n

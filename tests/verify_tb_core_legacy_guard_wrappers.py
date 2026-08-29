@@ -41,7 +41,7 @@ def extract_function(text: str, name: str) -> str:
 
 
 def main() -> int:
-    text = TB_CORE.read_text(encoding="utf-8")
+    text = TB_CORE.read_text(encoding="gbk")
 
     assert "(defun err:handler" not in text, "err:handler 应已删除"
     assert "(defun err:save-sysvars" not in text, "err:save-sysvars 应已删除"

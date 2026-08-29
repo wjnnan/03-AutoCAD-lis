@@ -21,6 +21,7 @@
 	(if(member (substr ad i 1) '("'" "," "." "1"))(setq len(- len 0.5) j 2))
         (setq i(1+ i))
 	)
+       (if (<= len 0)(setq len 1)) ; ·ÀÖ¹¿ÕÎÄ±¾µ¼ÖÂ³ýÁã
        (setq pjz (/ zc len) pt0(car pt10) npt pt0 i  1)
        (if(= j 2)(setq p2 (/ pjz 2)))
        (repeat xlen

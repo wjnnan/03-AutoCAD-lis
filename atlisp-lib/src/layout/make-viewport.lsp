@@ -1,5 +1,5 @@
 (defun layout:make-viewport (layout pt-center width height twistang pt-model / obj-pv)
-  "浠庢ā鍨嬬┖闂寸敓鎴愬竷灞�"
+  "从模型空间生成布局"
   "ename"
   (if (null (member layout (layout:list)))
       (progn
@@ -27,7 +27,7 @@
 	  ""
 	  pt-center)
   (setvar "cmdecho" 1)
-  ;;璋冩暣姣斾緥
+  ;;调整比例
   (setq obj-pv (e2o (entlast)))
   (vla-put-width obj-pv width)
   (vla-put-height obj-pv height)
@@ -46,7 +46,7 @@
 ;; 					    width height))
 ;; 	     ;; (vla-display obj-pv :vlax-true)
 ;; 	     ;; (vla-update  obj-pv)
-;; 	     ;; 妯″瀷鍩虹偣
+;; 	     ;; 模型基点
 ;; 	     (vla-getxdata obj-pv "ACAD" 'mtypes 'mvalues)
 ;; 	     (vlax-safearray-put-element
 ;; 	      mvalues 8 (car pt-model))

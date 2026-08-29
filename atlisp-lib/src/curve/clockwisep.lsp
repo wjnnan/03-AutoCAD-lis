@@ -1,11 +1,11 @@
 (defun curve:clockwisep (ent / fx offsetobj offsetresult plineobj)
-  "åˆ¤æ–­å¤šæ®µçº¿æ–¹å‘"
-  "é¡ºæ—¶é’ˆè¿”å›žtï¼Œåä¹‹nil"
+  "ÅÐ¶Ï¶à¶ÎÏß·½Ïò"
+  "Ë³Ê±Õë·µ»Øt£¬·´Ö®nil"
   "(curve:clockwisep (car(entsel)))"
   (setq plineobj (vlax-ename->vla-object ent))
   (setq offsetresult (vl-catch-all-apply 'vla-offset (list plineobj 0.0001)))
   (if (vl-catch-all-error-p offsetresult)
-    nil  ; è‡ªäº¤å¤šæ®µçº¿ç­‰æ— æ³•åç§»
+    nil  ; ×Ô½»¶à¶ÎÏßµÈÎÞ·¨Æ«ÒÆ
     (progn
       (setq offsetplineobj (car (vlax-safearray->list (vlax-variant-value offsetresult))))
       (if (> (vlax-curve-getdistatparam plineobj (vlax-curve-getendparam plineobj))

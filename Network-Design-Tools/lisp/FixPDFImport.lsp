@@ -22,7 +22,7 @@
   (if (vl-catch-all-error-p
         (vl-catch-all-apply 'vla-getboundingbox (list objCase 'minPt 'maxPt)))
     (progn (princ "
-é”™è¯¯: æ— æ³•èŽ·å–è¾¹ç•Œæ¡†ã€‚") (quit)))
+´íÎó: ÎÞ·¨»ñÈ¡±ß½ç¿ò¡£") (quit)))
   (setq pt1 (vlax-safeArray->list minPt))
   (setq pt2 (vlax-safeArray->list maxPt))
   (setq ptCase (mapcar '(lambda (x1 x2) (/ (+ x1 x2) 2.0)) pt1 pt2))

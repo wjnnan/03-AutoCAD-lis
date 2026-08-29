@@ -1,28 +1,28 @@
 (defun at-select:select-closed-lwpl (/ s1 filters)
-  (@::prompt '("é€‰æ‹©é—­åˆçš„å¤šæ®µçº¿"))
+  (@::prompt '("Ñ¡Ôñ±ÕºÏµÄ¶à¶ÎÏß"))
   (setq filters '((0 . "lwpolyline")(70 . 1)))
   (if @:*auto-mode*
       (setq s1 (ssget "x" filters))
     (progn
-      (prompt "å›è½¦æˆ–å³é”®åˆ™ä¸ºæ‰€æœ‰å¤šæ®µçº¿")
+      (prompt "»Ø³µ»òÓÒ¼üÔòÎªËùÓĞ¶à¶ÎÏß")
       (setq s1 (ssget filters))
       (if (null s1)
 	  (setq s1 (ssget "x" filters)))))
   (sssetfirst nil s1))
 (defun at-select:select-unclosed-lwpl (/ s1 filters)
-  (@::prompt '("é€‰æ‹©æœªé—­åˆçš„å¤šæ®µçº¿"))
+  (@::prompt '("Ñ¡ÔñÎ´±ÕºÏµÄ¶à¶ÎÏß"))
   (setq filters '((0 . "LWPOLYLINE")(70 . 0)))
   (if @:*auto-mode*
       (setq s1 (ssget "x" filters))
     (progn
-      (prompt "å›è½¦æˆ–å³é”®åˆ™ä¸ºæ‰€æœ‰å¤šæ®µçº¿")
+      (prompt "»Ø³µ»òÓÒ¼üÔòÎªËùÓĞ¶à¶ÎÏß")
       (setq s1 (ssget filters))
       (if (null s1)
 	  (setq s1 (ssget "x" filters)))))
   (sssetfirst nil s1))
 (defun at-select:select-sametype (/ ent1 s1 filters)
-  (@::prompt '("é€‰æ‹©åŒç±»å‹çš„å›¾å½¢"))
-  (@:prompt "è¯·ç‚¹é€‰ä¸€ä¸ªå›¾å½¢:")
+  (@::prompt '("Ñ¡ÔñÍ¬ÀàĞÍµÄÍ¼ĞÎ"))
+  (@:prompt "ÇëµãÑ¡Ò»¸öÍ¼ĞÎ:")
   (setq ent1 (car (pickset:to-list(ssget ":E:S" ))))
   (setq filters (list
 		 (cons 0
@@ -30,12 +30,12 @@
   (setq s1 (ssget "x" filters))
   (sssetfirst nil s1))
 (defun at-select:select-shortlines (/ ent1 s1 filters)
-  (@::prompt '("é€‰æ‹©çŸ­çº¿ï¼Œå³å°äºç»™å®šé•¿åº¦çš„çº¿"))
+  (@::prompt '("Ñ¡Ôñ¶ÌÏß£¬¼´Ğ¡ÓÚ¸ø¶¨³¤¶ÈµÄÏß"))
   (if (or (null shortline-value)
 	  (not(numberp shortline-value))
 	  (< shortline-value 0)
 	  )
-      (setq shortline-value (getreal "è¯·è¾“å…¥çŸ­çº¿é™å€¼:")))
+      (setq shortline-value (getreal "ÇëÊäÈë¶ÌÏßÏŞÖµ:")))
 	    
 		    
   (if (@::get-config 'curve:types)
@@ -51,7 +51,7 @@
 	   (> (vla-get-length (e2o x))
 	    shortline-value))
 	 (pickset:to-list (progn
-			    (prompt "å›è½¦æˆ–å³é”®åˆ™ä¸ºæ‰€æœ‰æ›²çº¿")
+			    (prompt "»Ø³µ»òÓÒ¼üÔòÎªËùÓĞÇúÏß")
 			    (setq s1 (ssget filters))
 			    (if (null s1)
 				(setq s1 (ssget "x" filters)))
@@ -59,8 +59,8 @@
   (if s1
       (sssetfirst nil (pickset:from-list s1))))
 (defun at-select:select-samelayer (/ ent1 s1 filters)
-  (@::prompt '("é€‰æ‹©åŒå±‚çš„å›¾å½¢"))
-  (@:prompt "è¯·ç‚¹é€‰ä¸€ä¸ªå›¾å½¢:")
+  (@::prompt '("Ñ¡ÔñÍ¬²ãµÄÍ¼ĞÎ"))
+  (@:prompt "ÇëµãÑ¡Ò»¸öÍ¼ĞÎ:")
   (setq ent1 (car (pickset:to-list(ssget ":E:S" ))))
   (setq filters (list
 		 (cons 8
@@ -68,8 +68,8 @@
   (setq s1 (ssget "x" filters))
   (sssetfirst nil s1))
 (defun at-select:select-samecolor (/ ent1 s1 filters)
-  (@::prompt '("é€‰æ‹©åŒè‰²çš„å›¾å½¢"))
-  (@:prompt "è¯·ç‚¹é€‰ä¸€ä¸ªå›¾å½¢:")
+  (@::prompt '("Ñ¡ÔñÍ¬É«µÄÍ¼ĞÎ"))
+  (@:prompt "ÇëµãÑ¡Ò»¸öÍ¼ĞÎ:")
   (setq ent1 (car (pickset:to-list(ssget ":E:S" ))))
   (setq filters (entity:get-color ent1))
   (setq s1
@@ -80,8 +80,8 @@
 	 (pickset:to-list (ssget "x"))))
   (sssetfirst nil (pickset:from-list s1)))
 (defun at-select:select-samelinetype (/ ent1 s1 filters)
-  (@::prompt '("é€‰æ‹©åŒçº¿å‹çš„å›¾å½¢"))
-  (@:prompt "è¯·ç‚¹é€‰ä¸€ä¸ªå›¾å½¢:")
+  (@::prompt '("Ñ¡ÔñÍ¬ÏßĞÍµÄÍ¼ĞÎ"))
+  (@:prompt "ÇëµãÑ¡Ò»¸öÍ¼ĞÎ:")
   (setq ent1 (car (pickset:to-list(ssget ":E:S" ))))
   (setq filters (entity:get-linetype ent1))
   (setq s1
@@ -94,13 +94,13 @@
 
 
 (defun at-select:select-similar (/ ent1 s1 filters)
-  (@::prompt '("é€‰æ‹©ç›¸ä¼¼æ›²çº¿"))
+  (@::prompt '("Ñ¡ÔñÏàËÆÇúÏß"))
   (if (@::get-config '@curve:types)
       (setq filters (list
 		     (cons 0
 			   (@::get-config '@curve:types))))
       (setq filters '((0 . "*POLYLINE,circle,arc,ellipse,spline,region,line"))))
-  (@:prompt "è¯·ç‚¹é€‰ä¸€ä¸ªæ›²çº¿:")
+  (@:prompt "ÇëµãÑ¡Ò»¸öÇúÏß:")
   (setq ent1 (car (pickset:to-list(ssget ":E:S" filters))))
   (setq s1
 	(vl-remove-if-not
@@ -111,15 +111,15 @@
 
 
 (defun at-select:select-samelens-lines (/ ent1 s1 filters lengths)
-  (@::prompt '("é€‰æ‹©å®šé•¿çº¿ï¼Œå³ç»™å®šçš„å›ºå®šé•¿åº¦çš„çº¿ã€‚"))
+  (@::prompt '("Ñ¡Ôñ¶¨³¤Ïß£¬¼´¸ø¶¨µÄ¹Ì¶¨³¤¶ÈµÄÏß¡£"))
   (while (null
 	  (and 
-	   (setq lengths (getstring t "è¯·è¾“å…¥çº¿é•¿åº¦å€¼(ä»¥ç©ºæ ¼æˆ–,å·åˆ†éš”å¤šå€¼):"))
-	   (setq lengths (vl-remove nil (string:split lengths '(" " "," "ï¼Œ"))))
+	   (setq lengths (getstring t "ÇëÊäÈëÏß³¤¶ÈÖµ(ÒÔ¿Õ¸ñ»ò,ºÅ·Ö¸ô¶àÖµ):"))
+	   (setq lengths (vl-remove nil (string:split lengths '(" " "," "£¬"))))
 	   (apply 'and (mapcar 'string:numberp lengths))
 	   (setq lengths (mapcar 'read lengths))
 	   ))
-    (prompt "è¾“å…¥é”™è¯¯ï¼Œè¯·é‡æ–°è¾“å…¥!\n"))
+    (prompt "ÊäÈë´íÎó£¬ÇëÖØĞÂÊäÈë!\n"))
   k		    
   (if (@::get-config 'curve:types)
       (setq filters (list
@@ -134,7 +134,7 @@
 	   (list:member (vla-get-length (e2o x))
 	    lengths (* 0.001 (vla-get-length (e2o x)))))
 	 (pickset:to-list (progn
-			    (prompt "å›è½¦æˆ–å³é”®åˆ™ä¸ºæ‰€æœ‰æ›²çº¿")
+			    (prompt "»Ø³µ»òÓÒ¼üÔòÎªËùÓĞÇúÏß")
 			    (setq s1 (ssget filters))
 			    (if (null s1)
 				(setq s1 (ssget "x" filters)))

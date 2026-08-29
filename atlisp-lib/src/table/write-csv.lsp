@@ -1,5 +1,5 @@
 (defun table:write-csv (lst file / fp *error*)
-  "å°† äºŒç»´è¡¨ å†™å…¥ csv æ–‡ä»¶ã€‚"
+  "½« ¶þÎ¬±í Ð´Èë csv ÎÄ¼þ¡£"
   ""
   (defun *error* (msg)
     (if (= (quote file)

@@ -1,3 +1,3 @@
 (defun astron:declination ()
-  "太阳高度角一般公式"
+  "̫���߶Ƚ�һ�㹫ʽ"
   )

@@ -1,11 +1,11 @@
 (defun example:dcl-progressbar2 (/ dcl-fp dcl-tmp valuebar v1 v2 v3)
-  "MVCNIS æ³•ç¤ºä¾‹7: 6 æ­¥è¿›è¡ŒåŠ¨æ€ DCL å¼€å‘ä¹‹è¿›åº¦æ¡2"
+  "MVCNIS ·¨Ê¾Àı7: 6 ²½½øĞĞ¶¯Ì¬ DCL ¿ª·¢Ö®½ø¶ÈÌõ2"
   ""
   ""
   (require (quote dcl:*))
-  "1. Model å»ºç«‹æ•°æ®æ¨¡å‹ã€‚"
+  "1. Model ½¨Á¢Êı¾İÄ£ĞÍ¡£"
   (setq value-bar 0.01 v1 0.01 v2 0.01 v3 0.01)
-  "2. View å»ºç«‹æ˜¾ç¤ºè§†å›¾ã€‚"
+  "2. View ½¨Á¢ÏÔÊ¾ÊÓÍ¼¡£"
   (dcl:dialog "example")
   (progn (dcl:progressbar "pbar0" "width=30;fixed_width=true;height=1;"  t)
 	 (dcl:progressbar "pbar1" "width=30;fixed_width=true;"    t)
@@ -13,13 +13,13 @@
 	 (dcl:progressbar "pbar3" "width=30;fixed_width=true;"   t)
 	 (dcl:mtext "mt"    1 30)
 	 (dcl:begin-cluster "row"   "")
-	 (progn (dcl:button "btn1"   "æ¸…é›¶"    "")
-		(dcl:button "btn2"   "è¿›åº¦+"   "")
+	 (progn (dcl:button "btn1"   "ÇåÁã"    "")
+		(dcl:button "btn2"   "½ø¶È+"   "")
 		(dcl:end-cluster)))
   (dcl:dialog-end-ok-cancel)
-  "3. Control åˆ›å»ºæ§åˆ¶æµç¨‹"
+  "3. Control ´´½¨¿ØÖÆÁ÷³Ì"
   (defun chg-bar (step)
-    (dcl:set-mtext "mt" "æ‰§è¡Œç¬¬ä¸€é˜¶æ®µï¼š")
+    (dcl:set-mtext "mt" "Ö´ĞĞµÚÒ»½×¶Î£º")
     (while (and (< v1 1)
 		(> v1 0))
       (setq v1 (+ v1 step))
@@ -30,7 +30,7 @@
       (dcl:set-progressbar "pbar1" v1)
       (dcl:set-progressbar "pbar0" (/ (+ v1 v2 v3)  3.0))
       (sleep 0.5))
-    (dcl:set-mtext "mt" "æ‰§è¡Œç¬¬äºŒé˜¶æ®µ: ")
+    (dcl:set-mtext "mt" "Ö´ĞĞµÚ¶ş½×¶Î: ")
     (while (and (< v2 1)
 		(> v2 0))
       (setq v2 (+ v2 (* 0.2 step)))
@@ -42,7 +42,7 @@
       (dcl:set-progressbar "pbar0"  (/ (+ v1 v2 v3)
 				       3.0))
       (sleep 0.2))
-    (dcl:set-mtext "mt" "æ‰§è¡Œç¬¬ä¸‰é˜¶æ®µ: ")
+    (dcl:set-mtext "mt" "Ö´ĞĞµÚÈı½×¶Î: ")
     (while (and (< v3 1)
 		(> v3 0))
       (setq v3 (+ v3 (* 0.3 step)))
@@ -53,19 +53,19 @@
       (dcl:set-progressbar "pbar3"   v3)
       (dcl:set-progressbar "pbar0"  (/ (+ v1 v2 v3) 3.0))
       (sleep 0.5))
-    (dcl:set-mtext "mt" "æ‰§è¡Œå®Œæ¯•ï¼ï¼ "))
+    (dcl:set-mtext "mt" "Ö´ĞĞÍê±Ï£¡£¡ "))
   (defun cb-btn1 nil (setq v1 0.001 v2 0.001 v3 0.001)
-	 (dcl:set-mtext "mt" "å‡†å¤‡ä¸­ ... ")
+	 (dcl:set-mtext "mt" "×¼±¸ÖĞ ... ")
 	 (mapcar (quote dcl:set-progressbar)
 		 (quote ("pbar0" "pbar1" "pbar2" "pbar3"))
 		 (quote (0.001 0.001 0.001 0.001))))
   (defun cb-btn2 nil (chg-bar 0.1))
-  "4. New ä¸€ä¸ªæ–°å¯¹è¯æ¡†å¯¹è±¡ã€‚"
+  "4. New Ò»¸öĞÂ¶Ô»°¿ò¶ÔÏó¡£"
   (dcl:new "example")
-  "5. Init åˆå§‹åŒ–å¯¹è¯æ¡†"
+  "5. Init ³õÊ¼»¯¶Ô»°¿ò"
   (set_tile "title"
-	    "dcl-è¿›åº¦æ¡ç¤ºä¾‹")
+	    "dcl-½ø¶ÈÌõÊ¾Àı")
   (cb-btn1)
-  "6. Show dialog æ˜¾ç¤ºå¹¶è¿›è¡Œäº¤äº’"
+  "6. Show dialog ÏÔÊ¾²¢½øĞĞ½»»¥"
   (dcl:show)
   (princ))

@@ -1,14 +1,14 @@
 (defun prefabricated-building:stat-slab ()
-  "ç»Ÿè®¡å½¢åŠæ¿é•¿"
+  "Í³¼ÆĞÎ¼°°å³¤"
   (setq slabs (pickset:to-list(block:ssget nil "slab*" nil)))
   
-  ;;æŒ‰æ¿å®½åˆ†ç»„
+  ;;°´°å¿í·Ö×é
   ;; (setq slabs (list:sort
   ;; 	       slabs
   ;; 	       '(lambda(x y)
   ;; 		  (<
-  ;; 		   (block:get-dynprop x "æŸ¥å¯»1")
-  ;; 		   (block:get-dynprop y "æŸ¥å¯»1")
+  ;; 		   (block:get-dynprop x "²éÑ°1")
+  ;; 		   (block:get-dynprop y "²éÑ°1")
   ;; 		   ))))
   ;; (setq slabs
   ;; 	(apply 'append
@@ -16,18 +16,18 @@
   ;; 	       slabs
   ;; 	       '(lambda(x y)
   ;; 		  (=
-  ;; 		   (block:get-dynprop x "æŸ¥å¯»1")
-  ;; 		   (block:get-dynprop y "æŸ¥å¯»1")
+  ;; 		   (block:get-dynprop x "²éÑ°1")
+  ;; 		   (block:get-dynprop y "²éÑ°1")
   ;; 		   )))))
   (setq statdata
 	(stat:stat (mapcar '(lambda(x)
-			      (strcat "W"(itoa (fix(block:get-dynprop x "è·ç¦»2")))
+			      (strcat "W"(itoa (fix(block:get-dynprop x "¾àÀë2")))
 				      "-"
 				      (itoa
 				       (fix
 					(* 10
 					   (round
-					    (/ (block:get-dynprop x  "è·ç¦»1") 10.0)))))))
+					    (/ (block:get-dynprop x  "¾àÀë1") 10.0)))))))
 			   slabs)))
   ;; (setq statdata
   ;; 	(mapcar '(lambda(w)
@@ -35,11 +35,11 @@
   ;; 		    (mapcar
   ;; 		     '(lambda(x)
   ;; 			(list
-  ;; 			 (block:get-dynprop x "æŸ¥å¯»1")
+  ;; 			 (block:get-dynprop x "²éÑ°1")
   ;; 			 (fix
   ;; 			  (* 10
   ;; 			     (round
-  ;; 			      (/ (block:get-dynprop x  "è·ç¦»1") 10.0))))))
+  ;; 			      (/ (block:get-dynprop x  "¾àÀë1") 10.0))))))
   ;; 		     w)))
   ;; 		slabs))
   
@@ -56,8 +56,8 @@
 		statdata))
   (setq ent-tbl
 	(table:make '(0 0 0)
-		    "æ¿ç»Ÿè®¡è¡¨"
-		    '("å‹å·""æ¿å®½W" "æ¿è·¨La(mm)""æ¿å‡€è·¨L""ä¸ªæ•°""å¤‡æ³¨")
+		    "°åÍ³¼Æ±í"
+		    '("ĞÍºÅ""°å¿íW" "°å¿çLa(mm)""°å¾»¿çL""¸öÊı""±¸×¢")
 		    table-data))
   (ui:dyndraw ent-tbl '(0 0 0)))
   

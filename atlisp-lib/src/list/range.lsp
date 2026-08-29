@@ -1,6 +1,6 @@
 (defun list:range (start end step)
-  "ç”Ÿæˆç­‰å·®æ•°åˆ—è¡¨ï¼Œç±»ä¼¼pythonçš„range()å‡½æ•°.\nå‚æ•°ï¼šstart:èµ·å§‹å€¼\n      end:ç»“æŸå€¼\n      step:ç­‰å·®å€¼"
-  "ç­‰å·®æ•°åˆ—è¡¨"
+  "Éú³ÉµÈ²îÊýÁÐ±í£¬ÀàËÆpythonµÄrange()º¯Êý.\n²ÎÊý£ºstart:ÆðÊ¼Öµ\n      end:½áÊøÖµ\n      step:µÈ²îÖµ"
+  "µÈ²îÊýÁÐ±í"
   "(list:range 1 4 1);; => (1 2 3 4)"
   (if (> start end)
       (quote nil)

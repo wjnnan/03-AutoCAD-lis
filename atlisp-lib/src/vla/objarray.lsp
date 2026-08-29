@@ -1,5 +1,5 @@
 (defun vla:objarray (lst)
-    "åˆ›å»ºvlaå¯¹è±¡æ•°ç»„\nå‚    æ•°:lst:vlaå¯¹è±¡è¡¨"
-    "è¿” å›ž å€¼:vlaå¯¹è±¡æ•°ç»„"
+    "´´½¨vla¶ÔÏóÊý×é\n²Î    Êý:lst:vla¶ÔÏó±í"
+    "·µ »Ø Öµ:vla¶ÔÏóÊý×é"
     "(vla:objarray lst)"
     (vla:list->array lst vlax-vbobject))

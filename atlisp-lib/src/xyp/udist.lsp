@@ -1,7 +1,7 @@
 (defun xyp:Udist (bit kwd msg def bpt / inp)
-  "è·ç¦»è¾“å…¥æ ¼å¼åŒ–"
+  "¾àÀëÊäÈë¸ñÊ½»¯"
   "real"
-  "(setq dist1 (Udist 1 \"\" \"è·ç¦»\" dist1 '(0 0)))"
+  "(setq dist1 (Udist 1 \"\" \"¾àÀë\" dist1 '(0 0)))"
   (if def
     (setq msg (strcat "\n" msg "<" (rtos def) ">: ")bit (* 2 (fix (/ bit 2))))
     (setq msg (strcat "\n" msg ": "))

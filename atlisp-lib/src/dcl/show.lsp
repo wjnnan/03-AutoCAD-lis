@@ -1,5 +1,5 @@
 (defun dcl:show (/ ret)
-  "æ˜¾ç¤ºdclå¯¹è¯æ¡†"
+  "ÏÔÊ¾dcl¶Ô»°¿ò"
   ""
   (setq ret (start_dialog))
   (unload_dialog dcl-id)

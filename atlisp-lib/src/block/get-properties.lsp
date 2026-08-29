@@ -1,5 +1,5 @@
 (defun block:get-properties (blkref / oblkref)
-  "è·å–åŠ¨æ€å—çš„åŠ¨æ€ç‰¹æ€§å’Œå€¼çš„ç‚¹å¯¹è¡¨"
+  "»ñÈ¡¶¯Ì¬¿éµÄ¶¯Ì¬ÌØĞÔºÍÖµµÄµã¶Ô±í"
   (if (= (quote ename) (type blkref))
       (mapcar (function(lambda(prop)
 		(cons 

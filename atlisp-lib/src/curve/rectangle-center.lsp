@@ -1,5 +1,5 @@
 (defun curve:rectangle-center (en / pl)
-  "鐭╁舰涓偣鍧愭爣"
+  "矩形中点坐标"
   (setq pl (curve:pline-2dpoints en))
   (mapcar (quote (lambda (x y)
         (/ (+ x y)

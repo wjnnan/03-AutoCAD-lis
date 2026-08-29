@@ -1,77 +1,79 @@
-;;; tb-mod-select.lsp â€” æ™ºèƒ½é€‰æ‹©è¿‡æ»¤æ¨¡å—ï¼ˆé€‰æ‹©æ˜“ï¼‰
-;;; ç»„åˆ entity:* sel:* lay:* åº“å‡½æ•°ã€‚
-;;; åŸæ–‡ä»¶æ¥æºï¼šF:\ç»“æ„æ’ä»¶\é€‰æ‹©æ˜“.lspï¼ˆc:ssï¼‰â€” DCL + è¿‡æ»¤é€»è¾‘é‡å†™
+;;; tb-mod-select.lsp ¡ª ÖÇÄÜÑ¡Ôñ¹ıÂËÄ£¿é£¨Ñ¡ÔñÒ×£©
+;;; ×éºÏ entity:* sel:* lay:* ¿âº¯Êı¡£
+;;; Ô­ÎÄ¼şÀ´Ô´£ºF:\½á¹¹²å¼ş\Ñ¡ÔñÒ×.lsp£¨c:ss£©¡ª DCL + ¹ıÂËÂß¼­ÖØĞ´
 ;;;
-;;; æ ¸å¿ƒæ€è·¯ï¼šé€‰ä¸€ä¸ªæ ·æ¿å®ä½“ â†’ è‡ªåŠ¨æå–æ‰€æœ‰å±æ€§ â†’ ç”¨æˆ·å‹¾é€‰è¿‡æ»¤æ¡ä»¶ â†’ è‡ªåŠ¨æ„å»º ssget è¿‡æ»¤å™¨
+;;; ºËĞÄË¼Â·£ºÑ¡Ò»¸öÑù°åÊµÌå ¡ú ×Ô¶¯ÌáÈ¡ËùÓĞÊôĞÔ ¡ú ÓÃ»§¹´Ñ¡¹ıÂËÌõ¼ş ¡ú ×Ô¶¯¹¹½¨ ssget ¹ıÂËÆ÷
 
 ;; ============================================================================
-;; DCL å¯¹è¯æ¡†ï¼ˆå†…åµŒå­—ç¬¦ä¸²ï¼ŒåŠ è½½æ—¶å†™å…¥ä¸´æ—¶æ–‡ä»¶ï¼‰
+;; DCL ¶Ô»°¿ò£¨ÄÚÇ¶×Ö·û´®£¬¼ÓÔØÊ±Ğ´ÈëÁÙÊ±ÎÄ¼ş£©
 ;; ============================================================================
 
 (setq *TB:SELECT-DCL*
   '("select_filter:dialog{"
-    "  label=\"é€‰æ‹©æ˜“ - æ™ºèƒ½è¿‡æ»¤\";"
+    "  label=\"Ñ¡ÔñÒ× - ÖÇÄÜ¹ıÂË\";"
     "  :column{"
-    "    :boxed_row{label=\"è¿‡æ»¤æ¡ä»¶\";"
+    "    :boxed_row{label=\"¹ıÂËÌõ¼ş\";"
     "      :column{"
-    "        :toggle{label=\"å®ä½“ç±»å‹\";key=\"t0\";}"
-    "        :toggle{label=\"å›¾å±‚\";key=\"t8\";}"
-    "        :toggle{label=\"é¢œè‰²\";key=\"t62\";}"
-    "        :toggle{label=\"çº¿å‹\";key=\"t6\";}"
+    "        :toggle{label=\"ÊµÌåÀàĞÍ\";key=\"t0\";}"
+    "        :toggle{label=\"Í¼²ã\";key=\"t8\";}"
+    "        :toggle{label=\"ÑÕÉ«\";key=\"t62\";}"
+    "        :toggle{label=\"ÏßĞÍ\";key=\"t6\";}"
     "      }"
     "      :column{"
-    "        :toggle{label=\"æ–‡å­—å†…å®¹\";key=\"t1\";}"
-    "        :toggle{label=\"æ–‡å­—æ ·å¼\";key=\"t7\";}"
-    "        :toggle{label=\"æ–‡å­—é«˜åº¦\";key=\"t40\";}"
-    "        :toggle{label=\"å—å\";key=\"t2\";}"
+    "        :toggle{label=\"ÎÄ×ÖÄÚÈİ\";key=\"t1\";}"
+    "        :toggle{label=\"ÎÄ×ÖÑùÊ½\";key=\"t7\";}"
+    "        :toggle{label=\"ÎÄ×Ö¸ß¶È\";key=\"t40\";}"
+    "        :toggle{label=\"¿éÃû\";key=\"t2\";}"
     "      }"
     "      :column{"
-    "        :edit_box{label=\"æ–‡å­—åŒ…å«\";key=\"text_filter\";width=20;}"
-    "        :edit_box{label=\"å›¾å±‚åç§°\";key=\"layer_filter\";width=20;}"
-    "        :edit_box{label=\"é¢œè‰²å·\";key=\"color_filter\";width=10;}"
+    "        :edit_box{label=\"ÎÄ×Ö°üº¬\";key=\"text_filter\";width=20;}"
+    "        :edit_box{label=\"Í¼²ãÃû³Æ\";key=\"layer_filter\";width=20;}"
+    "        :edit_box{label=\"ÑÕÉ«ºÅ\";key=\"color_filter\";width=10;}"
     "      }"
     "    }"
     "    :row{"
-    "      :button{label=\"åº”ç”¨è¿‡æ»¤å¹¶é€‰æ‹©\";key=\"apply\";is_default=true;}"
-    "      :button{label=\"å…¨é€‰åŒç±»\";key=\"select_all\";}"
+    "      :button{label=\"Ó¦ÓÃ¹ıÂË²¢Ñ¡Ôñ\";key=\"apply\";is_default=true;}"
+    "      :button{label=\"È«Ñ¡Í¬Àà\";key=\"select_all\";}"
     "      cancel_button;"
     "    }"
     "  }"
     "}"))
 
 ;; ============================================================================
-;; é€‰æ‹©æ˜“æ ¸å¿ƒé€»è¾‘
+;; Ñ¡ÔñÒ×ºËĞÄÂß¼­
 ;; ============================================================================
 
-(defun c:ss (/ sample slent entl dcl-fn dcl-id filter ss result
+(defun c:ss (/ sample slent entl dcl-fn dcl-f dcl-id filter ss result
               type-toggle layer-toggle color-toggle ltype-toggle
               text-toggle style-toggle height-toggle blk-toggle
               text-filter layer-filter color-filter)
-  "æ™ºèƒ½é€‰æ‹©è¿‡æ»¤ã€‚é€‰æ‹©æ ·æ¿å®ä½“ â†’ å‹¾é€‰è¿‡æ»¤æ¡ä»¶ â†’ è‡ªåŠ¨é€‰æ‹©åŒ¹é…å®ä½“ã€‚"
-  ;; æå–æ¨¡æ¿å®ä½“çš„æ‰€æœ‰ DXF ç»„ç 
+  (uc:guard-begin '())
+  "ÖÇÄÜÑ¡Ôñ¹ıÂË¡£Ñ¡ÔñÑù°åÊµÌå ¡ú ¹´Ñ¡¹ıÂËÌõ¼ş ¡ú ×Ô¶¯Ñ¡ÔñÆ¥ÅäÊµÌå¡£"
+  ;; ÌáÈ¡Ä£°åÊµÌåµÄËùÓĞ DXF ×éÂë
   (initget "N")
-  (setq slent (entsel "\né€‰æ‹©æ ·æ¿å®ä½“ (N-å–æ¶ˆ): "))
+  (setq slent (entsel "\nÑ¡ÔñÑù°åÊµÌå (N-È¡Ïû): "))
   (if (and slent (listp slent))
     (progn
       (setq sample (car slent)
             entl (entget sample))
 
-      ;; å†™å…¥ä¸´æ—¶ DCL æ–‡ä»¶
-      (setq dcl-fn (vl-filename-mktemp "TB-SELECT.DCL"))
+      ;; Ğ´ÈëÁÙÊ± DCL ÎÄ¼ş
+      (setq dcl-fn (strcat (getvar "TEMPPREFIX") "TB-SELECT.DCL"))
       (if (setq dcl-f (open dcl-fn "w"))
         (progn
           (foreach line *TB:SELECT-DCL* (write-line line dcl-f))
           (close dcl-f)))
 
-      ;; åŠ è½½ DCL å¹¶æ˜¾ç¤ºå¯¹è¯æ¡†
+      ;; ¼ÓÔØ DCL ²¢ÏÔÊ¾¶Ô»°¿ò
       (if (and (setq dcl-id (load_dialog dcl-fn))
                (new_dialog "select_filter" dcl-id))
         (progn
-          ;; æ˜¾ç¤ºæ ·æ¿å®ä½“ä¿¡æ¯
-          (set_tile "text_filter"
-            (strcat "æ ·æ¿: " (entity:get-type sample)
-                    "  å›¾å±‚: " (entity:get-layer sample)
-                    "  é¢œè‰²: " (itoa (abs (entity:get-dxf sample 62)))))
+          ;; ÏÔÊ¾Ñù°åÊµÌåĞÅÏ¢
+          ;; Õ¹Ê¾Ñù°åĞÅÏ¢µ½ÃüÁîĞĞ£¨²»ÎÛÈ¾ text_filter ±à¼­¿ò£©
+          (princ (strcat "\nÑù°å: " (entity:get-type sample)
+                         "  Í¼²ã: " (entity:get-layer sample)
+                         "  ÑÕÉ«: " (itoa (abs (if (entity:get-dxf sample 62) (entity:get-dxf sample 62) 7)))))
+          (set_tile "text_filter" "")
           (action_tile "apply"
             "(progn
                (setq type-toggle  (atoi (get_tile \"t0\")))
@@ -92,52 +94,83 @@
                (done_dialog 2))")
           (action_tile "cancel" "(done_dialog 0)")
 
-          ;; æ˜¾ç¤ºå¯¹è¯æ¡†
+          ;; ÏÔÊ¾¶Ô»°¿ò
           (setq result (start_dialog))
           (unload_dialog dcl-id)
 
-          ;; åˆ é™¤ä¸´æ—¶æ–‡ä»¶
+          ;; É¾³ıÁÙÊ±ÎÄ¼ş
           (vl-file-delete dcl-fn)
 
-          ;; æ„å»ºè¿‡æ»¤å™¨
+          ;; ¹¹½¨¹ıÂËÆ÷
           (if (> result 0)
             (progn
               (setq filter (list))
-              ;; å®ä½“ç±»å‹
+              ;; ÊµÌåÀàĞÍ
               (if (= type-toggle 1)
                 (setq filter (append filter (list (cons 0 (entity:get-type sample))))))
-              ;; å›¾å±‚
+              ;; Í¼²ã£¨±à¼­¿òÓÅÏÈ£¬·ñÔòÓÃÑù°åÍ¼²ã£©
               (if (= layer-toggle 1)
-                (setq filter (append filter (list (cons 8 (entity:get-layer sample))))))
-              ;; é¢œè‰²
+                (setq filter (append filter (list (cons 8
+                  (if (and layer-filter (/= layer-filter "")) layer-filter (entity:get-layer sample)))))))
+              ;; ÑÕÉ«£¨±à¼­¿òÓÅÏÈ£¬·ñÔòÓÃÑù°åÑÕÉ«£©
               (if (= color-toggle 1)
-                (setq filter (append filter (list (cons 62 (entity:get-dxf sample 62))))))
-              ;; çº¿å‹
-              (if (= ltype-toggle 1)
+                (setq filter (append filter (list (cons 62
+                  (if (and color-filter (/= color-filter "") (numberp (atoi color-filter)))
+                    (atoi color-filter)
+                    (if (entity:get-dxf sample 62) (entity:get-dxf sample 62) 7)))))))
+              ;; ÏßĞÍ
+              (if (and (= ltype-toggle 1) (entity:get-dxf sample 6))
                 (setq filter (append filter (list (cons 6 (entity:get-dxf sample 6))))))
-              ;; æ–‡å­—å†…å®¹é€šé…
+              ;; ÎÄ×ÖÄÚÈİÍ¨Åä
               (if (and (= text-toggle 1) text-filter (/= text-filter ""))
                 (setq filter (append filter (list (cons 1 (strcat "*" text-filter "*"))))))
-              ;; æ–‡å­—æ ·å¼
-              (if (= style-toggle 1)
+              ;; ÎÄ×ÖÑùÊ½
+              (if (and (= style-toggle 1) (entity:get-dxf sample 7))
                 (setq filter (append filter (list (cons 7 (entity:get-dxf sample 7))))))
-              ;; å—å
-              (if (= blk-toggle 1)
+              ;; ÎÄ×Ö¸ß¶È£¨°´Ñù°å×Ö¸ß¹ıÂË£©
+              (if (and (= height-toggle 1) (entity:get-dxf sample 40))
+                (setq filter (append filter (list (cons 40 (entity:get-dxf sample 40))))))
+              ;; ¿éÃû
+              (if (and (= blk-toggle 1) (entity:get-dxf sample 2))
                 (setq filter (append filter (list (cons 2 (entity:get-dxf sample 2))))))
 
-              ;; æ‰§è¡Œé€‰æ‹©
+              ;; Ö´ĞĞÑ¡Ôñ
               (if filter
                 (progn
-                  (setq ss (ssget filter))
+                  (setq ss (if (= result 2) (ssget "X" filter) (ssget filter)))
                   (if ss
                     (progn
                       (sssetfirst nil ss)
-                      (princ (strcat "\nå·²é€‰æ‹© " (itoa (sel:count ss)) " ä¸ªåŒ¹é…å®ä½“ã€‚")))
-                    (princ "\næœªæ‰¾åˆ°åŒ¹é…å®ä½“ã€‚")))
-                (princ "\næœªè®¾ç½®è¿‡æ»¤æ¡ä»¶ã€‚")))))))
-    (princ "\nå·²å–æ¶ˆã€‚"))
-  (princ))
+                      (princ (strcat "\nÒÑÑ¡Ôñ " (itoa (sel:count ss)) " ¸öÆ¥ÅäÊµÌå¡£")))
+                    (princ "\nÎ´ÕÒµ½Æ¥ÅäÊµÌå¡£")))
+                (princ "\nÎ´ÉèÖÃ¹ıÂËÌõ¼ş¡£")))))))
+    (princ "\nÒÑÈ¡Ïû¡£"))
+  (princ)
+  (uc:guard-end))
 
 
-(princ "\n[TB] æ™ºèƒ½é€‰æ‹©è¿‡æ»¤æ¨¡å—åŠ è½½å®Œæˆ (select: 1å‘½ä»¤)")
+(defun c:sss (/ e filter ss)
+  (uc:guard-begin '())
+  "Ñ¡ÔñÏàËÆ£ºµãÑ¡Ñù°å¶ÔÏó£¬È«Í¼Ñ¡ÔñËùÓĞÏàËÆÊµÌå£¨Í¬ÀàĞÍ+Í¬Í¼²ã+Í¬¿éÃû/ÑùÊ½£©¡£"
+  (if (setq e (car (entsel "\nÑ¡ÔñÑù°å¶ÔÏó: ")))
+    (progn
+      (setq filter (list (cons 0 (entity:get-type e))
+                         (cons 8 (entity:get-layer e))))
+      ;; ¿éÃû£¨INSERT£©
+      (if (and (= (entity:get-type e) "INSERT") (entity:get-dxf e 2))
+        (setq filter (append filter (list (cons 2 (entity:get-dxf e 2))))))
+      ;; ÎÄ×ÖÑùÊ½£¨TEXT/MTEXT£©
+      (if (and (wcmatch (entity:get-type e) "TEXT,MTEXT") (entity:get-dxf e 7))
+        (setq filter (append filter (list (cons 7 (entity:get-dxf e 7))))))
+      ;; È«Í¼Ñ¡Ôñ
+      (setq ss (ssget "X" filter))
+      (if ss
+        (progn
+          (sssetfirst nil ss)
+          (princ (strcat "\nÒÑÑ¡Ôñ " (itoa (sel:count ss)) " ¸öÏàËÆÊµÌå¡£")))
+        (princ "\nÎ´ÕÒµ½ÏàËÆÊµÌå¡£"))))
+  (princ)
+  (uc:guard-end))
+
+(princ "\n[TB] ÖÇÄÜÑ¡Ôñ¹ıÂËÄ£¿é¼ÓÔØÍê³É (select: 2ÃüÁî)")
 (princ)

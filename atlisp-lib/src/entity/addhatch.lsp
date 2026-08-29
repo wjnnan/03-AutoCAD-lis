@@ -1,6 +1,6 @@
 (defun entity:addhatch (outarray inarray name / hatchobj)
-  "åˆ›å»ºå¡«å……ã€‚outArray:å¤–è¾¹ç•Œå¯¹è±¡è¡¨ï¼ŒinArray:å†…è¾¹ç•Œå¯¹è±¡è¡¨ï¼Œname:å……å¡«åç§°"
-  "å¡«å……ä½“å¯¹è±¡"
+  "´´½¨Ìî³ä¡£outArray:Íâ±ß½ç¶ÔÏó±í£¬inArray:ÄÚ±ß½ç¶ÔÏó±í£¬name:³äÌîÃû³Æ"
+  "Ìî³äÌå¶ÔÏó"
   (setq hatchobj (vla-addhatch (std:model-space)
       achatchpatterntypepredefined name :vlax-true))
   (vla-appendouterloop hatchobj (vla:objarray (mapcar (quote vlax-ename->vla-object)

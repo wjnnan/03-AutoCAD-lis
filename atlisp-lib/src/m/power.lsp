@@ -1,5 +1,5 @@
 (defun m:power (base pow / str1)
-    "澧炲己power鍑芥暟锛岀洰鐨勪负鎵╁睍expt鍑芥暟,鍙傛暟閮戒负鏁板瓧鏃讹紝瀛楃涓诧紝鏁板瓧锛屽垪琛ㄧ被鍨嬶紝鍏朵粬绫诲瀷杩斿洖nil,杩斿洖expt璁＄畻鐨勭粨鏋滐紝base涓哄瓧绗︿覆鍜屽垪琛ㄦ椂锛岃繑鍥炶嚜涔樼殑缁撴灉"
+    "增强power函数，目的为扩展expt函数,参数都为数字时，字符串，数字，列表类型，其他类型返回nil,返回expt计算的结果，base为字符串和列表时，返回自乘的结果"
     (cond ((stringp base)
             (progn (setq str1 "")
                 (repeat pow (setq str1 (strcat str1 base)))))

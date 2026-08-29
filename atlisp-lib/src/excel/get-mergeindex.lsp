@@ -1,6 +1,6 @@
 (defun excel:get-mergeindex (xlapp index / rtn)
-  "è·å–åˆå¹¶å•å…ƒæ ¼çš„ç´¢å¼•\nå‚æ•°:xlapp:å·²æ‰“å¼€çš„excelæ–‡ä»¶å¯¹è±¡\nå‚æ•°:index:åŒºåŸŸç´¢å¼•ï¼ŒA1å¼•ç”¨æ ¼å¼æˆ–è€…è¡Œåˆ—è¡¨"
-  "A1æ ¼å¼çš„ç´¢å¼•"
+  "»ñÈ¡ºÏ²¢µ¥Ôª¸ñµÄË÷Òı\n²ÎÊı:xlapp:ÒÑ´ò¿ªµÄexcelÎÄ¼ş¶ÔÏó\n²ÎÊı:index:ÇøÓòË÷Òı£¬A1ÒıÓÃ¸ñÊ½»òÕßĞĞÁĞ±í"
+  "A1¸ñÊ½µÄË÷Òı"
   "(Excel:get-MergeIndex)"
   (if (excel:range-mergep xlapp index)
     (progn (vlax-invoke-method (excel:get-range xlapp index)

@@ -1,5 +1,5 @@
 (defun entity:make-rectangle (pt1 pt2)
-  "åˆ›å»ºçŸ©å½¢æ¡†(æ°´å¹³ï¼Œç«–ç›´æ–¹å‘)"
+  "´´½¨¾ØĞÎ¿ò(Ë®Æ½£¬ÊúÖ±·½Ïò)"
   (entmake (list (quote (0 . "LWPOLYLINE"))
       (quote (100 . "AcDbEntity"))
       (quote (100 . "AcDbPolyline"))

@@ -1,5 +1,5 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; è¿™æ˜¯ä½¿ç”¨å¼€å‘å·¥å…· dev-tools è‡ªåŠ¨åˆ›å»ºçš„ç¨‹åºæºæ–‡ä»¶ 
+;; ÕâÊÇÊ¹ÓÃ¿ª·¢¹¤¾ß dev-tools ×Ô¶¯´´½¨µÄ³ÌĞòÔ´ÎÄ¼ş 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (defpackage :@cnc
   (:use :cl)
@@ -7,44 +7,44 @@
 (defpackage :at-cnc
   (:use :cl)
   )
-(@:define-config '@cnc::init 0 "é¦–è¡Œæ˜¯å¦åŠ è½½åˆå§‹åŒ–æŒ‡ä»¤")
-(@:define-config '@cnc::units 0.001  "åŠ å·¥ç²¾ç»†åº¦ï¼Œå³æœ€å°ç²¾åº¦ï¼Œå•ä½ä¸ºmm,é»˜è®¤ä¸º0.001 å³1å¾®ç±³")
-(@:define-config '@cnc::r  6.0  "åˆ€å…·ç›´å¾„ï¼Œç”Ÿæˆåˆ€è·¯æ—¶å°†ä»æˆå“è¾¹ç•Œåç§»åŠä¸ªç›´å¾„ã€‚")
-(@:define-config '@cnc::motor-speed 4000 "ä¸»è½´é©¬è¾¾è½¬é€Ÿ")
-(@:define-config '@cnc::f 50  "è¿›ç»™é€Ÿç‡")
-(@:define-config '@cnc::f-u 1.0  "Uè½´è¿›ç»™é€Ÿç‡ï¼Œè¯¥é¡¹å€¼å¯ä¸ä¸»è½´é©¬è¾¾è½¬é€Ÿé…åˆè®¾ç½®")
-(@:define-config '@cnc::cutter-compensation-left 0 "åˆ€å…·å·¦è¡¥å¿å€¼")
-(@:define-config '@cnc::cutter-compensation-right 0 "åˆ€å…·å³è¡¥å¿å€¼")
-(@:define-config '@cnc::chopping 0 "å·¥ä½œæ—¶æ˜¯å¦åŠ å†²ç¨‹")
-(@:define-config '@cnc::chopping-pause 10.0 "å†²ç¨‹å‰æš‚åœæ—¶é—´")
-(@:define-config '@cnc::k-thickness 0.3 "æ‰©å­”åšåº¦")
-(@:define-config '@cnc::k-times  30 "æ‰©å­”æ¬¡æ•°")
-(@:define-config '@cnc::rub-times 3 "ç£¨å­”æ¬¡æ•°")
-(@:define-config '@cnc::rub-f  300 "ç£¨å­”è¿›ç»™é€Ÿç‡")
-(@:define-config '@cnc::U-axis 1  "æ˜¯å¦æœ‰Uè½´")
-(@:define-config '@cnc::umotor-speed 800 "Uè½´é©¬è¾¾è½¬é€Ÿ")
-(@:define-config '@cnc::to-origin 1  "å®Œæˆåæ˜¯å¦å›åº“")
-(@:define-config '@cnc::thickness 10.0 "è¦åŠ å·¥å·¥ä»¶çš„åšåº¦ï¼Œå¦‚æœè®¾å®šäº†æ›²çº¿åšåº¦ï¼Œåˆ™é‡‡ç”¨æ›²çº¿åšåº¦å€¼")
-(@:define-config '@cnc::layer-route "CNC_ROUTE" "ç”Ÿæˆçš„ä¸­å¿ƒè½´åˆ€è·¯æ›²çº¿æ‰€åœ¨å›¾å±‚")
-(@:define-config '@cnc::candle "" "Candle æ–‡ä»¶è·¯å¾„ï¼Œç”¨äºæ‰“å¼€æ–°ç”Ÿæˆçš„ nc æ–‡ä»¶")
-(@:define-config '@cnc::nc-files "CNC" "ç”Ÿæˆçš„NC æ–‡ä»¶è·¯å¾„")
-(@:define-config '@cnc::syntek 0 "SYNTEK CEç³»ç»Ÿï¼ŒUè½´æœ€å¤§è¡Œç¨‹ä¸º2.0")
+(@:define-config '@cnc::init 0 "Ê×ĞĞÊÇ·ñ¼ÓÔØ³õÊ¼»¯Ö¸Áî")
+(@:define-config '@cnc::units 0.001  "¼Ó¹¤¾«Ï¸¶È£¬¼´×îĞ¡¾«¶È£¬µ¥Î»Îªmm,Ä¬ÈÏÎª0.001 ¼´1Î¢Ã×")
+(@:define-config '@cnc::r  6.0  "µ¶¾ßÖ±¾¶£¬Éú³Éµ¶Â·Ê±½«´Ó³ÉÆ·±ß½çÆ«ÒÆ°ë¸öÖ±¾¶¡£")
+(@:define-config '@cnc::motor-speed 4000 "Ö÷ÖáÂí´ï×ªËÙ")
+(@:define-config '@cnc::f 50  "½ø¸øËÙÂÊ")
+(@:define-config '@cnc::f-u 1.0  "UÖá½ø¸øËÙÂÊ£¬¸ÃÏîÖµ¿ÉÓëÖ÷ÖáÂí´ï×ªËÙÅäºÏÉèÖÃ")
+(@:define-config '@cnc::cutter-compensation-left 0 "µ¶¾ß×ó²¹³¥Öµ")
+(@:define-config '@cnc::cutter-compensation-right 0 "µ¶¾ßÓÒ²¹³¥Öµ")
+(@:define-config '@cnc::chopping 0 "¹¤×÷Ê±ÊÇ·ñ¼Ó³å³Ì")
+(@:define-config '@cnc::chopping-pause 10.0 "³å³ÌÇ°ÔİÍ£Ê±¼ä")
+(@:define-config '@cnc::k-thickness 0.3 "À©¿×ºñ¶È")
+(@:define-config '@cnc::k-times  30 "À©¿×´ÎÊı")
+(@:define-config '@cnc::rub-times 3 "Ä¥¿×´ÎÊı")
+(@:define-config '@cnc::rub-f  300 "Ä¥¿×½ø¸øËÙÂÊ")
+(@:define-config '@cnc::U-axis 1  "ÊÇ·ñÓĞUÖá")
+(@:define-config '@cnc::umotor-speed 800 "UÖáÂí´ï×ªËÙ")
+(@:define-config '@cnc::to-origin 1  "Íê³ÉºóÊÇ·ñ»Ø¿â")
+(@:define-config '@cnc::thickness 10.0 "Òª¼Ó¹¤¹¤¼şµÄºñ¶È£¬Èç¹ûÉè¶¨ÁËÇúÏßºñ¶È£¬Ôò²ÉÓÃÇúÏßºñ¶ÈÖµ")
+(@:define-config '@cnc::layer-route "CNC_ROUTE" "Éú³ÉµÄÖĞĞÄÖáµ¶Â·ÇúÏßËùÔÚÍ¼²ã")
+(@:define-config '@cnc::candle "" "Candle ÎÄ¼şÂ·¾¶£¬ÓÃÓÚ´ò¿ªĞÂÉú³ÉµÄ nc ÎÄ¼ş")
+(@:define-config '@cnc::nc-files "CNC" "Éú³ÉµÄNC ÎÄ¼şÂ·¾¶")
+(@:define-config '@cnc::syntek 0 "SYNTEK CEÏµÍ³£¬UÖá×î´óĞĞ³ÌÎª2.0")
 
-;; å‘ç³»ç»Ÿä¸­æ·»åŠ èœå• 
+;; ÏòÏµÍ³ÖĞÌí¼Ó²Ëµ¥ 
 (@::add-menus '("@CNC"
-	       ("ç”ŸæˆGä»£ç " (at-cnc::gen-gcode))
-	       ("é…ç½®@CNC" (at-cnc::setup))
-	       ("åˆ é™¤åˆ€è·¯" (at-cnc::remove-route))
-	       ("æ‰“å¼€Candle" (at-cnc::open-candle))
-	       ("æ‰“å¼€NCåº“" (at-cnc::explorer))
+	       ("Éú³ÉG´úÂë" (at-cnc::gen-gcode))
+	       ("ÅäÖÃ@CNC" (at-cnc::setup))
+	       ("É¾³ıµ¶Â·" (at-cnc::remove-route))
+	       ("´ò¿ªCandle" (at-cnc::open-candle))
+	       ("´ò¿ªNC¿â" (at-cnc::explorer))
 	       ))
 (defun at-cnc::setup (/ res)
-  (@:help '("é…ç½®@CNC"))
+  (@:help '("ÅäÖÃ@CNC"))
   (setq @::tmp-search-str "@CNC")
   (@::edit-config-dialog)
   )
 (defun at-cnc::n2s (num)
-  "æ•°å­—è½¬å­—ç¬¦ä¸²ï¼Œä¸€äº›è€çš„CNCè®¾å¤‡éœ€è¦å‚æ•°æœ‰å°æ•°ç‚¹ã€‚"
+  "Êı×Ö×ª×Ö·û´®£¬Ò»Ğ©ÀÏµÄCNCÉè±¸ĞèÒª²ÎÊıÓĞĞ¡Êıµã¡£"
   (setq num (rtos num 2 (@:get-config '@cnc::units)))
   (if (null (member (ascii ".")(vl-string->list num)))
       (strcat num ".0")
@@ -63,9 +63,9 @@
   (write-line "M15 " fp-cnc)
   )
 (defun at-cnc::open-candle ()
-  (@:help '("ç”¨ Candle æ‰“å¼€ç”Ÿæˆçš„ncæ–‡ä»¶è¿›è¡ŒCAM"))
+  (@:help '("ÓÃ Candle ´ò¿ªÉú³ÉµÄncÎÄ¼ş½øĞĞCAM"))
   (if (= "" (@:get-config '@cnc::candle))
-      (if (setq path (getfiled "Candle æ–‡ä»¶" "D:\\" "exe" 8))
+      (if (setq path (getfiled "Candle ÎÄ¼ş" "D:\\" "exe" 8))
 	  
 	  (@:set-config '@cnc::candle path))
     )
@@ -75,7 +75,7 @@
 			"\\@cnc.nc")
 		)))
 (defun at-cnc::explorer ()
-  (@:help '("æ‰“å¼€ç”Ÿæˆçš„ NC æ‰€åœ¨çš„æ–‡ä»¶å¤¹ã€‚"))
+  (@:help '("´ò¿ªÉú³ÉµÄ NC ËùÔÚµÄÎÄ¼ş¼Ğ¡£"))
   (startapp (strcat "explorer /e,\""
 		    (setq nc-dir
 			  (vl-string-trim
@@ -121,7 +121,7 @@
 		     )))))
     (if (vl-catch-all-error-p offset-result)
       (princ (strcat "
-åˆ€è·¯åç§»å¤±è´¥: " (vl-catch-all-error-message offset-result)))
+µ¶Â·Æ«ÒÆÊ§°Ü: " (vl-catch-all-error-message offset-result)))
       (progn
     (setq route (entlast))
     (entity:putdxf route 8 (@:get-config '@cnc::layer-route))
@@ -136,15 +136,15 @@
 	      (setq cnc-f (@:get-config '@cnc::f)))
 	    (setq bulges(curve:pline-convexity route))
 	    (setq pts (curve:get-points route))
-	    ;; é©¬è¾¾
-	    ;;è¿›åˆ€
+	    ;; Âí´ï
+	    ;;½øµ¶
 	    (setq pt0 (mapcar '- (car pts) at-cnc::pt-base))
 	    (write-line
 	     (strcat "G90 G00 "
 		     "X" (at-cnc::n2s (car pt0)) " "
 		     "Y" (at-cnc::n2s (cadr pt0)) " ")
 	     fp-cnc)
-            ;; å¦‚æœåŸæ¥æ˜¯ç”¨U è½´é“£åœ†çš„ï¼Œç°åœ¨æ¢ä¸»åˆ€
+            ;; Èç¹ûÔ­À´ÊÇÓÃU ÖáÏ³Ô²µÄ£¬ÏÖÔÚ»»Ö÷µ¶
 	    (if pre-circle-r
 		(progn
 		  (write-line "M00 (pause for z spindle)" fp-cnc)
@@ -232,7 +232,7 @@
 		     fp-cnc))
 		  )
 	      
-	      ;; ä¸é—­åˆçš„æ›²çº¿ï¼Œéœ€è¦æŠ¬èµ·åå›åˆ°èµ·ç‚¹
+	      ;; ²»±ÕºÏµÄÇúÏß£¬ĞèÒªÌ§Æğºó»Øµ½Æğµã
 	      (if (= 1 (@:get-config '@cnc::syntek))
 		  (write-line "G90 G00 Z0.0" fp-cnc)
 		(write-line "G90 G00 Z10.0" fp-cnc))
@@ -243,7 +243,7 @@
     ))
   (if (= 1 (@:get-config '@cnc::chopping))
       (write-line "M101" fp-cnc))
-  ;;å‡ºåˆ€
+  ;;³öµ¶
   (if (= 1 (@:get-config '@cnc::syntek))
       (write-line "G90 G00 Z0.0" fp-cnc)
     (write-line "G90 G00 Z10.0" fp-cnc))
@@ -254,17 +254,17 @@
   (setq times (@:get-config '@cnc::k-times))
   (setq rub nil)
   (setq pt (mapcar '- (entity:getdxf ent 10)  at-cnc::pt-base))
-  ;; å®šä½
+  ;; ¶¨Î»
   (write-line
    (strcat "G90 G00 "
 	   "X" (at-cnc::n2s (car pt)) " "
 	   "Y" (at-cnc::n2s (cadr pt)) " ")
    fp-cnc)
-  ;; å¼€å¯Uè½´é©¬è¾¾
+  ;; ¿ªÆôUÖáÂí´ï
   ;; (if (= 1 (@:get-config '@cnc::U-axis))
   ;;     (at-cnc::umotor-on (@:get-config '@cnc::umotor-speed)))
   
-  ;; éœ€é‡æ–°å®šåˆ€
+  ;; ĞèÖØĞÂ¶¨µ¶
   (if (and (= 1 (@:get-config '@cnc::syntek)))
       (if (> (- (entity:getdxf ent 40)
 		pre-circle-r)
@@ -273,11 +273,11 @@
 	    (write-line "M00 (pause for align U spindle)" fp-cnc)
 	    (setq pre-circle-r (entity:getdxf ent 40)))
 	))
-  ;; åŠå¾„ä¿®æ­£å› å­
+  ;; °ë¾¶ĞŞÕıÒò×Ó
   (setq r-n (- (entity:getdxf ent 40)
 	       pre-circle-r))
 
-  ;; å·¥ä½œé¢
+  ;; ¹¤×÷Ãæ
   (write-line
    (strcat "G90 G00" " Z0.0"
 	   " F" (itoa (@:get-config '@cnc::rub-f))" "
@@ -310,7 +310,7 @@
       (if(< (- (entity:getdxf ent 40) (* 0.5 (@:get-config '@cnc::r)) kthickness)
     	  0)
 	(progn
-    	  (@::alert "åˆ€å…·ç›´å¾„å¤ªå¤§ã€‚æ— æ³•è¹šå­”ã€‚")
+    	  (@::alert "µ¶¾ßÖ±¾¶Ì«´ó¡£ÎŞ·¨Û¿×¡£")
 	  (sssetfirst nil (ssadd ent))
 	  (exit)))
     (if (= 3 (entity:getdxf ent 62))
@@ -322,7 +322,7 @@
 		       (if (curve:clockwisep ent) 1 -1)
 		       ))))
       (progn
-	;; å†…å¾„åˆ†æï¼Œåˆ€å…·æ˜¯å¦å¯æ‰§è¡Œ
+	;; ÄÚ¾¶·ÖÎö£¬µ¶¾ßÊÇ·ñ¿ÉÖ´ĞĞ
 	(setq offset-result (vl-catch-all-apply 'vla-offset (list (e2o ent)
 		    (* 0.5 (+ (@:get-config '@cnc::r)
 			      (* times
@@ -333,14 +333,14 @@
 	))
     (if (vl-catch-all-error-p offset-result)
       (princ (strcat "
-åˆ€è·¯åç§»å¤±è´¥: " (vl-catch-all-error-message offset-result)))
+µ¶Â·Æ«ÒÆÊ§°Ü: " (vl-catch-all-error-message offset-result)))
       (progn
     (setq route (entlast))
     (entity:putdxf route 8 (@:get-config '@cnc::layer-route))
     (entity:putdxf route 62 256)
     (setq g41 (fix(@:get-config '@cnc::cutter-compensation-left)))
-    ;; U è½´
-    ;; å¼€å¯Uè½´é©¬è¾¾
+    ;; U Öá
+    ;; ¿ªÆôUÖáÂí´ï
     (repeat (if (> times 0) 1 (1+ (@:get-config '@cnc::rub-times)))
 	    (if (= times 0)
 		(if rub
@@ -355,7 +355,7 @@
 	      (setq cnc-f (@:get-config '@cnc::f)))
 	    (if (= 1 (@:get-config '@cnc::U-axis))
 		(progn
-		  ;; Rå¹³é¢,Uå®šä½
+		  ;; RÆ½Ãæ,U¶¨Î»
 		  (write-line
 		   (strcat "G90 G01 U"
 			   (if (= 1 (@:get-config '@cnc::syntek))
@@ -369,12 +369,12 @@
 			   )
 		   fp-cnc)
 		  )
-	      (progn ;; æ— Uè½´
+	      (progn ;; ÎŞUÖá
 		(setq pt (mapcar '- (entity:getdxf route 10)  at-cnc::pt-base))
 		(setq pt-arc0 (polar pt 0 (entity:getdxf route 40)))
 		(setq pt-arc1 (polar pt pi (entity:getdxf route 40)))
 		(write-line (strcat "G41 D"(itoa G41)) fp-cnc)
-		;;è¿›åˆ€
+		;;½øµ¶
 		(write-line
 		 (strcat "G90 G00 "
 			 "X" (at-cnc::n2s (car pt-arc0)) " "
@@ -416,10 +416,10 @@
       (write-line "M101" fp-cnc))
   (if (= 1 (@:get-config '@cnc::U-axis))
       (progn
-	;; Uè½´å›ä½,å…³ç”µæœº
+	;; UÖá»ØÎ»,¹Øµç»ú
 	(write-line "G90 G00 U0.0 " fp-cnc)
 	(at-cnc::umotor-off)))
-  ;; å‡ºåˆ€
+  ;; ³öµ¶
   ;; (write-line "G90 G28 U0.0" fp-cnc)
   )
 
@@ -432,7 +432,7 @@
       (layer:make (@:get-config '@cnc::layer-route) 2 nil nil))
   (at-cnc::remove-route)
   (setq curves (pickset:to-list (ssget '((0 . "lwpolyline,circle")))))
-  ;; æŒ‰å…ˆåœ†åæ›²æ’åºï¼Œä¸”åœ†æŒ‰åŠå¾„ä»å°åˆ°å¤§æ’åº
+  ;; °´ÏÈÔ²ºóÇúÅÅĞò£¬ÇÒÔ²°´°ë¾¶´ÓĞ¡µ½´óÅÅĞò
   (setq curves (vl-sort curves '(lambda(x y)
 				  (cond
 				   ((and (= "CIRCLE" (entity:getdxf x 0))
@@ -450,7 +450,7 @@
   (if (= "CIRCLE"  (entity:getdxf (car curves) 0))
       (progn
 	(if (= 1 (@:get-config '@cnc::syntek))
-	    (@::alert "é‡‡ç”¨è°ƒç”¨å­ç¨‹åºP1111çš„æ–¹å¼è¿›åˆ€ï¼Œè¯¥æ–¹å¼çš„æ‰©å­”åšåº¦ä¸è¿›åˆ€æ¬¡æ•°æœ‰å…³ï¼ŒCADè®¾ç½®ä¸­çš„æ‰©å­”åšåº¦è®¾ç½®å€¼æ— æ•ˆã€‚"))
+	    (@::alert "²ÉÓÃµ÷ÓÃ×Ó³ÌĞòP1111µÄ·½Ê½½øµ¶£¬¸Ã·½Ê½µÄÀ©¿×ºñ¶ÈÓë½øµ¶´ÎÊıÓĞ¹Ø£¬CADÉèÖÃÖĞµÄÀ©¿×ºñ¶ÈÉèÖÃÖµÎŞĞ§¡£"))
 	(setq pre-circle-r (entity:getdxf (car curves) 40))))
   (setq at-cnc::pt-base (append (car (pickset:getbox curves (+ 5 (@:get-config '@cnc::r)))) (list 0)))
   (if (member (ascii":")(vl-string->list (@:get-config '@cnc::nc-files)))
@@ -465,19 +465,20 @@
   (setq filename (strcat  nc-dir "\\@cnc_"(datetime:current-time "yyyymodd-hhmmss")".nc"))
   (setq fp-cnc
 	(open filename "w"))
+  (if (null fp-cnc) (progn (princ "\nÎŞ·¨´´½¨G´úÂëÎÄ¼ş -- ÍË³ö.") (quit)))
 
-  ;; åˆå§‹åŒ–
+  ;; ³õÊ¼»¯
   (if (= 1 (@:get-config '@cnc::init))
 	 (write-line "G71G94G80G90G40G49G50G69" fp-cnc))
   
-  ;; å¼€å¯ä¸»è½´é©¬è¾¾
+  ;; ¿ªÆôÖ÷ÖáÂí´ï
   (at-cnc::motor-on (@:get-config '@cnc::motor-speed))
   ;; (if (= 1 (@:get-config '@cnc::U-axis))
   ;;     (progn
-  ;; 	;; Uè½´å›ä½
+  ;; 	;; UÖá»ØÎ»
   ;; 	(write-line "G90 G00 U0.0 " fp-cnc)
   ;; 	))
-  ;; æŠ¬èµ·ï¼Œå¼€å†·å´
+  ;; Ì§Æğ£¬¿ªÀäÈ´
   (if (= 1 (@:get-config '@cnc::syntek))
       (write-line "G90 G00 Z0.0" fp-cnc)
     (write-line "G90 G00 Z30.0" fp-cnc))
@@ -491,9 +492,9 @@
 	     )
 	    )
 	   )
-  ;; å½’é›¶
+  ;; ¹éÁã
   (at-cnc::motor-off)
-  ;; å…³å†·å´
+  ;; ¹ØÀäÈ´
   (write-line "M9" fp-cnc)
   (if (= 1 (@:get-config '@cnc::to-origin))
       (if (= 1 (@:get-config '@cnc::syntek))
@@ -511,6 +512,6 @@
   (vl-file-copy filename
 		(strcat (getenv "userprofile")"\\"(@:get-config '@cnc::nc-files)
 			"\\@cnc.nc"))
-  (@:prompt "ç”ŸæˆGä»£ç æ–‡ä»¶ @cnc.nc")
+  (@:prompt "Éú³ÉG´úÂëÎÄ¼ş @cnc.nc")
   (princ)
   )

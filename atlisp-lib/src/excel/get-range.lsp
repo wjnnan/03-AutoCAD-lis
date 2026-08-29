@@ -1,6 +1,6 @@
 (defun excel:get-range (xlapp index)
-  "璇存槑:鏍规嵁绱㈠紩鑾峰彇range瀵硅薄\n鍙傛暟:xlapp:宸叉墦寮�鐨別xcel鏂囦欢瀵硅薄\n鍙傛暟:index:鍖哄煙绱㈠紩锛孉1寮曠敤鏍煎紡鎴栬�呰鍒楄〃"
-  "range瀵硅薄"
+  "说明:根据索引获取range对象\n参数:xlapp:已打开的excel文件对象\n参数:index:区域索引，A1引用格式或者行列表"
+  "range对象"
   "(excel:get-Range exobj \"A1\")"
   (vlax-get-property (vlax-get-property (vlax-get-property xlapp (quote activeworkbook))
       (quote activesheet))

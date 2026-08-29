@@ -1,6 +1,6 @@
 (defun m:rtos (real prec / dimzin result)
-    "ä¿ç•™å°æ•°ä½æ•°(å››èˆäº”å…¥)"
-    "å››èˆäº”å…¥åçš„å­—ç¬¦ä¸²"
+    "±£ÁôĞ¡ÊıÎ»Êı(ËÄÉáÎåÈë)"
+    "ËÄÉáÎåÈëºóµÄ×Ö·û´®"
     "(m:rtos 1.8000 3)"
     (setq dimzin (getvar (quote dimzin)))
     (setvar (quote dimzin)

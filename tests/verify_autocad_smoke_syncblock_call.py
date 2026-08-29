@@ -7,7 +7,7 @@ SMOKE_LSP = ROOT / "tests" / "autocad_2024_smoke.lsp"
 
 
 def main() -> int:
-    text = SMOKE_LSP.read_text(encoding="utf-8")
+    text = SMOKE_LSP.read_text(encoding="gbk")
 
     assert "sb:get-effective-name insert-ent" in text, (
         "autocad_2024_smoke.lsp 必须按最新签名向 sb:get-effective-name 传入 insert-ent"

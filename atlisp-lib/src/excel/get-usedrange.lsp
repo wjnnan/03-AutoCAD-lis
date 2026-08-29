@@ -1,6 +1,6 @@
 (defun excel:get-usedrange (xlapp name / rtn sh)
-  "鑾峰彇宸蹭娇鐢ㄧ殑range鍖哄煙\n鍙傛暟:XLApp:宸叉墦寮�鐨別xcel鏂囦欢瀵硅薄\n鍙傛暟:Name:宸ヤ綔琛ㄥ悕"
-  "鎴愬姛杩斿洖range瀵硅薄"
+  "获取已使用的range区域\n参数:XLApp:已打开的excel文件对象\n参数:Name:工作表名"
+  "成功返回range对象"
   "(excel:get-UsedRange exobj \"345\")"
   (if (null name)
     (setq name (excel:get-activesheet xlapp)))

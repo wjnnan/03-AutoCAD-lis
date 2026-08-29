@@ -1,5 +1,5 @@
 (defun entity:make-tag (pt name)
-  "ç”Ÿæˆä¸€ä¸ªæ ‡ç­¾"
+  "Éú³ÉÒ»¸ö±êÇ©"
   (entity:make-circle pt 10)
   (entity:maketext (vl-symbol-name name)
     pt 250 0 0.8 0 13))

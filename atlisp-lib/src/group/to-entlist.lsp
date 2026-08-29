@@ -1,4 +1,4 @@
 (defun group:to-entlist (obj-g / i objlst)
-    "ç¼–ç»„è½¬å›¾å…ƒåˆ—è¡¨, obj-g ä¸ºç¼–ç»„å¯¹è±¡ã€‚"
+    "±à×é×ªÍ¼ÔªÁÐ±í, obj-g Îª±à×é¶ÔÏó¡£"
     (mapcar (quote vlax-vla-object->ename)
         (group:to-objlist obj-g)))

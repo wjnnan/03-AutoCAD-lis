@@ -7,7 +7,7 @@ TB_MAIN = ROOT / "TB-Toolbox" / "tb-main.lsp"
 
 
 def main() -> int:
-    text = TB_MAIN.read_text(encoding="utf-8")
+    text = TB_MAIN.read_text(encoding="gbk")
 
     assert not re.search(r"\(defun\s+tb:run-bound-command\s+nil\b", text), \
         "tb:run-bound-command 不应使用 nil 作为 defun 形参表"

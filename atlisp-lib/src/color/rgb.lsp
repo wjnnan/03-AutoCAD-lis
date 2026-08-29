@@ -1,7 +1,7 @@
 (defun color:rgb (red green blue)
-    "è®¡ç®—rgbé¢œè‰²å¯¹åº”çš„æ•´æ•°å€¼ã€‚red green blue å–å€¼èŒƒå›´ä¸º [0,255]çš„æ•´æ•°æˆ–[0,1)çš„å°æ•°ã€‚"
-"rgbé¢œè‰²å€¼"
-"(color:rgb 255 0 0) or (color:rgb 0.999 0 0);çº¢è‰²"
+    "¼ÆËãrgbÑÕÉ«¶ÔÓ¦µÄÕûÊıÖµ¡£red green blue È¡Öµ·¶Î§Îª [0,255]µÄÕûÊı»ò[0,1)µÄĞ¡Êı¡£"
+"rgbÑÕÉ«Öµ"
+"(color:rgb 255 0 0) or (color:rgb 0.999 0 0);ºìÉ«"
 (cond ((and (<= 0 red)
             (< red 1)
             (<= 0 green)

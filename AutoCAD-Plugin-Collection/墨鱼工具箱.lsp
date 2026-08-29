@@ -1,4 +1,4 @@
-(PROMPT "\n☆☆启动命令【YYMOYU】☆☆")
+(PROMPT "\n����������YYMOYU�����")
 (PRINC)
 (vl-ACAD-defun (DEFUN C:YYMOYU (/ *ACAD* *DOC* BUTTONS FLAG_SEARCH MSG
 				 NOTEMSG STR_SPLIT TITL WYB-PANEL-COUNT
@@ -398,7 +398,7 @@
 		     (setq DCLSTR (STRCAT DCLSTR "\n:image{ height=0.1; color=140; fixed_height=true;}"))
 		     (setq DCLSTR (STRCAT DCLSTR "\n:text{ "
 					  "fixed_width=true; width=true; "
-					  "key=\"str\"; " "label=\"春有百花秋有月，夏有凉风冬有雪。若无闲事挂心头，便是人间好时节。\";is_enabled=false; "
+					  "key=\"str\"; " "label=\"���аٻ������£��������綬��ѩ���������¹���ͷ�������˼��ʱ�ڡ�\";is_enabled=false; "
 					  "}"
 				  )
 		     )
@@ -415,7 +415,7 @@
 		     (if FLAG_SEARCH
 		       (PROGN
 			 (setq DCLSTR (STRCAT DCLSTR "\n:edit_box{ " "fixed_width=true; width=30; " "key=\"key_editbox_search\"; "
-					      "label=\"模糊搜索:\"; " "}"
+					      "label=\"ģ������:\"; " "}"
 				      )
 			 )
 		       )
@@ -427,25 +427,25 @@
 		     (setq DCLSTR (STRCAT DCLSTR "\n:button{ "
 					  "fixed_width=true; width=10; "
 					  "key=\"main\"; "
-					  "label=\"主页(&Z)\"; " "}"
+					  "label=\"��ҳ(&Z)\"; " "}"
 				  )
 		     )
 		     (setq DCLSTR (STRCAT DCLSTR "\n:button{ "
 					  "fixed_width=true; width=10; "
 					  "key=\"YYDIYDIG\"; "
-					  "label=\"命令(&D)\"; " "}"
+					  "label=\"����(&D)\"; " "}"
 				  )
 		     )
 		     (setq DCLSTR (STRCAT DCLSTR "\n:button{ "
 					  "fixed_width=true; width=10; "
 					  "key=\"HLPE\"; "
-					  "label=\"帮助(&Q)\"; " "}"
+					  "label=\"����(&Q)\"; " "}"
 				  )
 		     )
 		     (setq DCLSTR (STRCAT DCLSTR "\n:button{ "
 					  "fixed_width=true; width=10; "
 					  "key=\"Close\"; "
-					  "label=\"关闭\"; "
+					  "label=\"�ر�\"; "
 					  "is_default=true; "
 					  "is_cancel=true; " "}"
 				  )
@@ -500,12 +500,12 @@
 		     )
 		     (ACTION_TILE "YYDIYDIG" "(done_dialog 1001)")
 		     (ACTION_TILE "HLPE" "
-			 (alert\"命令提示：
-			 \n\n1、输入【1~255】数字，可以更改对象为对应的颜色(【`】为随层)。
-			 \n\n2、输入【REINIT】命令，可以修改PGP文件后无需重新启动CAD。
-			 \n\n3、【ICL】命令，可以剪切光栅图像。\n\n4、WORD里方框对勾，按住ALT+9745。
-			 \n\n5、【模糊搜索】可以输入中文及大写英文，按回车。
-			 \n【墨鱼工具箱】。\")")
+			 (alert\"������ʾ��
+			 \n\n1�����롾1~255�����֣����Ը��Ķ���Ϊ��Ӧ����ɫ(��`��Ϊ���)��
+			 \n\n2�����롾REINIT����������޸�PGP�ļ���������������CAD��
+			 \n\n3����ICL��������Լ��й�դͼ��\n\n4��WORD�﷽��Թ�����סALT+9745��
+			 \n\n5����ģ�������������������ļ���дӢ�ģ����س���
+			 \n��ī�㹤���䡿��\")")
 		     (ACTION_TILE "Close" "(done_dialog 0)")
 		     (EVAL (READ (setq TEMP (STRCAT "(progn" (APPLY
 							       'STRCAT
@@ -718,58 +718,61 @@
 						 )
 				       )
 		   )
+		   ;; �ͷ� COM ���󣬷�ֹ�ڴ�й©
+		   (if MATCHES (vlax-release-object MATCHES))
+		   (vlax-release-object VBSEXP)
 		   (REVERSE END)
 		 )
 		 (setq *ACAD* (vlax-get-acad-object))
 		 (setq *DOC* (vla-get-ActiveDocument *ACAD*))
-		 (setq DATESTR (MENUCMD "m=$(edtime,$(getvar,date),YYYY年M月D日 HH:MM:SS  DDDD)"))
-		 (setq TITL (STRCAT "【墨鱼工具箱】 —— "
+		 (setq DATESTR (MENUCMD "m=$(edtime,$(getvar,date),YYYY��M��D�� HH:MM:SS  DDDD)"))
+		 (setq TITL (STRCAT "��ī�㹤���䡿 ���� "
 				    DATESTR
 			    )
 		 )
-		 (setq MSG "。")
+		 (setq MSG "��")
 		 (setq NOTEMSG ".")
 		 (setq BUTTONS '
-		 (("基础工具" (
-		 "MOYU_FF_YY 绘制直线" "MOYU_R_YY 绘制矩形"
-		 "MOYU_FTY_YY 绘制椭圆" "MOYU_FDB_YY 绘多边形"
-		 "MOYU_FDD_YY 绘多段线" "MOYU_W_YY 移动工具"
-		 "MOYU_Q_YY 偏移工具" "MOYU_RR_YY 旋转工具"
-		 "MOYU_WR_YY 镜像工具" "MOYU_CF_YY 倒角工具"
-		 "MOYU_DV_YY 定数等分"
+		 (("��������" (
+		 "MOYU_FF_YY ����ֱ��" "MOYU_R_YY ���ƾ���"
+		 "MOYU_FTY_YY ������Բ" "MOYU_FDB_YY ������"
+		 "MOYU_FDD_YY ������" "MOYU_W_YY �ƶ�����"
+		 "MOYU_Q_YY ƫ�ƹ���" "MOYU_RR_YY ��ת����"
+		 "MOYU_WR_YY ���񹤾�" "MOYU_CF_YY ���ǹ���"
+		 "MOYU_DV_YY �����ȷ�"
 		 )
 		 )
-		 ("高级工具" (
-		 "MOYU_CCX_YY 复制旋转"
-		 "MOYU_CCC_YY 连续复制" "MOYU_TC_YY 文字删重"
-		 "MOYU_TH_YY 一键统计"  "MOYU_KH_YY 框选统计"
-		 "MOYU_TRR_YY 区域删除" "MOYU_FPL_YY 批量倒角"
-		 "MOYU_QXN_YY 区域内偏"
+		 ("�߼�����" (
+		 "MOYU_CCX_YY ������ת"
+		 "MOYU_CCC_YY ��������" "MOYU_TC_YY ����ɾ��"
+		 "MOYU_TH_YY һ��ͳ��"  "MOYU_KH_YY ��ѡͳ��"
+		 "MOYU_TRR_YY ����ɾ��" "MOYU_FPL_YY ��������"
+		 "MOYU_QXN_YY ������ƫ"
 		 )
 		 )
-		 ("标注工具" (
-		 "MOYU_DA_YY 线性标注" "MOYU_DC_YY 连续快注"
-		 "MOYU_DD_YY 快速标注" "MOYU_DLX_YY 连续标注"
-		 "MOYU_DSB_YY 删除标注" "MOYU_DZ_YY 多重引线"
-		 "MOYU_DXB_YY 对齐标注" "MOYU_DJD_YY 角度标注"
-		 "MOYU_DBJ_YY 半径标注" "MOYU_DZJ_YY 直径标注"
-		 "MOYU_DHC_YY 弧长标注" "MOYU_DJX_YY 基线标注"
+		 ("��ע����" (
+		 "MOYU_DA_YY ���Ա�ע" "MOYU_DC_YY ������ע"
+		 "MOYU_DD_YY ���ٱ�ע" "MOYU_DLX_YY ������ע"
+		 "MOYU_DSB_YY ɾ����ע" "MOYU_DZ_YY ��������"
+		 "MOYU_DXB_YY �����ע" "MOYU_DJD_YY �Ƕȱ�ע"
+		 "MOYU_DBJ_YY �뾶��ע" "MOYU_DZJ_YY ֱ����ע"
+		 "MOYU_DHC_YY ������ע" "MOYU_DJX_YY ���߱�ע"
 		 )
 		 )
-		 ("辅助工具" (
-		 "MOYU_XX_YY 绘构造线" "MOYU_XC_YY 横构造线"
-		 "MOYU_XZ_YY 竖构造线" "MOYU_Z0_YY Z轴归零"
-		 "MOYU_FFX_YY 线改虚线" "MOYU_YM_YY 批量页码"
-		 "MOYU_ZZS_YY 置为最上" "MOYU_ZZX_YY 置为最底"
-		 "MOYU_ZZ_YY 格式刷"
+		 ("��������" (
+		 "MOYU_XX_YY �湹����" "MOYU_XC_YY �ṹ����"
+		 "MOYU_XZ_YY ��������" "MOYU_Z0_YY Z�����"
+		 "MOYU_FFX_YY �߸�����" "MOYU_YM_YY ����ҳ��"
+		 "MOYU_ZZS_YY ��Ϊ����" "MOYU_ZZX_YY ��Ϊ���"
+		 "MOYU_ZZ_YY ��ʽˢ"
 		 )
 		 )
-		 ("图块文字" (
-		 "MOYU_BB_YY 快速建块" "MOYU_BX_YY 炸开图块"
-		 "MOYU_BTJ_YY 图块统计" "MOYU_BGD_YY 改块基点"
-		 "MOYU_BQS_YY 按块全选" "MOYU_BGM_YY 图块改名"
-		 "MOYU_TTH_YY 文字替换" "MOYU_TZD_YY 单行转多"
-		 "MOYU_TT_YY 超级改字" "MOYU_TZK_YY 批改字宽"
+		 ("ͼ������" (
+		 "MOYU_BB_YY ���ٽ���" "MOYU_BX_YY ը��ͼ��"
+		 "MOYU_BTJ_YY ͼ��ͳ��" "MOYU_BGD_YY �Ŀ����"
+		 "MOYU_BQS_YY ����ȫѡ" "MOYU_BGM_YY ͼ�����"
+		 "MOYU_TTH_YY �����滻" "MOYU_TZD_YY ����ת��"
+		 "MOYU_TT_YY ��������" "MOYU_TZK_YY �����ֿ�"
 )
 )
 		       )
@@ -779,7 +782,7 @@
 	       )
 )
 'C:YYMOYU
-;;; CHAMFER - MOYU_CF_YY：倒角
+;;; CHAMFER - MOYU_CF_YY������
 (vl-ACAD-defun 
   (DEFUN C:MOYU_CF_YY ()
     (COMMAND "._CHAMFER")
@@ -787,7 +790,7 @@
   )
 )
 
-;;; DIMLINEAR - MOYU_DA_YY：线性标注
+;;; DIMLINEAR - MOYU_DA_YY�����Ա�ע
 (vl-ACAD-defun 
   (DEFUN C:MOYU_DA_YY ()
     (COMMAND "._DIMLINEAR")
@@ -795,7 +798,7 @@
   )
 )
 
-;;; QDIM - MOYU_DD_YY：快速标注
+;;; QDIM - MOYU_DD_YY�����ٱ�ע
 (vl-ACAD-defun 
   (DEFUN C:MOYU_DD_YY ()
     (COMMAND "._QDIM")
@@ -803,7 +806,7 @@
   )
 )
 
-;;; DIMANGULAR - MOYU_DJD_YY：角度标注
+;;; DIMANGULAR - MOYU_DJD_YY���Ƕȱ�ע
 (vl-ACAD-defun 
   (DEFUN C:MOYU_DJD_YY ()
     (COMMAND "._DIMANGULAR")
@@ -811,7 +814,7 @@
   )
 )
 
-;;; DIMALIGNED - MOYU_DXB_YY：对齐标注
+;;; DIMALIGNED - MOYU_DXB_YY�������ע
 (vl-ACAD-defun 
   (DEFUN C:MOYU_DXB_YY ()
     (COMMAND "._DIMALIGNED")
@@ -819,7 +822,7 @@
   )
 )
 
-;;; DIMARC - MOYU_DHC_YY：弧长标注
+;;; DIMARC - MOYU_DHC_YY��������ע
 (vl-ACAD-defun 
   (DEFUN C:MOYU_DHC_YY ()
     (COMMAND "._DIMARC")
@@ -827,7 +830,7 @@
   )
 )
 
-;;; DIMRADIUS - MOYU_DBJ_YY：半径标注
+;;; DIMRADIUS - MOYU_DBJ_YY���뾶��ע
 (vl-ACAD-defun 
   (DEFUN C:MOYU_DBJ_YY ()
     (COMMAND "._DIMRADIUS")
@@ -835,7 +838,7 @@
   )
 )
 
-;;; DIMDIAMETER - MOYU_DZJ_YY：直径标注
+;;; DIMDIAMETER - MOYU_DZJ_YY��ֱ����ע
 (vl-ACAD-defun 
   (DEFUN C:MOYU_DZJ_YY ()
     (COMMAND "._DIMDIAMETER")
@@ -843,7 +846,7 @@
   )
 )
 
-;;; DIMBASELINE - MOYU_DJX_YY：基线标注
+;;; DIMBASELINE - MOYU_DJX_YY�����߱�ע
 (vl-ACAD-defun 
   (DEFUN C:MOYU_DJX_YY ()
     (COMMAND "._DIMBASELINE")
@@ -851,7 +854,7 @@
   )
 )
 
-;;; DIMCONTINUE - MOYU_DLX_YY：连续标注
+;;; DIMCONTINUE - MOYU_DLX_YY��������ע
 (vl-ACAD-defun 
   (DEFUN C:MOYU_DLX_YY ()
     (COMMAND "._DIMCONTINUE")
@@ -859,7 +862,7 @@
   )
 )
 
-;;; MLEADER - MOYU_DZ_YY：多重引线
+;;; MLEADER - MOYU_DZ_YY����������
 (vl-ACAD-defun 
   (DEFUN C:MOYU_DZ_YY ()
     (COMMAND "._MLEADER")
@@ -867,14 +870,14 @@
   )
 )
 
-;;; ELLIPSE - MOYU_FTY_YY：椭圆
+;;; ELLIPSE - MOYU_FTY_YY����Բ
 (vl-ACAD-defun 
   (DEFUN C:MOYU_FTY_YY ()
     (COMMAND "._ELLIPSE")
     (PRINC)
   )
 )
-;;; POLYGON - MOYU_FDB_YY：多边形
+;;; POLYGON - MOYU_FDB_YY�������
 (vl-ACAD-defun 
   (DEFUN C:MOYU_FDB_YY ()
     (COMMAND "._POLYGON")
@@ -882,7 +885,7 @@
   )
 )
 
-;;; LINE - MOYU_FF_YY：直线
+;;; LINE - MOYU_FF_YY��ֱ��
 (vl-ACAD-defun 
   (DEFUN C:MOYU_FF_YY ()
     (COMMAND "._LINE")
@@ -890,7 +893,7 @@
   )
 )
 
-;;; PLINE - MOYU_FDD_YY：多段线
+;;; PLINE - MOYU_FDD_YY�������
 (vl-ACAD-defun 
   (DEFUN C:MOYU_FDD_YY ()
     (COMMAND "._PLINE")
@@ -898,7 +901,7 @@
   )
 )
 
-;;; OFFSET - MOYU_Q_YY：偏移
+;;; OFFSET - MOYU_Q_YY��ƫ��
 (vl-ACAD-defun 
   (DEFUN C:MOYU_Q_YY ()
     (COMMAND "._OFFSET")
@@ -906,14 +909,14 @@
   )
 )
 
-;;; RECTANG - MOYU_R_YY：矩形
+;;; RECTANG - MOYU_R_YY������
 (vl-ACAD-defun 
   (DEFUN C:MOYU_R_YY ()
     (COMMAND "._RECTANG")
     (PRINC)
   )
 )
-;;; ROTATE - MOYU_RR_YY：旋转
+;;; ROTATE - MOYU_RR_YY����ת
 (vl-ACAD-defun 
   (DEFUN C:MOYU_RR_YY ()
     (COMMAND "._ROTATE")
@@ -921,7 +924,7 @@
   )
 )
 
-;;; MOVE - MOYU_W_YY：移动
+;;; MOVE - MOYU_W_YY���ƶ�
 (vl-ACAD-defun 
   (DEFUN C:MOYU_W_YY ()
     (COMMAND "._MOVE")
@@ -929,7 +932,7 @@
   )
 )
 
-;;; MIRROR - MOYU_WR_YY：镜像
+;;; MIRROR - MOYU_WR_YY������
 (vl-ACAD-defun 
   (DEFUN C:MOYU_WR_YY ()
     (COMMAND "._MIRROR")
@@ -937,7 +940,7 @@
   )
 )
 
-;;; XLINE - MOYU_XX_YY：构造线
+;;; XLINE - MOYU_XX_YY��������
 (vl-ACAD-defun 
   (DEFUN C:MOYU_XX_YY ()
     (COMMAND "._XLINE")
@@ -945,7 +948,7 @@
   )
 )
 
-;;; MATCHPROP - MOYU_ZZ_YY：属性匹配
+;;; MATCHPROP - MOYU_ZZ_YY������ƥ��
 (vl-ACAD-defun 
   (DEFUN C:MOYU_ZZ_YY ()
     (COMMAND "._MATCHPROP")
@@ -953,7 +956,7 @@
   )
 )
 (vl-ACAD-defun (DEFUN C:MOYU_ZZS_YY ()
-		 (PROMPT "【选择对象改为最上层】")
+		 (PROMPT "��ѡ������Ϊ���ϲ㡿")
 		 (setq SS (SSGET))
 		 (command "draworder")
 		 (command SS)
@@ -964,7 +967,7 @@
 )
 'C:MOYU_ZZS_YY
 (vl-ACAD-defun (DEFUN C:MOYU_ZZX_YY ()
-		 (PROMPT "【选择对象改为最底层】")
+		 (PROMPT "��ѡ������Ϊ��ײ㡿")
 		 (setq SS (SSGET))
 		 (command "draworder")
 		 (command SS)
@@ -975,28 +978,28 @@
 )
 'C:MOYU_ZZX_YY
 (vl-ACAD-defun (DEFUN C:MOYU_XZ_YY ()
-		 (PROMPT "【竖向构造线】")
+		 (PROMPT "���������ߡ�")
 		 (command "XLINE")
 		 (command "V")
 	       )
 )
 'C:MOYU_XZ_YY
 (vl-ACAD-defun (DEFUN C:MOYU_XC_YY ()
-		 (PROMPT "【横向构造线】")
+		 (PROMPT "���������ߡ�")
 		 (command "XLINE")
 		 (command "H")
 	       )
 )
 'C:MOYU_XC_YY
 (vl-ACAD-defun (DEFUN C:MOYU_BQS_YY (/ ENT)
-			 (if (setq ENT (CAR (ENTSEL "【按块全选】")))
+			 (if (setq ENT (CAR (ENTSEL "������ȫѡ��")))
 			   (SSSETFIRST nil (SSGET "X" (LIST '(0 . "INSERT") (ASSOC 2 (ENTGET ENT)))))
 			   (princ "
-未选择对象。")
+δѡ�����")
 			 )
 		       )
 	)
-;;; MATCHPROP - MOYU_DV_YY：定数等分
+;;; MATCHPROP - MOYU_DV_YY�������ȷ�
 (vl-ACAD-defun 
   (DEFUN C:MOYU_DV_YY ()
     (COMMAND "._DIVIDE")
@@ -1009,9 +1012,9 @@
 				     MAXY0 MINX0 MINY0 P1 P2 P3 P4 P5 P6 P7
 				     P8 P9 SS
 				  )
-		 (setq BLKNAME (MENUCMD "M=$(edtime,$(getvar,date),墨鱼工具箱YYYYMODDHHMMSS)"))
+		 (setq BLKNAME (MENUCMD "M=$(edtime,$(getvar,date),ī�㹤����YYYYMODDHHMMSS)"))
 		 (if (AND
-		       (PRINC "\n选择快速创建块的对象: ")
+		       (PRINC "\nѡ����ٴ�����Ķ���: ")
 		       (SETVAR "cmdecho" 0)
 		       (setq SS (SSGET))
 		     )
@@ -1189,28 +1192,28 @@
   )
 )
 (vl-ACAD-defun (DEFUN C:MOYU_BX_YY ()
-                 (setvar "cmdecho" 0) ; 关闭命令回显
-                 (if (setq ss (ssget '((0 . "INSERT")))) ; 框选块
+                 (setvar "cmdecho" 0) ; �ر��������
+                 (if (setq ss (ssget '((0 . "INSERT")))) ; ��ѡ��
                    (progn
-                     (deep-explode ss) ; 调用递归分解函数
-                     (princ "\n完成全部分解操作。")
+                     (deep-explode ss) ; ���õݹ�ֽ⺯��
+                     (princ "\n���ȫ���ֽ������")
                    )
-                   (princ "\n没有选中任何块。")
+                   (princ "\nû��ѡ���κο顣")
                  )
                  (princ)
                )
 )
 
-;; 递归分解函数
+;; �ݹ�ֽ⺯��
 (defun deep-explode (ss / i blk newss)
   (if ss
     (progn
       (repeat (setq i (sslength ss))
         (setq blk (ssname ss (setq i (1- i))))
         (command "_.EXPLODE" blk)
-        ;; 检查是否还有块需要分解
+        ;; ����Ƿ��п���Ҫ�ֽ�
         (if (setq newss (ssget "P" '((0 . "INSERT"))))
-          (deep-explode newss) ; 递归分解新生成的块
+          (deep-explode newss) ; �ݹ�ֽ������ɵĿ�
         )
       )
     )
@@ -1223,7 +1226,7 @@
 			  ST
 			)
 		   (while (and
-			    (NOT (setq ST (ENTSEL "\n选择需要统计的图块:")))
+			    (NOT (setq ST (ENTSEL "\nѡ����Ҫͳ�Ƶ�ͼ��:")))
 			  )
 		   )
 		   (if (= (CDR (ASSOC 0 (ENTGET (CAR ST)))) "INSERT")
@@ -1232,11 +1235,11 @@
 		       (setq ST nil)
 		     )
 		     (PROGN
-		       (PRINC "\n未选择到图块!")
+		       (PRINC "\nδѡ��ͼ��!")
 		     )
 		   )
 		 )
-		 (PRINC (STRCAT "\n选择块" BLOCKNAME "<全选>:"))
+		 (PRINC (STRCAT "\nѡ���" BLOCKNAME "<ȫѡ>:"))
 		 (setq SS (SSGET))
 		 (if (= SS nil)
 		   (PROGN
@@ -1264,7 +1267,7 @@
 		   )
 		   (setq N (+ N 1))
 		 )
-		 (ALERT (STRCAT "块~" BLOCKNAME "：" (RTOS M 2 0) "个"))
+		 (ALERT (STRCAT "��~" BLOCKNAME "��" (RTOS M 2 0) "��"))
 	       )
 )
 'C:MOYU_BTJ_YY
@@ -1292,7 +1295,7 @@
     (PRINC)
   )
   (SETVAR 'ERRNO 0)
-  (setq ENT (CAR (ENTSEL "\n 选择一个图块：")))
+  (setq ENT (CAR (ENTSEL "\n ѡ��һ��ͼ�飺")))
   (while (and
 	   (COND
 	     ((= 7 (GETVAR 'ERRNO))
@@ -1310,7 +1313,7 @@
   )
   (if (AND
 	(= 'ENAME (TYPE ENT))
-	(setq NBP (GETPOINT "\n 指定图块新的基点："))
+	(setq NBP (GETPOINT "\n ָ��ͼ���µĻ��㣺"))
       )
     (PROGN
       (setq MAT (CAR (REVREFGEOM ENT)))
@@ -1420,9 +1423,9 @@
   (setq ENX (ENTGET ENT))
   (setq ANG (CDR (ASSOC 50 ENX)))
   (setq OCS (CDR (ASSOC 210 ENX)))
-  (LIST (setq MAT (MXM (LIST (LIST (/ 1.0 (CDR (ASSOC 41 ENX))) 0.0 0.0)
-			     (LIST 0.0 (/ 1.0 (CDR (ASSOC 42 ENX))) 0.0)
-			     (LIST 0.0 0.0 (/ 1.0 (CDR (ASSOC 43 ENX))))
+  (LIST (setq MAT (MXM (LIST (LIST (/ 1.0 (max (abs (CDR (ASSOC 41 ENX))) 1e-12)) 0.0 0.0)
+			     (LIST 0.0 (/ 1.0 (max (abs (CDR (ASSOC 42 ENX))) 1e-12)) 0.0)
+			     (LIST 0.0 0.0 (/ 1.0 (max (abs (CDR (ASSOC 43 ENX))) 1e-12)))
 		       ) (MXM (LIST (LIST (COS ANG) (SIN ANG) 0.0)
 				    (LIST (- (SIN ANG)) (COS ANG) 0.0) '
 				    (0.0 0.0 1.0)
@@ -1517,10 +1520,10 @@
 				     BLOCK DOC
 				  )
 		 (if (AND
-		       (setq ENT (CAR (ENTSEL "\n选择需要改名的块: ")))
+		       (setq ENT (CAR (ENTSEL "\nѡ����Ҫ�����Ŀ�: ")))
 		       (OR
 			 (= "INSERT" (CDR (ASSOC 0 (ENTGET ENT))))
-			 (ALERT "没有选择块!")
+			 (ALERT "û��ѡ���!")
 		       )
 		     )
 		   (PROGN
@@ -1530,17 +1533,17 @@
 				     ((setq FILEN (OPEN TEMPNAME "w"))
 				       (FOREACH STREAM '("\n"
 					  "RENAME:dialog {\n"
-					  "    label = \"修改块名\" ;\n"
+					  "    label = \"�޸Ŀ���\" ;\n"
 					  "    :row {\n"
 					  "        :edit_box {\n" "            key = \"dcl_edit_name\" ;\n"
 					  "            width = 30 ;\n"
 					  "        }\n"
 					  "    }\n" "    :row {\n"
 					  "        :button {\n" "            key = \"btn_ok\" ;\n"
-					  "            label = \"确认\" ;\n"
+					  "            label = \"ȷ��\" ;\n"
 					  "        }\n"
 					  "        :button {\n" "            is_cancel = true ;\n"
-					  "            key = \"btn_cancle\" ;\n" "            label = \"取消\" ;\n"
+					  "            key = \"btn_cancle\" ;\n" "            label = \"ȡ��\" ;\n"
 					  "        }\n" "    }\n"
 					  "}\n"
 					 )
@@ -1566,7 +1569,7 @@
 		     (SET_TILE "dcl_edit_name" NAME)
 		     (MODE_TILE "dcl_edit_name" 2)
 		     (ACTION_TILE "dcl_edit_name" "(setq name1 $value)")
-		     (ACTION_TILE "btn_ok" "(if (=(vla-get-objectname obj) \"AcDbBlockReference\")\n                               (if (tblsearch \"block\" name1)\n                                 (alert (strcat \"块名: \" name1 \" 已经存在.\"))\n                                 (if (not (snvalid name1))\n                                   (alert (strcat \"错误的块名: \" name1))\n                                   (done_dialog 1)\n                                 )\n                               )\n                             )")
+		     (ACTION_TILE "btn_ok" "(if (=(vla-get-objectname obj) \"AcDbBlockReference\")\n                               (if (tblsearch \"block\" name1)\n                                 (alert (strcat \"����: \" name1 \" �Ѿ�����.\"))\n                                 (if (not (snvalid name1))\n                                   (alert (strcat \"����Ŀ���: \" name1))\n                                   (done_dialog 1)\n                                 )\n                               )\n                             )")
 		     (setq DLG (START_DIALOG))
 		     (if (= DLG 1)
 		       (PROGN
@@ -1575,12 +1578,12 @@
 			 (vla-put-Name BLOCK NAME1)
 			 (if (= (SUBSTR BLKNAM 1 2) "*U")
 			   (PROGN
-			     (PRINC "\n这是一个匿名块.")
+			     (PRINC "\n����һ��������.")
 			     (vla-AuditInfo DOC :vlax-true)
 			     (vla-put-Name BLOCK NAME1)
 			   )
 			 )
-			 (PRINC (STRCAT "\n图块 \"" NAME "\" 重命名为 \""
+			 (PRINC (STRCAT "\nͼ�� \"" NAME "\" ������Ϊ \""
 					NAME1 "\""
 				)
 			 )
@@ -1629,7 +1632,7 @@
 		 (SETVAR "cmdecho" 0)
 		 (SETVAR "blipmode" 0)
 		 (GRAPHSCR)
-		 (PRINC "请选择要归零的实体")
+		 (PRINC "��ѡ��Ҫ�����ʵ��")
 		 (setq S (SSGET))
 		 (setq LEN (SSLENGTH S))
 		 (setq INDEX 0)
@@ -1659,7 +1662,7 @@
 		   (ENTMOD A)
 		   (setq INDEX (+ INDEX 1))
 		 )
-		 (PRINC "选择对象已经成功Z轴归零。")
+		 (PRINC "ѡ������Ѿ��ɹ�Z����㡣")
 		 (PRINC)
 	       )
 )
@@ -1671,13 +1674,13 @@
 		     (VL-EXIT-WITH-VALUE 0)
 		   )
 		 )
-		 (setq P1 (GETPOINT "\n选择复制基点"))
+		 (setq P1 (GETPOINT "\nѡ���ƻ���"))
 		 (if (NOT P1)
 		   (PROGN
 		     (VL-EXIT-WITH-VALUE 0)
 		   )
 		 )
-		 (setq P2 (acet-ss-drag-move SS P1 "\n选择插入点" 1))
+		 (setq P2 (acet-ss-drag-move SS P1 "\nѡ������" 1))
 		 (setq I 0)
 		 (setq SS1 (SSADD))
 		 (REPEAT (SSLENGTH SS)
@@ -1690,7 +1693,7 @@
 			     (vlax-3d-point P1) (vlax-3d-point P2)
 		   )
 		 )
-		 (setq ANG (acet-ss-drag-rotate SS1 P2 "\n选输入旋转角度" 1))
+		 (setq ANG (acet-ss-drag-rotate SS1 P2 "\nѡ������ת�Ƕ�" 1))
 		 (setq I 0)
 		 (REPEAT (SSLENGTH SS1)
 		   (setq E (SSNAME SS1 I))
@@ -1706,7 +1709,7 @@
   (YY_KAISHI_YY)
   (SETVAR "CMDECHO" 0)
 
-  ;; 实体选择集函数
+  ;; ʵ��ѡ�񼯺���
   (DEFUN SSNEXT (EN / SS)
     (setq SS (SSADD))
     (while (and
@@ -1724,7 +1727,7 @@
     SS
   )
 
-  ;; 错误处理函数
+  ;; ����������
   (defun *error* (msg)
     (if (/= msg "Function cancelled")
         (princ (strcat "\nError: " msg)))
@@ -1733,15 +1736,15 @@
     (princ)
   )
 
-  ;; 主程序流程
+  ;; ����������
   (if (setq SS (SSGET))
     (PROGN
-      (if (setq P0 (GETPOINT "\n指定基点:"))
+      (if (setq P0 (GETPOINT "\nָ������:"))
         (PROGN
           (while (and
                    T
                 )
-            (PRINC "\n指定下一点或距离:")
+            (PRINC "\nָ����һ������:")
             (if D
               (PROGN
                 (SETVAR "osmode" 0)
@@ -1790,11 +1793,11 @@
 'C:MOYU_CCC_YY
 (defun C:MOYU_TC_YY (/ ent obj txt layer color ss i j e1 e2 o1 o2 c1 c2 d tol del)
 
-  ;; 开始程序
+  ;; ��ʼ����
   (YY_KAISHI_YY)
   (SETVAR "CMDECHO" 0)
 
-  ;; 错误处理函数
+  ;; ����������
   (defun *error* (msg)
     (if (/= msg "Function cancelled")
         (princ (strcat "\nError: " msg)))
@@ -1803,7 +1806,7 @@
     (princ)
   )
 
-  ;; 文字内容清理函数
+  ;; ����������������
   (defun tc:clean (s)
     (if s
       (progn
@@ -1815,7 +1818,7 @@
     )
   )
 
-  ;; 获取对象中心点
+  ;; ��ȡ�������ĵ�
   (defun tc:center (obj)
     (if obj
       (progn
@@ -1828,24 +1831,24 @@
           (if (caddr p1) (/ (+ (caddr p1) (caddr p2)) 2.0) 0.0)
         )
       )
-      '(0 0 0) ; 返回默认点
+      '(0 0 0) ; ����Ĭ�ϵ�
     )
   )
 
   (setq tol 5.0)
   (setq del 0)
 
-  ;; ① 选择参考文字
-  (setq ent (car (nentsel "\n请选择一个参考文字: ")))
+  ;; �� ѡ��ο�����
+  (setq ent (car (nentsel "\n��ѡ��һ���ο�����: ")))
 
   (if (not ent)
     (progn 
-      (princ "\n未选择") 
+      (princ "\nδѡ��") 
       (YY_END_YY)
       (princ)
     )
     (progn
-      ;; 检查是否为文字对象
+      ;; ����Ƿ�Ϊ���ֶ���
       (setq obj_data (entget ent))
       (if obj_data
         (progn
@@ -1860,7 +1863,7 @@
                   (setq layer (vla-get-Layer obj))
                   (setq color (vla-get-Color obj))
 
-                  ;; ② 获取同图层同颜色所有文字
+                  ;; �� ��ȡͬͼ��ͬ��ɫ��������
                   (setq ss (ssget "X"
                             (list
                               (cons 0 "TEXT,MTEXT")
@@ -1871,23 +1874,23 @@
 
                   (if (not ss)
                     (progn 
-                      (princ "\n未找到对象") 
+                      (princ "\nδ�ҵ�����") 
                       (YY_END_YY)
                       (princ)
                     )
                     (progn
-                      ;; ③ 改进：持续删除直到没有更多重复项
+                      ;; �� �Ľ�������ɾ��ֱ��û�и����ظ���
                       (setq continue_delete T)
                       
                       (while continue_delete
                         (setq continue_delete nil)
                         
-                        ;; 重新获取符合条件的文字列表
+                        ;; ���»�ȡ���������������б�
                         (setq txtList '())
                         (setq i 0)
                         (repeat (sslength ss)
                           (setq e1 (ssname ss i))
-                          ;; 检查实体是否存在
+                          ;; ���ʵ���Ƿ����
                           (if (and e1 (entget e1))
                             (progn
                               (setq o1 (vlax-ename->vla-object e1))
@@ -1901,16 +1904,16 @@
                           (setq i (1+ i))
                         )
 
-                        ;; 检查列表是否为空
+                        ;; ����б��Ƿ�Ϊ��
                         (if (null txtList)
                           (setq continue_delete nil)
                           (progn
-                            ;; ④ 改进：双重循环检查重复并删除
+                            ;; �� �Ľ���˫��ѭ������ظ���ɾ��
                             (setq i 0)
                             (while (and (< i (length txtList)) (not continue_delete))
                               (setq e1 (nth i txtList))
 
-                              ;; 确保实体仍然存在
+                              ;; ȷ��ʵ����Ȼ����
                               (if (and e1 (entget e1))
                                 (progn
                                   (setq o1 (vlax-ename->vla-object e1))
@@ -1923,7 +1926,7 @@
                                       (while (and (< j (length txtList)) (not continue_delete))
                                         (setq e2 (nth j txtList))
 
-                                        ;; 确保实体仍然存在
+                                        ;; ȷ��ʵ����Ȼ����
                                         (if (and e2 (entget e2))
                                           (progn
                                             (setq o2 (vlax-ename->vla-object e2))
@@ -1936,7 +1939,7 @@
                                                   (progn
                                                     (entdel e2)
                                                     (setq del (1+ del))
-                                                    (setq continue_delete T) ; 标记需要继续删除
+                                                    (setq continue_delete T) ; �����Ҫ����ɾ��
                                                   )
                                                 )
                                               )
@@ -1961,26 +1964,26 @@
                         )
                       )
 
-                      (alert (strcat "删除重复数量: " (itoa del)))
+                      (alert (strcat "ɾ���ظ�����: " (itoa del)))
                     )
                   )
                 )
                 (progn
-                  (princ "\n无法获取对象信息")
+                  (princ "\n�޷���ȡ������Ϣ")
                   (YY_END_YY)
                   (princ)
                 )
               )
             )
             (progn
-              (princ "\n选择的不是文字对象")
+              (princ "\nѡ��Ĳ������ֶ���")
               (YY_END_YY)
               (princ)
             )
           )
         )
         (progn
-          (princ "\n无法获取实体数据")
+          (princ "\n�޷���ȡʵ������")
           (YY_END_YY)
           (princ)
         )
@@ -1991,17 +1994,17 @@
   (YY_END_YY)
   (princ)
 )
-'C:MOYU_TC_YY 文字删重
+'C:MOYU_TC_YY ����ɾ��
 
 (defun C:MOYU_TH_YY (/ ent obj txt layer color ss i e o
                objtype pt ptlist count
                linetype total radius)
 
-  ;; 开始程序
+  ;; ��ʼ����
   (YY_KAISHI_YY)
   (SETVAR "CMDECHO" 0)
 
-  ;; 错误处理函数
+  ;; ����������
   (defun *error* (msg)
     (if (/= msg "Function cancelled")
         (princ (strcat "\nError: " msg)))
@@ -2010,7 +2013,7 @@
     (princ)
   )
 
-  ;; MTEXT统一清洗
+  ;; MTEXTͳһ��ϴ
   (defun th:clean (str)
     (if str
       (progn
@@ -2023,7 +2026,7 @@
     )
   )
 
-  ;; 获取中心点（用于去重）
+  ;; ��ȡ���ĵ㣨����ȥ�أ�
   (defun th:center (obj)
     (vla-GetBoundingBox obj 'p1 'p2)
     (setq p1 (vlax-safearray->list p1))
@@ -2035,7 +2038,7 @@
     )
   )
 
-  ;; 判断是否重复点
+  ;; �ж��Ƿ��ظ���
   (defun th:inlist (pt lst tol)
     (vl-some
       (function
@@ -2051,12 +2054,12 @@
   (setq ptlist '())
   (setq count 0)
 
-  ;; ================= 选择对象 =================
-  (setq ent (car (nentsel "\n请选择文字或线条对象: ")))
+  ;; ================= ѡ����� =================
+  (setq ent (car (nentsel "\n��ѡ�����ֻ���������: ")))
 
   (if (not ent)
     (progn 
-      (princ "\n未选择") 
+      (princ "\nδѡ��") 
       (YY_END_YY)
       (princ)
     )
@@ -2066,7 +2069,7 @@
       (setq color (vla-get-Color obj))
       (setq objtype (cdr (assoc 0 (entget ent))))
 
-      ;; ================= 文字统计（去重版） =================
+      ;; ================= ����ͳ�ƣ�ȥ�ذ棩 =================
       (if (or (= objtype "TEXT") (= objtype "MTEXT"))
         (progn
           (setq txt (th:clean (vla-get-TextString obj)))
@@ -2091,7 +2094,7 @@
                   (progn
                     (setq pt (th:center o))
 
-                    ;; ? 去重核心
+                    ;; ? ȥ�غ���
                     (if (not (th:inlist pt ptlist tol))
                       (progn
                         (setq ptlist (cons pt ptlist))
@@ -2106,15 +2109,15 @@
 
               (alert
                 (strcat
-                  "文字: " txt "\n"
-                  "去重后数量: " (itoa count)
+                  "����: " txt "\n"
+                  "ȥ�غ�����: " (itoa count)
                 )
               )
             )
           )
         )
 
-        ;; ================= 线条统计（原逻辑保留） =================
+        ;; ================= ����ͳ�ƣ�ԭ�߼������� =================
         (if (member objtype '("LINE" "ARC" "CIRCLE" "LWPOLYLINE"))
           (progn
             (setq linetype (vla-get-Linetype obj))
@@ -2157,14 +2160,14 @@
 
                 (alert
                   (strcat
-                    "总长度: " (rtos total 2 0)
+                    "�ܳ���: " (rtos total 2 0)
                   )
                 )
               )
             )
           )
 
-          (alert "不支持对象")
+          (alert "��֧�ֶ���")
         )
       )
     )
@@ -2173,18 +2176,18 @@
   (YY_END_YY)
   (princ)
 )
-'C:MOYU_TH_YY 一键统计
+'C:MOYU_TH_YY һ��ͳ��
 
 (defun C:MOYU_KH_YY (/ ss ent i ent-item obj-item ent-data obj-type 
                 layer-name color text-string count 
                 total-length radius linetype
                 pt-list pt tol)
 
-  ;; 开始程序
+  ;; ��ʼ����
   (YY_KAISHI_YY)
   (SETVAR "CMDECHO" 0)
 
-  ;; 错误处理函数
+  ;; ����������
   (defun *error* (msg)
     (if (/= msg "Function cancelled")
         (princ (strcat "\nError: " msg)))
@@ -2236,12 +2239,12 @@
 
   (setq tol 5.0)
 
-  (princ "\n框选对象...")
+  (princ "\n��ѡ����...")
   (setq ss (ssget))
 
   (if ss
     (progn
-      (setq ent (car (nentsel "\n点选一个样本对象: ")))
+      (setq ent (car (nentsel "\n��ѡһ����������: ")))
 
       (if ent
         (progn
@@ -2251,7 +2254,7 @@
           (setq layer-name (vla-get-Layer obj-item))
           (setq color (vla-get-Color obj-item))
 
-          ;; ================= 文字统计（去重版） =================
+          ;; ================= ����ͳ�ƣ�ȥ�ذ棩 =================
           (if (or (= obj-type "TEXT") (= obj-type "MTEXT"))
             (progn
               (setq text-string (kh:clean (getTextString obj-item)))
@@ -2277,7 +2280,7 @@
                       (progn
                         (setq pt (kh:center obj-item))
 
-                        ;; ? 核心：去重判断
+                        ;; ? ���ģ�ȥ���ж�
                         (if (not (kh:is-duplicate pt pt-list tol))
                           (progn
                             (setq pt-list (cons pt pt-list))
@@ -2294,13 +2297,13 @@
 
               (alert
                 (strcat
-                  "文字: \"" text-string "\"\n"
-                  "去重后数量: " (itoa count)
+                  "����: \"" text-string "\"\n"
+                  "ȥ�غ�����: " (itoa count)
                 )
               )
             )
 
-            ;; ================= 线条统计（不变） =================
+            ;; ================= ����ͳ�ƣ����䣩 =================
             (if (member obj-type '("LINE" "ARC" "CIRCLE" "LWPOLYLINE"))
               (progn
                 (setq linetype (vla-get-Linetype obj-item))
@@ -2335,10 +2338,10 @@
                   (setq i (1+ i))
                 )
 
-                (alert (strcat "总长度: " (rtos total-length 2 0)))
+                (alert (strcat "�ܳ���: " (rtos total-length 2 0)))
               )
 
-              (alert "不支持类型")
+              (alert "��֧������")
             )
           )
         )
@@ -2349,7 +2352,7 @@
   (YY_END_YY)
   (princ)
 )
-'C:MOYU_KH_YY 框选统计
+'C:MOYU_KH_YY ��ѡͳ��
 (DEFUN PLSXPY_YY ()
   (if (SSGET ":s" '((0 . "Arc,Circle,Ellipse,*Line")))
     (PROGN
@@ -2357,14 +2360,15 @@
 						(vla-get-ActiveDocument
 									(vlax-get-acad-object)
 						)
-		    ) (vla-Offset OBJ GETDS) (vla-Offset OBJ (* GETDS -1))
+		    ) (vl-catch-all-apply 'vla-Offset (list OBJ GETDS))
+			    (vl-catch-all-apply 'vla-Offset (list OBJ (* GETDS -1)))
       )
     )
     (PROGN
       (vlax-release-object OBJ)
     )
   )
-  (if (NOT (GETPOINT "\n左键保留源对象 <空格删除>"))
+  (if (NOT (GETPOINT "\n�������Դ���� <�ո�ɾ��>"))
     (PROGN
       (command "_.ERASE")
       (command (SSGET "p"))
@@ -2374,17 +2378,17 @@
   (PRINC)
 )
 (vl-ACAD-defun (DEFUN C:MOYU_QXN_YY ()
-		 (PROMPT "【在封闭区域内向内偏移线条】")
+		 (PROMPT "���ڷ������������ƫ��������")
 		 (YY_KAISHI_YY)
 		 (SETVAR "cmdecho" 0)
 		 (SETVAR "osmode" 0)
 		 (if (NOT SSJ)
 		   (PROGN
-		     (setq SSJ (GETSTRING "\n请输入偏移量:"))
+		     (setq SSJ (GETSTRING "\n������ƫ����:"))
 		   )
 		   (PROGN
 		     (setq SSJ (if (/= "" (setq SS2K (GETSTRING
-								(STRCAT "\n请输入偏移量<"
+								(STRCAT "\n������ƫ����<"
 									SSJ ">:"
 								)
 						     )
@@ -2401,7 +2405,7 @@
 		   )
 		 )
 		 (while (and
-			  (setq PT (GETPOINT "\n闭合范围里取点(退出ESC)："))
+			  (setq PT (GETPOINT "\n�պϷ�Χ��ȡ��(�˳�ESC)��"))
 			)
 		   (command "bpoly")
 		   (command PT)
@@ -2580,7 +2584,7 @@
 )
 (vl-ACAD-defun (DEFUN C:MOYU_FPL_YY (/ SK_RADIUS1 SS EN)
 		 (setq SK_RADIUS (GETVAR "FILLETRAD"))
-		 (if (setq SK_RADIUS1 (GETDIST (STRCAT "\n请指定圆角半径<"
+		 (if (setq SK_RADIUS1 (GETDIST (STRCAT "\n��ָ��Բ�ǰ뾶<"
 						       (RTOS SK_RADIUS) ">:"
 					       )
 				      )
@@ -2649,7 +2653,7 @@
 		 (SETVAR "CMDECHO" 0)
 		 (setq OSM_OLD (GETVAR "OSMODE"))
 		 (INITGET "N W")
-		 (setq KXJQ (GETKWORD "\n框选剪切 [剪除框内(N)/剪除框外(W)]：<N>"))
+		 (setq KXJQ (GETKWORD "\n��ѡ���� [��������(N)/��������(W)]��<N>"))
 		 (if (NOT KXJQ)
 		   (PROGN
 		     (setq KXJQ "N")
@@ -2658,9 +2662,9 @@
 		 (COND
 		   ((= KXJQ "N")
 		     (while (and
-			      (setq PT1 (GETPOINT "\n第一角点: "))
+			      (setq PT1 (GETPOINT "\n��һ�ǵ�: "))
 			    )
-		       (if (setq PT2 (GETCORNER PT1 " >>>第二角点: "))
+		       (if (setq PT2 (GETCORNER PT1 " >>>�ڶ��ǵ�: "))
 			 (PROGN
 			   (SETVAR "OSMODE" 0)
 			   (command "_rectang")
@@ -2701,8 +2705,8 @@
 		     )
 		   )
 		   ((= KXJQ "W")
-		     (setq PT1 (GETPOINT "\n第一角点: "))
-		     (if (setq PT2 (GETCORNER PT1 " >>>第二角点: "))
+		     (setq PT1 (GETPOINT "\n��һ�ǵ�: "))
+		     (if (setq PT2 (GETCORNER PT1 " >>>�ڶ��ǵ�: "))
 		       (PROGN
 			 (SETVAR "OSMODE" 0)
 			 (command "_rectang")
@@ -3317,16 +3321,16 @@
   (setq DIST_OFFSET (* 7 (GETVAR "dimscale")))
   (SETVAR "CMDECHO" 0)
   (YY_KAISHI_YY)
-  (if (= (TBLOBJNAME "LAYER" "0-临时尺寸") nil)
+  (if (= (TBLOBJNAME "LAYER" "0-��ʱ�ߴ�") nil)
     (PROGN
       (ENTMAKE (LIST '(0 . "LAYER") '(100 . "AcDbSymbolTableRecord") '
 		     (100 . "AcDbLayerTableRecord") '(70 . 0) '(62 . 143)
-		     (CONS 2 "0-临时尺寸")
+		     (CONS 2 "0-��ʱ�ߴ�")
 	       )
       )
     )
   )
-  (SETVAR "clayer" "0-临时尺寸")
+  (SETVAR "clayer" "0-��ʱ�ߴ�")
   (SETVAR "osmode" 0)
   (GRAPHSCR)
   (setq I_SS 0)
@@ -3419,7 +3423,7 @@
 )
 
 (defun c:MOYU_DSB_YY (/ ss ent idx ent1 filtered-ss)
-    ;; 自定义函数，用于查找实体在选择集中的索引
+    ;; �Զ��庯�������ڲ���ʵ����ѡ���е�����
     (defun my-ssmember (ent ss / idx)
         (setq idx 0)
         (while (and (setq ent1 (ssname ss idx))
@@ -3432,40 +3436,40 @@
         )
     )
 
-    ;; 检查是否已经有选择集
+    ;; ����Ƿ��Ѿ���ѡ��
     (if (setq ss (ssget))
-        ;; 如果已经有选择集，直接使用
+        ;; ����Ѿ���ѡ�񼯣�ֱ��ʹ��
         (progn)
-        ;; 如果没有选择集，提示用户框选区域
+        ;; ���û��ѡ�񼯣���ʾ�û���ѡ����
         (progn
-            (prompt "\n请框选要删除标注的区域：")
+            (prompt "\n���ѡҪɾ����ע������")
             (setq ss (ssget))
         )
     )
 
-    ;; 如果成功获取到选择集
+    ;; ����ɹ���ȡ��ѡ��
     (if ss
         (progn
-            ;; 筛选出选择集中的标注对象
+            ;; ɸѡ��ѡ���еı�ע����
             (setq filtered-ss (ssadd))
             (setq idx 0)
             (while (setq ent (ssname ss idx))
                 (setq ent-type (cdr (assoc 0 (entget ent))))
-                ;; 检查所有类型的标注
-                (if (or (equal ent-type "DIMENSION")    ; 普通标注
-                       (equal ent-type "LEADER")        ; 引线标注
-                       (equal ent-type "MULTILEADER")   ; 多重引线标注
-                       (equal ent-type "ARCALIGNEDDIMENSION") ; 圆弧标注
-                       (equal ent-type "RADIALDIMENSION")     ; 半径标注
-                       (equal ent-type "DIAMETRICDIMENSION")  ; 直径标注
-                       (wcmatch ent-type "*DIMARC")    ; 弧长标注
-                       (wcmatch ent-type "*DIMRADIUS") ; 半径标注
-                       (wcmatch ent-type "*DIMDIA"))   ; 直径标注
+                ;; ����������͵ı�ע
+                (if (or (equal ent-type "DIMENSION")    ; ��ͨ��ע
+                       (equal ent-type "LEADER")        ; ���߱�ע
+                       (equal ent-type "MULTILEADER")   ; �������߱�ע
+                       (equal ent-type "ARCALIGNEDDIMENSION") ; Բ����ע
+                       (equal ent-type "RADIALDIMENSION")     ; �뾶��ע
+                       (equal ent-type "DIAMETRICDIMENSION")  ; ֱ����ע
+                       (wcmatch ent-type "*DIMARC")    ; ������ע
+                       (wcmatch ent-type "*DIMRADIUS") ; �뾶��ע
+                       (wcmatch ent-type "*DIMDIA"))   ; ֱ����ע
                     (ssadd ent filtered-ss)
                 )
                 (setq idx (1+ idx))
             )
-            ;; 遍历筛选后的选择集中的每个标注对象
+            ;; ����ɸѡ���ѡ���е�ÿ����ע����
             (setq idx 0)
             (repeat (sslength filtered-ss)
                 (setq ent (ssname filtered-ss idx))
@@ -3474,9 +3478,9 @@
                 )
                 (setq idx (1+ idx))
             )
-            (princ "\n框选区域内的所有标注已删除。")
+            (princ "\n��ѡ�����ڵ����б�ע��ɾ����")
         )
-        (princ "\n未选择任何区域或未找到标注对象。")
+        (princ "\nδѡ���κ������δ�ҵ���ע����")
     )
     (princ)
 )
@@ -3495,7 +3499,7 @@
   )
   (SETVAR "measurement" 1)
   (SETVAR "measureinit" 1)
-  (PRINC "\n请选择填充区域：右键改为点选区域）")
+  (PRINC "\n��ѡ����������Ҽ���Ϊ��ѡ����")
   (if (setq SS (SSGET))
     (PROGN
       (command "bhatch")
@@ -3505,7 +3509,7 @@
       (command "")
     )
     (PROGN
-      (PRINC "\n请拾取填充内部点：")
+      (PRINC "\n��ʰȡ����ڲ��㣺")
       (command "bhatch")
       (command PAUSE)
       (command PAUSE)
@@ -3532,7 +3536,7 @@
   (PRINC)
 )
 (vl-ACAD-defun (DEFUN C:MOYU_FFX_YY (/ ENT)
-		 (PROMPT "\n更改线型为虚线")
+		 (PROMPT "\n��������Ϊ����")
 		 (SETVAR "CMDECHO" 0)
 		 (setq ENT (SSGET))
 		 (command "change")
@@ -3703,7 +3707,7 @@
 		   )
 		   (REVERSE NEWLIST)
 		 )
-		 (setq OB1 (ENTSEL "\n选择要修改的任何文本:"))
+		 (setq OB1 (ENTSEL "\nѡ��Ҫ�޸ĵ��κ��ı�:"))
 		 (setq OBN (CAR OB1))
 		 (setq PTN (CAR (CDR OB1)))
 		 (setq OBT (CAR (NENTSELP PTN)))
@@ -3759,36 +3763,36 @@
 		     (setq DCLNAME (COND
 				     ((setq FILEN (OPEN TEMPNAME "w"))
 				       (FOREACH STREAM '("\n"
-					  "文字修改:dialog {\n"
-					  "\tlabel = \"文字编辑...\";\n"
+					  "�����޸�:dialog {\n"
+					  "\tlabel = \"���ֱ༭...\";\n"
 					  "\t: boxed_radio_column {\n"
-					  "\t\tlabel = \"超级文字编辑...\";\n"
+					  "\t\tlabel = \"�������ֱ༭...\";\n"
 					  "\t\t: edit_box {\n"
-					  "\t\t\tlabel= \"文字:\";\n"
+					  "\t\t\tlabel= \"����:\";\n"
 					  "\t\t\tkey = \"text\";\n"
 					  "\t\t\tedit_width = 50;\n" "                                             allow_accept = true;\n"
 					  "\t\t}\n" "\t\t: row {\n"
 					  "\t\t\t: popup_list {\n"
-					  "\t\t\t\tlabel=\"样式\";\n"
+					  "\t\t\t\tlabel=\"��ʽ\";\n"
 					  "\t\t\t\tkey = \"sty\";\n"
 					  "\t\t\t\tedit_width = 13;\n"
 					  "\t\t\t\tfixed_width = true;\n"
 					  "\t\t\t}\n"
 					  "\t\t\t: edit_box {\n"
-					  "\t\t\t\tlabel=\"高度\";\n"
+					  "\t\t\t\tlabel=\"�߶�\";\n"
 					  "\t\t\t\tkey = \"hig\";\n"
 					  "\t\t\t\tedit_width = 7;\n"
 					  "\t\t\t\tfixed_width = true;\n"
 					  "\t\t\t}\n"
 					  "\t\t\t: edit_box {\n"
-					  "\t\t\t\tlabel=\"宽度\";\n"
+					  "\t\t\t\tlabel=\"����\";\n"
 					  "\t\t\t\tkey = \"wid\";\n"
 					  "\t\t\t\tedit_width = 7;\n"
 					  "\t\t\t\tfixed_width = true;\n"
 					  "\t\t\t}\n"
 					  "\t\t}\n" "\t\t: row {\n"
 					  "\t\t\t: popup_list {\n"
-					  "\t\t\t\tlabel=\"图层\";\n"
+					  "\t\t\t\tlabel=\"ͼ��\";\n"
 					  "\t\t\t\tkey = \"lay\";\n"
 					  "\t\t\t\tedit_width = 13;\n"
 					  "\t\t\t\tfixed_width = true;\n"
@@ -3804,7 +3808,7 @@
 					  "\t\t\t\twidth= 12;\n"
 					  "\t\t\t\tfixed_width = true;\n"
 					  "\t\t\t}\n" "\t\t\t: edit_box {\n"
-					  "\t\t\t\tlabel=\"角度\";\n"
+					  "\t\t\t\tlabel=\"�Ƕ�\";\n"
 					  "\t\t\t\tkey = \"ang\";\n"
 					  "\t\t\t\tedit_width = 7;\n"
 					  "\t\t\t\tfixed_width = true;\n"
@@ -3827,7 +3831,7 @@
 				   )
 		     )
 		     (setq DCL_ID1 (LOAD_DIALOG DCLNAME))
-		     (if (NOT (NEW_DIALOG "文字修改" DCL_ID1))
+		     (if (NOT (NEW_DIALOG "�����޸�" DCL_ID1))
 		       (PROGN
 			 (EXIT)
 		       )
@@ -3954,7 +3958,7 @@
 				   )
 		 (if (setq SS (SSGET '((0 . "*TEXT"))))
 		   (PROGN
-		     (if (= nil (setq NEWWID (GETREAL "\n 请输入新的文字宽度因子，默认<1.0>：")))
+		     (if (= nil (setq NEWWID (GETREAL "\n �������µ����ֿ������ӣ�Ĭ��<1.0>��")))
 		       (PROGN
 			 (setq NEWWID 1.0)
 		       )
@@ -4045,7 +4049,7 @@
 		     )
 		   )
 		   (PROGN
-		     (ALERT "请选择文字对象后再行尝试！")
+		     (ALERT "��ѡ�����ֶ�������г��ԣ�")
 		   )
 		 )
 		 (PRIN1)
@@ -4053,33 +4057,33 @@
 )
 'C:MOYU_TZK_YY
 (defun c:MOYU_TTH_YY (/ dcl_id fn old new ss)
-  ;; 内部函数：创建对话框DCL文件
+  ;; �ڲ������������Ի���DCL�ļ�
   (defun write_dcl_file ()
     (setq fn (strcat (getenv "TEMP") "\\bth.dcl"))
     (setq fp (open fn "w"))
     (write-line "bth : dialog {" fp)
-    (write-line "  label = \"文字替换\";" fp)
+    (write-line "  label = \"�����滻\";" fp)
     (write-line "  : column {" fp)
     (write-line "    : edit_box {" fp)
-    (write-line "      label = \"查找内容:\";" fp)
+    (write-line "      label = \"��������:\";" fp)
     (write-line "      key = \"old\";" fp)
     (write-line "      width = 40;" fp)
     (write-line "      value = \"\";" fp)
     (write-line "    }" fp)
     (write-line "    : edit_box {" fp)
-    (write-line "      label = \"替换为:\";" fp)
+    (write-line "      label = \"�滻Ϊ:\";" fp)
     (write-line "      key = \"new\";" fp)
     (write-line "      width = 40;" fp)
     (write-line "      value = \"\";" fp)
     (write-line "    }" fp)
     (write-line "    : row {" fp)
     (write-line "      : button {" fp)
-    (write-line "        label = \"替换\";" fp)
+    (write-line "        label = \"�滻\";" fp)
     (write-line "        key = \"accept\";" fp)
     (write-line "        is_default = true;" fp)
     (write-line "      }" fp)
     (write-line "      : button {" fp)
-    (write-line "        label = \"取消\";" fp)
+    (write-line "        label = \"ȡ��\";" fp)
     (write-line "        key = \"cancel\";" fp)
     (write-line "      }" fp)
     (write-line "    }" fp)
@@ -4089,12 +4093,12 @@
     fn
   )
 
-  ;; 内部函数：替换文字
+  ;; �ڲ��������滻����
   (defun replace_text (ent old new / entdata txt)
     (setq entdata (entget ent))
     (setq etype (cdr (assoc 0 entdata)))
     (cond 
-      ;; 处理单行文字
+      ;; ������������
       ((= etype "TEXT")
        (setq txt (cdr (assoc 1 entdata)))
        (if (and txt (vl-string-search old txt))
@@ -4106,7 +4110,7 @@
          0
        )
       )
-      ;; 处理多行文字
+      ;; ������������
       ((= etype "MTEXT")
        (setq txt (cdr (assoc 1 entdata)))
        (if (and txt (vl-string-search old txt))
@@ -4118,7 +4122,7 @@
          0
        )
       )
-      ;; 处理属性文字
+      ;; ������������
       ((= etype "ATTRIB")
        (setq txt (cdr (assoc 1 entdata)))
        (if (and txt (vl-string-search old txt))
@@ -4130,7 +4134,7 @@
          0
        )
       )
-      ;; 处理块参照（可能包含属性）
+      ;; ��������գ����ܰ������ԣ�
       ((= etype "INSERT")
        (setq count 0)
        (setq att (entnext ent))
@@ -4144,7 +4148,7 @@
     )
   )
 
-  ;; 内部函数：处理选择集
+  ;; �ڲ�����������ѡ��
   (defun process_selection (old new ss / count ent i)
     (setq count 0
           i 0)
@@ -4156,57 +4160,57 @@
           (setq i (1+ i))
         )
         (if (> count 0)
-          (alert (strcat "替换完成！\n共替换了 " (itoa count) " 处文字。"))
-          (alert "未找到可替换的文字。")
+          (alert (strcat "�滻��ɣ�\n���滻�� " (itoa count) " �����֡�"))
+          (alert "δ�ҵ����滻�����֡�")
         )
       )
     )
   )
 
-  ;; 主程序开始
-  ;; 检查是否有预选的对象
+  ;; ������ʼ
+  ;; ����Ƿ���Ԥѡ�Ķ���
   (setq ss (ssget "_I"))
   
-  ;; 如果没有预选对象，提示用户选择
+  ;; ���û��Ԥѡ������ʾ�û�ѡ��
   (if (not ss)
     (progn
-      (prompt "\n选择要替换的文字对象: ")
+      (prompt "\nѡ��Ҫ�滻�����ֶ���: ")
       (setq ss (ssget))
     )
   )
   
-  ;; 如果有选择的对象，继续处理
+  ;; �����ѡ��Ķ��󣬼�������
   (if ss
     (progn
-      ;; 创建并显示对话框
+      ;; ��������ʾ�Ի���
       (setq fn (write_dcl_file))
       (setq dcl_id (load_dialog fn))
       
       (if (not (new_dialog "bth" dcl_id))
         (progn
-          (alert "无法创建对话框!")
+          (alert "�޷������Ի���!")
           (exit)
         )
       )
       
-      ;; 设置初始值
+      ;; ���ó�ʼֵ
       (set_tile "old" "")
       (set_tile "new" "")
       
-      ;; 动作处理
+      ;; ��������
       (action_tile "accept" "(setq user-old (get_tile \"old\") user-new (get_tile \"new\")) (done_dialog 1)")
       (action_tile "cancel" "(done_dialog 0)")
       
-      ;; 显示对话框并获取结果
+      ;; ��ʾ�Ի��򲢻�ȡ���
       (setq result (start_dialog))
       (unload_dialog dcl_id)
       (vl-file-delete fn)
       
-      ;; 处理对话框结果
+      ;; �����Ի�����
       (if (= result 1)
         (if (and user-old (/= user-old ""))
           (process_selection user-old user-new ss)
-          (alert "请输入要查找的内容！")
+          (alert "������Ҫ���ҵ����ݣ�")
         )
       )
     )
@@ -4217,7 +4221,7 @@
 (vl-ACAD-defun (DEFUN C:MOYU_TZD_YY (/ *ERROR* CMDE DOC TSS INC TENT TOBJ
 				      TINS TJUST
 				   )
-		 (PROMPT "【单行文字改为多行文字】")
+		 (PROMPT "���������ָ�Ϊ�������֡�")
 		 (DEFUN *ERROR* (ERRMSG)
 		   (if (NOT (WCMATCH ERRMSG "Function cancelled,quit / exit abort,console break"))
 		     (PROGN
@@ -4286,7 +4290,7 @@
 		 )
 		 (SETVAR 'CMDECHO CMDE)
 		 (vla-EndUndoMark DOC)
-		 (PRINC "\n单行文字已改为多行文字\n")
+		 (PRINC "\n���������Ѹ�Ϊ��������\n")
 		 (PRINC)
 	       )
 )
@@ -4754,9 +4758,9 @@
 	(setq A11 (LIST (CONS 'NTH (CONS (- ALEN 1) '((VXGETATTS SLENT))))))
 	(setq A12 (CONS 'IF (LIST '(VXGETATTS SLENT) (CONS 'CDR A11))))
 	(setq A13 (CONS 'IF (LIST '(VXGETATTS SLENT) (CONS 'CAR A11))))
-	(setq LVAL (LIST (STRCAT "FJ" (RTOS (* 2 ALEN) 2 0)) "属性数值" A12))
+	(setq LVAL (LIST (STRCAT "FJ" (RTOS (* 2 ALEN) 2 0)) "������ֵ" A12))
 	(setq LTAG (LIST (STRCAT "FJ" (RTOS (- (* 2 ALEN) 1) 2 0))
-			 "属性标志" A13
+			 "���Ա�־" A13
 		   )
 	)
 	(setq AFLST (APPEND
@@ -7941,7 +7945,7 @@
              index0 index sslist XZ_sortlist len0 len sslist-ptl index0)
   (vl-load-com)
   (if (progn
-        (setq EP1 (entsel"\n点取属性块中页码的位置:")
+        (setq EP1 (entsel"\n��ȡ���Կ���ҳ���λ��:")
               EG1 (cdr (assoc 0 (entget (car EP1)))))
         (if (= EG1 "INSERT")
           (progn 
@@ -7950,20 +7954,20 @@
               (setq blktag (cdr (assoc 2 (entget EG2)))))
             (setq EP1st (entget (car EP1))
                   blkname (assoc 2 EP1st)))))
-      (princ (strcat "\n块名为-->" (cdr blkname) "   标记为-->" blktag)))
+      (princ (strcat "\n����Ϊ-->" (cdr blkname) "   ���Ϊ-->" blktag)))
 
-  (setq prefix (getstring "\n请输入前缀:"))
+  (setq prefix (getstring "\n������ǰ׺:"))
   (if (= str0 nil) (setq str0 1))
   (initget 6)
-  (setq str (getint (strcat "\n请输入一个起始整数<" (rtos str0) ">:")))
+  (setq str (getint (strcat "\n������һ����ʼ����<" (rtos str0) ">:")))
   (if (= str nil)(setq str str0))
   
   (initget "H V S")
-  (setq GETK (getkword "\n排序方式 [横向优先(H)/竖向优先(V)/选择优先(S)]: <H> "))
+  (setq GETK (getkword "\n����ʽ [��������(H)/��������(V)/ѡ������(S)]: <H> "))
   
   (setq ss (ssget (list (cons 0 "INSERT") blkname))
         index0 0 
-        index (sslength ss) 
+        index (if ss (sslength ss) 0) 
         sslist '())
   
   (repeat index
@@ -8908,7 +8912,7 @@
        )
 	(COND
 	  ((= KD0 "W")
-	    (vla-Offset (vlax-ename->vla-object EN) OFFSET)
+	    (vl-catch-all-apply 'vla-Offset (list (vlax-ename->vla-object EN) OFFSET))
 	    (vla-put-Layer (vlax-ename->vla-object (setq NEW
 							 (ENTLAST)
 						   )
@@ -8917,7 +8921,7 @@
 	    (setq ENLST (CONS NEW ENLST))
 	  )
 	  ((= KD0 "N")
-	    (vla-Offset (vlax-ename->vla-object EN) (- OFFSET))
+	    (vl-catch-all-apply 'vla-Offset (list (vlax-ename->vla-object EN) (- OFFSET)))
 	    (vla-put-Layer (vlax-ename->vla-object (setq NEW
 							 (ENTLAST)
 						   )
@@ -8926,14 +8930,14 @@
 	    (setq ENLST (CONS NEW ENLST))
 	  )
 	  (T
-	    (vla-Offset (vlax-ename->vla-object EN) OFFSET)
+	    (vl-catch-all-apply 'vla-Offset (list (vlax-ename->vla-object EN) OFFSET))
 	    (vla-put-Layer (vlax-ename->vla-object (setq NEW
 							 (ENTLAST)
 						   )
 			   ) OLDLAY
 	    )
 	    (setq ENLST (CONS NEW ENLST))
-	    (vla-Offset (vlax-ename->vla-object EN) (- OFFSET))
+	    (vl-catch-all-apply 'vla-Offset (list (vlax-ename->vla-object EN) (- OFFSET)))
 	    (vla-put-Layer (vlax-ename->vla-object (setq NEW
 							 (ENTLAST)
 						   )
@@ -8948,10 +8952,10 @@
 	  ((= KD0 "W")
 	    (if (CLOCKWISEP EN)
 	      (PROGN
-		(vla-Offset (vlax-ename->vla-object EN) (- OFFSET))
+		(vl-catch-all-apply 'vla-Offset (list (vlax-ename->vla-object EN) (- OFFSET)))
 	      )
 	      (PROGN
-		(vla-Offset (vlax-ename->vla-object EN) OFFSET)
+		(vl-catch-all-apply 'vla-Offset (list (vlax-ename->vla-object EN) OFFSET))
 	      )
 	    )
 	    (vla-put-Layer (vlax-ename->vla-object (setq NEW
@@ -8964,10 +8968,10 @@
 	  ((= KD0 "N")
 	    (if (CLOCKWISEP EN)
 	      (PROGN
-		(vla-Offset (vlax-ename->vla-object EN) OFFSET)
+		(vl-catch-all-apply 'vla-Offset (list (vlax-ename->vla-object EN) OFFSET))
 	      )
 	      (PROGN
-		(vla-Offset (vlax-ename->vla-object EN) (- OFFSET))
+		(vl-catch-all-apply 'vla-Offset (list (vlax-ename->vla-object EN) (- OFFSET)))
 	      )
 	    )
 	    (vla-put-Layer (vlax-ename->vla-object (setq NEW
@@ -8978,14 +8982,14 @@
 	    (setq ENLST (CONS NEW ENLST))
 	  )
 	  (T
-	    (vla-Offset (vlax-ename->vla-object EN) OFFSET)
+	    (vl-catch-all-apply 'vla-Offset (list (vlax-ename->vla-object EN) OFFSET))
 	    (vla-put-Layer (vlax-ename->vla-object (setq NEW
 							 (ENTLAST)
 						   )
 			   ) OLDLAY
 	    )
 	    (setq ENLST (CONS NEW ENLST))
-	    (vla-Offset (vlax-ename->vla-object EN) (- OFFSET))
+	    (vl-catch-all-apply 'vla-Offset (list (vlax-ename->vla-object EN) (- OFFSET)))
 	    (vla-put-Layer (vlax-ename->vla-object (setq NEW
 							 (ENTLAST)
 						   )
@@ -9022,75 +9026,75 @@
   (SETVAR "CLAYER" CLA_OLD)
   (SETVAR "ORTHOMODE" ORT_OLD)
   (setq *ERROR* *OLDERR*)
-  (if (= MSG "完美退出。谢谢使用。")
+  (if (= MSG "�����˳���ллʹ�á�")
     (PROGN
       (PRINC (STRCAT "\\n>>>" MSG))
     )
     (PROGN
-      (PRINC "\\n>>>中途退出，图层及捕捉已恢复。")
+      (PRINC "\\n>>>��;�˳���ͼ�㼰��׽�ѻָ���")
     )
   )
   (PRINC)
 )
-(setq *LST-1TH* (LIST     (LIST "基础工具"
-        (LIST "绘制直线" "sbq0001" "MOYU_FF_YY" "FF")
-        (LIST "绘制矩形" "sbq0002" "MOYU_R_YY" "R")
-        (LIST "绘制椭圆" "sbq0003" "MOYU_FTY_YY" "FTY")
-        (LIST "绘多边形" "sbq0004" "MOYU_FDB_YY" "FDB")
-        (LIST "绘多段线" "sbq0005" "MOYU_FDD_YY" "FDD")
-        (LIST "移动工具" "sbq0006" "MOYU_W_YY" "W")
-        (LIST "偏移工具" "sbq0007" "MOYU_Q_YY" "Q")
-        (LIST "旋转工具" "sbq0008" "MOYU_RR_YY" "RR")
-        (LIST "镜像工具" "sbq0009" "MOYU_WR_YY" "WR")
-        (LIST "倒角工具" "sbq0010" "MOYU_CF_YY" "CF")
-        (LIST "定数等分" "sbq0011" "MOYU_DV_YY" "DV")
+(setq *LST-1TH* (LIST     (LIST "��������"
+        (LIST "����ֱ��" "sbq0001" "MOYU_FF_YY" "FF")
+        (LIST "���ƾ���" "sbq0002" "MOYU_R_YY" "R")
+        (LIST "������Բ" "sbq0003" "MOYU_FTY_YY" "FTY")
+        (LIST "������" "sbq0004" "MOYU_FDB_YY" "FDB")
+        (LIST "������" "sbq0005" "MOYU_FDD_YY" "FDD")
+        (LIST "�ƶ�����" "sbq0006" "MOYU_W_YY" "W")
+        (LIST "ƫ�ƹ���" "sbq0007" "MOYU_Q_YY" "Q")
+        (LIST "��ת����" "sbq0008" "MOYU_RR_YY" "RR")
+        (LIST "���񹤾�" "sbq0009" "MOYU_WR_YY" "WR")
+        (LIST "���ǹ���" "sbq0010" "MOYU_CF_YY" "CF")
+        (LIST "�����ȷ�" "sbq0011" "MOYU_DV_YY" "DV")
     )
-    (LIST "高级工具"
-        (LIST "复制旋转" "sbq0015" "MOYU_CCX_YY" "CCX")
-        (LIST "连续复制" "sbq0016" "MOYU_CCC_YY" "CCC")
-		(LIST "文字删重" "sbq0117" "MOYU_TC_YY" "TC")
-		(LIST "一键统计" "sbq0217" "MOYU_TH_YY" "TH")
-		(LIST "框选统计" "sbq0317" "MOYU_KH_YY" "KH")
-        (LIST "区域删除" "sbq0018" "MOYU_TRR_YY" "TRR")
-        (LIST "批量倒角" "sbq0019" "MOYU_FPL_YY" "FPL")
-        (LIST "区域内偏" "sbq0020" "MOYU_QXN_YY" "QXN")
+    (LIST "�߼�����"
+        (LIST "������ת" "sbq0015" "MOYU_CCX_YY" "CCX")
+        (LIST "��������" "sbq0016" "MOYU_CCC_YY" "CCC")
+		(LIST "����ɾ��" "sbq0117" "MOYU_TC_YY" "TC")
+		(LIST "һ��ͳ��" "sbq0217" "MOYU_TH_YY" "TH")
+		(LIST "��ѡͳ��" "sbq0317" "MOYU_KH_YY" "KH")
+        (LIST "����ɾ��" "sbq0018" "MOYU_TRR_YY" "TRR")
+        (LIST "��������" "sbq0019" "MOYU_FPL_YY" "FPL")
+        (LIST "������ƫ" "sbq0020" "MOYU_QXN_YY" "QXN")
     )
-    (LIST "标注工具"
-        (LIST "线性标注" "sbq0021" "MOYU_DA_YY" "DA")
-        (LIST "连续快注" "sbq0022" "MOYU_DC_YY" "DC")
-        (LIST "快速标注" "sbq0023" "MOYU_DD_YY" "DD")
-        (LIST "连续标注" "sbq0024" "MOYU_DLX_YY" "DLX")
-        (LIST "删除标注" "sbq0026" "MOYU_DSB_YY" "DSB")
-        (LIST "多重引线" "sbq0028" "MOYU_DZ_YY" "DZ")
-        (LIST "对齐标注" "sbq0029" "MOYU_DXB_YY" "DXB")
-        (LIST "角度标注" "sbq0030" "MOYU_DJD_YY" "DJD")
-        (LIST "半径标注" "sbq0031" "MOYU_DBJ_YY" "DBJ")
-        (LIST "直径标注" "sbq0032" "MOYU_DZJ_YY" "DZJ")
-        (LIST "弧长标注" "sbq0033" "MOYU_DHC_YY" "DHC")
-        (LIST "基线标注" "sbq0034" "MOYU_DJX_YY" "DJX")
+    (LIST "��ע����"
+        (LIST "���Ա�ע" "sbq0021" "MOYU_DA_YY" "DA")
+        (LIST "������ע" "sbq0022" "MOYU_DC_YY" "DC")
+        (LIST "���ٱ�ע" "sbq0023" "MOYU_DD_YY" "DD")
+        (LIST "������ע" "sbq0024" "MOYU_DLX_YY" "DLX")
+        (LIST "ɾ����ע" "sbq0026" "MOYU_DSB_YY" "DSB")
+        (LIST "��������" "sbq0028" "MOYU_DZ_YY" "DZ")
+        (LIST "�����ע" "sbq0029" "MOYU_DXB_YY" "DXB")
+        (LIST "�Ƕȱ�ע" "sbq0030" "MOYU_DJD_YY" "DJD")
+        (LIST "�뾶��ע" "sbq0031" "MOYU_DBJ_YY" "DBJ")
+        (LIST "ֱ����ע" "sbq0032" "MOYU_DZJ_YY" "DZJ")
+        (LIST "������ע" "sbq0033" "MOYU_DHC_YY" "DHC")
+        (LIST "���߱�ע" "sbq0034" "MOYU_DJX_YY" "DJX")
     )
-    (LIST "辅助工具"
-        (LIST "绘构造线" "sbq0035" "MOYU_XX_YY" "XX")
-        (LIST "横构造线" "sbq0036" "MOYU_XC_YY" "XC")
-        (LIST "竖构造线" "sbq0037" "MOYU_XZ_YY" "XZ")
-        (LIST "Z轴归零" "sbq0038" "MOYU_Z0_YY" "Z0")
-        (LIST "线改虚线" "sbq0039" "MOYU_FFX_YY" "FFX")
-        (LIST "批量页码" "sbq0040" "MOYU_YM_YY" "YM")
-        (LIST "置为最上" "sbq0041" "MOYU_ZZS_YY" "DZS")
-        (LIST "置为最底" "sbq0042" "MOYU_ZZX_YY" "DZX")
-        (LIST "格式刷" "sbq0043" "MOYU_ZZ_YY" "ZZ")
+    (LIST "��������"
+        (LIST "�湹����" "sbq0035" "MOYU_XX_YY" "XX")
+        (LIST "�ṹ����" "sbq0036" "MOYU_XC_YY" "XC")
+        (LIST "��������" "sbq0037" "MOYU_XZ_YY" "XZ")
+        (LIST "Z�����" "sbq0038" "MOYU_Z0_YY" "Z0")
+        (LIST "�߸�����" "sbq0039" "MOYU_FFX_YY" "FFX")
+        (LIST "����ҳ��" "sbq0040" "MOYU_YM_YY" "YM")
+        (LIST "��Ϊ����" "sbq0041" "MOYU_ZZS_YY" "DZS")
+        (LIST "��Ϊ���" "sbq0042" "MOYU_ZZX_YY" "DZX")
+        (LIST "��ʽˢ" "sbq0043" "MOYU_ZZ_YY" "ZZ")
     )
-    (LIST "图块文字"
-        (LIST "快速建块" "sbq0044" "MOYU_BB_YY" "BB")
-        (LIST "炸开图块" "sbq0045" "MOYU_BX_YY" "BX")
-        (LIST "图块统计" "sbq0046" "MOYU_BTJ_YY" "BTJ")
-        (LIST "改块基点" "sbq0047" "MOYU_BGD_YY" "BGD")
-        (LIST "按块全选" "sbq0048" "MOYU_BQS_YY" "BQS")
-        (LIST "图块改名" "sbq0049" "MOYU_BGM_YY" "BGM")
-        (LIST "文字替换" "sbq0050" "MOYU_TTH_YY" "TTH")
-        (LIST "单行转多" "sbq0051" "MOYU_TZD_YY" "TZD")
-        (LIST "超级改字" "sbq0052" "MOYU_TT_YY" "TT")
-        (LIST "批改字宽" "sbq0053" "MOYU_TZK_YY" "TZK")
+    (LIST "ͼ������"
+        (LIST "���ٽ���" "sbq0044" "MOYU_BB_YY" "BB")
+        (LIST "ը��ͼ��" "sbq0045" "MOYU_BX_YY" "BX")
+        (LIST "ͼ��ͳ��" "sbq0046" "MOYU_BTJ_YY" "BTJ")
+        (LIST "�Ŀ����" "sbq0047" "MOYU_BGD_YY" "BGD")
+        (LIST "����ȫѡ" "sbq0048" "MOYU_BQS_YY" "BQS")
+        (LIST "ͼ�����" "sbq0049" "MOYU_BGM_YY" "BGM")
+        (LIST "�����滻" "sbq0050" "MOYU_TTH_YY" "TTH")
+        (LIST "����ת��" "sbq0051" "MOYU_TZD_YY" "TZD")
+        (LIST "��������" "sbq0052" "MOYU_TT_YY" "TT")
+        (LIST "�����ֿ�" "sbq0053" "MOYU_TZK_YY" "TZK")
 		)
 		)
 )
@@ -9127,7 +9131,7 @@
 )
 (DEFUN EDIT_BOX_1TH (*LST-1TH*)
   (APPEND
-    (LIST "  agtckz1 : dialog{" "    label =\"自定义快捷键命令\" ;"
+    (LIST "  agtckz1 : dialog{" "    label =\"�Զ����ݼ�����\" ;"
 	  "    :row {"
     )
     (APPLY
@@ -9142,30 +9146,30 @@
 	  "            vertical_margin = none ;"
 	  "            fixed_width = true ;"
 	  "            key =\"onekeyset\" ;"
-	  "            label =\"快速设置\" ;" "            width = 14.2 ;"
+	  "            label =\"��������\" ;" "            width = 14.2 ;"
 	  "        }" "        :button {"
 	  "            horizontal_margin = none ;"
 	  "            vertical_margin = none ;"
 	  "            fixed_width = true ;"
 	  "            key =\"purgeall\" ;"
-	  "            label =\"全部清除\" ;" "            width = 14.2 ;"
+	  "            label =\"ȫ�����\" ;" "            width = 14.2 ;"
 	  "        }" "        :spacer {" "            width = 50 ;"
 	  "        }" "        :button {"
 	  "            horizontal_margin = none ;"
 	  "            vertical_margin = none ;"
 	  "            fixed_width = true ;" "            key =\"ok\" ;"
-	  "            label =\"确定\" ;" "            width = 10 ;"
+	  "            label =\"ȷ��\" ;" "            width = 10 ;"
 	  "        }" "        :button {"
 	  "            horizontal_margin = none ;"
 	  "            vertical_margin = none ;"
 	  "            fixed_width = true ;" "            key =\"find\" ;"
-	  "            label =\"主页\" ;" "            width = 10 ;"
+	  "            label =\"��ҳ\" ;" "            width = 10 ;"
 	  "        }" "        :button {"
 	  "            horizontal_margin = none ;"
 	  "            vertical_margin = none ;"
 	  "            fixed_width = true ;"
 	  "            is_cancel = true ;" "            key =\"cancle\" ;"
-	  "            label =\"关闭\" ;" "            width = 10 ;"
+	  "            label =\"�ر�\" ;" "            width = 10 ;"
 	  "        }" "    }" "}"
     )
   )
@@ -9207,7 +9211,7 @@
   (COND
     ((= DD 1001)
       (WRITE_TO_REGISTRY *LST-1TH*)
-      (ALERT "★提示：\n自定义快捷命令已设置成功！\n重新打开AutoCAD后，设置才会全部生效！")
+      (ALERT "����ʾ��\n�Զ��������������óɹ���\n���´�AutoCAD�����òŻ�ȫ����Ч��")
       (SBQ_QIDONG *LST-1TH*)
     )
     ((= DD 1002)
@@ -9391,14 +9395,14 @@
 (DEFUN WRITE_DCL_DQ (/ DCL_FILE FILE STR)
   (setq DCL_FILE (VL-FILENAME-MKTEMP nil nil ".Dcl"))
   (setq FILE (OPEN DCL_FILE "w"))
-  (FOREACH STR '("dq:dialog{" " label=\"实体对齐\";"
-     " :row{" "  :button{label=\" 左对齐 \";key=\"hl\";width=13;height=2.5;allow_accept=true;}"
-     "  :button{label=\"水平居中\";key=\"hm\";width=13;height=2.5;allow_accept=true;}" "  :button{label=\" 右对齐 \";key=\"hr\";width=13;height=2.5;allow_accept=true;}"
+  (FOREACH STR '("dq:dialog{" " label=\"ʵ�����\";"
+     " :row{" "  :button{label=\" ����� \";key=\"hl\";width=13;height=2.5;allow_accept=true;}"
+     "  :button{label=\"ˮƽ����\";key=\"hm\";width=13;height=2.5;allow_accept=true;}" "  :button{label=\" �Ҷ��� \";key=\"hr\";width=13;height=2.5;allow_accept=true;}"
      " }" " :row{"
-     "  :button{label=\" 上对齐 \";key=\"vt\";width=13;height=2.5;allow_accept=true;}" "  :button{label=\"垂直居中\";key=\"vm\";width=13;height=2.5;allow_accept=true;}"
-     "  :button{label=\" 下对齐 \";key=\"vd\";width=13;height=2.5;allow_accept=true;}"
+     "  :button{label=\" �϶��� \";key=\"vt\";width=13;height=2.5;allow_accept=true;}" "  :button{label=\"��ֱ����\";key=\"vm\";width=13;height=2.5;allow_accept=true;}"
+     "  :button{label=\" �¶��� \";key=\"vd\";width=13;height=2.5;allow_accept=true;}"
      " }"
-     "  :button{label=\" 关闭 \";key=\"cancel\";width=13;height=2.2;is_cancel=true;fixed_width=true;alignment=centered;}"
+     "  :button{label=\" �ر� \";key=\"cancel\";width=13;height=2.2;is_cancel=true;fixed_width=true;alignment=centered;}"
      "}"
     )
     (WRITE-LINE STR FILE)
@@ -9419,11 +9423,11 @@
 	(= (SSLENGTH SELOBJS) 1)
       )
     (PROGN
-      (PRINC "\n你必须选定两个或两个以上的对象")
+      (PRINC "\n�����ѡ���������������ϵĶ���")
     )
   )
   (INITGET 1)
-  (setq APNT (GETPOINT "\n选择对齐点："))
+  (setq APNT (GETPOINT "\nѡ�����㣺"))
   (setq APNT_X (CAR APNT))
   (setq APNT_Y (CADR APNT))
   (VL-LOAD-COM)

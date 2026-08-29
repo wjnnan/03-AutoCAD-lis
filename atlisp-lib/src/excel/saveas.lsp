@@ -1,5 +1,5 @@
 (defun excel:saveas (xlapp filename)
-  "鍙﹀瓨涓篹xcel鏂囦欢\n鍙傛暟:XLApp:宸叉墦寮�鐨別xcel鏂囦欢瀵硅薄\n鍙傛暟:Filename:鍙﹀瓨涓虹殑鏂囦欢璺緞"
+  "另存为excel文件\n参数:XLApp:已打开的excel文件对象\n参数:Filename:另存为的文件路径"
   (vlax-invoke (vlax-get-property xlapp "ActiveWorkbook")
     "SaveAs"
     filename))

@@ -1,9 +1,9 @@
 (defun block:insert (blkname path pt ang scale)
-  "æ’å…¥å—å‚ç…§ï¼Œå‚æ•°ï¼šblkname å—åï¼Œpath å—æ–‡ä»¶è·¯å¾„(ä»¥/ç»“å°¾,ä¸å«å—æ–‡ä»¶å)ï¼Œ pt æ’å…¥ç‚¹, ang æ—‹è½¬è§’åº¦ï¼Œscale æ¯”ä¾‹ã€‚"
-  "å—å®ä½“"
+  "²åÈë¿é²ÎÕÕ£¬²ÎÊı£ºblkname ¿éÃû£¬path ¿éÎÄ¼şÂ·¾¶(ÒÔ/½áÎ²,²»º¬¿éÎÄ¼şÃû)£¬ pt ²åÈëµã, ang Ğı×ª½Ç¶È£¬scale ±ÈÀı¡£"
+  "¿éÊµÌå"
   "(block:insert \"aa\" \"C:/design/\" (getpoint) 0 1)"
   (if (tblsearch "block" blkname)
-      ;; ä½¿ç”¨ ax æ–¹æ³•å¯ä»¥é¿å…å±æ€§å—çš„åŒæ­¥é—®é¢˜
+      ;; Ê¹ÓÃ ax ·½·¨¿ÉÒÔ±ÜÃâÊôĞÔ¿éµÄÍ¬²½ÎÊÌâ
       (progn
 	(if vla-insertblock
 	    (vla-insertblock

@@ -1,5 +1,5 @@
 (defun point:remove-duplicates (pts / lst)
-  "å»æ‰ç‚¹åˆ—è¡¨ä¸­çš„é‡å¤æˆ–è·ç¦»è¾ƒå°çš„çš„ç›¸é‚»ç‚¹"
+  "È¥µôµãÁĞ±íÖĞµÄÖØ¸´»ò¾àÀë½ÏĞ¡µÄµÄÏàÁÚµã"
   ""
   (setq lst (cons (car pts) nil))
   (foreach pt pts

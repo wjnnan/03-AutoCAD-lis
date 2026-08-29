@@ -1,5 +1,5 @@
 (defun p:string-listp (lst)
-  "鍒ゆ柇鏄惁涓哄瓧绗︿覆鍒楄〃"
+  "判断是否为字符串列表"
   (if (and lst
 	   (listp lst))
       (apply (quote and)

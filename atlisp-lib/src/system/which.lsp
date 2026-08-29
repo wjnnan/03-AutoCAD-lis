@@ -1,5 +1,5 @@
 (defun system:which (exename / res logfile)
-  "Ф÷╔Ф┴╬Е╝ Д╫█Е▐╞Ф┴╖Х║▄Ф√┤Д╩╤"
+  "╡Иур╤╗н╩©иж╢ппнд╪Ч"
   (progn
   (setq logfile (@::path-os(strcat @::*tmp-path* "pslog")))
   (@::cmd "shell" 

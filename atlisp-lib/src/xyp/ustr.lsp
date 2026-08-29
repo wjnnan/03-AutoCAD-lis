@@ -1,7 +1,7 @@
 (defun xyp:Ustr (bit msg def spflag / inp nval)
-  "å­—ç¬¦ä¸²è¾“å…¥æ ¼å¼åŒ–"
+  "×Ö·û´®ÊäÈë¸ñÊ½»¯"
   "string"
-  "(setq txt1 (Ustr 1 \"å­—ç¬¦ä¸²\" txt1 nil))"
+  "(setq txt1 (Ustr 1 \"×Ö·û´®\" txt1 nil))"
   (if (and def (/= def ""))
     (setq msg (strcat "\n" msg "<" def ">: ")
 	  inp (getstring msg spflag)

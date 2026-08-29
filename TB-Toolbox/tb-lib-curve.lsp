@@ -1,69 +1,69 @@
-;;; tb-lib-curve.lsp â€” æ›²çº¿æ“ä½œåº“
-;;; ç»Ÿä¸€å°è£… vlax-curve-* ç³»åˆ—å‡½æ•°ã€‚vlax-curve-* åœ¨ä¸‰ä¸ªå¹³å°å‡å¯ç”¨ã€‚
-;;; ä¾èµ–ï¼štb-core.lsp, tb-lib-point.lspï¼ˆéœ€å…ˆåŠ è½½ï¼‰
+;;; tb-lib-curve.lsp ¡ª ÇúÏß²Ù×÷¿â
+;;; Í³Ò»·â×° vlax-curve-* ÏµÁĞº¯Êı¡£vlax-curve-* ÔÚÈı¸öÆ½Ì¨¾ù¿ÉÓÃ¡£
+;;; ÒÀÀµ£ºtb-core.lsp, tb-lib-point.lsp£¨ĞèÏÈ¼ÓÔØ£©
 
 ;; ============================================================================
-;; å±æ€§æŸ¥è¯¢
+;; ÊôĞÔ²éÑ¯
 ;; ============================================================================
 
 (defun curve:length (ename)
-  "è·å–æ›²çº¿é•¿åº¦ã€‚æ”¯æŒ LINEã€ARCã€CIRCLEã€*POLYLINEã€SPLINE ç­‰ã€‚"
+  "»ñÈ¡ÇúÏß³¤¶È¡£Ö§³Ö LINE¡¢ARC¡¢CIRCLE¡¢*POLYLINE¡¢SPLINE µÈ¡£"
   (vlax-curve-getdistatparam ename (vlax-curve-getendparam ename)))
 
 (defun curve:area (ename / obj)
-  "è·å–æ›²çº¿é¢ç§¯ã€‚ä»…å¯¹é—­åˆå¤šæ®µçº¿/åœ†/æ¤­åœ†æœ‰æ„ä¹‰ã€‚
-AutoCAD/GStarCAD å…ˆæ£€æŸ¥é¢ç§¯å±æ€§ï¼›ZWCAD æ—  COM åˆ™ç›´æ¥è°ƒ vlax-curve-getareaã€‚"
+  "»ñÈ¡ÇúÏßÃæ»ı¡£½ö¶Ô±ÕºÏ¶à¶ÎÏß/Ô²/ÍÖÔ²ÓĞÒâÒå¡£
+AutoCAD/GStarCAD ÏÈ¼ì²éÃæ»ıÊôĞÔ£»ZWCAD ÎŞ COM ÔòÖ±½Óµ÷ vlax-curve-getarea¡£"
   (if (null ename) 0.0
     (if *SYS:HAS-ACTIVEX*
     (progn
       (setq obj (vl-catch-all-apply 'vlax-ename->vla-object (list ename)))
       (if (and (not (vl-catch-all-error-p obj))
                (vlax-property-available-p obj 'area))
-        (vlax-curve-getarea ename)
+        (vla-get-area obj)
         0.0))
-    (or (vlax-curve-getarea ename) 0.0)))
+    (or (vlax-curve-getarea ename) 0.0))))
 
 (defun curve:startpt (ename)
-  "è·å–æ›²çº¿èµ·ç‚¹ã€‚"
+  "»ñÈ¡ÇúÏßÆğµã¡£"
   (vlax-curve-getstartpoint ename))
 
 (defun curve:endpt (ename)
-  "è·å–æ›²çº¿ç»ˆç‚¹ã€‚"
+  "»ñÈ¡ÇúÏßÖÕµã¡£"
   (vlax-curve-getendpoint ename))
 
 (defun curve:midpt (ename)
-  "è·å–æ›²çº¿ä¸­ç‚¹ï¼ˆæŒ‰å‚æ•°ä¸­ç‚¹è®¡ç®—ï¼Œéå‡ ä½•ä¸­ç‚¹ï¼‰ã€‚"
+  "»ñÈ¡ÇúÏßÖĞµã£¨°´²ÎÊıÖĞµã¼ÆËã£¬·Ç¼¸ºÎÖĞµã£©¡£"
   (vlax-curve-getpointatdist ename
     (* 0.5 (curve:length ename))))
 
 
 ;; ============================================================================
-;; å‚æ•°ä¸ç‚¹äº’è½¬
+;; ²ÎÊıÓëµã»¥×ª
 ;; ============================================================================
 
 (defun curve:param-at-pt (ename pt)
-  "è·å–æ›²çº¿ä¸Šç‚¹ pt å¯¹åº”çš„å‚æ•°å€¼ã€‚pt åº”å°½å¯èƒ½åœ¨æ›²çº¿ä¸Šã€‚"
+  "»ñÈ¡ÇúÏßÉÏµã pt ¶ÔÓ¦µÄ²ÎÊıÖµ¡£pt Ó¦¾¡¿ÉÄÜÔÚÇúÏßÉÏ¡£"
   (vlax-curve-getparamatpoint ename pt))
 
 (defun curve:pt-at-param (ename param)
-  "æ ¹æ®å‚æ•°å€¼è·å–æ›²çº¿ä¸Šå¯¹åº”ç‚¹ã€‚"
+  "¸ù¾İ²ÎÊıÖµ»ñÈ¡ÇúÏßÉÏ¶ÔÓ¦µã¡£"
   (vlax-curve-getpointatparam ename param))
 
 (defun curve:pt-at-dist (ename dist)
-  "è·å–æ›²çº¿ä¸Šè·èµ·ç‚¹æŒ‡å®šè·ç¦»çš„ç‚¹ã€‚"
+  "»ñÈ¡ÇúÏßÉÏ¾àÆğµãÖ¸¶¨¾àÀëµÄµã¡£"
   (vlax-curve-getpointatdist ename dist))
 
 
 ;; ============================================================================
-;; å‡ ä½•è®¡ç®—
+;; ¼¸ºÎ¼ÆËã
 ;; ============================================================================
 
 (defun curve:closest-pt (ename pt)
-  "æ±‚æ›²çº¿ä¸Šç¦» pt æœ€è¿‘çš„ç‚¹ã€‚"
+  "ÇóÇúÏßÉÏÀë pt ×î½üµÄµã¡£"
   (vlax-curve-getclosestpointto ename pt))
 
 (defun curve:tangent (ename pt)
-  "è·å–æ›²çº¿ä¸Š pt å¤„çš„åˆ‡çº¿æ–¹å‘è§’ï¼ˆå¼§åº¦ï¼‰ã€‚"
+  "»ñÈ¡ÇúÏßÉÏ pt ´¦µÄÇĞÏß·½Ïò½Ç£¨»¡¶È£©¡£"
   (angle '(0 0 0)
     (vlax-curve-getfirstderiv ename
       (vlax-curve-getparamatpoint ename
@@ -71,16 +71,16 @@ AutoCAD/GStarCAD å…ˆæ£€æŸ¥é¢ç§¯å±æ€§ï¼›ZWCAD æ—  COM åˆ™ç›´æ¥è°ƒ vlax-curve-g
 
 
 ;; ============================================================================
-;; åˆ¤æ–­
+;; ÅĞ¶Ï
 ;; ============================================================================
 
 (defun curve:closed? (ename)
-  "åˆ¤æ–­æ›²çº¿æ˜¯å¦é—­åˆã€‚"
+  "ÅĞ¶ÏÇúÏßÊÇ·ñ±ÕºÏ¡£"
   (vlax-curve-isclosed ename))
 
 (defun curve:clockwise? (pts / sum)
-  "åˆ¤æ–­ç‚¹é›†æ–¹å‘ã€‚T = é¡ºæ—¶é’ˆï¼Œnil = é€†æ—¶é’ˆã€‚
-ä½¿ç”¨å‰ç§¯æ³•ï¼ˆShoelace å…¬å¼å˜ä½“ï¼‰ã€‚"
+  "ÅĞ¶Ïµã¼¯·½Ïò¡£T = Ë³Ê±Õë£¬nil = ÄæÊ±Õë¡£
+Ê¹ÓÃ²æ»ı·¨£¨Shoelace ¹«Ê½±äÌå£©¡£"
   (setq sum 0.0)
     (mapcar '(lambda (a b)
               (setq sum (+ sum (* (- (car b) (car a)) (+ (cadr b) (cadr a))))))
@@ -90,14 +90,14 @@ AutoCAD/GStarCAD å…ˆæ£€æŸ¥é¢ç§¯å±æ€§ï¼›ZWCAD æ—  COM åˆ™ç›´æ¥è°ƒ vlax-curve-g
 
 
 ;; ============================================================================
-;; é¡¶ç‚¹æ“ä½œ
+;; ¶¥µã²Ù×÷
 ;; ============================================================================
 
 (defun curve:vertices (ename / typ obj pts n)
-  "è·å–æ›²çº¿çš„æ‰€æœ‰é¡¶ç‚¹ã€‚è¿”å›ç‚¹è¡¨ã€‚
-LWPOLYLINE: ä» DXF ç»„ç  10 è¯»å–ï¼ˆæœ€å¿«ï¼‰ã€‚
-POLYLINE: éå†å­å®ä½“ã€‚
-å…¶ä»–æ›²çº¿: å–èµ·ç‚¹ç»ˆç‚¹ã€‚"
+  "»ñÈ¡ÇúÏßµÄËùÓĞ¶¥µã¡£·µ»Øµã±í¡£
+LWPOLYLINE: ´Ó DXF ×éÂë 10 ¶ÁÈ¡£¨×î¿ì£©¡£
+POLYLINE: ±éÀú×ÓÊµÌå¡£
+ÆäËûÇúÏß: È¡ÆğµãÖÕµã¡£"
   (if (null ename)
     nil
     (progn
@@ -105,7 +105,7 @@ POLYLINE: éå†å­å®ä½“ã€‚
       (if (null typ)
         nil
         (cond
-          ;; ä¼˜åŒ–å¤šæ®µçº¿ï¼šç›´æ¥ä» DXF è¯»å–
+          ;; ÓÅ»¯¶à¶ÎÏß£ºÖ±½Ó´Ó DXF ¶ÁÈ¡
     ((= typ "LWPOLYLINE")
      (setq pts nil
            obj (entget ename))
@@ -113,7 +113,7 @@ POLYLINE: éå†å­å®ä½“ã€‚
        (if (= (car pair) 10)
          (setq pts (append pts (list (cdr pair))))))
      pts)
-    ;; ä¼ ç»Ÿå¤šæ®µçº¿ï¼šéå†å­å›¾å…ƒ
+    ;; ´«Í³¶à¶ÎÏß£º±éÀú×ÓÍ¼Ôª
     ((= typ "POLYLINE")
      (setq pts nil
            n  ename)
@@ -123,19 +123,19 @@ POLYLINE: éå†å­å®ä½“ã€‚
          (setq pts (append pts
            (list (cdr (assoc 10 (entget n))))))))
      pts)
-    ;; å…¶ä»–æ›²çº¿ï¼šèµ·ç‚¹+ç»ˆç‚¹
+    ;; ÆäËûÇúÏß£ºÆğµã+ÖÕµã
     (t (list (curve:startpt ename) (curve:endpt ename))))))))
 
 
 ;; ============================================================================
-;; çº¿æ®µç›¸äº¤ï¼ˆçº¯ Lispï¼Œä¸ä¾èµ– ActiveXï¼‰
+;; Ïß¶ÎÏà½»£¨´¿ Lisp£¬²»ÒÀÀµ ActiveX£©
 ;; ============================================================================
 
 (defun curve:inters-lines (p1 p2 p3 p4)
-  "è®¡ç®—ä¸¤æ¡çº¿æ®µ p1-p2 å’Œ p3-p4 çš„äº¤ç‚¹ã€‚
-onseg=T ç¡®ä¿äº¤ç‚¹å¿…é¡»åœ¨çº¿æ®µä¸Šï¼ˆéæ— é™å»¶é•¿çº¿ï¼‰ã€‚"
+  "¼ÆËãÁ½ÌõÏß¶Î p1-p2 ºÍ p3-p4 µÄ½»µã¡£
+onseg=T È·±£½»µã±ØĞëÔÚÏß¶ÎÉÏ£¨·ÇÎŞÏŞÑÓ³¤Ïß£©¡£"
   (inters p1 p2 p3 p4 T))
 
 
-(princ "\n[TB] æ›²çº¿æ“ä½œåº“åŠ è½½å®Œæˆ (curve:*)")
+(princ "\n[TB] ÇúÏß²Ù×÷¿â¼ÓÔØÍê³É (curve:*)")
 (princ)

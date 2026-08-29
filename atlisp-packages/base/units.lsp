@@ -1,18 +1,18 @@
 (setq @:*units*
       '("m" "kg" "s" "h" "A" "K" "mol" "cd"
-	"mÂ²" "mÂ³" "mÂ³/mol" "mÂ³/kg" "Hz"
-	"kg/mÂ³" "kg/mol" "m/s"  "rad/s" "N"
-	"Pa" "N/m" "NÂ·s"  "J" "NÂ·m"  "J/mol"
-	"W""J/s""J/K" "J/(molÂ·K)" "J/(kgÂ·K)"
-	"NÂ·s/mÂ²" "W/(mÂ·K)"  "mÂ²/s"
-	"C" "V" "Î©"
+	"m^2" "m^3" "m^3/mol" "m^3/kg" "Hz"
+	"kg/m^3" "kg/mol" "m/s"  "rad/s" "N"
+	"Pa" "N/m" "N¡¤s"  "J" "N¡¤m"  "J/mol"
+	"W""J/s""J/K" "J/(mol¡¤K)" "J/(kg¡¤K)"
+	"N¡¤s/m^2" "W/(m¡¤K)"  "m^2/s"
+	"C" "V" "¦¸"
 	"m"  "mm""cm" "dm""km"
 	"g""mg"
 	"k""M"
 	"kN""MPa""kPa"
-	"dB" "â„ƒ" "ppm" "äºº"
-	"Â²" "Â³" "Âµ" "/""Â·""("")"
-	"W/mÂ²Â·K""â„‰""Bq""lx""lm""S""H""Wb""T""F""W"
+	"dB" "¡æ" "ppm" "ÈË"
+	"^2" "^3" "u" "/""¡¤""("")"
+	"W/m^2¡¤K""¨H""Bq""lx""lm""S""H""Wb""T""F""W"
 	))
-;; Â²Â³Âµ/Â·
+;; ^2^3u/¡¤
 

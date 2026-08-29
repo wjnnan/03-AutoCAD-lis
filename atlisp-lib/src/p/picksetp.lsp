@@ -1,5 +1,5 @@
 (defun p:picksetp (ss)
-  "åˆ¤æ–­æ˜¯å¦éžç©ºé€‰æ‹©é›†"
+  "ÅÐ¶ÏÊÇ·ñ·Ç¿ÕÑ¡Ôñ¼¯"
   (and (= (type ss)
       (quote pickset))
     (> (sslength ss)

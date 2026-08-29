@@ -1,11 +1,11 @@
 (defun example:dcl-progressbar (/ dcl-fp dcl-tmp valuebar)
-  "MVCNIS æ³•ç¤ºä¾‹6: 6 æ­¥è¿›è¡ŒåŠ¨æ€ DCL å¼€å‘ä¹‹è¿›åº¦æ¡"
+  "MVCNIS ·¨Ê¾Àı6: 6 ²½½øĞĞ¶¯Ì¬ DCL ¿ª·¢Ö®½ø¶ÈÌõ"
   ""
   ""
   (require (quote dcl:*))
-  "1. Model å»ºç«‹æ•°æ®æ¨¡å‹ã€‚"
+  "1. Model ½¨Á¢Êı¾İÄ£ĞÍ¡£"
   (setq value-bar 0.3)
-  "2. View å»ºç«‹æ˜¾ç¤ºè§†å›¾ã€‚"
+  "2. View ½¨Á¢ÏÔÊ¾ÊÓÍ¼¡£"
   (dcl:dialog "example")
   (progn (dcl:progressbar "pbar1"
       "width=30;fixed_width=true;"
@@ -13,14 +13,14 @@
     (dcl:begin-cluster "row"
       "")
     (progn (dcl:button "btn1"
-        "è¿›åº¦-"
+        "½ø¶È-"
         "")
       (dcl:button "btn2"
-        "è¿›åº¦+"
+        "½ø¶È+"
         "")
       (dcl:end-cluster)))
   (dcl:dialog-end-ok-cancel)
-  "3. Control åˆ›å»ºæ§åˆ¶æµç¨‹"
+  "3. Control ´´½¨¿ØÖÆÁ÷³Ì"
   (defun chg-bar (step)
     (setq value-bar (+ value-bar step))
     (if (> value-bar 1)
@@ -32,13 +32,13 @@
       (chg-bar -0.1)))
   (defun cb-btn2 nil (dcl:set-progressbar "pbar1"
       (chg-bar 0.1)))
-  "4. New ä¸€ä¸ªæ–°å¯¹è¯æ¡†å¯¹è±¡ã€‚"
+  "4. New Ò»¸öĞÂ¶Ô»°¿ò¶ÔÏó¡£"
   (dcl:new "example")
-  "5. Init åˆå§‹åŒ–å¯¹è¯æ¡†"
+  "5. Init ³õÊ¼»¯¶Ô»°¿ò"
   (set_tile "title"
-    "dcl-è¿›åº¦æ¡ç¤ºä¾‹")
+    "dcl-½ø¶ÈÌõÊ¾Àı")
   (dcl:set-progressbar "pbar1"
     value-bar)
-  "6. Show dialog æ˜¾ç¤ºå¹¶è¿›è¡Œäº¤äº’"
+  "6. Show dialog ÏÔÊ¾²¢½øĞĞ½»»¥"
   (dcl:show)
   (princ))

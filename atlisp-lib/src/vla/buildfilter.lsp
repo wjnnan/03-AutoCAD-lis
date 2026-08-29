@@ -1,6 +1,6 @@
 (defun vla:buildfilter (filter)
-    "鏋勫缓variant鍒楄〃\n鍙傛暟锛歕nfilter:鐐瑰鍒楄〃"
-    "variant鍒楄〃"
+    "构建variant列表\n参数：\nfilter:点对列表"
+    "variant列表"
     "(vla:buildfilter '((1 . \"123\")(2 . \"4556\")))"
     (vl-load-com)
     (mapcar (quote (lambda (lst typ)

@@ -1,5 +1,5 @@
 (defun string:intp (str)
-  "纭畾瀛楃涓叉槸鍚︿负鏁存暟"
+  "确定字符串是否为整数"
   (and (string:numberp str)
     (not (or (= "."
           (substr str 1 1))

@@ -1,6 +1,6 @@
 (defun system:winget ()
-  "鏃╂湡鐨剋in10娌℃湁winget,杩欎釜鍑芥暟鐢ㄤ簬瀹夎winget"
-  ;;鏈湴閮ㄧ讲
+  "早期的win10没有winget,这个函数用于安装winget"
+  ;;本地部署
   (setq ps1 (list
 "if (-not ( Get-Command winget -errorAction SilentlyContinue)) {"
 "    Add-AppxPackage -RegisterByFamilyName -MainPackage Microsoft.DesktopAppInstaller_8wekyb3d8bbwe"

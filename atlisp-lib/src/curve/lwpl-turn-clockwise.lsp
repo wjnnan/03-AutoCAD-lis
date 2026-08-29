@@ -1,6 +1,6 @@
 (defun curve:lwpl-turn-clockwise (ent / pts convexity)
-  "åè½¬å¤šæ®µçº¿ï¼Œè°ƒæ•´é¡ºæ—¶é’ˆæˆ–é€†æ—¶é’ˆæ–¹å‘ã€‚"
-  "æ–°å¤šæ®µçº¿å›¾å…ƒ"
+  "·´×ª¶à¶ÎÏß£¬µ÷ÕûË³Ê±Õë»òÄæÊ±Õë·½Ïò¡£"
+  "ÐÂ¶à¶ÎÏßÍ¼Ôª"
   (setq pts (curve:pline-3dpoints ent))
   (setq convexity (curve:pline-convexity ent))
   (if (> (length pts)

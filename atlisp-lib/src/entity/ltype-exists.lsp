@@ -1,6 +1,6 @@
 (defun entity:ltype-exists (strltype)
-  "çº¿å‹æ˜¯å¦å­˜åœ¨?\nå‚æ•°:\nstrLtype:çº¿å‹å"
-  "æˆåŠŸè¿”å›tï¼Œå¤±è´¥è¿”å›nil"
+  "ÏßĞÍÊÇ·ñ´æÔÚ?\n²ÎÊı:\nstrLtype:ÏßĞÍÃû"
+  "³É¹¦·µ»Øt£¬Ê§°Ü·µ»Ønil"
   "(entity:Ltype-Exists \"continuous\")"
   (and (member (strcase strltype)
       (mapcar (quote strcase)

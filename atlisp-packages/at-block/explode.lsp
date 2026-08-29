@@ -14,15 +14,15 @@
 		(setq ent-sf (entity:getdxf (entity:getdxf (entity:getdxf blkref 360) 360)360)) 290))
 	    (setq flag-out t)
 	    (setq flag-out nil))
-	;; ç‚¸å¼€åçš„å—å›¾å…ƒ ents-x
+	;; Õ¨¿ªºóµÄ¿éÍ¼Ôª ents-x
 	(setq objs-x (list:flatten (@block:explode-chain blkref)))
 	(mapcar 'vla-update objs-x)
 	(setq ents-x (mapcar 'o2e objs-x))
 	;;(princ "abc")
-	;; ç‚¸åˆ°åº•
-	;; åˆ é™¤åŸå—å¼•ç”¨
+	;; Õ¨µ½µ×
+	;; É¾³ıÔ­¿éÒıÓÃ
 	;; (vla-delete (e2o blkref))
-	;;ç»˜åˆ¶å‰ªè£èŒƒå›´æ¡†ï¼Œç”¨äºäººå·¥æ ¸æŸ¥
+	;;»æÖÆ¼ô²Ã·¶Î§¿ò£¬ÓÃÓÚÈË¹¤ºË²é
 	(setq border
 	      (entity:putdxf 
 	       (entity:make-lwpolyline
@@ -37,23 +37,23 @@
 	    (setq offset-value (* -1 offset-value)))
 	(setq obj-trim (vl-catch-all-apply '(lambda nil (car (vlax-safearray->list (vlax-variant-value (vla-offset (e2o border) offset-value))))) '()))
 	(if (or (vl-catch-all-error-p obj-trim) (null obj-trim))
-	  (progn (princ "\né”™è¯¯: æ— æ³•åç§»å‰ªè£è¾¹ç•Œã€‚") (pop-var) (quit)))
+	  (progn (princ "\n´íÎó: ÎŞ·¨Æ«ÒÆ¼ô²Ã±ß½ç¡£") (pop-var) (quit)))
 	
 	(setq pts-trim (curve:get-points (o2e obj-trim)))
 	(setq pts-trim (append pts-trim (list (car pts-trim))))
 	(vla-delete obj-trim)
-	;; å–å‰ªè£èŒƒå›´çš„å›¾å…ƒ
+	;; È¡¼ô²Ã·¶Î§µÄÍ¼Ôª
 	(if flag-out
 	    (progn
 	      (setq ents-in (pickset:to-list (ssget "wp" pts)))
-	      ;; å»æ‰åœ¨èŒƒå›´å†…çš„å›¾å…ƒ
+	      ;; È¥µôÔÚ·¶Î§ÄÚµÄÍ¼Ôª
 	      (mapcar '(lambda(x)
 			(if (member x ents-in)
 			    (entdel x)))
 		      ents-x))
 	    (progn
 	      (setq ents-in (pickset:to-list (ssget "cp" pts)))
-	      ;; å»æ‰ä¸åœ¨èŒƒå›´å†…çš„å›¾å…ƒ
+	      ;; È¥µô²»ÔÚ·¶Î§ÄÚµÄÍ¼Ôª
 	      (mapcar '(lambda(x)
 			(if (not(member x ents-in))
 			    (entdel x)))
@@ -71,7 +71,7 @@
   )
  
 (defun @block:menu-explode-cliped ()
-  (@::prompt "ç‚¸å¼€å‰ªè£å—")
+  (@::prompt "Õ¨¿ª¼ô²Ã¿é")
   (mapcar '@block:explode-cliped
 	  (pickset:to-list (ssget '((0 . "insert")))))
 

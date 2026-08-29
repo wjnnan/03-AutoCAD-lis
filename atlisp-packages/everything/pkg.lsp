@@ -7,6 +7,6 @@
         (:CATEGORY . "APP")
         (:REQUIRED . "base")
         (:OPENSOURCE . 0)
-        (:DESCRIPTION . "基于名称快速定位文件和文件夹。")
+        (:DESCRIPTION . "�������ƿ��ٶ�λ�ļ����ļ��С�")
         (:URL . "http://atlisp.cn")
         (:FILES "everything")))

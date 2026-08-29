@@ -1,5 +1,5 @@
 (defun matrix:transform (translation scale rotation pt)
-  "鍧愭爣鍙樻崲鍏紡A'=TSRA"
+  "坐标变换公式A'=TSRA"
   (matrix:mxp translation
 	      (matrix:mxp scale
 			 (matrix:mxp rotation

@@ -1,44 +1,44 @@
 (defun example:error-exit (para / *error*)
-  "函数错误处理方案示例 *error* 定义私有函数，隔绝公共域 *error* ，使之不用重定义。\n参数 para .为 t 时执行正常流程，为 nil 时，执行错误处理流程。"
+  "��������������ʾ�� *error* ����˽�к��������������� *error* ��ʹ֮�����ض��塣\n���� para .Ϊ t ʱִ���������̣�Ϊ nil ʱ��ִ�д��������̡�"
   ""
   "(example:error-exit nil)"
   (defun *error* (msg)
-    "当异常退出时，正常流程没有关闭文件指针，在这里关闭"
+    "���쳣�˳�ʱ����������û�йر��ļ�ָ�룬������ر�"
     (if (= (quote file)
         (type fp))
-      (progn (princ "关闭出错时的文件句本柄。\n")
+      (progn (princ "�رճ���ʱ���ļ��䱾����\n")
         (close fp)))
-    (princ "当异常退出时，设置的变量没有恢复，在这里恢复")
+    (princ "���쳣�˳�ʱ�����õı���û�лָ���������ָ�")
     (pop-var)
-    (princ "显示恢复的变量值：")
+    (princ "��ʾ�ָ��ı���ֵ��")
     (princ (getvar "osmode"))
     (princ "\n")
-    "以上为你专用的处理过程"
-    "下面是 @lisp 常用错误处理过程"
+    "����Ϊ��ר�õĴ�������"
+    "������ @lisp ���ô���������"
     (@:*error* msg)
     (princ))
-  "设置当前运行的函数名，当出错时给出信息。"
+  "���õ�ǰ���еĺ�������������ʱ������Ϣ��"
   (setq *funname* (quote example:error-exit))
-  (princ "显示变量原值：")
+  (princ "��ʾ����ԭֵ��")
   (princ (getvar "osmode"))
   (princ "\n")
   (push-var)
-  "修改变量"
+  "�޸ı���"
   (setvar "osmode"
     0)
-  (princ "显示修改后的变量值：")
+  (princ "��ʾ�޸ĺ�ı���ֵ��")
   (princ (getvar "osmode"))
   (princ "\n")
   (setq fp (open (findfile "acad.pgp")
       "r"))
   (read-line fp)
   (if (null para)
-    (progn "这是一个未定义的函数。在这里异常退出."
+    (progn "����һ��δ����ĺ������������쳣�˳�."
       (mmma)))
-  (princ "正常的流程,关闭文件句柄，恢复变量。")
+  (princ "����������,�ر��ļ�������ָ�������")
   (close fp)
   (pop-var)
-  (princ "显示恢复的变量值：")
+  (princ "��ʾ�ָ��ı���ֵ��")
   (princ (getvar "osmode"))
   (princ "\n")
   (princ))

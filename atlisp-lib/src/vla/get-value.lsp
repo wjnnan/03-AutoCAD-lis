@@ -1,6 +1,6 @@
 (defun vla:get-value (var)
-  "å˜ä½“é‡Œå–å€¼.å‚æ•° var:å˜ä½“æˆ–è€…æ•°ç»„"
-  "æ•°æ®åˆ—è¡¨"
+  "±äÌåÀïÈ¡Öµ.²ÎÊı var:±äÌå»òÕßÊı×é"
+  "Êı¾İÁĞ±í"
   "(vla:get-value var)"
   (cond ((listp var)
       (mapcar (quote vla:get-value)

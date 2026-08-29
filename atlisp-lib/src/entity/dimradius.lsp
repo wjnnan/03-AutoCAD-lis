@@ -1,6 +1,6 @@
 (defun entity:dimradius (pt-cen pt-r)
-  "ç”ŸæˆåŠå¾„æ ‡æ³¨"
-  "return:æ ‡æ³¨å›¾å…ƒå"
+  "Éú³É°ë¾¶±ê×¢"
+  "return:±ê×¢Í¼ÔªÃû"
   "example:(entity:dimradius (getpoint)
     (getpoint))"
   (entmakex (list (quote (0 . "DIMENSION"))

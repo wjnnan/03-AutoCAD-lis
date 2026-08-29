@@ -1,6 +1,6 @@
 (defun pickset:ptx (sel n / ptlist)
-  "å–é€‰æ‹©é›†4è§’ç‚¹åæ ‡çš„ç¬¬nä¸ªï¼Œå·¦ä¸‹ 0 å³ä¸‹ 1 å³ä¸Š 2 å·¦ä¸Š 3"
-  "ç¬¬nä¸ªè§’ç‚¹åæ ‡"
+  "È¡Ñ¡Ôñ¼¯4½Çµã×ø±êµÄµÚn¸ö£¬×óÏÂ 0 ÓÒÏÂ 1 ÓÒÉÏ 2 ×óÉÏ 3"
+  "µÚn¸ö½Çµã×ø±ê"
   "(pickset:ptx sel 0)"
   (setq ptlist (pickset:getbox sel 0))
   (nth n (point:rec-2pt->4pt (car ptlist)

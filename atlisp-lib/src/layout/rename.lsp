@@ -1,8 +1,8 @@
 (defun layout:rename (str-oldname str-newname / lst-name)
-  "閲嶅懡鍚嶅竷灞�鍚嶇О"
+  "重命名布局名称"
   ""
-  "(layout:rename \"甯冨眬1\"
-    \"鎴戠殑甯冨眬\")"
+  "(layout:rename \"布局1\"
+    \"我的布局\")"
   (setq lst-name (mapcar (quote vla-get-name)
       (layout:vla-list)))
   (if (and (member str-oldname lst-name)

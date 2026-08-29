@@ -1,6 +1,6 @@
 (defun list:replace-index (oldlst index item)
-    "æŒ‰ç´¢å¼•æ›¿æ¢åˆ—è¡¨"
-    "æ›¿æ¢åçš„åˆ—è¡¨"
+    "°´Ë÷ÒıÌæ»»ÁĞ±í"
+    "Ìæ»»ºóµÄÁĞ±í"
     "(list:reeplace-index '(0 1 2 3)
         1 5)"
     (if (zerop index)

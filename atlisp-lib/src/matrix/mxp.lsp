@@ -1,6 +1,6 @@
 (defun matrix:mxp (m p)
-  "å¯¹ç‚¹çš„åæ ‡è¿›è¡ŒçŸ©é˜µå˜æ¢"
-  "å˜æ¢åçš„3Dç‚¹åæ ‡"
+  "¶ÔµãµÄ×ø±ê½øĞĞ¾ØÕó±ä»»"
+  "±ä»»ºóµÄ3Dµã×ø±ê"
   (if (= 2 (length p))
       (setq p (append p (list 0))))
   (reverse (cdr (reverse (matrix:mxv m (append p (list 1.0)))))))

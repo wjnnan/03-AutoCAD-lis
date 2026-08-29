@@ -1,5 +1,5 @@
 (defun at-dim:area ()
-  (@::help "æ ‡æ³¨åŒºåŸŸçš„é¢ç§¯å€¼")
+  (@::help "±ê×¢ÇøÓòµÄÃæ»ıÖµ")
   (setq lwpls (pickset:to-list (ssget '((0 . "lwpolyline")(70 . 1)))))
   (mapcar
    (function

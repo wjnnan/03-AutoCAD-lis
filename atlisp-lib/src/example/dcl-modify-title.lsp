@@ -1,5 +1,5 @@
 (defun example:dcl-modify-title (/ *error* make-dcl dcl-tmp dcl-id)
-  "dclæ”¹æ ‡é¢˜ç¤ºä¾‹"
+  "dcl¸Ä±êÌâÊ¾Àı"
   ""
   "(require 'example:dcl-modify-title)(example:dcl-modify-title)"
   (defun *error* (msg)
@@ -8,7 +8,7 @@
     (setq lst_str (quote (""
           "test:dialog {"
           "
-             value=\"åˆå§‹æ ‡é¢˜\";"
+             value=\"³õÊ¼±êÌâ\";"
           "
              key = \"test\"
           ;"
@@ -18,7 +18,7 @@
                  key = \"title\"
           ;"
           "
-                 label = \"æ ‡é¢˜:\"
+                 label = \"±êÌâ:\"
           ;"
           "
              }"
@@ -28,7 +28,7 @@
                  key = \"modify\"
           ;"
           "
-                 label = \"æ›´æ”¹\"
+                 label = \"¸ü¸Ä\"
           ;"
           "
              }"

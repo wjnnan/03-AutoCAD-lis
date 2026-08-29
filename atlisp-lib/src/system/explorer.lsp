@@ -1,4 +1,4 @@
 (defun system:explorer (dir-path)
-  "鍦ㄨ祫婧愮鐞嗗櫒涓墦寮�鎸囧畾鐨勬枃浠跺す"
+  "在资源管理器中打开指定的文件夹"
   (startapp (strcat "explorer /e,\""(@::path-os dir-path)"\""))
   (princ))

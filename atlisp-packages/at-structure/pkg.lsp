@@ -1,13 +1,13 @@
 (@::def-pkg '((:NAME . "at-structure")
-        (:FULL-NAME . "@lispç»“æ„å·¥å…·")
+        (:FULL-NAME . "@lisp½á¹¹¹¤¾ß")
         (:AUTHOR . "VitalGG")
         (:EMAIL . "vitalgg@gmail.com")
         (:VERSION . "0.0.18")
         (:LOCALE . "CHS")
-        (:CATEGORY . "ç»“æ„")
+        (:CATEGORY . "½á¹¹")
         (:REQUIRED . "base")
         (:OPENSOURCE . 0)
-        (:DESCRIPTION . "ç»“æ„ç»˜å›¾å·¥å…·ï¼ŒæŸ¥é’¢ç­‹é¢ç§¯ç­‰ã€‚")
+        (:DESCRIPTION . "½á¹¹»æÍ¼¹¤¾ß£¬²é¸Ö½îÃæ»ıµÈ¡£")
         (:URL . "http://atlisp.cn")
         (:FILES "at-structure"
             "concrete"

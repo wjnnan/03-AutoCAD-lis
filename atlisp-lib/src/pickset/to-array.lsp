@@ -1,6 +1,6 @@
 (defun pickset:to-array (ss)
-  "é€‰æ‹©é›†->æ•°"
-  "æ•°ç»„"
+  "Ñ¡Ôñ¼¯->Êý"
+  "Êý×é"
   "(pickset->Array (ssget))"
   (if ss (vla:list->array (pickset:to-vlalist ss)
 			  9)

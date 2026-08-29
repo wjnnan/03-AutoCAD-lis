@@ -1,5 +1,5 @@
 (defun list:same-num (lst / l2 tmp)
-    "è¡¨ä¸­ç›¸åŒå…ƒç´ åŠæ•°é‡"
+    "±íÖĞÏàÍ¬ÔªËØ¼°ÊıÁ¿"
     (while (setq tmp (vl-remove (car lst)
                 lst)
             l2 (if (member (car lst)

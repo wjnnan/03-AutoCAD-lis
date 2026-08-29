@@ -179,12 +179,12 @@
   
   (foreach v vm (if (> (cadr v) bc) (setq bc (cadr v) bv (list (caddr v) (cadddr v)))))
   
-  ;; â˜… å–æ¶ˆæ‰€æœ‰æ‰‹å‹•è¼¸å…¥ï¼å…¨è‡ªå‹•åˆ¤æ–·ä½ç§»é‡
+  ;; ¡ï È¡ÏûËùÓĞÊÖ„Óİ”Èë£¡È«×Ô„ÓÅĞ”àÎ»ÒÆÁ¿
   (if (> bc 0)
     (princ (strcat "\n  Auto-align votes: " (itoa bc) " (Anchor matched)"))
     (progn
       (princ "\n  [Warning] No identical anchor found. Using Bounding Box auto-align...")
-      ;; å¦‚æœé€£1ç¥¨éƒ½æ²’æœ‰ï¼Œè‡ªå‹•è¨ˆç®—å…©å€‹é¸å–å€çš„ã€Œå·¦ä¸‹è§’ã€åº§æ¨™å·®å€¼ä½œç‚ºä½ç§»é‡
+      ;; Èç¹ûßB1Æ±¶¼›]ÓĞ£¬×Ô„ÓÓ‹ËãƒÉ‚€ßxÈ¡…^µÄ¡¸×óÏÂ½Ç¡¹×ù˜Ë²îÖµ×÷éÎ»ÒÆÁ¿
       (setq minXa 1e99 minYa 1e99 maxXa -1e99 maxYa -1e99)
       (foreach en lA (if (setq box (dc:get-bbox en)) (setq minXa (min minXa (caar box)) minYa (min minYa (cadar box)) maxXa (max maxXa (caadr box)) maxYa (max maxYa (cadadr box)))))
       (setq minXb 1e99 minYb 1e99 maxXb -1e99 maxYb -1e99)
@@ -192,7 +192,7 @@
       
       (if (and (< minXa 1e90) (< minXb 1e90))
          (setq bv (list (- minXb minXa) (- minYb minYa)))
-         (setq bv '(0.0 0.0)) ; å¦‚æœé¸åˆ°å®Œå…¨æ²’é‚Šç•Œçš„å¹½éˆç‰©ä»¶ï¼Œä½ç§»æ­¸é›¶
+         (setq bv '(0.0 0.0)) ; Èç¹ûßxµ½ÍêÈ«›]ß…½çµÄÓÄì`Îï¼ş£¬Î»ÒÆšwÁã
       )
     )
   )
@@ -309,7 +309,7 @@
     )
   )
 
-  (princ "\n  â”€â”€ Results â”€â”€")
+  (princ "\n  ©¤©¤ Results ©¤©¤")
   (princ (strcat "\n  Matched (Unchanged): " (itoa cnt-m)))
   (princ (strcat "\n  Changes detected:    " (itoa (+ cnt-a cnt-r))))
   (if (> ignored-cnt 0) (princ (strcat "\n  [Filtered " (itoa ignored-cnt) " giant background elements]")))
@@ -335,7 +335,7 @@
   (if (null lA)
     (progn
       (if (uc:function-defined-p 'uc:guard-end) (uc:guard-end))
-      (princ "\næœªé€‰æ‹© Region Aã€‚")
+      (princ "\nÎ´Ñ¡Ôñ Region A¡£")
       (princ)
       nil)
     (progn
@@ -343,7 +343,7 @@
       (if (null lB)
         (progn
           (if (uc:function-defined-p 'uc:guard-end) (uc:guard-end))
-          (princ "\næœªé€‰æ‹© Region Bã€‚")
+          (princ "\nÎ´Ñ¡Ôñ Region B¡£")
           (princ)
           nil)
         (progn

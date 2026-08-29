@@ -1,12 +1,12 @@
 (defun example:prev-var (/ k) 
-  "ä¸Šæ¬¡è¾“å…¥çš„å€¼ä½œä¸ºé»˜è®¤å€¼çš„ç¤ºä¾‹"
+  "ÉÏ´ÎÊäÈëµÄÖµ×÷ÎªÄ¬ÈÏÖµµÄÊ¾Àı"
   ""
   "(example:prev-var)"
   (if (not (and prev-var (p:stringp prev-var)))(setq prev-var "D"))
   (initget "A W V D S B")
   (if (setq k (getkword 
                (strcat 
-		"ä½ç½®[A åœ¨æ–‡å­—å·¦è¾¹,W åœ¨æ³¨è§£å·¦è¾¹,V åœ¨æ”¹æ¨¡æ–‡å­—å·¦è¾¹,D åœ¨æ–‡å­—å³è¾¹,S æ‰‹åŠ¨æ·»åŠ ,B åœ¨æ¨¡å…·BOMåºå·å·¦è¾¹]<"
+		"Î»ÖÃ[A ÔÚÎÄ×Ö×ó±ß,W ÔÚ×¢½â×ó±ß,V ÔÚ¸ÄÄ£ÎÄ×Ö×ó±ß,D ÔÚÎÄ×ÖÓÒ±ß,S ÊÖ¶¯Ìí¼Ó,B ÔÚÄ£¾ßBOMĞòºÅ×ó±ß]<"
                 prev-var
 		">:")))
       (setq prev-var k))

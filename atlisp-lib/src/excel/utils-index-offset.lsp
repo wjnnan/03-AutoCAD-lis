@@ -1,6 +1,6 @@
 (defun excel:utils-index-offset (basecellid rowoffset columnoffset)
-  "鏍规嵁琛屽垪鍋忕Щ閲忚绠楀崟鍏冩牸绱㈠紩\n鍙傛暟:BaseCellId:鍩虹鍗曞厓鏍肩储寮曪紝鍙互涓篈1寮曠敤鏍煎紡鎴栬�呰鍒楁暟瀛楀垪琛╘n鍙傛暟:rowOffset:琛屽亸绉婚噺\n鍙傛暟:columnOffset:鍒楀亸绉婚噺"
-  "A1鏍煎紡鐨勫崟鍏冩牸绱㈠紩"
+  "根据行列偏移量计算单元格索引\n参数:BaseCellId:基础单元格索引，可以为A1引用格式或者行列数字列表\n参数:rowOffset:行偏移量\n参数:columnOffset:列偏移量"
+  "A1格式的单元格索引"
   "(excel:Utils-index-offset \"A1\"
     2 3)"
   (if (= (quote str)

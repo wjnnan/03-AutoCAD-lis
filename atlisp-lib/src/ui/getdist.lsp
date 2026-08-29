@@ -1,5 +1,5 @@
 (defun ui:getdist (msg / flag sn ents ss)
-  "å½“æŒ‰ä¸‹é”®ç›˜æ•°å­—é”®æ—¶ï¼Œè¿”å›æ•°å€¼ï¼Œå½“é¼ æ ‡å·¦é”®ç‚¹å–æ–‡å­—æˆ–æ ‡æ³¨æ—¶ï¼Œå–æ–‡å­—æˆ–æ ‡æ³¨çš„å€¼ã€‚"
+  "µ±°´ÏÂ¼üÅÌÊı×Ö¼üÊ±£¬·µ»ØÊıÖµ£¬µ±Êó±ê×ó¼üµãÈ¡ÎÄ×Ö»ò±ê×¢Ê±£¬È¡ÎÄ×Ö»ò±ê×¢µÄÖµ¡£"
   "Number"
   "(ui:getdist \"Please input number or select text/dimension\")"
   (princ msg)
@@ -7,23 +7,23 @@
   (setq flag t)
   (while flag
     (setq gr (grread t 16))
-    "å¤„ç†è¾“å…¥"
+    "´¦ÀíÊäÈë"
     (cond ((= 2 (car gr))
-	   "æŒ‰ä¸‹äº†é”®ç›˜æŒ‰é”®"
+	   "°´ÏÂÁË¼üÅÌ°´¼ü"
 	   (cond
 	    ((member (cadr gr) (vl-string->list "0123456789." ))
-	     "æŒç»­è¾“å…¥æ•°å­—é”®"
+	     "³ÖĞøÊäÈëÊı×Ö¼ü"
 	     (setq sn (strcat sn (chr (cadr gr))))
 	     (princ (chr (cadr gr)))
 	     )
 	    ((member (cadr gr) '(13 32))
-	     "å›è½¦ æˆ–ç©ºæ ¼ï¼Œè¿”å›è¾“å…¥çš„å€¼"
+	     "»Ø³µ »ò¿Õ¸ñ£¬·µ»ØÊäÈëµÄÖµ"
 	     (princ "\n")
 	     (setq flag nil)
 	     )
 	    ))
 	  ((= 3 (car gr))
-	   "æŒ‰ä¸‹é¼ æ ‡å·¦é”®ï¼Œé€‰ä¸­å›¾å…ƒï¼Œè¯»å€¼"
+	   "°´ÏÂÊó±ê×ó¼ü£¬Ñ¡ÖĞÍ¼Ôª£¬¶ÁÖµ"
 	   (setq ents (pickset:to-list (ssget (cadr gr) '((0 . "DIM*,TEXT")))))
 	   (if ents
 	       (progn
@@ -34,7 +34,7 @@
 		 (setq flag nil)
 		 )))
 	  ((= 5 (car gr))
-           "ç§»åŠ¨é¼ æ ‡,é«˜äº®å›¾å…ƒ"
+           "ÒÆ¶¯Êó±ê,¸ßÁÁÍ¼Ôª"
 	   (if ss(redraw (ssname ss 0) 4))
 	   (setq ss (ssget (cadr gr) '((0 . "DIM*,TEXT"))))
 	   (if ss(redraw (ssname ss 0) 3))

@@ -1,5 +1,5 @@
 (defun xdata:remove-appid (ename appid / lst)
-  "åˆ é™¤å›¾å…ƒçš„åº”ç”¨åä¸ºappidçš„æ‰©å±•æ•°æ®"
+  "É¾³ıÍ¼ÔªµÄÓ¦ÓÃÃûÎªappidµÄÀ©Õ¹Êı¾İ"
   ""
   "(xdata:remove-appid (car(entsel)) \"ACAD\")"
   (cond

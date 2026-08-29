@@ -1,5 +1,5 @@
 (@::def-pkg '((:NAME . "at-lab")
-        (:FULL-NAME . "@试验室")
+        (:FULL-NAME . "@������")
         (:AUTHOR . "VitalGG")
         (:EMAIL . "vitalgg@gmail.com")
         (:VERSION . "0.0.37")
@@ -8,7 +8,7 @@
         (:REQUIRED . "base")
         (:OPENSOURCE . 0)
         (:FREE . T)
-        (:DESCRIPTION . "试验性代码集中营。一些特定功能或尝鲜功能。动态调整-by 捉刀人")
+        (:DESCRIPTION . "�����Դ��뼯��Ӫ��һЩ�ض����ܻ��ʹ��ܡ���̬����-by ׽����")
         (:URL . "http://atlisp.cn")
         (:FILES "at-lab"
             "menus"

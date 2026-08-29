@@ -1,12 +1,12 @@
 (defun example:dcl-mtext2 (/ curr-page total-page dcl-fp dcl-tmp)
-  "MVCNIS æ–¹æ³•ç¤ºä¾‹5: 6 æ­¥è¿›è¡ŒåŠ¨æ€ DCL å¼€å‘ã€‚Model-View-Control-New-Init-Show."
+  "MVCNIS ·½·¨Ê¾Àı5: 6 ²½½øĞĞ¶¯Ì¬ DCL ¿ª·¢¡£Model-View-Control-New-Init-Show."
   ""
   "(example:dcl-dialog)"
   (require (quote dcl:*))
-  "1. Model å»ºç«‹æ•°æ®æ¨¡å‹ã€‚"
+  "1. Model ½¨Á¢Êı¾İÄ£ĞÍ¡£"
   (setq curr-page 0)
   (setq total-page 5)
-  "2. View å»ºç«‹æ˜¾ç¤ºè§†å›¾ã€‚"
+  "2. View ½¨Á¢ÏÔÊ¾ÊÓÍ¼¡£"
   (dcl:dialog "example")
   (progn (dcl:begin-cluster "column"
       "")
@@ -25,21 +25,21 @@
         (dcl:end-cluster))
       (dcl:end-cluster)))
   (dcl:dialog-end-ok-cancel)
-  "3. Control åˆ›å»ºæ§åˆ¶æµç¨‹"
+  "3. Control ´´½¨¿ØÖÆÁ÷³Ì"
   (defun cb-flush-page nil (set_tile "num"
-      (strcat "\n         å½“å‰é¡µé¢: "
+      (strcat "\n         µ±Ç°Ò³Ãæ: "
         (itoa (1+ curr-page)))))
   (defun cb-btn1 nil (dcl:set-mtext "mtext"
-      "è¯´æ˜ï¼šå­—ç¬¦ä¸²è½¬å­—byte or word æ•´æ•°å€¼åˆ—è¡¨ã€‚nå½“å°äº128æ—¶ï¼Œå•å­—èŠ‚ï¼Œå½“ä¸¤ä¸ªè¿ç»­çš„å¤§äº128æ—¶ï¼ŒåŒå­—èŠ‚å€¼ã€‚ç”¨äºè½¬æ¢éè‹±æ–‡å­—ä¸²æ—¶é˜²æ­¢é‡ç ã€‚nå½“AutoCAD2021ä¸”lispsys=1æ—¶ï¼Œè¿”å› unicode ç ã€‚è¯´æ˜ï¼šè‡ªåŠ¨åˆ†æ®µï¼ŒæŒ‰æ•°å­—-å­—æ¯-æ±‰å­—è‡ªåŠ¨æ–­å¼€å­—ç¬¦ä¸²ä¸ºå­—ç¬¦ä¸²åˆ—è¡¨ã€‚ä¸æ”¯æŒç§‘å­¦è®¡æ•°æ³•çš„æ•°å­—ã€‚è¯´æ˜ï¼šå­—ç¬¦ä¸²è½¬å­—byte or word æ•´æ•°å€¼åˆ—è¡¨ã€‚nå½“å°äº128æ—¶ï¼Œå•å­—èŠ‚ï¼Œå½“ä¸¤ä¸ªè¿ç»­çš„å¤§äº128æ—¶ï¼ŒåŒå­—èŠ‚å€¼ã€‚ç”¨äºè½¬æ¢éè‹±æ–‡å­—ä¸²æ—¶é˜²æ­¢é‡ç ã€‚nå½“AutoCAD2021ä¸”lispsys=1æ—¶ï¼Œè¿”å› unicode ç ã€‚è¯´æ˜ï¼šè‡ªåŠ¨åˆ†æ®µï¼ŒæŒ‰æ•°å­—-å­—æ¯-æ±‰å­—è‡ªåŠ¨æ–­å¼€å­—ç¬¦ä¸²ä¸ºå­—ç¬¦ä¸²åˆ—è¡¨ã€‚ä¸æ”¯æŒç§‘å­¦è®¡æ•°æ³•çš„æ•°å­—ã€‚"))
+      "ËµÃ÷£º×Ö·û´®×ª×Öbyte or word ÕûÊıÖµÁĞ±í¡£nµ±Ğ¡ÓÚ128Ê±£¬µ¥×Ö½Ú£¬µ±Á½¸öÁ¬ĞøµÄ´óÓÚ128Ê±£¬Ë«×Ö½ÚÖµ¡£ÓÃÓÚ×ª»»·ÇÓ¢ÎÄ×Ö´®Ê±·ÀÖ¹ÖØÂë¡£nµ±AutoCAD2021ÇÒlispsys=1Ê±£¬·µ»Ø unicode Âë¡£ËµÃ÷£º×Ô¶¯·Ö¶Î£¬°´Êı×Ö-×ÖÄ¸-ºº×Ö×Ô¶¯¶Ï¿ª×Ö·û´®Îª×Ö·û´®ÁĞ±í¡£²»Ö§³Ö¿ÆÑ§¼ÆÊı·¨µÄÊı×Ö¡£ËµÃ÷£º×Ö·û´®×ª×Öbyte or word ÕûÊıÖµÁĞ±í¡£nµ±Ğ¡ÓÚ128Ê±£¬µ¥×Ö½Ú£¬µ±Á½¸öÁ¬ĞøµÄ´óÓÚ128Ê±£¬Ë«×Ö½ÚÖµ¡£ÓÃÓÚ×ª»»·ÇÓ¢ÎÄ×Ö´®Ê±·ÀÖ¹ÖØÂë¡£nµ±AutoCAD2021ÇÒlispsys=1Ê±£¬·µ»Ø unicode Âë¡£ËµÃ÷£º×Ô¶¯·Ö¶Î£¬°´Êı×Ö-×ÖÄ¸-ºº×Ö×Ô¶¯¶Ï¿ª×Ö·û´®Îª×Ö·û´®ÁĞ±í¡£²»Ö§³Ö¿ÆÑ§¼ÆÊı·¨µÄÊı×Ö¡£"))
   (defun cb-btn2 nil (dcl:set-mtext "mtext"
       "The button's label specifies text that appears inside the button. Buttons are appropriate for actions that are immediately visible to the user such as leaving the dialog box, or going into a subdialog box."))
-  "4. New ä¸€ä¸ªæ–°å¯¹è¯æ¡†å¯¹è±¡ã€‚"
+  "4. New Ò»¸öĞÂ¶Ô»°¿ò¶ÔÏó¡£"
   (dcl:new "example")
-  "5. Init åˆå§‹åŒ–å¯¹è¯æ¡†"
+  "5. Init ³õÊ¼»¯¶Ô»°¿ò"
   (set_tile "title"
-    "Example æ ‡é¢˜")
+    "Example ±êÌâ")
   (cb-flush-page)
   (dcl:set-mtext "mtext"
-    "åŠ¨æ€å¤šè¡Œæ–‡æœ¬ã€‚")
+    "¶¯Ì¬¶àĞĞÎÄ±¾¡£")
   (dcl:show)
   (princ))

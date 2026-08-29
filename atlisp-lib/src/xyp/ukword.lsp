@@ -1,7 +1,7 @@
 (defun xyp:Ukword (bit kwd msg def / inp)
-  "å…³é”®å­—è¾“å…¥æ ¼å¼åŒ–"
+  "¹Ø¼ü×ÖÊäÈë¸ñÊ½»¯"
   "int"
-  "(setq tx1 (Ukword 1 \"1 2\" \"1-ä»»æ„ç‚¹/2-ä¸­å¿ƒç‚¹\" tx1))"
+  "(setq tx1 (Ukword 1 \"1 2\" \"1-ÈÎÒâµã/2-ÖĞĞÄµã\" tx1))"
   (if (and def (/= def ""))
     (setq msg (strcat "\n" msg "<" def ">: ") bit (* 2 (fix (/ bit 2))))
     (setq msg (strcat "\n" msg ": "))

@@ -214,7 +214,7 @@
     ((= fiber-num 12) (setq fiber-color "AQUA"))
   )
   
-  ; æ£€æŸ¥ buffer-num å’Œ fiber-num æ˜¯å¦åœ¨æœ‰æ•ˆèŒƒå›´å†…
+  ; ¼ì²é buffer-num ºÍ fiber-num ÊÇ·ñÔÚÓĞĞ§·¶Î§ÄÚ
   (if (or (null buffer-color) (null fiber-color))
     (progn
       (alert (strcat "Error: Invalid buffer/fiber number. Buffer: "

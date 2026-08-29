@@ -1,7 +1,7 @@
 (defun xyp:Uangle (bit kwd msg def bpt / inp)
-  "æ ¼å¼åŒ–è¾“å…¥è§’åº¦ç„¶åè¿”å›ä»¥å¼§åº¦è¡¨ç¤ºçš„è§’åº¦"
+  "¸ñÊ½»¯ÊäÈë½Ç¶ÈÈ»ºó·µ»ØÒÔ»¡¶È±íÊ¾µÄ½Ç¶È"
   "ang"
-  "(setq ang (Uangle 1 \"\" \"è§’åº¦\" ang '(0 0)))"
+  "(setq ang (Uangle 1 \"\" \"½Ç¶È\" ang '(0 0)))"
   (if def
       (setq msg (strcat "\n" msg "<" (angtos def) ">: ")bit (* (fix (/ bit 2))))
     (setq msg (strcat "\n" msg ": "))

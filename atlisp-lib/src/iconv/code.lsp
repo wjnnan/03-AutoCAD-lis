@@ -1,4 +1,4 @@
 (defun iconv:code ()
-  "æ±‰å­—ç¼–ç å¯¹ç…§è¡¨ï¼Œcar ä¸º unicode,cdrä¸ºgb2312"
+  "ºº×Ö±àÂë¶ÔÕÕ±í£¬car Îª unicode,cdrÎªgb2312"
   
   )

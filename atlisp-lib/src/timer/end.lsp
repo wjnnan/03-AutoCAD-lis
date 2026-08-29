@@ -1,5 +1,5 @@
 (defun timer:end (time p / usetime)
-  "è®¡æ—¶å™¨ç»“æŸã€‚time å¼€å§‹æ—¶é—´ p æ˜¯å¦æ‰“å°ã€‚"
+  "¼ÆÊ±Æ÷½áÊø¡£time ¿ªÊ¼Ê±¼ä p ÊÇ·ñ´òÓ¡¡£"
   (if (not time)
       (setq time *timer*))
   (if (> (@::acadver)

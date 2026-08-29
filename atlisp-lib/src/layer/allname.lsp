@@ -1,5 +1,5 @@
 (defun layer:allname (/ out)
-    "杩斿洖鎵�鏈夊浘灞傜殑鍚嶇О(瀛楃涓茶〃)"
+    "返回所有图层的名称(字符串表)"
     (vlax-for obj *lays* (setq out (cons (vlax-get-property obj (quote name))
                 out)))
     (reverse out))

@@ -1,5 +1,5 @@
 (defun vla:sel (/ ent)
-  "å•é€‰å¯¹è±¡ï¼Œè¿”å› vla-object æˆ– nilï¼ˆç”¨æˆ·å–æ¶ˆæ—¶ï¼‰ã€‚"
+  "µ¥Ñ¡¶ÔÏó£¬·µ»Ø vla-object »ò nil£¨ÓÃ»§È¡ÏûÊ±£©¡£"
   (if (setq ent (car (entsel)))
     (e2o ent)
     nil))

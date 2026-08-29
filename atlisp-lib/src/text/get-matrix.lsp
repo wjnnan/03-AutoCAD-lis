@@ -1,6 +1,6 @@
 (defun text:get-matrix (/ ss-txt result lst-tmp row)
-  "ä»dwgå›¾ä¸­æ¡†å–å•è¡Œæ–‡æœ¬ï¼Œå½¢æˆäºŒç»´åˆ—è¡¨æ•°æ®"
-  "ç”±å­—ç¬¦ä¸²ç»„æˆçš„äºŒç»´åˆ—è¡¨"
+  "´ÓdwgÍ¼ÖĞ¿òÈ¡µ¥ĞĞÎÄ±¾£¬ĞÎ³É¶şÎ¬ÁĞ±íÊı¾İ"
+  "ÓÉ×Ö·û´®×é³ÉµÄ¶şÎ¬ÁĞ±í"
   ""
   (setq ss-txt (pickset:to-list (ssget (quote ((0 . "text"))))))
   (setq ss-txt (vl-sort ss-txt (quote (lambda (x y)

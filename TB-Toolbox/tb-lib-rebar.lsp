@@ -1,161 +1,161 @@
-ï»¿;;; tb-lib-rebar.lsp â€” é’¢ç­‹å‡ ä½•åº“
-;;; é’¢ç­‹ = ç­‰å®½å¤šæ®µçº¿ + å¼¯é’©å¼§æ®µï¼ˆbulgeï¼‰
-;;; æ ¸å¿ƒå‡ ä½•ï¼šé€šè¿‡å¤šæ®µçº¿ç»„ç  43ï¼ˆå¸¸é‡çº¿å®½ï¼‰å’Œ 42ï¼ˆå¼§æ®µå‡¸åº¦ï¼‰å®ç°
-;;; ä¾èµ–ï¼štb-core.lsp, tb-lib-point.lsp, tb-lib-entity.lsp, tb-lib-lay.lsp
+;;; tb-lib-rebar.lsp ¡ª ¸Ö½î¼¸ºÎ¿â
+;;; ¸Ö½î = µÈ¿í¶à¶ÎÏß + Íä¹³»¡¶Î£¨bulge£©
+;;; ºËĞÄ¼¸ºÎ£ºÍ¨¹ı¶à¶ÎÏß×éÂë 43£¨³£Á¿Ïß¿í£©ºÍ 42£¨»¡¶ÎÍ¹¶È£©ÊµÏÖ
+;;; ÒÀÀµ£ºtb-core.lsp, tb-lib-point.lsp, tb-lib-entity.lsp, tb-lib-lay.lsp
 ;;;
-;;; å¼¯é’©ç±»å‹ï¼š1=åœ†é’©180Â°(HPB300)  2=æ–œé’©135Â°(HRB400æŠ—éœ‡)  3=ç›´é’©90Â°  0=æ— é’©
-;;; å¼¯æ›²ç›´å¾„ï¼šä¸€çº§é’¢ 2.5dï¼ŒäºŒ/ä¸‰çº§é’¢ 4d (GB 50010-2010)
-;;; å¼¯åå¹³ç›´æ®µï¼šåœ†é’© 3dï¼Œæ–œé’© 5d(éæŠ—éœ‡)/10d(æŠ—éœ‡)ï¼Œç›´é’© 12d
+;;; Íä¹³ÀàĞÍ£º1=Ô²¹³180¡ã(HPB300)  2=Ğ±¹³135¡ã(HRB400¿¹Õğ)  3=Ö±¹³90¡ã  0=ÎŞ¹³
+;;; ÍäÇúÖ±¾¶£ºÒ»¼¶¸Ö 2.5d£¬¶ş/Èı¼¶¸Ö 4d (GB 50010-2010)
+;;; ÍäºóÆ½Ö±¶Î£ºÔ²¹³ 3d£¬Ğ±¹³ 5d(·Ç¿¹Õğ)/10d(¿¹Õğ)£¬Ö±¹³ 12d
 
 ;; ============================================================================
-;; å¼¯é’©å‚æ•°è®¡ç®—
+;; Íä¹³²ÎÊı¼ÆËã
 ;; ============================================================================
 
 (defun rebar:hook-angle (hook-type)
-  "å¼¯é’©è§’åº¦ï¼ˆå¼§åº¦ï¼‰ã€‚1=180Â°, 2=135Â°, 3=90Â°ã€‚"
+  "Íä¹³½Ç¶È£¨»¡¶È£©¡£1=180¡ã, 2=135¡ã, 3=90¡ã¡£"
   (cond ((= hook-type 1) pi)
         ((= hook-type 2) (* pi 0.75))
         ((= hook-type 3) (* pi 0.5))
         (t 0.0)))
 
 (defun rebar:hook-bulge (hook-type / ang)
-  "å¼¯é’© bulge å€¼ã€‚bulge = tan(angle/4)ã€‚"
+  "Íä¹³ bulge Öµ¡£bulge = tan(angle/4)¡£"
   (setq ang (rebar:hook-angle hook-type))
   (if (> ang 0)
     (/ (sin (* 0.25 ang)) (cos (* 0.25 ang)))
     0.0))
 
 (defun rebar:bend-radius (d grade)
-  "å¼¯æ›²åŠå¾„ã€‚ä¸€çº§é’¢(grade=1): 1.25dï¼ŒäºŒ/ä¸‰çº§é’¢: 2.0dã€‚"
+  "ÍäÇú°ë¾¶¡£Ò»¼¶¸Ö(grade=1): 1.25d£¬¶ş/Èı¼¶¸Ö: 2.0d¡£"
   (* 0.5 d (if (= grade 1) 2.5 4.0)))
 
 (defun rebar:hook-tail (hook-type d grade)
-  "å¼¯åå¹³ç›´æ®µé•¿åº¦ã€‚"
+  "ÍäºóÆ½Ö±¶Î³¤¶È¡£"
   (cond
-    ((= hook-type 1) (* d 3.0))                        ; åœ†é’©: 3d
-    ((= hook-type 2) (* d (if (= grade 1) 5.0 10.0)))  ; æ–œé’©: 5d/10d
-    ((= hook-type 3) (* d 12.0))                       ; ç›´é’©: 12d
+    ((= hook-type 1) (* d 3.0))                        ; Ô²¹³: 3d
+    ((= hook-type 2) (* d (if (= grade 1) 5.0 10.0)))  ; Ğ±¹³: 5d/10d
+    ((= hook-type 3) (* d 12.0))                       ; Ö±¹³: 12d
     (t 0.0)))
 
 
 ;; ============================================================================
-;; å¼¯é’©å‡ ä½•ç”Ÿæˆ
+;; Íä¹³¼¸ºÎÉú³É
 ;; ============================================================================
 
-;; ç”Ÿæˆæœ«ç«¯å¼¯é’©çš„å‡ ä½•æ•°æ®ï¼ˆbarâ†’tail æ–¹å‘ï¼‰ã€‚
-;; D: é’¢ç­‹æœ«ç«¯ç‚¹ï¼ˆå¼¯å¼§èµ·ç‚¹ï¼‰
-;; ang: é’¢ç­‹åœ¨ D å¤„çš„æ–¹å‘è§’ï¼ˆå¼§åº¦ï¼‰
-;; hook-type: å¼¯é’©ç±»å‹ 1/2/3/0
-;; hook-dir: +1=å·¦å¼¯(CCW), -1=å³å¼¯(CW)
-;; d: é’¢ç­‹ç›´å¾„(mm)  grade: é’¢ç­‹ç­‰çº§(1/2/3)
-;; è¿”å›: ((C . bulge-at-D) (tail-end . bulge-at-C))
-;; è°ƒç”¨è€…å°† bulge-at-D èµ‹ç»™é¡¶ç‚¹ Dï¼Œbulge-at-C èµ‹ç»™é¡¶ç‚¹ Cã€‚
-(defun rebar:make-hook-geom (D ang hook-type hook-dir d grade
+;; Éú³ÉÄ©¶ËÍä¹³µÄ¼¸ºÎÊı¾İ£¨bar¡útail ·½Ïò£©¡£
+;; D: ¸Ö½îÄ©¶Ëµã£¨Íä»¡Æğµã£©
+;; ang: ¸Ö½îÔÚ D ´¦µÄ·½Ïò½Ç£¨»¡¶È£©
+;; hook-type: Íä¹³ÀàĞÍ 1/2/3/0
+;; hook-dir: +1=×óÍä(CCW), -1=ÓÒÍä(CW)
+;; d: ¸Ö½îÖ±¾¶(mm)  grade: ¸Ö½îµÈ¼¶(1/2/3)
+;; ·µ»Ø: ((C . bulge-at-D) (tail-end . bulge-at-C))
+;; µ÷ÓÃÕß½« bulge-at-D ¸³¸ø¶¥µã D£¬bulge-at-C ¸³¸ø¶¥µã C¡£
+(defun rebar:make-hook-geom (D ang hook-type hook-dir diam grade
                              / R hook-angle hook-bulge tail-len perp-ang
                                O start-ang end-ang C tail-dir tail-end)
   (if (= hook-type 0)
-    nil  ; æ— å¼¯é’©
+    nil  ; ÎŞÍä¹³
     (progn
       (setq hook-angle (rebar:hook-angle hook-type)
             hook-bulge (rebar:hook-bulge hook-type)
-            R          (rebar:bend-radius d grade)
-            tail-len   (rebar:hook-tail hook-type d grade)
-            perp-ang   (+ ang (* hook-dir (* pi 0.5)))   ; å¼¯æ›²å†…ä¾§æ–¹å‘
-            O          (point:polar D perp-ang R)         ; å¼¯å¿ƒ
-            start-ang  (+ perp-ang pi)                    ; ä»å¼¯å¿ƒæŒ‡å‘ D çš„è§’åº¦
-            end-ang    (+ start-ang (* hook-dir hook-angle)) ; ä»å¼¯å¿ƒæŒ‡å‘ C çš„è§’åº¦
-            C          (point:polar O end-ang R)          ; å¼§æ®µç»ˆç‚¹
-            tail-dir   (+ end-ang (* hook-dir (* pi 0.5))) ; å°¾æ®µåˆ‡çº¿æ–¹å‘
-            tail-end   (point:polar C tail-dir tail-len)) ; å°¾ç«¯
-      ;; è¿”å›: (C . bulge-at-D) (tail-end . 0)
+            R          (rebar:bend-radius diam grade)
+            tail-len   (rebar:hook-tail hook-type diam grade)
+            perp-ang   (+ ang (* hook-dir (* pi 0.5)))   ; ÍäÇúÄÚ²à·½Ïò
+            O          (point:polar D perp-ang R)         ; ÍäĞÄ
+            start-ang  (+ perp-ang pi)                    ; ´ÓÍäĞÄÖ¸Ïò D µÄ½Ç¶È
+            end-ang    (+ start-ang (* hook-dir hook-angle)) ; ´ÓÍäĞÄÖ¸Ïò C µÄ½Ç¶È
+            C          (point:polar O end-ang R)          ; »¡¶ÎÖÕµã
+            tail-dir   (+ end-ang (* hook-dir (* pi 0.5))) ; Î²¶ÎÇĞÏß·½Ïò
+            tail-end   (point:polar C tail-dir tail-len)) ; Î²¶Ë
+      ;; ·µ»Ø: (C . bulge-at-D) (tail-end . 0)
       (list (cons C (* hook-dir hook-bulge))
             (cons tail-end 0.0)))))
 
 
 ;; ============================================================================
-;; é’¢ç­‹åˆ›å»º
+;; ¸Ö½î´´½¨
 ;; ============================================================================
 
-;; åˆ›å»ºé’¢ç­‹å¤šæ®µçº¿ã€‚
-;; pts: é’¢ç­‹è·¯å¾„ç‚¹è¡¨ï¼ˆä¸å«å¼¯é’©ï¼‰
-;; hook-start: èµ·å§‹ç«¯å¼¯é’©ç±»å‹ (0/1/2/3)
-;; hook-end: æœ«ç«¯å¼¯é’©ç±»å‹ (0/1/2/3)
-;; d: é’¢ç­‹ç›´å¾„(mm)  grade: é’¢ç­‹ç­‰çº§(1/2/3)
-;; hook-dir: +1 å·¦å¼¯, -1 å³å¼¯
-;; width: å¤šæ®µçº¿å¸¸é‡çº¿å®½ï¼ˆnil=è‡ªåŠ¨æŒ‰ d è®¡ç®—ï¼‰
-;; layer: å›¾å±‚åï¼ˆnil=å½“å‰å›¾å±‚ï¼‰
-;; è¿”å›: å¤šæ®µçº¿ ename
-(defun rebar:make-bar (pts hook-start hook-end d grade hook-dir width layer
+;; ´´½¨¸Ö½î¶à¶ÎÏß¡£
+;; pts: ¸Ö½îÂ·¾¶µã±í£¨²»º¬Íä¹³£©
+;; hook-start: ÆğÊ¼¶ËÍä¹³ÀàĞÍ (0/1/2/3)
+;; hook-end: Ä©¶ËÍä¹³ÀàĞÍ (0/1/2/3)
+;; d: ¸Ö½îÖ±¾¶(mm)  grade: ¸Ö½îµÈ¼¶(1/2/3)
+;; hook-dir: +1 ×óÍä, -1 ÓÒÍä
+;; width: ¶à¶ÎÏß³£Á¿Ïß¿í£¨nil=×Ô¶¯°´ d ¼ÆËã£©
+;; layer: Í¼²ãÃû£¨nil=µ±Ç°Í¼²ã£©
+;; ·µ»Ø: ¶à¶ÎÏß ename
+(defun rebar:make-bar (pts hook-start hook-end diam grade hook-dir width layer
                        / all-pts all-bulges dir-ang hook-geom
                          D C bulge-D bulge-C tail-end)
-  ;; é»˜è®¤çº¿å®½ï¼šé’¢ç­‹ç›´å¾„ Ã— å‡ºå›¾æ¯”ä¾‹ç³»æ•°
-  (or width (setq width (* d (or (sys:get '*SYS:DWG-SCALE*) 100) 0.01)))
-  ;; é»˜è®¤å›¾å±‚
+  ;; Ä¬ÈÏÏß¿í£º¸Ö½îÖ±¾¶ ¡Á ³öÍ¼±ÈÀıÏµÊı
+  (or width (setq width (* diam (or (sys:get '*SYS:DWG-SCALE*) 100) 0.01)))
+  ;; Ä¬ÈÏÍ¼²ã
   (or layer (setq layer (or (sys:get '*SYS:REBAR-LAYER*) "S_REBAR")))
   (lay:make layer 1)
 
-  ;; === å¤„ç†èµ·å§‹ç«¯å¼¯é’©ï¼ˆæ–¹å‘ä¸è¡Œè¿›ç›¸åï¼‰ ===
+  ;; === ´¦ÀíÆğÊ¼¶ËÍä¹³£¨·½ÏòÓëĞĞ½øÏà·´£© ===
   (if (> hook-start 0)
     (progn
-      (setq dir-ang (point:angle (car pts) (cadr pts))  ; èµ·å§‹æ®µæ–¹å‘
-            D (car pts))                                  ; å¼¯å¼§èµ·ç‚¹ = é’¢ç­‹ç¬¬ä¸€ç‚¹
-      (setq hook-geom (rebar:make-hook-geom D (+ dir-ang pi) hook-start hook-dir d grade))
-      ;; hook-geom æ˜¯æ­£å‘(barâ†’tail)çš„ç»“æœï¼Œèµ·å§‹é’©éœ€è¦åå‘ï¼štail â†’ C â†’ D
-      ;; å³ï¼štail-end â†’ C(bulge=-bulge) â†’ D(bulge=0, è¿æ¥ä¸»ç­‹)
+      (setq dir-ang (point:angle (car pts) (cadr pts))  ; ÆğÊ¼¶Î·½Ïò
+            D (car pts))                                  ; Íä»¡Æğµã = ¸Ö½îµÚÒ»µã
+      (setq hook-geom (rebar:make-hook-geom D (+ dir-ang pi) hook-start hook-dir diam grade))
+      ;; hook-geom ÊÇÕıÏò(bar¡útail)µÄ½á¹û£¬ÆğÊ¼¹³ĞèÒª·´Ïò£ºtail ¡ú C ¡ú D
+      ;; ¼´£ºtail-end ¡ú C(bulge=-bulge) ¡ú D(bulge=0, Á¬½ÓÖ÷½î)
       (if hook-geom
         (progn
-          (setq tail-end (car (cadr hook-geom))            ; å°¾ç«¯ç‚¹
-                C       (car (car  hook-geom))             ; å¼§æ®µç»ˆç‚¹
-                bulge-C (- (cdr (car hook-geom))))         ; åå‘ bulge
-          ;; é¢„ç½®åˆ°é¡¶ç‚¹åˆ—è¡¨
+          (setq tail-end (car (cadr hook-geom))            ; Î²¶Ëµã
+                C       (car (car  hook-geom))             ; »¡¶ÎÖÕµã
+                bulge-C (- (cdr (car hook-geom))))         ; ·´Ïò bulge
+          ;; Ô¤ÖÃµ½¶¥µãÁĞ±í
           (setq all-pts    (list tail-end C D)
                 all-bulges (list 0.0 bulge-C 0.0))))))
 
-  ;; === ä¸»ç­‹è·¯å¾„ï¼ˆè·³è¿‡å·²ç”¨çš„ç¬¬ä¸€ç‚¹ï¼‰ ===
+  ;; === Ö÷½îÂ·¾¶£¨Ìø¹ıÒÑÓÃµÄµÚÒ»µã£© ===
   (if all-pts
-    ;; ä» D ä¹‹åçš„ç¬¬ 2 ä¸ªç‚¹å¼€å§‹ï¼ˆD å·²åœ¨åˆ—è¡¨ä¸­ï¼‰
+    ;; ´Ó D Ö®ºóµÄµÚ 2 ¸öµã¿ªÊ¼£¨D ÒÑÔÚÁĞ±íÖĞ£©
     (foreach pt (cdr pts)
       (setq all-pts    (append all-pts    (list pt))
             all-bulges (append all-bulges (list 0.0))))
-    ;; æ— èµ·å§‹é’©ï¼šå…¨éƒ¨è·¯å¾„ç‚¹
+    ;; ÎŞÆğÊ¼¹³£ºÈ«²¿Â·¾¶µã
     (progn
       (setq all-pts    pts
             all-bulges (mapcar '(lambda (x) 0.0) pts))))
 
-  ;; === å¤„ç†æœ«ç«¯å¼¯é’© ===
+  ;; === ´¦ÀíÄ©¶ËÍä¹³ ===
   (if (> hook-end 0)
     (progn
-      (setq D (last all-pts)                               ; ä¸»ç­‹æœ€åä¸€ç‚¹
+      (setq D (last all-pts)                               ; Ö÷½î×îºóÒ»µã
             dir-ang (point:angle (nth (- (length all-pts) 2) all-pts) D))
-      (setq hook-geom (rebar:make-hook-geom D dir-ang hook-end hook-dir d grade))
+      (setq hook-geom (rebar:make-hook-geom D dir-ang hook-end hook-dir diam grade))
       (if hook-geom
         (progn
-          ;; D çš„ bulge = hook-dir * bulgeï¼ˆå¼§æ®µä» D åˆ° Cï¼‰
+          ;; D µÄ bulge = hook-dir * bulge£¨»¡¶Î´Ó D µ½ C£©
           (setq bulge-D (cdr (car  hook-geom))
                 C       (car (car  hook-geom))
                 tail-end (car (cadr hook-geom)))
-          ;; æ›¿æ¢ D çš„ bulgeï¼Œè¿½åŠ  C å’Œ tail-end
+          ;; Ìæ»» D µÄ bulge£¬×·¼Ó C ºÍ tail-end
           (setq all-bulges (reverse all-bulges)
                 all-pts    (reverse all-pts))
-          (setq all-bulges (cdr all-bulges)                     ; å»æ‰æ—§çš„ D bulge(0)
-                all-bulges (cons bulge-D all-bulges))           ; è®¾ D çš„ bulge
-          (setq all-pts    (cdr all-pts)                        ; å»æ‰æ—§çš„ D
-                all-pts    (cons D all-pts))                    ; æ”¾å› D
-          (setq all-pts    (cons C       all-pts)               ; åŠ  C
-                all-bulges (cons 0.0     all-bulges))           ; C çš„ bulge=0
-          (setq all-pts    (cons tail-end all-pts)              ; åŠ  tail-end
-                all-bulges (cons 0.0     all-bulges))           ; tail çš„ bulge=0
-          ;; åè½¬å›æ¥
+          (setq all-bulges (cdr all-bulges)                     ; È¥µô¾ÉµÄ D bulge(0)
+                all-bulges (cons bulge-D all-bulges))           ; Éè D µÄ bulge
+          (setq all-pts    (cdr all-pts)                        ; È¥µô¾ÉµÄ D
+                all-pts    (cons D all-pts))                    ; ·Å»Ø D
+          (setq all-pts    (cons C       all-pts)               ; ¼Ó C
+                all-bulges (cons 0.0     all-bulges))           ; C µÄ bulge=0
+          (setq all-pts    (cons tail-end all-pts)              ; ¼Ó tail-end
+                all-bulges (cons 0.0     all-bulges))           ; tail µÄ bulge=0
+          ;; ·´×ª»ØÀ´
           (setq all-pts    (reverse all-pts)
                 all-bulges (reverse all-bulges))))))
 
-  ;; === åˆ›å»ºå¤šæ®µçº¿ï¼ˆå¸¦ bulge å€¼ï¼‰ ===
+  ;; === ´´½¨¶à¶ÎÏß£¨´ø bulge Öµ£© ===
   (rebar:make-pline-with-bulges all-pts all-bulges nil width layer))
 
 
-;; åˆ›å»ºå¸¦ bulge çš„ä¼˜åŒ–å¤šæ®µçº¿ã€‚entmakex å®ç°ã€‚
-;; pts: é¡¶ç‚¹è¡¨  bulges: æ¯ç‚¹ bulge è¡¨ï¼ˆé•¿åº¦åŒ ptsï¼‰
-;; closed: T=é—­åˆ  width: å¸¸é‡çº¿å®½  layer: å›¾å±‚
+;; ´´½¨´ø bulge µÄÓÅ»¯¶à¶ÎÏß¡£entmakex ÊµÏÖ¡£
+;; pts: ¶¥µã±í  bulges: Ã¿µã bulge ±í£¨³¤¶ÈÍ¬ pts£©
+;; closed: T=±ÕºÏ  width: ³£Á¿Ïß¿í  layer: Í¼²ã
 (defun rebar:make-pline-with-bulges (pts bulges closed width layer)
   (entmakex
     (append
@@ -173,94 +173,97 @@
 
 
 ;; ============================================================================
-;; é’¢ç­‹æŸ¥è¯¢
+;; ¸Ö½î²éÑ¯
 ;; ============================================================================
 
-(defun rebar:is-rebar? (ename)
-  "åˆ¤æ–­æ˜¯å¦ä¸ºé’¢ç­‹å®ä½“ï¼ˆç­‰å®½å¤šæ®µçº¿ï¼Œç»„ç  43 > 0ï¼‰ã€‚"
+(defun rebar:is-rebar? (ename / w)
+  "ÅĞ¶ÏÊÇ·ñÎª¸Ö½îÊµÌå£¨µÈ¿í¶à¶ÎÏß£¬×éÂë 43 > 0£©¡£"
   (and (= (entity:get-type ename) "LWPOLYLINE")
-       (> (entity:get-dxf ename 43) 0)))
+       (setq w (entity:get-dxf ename 43))
+       (> w 0)))
 
 (defun rebar:get-width (ename)
-  "è·å–é’¢ç­‹çº¿å®½ã€‚"
+  "»ñÈ¡¸Ö½îÏß¿í¡£"
   (entity:get-dxf ename 43))
 
 (defun rebar:set-width (ename w)
-  "è®¾ç½®é’¢ç­‹çº¿å®½ã€‚"
+  "ÉèÖÃ¸Ö½îÏß¿í¡£"
   (entity:set-dxf ename 43 w)
   (entity:update ename))
 
 (defun rebar:get-vertices (ename)
-  "è·å–é’¢ç­‹æ‰€æœ‰é¡¶ç‚¹åæ ‡è¡¨ã€‚"
+  "»ñÈ¡¸Ö½îËùÓĞ¶¥µã×ø±ê±í¡£"
   (curve:vertices ename))
 
 (defun rebar:get-bulges (ename / elst bulges)
-  "è·å–é’¢ç­‹æ‰€æœ‰é¡¶ç‚¹ bulge å€¼è¡¨ã€‚"
+  "»ñÈ¡¸Ö½îËùÓĞ¶¥µã bulge Öµ±í¡£"
   (setq elst (entget ename))
   (mapcar '(lambda (x) (cdr x))
     (vl-remove-if-not '(lambda (x) (= (car x) 42)) elst)))
 
 
 ;; ============================================================================
-;; å¼¯é’©æ£€æµ‹ä¸ä¿®æ”¹
+;; Íä¹³¼ì²âÓëĞŞ¸Ä
 ;; ============================================================================
 
-;; æ£€æµ‹é’¢ç­‹æŒ‡å®šç«¯çš„å¼¯é’©ç±»å‹ã€‚
-;; end: 'start æˆ– 'endã€‚è¿”å› 0(æ— é’©)/1(åœ†)/2(æ–œ)/3(ç›´)ã€‚
+;; ¼ì²â¸Ö½îÖ¸¶¨¶ËµÄÍä¹³ÀàĞÍ¡£
+;; end: 'start »ò 'end¡£·µ»Ø 0(ÎŞ¹³)/1(Ô²)/2(Ğ±)/3(Ö±)¡£
 (defun rebar:detect-hook-end (ename end / pts bulges n b1 b2 b3)
   (setq pts    (rebar:get-vertices ename)
         bulges (rebar:get-bulges ename)
         n      (length pts))
-  (if (< n 4) 0  ; n<4 æ—¶é¡¶ç‚¹ä¸è¶³ä»¥å½¢æˆå¼¯é’©ç»“æ„
+  (if (< n 4) 0  ; n<4 Ê±¶¥µã²»×ãÒÔĞÎ³ÉÍä¹³½á¹¹
     (if (eq end 'start)
-      ;; èµ·å§‹ç«¯ï¼šæ£€æŸ¥å‰ 3 ä¸ªé¡¶ç‚¹
-      (setq b1 (nth 0 bulges)
-            b2 (nth 1 bulges))
-      (if (and (= b1 0) (not (zerop b2)))
-        (rebar:bulge-to-hook-type (abs b2))
-        0)
-      ;; æœ«ç«¯ï¼šæ£€æŸ¥å 3 ä¸ªé¡¶ç‚¹
-      (setq b3 (nth (- n 3) bulges)
-            b2 (nth (- n 2) bulges))
-      (if (and (not (zerop b3)) (= b2 0))
-        (rebar:bulge-to-hook-type (abs b3))
-        0))))
+      ;; ÆğÊ¼¶Ë£º¼ì²éÇ° 3 ¸ö¶¥µã
+      (progn
+        (setq b1 (nth 0 bulges)
+              b2 (nth 1 bulges))
+        (if (and (= b1 0) (not (zerop b2)))
+          (rebar:bulge-to-hook-type (abs b2))
+          0))
+      ;; Ä©¶Ë£º¼ì²éºó 3 ¸ö¶¥µã
+      (progn
+        (setq b3 (nth (- n 3) bulges)
+              b2 (nth (- n 2) bulges))
+        (if (and (not (zerop b3)) (= b2 0))
+          (rebar:bulge-to-hook-type (abs b3))
+          0)))))
 
 (defun rebar:get-hook-sign (ename end / pts bulges n b)
-  "è·å–é’¢ç­‹æŒ‡å®šç«¯å¼¯é’©çš„æ–¹å‘ç¬¦å·ã€‚+1=å·¦å¼¯(CCW), -1=å³å¼¯(CW), 0=æ— é’©ã€‚"
+  "»ñÈ¡¸Ö½îÖ¸¶¨¶ËÍä¹³µÄ·½Ïò·ûºÅ¡£+1=×óÍä(CCW), -1=ÓÒÍä(CW), 0=ÎŞ¹³¡£"
   (setq pts    (rebar:get-vertices ename)
         bulges (rebar:get-bulges ename)
         n      (length pts))
   (if (< n 3) 0
     (if (eq end 'start)
       (progn (setq b (nth 1 bulges))
-             ;; èµ·å§‹é’© bulge å–åå­˜å‚¨ï¼Œç¬¦å·ä¸çœŸå® hook-dir ç›¸å
+             ;; ÆğÊ¼¹³ bulge È¡·´´æ´¢£¬·ûºÅÓëÕæÊµ hook-dir Ïà·´
              (if (and b (not (zerop b))) (if (> b 0) -1 1) 0))
       (progn (setq b (nth (- n 3) bulges))
              (if (and b (not (zerop b))) (if (> b 0) 1 -1) 0)))))
 
 (defun rebar:bulge-to-hook-type (bulge-abs)
-  "æ ¹æ® bulge ç»å¯¹å€¼åæ¨å¼¯é’©ç±»å‹ã€‚"
+  "¸ù¾İ bulge ¾ø¶ÔÖµ·´ÍÆÍä¹³ÀàĞÍ¡£"
   (cond
-    ((equal bulge-abs 1.0    0.01) 1)  ; 180Â°åœ†é’©
-    ((equal bulge-abs 0.6682 0.02) 2)  ; 135Â°æ–œé’©
-    ((equal bulge-abs 0.4142 0.02) 3)  ; 90Â°ç›´é’©
+    ((equal bulge-abs 1.0    0.01) 1)  ; 180¡ãÔ²¹³
+    ((equal bulge-abs 0.6682 0.02) 2)  ; 135¡ãĞ±¹³
+    ((equal bulge-abs 0.4142 0.02) 3)  ; 90¡ãÖ±¹³
     (t 0)))
 
 
 ;; ============================================================================
-;; æ·»åŠ /åˆ é™¤å¼¯é’©
+;; Ìí¼Ó/É¾³ıÍä¹³
 ;; ============================================================================
 
-(defun rebar:add-hook (ename end hook-type hook-dir d grade
+(defun rebar:add-hook (ename end hook-type hook-dir diam grade
                        / pts bulges n dir-ang D hook-geom C bulge-val tail-end
                          new-pts new-bulges closed? w lay)
-  ;; åœ¨å·²æœ‰é’¢ç­‹æŒ‡å®šç«¯æ·»åŠ å¼¯é’©ã€‚
-  ;; end: 'start æˆ– 'endã€‚è‹¥è¯¥ç«¯å·²æœ‰å¼¯é’©åˆ™å…ˆåˆ é™¤å†æ·»åŠ ã€‚
-  ;; å…ˆåˆ é™¤å·²æœ‰å¼¯é’©
+  ;; ÔÚÒÑÓĞ¸Ö½îÖ¸¶¨¶ËÌí¼ÓÍä¹³¡£
+  ;; end: 'start »ò 'end¡£Èô¸Ã¶ËÒÑÓĞÍä¹³ÔòÏÈÉ¾³ıÔÙÌí¼Ó¡£
+  ;; ÏÈÉ¾³ıÒÑÓĞÍä¹³
   (if (> (rebar:detect-hook-end ename end) 0)
     (setq ename (rebar:remove-hook ename end)))
-  (if (= hook-type 0) ename  ; ä¸æ·»åŠ 
+  (if (= hook-type 0) ename  ; ²»Ìí¼Ó
 
     (progn
       (setq pts    (rebar:get-vertices ename)
@@ -269,38 +272,38 @@
 
       (if (eq end 'start)
         (progn
-          ;; èµ·å§‹ç«¯ï¼šæ–¹å‘ä»ç¬¬2ç‚¹æŒ‡å‘ç¬¬1ç‚¹ï¼ˆåå‘ï¼‰
+          ;; ÆğÊ¼¶Ë£º·½Ïò´ÓµÚ2µãÖ¸ÏòµÚ1µã£¨·´Ïò£©
           (setq D       (car pts)
                 dir-ang (point:angle (cadr pts) D))
-          (setq hook-geom (rebar:make-hook-geom D dir-ang hook-type hook-dir d grade))
+          (setq hook-geom (rebar:make-hook-geom D dir-ang hook-type hook-dir diam grade))
           (if hook-geom
             (progn
               (setq C        (car (car  hook-geom))
-                    bulge-val (- (cdr (car hook-geom)))  ; åå‘ bulge
+                    bulge-val (- (cdr (car hook-geom)))  ; ·´Ïò bulge
                     tail-end  (car (cadr hook-geom)))
               (setq new-pts    (list tail-end C D))
               (setq new-bulges (list 0.0 bulge-val 0.0))
-              ;; è¿½åŠ åŸé’¢ç­‹å…¶ä½™é¡¶ç‚¹
+              ;; ×·¼ÓÔ­¸Ö½îÆäÓà¶¥µã
               (foreach pt (cdr pts)    (setq new-pts (append new-pts (list pt))))
               (foreach b  (cdr bulges) (setq new-bulges (append new-bulges (list b)))))))
 
-        ;; æœ«ç«¯
+        ;; Ä©¶Ë
         (progn
           (setq D       (last pts)
                 dir-ang (point:angle (nth (- n 2) pts) D))
-          (setq hook-geom (rebar:make-hook-geom D dir-ang hook-type hook-dir d grade))
+          (setq hook-geom (rebar:make-hook-geom D dir-ang hook-type hook-dir diam grade))
           (if hook-geom
             (progn
               (setq bulge-val (cdr (car  hook-geom))
                     C         (car (car  hook-geom))
                     tail-end  (car (cadr hook-geom)))
-              ;; å¤åˆ¶å‰ n-1 ä¸ªç‚¹ä¸å˜ï¼Œæœ€åä¸€ä¸ª(D)è®¾ bulgeï¼ŒåŠ  C å’Œ tail
+              ;; ¸´ÖÆÇ° n-1 ¸öµã²»±ä£¬×îºóÒ»¸ö(D)Éè bulge£¬¼Ó C ºÍ tail
               (setq new-pts    (reverse pts)
                     new-bulges (reverse bulges))
-              (setq new-pts    (cdr new-pts)              ; å»æ‰ D
+              (setq new-pts    (cdr new-pts)              ; È¥µô D
                     new-bulges (cdr new-bulges))
-              (setq new-pts    (cons D new-pts)            ; æ”¾å› D (ä½œ arc-start)
-                    new-bulges (cons bulge-val new-bulges)) ; D çš„ bulge
+              (setq new-pts    (cons D new-pts)            ; ·Å»Ø D (×÷ arc-start)
+                    new-bulges (cons bulge-val new-bulges)) ; D µÄ bulge
               (setq new-pts    (cons C new-pts)            ; C (arc-end)
                     new-bulges (cons 0.0 new-bulges))
               (setq new-pts    (cons tail-end new-pts)     ; tail
@@ -308,7 +311,7 @@
               (setq new-pts    (reverse new-pts)
                     new-bulges (reverse new-bulges))))))
 
-      ;; é‡å»ºå¤šæ®µçº¿ï¼ˆå…ˆè¯»å–å±æ€§ï¼Œå†åˆ é™¤æ—§å®ä½“ï¼‰
+      ;; ÖØ½¨¶à¶ÎÏß£¨ÏÈ¶ÁÈ¡ÊôĞÔ£¬ÔÙÉ¾³ı¾ÉÊµÌå£©
       (if new-pts
         (progn
           (setq closed? (curve:closed? ename)
@@ -320,28 +323,28 @@
 
 
 (defun rebar:remove-hook (ename end / pts bulges n new-pts new-bulges closed? w lay)
-  "ç§»é™¤é’¢ç­‹æŒ‡å®šç«¯çš„å¼¯é’©ï¼ˆæ¢å¤ä¸ºæ— é’©ç›´æ®µï¼‰ã€‚"
+  "ÒÆ³ı¸Ö½îÖ¸¶¨¶ËµÄÍä¹³£¨»Ö¸´ÎªÎŞ¹³Ö±¶Î£©¡£"
   (setq pts    (rebar:get-vertices ename)
         bulges (rebar:get-bulges ename)
         n      (length pts))
-  (if (< n 4) ename  ; è‡³å°‘4ä¸ªç‚¹æ‰æœ‰å¼¯é’©å¯åˆ 
+  (if (< n 4) ename  ; ÖÁÉÙ4¸öµã²ÅÓĞÍä¹³¿ÉÉ¾
     (progn
       (if (eq end 'start)
-        ;; èµ·å§‹é’©ï¼šå»æ‰å‰2ä¸ªï¼ˆtail-end å’Œ Cï¼‰ï¼Œä¿ç•™ D
+        ;; ÆğÊ¼¹³£ºÈ¥µôÇ°2¸ö£¨tail-end ºÍ C£©£¬±£Áô D
         (progn
           (setq new-pts    (cddr pts))
           (setq new-bulges (cddr bulges))
-          ;; é‡ç½®æš´éœ²çš„ D é¡¶ç‚¹ bulge=0ï¼ˆåŸä¸º hook bulgeï¼‰
+          ;; ÖØÖÃ±©Â¶µÄ D ¶¥µã bulge=0£¨Ô­Îª hook bulge£©
           (if new-bulges
             (setq new-bulges (cons 0.0 (cdr new-bulges)))))
-        ;; æœ«ç«¯é’©ï¼šå»æ‰å2ä¸ªï¼ˆC å’Œ tail-endï¼‰ï¼Œä¿ç•™ D
+        ;; Ä©¶Ë¹³£ºÈ¥µôºó2¸ö£¨C ºÍ tail-end£©£¬±£Áô D
         (progn
           (setq new-pts    (reverse (cddr (reverse pts)))
                 new-bulges (reverse (cddr (reverse bulges))))
-          ;; é‡ç½®æš´éœ²çš„ D é¡¶ç‚¹ bulge=0
+          ;; ÖØÖÃ±©Â¶µÄ D ¶¥µã bulge=0
           (if new-bulges
             (setq new-bulges (reverse (cons 0.0 (cdr (reverse new-bulges))))))))
-      ;; é‡å»ºï¼ˆå…ˆè¯»å–å±æ€§ï¼Œå†åˆ é™¤æ—§å®ä½“ï¼‰
+      ;; ÖØ½¨£¨ÏÈ¶ÁÈ¡ÊôĞÔ£¬ÔÙÉ¾³ı¾ÉÊµÌå£©
       (setq closed? (curve:closed? ename)
             w       (rebar:get-width ename)
             lay     (entity:get-layer ename))
@@ -350,80 +353,58 @@
 
 
 ;; ============================================================================
-;; ç®ç­‹åˆ›å»º
+;; ¹¿½î´´½¨
 ;; ============================================================================
 
 (defun rebar:make-stirrup (p1 p3 hook-type d grade hook-dir width layer
-                           / p2 p4 cover R inner-pts pts bulges
-                             dir-ang-0 dir-ang-2 hook-geom-0 hook-geom-2
-                             C0 bulge0 tail0 C2 bulge2 tail2)
-  ;; åˆ›å»ºçŸ©å½¢ç®ç­‹ï¼ˆå¸¦å¼¯é’©åœ¨çŸ©å½¢å¯¹è§’ä¸¤ç«¯ï¼‰ã€‚
-  ;; p1: å·¦ä¸‹è§’ç‚¹  p3: å³ä¸Šè§’ç‚¹
-  ;; hook-type: å¼¯é’©ç±»å‹  d: ç›´å¾„  grade: ç­‰çº§
+                           / p2 p4 cover R pts bulges dir-ang hook-geom C bulge-D tail-end)
+  ;; ´´½¨¾ØĞÎ¹¿½î£¨±ÕºÏ¾ØĞÎ + Æğµã 135¡ã Íä¹³£©¡£
+  ;; p1: ×óÏÂ½Çµã  p3: ÓÒÉÏ½Çµã
   (or width (setq width (* d (or (sys:get '*SYS:DWG-SCALE*) 100) 0.01)))
   (or layer (setq layer (or (sys:get '*SYS:STIRRUP-LAYER*) "S_STIRRUP")))
-  (lay:make layer 4)  ; é’è‰²
+  (lay:make layer 4)
 
-  ;; çŸ©å½¢å››è§’ï¼ˆé€†æ—¶é’ˆï¼‰
-  (setq p2 (list (car p1) (cadr p3) 0.0)   ; å·¦ä¸Š
-        p4 (list (car p3) (cadr p1) 0.0))  ; å³ä¸‹
-  ;; é’¢ç­‹å†…ç¼˜ï¼ˆå‡å»ä¿æŠ¤å±‚ + åŠå¾„ï¼‰
+  ;; ¾ØĞÎËÄ½Ç£¨ÄæÊ±Õë£©
+  (setq p2 (list (car p1) (cadr p3) 0.0)   ; ×óÉÏ
+        p4 (list (car p3) (cadr p1) 0.0))  ; ÓÒÏÂ
+  ;; ÄÚÊÕ±£»¤²ã + ÍäÇú°ë¾¶
   (setq cover (or (sys:get '*SYS:REBAR-COVER*) 25)
         d     (or d 8)
         R     (rebar:bend-radius d grade))
-  ;; ç®ç­‹å°ºå¯¸å†…æ”¶ä¿æŠ¤å±‚+å¼¯æ›²åŠå¾„
   (setq p1 (list (+ (car p1) cover R) (+ (cadr p1) cover R) 0.0)
         p2 (list (+ (car p2) cover R) (- (cadr p2) cover R) 0.0)
         p3 (list (- (car p3) cover R) (- (cadr p3) cover R) 0.0)
         p4 (list (- (car p4) cover R) (+ (cadr p4) cover R) 0.0))
 
-  ;; ç®ç­‹è·¯å¾„ï¼šp1 â†’ p2 â†’ p3 â†’ p4 â†’ å›åˆ° p1
-  ;; å¼¯é’©æ”¾åœ¨ p1â†’p2 æ®µå’Œ p3â†’p4 æ®µï¼ˆå¯¹è§’çº¿ä¸¤ç«¯ï¼‰
-  ;; ç®€åŒ–ï¼šå¼¯é’©æ”¾åœ¨èµ·å§‹æ®µ (p1) å’Œ p3 å¤„
-
-  ;; ä¸»ç­‹è·¯å¾„ï¼ˆé—­åˆçŸ©å½¢ï¼Œå»æ‰ p1 é‡å¤ï¼‰
-  (setq inner-pts (list p1 p2 p3 p4))
-
-  ;; è®¡ç®— p1 å¤„çš„å¼¯é’©ï¼ˆæ–¹å‘ä» p1 â†’ p2ï¼‰
-  (setq dir-ang-0  (point:angle p1 p2)
-        hook-geom-0 (rebar:make-hook-geom p1 dir-ang-0 hook-type hook-dir d grade))
-  ;; è®¡ç®— p3 å¤„çš„å¼¯é’©ï¼ˆæ–¹å‘ä» p3 â†’ p4ï¼‰
-  (setq dir-ang-2  (point:angle p3 p4)
-        hook-geom-2 (rebar:make-hook-geom p3 dir-ang-2 hook-type hook-dir d grade))
-
-  (if (and hook-geom-0 hook-geom-2)
+  ;; Íä¹³ÔÚ p1 ½Ç£ºÖ÷Ìå×ß p1¡úp2¡úp3¡úp4¡úp1 ºó£¬´Ó p1 Éì³ö 135¡ã Íä¹³
+  (setq dir-ang   (point:angle p4 p1)
+        hook-geom (rebar:make-hook-geom p1 dir-ang hook-type hook-dir d grade))
+  (if hook-geom
     (progn
-      (setq C0      (car (car  hook-geom-0))
-            bulge0   (cdr (car  hook-geom-0))
-            tail0    (car (cadr hook-geom-0))
-            C2      (car (car  hook-geom-2))
-            bulge2   (cdr (car  hook-geom-2))
-            tail2    (car (cadr hook-geom-2)))
-
-      ;; é¡¶ç‚¹åºåˆ—ï¼štail0 â†’ C0(å¼§) â†’ p1 â†’ p2 â†’ p3 â†’ C2(å¼§) â†’ tail2 â†’ p3(å›è§’) â†’ p4 â†’ p1 â†’ é—­åˆ
-      ;; tail2â†’p3 å›åˆ°è§’ç‚¹å†è¿ p4ï¼Œç¡®ä¿ç®ç­‹åº•è¾¹æ²¿ p3â†’p4 æ–¹å‘ï¼ˆè€Œéæ–œç©¿ï¼‰
-      ;; é—­åˆæ ‡å¿—ç”¨ nilï¼šæ˜¾å¼è¾¹ p4â†’p1 å·²é—­åˆçŸ©å½¢ã€‚
-      ;; T ä¼šå¯¼è‡´è‡ªåŠ¨é—­åˆæ®µ p1â†’tail0 ç©¿è¿‡èµ·å§‹å¼¯é’©åŒºåŸŸã€‚
-      (setq pts    (list tail0 C0 p1 p2 p3 C2 tail2 p3 p4 p1))
-      (setq bulges (list 0.0 (- bulge0) 0.0 0.0 bulge2 0.0 0.0 0.0 0.0 0.0))
-
+      (setq bulge-D  (cdr (car hook-geom))   ; p1¡úC »¡¶Î bulge£¨ÕıÏò£©
+            C        (car (car hook-geom))   ; »¡¶ÎÖÕµã
+            tail-end (car (cadr hook-geom))) ; Íä¹³Î²¶Ë
+      ;; ¶¥µã£ºp1 p2 p3 p4 p1£¨Ö÷ÌåÏÔÊ½±ÕºÏ£©C tail-end£¨Íä¹³Éì³ö£©
+      (setq pts    (list p1 p2 p3 p4 p1 C tail-end)
+            bulges (list 0.0 0.0 0.0 0.0 bulge-D 0.0 0.0))
       (rebar:make-pline-with-bulges pts bulges nil width layer))
-    ;; æ— é’©ç®€åŒ–ï¼šçº¯çŸ©å½¢
+    ;; ÎŞ¹³£º´¿±ÕºÏ¾ØĞÎ
     (entity:make-pline (list p1 p2 p3 p4) T layer)))
+
 
 
 (defun rebar:make-poly-stirrup (boundary-pts hook-type d grade hook-dir width layer
                                 / inner-pts p0 p1 dir-ang hook-geom C bulge-val tail all-pts all-bulges)
-  ;; åˆ›å»ºå¤šè¾¹å½¢ç®ç­‹ï¼ˆæ²¿ç»™å®šè¾¹ç•Œï¼‰ã€‚
-  ;; boundary-pts: ç®ç­‹è·¯å¾„ç‚¹è¡¨ï¼ˆé—­åˆå¤šè¾¹å½¢é¡¶ç‚¹ï¼‰ã€‚
+  ;; ´´½¨¶à±ßĞÎ¹¿½î£¨ÑØ¸ø¶¨±ß½ç£©¡£
+  ;; boundary-pts: ¹¿½îÂ·¾¶µã±í£¨±ÕºÏ¶à±ßĞÎ¶¥µã£©¡£
   (or width (setq width (* d (or (sys:get '*SYS:DWG-SCALE*) 100) 0.01)))
   (or layer (setq layer (or (sys:get '*SYS:STIRRUP-LAYER*) "S_STIRRUP")))
   (lay:make layer 4)
 
   (if (or (null boundary-pts) (< (length boundary-pts) 3))
-    (princ "\n[TB] ç®ç­‹è¾¹ç•Œç‚¹ä¸è¶³ï¼ˆè‡³å°‘éœ€è¦2ä¸ªç‚¹ï¼‰ã€‚")
-    ;; ç®€åŒ–ç‰ˆï¼šç›´æ¥ä»¥è¾¹ç•Œç‚¹ä¸ºè·¯å¾„åˆ›å»ºé—­åˆå¤šæ®µçº¿
-    ;; å¼¯é’©æ”¾åœ¨èµ·ç‚¹
+    (princ "\n[TB] ¹¿½î±ß½çµã²»×ã£¨ÖÁÉÙĞèÒª2¸öµã£©¡£")
+    ;; ¼ò»¯°æ£ºÖ±½ÓÒÔ±ß½çµãÎªÂ·¾¶´´½¨±ÕºÏ¶à¶ÎÏß
+    ;; Íä¹³·ÅÔÚÆğµã
     (if (> hook-type 0)
     (progn
       (setq p0 (car boundary-pts)
@@ -441,5 +422,44 @@
     (entity:make-pline boundary-pts T layer))))
 
 
-(princ "\n[TB] é’¢ç­‹å‡ ä½•åº“åŠ è½½å®Œæˆ (rebar:*)")
+;; ============================================================================
+;; ¸Ö½îÖØÁ¿£¨ÎüÊÕÃ÷¾­ÂÛÌ³"×Ô¶¯¼ÆËã¸Ö½î×Ü³¤×ÜÖØ"£¬ÀíÂÛÖØÁ¿¹«Ê½£©
+;; ============================================================================
+
+(defun rebar:weight (diameter length)
+  "¸Ö½îÀíÂÛÖØÁ¿(kg)¡£diameter=Ö±¾¶(mm)£¬length=³¤¶È(m)¡£¹«Ê½ 0.00617*d^2*L¡£"
+  (* 0.00617 diameter diameter length))
+
+(defun rebar:parse-diameter (str)
+  "½âÎö¸Ö½îÖ±¾¶¹æ¸ñ×Ö·û´®¡£Ö§³Ö %%13112 / \\U+008412 / 12 µÈĞÎÊ½¡£"
+  (cond
+    ((wcmatch str "*%%*")
+     (atof (substr str 6 (- (strlen str) 5))))
+    ((wcmatch (substr str 1 1) "\\")
+     (atof (substr str 8 (- (strlen str) 7))))
+    (t (atof str))))
+
+(defun c:GJZL (/ ss total-len total-w count)
+  "¸Ö½îÖØÁ¿Í³¼Æ¡£Ñ¡¸Ö½î¶à¶ÎÏß£¬ÀÛ¼Æ×Ü³¤ÓëÀíÂÛÖØÁ¿¡£"
+  (if (setq ss (ssget '((0 . "LWPOLYLINE"))))
+    (progn
+      (setq total-len 0.0 total-w 0.0 count 0)
+      (sel:for-each ss
+        '(lambda (e / d l w)
+           (if (rebar:is-rebar? e)
+             (progn
+               (setq d (rebar:get-width e)
+                     l (/ (curve:length e) 1000.0)
+                     w (rebar:weight d l))
+               (setq total-len (+ total-len l)
+                     total-w (+ total-w w)
+                     count (1+ count))))))
+      (princ (strcat "\n[TB] ¸Ö½îÖØÁ¿Í³¼Æ: " (itoa count) " ¸ù"))
+      (princ (strcat "\n  ×Ü³¤¶È = " (rtos total-len 2 2) " m"))
+      (princ (strcat "\n  ×ÜÖØÁ¿ = " (rtos total-w 2 2) " kg"))
+      (princ))
+    (princ "\n[TB] Î´Ñ¡Ôñ¸Ö½î¡£"))
+  (princ))
+
+(princ "\n[TB] ¸Ö½î¼¸ºÎ¿â¼ÓÔØÍê³É (rebar:*)")
 (princ)

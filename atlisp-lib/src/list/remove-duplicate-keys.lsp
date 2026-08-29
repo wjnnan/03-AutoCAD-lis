@@ -1,5 +1,5 @@
 (defun list:remove-duplicate-keys (lst)
-    "åˆ é™¤ç‚¹å¯¹è¡¨ä¸­é‡å¤çš„keyï¼Œå³å­è¡¨ä¸­ç¬¬ä¸€ä¸ªå…ƒç´ å”¯ä¸€ã€‚"
+    "É¾³ıµã¶Ô±íÖĞÖØ¸´µÄkey£¬¼´×Ó±íÖĞµÚÒ»¸öÔªËØÎ¨Ò»¡£"
     (if lst
 	(cons (car lst)
 	      (list:remove-duplicate-keys

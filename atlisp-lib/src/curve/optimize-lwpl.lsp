@@ -1,6 +1,6 @@
 (defun curve:optimize-lwpl (ent / segs res n1 n2 n3 fuzz)
-  "ä¼˜åŒ–å¤šæ®µçº¿é¡¶ç‚¹ã€‚å½“è¿ç»­å¤šç‚¹å…±çº¿æˆ–å…±åœ†æ—¶ï¼Œå‡å°‘é¡¶ç‚¹ã€‚ä¼˜åŒ–é¡ºæ—¶é’ˆçš„å¤šæ®µçº¿æœ‰é—®é¢˜å¾…ä¿®å¤ã€‚ä¼˜åŒ–ä¼šä¸¢å¤±å®½åº¦ä¿¡æ¯ï¼ï¼"
-  "ä¼˜åŒ–åçš„æ–°å›¾å…ƒ"
+  "ÓÅ»¯¶à¶ÎÏß¶¥µã¡£µ±Á¬Ğø¶àµã¹²Ïß»ò¹²Ô²Ê±£¬¼õÉÙ¶¥µã¡£ÓÅ»¯Ë³Ê±ÕëµÄ¶à¶ÎÏßÓĞÎÊÌâ´ıĞŞ¸´¡£ÓÅ»¯»á¶ªÊ§¿í¶ÈĞÅÏ¢£¡£¡"
+  "ÓÅ»¯ºóµÄĞÂÍ¼Ôª"
   (if (numberp tmp-fuzz)
       (setq fuzz tmp-fuzz)
     (setq fuzz  1.0e-06))
@@ -8,7 +8,7 @@
           (cons x y)))
       (curve:pline-3dpoints ent)
       (curve:pline-convexity ent)))
-  ;; å½“é—­åˆæ—¶
+  ;; µ±±ÕºÏÊ±
   (setq n1 (car segs))
   (setq res (cons n1 nil))
   (setq segs (cdr segs))
@@ -49,7 +49,7 @@
     (setq n2 (car res))
     (setq segs (cdr segs)))
   (if (= 1 (entity:getdxf ent 70))
-      ;;é—­åˆæ—¶ï¼Œæ£€æµ‹æœ€åä¸€ç‚¹,
+      ;;±ÕºÏÊ±£¬¼ì²â×îºóÒ»µã,
       (progn
 	(setq n3 (last res))
 	(cond
@@ -81,7 +81,7 @@
 	 )
 	(setq n1 (car res))
 	(setq n2 (last res))
-	;; æ£€æµ‹ç¬¬ä¸€ç‚¹
+	;; ¼ì²âµÚÒ»µã
 	(setq n3 (cadr (reverse res)))
 	(cond
 	 ((and (= 0 (cdr n1))

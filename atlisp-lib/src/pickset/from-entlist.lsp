@@ -1,6 +1,6 @@
 (defun pickset:from-entlist (entlst / ss)
-  "图元列表->选择集"
-  "选择集"
+  "ͼԪ�б�->ѡ��"
+  "ѡ��"
   (setq ss (ssadd))
   (foreach i entlst (ssadd i ss))
   ss)

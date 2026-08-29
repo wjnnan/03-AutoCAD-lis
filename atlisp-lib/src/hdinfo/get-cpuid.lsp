@@ -1,5 +1,5 @@
 (defun hdinfo:get-cpuid (/ vlist vobj lcom lexecquery item)
-  "è·å–CPU ID,ä¸ä¸€å®šæœ‰ç”¨ã€‚"
+  "»ñÈ¡CPU ID,²»Ò»¶¨ÓĞÓÃ¡£"
   (vl-load-com)
   (setq vlist (quote nil))
   (if (setq vobj (vlax-create-object "wbemscripting.swbemlocator"))

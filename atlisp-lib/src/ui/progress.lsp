@@ -1,21 +1,21 @@
 (defun ui:progress (current max-number)
-  "\næä¾›ä¸€ä¸ªè¿›åº¦æ¡åŠŸèƒ½å‡½æ•°ï¼Œcurrent æ˜¯å½“å‰è¿›åº¦   max-number æ˜¯è¿›åº¦æ€»é‡\nè°ƒç”¨å®Œæˆä¹‹åï¼Œå¯ä»¥ä½¿ç”¨(GRTEXT)
-  æ¸…é™¤è¿›åº¦\n"
-  "æ— è¿”å›å€¼"
+  "\nÌá¹©Ò»¸ö½ø¶ÈÌõ¹¦ÄÜº¯Êı£¬current ÊÇµ±Ç°½ø¶È   max-number ÊÇ½ø¶È×ÜÁ¿\nµ÷ÓÃÍê³ÉÖ®ºó£¬¿ÉÒÔÊ¹ÓÃ(GRTEXT)
+  Çå³ı½ø¶È\n"
+  "ÎŞ·µ»ØÖµ"
   "\n(SETQ CURRENT 0)\n(repeat 1000 (UI:PROGRESS (setq CURRENT (1+ CURRENT))
       1000))\n(grtext)\n"
   (require (quote music-die:multi-element))
-  (grtext -1 (strcat (substr "â–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆ"
+  (grtext -1 (strcat (substr "¨€¨€¨€¨€¨€¨€¨€¨€¨€¨€¨€¨€¨€¨€¨€¨€¨€¨€¨€¨€"
         1 (* 2 (fix (* 10 (/ current max-number 1.0)))))
       (nth (fix (* 7 (- (* 10 (/ current max-number 1.0))
               (fix (* 10 (/ current max-number 1.0))))))
-        (quote ("â–"
-            "â–"
-            "â–"
-            "â–Œ"
-            "â–‹"
-            "â–Š"
-            "â–‰")))
+        (quote ("¨‡"
+            "¨†"
+            "¨…"
+            "¨„"
+            "¨ƒ"
+            "¨‚"
+            "¨")))
       (apply (quote strcat)
         (music-die:multi-element "
           "

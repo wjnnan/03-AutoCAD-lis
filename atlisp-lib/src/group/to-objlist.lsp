@@ -1,5 +1,5 @@
 (defun group:to-objlist (obj-g / i objlst)
-    "ç¼–ç»„è½¬å›¾å…ƒå¯¹è±¡åˆ—è¡¨, obj-g ä¸ºç¼–ç»„å¯¹è±¡ã€‚"
+    "±à×é×ªÍ¼Ôª¶ÔÏóÁÐ±í, obj-g Îª±à×é¶ÔÏó¡£"
     (setq i 0)
     (setq objlst (quote nil))
     (while (< i (vla-get-count obj-g))

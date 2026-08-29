@@ -1,30 +1,46 @@
 (defun at-cnc:gen-gcodeb ()
-  (@:help '("å°†æ›²çº¿ç”ŸæˆG-code"))
+  (@:help '("½«ÇúÏßÉú³ÉG-code"))
  (setvar "CMDECHO" 0)
  (setq dnm (getvar "DWGNAME")
           dnm (substr dnm 1 (- (strlen dnm) 4))
           dnmb (strcat dnm "b.cnc")
           dnm (strcat dnm ".cnc"))
- (setq tn (getstring "\nNumber of tools åˆ€å…·ç¼–å· :"))
- (setq td (getdist "\nDiameter of tools åˆ€å…·ç›´å¾„ :"))
- (setq f (strcat " F" (rtos (getreal "\nFeedRate è¿›ç»™ç‡ :") 2) "\n"))
+ (if (null (setq tn (getstring "
+Number of tools µ¶¾ß±àºÅ :"))) (progn (princ "
+ÊäÈëÈ¡Ïû -- ÍË³ö.") (quit)))
+ (if (null (setq td (getdist "
+Diameter of tools µ¶¾ßÖ±¾¶ :"))) (progn (princ "
+ÊäÈëÈ¡Ïû -- ÍË³ö.") (quit)))
+ (if (null (setq fr (getreal "
+FeedRate ½ø¸øÂÊ :"))) (progn (princ "
+ÊäÈëÈ¡Ïû -- ÍË³ö.") (quit)))
+ (setq f (strcat " F" (rtos fr 2) "
+"))
  (setq hd T)
- (setq n 1)
+ (setq n 1 stno (strcat "N" (itoa n)))
  (setq pl (list)
           ppl (list (strcat "(" dnm ")\n") '"%\n")
           ppl2 (list (strcat "(" dnmb ")\n") "%\n"))
  (while (or (initget 1 "H ")
-          (setq s1 (entsel "\nSelect a slot é€‰æ‹©ç”»å¥½çš„æ§½ (H=æ¢åˆ€) :")))
+          (setq s1 (entsel "\nSelect a slot Ñ¡Ôñ»­ºÃµÄ²Û (H=»»µ¶) :")))
   (if (= s1 "H") (progn
-   (setq tn (getstring "\nNumber of tools åˆ€å…·ç¼–å· :"))
-   (setq td (getdist "\nDiameter of tools åˆ€å…·ç›´å¾„ :"))
-   (setq f (strcat " F" (rtos (getreal "\nFeedRate è¿›ç»™ç‡ :") 2) "\n"))
-   (setq hd T
-            pl (cons (strcat "åŠ å·¥ç¼–å·" stno "-N" (itoa n))))
+   (if (null (setq tn (getstring "
+Number of tools µ¶¾ß±àºÅ :"))) (progn (princ "
+ÊäÈëÈ¡Ïû -- ÍË³ö.") (quit)))
+   (if (null (setq td (getdist "
+Diameter of tools µ¶¾ßÖ±¾¶ :"))) (progn (princ "
+ÊäÈëÈ¡Ïû -- ÍË³ö.") (quit)))
+   (if (null (setq fr (getreal "
+FeedRate ½ø¸øÂÊ :"))) (progn (princ "
+ÊäÈëÈ¡Ïû -- ÍË³ö.") (quit)))
+   (setq f (strcat " F" (rtos fr 2) "
+"))
+   (setq hd T)
+   (setq pl (cons (strcat "¼Ó¹¤±àºÅ" stno "-N" (itoa n))))
   )
    (if (and (setq ent (entget(car s1)))
           (or (= (cdr (assoc 0 ent)) "LWPOLYLINE") (= (cdr (assoc 0 ent)) "POLYLINE"))
-    (setq pt (getpoint "\nStart Point èµ·ç‚¹ :"))
+    (setq pt (getpoint "\nStart Point Æğµã :"))
     (setq pc0 (osnap pt "CEN"))) (progn
     (if hd
   (setq ppl (cons (strcat "M06 T" tn "(D="(rtos td 2 2)")\n") ppl)
@@ -40,12 +56,13 @@
            ppl (cons "G01 F1500 Z5.0\n" ppl)
            ppl2 (cons "G01 F1500 Z5.0\n" ppl2)
            hd nil
-           pl (cons (strcat "åˆ€å…·å¤§å°=" (rtos td 2)) pl)
+           pl (cons (strcat "µ¶¾ß´óĞ¡=" (rtos td 2)) pl)
            stno (strcat "N" (itoa n)))
  )
     (command ".UNDO" "BE")
     (command "explode" (car s1))
     (setq ss (ssget "P"))
+    (if ss (progn
     (setq i -1 ss1 (list) j nil k T ang (angle pt pc0))
     (while (= j nil)
      (setq en (ssname ss (setq i (1+ i)))
@@ -60,7 +77,7 @@
      (if (or (equal (distance pt p1) 0.0 0.0001)
              (equal (distance pt p2) 0.0 0.0001)) (setq j i))
     )
-    (if k (progn
+    (if (and k j) (progn
      (repeat (- (sslength ss) j) (setq ss1 (append ss1 (list (ssname ss i))) i (1+ i)))
      (setq i 0)
      (repeat j (setq ss1 (append ss1 (list (ssname ss i))) i (1+ i)))
@@ -109,14 +126,14 @@
      (setq ppl (cons "G00 Z5.0\n" ppl)
               ppl (cons "M01\n" ppl))
     )
-     (princ "r is too small! Con't cut the slot. åŠå¾„å¤ªå°ï¼")
-    )
+     (princ "r is too small! Con't cut the slot. °ë¾¶Ì«Ğ¡£¡")
+    ))
     (command ".UNDO" "E")
     (command "_U")
     (command ".UNDO" "BE")
     (command "OFFSET" (- (/ td 2) 0.25) (cadr s1) (polar pt ang (/ td 2)) "")
     (command "explode" "l")
-    (setq ss (ssget "P"))
+    (if (setq ss (ssget "P")) (progn
     (setq i -1 ss1 (list) j nil pt0 (polar pt ang (- (/ td 2) 0.25)))
     (while (= j nil)
      (setq en (ssname ss (setq i (1+ i)))
@@ -130,6 +147,7 @@
      (if (or (equal (distance pt0 p1) 0.0 0.0001)
              (equal (distance pt0 p2) 0.0 0.0001)) (setq j i))
     )
+    (if j (progn
     (repeat (- (sslength ss) j) (setq ss1 (append ss1 (list (ssname ss i))) i (1+ i)))
     (setq i 0)
     (repeat j (setq ss1 (append ss1 (list (ssname ss i))) i (1+ i)))
@@ -174,16 +192,18 @@
     (setq ppl2 (cons "G00 Z5.0\n" ppl2)
              ppl2 (cons "M01\n" ppl2))
     (setq n (1+ n))
+    ))
     (command ".UNDO" "E")
     (command "_U")
    ))
   )
  )
  (if (and (listp pl) (listp ppl) (listp ppl2)) (progn
-  (setq pl (cons (strcat "é“£æ§½æ­£é¢ç¨‹å¼" dmm) pl)
-           pl (cons (strcat "é“£æ§½åé¢ç¨‹å¼" dnmb) pl)
+  (setq pl (cons (strcat "Ï³²ÛÕıÃæ³ÌÊ½" dnm) pl)
+           pl (cons (strcat "Ï³²Û·´Ãæ³ÌÊ½" dnmb) pl)
            pl (reverse pl))
   (setq fp (open dnm "w"))
+  (if (null fp) (progn (princ "\nÎŞ·¨´´½¨G´úÂëÎÄ¼ş -- ÍË³ö.") (quit)))
   (setq ppl (cons "M30\n" ppl))
   (setq ppl2 (cons "M30\n" ppl2))
   (setq ppl (reverse ppl) i -1)
@@ -192,12 +212,15 @@
   )
   (close fp)
   (setq fp1 (open dnmb "w"))
+  (if (null fp1) (progn (close fp) (princ "\nÎŞ·¨´´½¨·´ÃæG´úÂëÎÄ¼ş -- ÍË³ö.") (quit)))
   (setq ppl2 (reverse ppl2) i -1)
   (repeat (length ppl2)
    (princ (nth (setq i (1+ i)) ppl2) fp1)
   )
   (close fp1)
-  (setq pt (getpoint "\nStart Text(s) Point æ–‡å­—å¼€å§‹ç‚¹ :"))
+  (if (null (setq pt (getpoint "
+Start Text(s) Point ÎÄ×Ö¿ªÊ¼µã :"))) (progn (princ "
+Î´Ö¸¶¨ÎÄ×ÖÎ»ÖÃ -- Ìø¹ı.") (setq pt '(0 0 0))))
   (setq i -1)
   (repeat (length pl)
    (command ".text" pt 3 0 (nth (setq i (1+ i)) pl))

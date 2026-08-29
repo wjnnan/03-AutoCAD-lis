@@ -7,6 +7,6 @@
         (:CATEGORY . "Common")
         (:REQUIRED . "base")
         (:OPENSOURCE . 0)
-        (:DESCRIPTION . "æ ¹æ®æè¿°çš„æ¡ä»¶ç”Ÿæˆå†…å®¹,AIGC,ç”Ÿæˆå¼äººå·¥æ™ºèƒ½(æµ‹è¯•ç‰ˆ)")
+        (:DESCRIPTION . "¸ù¾ÝÃèÊöµÄÌõ¼þÉú³ÉÄÚÈÝ,AIGC,Éú³ÉÊ½ÈË¹¤ÖÇÄÜ(²âÊÔ°æ)")
         (:URL . "http://atlisp.cn")
         (:FILES "aigc")))

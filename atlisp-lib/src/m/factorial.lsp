@@ -1,5 +1,5 @@
 (defun m:factorial (n)
-    "姹俷 鐨勯樁涔樸�傛柉鐗规灄鍏紡娉曘�俓n"
+    "求n 的阶乘。斯特林公式法。\n"
     (* (sqrt (* 2 pi n))
         (expt (/ n (exp 1))
             n)))

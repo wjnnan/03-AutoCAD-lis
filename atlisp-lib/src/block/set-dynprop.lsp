@@ -1,5 +1,5 @@
 (defun block:set-dynprop (blkref prp val)
-  "è®¾ç½®åŠ¨æ€å—ç‰¹æ€§å€¼"
+  "ÉèÖÃ¶¯Ì¬¿éÌØĞÔÖµ"
   (setq prp (strcase prp))
   (vl-some (quote (lambda (x)
         (if (= prp (strcase (vla-get-propertyname x)))

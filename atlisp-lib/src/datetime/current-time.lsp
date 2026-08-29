@@ -1,6 +1,6 @@
 (defun datetime:current-time (str-fmt)
-  "æ ¼å¼åŒ–æ—¥æœŸæ—¶é—´ï¼Œyyyy å¹´ mo æœˆ dd æ—¥ hh æ—¶ mm åˆ† ss ç§’"
-  "æ—¥æœŸæ—¶é—´å­—ç¬¦ä¸²"
+  "¸ñÊ½»¯ÈÕÆÚÊ±¼ä£¬yyyy Äê mo ÔÂ dd ÈÕ hh Ê± mm ·Ö ss Ãë"
+  "ÈÕÆÚÊ±¼ä×Ö·û´®"
   "(datetime:current-time \"yyyy-mo-dd hh:mm:ss\")"
     (menucmd (strcat "M=$(edtime,$(getvar,date),"
           str-fmt ")")))

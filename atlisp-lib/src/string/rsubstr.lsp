@@ -1,4 +1,4 @@
 (defun string:rsubstr (str len)
-  "ä»å³ä¾§æˆªå–å­ä¸²"
+  "´ÓÓÒ²à½ØÈ¡×Ó´®"
   (substr str (- (strlen str)
       len -1)))

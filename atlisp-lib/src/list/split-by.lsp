@@ -1,6 +1,6 @@
 (defun list:split-by (lst fun / res lst-sub)
-  "æŒ‰ç»™å®šçš„æ¡ä»¶æ‹†åˆ†è¡¨"
-  "ç”±lstç»„æˆçš„lst"
+  "°´¸ø¶¨µÄÌõ¼ş²ğ·Ö±í"
+  "ÓÉlst×é³ÉµÄlst"
   ""
   (setq res nil)
   (setq lst-sub nil)

@@ -1,24 +1,24 @@
 (defun curve:3pt+chord2pt (pt1 pt2 pt3 chord-length pt-on-arc / angle1 angle2 center half-chord-angle pt-other radius)
-"å·²çŸ¥åœ†å¼§ä¸Šä¸‰ç‚¹pt1,pt2,pt3,æ±‚æ­¤åœ†å¼§ä¸Šå’Œpt-on-arcå¼¦é•¿ä¸ºchord-lengthçš„ç‚¹"
+"ÒÑÖªÔ²»¡ÉÏÈıµãpt1,pt2,pt3,Çó´ËÔ²»¡ÉÏºÍpt-on-arcÏÒ³¤Îªchord-lengthµÄµã"
 "pt"
 "(curve:3pt+chord2pt pt1 pt2 pt3 chord-length pt-on-arc)"
 	(setq 		
 		center (curve:3pt2o pt1 pt2 pt3)
 		radius (distance center pt1)
 	)
-  ;; è®¡ç®—ä¸­å¿ƒè§’
+  ;; ¼ÆËãÖĞĞÄ½Ç
   (setq half-chord-angle (m:acos (- 1 (/ (expt chord-length 2) (* 2 (expt radius 2))))))
-  ;; è®¡ç®—åœ†å¼§ä¸Šå·²çŸ¥ç‚¹ç›¸å¯¹äºåœ†å¿ƒçš„è§’åº¦
+  ;; ¼ÆËãÔ²»¡ÉÏÒÑÖªµãÏà¶ÔÓÚÔ²ĞÄµÄ½Ç¶È
   (setq angle1 (angle center pt-on-arc))
-  ;; è®¡ç®—å¦ä¸€ä¸ªç‚¹çš„è§’åº¦
+  ;; ¼ÆËãÁíÒ»¸öµãµÄ½Ç¶È
 	(if (> (geometry:turn-right-p pt1 pt2 pt3) 0)
-				(setq angle2 (+ angle1 half-chord-angle)) ; é¡ºæ—¶é’ˆæ–¹å‘
-		(setq angle2 (- angle1 half-chord-angle)) ; é€†æ—¶é’ˆæ–¹å‘ï¼Œæ ¹æ®å®é™…æƒ…å†µé€‰æ‹©
+				(setq angle2 (+ angle1 half-chord-angle)) ; Ë³Ê±Õë·½Ïò
+		(setq angle2 (- angle1 half-chord-angle)) ; ÄæÊ±Õë·½Ïò£¬¸ù¾İÊµ¼ÊÇé¿öÑ¡Ôñ
 
 	)
 	(setq pt-other (polar center angle2 radius))
 	
 	
-  ;; è¿”å›å¦ä¸€ä¸ªç‚¹çš„åæ ‡
+  ;; ·µ»ØÁíÒ»¸öµãµÄ×ø±ê
   pt-other
 )

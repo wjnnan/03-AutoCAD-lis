@@ -1,15 +1,15 @@
 (defun dcl:paging (h-or-v / *error*)
-  "DCL åˆ†é¡µæ¨¡å—ï¼Œkeyä¸º prev, next, curr_total. \nå‚æ•° h-or-v : t ä¸º æ°´å¹³ï¼Œnil ä¸ºç«–å‘.\nModeléƒ¨å¤–éƒ¨å˜é‡è¯´æ˜: curr-page:å½“å‰é¡µå·, total-page :æ€»é¡µæ•°ã€‚\nControléƒ¨å›è°ƒå‡½æ•°å®šä¹‰: (cb-flush-page)
-  é¡µé¢æ›´æ–°ã€‚\nInitéƒ¨: (paging-init)åˆå§‹åŒ–æŒ‰é’®ä½¿èƒ½"
-  "dclæ ¼å¼å­—ç¬¦ä¸²ã€‚"
+  "DCL ·ÖÒ³Ä£¿é£¬keyÎª prev, next, curr_total. \n²ÎÊı h-or-v : t Îª Ë®Æ½£¬nil ÎªÊúÏò.\nModel²¿Íâ²¿±äÁ¿ËµÃ÷: curr-page:µ±Ç°Ò³ºÅ, total-page :×ÜÒ³Êı¡£\nControl²¿»Øµ÷º¯Êı¶¨Òå: (cb-flush-page)
+  Ò³Ãæ¸üĞÂ¡£\nInit²¿: (paging-init)³õÊ¼»¯°´Å¥Ê¹ÄÜ"
+  "dcl¸ñÊ½×Ö·û´®¡£"
   "(dcl:paging t)"
   (defun *error* (msg)
     (if (/= (quote file)
         (type dcl-fp))
-      (alert "è¯·å…ˆè¿è¡Œ dcl:dialog ."))
+      (alert "ÇëÏÈÔËĞĞ dcl:dialog ."))
     (@:*error* msg))
-  (defun cb-flush-page nil "ä¸€èˆ¬å‡½æ•°ï¼Œéœ€æ ¹æ®åŠŸèƒ½è¦æ±‚é‡æ–°å®šä¹‰."
-    (alert "è¯·å®šä¹‰å›è°ƒå‡½æ•° (cb-flush-page)"))
+  (defun cb-flush-page nil "Ò»°ãº¯Êı£¬Ğè¸ù¾İ¹¦ÄÜÒªÇóÖØĞÂ¶¨Òå."
+    (alert "Çë¶¨Òå»Øµ÷º¯Êı (cb-flush-page)"))
   (defun paging-init nil (if (= 0 curr-page)
       (mode_tile "prev"
         1)

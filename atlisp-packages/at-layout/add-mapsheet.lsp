@@ -1,5 +1,5 @@
 (defun @layout:add-mapsheet-a4 ()
-  (@::prompt "瑙嗗彛鍔燗4鍥炬")
+  (@::prompt "视口加A4图框")
   (setq vps (pickset:to-list (ssget '((0 . "viewport")))))
   (mapcar
    '(lambda(x)
@@ -18,7 +18,7 @@
   )
 	 
 (defun @layout:add-mapsheet-a3 ()
-  (@::prompt "瑙嗗彛鍔燗3鍥炬")
+  (@::prompt "视口加A3图框")
   (setq vps (pickset:to-list (ssget '((0 . "viewport")))))
   (mapcar
    '(lambda(x)

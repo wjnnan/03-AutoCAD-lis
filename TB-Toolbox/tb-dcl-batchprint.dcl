@@ -1,111 +1,108 @@
-// tb-dcl-batchprint.dcl â€” æ‰¹é‡æ‰“å°å¯¹è¯æ¡†
-// æ•´åˆ BatchPlot/MSteel/æºæ³‰/SmartBatchPlot çš„ä¼˜ç‚¹
+// tb-dcl-batchprint.dcl ¡ª ÅúÁ¿´òÓ¡¶Ô»°¿ò£¨ÖØĞ´°æ v2.0£©
 
 bp_main : dialog {
-  label = "æ‰¹é‡æ‰“å° v1.0";
+  label = "ÅúÁ¿´òÓ¡ v2.0";
   initial_focus = "btn_detect";
 
-  // === ç¬¬ä¸€è¡Œï¼šå›¾æ¡†è¯†åˆ«è®¾ç½® ===
-  :boxed_column { label = "å›¾æ¡†è¯†åˆ«";
+  // === Í¼¿òÊ¶±ğ ===
+  :boxed_column { label = "Í¼¿òÊ¶±ğ";
     :row {
       :column {
-        :popup_list { key = "frame_type"; label = "è¯†åˆ«æ–¹å¼:"; width = 20; }
+        :popup_list { key = "frame_type"; label = "Ê¶±ğ·½Ê½:"; width = 20; }
       }
       :column {
-        :edit_box { key = "frame_value"; label = "å›¾å—å/å›¾å±‚å:"; width = 24; }
+        :edit_box { key = "frame_value"; label = "Í¼¿éÃû/Í¼²ãÃû:"; width = 24; }
       }
       :column {
-        :button { key = "btn_pick"; label = "æ‹¾å–<<"; width = 10; fixed_width = true; }
+        :button { key = "btn_pick"; label = "Ê°È¡<<"; width = 10; fixed_width = true; }
       }
     }
     :row {
-      :toggle { key = "include_layouts"; label = "åŒ…å«å¸ƒå±€ç©ºé—´"; }
-      :toggle { key = "include_model"; label = "åŒ…å«æ¨¡å‹ç©ºé—´"; value = "1"; }
-      :toggle { key = "auto_rotate"; label = "è‡ªåŠ¨æ—‹è½¬"; value = "1"; }
-      :toggle { key = "auto_center"; label = "è‡ªåŠ¨å±…ä¸­"; value = "1"; }
+      :toggle { key = "include_layouts"; label = "°üº¬²¼¾Ö¿Õ¼ä"; }
+      :toggle { key = "include_model"; label = "°üº¬Ä£ĞÍ¿Õ¼ä"; value = "1"; }
     }
   }
 
-  // === ç¬¬äºŒè¡Œï¼šæ‰“å°è®¾ç½® ===
-  :boxed_column { label = "æ‰“å°è®¾ç½®";
+  // === ´òÓ¡ÉèÖÃ ===
+  :boxed_column { label = "´òÓ¡ÉèÖÃ";
     :row {
       :column {
-        :popup_list { key = "printer"; label = "æ‰“å°æœº:"; width = 32; }
+        :popup_list { key = "printer"; label = "´òÓ¡»ú:"; width = 32; }
       }
     }
     :row {
       :column {
-        :popup_list { key = "paper"; label = "çº¸å¼ :"; width = 16; }
+        :popup_list { key = "paper"; label = "Ö½ÕÅ:"; width = 20; }
       }
       :column {
-        :popup_list { key = "scale_mode"; label = "æ¯”ä¾‹:"; width = 16; }
+        :popup_list { key = "scale_mode"; label = "±ÈÀı:"; width = 16; }
       }
       :column {
-        :popup_list { key = "ctb"; label = "æ‰“å°æ ·å¼:"; width = 16; }
-      }
-    }
-    :row {
-      :column {
-        :edit_box { key = "custom_scale"; label = "è‡ªå®šä¹‰æ¯”ä¾‹ 1:"; width = 10; }
-      }
-      :column {
-        :popup_list { key = "color_mode"; label = "é¢œè‰²:"; width = 12; }
-      }
-      :column {
-        :toggle { key = "plot_upside_down"; label = "åå‘æ‰“å°"; }
-      }
-    }
-  }
-
-  // === ç¬¬ä¸‰è¡Œï¼šè¾“å‡ºè®¾ç½® ===
-  :boxed_column { label = "è¾“å‡ºè®¾ç½®";
-    :row {
-      :column {
-        :popup_list { key = "output_mode"; label = "è¾“å‡ºæ–¹å¼:"; width = 16; }
-      }
-      :column {
-        :edit_box { key = "output_path"; label = "è¾“å‡ºè·¯å¾„:"; width = 24; }
-      }
-      :column {
-        :button { key = "btn_path"; label = "æµè§ˆ..."; width = 10; fixed_width = true; }
+        :popup_list { key = "ctb"; label = "´òÓ¡ÑùÊ½:"; width = 16; }
       }
     }
     :row {
       :column {
-        :edit_box { key = "name_rule"; label = "æ–‡ä»¶å‘½åè§„åˆ™:"; width = 28; }
+        :edit_box { key = "custom_scale"; label = "×Ô¶¨Òå±ÈÀı 1:"; width = 10; }
       }
       :column {
-        :toggle { key = "merge_pdf"; label = "åˆå¹¶ä¸ºå•ä¸ªPDF"; }
+        :popup_list { key = "color_mode"; label = "ÑÕÉ«:"; width = 12; }
+      }
+      :column {
+        :toggle { key = "plot_upside_down"; label = "·´Ïò´òÓ¡"; }
       }
     }
   }
 
-  // === ç¬¬å››è¡Œï¼šå›¾çº¸åˆ—è¡¨ ===
-  :boxed_column { label = "å›¾çº¸åˆ—è¡¨";
+  // === Êä³öÉèÖÃ ===
+  :boxed_column { label = "Êä³öÉèÖÃ";
+    :row {
+      :column {
+        :popup_list { key = "output_mode"; label = "Êä³ö¸ñÊ½:"; width = 16; }
+      }
+      :column {
+        :edit_box { key = "output_path"; label = "Êä³öÂ·¾¶:"; width = 24; }
+      }
+      :column {
+        :button { key = "btn_path"; label = "ä¯ÀÀ..."; width = 10; fixed_width = true; }
+      }
+    }
+    :row {
+      :column {
+        :edit_box { key = "name_rule"; label = "ÃüÃû¹æÔò(¿ÉÑ¡):"; width = 28; }
+      }
+      :column {
+        :toggle { key = "merge_pdf"; label = "ºÏ²¢Îªµ¥¸öPDF"; }
+      }
+    }
+  }
+
+  // === Í¼Ö½ÁĞ±í ===
+  :boxed_column { label = "Í¼Ö½ÁĞ±í";
     :row {
       :list_box { key = "drawing_list"; width = 50; height = 12; multiple_select = true; }
       :column {
-        :button { key = "btn_detect"; label = "æ£€æµ‹å›¾æ¡†"; width = 12; fixed_width = true; }
-        :button { key = "btn_preview"; label = "é¢„è§ˆ"; width = 12; fixed_width = true; }
-        :button { key = "btn_sort_x"; label = "Xæ’åº"; width = 12; fixed_width = true; }
-        :button { key = "btn_sort_y"; label = "Yæ’åº"; width = 12; fixed_width = true; }
-        :button { key = "btn_remove"; label = "ç§»é™¤é€‰ä¸­"; width = 12; fixed_width = true; }
-        :button { key = "btn_clear"; label = "æ¸…ç©ºåˆ—è¡¨"; width = 12; fixed_width = true; }
+        :button { key = "btn_detect"; label = "¼ì²âÍ¼¿ò"; width = 12; fixed_width = true; }
+        :button { key = "btn_preview"; label = "Ô¤ÀÀ"; width = 12; fixed_width = true; }
+        :popup_list { key = "sort_mode"; width = 12; }
+        :button { key = "btn_sort"; label = "ÅÅĞò"; width = 12; fixed_width = true; }
+        :button { key = "btn_remove"; label = "ÒÆ³ıÑ¡ÖĞ"; width = 12; fixed_width = true; }
+        :button { key = "btn_clear"; label = "Çå¿ÕÁĞ±í"; width = 12; fixed_width = true; }
         spacer;
-        :button { key = "btn_save_cfg"; label = "ä¿å­˜é…ç½®"; width = 12; fixed_width = true; }
-        :button { key = "btn_load_cfg"; label = "åŠ è½½é…ç½®"; width = 12; fixed_width = true; }
+        :button { key = "btn_save_cfg"; label = "±£´æÅäÖÃ"; width = 12; fixed_width = true; }
+        :button { key = "btn_load_cfg"; label = "¼ÓÔØÅäÖÃ"; width = 12; fixed_width = true; }
       }
     }
     :row {
-      :text { key = "status"; label = "å°±ç»ªã€‚ç‚¹å‡»ã€Œæ£€æµ‹å›¾æ¡†ã€å¼€å§‹ã€‚"; }
+      :text { key = "status"; label = "µã»÷¡¸¼ì²âÍ¼¿ò¡¹¿ªÊ¼¡£"; }
     }
   }
 
-  // === åº•éƒ¨æŒ‰é’® ===
+  // === µ×²¿ ===
   :row {
-    :button { key = "btn_help"; label = "å¸®åŠ©"; width = 10; fixed_width = true; }
+    :button { key = "btn_help"; label = "°ïÖú"; width = 10; fixed_width = true; }
     spacer;
-    :button { key = "btn_print"; label = "å¼€å§‹æ‰“å°"; width = 14; fixed_width = true; is_default = true; }
+    :button { key = "btn_print"; label = "¿ªÊ¼´òÓ¡"; width = 14; fixed_width = true; is_default = true; }
     cancel_button;
   }
 }

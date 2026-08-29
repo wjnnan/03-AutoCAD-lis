@@ -1,6 +1,6 @@
 (defun block:get-attrib-ents (blkref / lst)
-  "è·å–å—å‚ç…§çš„å±æ€§å›¾å…ƒã€‚"
-  "å›¾å…ƒåˆ—è¡¨"
+  "»ñÈ¡¿é²ÎÕÕµÄÊôĞÔÍ¼Ôª¡£"
+  "Í¼ÔªÁĞ±í"
   "(block:get-attrib-ents (car(entsel)))"
   (if (= (quote VLA-OBJECT)
 	 (type blkref))

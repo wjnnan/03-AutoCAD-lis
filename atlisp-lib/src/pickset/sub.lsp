@@ -1,6 +1,6 @@
 (defun pickset:sub (ss1 ss2 / ename ss sstemp)
-  "é€‰æ‹©é›†ç›¸å‡"
-  "é€‰æ‹©é›† or nil"
+  "Ñ¡Ôñ¼¯Ïà¼õ"
+  "Ñ¡Ôñ¼¯ or nil"
   "(pickset:Sub (setq ss1 (ssget))
     (setq ss2 (ssget)))"
   (cond ((and (equal (type ss1)

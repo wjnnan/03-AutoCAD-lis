@@ -1,5 +1,5 @@
 (defun string:case (str)
-  "大小写替换"
+  "��Сд�滻"
   (vl-list->string (mapcar (quote (lambda (x)
           (cond ((and (>= x 65)
                 (< x 97))
