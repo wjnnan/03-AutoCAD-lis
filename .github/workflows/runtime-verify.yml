@@ -15,14 +15,23 @@ jobs:
       - name: 检出代码
         uses: actions/checkout@v4
 
+      - name: 修复脚本中的本地路径
+        shell: powershell
+        run: |
+          $ws = "${{ github.workspace }}"
+          $wsSlash = $ws -replace '\\', '/'
+          # 替换 smoke 脚本里的 Windows 反斜杠路径
+          (Get-Content "tests\autocad_2024_smoke.scr" -Raw) -replace [regex]::Escape('d:\My Code\Claude Code\03-AutoCAD-lisp'), $ws | Set-Content "tests\autocad_2024_smoke.scr" -NoNewline
+          # 替换测试脚本里的正斜杠路径
+          (Get-Content "_test_script.scr" -Raw) -replace 'd:/My Code/Claude Code/03-AutoCAD-lisp', $wsSlash | Set-Content "_test_script.scr" -NoNewline
+          Write-Host "脚本路径已修复为: $ws"
+
       - name: 运行 accoreconsole 冒烟测试
         shell: cmd
         run: |
           "C:\Program Files\Autodesk\AutoCAD 2024\accoreconsole.exe" /s "tests\autocad_2024_smoke.scr"
-          type _cc_smoke_result.log 2>nul
 
       - name: 运行 AutoLISP 测试套件
         shell: cmd
         run: |
           "C:\Program Files\Autodesk\AutoCAD 2024\accoreconsole.exe" /s "_test_script.scr"
-          type _test_results.log 2>nul
