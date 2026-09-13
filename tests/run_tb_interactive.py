@@ -31,7 +31,9 @@ SCR_PATH = ROOT / "_tb_interactive.scr"
 # 注入到引擎里的辅助函数（纯 ASCII，避免编码问题）
 HELPER_SRC = ''';;; _tb_interactive_helper.lsp -- 交互式测试辅助，由 run_tb_interactive.py 生成
 (defun it:clean ()
-  "清空当前图形中的所有实体。"
+  "清空实体并恢复图层状态（c:TG/c:TD 会关闭或冻结图层）。"
+  (command "_.-LAYER" "_ON" "*" "")
+  (command "_.-LAYER" "_T" "*" "")
   (setq *it:ss* (ssget "_X"))
   (if *it:ss*
     (progn
@@ -151,6 +153,38 @@ CASES = [
         "inputs": ["nn"],
         "expect": ["捕捉模式:"],
         "forbid": ["错误", "no function definition"],
+    },
+    {
+        "name": "DD",
+        "desc": "c:dd 水平断点符号（getpoint 取点后建多段线）",
+        "setup": "",
+        "inputs": ["dd", "0,0"],
+        "expect": ["###COUNT:DD=1###"],
+        "forbid": ["错误", "no function definition"],
+    },
+    {
+        "name": "TG",
+        "desc": "c:tg 关闭所选对象所在图层（ssget）",
+        "setup": "(it:mkline 0.0 0.0 100.0 0.0)",
+        "inputs": ["tg", "W", "-10000,-10000", "10000,10000", ""],
+        "expect": ["已关闭所选对象的图层。"],
+        "forbid": ["错误", "no function definition", "参数太少"],
+    },
+    {
+        "name": "TD",
+        "desc": "c:td 冻结所选对象所在图层（ssget）",
+        "setup": "(it:mkline 0.0 0.0 100.0 0.0)",
+        "inputs": ["td", "W", "-10000,-10000", "10000,10000", ""],
+        "expect": ["已冻结所选对象的图层"],
+        "forbid": ["错误", "no function definition", "参数太少"],
+    },
+    {
+        "name": "RB",
+        "desc": "c:RB 画任意钢筋（直径/等级/弯钩/方向 + 点取路径）",
+        "setup": "",
+        "inputs": ["RB", "20", "3", "2", "2", "L", "0,0", "200,0", ""],
+        "expect": ["钢筋已绘制。D=20 等级=3", "弯钩: 始=斜 末=斜"],
+        "forbid": ["错误", "no function definition", "参数太少", "至少需要2个点"],
     },
 ]
 
