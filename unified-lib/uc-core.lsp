@@ -34,10 +34,16 @@
     (t
      (apply 'command args))))
 
-(defun uc:com-available-p nil
-  (not
-    (vl-catch-all-error-p
-      (vl-catch-all-apply 'vlax-get-acad-object '()))))
+(defun uc:com-available-p (/ obj)
+  "判断 ActiveX/COM 是否真的可用。
+不只检查是否报错：无头引擎(accoreconsole)下 vlax-get-acad-object 不报错但
+返回 nil，旧写法会对 nil 取 not 而误判为可用，随后 vla-* 调用报
+VLA-OBJECT nil；且 vla-* 未定义时属 no function definition，
+vl-catch-all-apply 不兜底，会直接中断命令。故须同时校验函数存在与返回值有效。"
+  (and (car (atoms-family 1 (list "VLAX-GET-ACAD-OBJECT")))
+       (setq obj (vl-catch-all-apply 'vlax-get-acad-object '()))
+       (not (vl-catch-all-error-p obj))
+       obj))
 
 (defun uc:alist-put (alist key value)
   (if (assoc key alist)
