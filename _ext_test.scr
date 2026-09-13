@@ -1,0 +1,3 @@
+(setvar "SECURELOAD" 0)
+(load "d:/My Code/Claude Code/03-AutoCAD-lisp/_ext_test.lsp")
+_.quit _y

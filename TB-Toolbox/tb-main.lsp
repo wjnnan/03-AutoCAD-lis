@@ -9,13 +9,13 @@
           *TB:TAB-KEYS* '("tab_edit" "tab_text" "tab_layer" "tab_block" "tab_dim" "tab_struct" "tab_misc")
           *TB:PAGE-BINDS* '(
     ;; 页0
-    (("btn_q" . "q") ("btn_qw" . "qw") ("btn_ww" . "ww") ("btn_ty" . "ty") ("btn_qr" . "qr") ("btn_pp" . "pp") ("btn_te" . "te") ("btn_we" . "we") ("btn_a" . "a") ("btn_s" . "s") ("btn_sc" . "sc") ("btn_r" . "r") ("btn_de" . "de") ("btn_cc" . "cc") ("btn_cf" . "cf") ("btn_cr" . "cr") ("btn_cl" . "cl") ("btn_ff" . "ff") ("btn_fr" . "fr") ("btn_oo" . "oo") ("btn_cx" . "cx") ("btn_s1" . "s1") ("btn_s2" . "s2") ("btn_s4" . "s4") ("btn_s5" . "s5") ("btn_s0" . "s0") ("btn_s00" . "s00") ("btn_r4" . "r4") ("btn_r9" . "r9") ("btn_r5" . "r5") ("btn_r0" . "r0") ("btn_c1" . "C1") ("btn_c2" . "C2") ("btn_c3" . "C3") ("btn_c4" . "C4") ("btn_c5" . "C5") ("btn_c6" . "C6") ("btn_c7" . "C7") ("btn_c8" . "C8") ("btn_z0" . "z0") ("btn_ee" . "ee") ("btn_as" . "As") ("btn_v1" . "v1") ("btn_v2" . "v2") ("btn_v3" . "v3"))
+    (("btn_q" . "q") ("btn_qw" . "qw") ("btn_ww" . "ww") ("btn_ty" . "ty") ("btn_qr" . "qr") ("btn_pp" . "pp") ("btn_te" . "te") ("btn_we" . "we") ("btn_a" . "a") ("btn_s" . "s") ("btn_sc" . "sc") ("btn_r" . "r") ("btn_de" . "de") ("btn_cc" . "cc") ("btn_cf" . "cf") ("btn_cr" . "cr") ("btn_cl" . "cl") ("btn_ff" . "ff") ("btn_fr" . "fr") ("btn_oo" . "oo") ("btn_mof" . "MOF") ("btn_cx" . "cx") ("btn_s1" . "s1") ("btn_s2" . "s2") ("btn_s4" . "s4") ("btn_s5" . "s5") ("btn_s0" . "s0") ("btn_s00" . "s00") ("btn_r4" . "r4") ("btn_r9" . "r9") ("btn_r5" . "r5") ("btn_r0" . "r0") ("btn_c1" . "C1") ("btn_c2" . "C2") ("btn_c3" . "C3") ("btn_c4" . "C4") ("btn_c5" . "C5") ("btn_c6" . "C6") ("btn_c7" . "C7") ("btn_c8" . "C8") ("btn_z0" . "z0") ("btn_ee" . "ee") ("btn_as" . "As") ("btn_v1" . "v1") ("btn_v2" . "v2") ("btn_v3" . "v3"))
     ;; 页1
     (("btn_tssd" . "tssd") ("btn_gts" . "gts") ("btn_ttk" . "ttk") ("btn_ttg" . "ttg") ("btn_ttr" . "ttr") ("btn_tty" . "tty") ("btn_th" . "th") ("btn_ttj" . "ttj") ("btn_ttq" . "ttq") ("btn_tjk" . "tjk") ("btn_13" . "13") ("btn_23" . "23") ("btn_31" . "31") ("btn_32" . "32"))
     ;; 页2
     (("btn_tg" . "tg") ("btn_tgf" . "tgf") ("btn_td" . "td") ("btn_tdf" . "tdf") ("btn_ts" . "ts") ("btn_tsf" . "tsf") ("btn_tdj" . "tdj") ("btn_tsj" . "tsj") ("btn_tx" . "tx") ("btn_tq" . "tq") ("btn_gtc" . "gtc"))
     ;; 页3
-    (("btn_jk" . "jk") ("btn_ktj" . "ktj") ("btn_gkm" . "gkm") ("btn_gks" . "gks") ("btn_sk" . "sk"))
+    (("btn_jk" . "jk") ("btn_ktj" . "ktj") ("btn_gkm" . "gkm") ("btn_gks" . "gks") ("btn_sk" . "sk") ("btn_mbo" . "MBO") ("btn_rav" . "RAV") ("btn_rblk" . "RBLK"))
     ;; 页4
     (("btn_fw" . "fw") ("btn_bbq" . "bbq") ("btn_bbf" . "bbf") ("btn_bgc" . "bgc") ("btn_ggb" . "ggb") ("btn_gbb" . "gbb") ("btn_zb" . "zb") ("btn_qb" . "qb"))
     ;; 页5
@@ -48,6 +48,7 @@
   ("btn_ff" "ff" "零倒角" 0)
   ("btn_fr" "fr" "倒圆角" 0)
   ("btn_oo" "oo" "偏移" 0)
+  ("btn_mof" "MOF" "多重偏移" 0)
   ("btn_cx" "cx" "选线修剪" 0)
   ("btn_s1" "s1" "缩放0.5×" 0)
   ("btn_s2" "s2" "缩放2×" 0)
@@ -103,6 +104,9 @@
   ("btn_gkm" "gkm" "块改名" 3)
   ("btn_gks" "gks" "改块属性" 3)
   ("btn_sk" "sk" "删重叠块" 3)
+  ("btn_mbo" "MBO" "块向匹配" 3)
+  ("btn_rav" "RAV" "属性取整" 3)
+  ("btn_rblk" "RBLK" "批量换块" 3)
   ("btn_fw" "fw" "标注复位" 4)
   ("btn_bbq" "bbq" "标注线对齐" 4)
   ("btn_bbf" "bbf" "标注等分" 4)
@@ -154,6 +158,8 @@
   ("btn_bpt" "BPT" "批量打印" 6)
   ("btn_bpset" "BPSET" "打印设置" 6)
 ))
+
+
 
 (setq *TB:PAGE-NAMES* '("绘图编辑" "文字处理" "图层管理" "图块管理" "标注处理" "结构通用" "辅助功能"))
 

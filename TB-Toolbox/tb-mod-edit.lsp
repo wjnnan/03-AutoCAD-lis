@@ -215,5 +215,38 @@
           (princ (strcat "\n[TB] 已偏移 " (itoa (sslength ss)) " 条曲线"))))))
   (princ))
 
-(princ "\n[TB] 绘图编辑模块加载完成 (edit: 44命令)")
+;; ============================================================================
+;; 多重偏移（吸收自 AutoCAD-LISP 项目，修复全局变量污染）
+;; ============================================================================
+
+(defun c:MOF (/ d oftype ans ss i e cnt)
+  "多重偏移：向外/居中/向内，可选删除源对象。"
+  (uc:guard-begin '())
+  (setq d (getdist "\n偏移距离: "))
+  (if (and d (setq ss (ssget '((0 . "LWPOLYLINE,CIRCLE,ELLIPSE,SPLINE,ARC")))))
+    (progn
+      (initget 1 "Out Center In")
+      (setq oftype (getkword "\n偏移方式 [向外(Out)/居中(Center)/向内(In)]: "))
+      (initget "Y N")
+      (setq ans (getkword "\n删除源对象? [Y/N] <N>: "))
+      (setq i 0 cnt 0)
+      (repeat (sslength ss)
+        (setq e (vlax-ename->vla-object (ssname ss i)))
+        (cond
+          ((= oftype "Out")
+           (vl-catch-all-apply 'vla-offset (list e d)))
+          ((= oftype "Center")
+           (vl-catch-all-apply 'vla-offset (list e d))
+           (vl-catch-all-apply 'vla-offset (list e (- d))))
+          (t
+           (vl-catch-all-apply 'vla-offset (list e (- d)))))
+        (if (= ans "Y")
+          (vl-catch-all-apply 'vla-delete (list e)))
+        (setq i (1+ i) cnt (1+ cnt)))
+      (princ (strcat "\n已偏移 " (itoa cnt) " 个对象。")))
+    (princ "\n未选择对象或未输入距离。"))
+  (princ)
+  (uc:guard-end))
+
+(princ "\n[TB] 绘图编辑模块加载完成 (edit: 45命令)")
 (princ)

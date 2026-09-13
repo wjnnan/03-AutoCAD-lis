@@ -14,7 +14,7 @@ TB_DCL_LAUNCHER = ROOT / "TB-Toolbox" / "tb-dcl-launcher.dcl"
 TB_DCL_HOTKEY = ROOT / "TB-Toolbox" / "tb-dcl-hotkey.dcl"
 TB_HOTKEY_LSP = ROOT / "TB-Toolbox" / "tb-mod-hotkey.lsp"
 
-EXPECT_PAGE_COUNTS = [45, 14, 11, 5, 8, 23, 19]
+EXPECT_PAGE_COUNTS = [46, 14, 11, 8, 8, 23, 19]
 
 
 def parse_binds(text: str):
@@ -79,8 +79,8 @@ def main() -> int:
     catalog = parse_catalog(main_text)
 
     # 1. 数量一致
-    assert len(binds) == 125, f"PAGE-BINDS 数量 {len(binds)} != 125"
-    assert len(catalog) == 125, f"CMD-CATALOG 数量 {len(catalog)} != 125"
+    assert len(binds) == 129, f"PAGE-BINDS 数量 {len(binds)} != 129"
+    assert len(catalog) == 129, f"CMD-CATALOG 数量 {len(catalog)} != 129"
 
     # 2. 逐项匹配（key + 命令名大小写不敏感）
     for (bk, bc), (ck, cc, cf, cp) in zip(binds, catalog):

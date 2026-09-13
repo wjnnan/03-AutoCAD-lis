@@ -116,5 +116,96 @@
   (uc:guard-end))
 
 
-(princ "\n[TB] 图块管理模块加载完成 (block: 5命令)")
+;; ============================================================================
+;; 块方向匹配（吸收自 AutoCAD-LISP 项目）
+;; ============================================================================
+
+(defun c:MBO (/ ref rot ss i cnt)
+  "块方向匹配：选参照块，其余所选块统一旋转到相同角度。"
+  (uc:guard-begin '())
+  (if (setq ref (car (entsel "\n选择参照块: ")))
+    (if (= (entity:get-type ref) "INSERT")
+      (progn
+        (setq rot (vlax-get (vlax-ename->vla-object ref) 'Rotation))
+        (if (setq ss (ssget '((0 . "INSERT"))))
+          (progn
+            (setq i 0 cnt 0)
+            (repeat (sslength ss)
+              (vl-catch-all-apply 'vla-put-rotation
+                (list (vlax-ename->vla-object (ssname ss i)) rot))
+              (setq i (1+ i) cnt (1+ cnt)))
+            (princ (strcat "\n已将 " (itoa cnt) " 个块旋转到 "
+                           (rtos (* 180.0 (/ rot pi)) 2 2) " 度。")))))
+      (princ "\n所选不是图块。")))
+  (princ)
+  (uc:guard-end))
+
+
+;; ============================================================================
+;; 属性文字取整（吸收自 AutoCAD-LISP 项目）
+;; ============================================================================
+
+(defun c:RAV (/ ss i cnt en atts)
+  "块属性文字取整：数字型属性统一保留 2 位小数。"
+  (uc:guard-begin '())
+  (if (setq ss (ssget '((0 . "INSERT"))))
+    (progn
+      (setq i 0 cnt 0)
+      (repeat (sslength ss)
+        (setq en (ssname ss i))
+        (foreach pair (uc:block-attributes en)
+          (if (numberp (read (cdr pair)))
+            (progn
+              (entity:set-attrib en (car pair) (rtos (atof (cdr pair)) 2 2))
+              (setq cnt (1+ cnt)))))
+        (setq i (1+ i)))
+      (princ (strcat "\n已处理 " (itoa cnt) " 个属性文字。"))))
+  (princ)
+  (uc:guard-end))
+
+
+;; ============================================================================
+;; 批量换块（吸收自 AutoCAD-LISP 项目，通用化改造）
+;; ============================================================================
+
+(defun c:RBLK (/ ref new old newname ss i recs cnt ins e)
+  "批量换块：把全图指定块替换为目标块，保留插入点/旋转/图层，迁移同名属性。"
+  (uc:guard-begin '())
+  (if (and (setq ref (car (entsel "\n选择要被替换的块: ")))
+           (= (entity:get-type ref) "INSERT"))
+    (progn
+      (setq old (entity:get-dxf ref 2))
+      (if (and (setq new (car (entsel (strcat "\n选择替换目标块 [" old "]: "))))
+               (= (entity:get-type new) "INSERT"))
+        (progn
+          (setq newname (entity:get-dxf new 2))
+          ;; 收集旧块的插入点/旋转/图层/属性
+          (setq ss (ssget "X" (list '(0 . "INSERT") (cons 2 old)))
+                i 0 recs nil)
+          (repeat (sslength ss)
+            (setq e (ssname ss i))
+            (setq recs (cons (list (entity:get-dxf e 10)
+                                   (or (entity:get-dxf e 50) 0.0)
+                                   (entity:get-layer e)
+                                   (uc:block-attributes e))
+                             recs))
+            (setq i (1+ i)))
+          ;; 删除旧块
+          (command "_.ERASE" ss "")
+          ;; 插入新块并回填属性
+          (setq cnt 0)
+          (foreach rec recs
+            (setq ins (blk:insert newname (car rec) 1.0 (cadr rec)))
+            (if ins
+              (progn
+                (entity:set-dxf ins 8 (caddr rec))
+                (foreach pair (cadddr rec)
+                  (entity:set-attrib ins (car pair) (cdr pair)))
+                (setq cnt (1+ cnt)))))
+          (princ (strcat "\n已将 " (itoa cnt) " 个 " old " 替换为 " newname)))
+        (princ "\n未选择有效的替换块。"))))
+  (princ)
+  (uc:guard-end))
+
+(princ "\n[TB] 图块管理模块加载完成 (block: 8命令)")
 (princ)

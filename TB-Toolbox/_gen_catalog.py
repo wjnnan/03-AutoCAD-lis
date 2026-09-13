@@ -6,7 +6,7 @@ import io, re, sys
 
 MAIN = 'TB-Toolbox/tb-main.lsp'
 DCL = 'TB-Toolbox/tb-dcl-launcher.dcl'
-PAGE_COUNTS = [45, 14, 11, 5, 8, 23, 19]
+PAGE_COUNTS = [46, 14, 11, 8, 8, 23, 19]
 
 def read_gbk(p):
     return io.open(p, encoding='gbk').read()
@@ -81,7 +81,7 @@ def main():
             catalog.append((key, cmd, fn, page_idx))
 
     # 4. 断言
-    assert len(catalog) == 125, '总数 %d != 125' % len(catalog)
+    assert len(catalog) == 129, '总数 %d != 129' % len(catalog)
     for page_idx in range(7):
         n = len([c for c in catalog if c[3] == page_idx])
         assert n == PAGE_COUNTS[page_idx], '页%d 数量 %d' % (page_idx, n)

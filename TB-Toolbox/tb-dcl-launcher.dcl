@@ -60,6 +60,7 @@ tb_page_0:dialog{
           :button{label="零倒角 FF";key="btn_ff";width=14;fixed_width=true;}
           :button{label="倒圆角 FR";key="btn_fr";width=14;fixed_width=true;}
           :button{label="偏移 OO";key="btn_oo";width=14;fixed_width=true;}
+          :button{label="多重偏移 MOF";key="btn_mof";width=14;fixed_width=true;}
         }
       }
     }
@@ -277,10 +278,13 @@ tb_page_3:dialog{
         :button{label="快速建块 JK";key="btn_jk";width=14;fixed_width=true;}
         :button{label="块统计 KTJ";key="btn_ktj";width=14;fixed_width=true;}
         :button{label="块改名 GKM";key="btn_gkm";width=14;fixed_width=true;}
+        :button{label="块向匹配 MBO";key="btn_mbo";width=16;fixed_width=true;}
       }
       :column{
         :button{label="改块属性 GKS";key="btn_gks";width=14;fixed_width=true;}
         :button{label="删重叠块 SK";key="btn_sk";width=14;fixed_width=true;}
+        :button{label="属性取整 RAV";key="btn_rav";width=16;fixed_width=true;}
+        :button{label="批量换块 RBLK";key="btn_rblk";width=16;fixed_width=true;}
       }
     }
   }
