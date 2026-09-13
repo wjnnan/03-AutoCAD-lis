@@ -226,6 +226,61 @@ def run_harness(accore: str) -> tuple[int, int]:
     return passed, failed
 
 
+def run_functional(accore: str) -> tuple[int, int]:
+    """运行 TB-Toolbox 真机测试：函数级断言 + 交互式命令。返回 (通过, 失败)。
+
+    函数级：加载、命令/库函数注册完整性、entmake 造图元后的库函数行为断言。
+    交互级：用 .scr 按提示顺序喂输入，驱动需要选对象/取点的命令。
+    """
+    if str(TESTS_DIR) not in sys.path:
+        sys.path.insert(0, str(TESTS_DIR))
+    total_pass = total_fail = 0
+
+    # 1. 函数级
+    print("")
+    print("[功能测试: 库函数行为（加载/注册/断言）]")
+    try:
+        import run_tb_functional as tbf
+    except ImportError as exc:
+        print(f"  [FAIL] 无法导入 run_tb_functional.py：{exc}")
+        return 0, 1
+    passed, failed, errs = tbf.run_functional_suite(accore)
+    if passed < 0:
+        print("  [SKIP] 未找到 accoreconsole.exe，跳过真机测试")
+        return 0, 0
+    bad = failed + errs
+    print(f"  {'[PASS]' if bad == 0 else '[FAIL]'} 通过 {passed}，失败 {failed}，异常 {errs}")
+    if bad:
+        _sections, _tp, _tf, _te = tbf.parse_report()
+        for title, items in _sections:
+            for item in items:
+                if item.startswith("[FAIL]") or item.startswith("[ERR ]"):
+                    print(f"      [{title}] {item}")
+    total_pass += passed
+    total_fail += bad
+
+    # 2. 交互级
+    print("")
+    print("[功能测试: 交互式命令（.scr 喂输入序列）]")
+    try:
+        import run_tb_interactive as tbi
+    except ImportError as exc:
+        print(f"  [FAIL] 无法导入 run_tb_interactive.py：{exc}")
+        return total_pass, total_fail + 1
+    ipass, ifail, iresults = tbi.run_suite(accore)
+    if ipass < 0:
+        print("  [SKIP] 未找到 accoreconsole.exe")
+        return total_pass, total_fail
+    print(f"  {'[PASS]' if ifail == 0 else '[FAIL]'} 通过 {ipass}，失败 {ifail}")
+    for case, problems in iresults:
+        for prob in problems:
+            print("      [%s] %s" % (case["name"], prob))
+    total_pass += ipass
+    total_fail += ifail
+
+    return total_pass, total_fail
+
+
 def run_smoke(accore: str) -> tuple[int, int]:
     """运行 tests/autocad_2024_smoke.lsp，检查 [CCSMOKE] Result: PASS。"""
     print("\n[冒烟测试: tests/autocad_2024_smoke.lsp]")
@@ -283,6 +338,9 @@ def _print_discovery(discovery: dict[str, list[Path]], mode: str) -> None:
         print("\n[运行时验证]")
         for p in discovery["runtime"]:
             print(f"  {p.name}")
+    if mode in ("functional", "all"):
+        print("\n[功能测试]")
+        print("  tests/run_tb_functional.py（真机：加载/注册/库函数行为断言）")
 
 
 def main() -> int:
@@ -291,12 +349,15 @@ def main() -> int:
     group.add_argument("--static", action="store_true", help="仅静态检查（默认）")
     group.add_argument("--runtime", action="store_true", help="静态 + 运行时验证（需 accoreconsole）")
     group.add_argument("--harness", action="store_true", help="静态 + 运行时 + 单元测试 harness")
-    group.add_argument("--all", action="store_true", help="静态 + 运行时 + harness + 冒烟")
+    group.add_argument("--functional", action="store_true",
+                       help="静态 + TB-Toolbox 真机功能测试（需 accoreconsole）")
+    group.add_argument("--all", action="store_true", help="静态 + 运行时 + harness + 冒烟 + 功能测试")
     parser.add_argument("--list", action="store_true", help="仅列出将执行的测试")
     args = parser.parse_args()
 
     discovery = discover()
-    mode = "all" if args.all else "harness" if args.harness else "runtime" if args.runtime else "static"
+    mode = ("all" if args.all else "functional" if args.functional
+            else "harness" if args.harness else "runtime" if args.runtime else "static")
 
     if args.list:
         _print_discovery(discovery, mode)
@@ -334,6 +395,9 @@ def main() -> int:
                     total_pass += p; total_fail += f; total_skip += s
                 if mode in ("harness", "all"):
                     p, f = run_harness(accore)
+                    total_pass += p; total_fail += f
+                if mode in ("functional", "all"):
+                    p, f = run_functional(accore)
                     total_pass += p; total_fail += f
                 if mode == "all":
                     p, f = run_smoke(accore)
