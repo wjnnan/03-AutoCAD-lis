@@ -62,10 +62,9 @@
 (defun c:qh (/ ss total)
   (uc:guard-begin '())
   "提取所选文字/标注中的数字并求和。"
+  (setq total 0.0)
   (if (setq ss (ssget '((0 . "TEXT,MTEXT,DIMENSION"))))
-    (progn
-      (setq total 0.0)
-      (sel:for-each ss
+    (sel:for-each ss
         '(lambda (e / str val i num-str)
            (setq str (cond
                        ((= (entity:get-type e) "DIMENSION")
@@ -84,7 +83,9 @@
            (setq val (if (= num-str "") 0.0 (atof num-str)))
            (if (not (zerop val))
              (setq total (+ total val))))))
-    (princ (strcat "\n数字求和: " (rtos total 2 2))))
+  ;; 无论是否选中都输出结果。原实现只把输出放在 else 分支：
+  ;; 选中对象时静默无结果，未选中时 total 为 nil，(rtos nil 2 2) 直接报错。
+  (princ (strcat "\n数字求和: " (rtos total 2 2)))
   (princ)
   (uc:guard-end))
 
