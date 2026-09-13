@@ -103,41 +103,37 @@
 ;; c:RH — 添加弯钩
 ;; ============================================================================
 
-(defun c:RH (/ e hook-type hdir d grade end-str end)
+(defun c:RH (/ ss i e hook-type hdir d grade end-str end)
   (uc:guard-begin '())
-  "为已有钢筋添加或修改弯钩。"
-  (if (setq e (car (entsel "\n选择钢筋: ")))
-    (if (rebar:is-rebar? e)
-      (progn
-        (initget "0 1 2 3")
-        (setq hook-type (getint "\n弯钩类型 [0=删除 1=圆钩 2=斜钩 3=直钩] <2>: "))
-        (if (not hook-type) (setq hook-type 2))
+  "为所选钢筋批量添加或修改弯钩（支持框选）。"
+  (if (setq ss (ssget '((0 . "LWPOLYLINE"))))
+    (progn
+      (initget "0 1 2 3")
+      (setq hook-type (getint "\n弯钩类型 [0=删除 1=圆钩 2=斜钩 3=直钩] <2>: "))
+      (if (not hook-type) (setq hook-type 2))
 
-        (initget "S E")
-        (setq end-str (getkword "\n加在哪端 [S起点/E终点] <E>: "))
-        (setq end (if (or (not end-str) (= end-str "E")) 'end 'start))
+      (initget "S E")
+      (setq end-str (getkword "\n加在哪端 [S起点/E终点] <E>: "))
+      (setq end (if (or (not end-str) (= end-str "E")) 'end 'start))
 
-        (initget "L R")
-        (setq hdir-str (getkword "\n弯钩方向 [L左/R右] <L>: "))
-        (setq hdir (if (or (not hdir-str) (= hdir-str "L")) 1 -1))
+      (initget "L R")
+      (setq hdir-str (getkword "\n弯钩方向 [L左/R右] <L>: "))
+      (setq hdir (if (or (not hdir-str) (= hdir-str "L")) 1 -1))
 
-        (setq d (safe:get-real "钢筋直径(mm)" (sys:get '*SYS:REBAR-DIAMETER*))
-              grade (safe:get-int "钢筋等级(1/2/3)" (sys:get '*SYS:REBAR-GRADE*)))
+      (setq d (safe:get-real "钢筋直径(mm)" (sys:get '*SYS:REBAR-DIAMETER*))
+            grade (safe:get-int "钢筋等级(1/2/3)" (sys:get '*SYS:REBAR-GRADE*)))
 
-        (if (= hook-type 0)
-          ;; 删除弯钩
-          (if (> (rebar:detect-hook-end e end) 0)
-            (progn
-              (rebar:remove-hook e end)
-              (princ "\n弯钩已删除。"))
-            (princ "\n该端没有弯钩。"))
-          ;; 添加弯钩
-          (progn
-            (rebar:add-hook e end hook-type hdir d grade)
-            (princ (strcat "\n弯钩已添加/更新。类型="
-                           (nth hook-type '("" "圆钩" "斜钩" "直钩")))))))
-      (princ "\n所选实体不是钢筋（缺少常量线宽）。"))
-    (princ "\n未选择实体。"))
+      (setq i 0)
+      (repeat (sslength ss)
+        (setq e (ssname ss i))
+        (if (rebar:is-rebar? e)
+          (if (= hook-type 0)
+            (if (> (rebar:detect-hook-end e end) 0)
+              (rebar:remove-hook e end))
+            (rebar:add-hook e end hook-type hdir d grade)))
+        (setq i (1+ i)))
+      (princ (strcat "\n已处理 " (itoa (sslength ss)) " 根钢筋。")))
+    (princ "\n未选择钢筋。"))
   (princ)
   (uc:guard-end))
 
@@ -146,25 +142,28 @@
 ;; c:RDH — 删除弯钩
 ;; ============================================================================
 
-(defun c:RDH (/ e end-str end)
+(defun c:RDH (/ ss i e end-str end)
   (uc:guard-begin '())
-  "删除钢筋指定端的弯钩。"
-  (if (setq e (car (entsel "\n选择钢筋: ")))
-    (if (rebar:is-rebar? e)
-      (progn
-        (initget "S E B")
-        (setq end-str (getkword "\n删除哪端 [S起点/E终点/B两端] <B>: "))
-        (if (or (not end-str) (= end-str "B"))
-          (progn
-            (setq e (rebar:remove-hook e 'start))
-            (rebar:remove-hook e 'end)
-            (princ "\n两端弯钩已全部删除。"))
-          (progn
-            (setq end (if (= end-str "S") 'start 'end))
-            (rebar:remove-hook e end)
-            (princ "\n弯钩已删除。"))))
-      (princ "\n所选实体不是钢筋。"))
-    (princ "\n未选择实体。"))
+  "批量删除钢筋指定端的弯钩（支持框选）。"
+  (if (setq ss (ssget '((0 . "LWPOLYLINE"))))
+    (progn
+      (initget "S E B")
+      (setq end-str (getkword "\n删除哪端 [S起点/E终点/B两端] <B>: "))
+      (setq end (cond ((= end-str "S") 'start)
+                      ((= end-str "E") 'end)
+                      (t 'both)))
+      (setq i 0)
+      (repeat (sslength ss)
+        (setq e (ssname ss i))
+        (if (rebar:is-rebar? e)
+          (if (= end 'both)
+            (progn
+              (setq e (rebar:remove-hook e 'start))
+              (rebar:remove-hook e 'end))
+            (rebar:remove-hook e end)))
+        (setq i (1+ i)))
+      (princ (strcat "\n已处理 " (itoa (sslength ss)) " 根钢筋。")))
+    (princ "\n未选择钢筋。"))
   (princ)
   (uc:guard-end))
 
@@ -192,19 +191,19 @@
 ;; c:RO — 偏移钢筋
 ;; ============================================================================
 
-(defun c:RO (/ e dist side pt)
+(defun c:RO (/ ss dist pt)
   (uc:guard-begin '())
-  "偏移钢筋（保持钢筋属性）。"
-  (if (setq e (car (entsel "\n选择要偏移的钢筋: ")))
+  "批量偏移钢筋（保持钢筋属性，支持框选）。"
+  (if (setq ss (ssget '((0 . "LWPOLYLINE"))))
     (progn
       (setq dist (safe:get-real "偏移距离(mm)" 100)
             pt   (getpoint "\n偏移方向点: "))
       (if pt
         (progn
           (if (vl-catch-all-error-p
-                (vl-catch-all-apply (quote (lambda nil (command "_.OFFSET" dist e pt "")))))
+                (vl-catch-all-apply (quote (lambda nil (command "_.OFFSET" dist ss "" pt "")))))
             (princ "\n偏移失败，请检查钢筋和偏移距离。")
-            (princ "\n钢筋已偏移。")))
+            (princ (strcat "\n已偏移 " (itoa (sslength ss)) " 根钢筋。"))))
         (princ "\n未指定偏移方向。"))))
   (princ)
   (uc:guard-end))

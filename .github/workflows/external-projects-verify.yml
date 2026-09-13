@@ -1,0 +1,87 @@
+name: External Projects Verify
+
+# 验证 GitHub 上第三方 AutoCAD AutoLISP 项目能否在本机 AutoCAD 环境正常运行
+# 需要 self-hosted runner（标签 autocad）
+
+on:
+  workflow_dispatch:
+
+jobs:
+  verify-external:
+    runs-on: [self-hosted, windows, autocad]
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v4
+
+      - name: 克隆外部项目
+        shell: powershell
+        run: |
+          $ErrorActionPreference = "Continue"
+          git clone --depth 1 https://github.com/ferhatatesmech/pipe-router-autolisp.git _ext_pipe 2>&1 | Out-Null
+          git clone --depth 1 https://github.com/ahmed-abdelmotey/AutoCAD-LISP.git _ext_tools 2>&1 | Out-Null
+          git clone --depth 1 https://github.com/Jciel/cathedral.git _ext_cathedral 2>&1 | Out-Null
+          Write-Host "克隆完成"
+          Get-ChildItem -Directory | Where-Object { $_.Name -like "_ext_*" } | Select-Object Name
+
+      - name: 生成测试脚本（纯 ASCII，动态路径）
+        shell: powershell
+        run: |
+          $ws = "${{ github.workspace }}".Replace('\', '/')
+          $lsp = @"
+          (setq *log* (open "$ws/_ext_result.log" "w"))
+          (setq *ok* 0 *bad* 0)
+          (defun lg (m) (write-line m *log*) (princ (strcat "\n" m)))
+          (defun try (label path)
+            (lg (strcat "LOAD " label))
+            (if (not (findfile path))
+              (progn (lg "  SKIP not found") nil)
+              (if (vl-catch-all-error-p (setq r (vl-catch-all-apply 'load (list path))))
+                (progn (lg (strcat "  FAIL: " (vl-catch-all-error-message r)))
+                       (setq *bad* (1+ *bad*)) nil)
+                (progn (lg "  OK") (setq *ok* (1+ *ok*)) T))))
+          (lg "===== 1. pipe-router-autolisp =====")
+          (try "pipedraw.lsp" "$ws/_ext_pipe/pipedraw.lsp")
+          (lg "===== 2. AutoCAD-LISP tools =====")
+          (try "Multiple Offset" "$ws/_ext_tools/1- Multiple offset/Multiple Offset.lsp")
+          (try "Match Block Orientation" "$ws/_ext_tools/3- Match Block orientation/Match Block Orientation.lsp")
+          (try "replace blocks" "$ws/_ext_tools/4- Replace block/replace blocks.lsp")
+          (try "Round Attributes Text" "$ws/_ext_tools/5- Round Block Attributes/1/ROUND ATTRIBUTES TEXT 1.0.LSP")
+          (lg "===== 3. cathedral lib =====")
+          (try "core.LSP" "$ws/_ext_cathedral/src/core/core.LSP")
+          (try "math.LSP" "$ws/_ext_cathedral/src/math/math.LSP")
+          (try "block.LSP" "$ws/_ext_cathedral/src/block/block.LSP")
+          (try "string.LSP" "$ws/_ext_cathedral/src/string/string.LSP")
+          (try "association-list.LSP" "$ws/_ext_cathedral/src/list/association-list.LSP")
+          (try "excell-files.LSP" "$ws/_ext_cathedral/src/files/excell-files.LSP")
+          (lg "===== SUMMARY =====")
+          (lg (strcat "PASS=" (itoa *ok*) " FAIL=" (itoa *bad*)))
+          (close *log*)
+          (princ)
+          "@
+          [System.IO.File]::WriteAllText("${{ github.workspace }}\_ext_test.lsp", $lsp, [System.Text.Encoding]::ASCII)
+          $scr = "_.new _ext`n(load `"$ws/_ext_test.lsp`")`n_.quit _y`n"
+          [System.IO.File]::WriteAllText("${{ github.workspace }}\_ext_test.scr", $scr, [System.Text.Encoding]::ASCII)
+          Write-Host "测试脚本已生成"
+
+      - name: 运行 accoreconsole 外部项目测试
+        shell: cmd
+        continue-on-error: true
+        run: |
+          "C:\Program Files\Autodesk\AutoCAD 2024\accoreconsole.exe" /s "%GITHUB_WORKSPACE%\_ext_test.scr"
+
+      - name: 显示测试结果
+        shell: powershell
+        run: |
+          $log = "${{ github.workspace }}\_ext_result.log"
+          if (Test-Path $log) {
+            Get-Content $log | Write-Host
+          } else {
+            Write-Host "结果文件未生成 —— accoreconsole 可能未执行脚本"
+          }
+
+      - name: 上传结果
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: external-projects-result
+          path: _ext_result.log
