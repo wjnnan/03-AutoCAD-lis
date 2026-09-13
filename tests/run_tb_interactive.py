@@ -57,6 +57,12 @@ HELPER_SRC = ''';;; _tb_interactive_helper.lsp -- 交互式测试辅助，由 ru
 (defun it:mkcircle (cx cy r)
   (entmake (list (cons 0 "CIRCLE") (cons 10 (list cx cy 0.0)) (cons 40 r))))
 
+(defun it:count (tag)
+  "打印当前图形实体数，供外部校验命令是否真的产生了对象。空图时 ssget 返回 nil。"
+  (setq *it:cs* (ssget "_X"))
+  (princ (strcat (chr 10) "###COUNT:" tag "="
+                 (itoa (if *it:cs* (sslength *it:cs*) 0)) "###" (chr 10))))
+
 (defun it:mktext (x y s)
   (entmake (list (cons 0 "TEXT") (cons 10 (list x y 0.0)) (cons 40 3.5)
                  (cons 1 s) (cons 7 "Standard"))))
@@ -106,6 +112,46 @@ CASES = [
         "expect": ["数字求和: 319.5"],
         "forbid": ["错误", "no function definition", "参数太少"],
     },
+    {
+        "name": "SEIS",
+        "desc": "c:SEIS 抗震特征周期（getkword 选分支 + getint）",
+        "setup": "",
+        "inputs": ["SEIS", "T", "2", "2"],
+        "expect": ["地震特征周期 Tg ="],
+        "forbid": ["错误", "no function definition", "参数太少"],
+    },
+    {
+        "name": "Q",
+        "desc": "c:q 直线（包装内置 LINE 命令）",
+        "setup": "",
+        "inputs": ["q", "0,0", "100,0", ""],
+        "expect": ["###COUNT:Q=1###"],
+        "forbid": ["错误", "no function definition"],
+    },
+    {
+        "name": "WW",
+        "desc": "c:ww 圆（包装内置 CIRCLE 命令）",
+        "setup": "",
+        "inputs": ["ww", "50,50", "25"],
+        "expect": ["###COUNT:WW=1###"],
+        "forbid": ["错误", "no function definition"],
+    },
+    {
+        "name": "QR",
+        "desc": "c:qr 矩形（包装内置 RECTANG 命令）",
+        "setup": "",
+        "inputs": ["qr", "0,0", "80,60"],
+        "expect": ["###COUNT:QR=1###"],
+        "forbid": ["错误", "no function definition"],
+    },
+    {
+        "name": "nn",
+        "desc": "c:nn 对象捕捉设置（无交互，直接调用）",
+        "setup": "",
+        "inputs": ["nn"],
+        "expect": ["捕捉模式:"],
+        "forbid": ["错误", "no function definition"],
+    },
 ]
 
 
@@ -128,6 +174,7 @@ def build_scr() -> str:
             lines.append(c["setup"])
         lines.append('(it:mark "%s")' % c["name"])
         lines.extend(c["inputs"])
+        lines.append('(it:count "%s")' % c["name"])
     lines.append('(it:mark "END")')
     lines.append("_.quit _y")
     return "\n".join(lines) + "\n"
