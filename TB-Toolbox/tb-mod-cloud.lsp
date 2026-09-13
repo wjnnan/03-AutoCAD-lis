@@ -14,7 +14,7 @@
 全局参数：*SYS:CLOUD-LAYER* *SYS:CLOUD-ARC* *SYS:DWG-SCALE* *SYS:TEXT-STYLE*"
 
   ;; 确保图层和样式存在
-  (lay:make (sys:get '*SYS:CLOUD-LAYER*) (sys:get '*SYS:CLOUD-COLOR*))
+  (lay:make (sys:get '*SYS:CLOUD-LAYER*) (sys:get '*SYS:CLOUD-COLOR*) "Continuous")
   (txt:make-style (sys:get '*SYS:TEXT-STYLE*)
                   (sys:get '*SYS:TEXT-FONT*)
                   (sys:get '*SYS:TEXT-BIGFONT*)

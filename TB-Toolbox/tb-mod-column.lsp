@@ -37,7 +37,7 @@
   (uc:guard-begin '())
   "绘制圆形柱截面。"
   (setq layer (sys:get '*PRJ:COLUMN-LAYER*))
-  (lay:make layer 4)
+  (lay:make layer 4 "Continuous")
   (if (and (setq pt (getpoint "\n圆心: "))
            (setq r  (safe:get-real "半径" 200)))
     (progn

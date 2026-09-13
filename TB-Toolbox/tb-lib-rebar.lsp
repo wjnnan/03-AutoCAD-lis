@@ -92,7 +92,7 @@
   (or width (setq width (* diam (or (sys:get '*SYS:DWG-SCALE*) 100) 0.01)))
   ;; 默认图层
   (or layer (setq layer (or (sys:get '*SYS:REBAR-LAYER*) "S_REBAR")))
-  (lay:make layer 1)
+  (lay:make layer 1 "Continuous")
 
   ;; === 处理起始端弯钩（方向与行进相反） ===
   (if (> hook-start 0)
@@ -362,7 +362,7 @@
   ;; p1: 左下角点  p3: 右上角点
   (or width (setq width (* d (or (sys:get '*SYS:DWG-SCALE*) 100) 0.01)))
   (or layer (setq layer (or (sys:get '*SYS:STIRRUP-LAYER*) "S_STIRRUP")))
-  (lay:make layer 4)
+  (lay:make layer 4 "Continuous")
 
   ;; 矩形四角（逆时针）
   (setq p2 (list (car p1) (cadr p3) 0.0)   ; 左上
@@ -399,7 +399,7 @@
   ;; boundary-pts: 箍筋路径点表（闭合多边形顶点）。
   (or width (setq width (* d (or (sys:get '*SYS:DWG-SCALE*) 100) 0.01)))
   (or layer (setq layer (or (sys:get '*SYS:STIRRUP-LAYER*) "S_STIRRUP")))
-  (lay:make layer 4)
+  (lay:make layer 4 "Continuous")
 
   (if (or (null boundary-pts) (< (length boundary-pts) 3))
     (princ "\n[TB] 箍筋边界点不足（至少需要2个点）。")

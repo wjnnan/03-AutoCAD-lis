@@ -75,7 +75,7 @@
   (uc:guard-begin '())
   "标注归层：将所有标注移到 S_DIM 图层。"
   (setq layer (or (sys:get '*PRJ:DIM-LAYER*) "S_DIM"))
-  (lay:make layer 3)  ; 绿色
+  (lay:make layer 3 "Continuous")  ; 绿色
   (if (setq ss (ssget '((0 . "DIMENSION"))))
     (lay:move-selection ss layer))
   (princ (strcat "\n标注已移至图层: " layer))

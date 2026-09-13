@@ -234,7 +234,7 @@
 
       (setq width (* d (sys:get '*SYS:DWG-SCALE*) 0.01)
             layer (sys:get '*SYS:REBAR-LAYER*))
-      (lay:make layer 1)
+      (lay:make layer 1 "Continuous")
 
       (sel:for-each ss
         '(lambda (e / typ pts)
@@ -300,7 +300,7 @@
             count  0
             text-h (* (or (sys:get '*SYS:TEXT-HEIGHT*) 350) (or (sys:get '*SYS:DWG-SCALE*) 100) 0.01)
             layer  (sys:get '*SYS:REBAR-TEXT-LAYER*))
-      (lay:make layer 2)  ; 黄色
+      (lay:make layer 2 "Continuous")  ; 黄色
 
       ;; 排序方向
       (initget "X Y")
@@ -348,7 +348,7 @@
             x3 (car p3) y3 (cadr p3)
             y y1
             count 0)
-      (lay:make layer 1)
+      (lay:make layer 1 "Continuous")
       ;; 水平底筋（X 向），从下到上
       (while (and (<= y y3) (< count 5000))
         (rebar:make-bar
@@ -399,7 +399,7 @@
             layer  (sys:get '*SYS:REBAR-LAYER*)
             perp-dir (+ ang (* pi 0.5))
             count  0)
-      (lay:make layer 1)
+      (lay:make layer 1 "Continuous")
 
       ;; 沿支座线每隔 spacing 放一根负筋
       (setq dist 0.0
