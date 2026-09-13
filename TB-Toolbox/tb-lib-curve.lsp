@@ -10,18 +10,27 @@
   "获取曲线长度。支持 LINE、ARC、CIRCLE、*POLYLINE、SPLINE 等。"
   (vlax-curve-getdistatparam ename (vlax-curve-getendparam ename)))
 
-(defun curve:area (ename / obj)
+(defun curve:area (ename / obj a)
   "获取曲线面积。仅对闭合多段线/圆/椭圆有意义。
-AutoCAD/GStarCAD 先检查面积属性；ZWCAD 无 COM 则直接调 vlax-curve-getarea。"
+AutoCAD/GStarCAD 先检查面积属性；ZWCAD 无 COM 则直接调 vlax-curve-getarea。
+ 不用 (or 值 0.0) 兜底：vlax 系列在无头引擎(accoreconsole)下可能返回
+ 非数值（实测返回 T），or 会把它当结果透传出去。改为末尾 numberp 显式收敛，
+ 保证本函数永远返回实数。"
   (if (null ename) 0.0
-    (if *SYS:HAS-ACTIVEX*
     (progn
-      (setq obj (vl-catch-all-apply 'vlax-ename->vla-object (list ename)))
-      (if (and (not (vl-catch-all-error-p obj))
-               (vlax-property-available-p obj 'area))
-        (vla-get-area obj)
-        0.0))
-    (or (vlax-curve-getarea ename) 0.0))))
+      (setq a
+        (if *SYS:HAS-ACTIVEX*
+          (progn
+            (setq obj (vl-catch-all-apply 'vlax-ename->vla-object (list ename)))
+            (if (and (not (vl-catch-all-error-p obj))
+                     (vlax-property-available-p obj 'area))
+              (vla-get-area obj)
+              nil))
+          ;; 先确认函数存在，未 vl-load-com 时直接调用会中断整个 load
+          (if (car (atoms-family 1 (list "VLAX-CURVE-GETAREA")))
+            (vlax-curve-getarea ename)
+            nil)))
+      (if (numberp a) (float a) 0.0))))
 
 (defun curve:startpt (ename)
   "获取曲线起点。"
