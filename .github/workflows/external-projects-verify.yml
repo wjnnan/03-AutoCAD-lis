@@ -4,6 +4,10 @@ name: External Projects Verify
 # 需要 self-hosted runner（标签 autocad）
 
 on:
+  push:
+    paths:
+      - '.github/workflows/external-projects-verify.yml'
+      - '_ext_trigger.txt'
   workflow_dispatch:
 
 jobs:
