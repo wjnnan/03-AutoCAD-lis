@@ -57,15 +57,13 @@ jobs:
 
       - name: 显示测试结果
         if: always()
-        shell: powershell
+        shell: cmd
         run: |
-          $log = "${{ github.workspace }}\_ext_result.log"
-          if (Test-Path $log) {
-            $gbk = [System.Text.Encoding]::GetEncoding(936)
-            [System.IO.File]::ReadAllText($log, $gbk).Split("`n") | Write-Host
-          } else {
-            Write-Host "结果文件未生成 —— accoreconsole 可能未执行脚本"
-          }
+          if exist "%GITHUB_WORKSPACE%\_ext_result.log" (
+            type "%GITHUB_WORKSPACE%\_ext_result.log"
+          ) else (
+            echo 结果文件未生成 —— accoreconsole 可能未执行脚本
+          )
 
       - name: 上传结果
         if: always()
