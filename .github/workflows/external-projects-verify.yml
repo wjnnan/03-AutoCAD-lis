@@ -8,7 +8,7 @@ on:
 
 jobs:
   verify-external:
-    runs-on: [self-hosted, windows, autocad]
+    runs-on: [self-hosted, windows]
     steps:
       - name: 检出代码
         uses: actions/checkout@v4

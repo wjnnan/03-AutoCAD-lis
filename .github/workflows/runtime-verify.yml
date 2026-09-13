@@ -10,7 +10,7 @@ on:
 jobs:
   runtime-verify:
     # 需在装有 AutoCAD 的本机注册 self-hosted runner，标签 autocad
-    runs-on: [self-hosted, windows, autocad]
+    runs-on: [self-hosted, windows]
     steps:
       - name: 检出代码
         uses: actions/checkout@v4
