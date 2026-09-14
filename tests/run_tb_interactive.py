@@ -220,6 +220,14 @@ COUNT_UNRELIABLE = {"ttj", "sss", "MBO", "BOFF", "ttq", "ssm", "RM",
 # 无法用固定序列驱动 —— 排除出批量，留待真实 AutoCAD 手工验证。
 # sg/cf/RN 内部还有未预期的交互提示，固定序列喂不满（超时）
 MANUAL_ONLY = {"pq", "dkk", "sg", "cf", "RN", "cx", "ce",
+               # 依赖 entsel / ssget 拾取点选的命令：accoreconsole 无图形界面，
+               # 喂坐标一律返回 nil（实测 PICKBOX=30、ZOOM _E、ssget "_+.:E:S" 均无效），
+               # 只有窗口选择（W + 两角点）可用。这些命令若写成
+               # (if (setq e (entsel ...)) ...) 无 else 分支，命令会静默结束 ——
+               # 断言只查"无错误"就会假通过，故一律排除，留待真实 AutoCAD 手工验证。
+               "SSC", "tml", "ktj", "Tn", "tq", "RED", "REDB",   # BULK_ENTSEL
+               "ttj", "ttq", "sss", "ssm", "MBO", "gkm", "objinfo", "MoveToCenter",
+               "AlignToCenter", "MAV", "SumFootage", "SyncNow", "StreetLabel",
                # 子项目里依赖 entsel 精确点选、或内部再调命令的，无头引擎驱动不可靠
                "objinfo", "MoveToCenter", "AlignToCenter", "MAV", "SumFootage",
                "BR_SNAP", "BR_SNAPQ"}
