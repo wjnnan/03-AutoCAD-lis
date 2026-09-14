@@ -14,6 +14,7 @@
 from __future__ import annotations
 
 import argparse
+import glob
 import re
 import subprocess
 import sys
@@ -203,9 +204,13 @@ CASES = [
 # 这类命令多为改属性/开关类，逐个写精确断言性价比低，但"不报错"能抓出
 # 类似 lay:make 参数不足那样的运行时错误。
 # ---------------------------------------------------------------------------
-BULK_SETUP = ("(it:mkline 0.0 0.0 100.0 0.0)(it:mkcircle 300.0 300.0 40.0)"
-              "(it:mkrect 500.0 0.0 600.0 50.0)(it:mktext 0.0 300.0 \"7\")")
-
+# 注意：.scr 中同一行的多个 LISP 表达式只有第一个会被求值，必须逐行分开。
+BULK_SETUP = chr(10).join([
+    "(it:mkline 0.0 0.0 100.0 0.0)",
+    "(it:mkcircle 300.0 300.0 40.0)",
+    "(it:mkrect 500.0 0.0 600.0 50.0)",
+    '(it:mktext 0.0 300.0 "7")',
+])
 # 命令内部若再调 command，会消费掉脚本后续行，COUNT 标记无法打出；
 # 这类只验证"命令被调用且未报错"（CASE 标记存在即证明执行到该用例）。
 COUNT_UNRELIABLE = {"ttj", "sss", "MBO", "BOFF", "ttq", "ssm", "RM",
@@ -214,7 +219,10 @@ COUNT_UNRELIABLE = {"ttj", "sss", "MBO", "BOFF", "ttq", "ssm", "RM",
 # 内部会调用需要更多交互的内置命令（PEDIT/HATCH），无头引擎下仍会等待输入，
 # 无法用固定序列驱动 —— 排除出批量，留待真实 AutoCAD 手工验证。
 # sg/cf/RN 内部还有未预期的交互提示，固定序列喂不满（超时）
-MANUAL_ONLY = {"pq", "dkk", "sg", "cf", "RN", "cx"}
+MANUAL_ONLY = {"pq", "dkk", "sg", "cf", "RN", "cx",
+               # 子项目里依赖 entsel 精确点选、或内部再调命令的，无头引擎驱动不可靠
+               "objinfo", "MoveToCenter", "AlignToCenter", "MAV", "SumFootage",
+               "BR_SNAP", "BR_SNAPQ"}
 
 # entsel 类：点选实体（坐标须落在实体上）。BULK_SETUP 建了
 # 线(0,0)-(100,0)、圆(300,300)r40、矩形(500,0)-(600,50)、文字(0,300)、线(0,500)-(200,500)
@@ -303,7 +311,9 @@ BULK_CUSTOM = {
     "th":  ["A", "B"] + SEL,            # 两个字符串，再选
 }
 
-BULK_FORBID = ["错误", "no function definition", "参数太少", "参数类型错误"]
+BULK_FORBID = ["错误", "no function definition", "参数太少", "参数类型错误",
+               "aborting", "Invalid selection", "Nothing selected",
+               "no object", "No object"]
 
 # 少数命令执行后会消费掉脚本的后续行（如内部再调 command），COUNT 标记打不出来，
 # 改为断言命令自身的成功提示。
@@ -363,6 +373,65 @@ for _n, _seq, _d in BULK_MORE:
         "forbid": BULK_FORBID,
     })
 
+# ---------------------------------------------------------------------------
+# 其它子项目（DiffCheck / SyncBlock）：项目根目录下的独立工具箱，
+# 编码为 GBK，可直接由 accoreconsole 加载。
+# ---------------------------------------------------------------------------
+NDT = "d:/My Code/Claude Code/03-AutoCAD-lisp/Network-Design-Tools/lisp/"
+APP = "d:/My Code/Claude Code/03-AutoCAD-lisp/Network-Design-Tools/Others' Routines/"
+BRD = "d:/My Code/Claude Code/03-AutoCAD-lisp/BR_LISP_DEV/"
+P3A, P3B, P3C = "50,0", "340,300", "550,25"   # 依次命中 线 / 圆 / 矩形
+
+SUB_ROOTS = ["Network-Design-Tools", "BR_LISP_DEV", "DiffCheck", "SyncBlock"]
+
+
+def resolve_sub(filename):
+    """在子项目目录下按文件名定位真实路径。
+
+    这些项目目录层级不一（lisp/、lisp/lib/、Others' Routines/ 等），
+    硬编码路径容易出错，改为运行时递归查找。
+    """
+    for d in SUB_ROOTS:
+        for f in glob.glob(str(ROOT / d / "**" / filename), recursive=True):
+            return str(Path(f))
+    raise FileNotFoundError("子项目中找不到 %s" % filename)
+
+SUB_CASES = [
+    # (命令, 文件名, 输入序列, 期望, 说明)
+    ("DFCC",    "DiffCheck.lsp", SELW,               [], "DiffCheck 颜色对比（ssget）"),
+    ("DFCT",    "DiffCheck.lsp", ["1.0","1.0","1.0"],[], "DiffCheck 容差设置（getreal×3）"),
+    ("SFM",     "SyncBlock.lsp", [],                 [], "SyncBlock 同步模式（无交互）"),
+    ("SyncNow", "SyncBlock.lsp", [PICK_LINE] + SELW, [], "SyncBlock 同步（entsel+ssget）"),
+    ("objinfo",     "ObjectInfo.lsp",   [PICK_LINE],     [], "对象信息（entsel，只读）"),
+    ("CenterText",  "CenterText.lsp",   SELW,            [], "文字居中（ssget）"),
+    ("MoveToCenter","MoveToCenter.lsp", [P3A, P3B, P3C], [], "移动到中心（entsel×3）"),
+    ("AlignToCenter","AlignToCenter.lsp",[P3A, P3B, P3C],[], "对齐到中心（entsel×3）"),
+    ("SumFootage",  "SumFootage.lsp",   [PICK_LINE] + SELW, [], "累计长度（entsel+ssget）"),
+    ("MAV",         "MAV.lsp",          [PICK_LINE] + SELW, [], "MAV（entsel+ssget）"),
+    ("BR_SNAP",     ["BR_Core.lsp", "BR_Snapshot.lsp"], [], [], "BR 快照（无交互）"),
+    ("BR_SNAPQ",    ["BR_Core.lsp", "BR_Snapshot.lsp"], [], [], "BR 快速快照（无交互）"),
+]
+
+for _n, _load, _seq, _exp, _d in SUB_CASES:
+    CASES.append({
+        "name": "SUB_" + _n,
+        "desc": "【子项目】%s" % _d,
+        "setup": BULK_SETUP,
+        "load": [resolve_sub(x) for x in (_load if isinstance(_load, list) else [_load])],
+        "inputs": [_n] + _seq,
+        "expect": _exp,
+        "forbid": BULK_FORBID,
+    })
+
+# 后一批只给 4 元组（不含 expect），统一按"执行且不报错"验证
+
+# ---------------------------------------------------------------------------
+# 子项目 Network-Design-Tools / BR_LISP_DEV
+# 只挑只读或纯绘图类命令；跳过会发布图纸、写项目库等有副作用的。
+# ---------------------------------------------------------------------------
+
+
+
 CASES += [_bulk_case(n) for n in BULK_SSGET]
 for _n, _seq in BULK_CUSTOM.items():
     CASES.append({
@@ -416,6 +485,39 @@ def _check_balanced(text, label):
         raise SystemExit("[%s] 括号不平衡，相差 %d 个（左多右少为正）" % (label, depth))
 
 
+
+GBK_CACHE = Path(__file__).resolve().parent / "_gbk_cache"
+
+
+def ensure_gbk(path):
+    """把 UTF-8 的 lsp 转成 GBK 副本（accoreconsole 只认 GBK）。
+
+    子项目（BR_LISP_DEV / Network-Design-Tools）多为 UTF-8，直接 load 会乱码或
+    报错。这里转码到缓存目录，不改动源文件。已是 GBK/ASCII 的原样返回。
+    """
+    p = Path(path)
+    raw = p.read_bytes()
+    try:
+        raw.decode("ascii")
+        return str(p)                      # 纯 ASCII，无需转换
+    except UnicodeDecodeError:
+        pass
+    # 注意判断顺序：不少 UTF-8 文件的字节序列恰好也是合法 GBK，先判 GBK 会误判。
+    # UTF-8 能解出非 ASCII 字符即认定 UTF-8（GBK 文件几乎不可能被 UTF-8 正确解码）。
+    try:
+        text = raw.decode("utf-8")
+        if any(ord(ch) > 127 for ch in text):
+            GBK_CACHE.mkdir(exist_ok=True)
+            out = GBK_CACHE / p.name
+            out.write_bytes(text.encode("gbk", errors="replace"))
+            return str(out)
+        return str(p)
+    except UnicodeDecodeError:
+        return str(p)                      # 非 UTF-8，按原样（GBK）使用
+
+
+
+
 def build_scr(cases=None) -> str:
     """生成驱动交互式命令的 .scr。cases 为 None 时用全部用例。"""
     cases = CASES if cases is None else cases
@@ -431,10 +533,12 @@ def build_scr(cases=None) -> str:
         '(princ (strcat (chr 10) "###ENV:or=" (if (it:or-works) "ok" "broken") "###" (chr 10)))',
     ]
     for c in cases:
+        for extra in c.get("load", []):
+            lines.append('(load "%s")' % ensure_gbk(extra).replace(chr(92), "/"))
         lines.append("(it:clean)")
         if c["setup"]:
             lines.append("(princ)")
-            lines.append(c["setup"])
+            lines.extend(c["setup"].split(chr(10)))
         lines.append('(it:mark "%s")' % c["name"])
         lines.extend(c["inputs"])
         lines.append('(it:count "%s")' % c["name"])
@@ -512,7 +616,8 @@ def run_suite(accore=None, only=None, verbose=False):
         return -1, -1, []
 
     cases = [c for c in CASES if only is None or c["name"] in only]
-    cases = [c for c in cases if c["name"].replace("BULK_", "") not in MANUAL_ONLY]
+    cases = [c for c in cases
+             if c["name"].replace("BULK_", "").replace("SUB_", "") not in MANUAL_ONLY]
     results, passed, failed = [], 0, 0
     for c in cases:
         single = dict(c)
