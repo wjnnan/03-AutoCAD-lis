@@ -36,3 +36,5 @@ tests/_tb_functional_gen.lsp
 # 真机功能测试生成物（由 tests/run_tb_functional.py / run_tb_interactive.py 自动生成）
 tests/_tb_interactive_helper.lsp
 _tb_interactive.scr
+# 子项目命令（BR_SNAP 等）运行时会写的快照目录
+/DATA/
