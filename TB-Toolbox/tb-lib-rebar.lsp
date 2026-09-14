@@ -89,9 +89,9 @@
                        / all-pts all-bulges dir-ang hook-geom
                          D C bulge-D bulge-C tail-end)
   ;; 默认线宽：钢筋直径 × 出图比例系数
-  (or width (setq width (* diam (or (sys:get '*SYS:DWG-SCALE*) 100) 0.01)))
+  (or width (setq width (* diam (if (sys:get '*SYS:DWG-SCALE*) (sys:get '*SYS:DWG-SCALE*) 100) 0.01)))
   ;; 默认图层
-  (or layer (setq layer (or (sys:get '*SYS:REBAR-LAYER*) "S_REBAR")))
+  (or layer (setq layer (if (sys:get '*SYS:REBAR-LAYER*) (sys:get '*SYS:REBAR-LAYER*) "S_REBAR")))
   (lay:make layer 1 "Continuous")
 
   ;; === 处理起始端弯钩（方向与行进相反） ===
@@ -360,16 +360,16 @@
                            / p2 p4 cover R pts bulges dir-ang hook-geom C bulge-D tail-end)
   ;; 创建矩形箍筋（闭合矩形 + 起点 135° 弯钩）。
   ;; p1: 左下角点  p3: 右上角点
-  (or width (setq width (* d (or (sys:get '*SYS:DWG-SCALE*) 100) 0.01)))
-  (or layer (setq layer (or (sys:get '*SYS:STIRRUP-LAYER*) "S_STIRRUP")))
+  (or width (setq width (* d (if (sys:get '*SYS:DWG-SCALE*) (sys:get '*SYS:DWG-SCALE*) 100) 0.01)))
+  (or layer (setq layer (if (sys:get '*SYS:STIRRUP-LAYER*) (sys:get '*SYS:STIRRUP-LAYER*) "S_STIRRUP")))
   (lay:make layer 4 "Continuous")
 
   ;; 矩形四角（逆时针）
   (setq p2 (list (car p1) (cadr p3) 0.0)   ; 左上
         p4 (list (car p3) (cadr p1) 0.0))  ; 右下
   ;; 内收保护层 + 弯曲半径
-  (setq cover (or (sys:get '*SYS:REBAR-COVER*) 25)
-        d     (or d 8)
+  (setq cover (if (sys:get '*SYS:REBAR-COVER*) (sys:get '*SYS:REBAR-COVER*) 25)
+        d     (if d d 8)
         R     (rebar:bend-radius d grade))
   (setq p1 (list (+ (car p1) cover R) (+ (cadr p1) cover R) 0.0)
         p2 (list (+ (car p2) cover R) (- (cadr p2) cover R) 0.0)
@@ -397,8 +397,8 @@
                                 / inner-pts p0 p1 dir-ang hook-geom C bulge-val tail all-pts all-bulges)
   ;; 创建多边形箍筋（沿给定边界）。
   ;; boundary-pts: 箍筋路径点表（闭合多边形顶点）。
-  (or width (setq width (* d (or (sys:get '*SYS:DWG-SCALE*) 100) 0.01)))
-  (or layer (setq layer (or (sys:get '*SYS:STIRRUP-LAYER*) "S_STIRRUP")))
+  (or width (setq width (* d (if (sys:get '*SYS:DWG-SCALE*) (sys:get '*SYS:DWG-SCALE*) 100) 0.01)))
+  (or layer (setq layer (if (sys:get '*SYS:STIRRUP-LAYER*) (sys:get '*SYS:STIRRUP-LAYER*) "S_STIRRUP")))
   (lay:make layer 4 "Continuous")
 
   (if (or (null boundary-pts) (< (length boundary-pts) 3))

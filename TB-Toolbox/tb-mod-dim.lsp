@@ -74,7 +74,7 @@
 (defun c:bgc (/ ss layer)
   (uc:guard-begin '())
   "标注归层：将所有标注移到 S_DIM 图层。"
-  (setq layer (or (sys:get '*PRJ:DIM-LAYER*) "S_DIM"))
+  (setq layer (if (sys:get '*PRJ:DIM-LAYER*) (sys:get '*PRJ:DIM-LAYER*) "S_DIM"))
   (lay:make layer 3 "Continuous")  ; 绿色
   (if (setq ss (ssget '((0 . "DIMENSION"))))
     (lay:move-selection ss layer))
@@ -113,7 +113,7 @@
   (uc:guard-begin '())
   "在指定点创建坐标标注（X,Y）。"
   (entity:make-style "TSSD_Rein" "tssdeng.shx" "hztxt.shx" 0.7)
-  (setq h  (or (sys:get '*SYS:TEXT-HEIGHT*) 350)
+  (setq h  (if (sys:get '*SYS:TEXT-HEIGHT*) (sys:get '*SYS:TEXT-HEIGHT*) 350)
         pt (getpoint "\n标注点: "))
   (if pt
     (progn

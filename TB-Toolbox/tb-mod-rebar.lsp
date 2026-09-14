@@ -264,7 +264,7 @@
       (setq d         (safe:get-real "钢筋直径(mm)" (sys:get '*SYS:REBAR-DIAMETER*))
             grade     (safe:get-int "钢筋等级(1/2/3)" (sys:get '*SYS:REBAR-GRADE*))
             grade-sym (nth (1- (if grade grade (sys:get '*SYS:REBAR-GRADE*))) '("%%130" "%%131" "%%132"))
-            text-h    (* (or (sys:get '*SYS:TEXT-HEIGHT*) 350) (or (sys:get '*SYS:DWG-SCALE*) 100) 0.01))
+            text-h    (* (if (sys:get '*SYS:TEXT-HEIGHT*) (sys:get '*SYS:TEXT-HEIGHT*) 350) (if (sys:get '*SYS:DWG-SCALE*) (sys:get '*SYS:DWG-SCALE*) 100) 0.01))
 
       (setq num-str (getstring (strcat "\n钢筋根数（回车跳过）: ")))
       (setq spacing-str (getstring "\n间距@（回车跳过）: "))
@@ -298,7 +298,7 @@
     (progn
       (setq num    (safe:get-int "起始编号" 1)
             count  0
-            text-h (* (or (sys:get '*SYS:TEXT-HEIGHT*) 350) (or (sys:get '*SYS:DWG-SCALE*) 100) 0.01)
+            text-h (* (if (sys:get '*SYS:TEXT-HEIGHT*) (sys:get '*SYS:TEXT-HEIGHT*) 350) (if (sys:get '*SYS:DWG-SCALE*) (sys:get '*SYS:DWG-SCALE*) 100) 0.01)
             layer  (sys:get '*SYS:REBAR-TEXT-LAYER*))
       (lay:make layer 2 "Continuous")  ; 黄色
 

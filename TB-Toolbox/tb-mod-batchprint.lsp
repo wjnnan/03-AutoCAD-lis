@@ -178,7 +178,7 @@
                (setq result (cons
                  (bp:make-drawing (entity:handle e)
                    center w h
-                   (or scale-val (bp:detect-scale w h
+                   (if scale-val scale-val (bp:detect-scale w h
                      (cadr (assoc paper-name *BP:PAPER-SIZES*))
                      (caddr (assoc paper-name *BP:PAPER-SIZES*))))
                    paper-name
@@ -245,8 +245,9 @@
     (progn
       ;; 行容差 = 首图框高度的一半
       (setq row-tol (* 0.5
-        (or (bp:drawing-prop (car drawings) 'height)
-            (bp:drawing-prop (car drawings) 'width) 0.0)))
+        (cond ((bp:drawing-prop (car drawings) 'height))
+              ((bp:drawing-prop (car drawings) 'width))
+              (0.0))))
       (if (< row-tol 1.0) (setq row-tol 1.0))
       ;; 先按 Y 降序、X 升序粗排
       (setq sorted
@@ -309,10 +310,10 @@
 
 (defun bp:make-filename (drawing rule index / num name scale date result)
   "按命名规则生成文件名。{序号} 零填充 3 位。"
-  (setq num   (or (bp:drawing-prop drawing 'draw-num) "")
-        name  (or (bp:drawing-prop drawing 'draw-name) "")
-        scale (itoa (or (bp:drawing-prop drawing 'scale) 100))
-        date  (or (bp:drawing-prop drawing 'date) ""))
+  (setq num   (if (bp:drawing-prop drawing 'draw-num) (bp:drawing-prop drawing 'draw-num) "")
+        name  (if (bp:drawing-prop drawing 'draw-name) (bp:drawing-prop drawing 'draw-name) "")
+        scale (itoa (if (bp:drawing-prop drawing 'scale) (bp:drawing-prop drawing 'scale) 100))
+        date  (if (bp:drawing-prop drawing 'date) (bp:drawing-prop drawing 'date) ""))
   ;; 基础名：图号-图名，缺项回退序号
   (setq result
     (cond
@@ -698,10 +699,11 @@
   (mapcar 'add_list
     (mapcar
       '(lambda (d / num name scale paper dup-mark)
-         (setq num (or (bp:drawing-prop d 'draw-num) "-")
-               name (or (bp:drawing-prop d 'draw-name) (or (bp:drawing-prop d 'layout) "未命名"))
-               scale (itoa (or (bp:drawing-prop d 'scale) 100))
-               paper (or (bp:drawing-prop d 'paper) "?"))
+         (setq num (if (bp:drawing-prop d 'draw-num) (bp:drawing-prop d 'draw-num) "-")
+               name (if (bp:drawing-prop d 'draw-name) (bp:drawing-prop d 'draw-name)
+                        (if (bp:drawing-prop d 'layout) (bp:drawing-prop d 'layout) "未命名"))
+               scale (itoa (if (bp:drawing-prop d 'scale) (bp:drawing-prop d 'scale) 100))
+               paper (if (bp:drawing-prop d 'paper) (bp:drawing-prop d 'paper) "?"))
          (if (member num duplicates) (setq dup-mark "[!] ") (setq dup-mark ""))
          (strcat dup-mark num "  " name "  1:" scale "  " paper))
       drawings))

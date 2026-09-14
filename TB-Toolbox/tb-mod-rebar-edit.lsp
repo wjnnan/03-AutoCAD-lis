@@ -11,7 +11,7 @@
   (uc:guard-begin '())
   "智能编辑钢筋标注。选文字 → 自动解析 → 交互修改。
    c:RED/c:REDB 可通过 *RE:EDIT-ENTITY* 传入预选实体。"
-  (setq e (or *RE:EDIT-ENTITY* (car (entsel "\n选择钢筋标注文字: ")))
+  (setq e (if *RE:EDIT-ENTITY* *RE:EDIT-ENTITY* (car (entsel "\n选择钢筋标注文字: ")))
         *RE:EDIT-ENTITY* nil)
   (if e
     (if (wcmatch (entity:get-type e) "TEXT,MTEXT")
@@ -24,8 +24,8 @@
           "\n═══════ 钢筋标注解析 ═══════"
           "\n  原文:   " str
           "\n  类型:   " (cdr (assoc 'type props))
-          "\n  等级:   " (itoa (or (cdr (assoc 'grade props)) 0)) "级钢"
-          "\n  直径:   " (rtos (or (cdr (assoc 'diameter props)) 0) 2 0) "mm"))
+          "\n  等级:   " (itoa (if (cdr (assoc 'grade props)) (cdr (assoc 'grade props)) 0)) "级钢"
+          "\n  直径:   " (rtos (if (cdr (assoc 'diameter props)) (cdr (assoc 'diameter props)) 0) 2 0) "mm"))
 
         (if (cdr (assoc 'count props))
           (princ (strcat "\n  根数:   " (itoa (cdr (assoc 'count props))))))
@@ -54,9 +54,9 @@
                   (strcat (itoa (cdr (assoc 'count alt))) "%%132" (rtos (cdr (assoc 'diameter alt)) 2 0)))
                 (if (cdr (assoc 'spacing alt))
                   (strcat "@" (itoa (cdr (assoc 'spacing alt)))))
-                "  As=" (rtos (or (cdr (assoc 'area alt))
-                                  (cdr (assoc 'area-per-m alt))) 2 1) "mm^2")))))
-
+                "  As=" (rtos (if (cdr (assoc 'area alt))
+                                 (cdr (assoc 'area alt))
+                                 (cdr (assoc 'area-per-m alt))) 2 1) "mm^2")))))
         (princ "\n══════════════════════════")
         (princ "\n  [M]手动修改  [数字]选方案  [回车]退出")
 
@@ -66,7 +66,7 @@
         (cond
           ;; 手动修改
           ((= (strcase choice) "M")
-           (setq new-d (safe:get-real "直径(mm)" (or (cdr (assoc 'diameter props)) 8)))
+           (setq new-d (safe:get-real "直径(mm)" (if (cdr (assoc 'diameter props)) (cdr (assoc 'diameter props)) 8)))
 
            (initget "1 2 3")
            (setq new-grade (getint (strcat "\n等级 [1一级/2二级/3三级] <"
@@ -74,8 +74,8 @@
            (if (not new-grade) (setq new-grade (cdr (assoc 'grade props))))
 
            (if (eq (cdr (assoc 'type props)) 'stirrup)
-             (setq new-s (safe:get-int "间距(mm)" (or (cdr (assoc 'spacing props)) 200)))
-             (setq new-count (safe:get-int "根数" (or (cdr (assoc 'count props)) 4))))
+             (setq new-s (safe:get-int "间距(mm)" (if (cdr (assoc 'spacing props)) (cdr (assoc 'spacing props)) 200)))
+             (setq new-count (safe:get-int "根数" (if (cdr (assoc 'count props)) (cdr (assoc 'count props)) 4))))
 
            ;; 构建新标注
            (setq new-props (list

@@ -185,7 +185,7 @@
           (repeat (sslength ss)
             (setq e (ssname ss i))
             (setq recs (cons (list (entity:get-dxf e 10)
-                                   (or (entity:get-dxf e 50) 0.0)
+                                   (if (entity:get-dxf e 50) (entity:get-dxf e 50) 0.0)
                                    (entity:get-layer e)
                                    (uc:block-attributes e))
                              recs))
