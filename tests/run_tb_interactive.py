@@ -206,6 +206,75 @@ CASES = [
 BULK_SETUP = ("(it:mkline 0.0 0.0 100.0 0.0)(it:mkcircle 300.0 300.0 40.0)"
               "(it:mkrect 500.0 0.0 600.0 50.0)(it:mktext 0.0 300.0 \"7\")")
 
+# 命令内部若再调 command，会消费掉脚本后续行，COUNT 标记无法打出；
+# 这类只验证"命令被调用且未报错"（CASE 标记存在即证明执行到该用例）。
+COUNT_UNRELIABLE = {"ttj", "sss", "MBO", "BOFF", "ttq", "ssm", "RM",
+                    "lmj", "jk", "bbq", "gkm", "RDH", "dk", "cx"}
+
+# 内部会调用需要更多交互的内置命令（PEDIT/HATCH），无头引擎下仍会等待输入，
+# 无法用固定序列驱动 —— 排除出批量，留待真实 AutoCAD 手工验证。
+# sg/cf/RN 内部还有未预期的交互提示，固定序列喂不满（超时）
+MANUAL_ONLY = {"pq", "dkk", "sg", "cf", "RN", "cx"}
+
+# entsel 类：点选实体（坐标须落在实体上）。BULK_SETUP 建了
+# 线(0,0)-(100,0)、圆(300,300)r40、矩形(500,0)-(600,50)、文字(0,300)、线(0,500)-(200,500)
+PICK_LINE = "50,0"        # 命中线 (0,0)-(100,0)
+PICK_CIRC = "340,300"     # 命中圆 (300,300) r40
+PICK_RECT = "550,25"      # 命中矩形内部边框
+
+# 仅 entsel：喂一个实体上的点即可
+BULK_ENTSEL = [
+    ("SSC", [PICK_LINE]),
+    ("tml", [PICK_LINE]),
+    ("ktj", [PICK_LINE]),
+    ("Tn",  [PICK_LINE]),
+    ("tq",  [PICK_LINE]),
+    ("RED", [PICK_LINE]),
+    ("REDB", [PICK_LINE]),
+]
+
+# 仅 getpoint：喂一个或多个点
+BULK_GETPT = [
+    ("zb",  ["50,50"]),
+    ("dkk", ["50,50", "200", ""]),
+    ("ddd", ["0,0"]),
+]
+
+# 第二批：ssget 之后还要补数值/点，或 entsel 之后还有后续输入
+SELW = ["W", "-10000,-10000", "10000,10000", ""]
+BULK_MORE = [
+    # (命令, 输入序列, 说明)
+    ("pq",   ["0,0", "100,0"],                      "两点剖切符号"),
+    ("pmh",  ["0,0", "K1"],                         "点+名称"),
+    ("jk",   SELW + ["0,0"],                        "选择后取点"),
+    ("gkm",  [PICK_LINE, "新块名"],                  "选实体+输名称"),
+    ("lmj",  SELW + [""],                           "累计面积"),
+    ("jt",   ["0,0", "100,100"],                    "两点云线"),
+    ("dk",   ["0,0", "300,300", "50,50"],           "柱角点"),
+    ("sg",   ["0,0", "100,0"],                      "墙两点"),
+    ("bbq",  SELW + ["0,0", "50,50"],               "球标"),
+    ("cf",   SELW + ["0,0", "50,0"],                "等距复制"),
+    ("cx",   ["0,0", "100,0"],                      "选线修剪"),
+    ("ts",   SELW,                                  "图层相关"),
+    ("dx",   ["0,0", "100,0"],                      "断点"),
+    ("dxx",  ["0,0", "100,0"],                      "断点2"),
+    ("hgf",  ["0,0", "100,0"],                      "焊缝"),
+    ("sy",   ["0,0", "SYM1"],                       "符号"),
+    ("RN",   SELW + [""],                          "钢筋编号"),
+    ("RM",   SELW + ["0,0", "100,0"],               "钢筋移动"),
+    ("RDH",  SELW + [""],                          "弯钩"),
+    ("RCC",  SELW + [""],                           "钢筋"),
+    ("RBR",  ["20", "200", "3", "0,0", "300,200"],      "直径/间距/等级+两角点"),
+    ("ttr",  SELW + ["0"],                          "文字旋转"),
+    ("ttj",  [PICK_LINE] + SELW,                    "文字对齐"),
+    ("ttq",  [PICK_LINE] + SELW,                    "文字齐平"),
+    ("sss",  [PICK_LINE] + SELW,                    "模板选择"),
+    ("ssm",  [PICK_LINE] + SELW,                    "选择过滤"),
+    ("MBO",  [PICK_LINE] + SELW,                    "匹配块方向"),
+    ("BOFF", ["100"] + SELW,                        "多重偏移"),
+    ("ts",   SELW,                                  "图层状态"),
+]
+
 # 仅 ssget：喂窗口选择即可
 BULK_SSGET = [
     "GJZL", "sk", "RAV", "ce", "fw", "bgc", "ggb", "cl", "z0",
@@ -244,7 +313,7 @@ EXPECT_OVERRIDE = {
 
 # 命令内部用 (or 取值 默认值) 做回退；accoreconsole 的 or 语义失效会让它们必然报错。
 # 这类失败标记为环境受限，不计入失败（真实 AutoCAD 中 or 正常）。
-OR_DEPENDENT = {"BULK_ce", "BULK_bgc"}
+OR_DEPENDENT = {"BULK_ce", "BULK_bgc", "BULK_RCC"}
 
 def _bulk_case(name):
     """生成一个批量冒烟用例；name 以 * 结尾表示需要额外取点。"""
@@ -263,6 +332,36 @@ def _bulk_case(name):
         "forbid": BULK_FORBID,
     }
 
+
+for _n, _seq in BULK_ENTSEL:
+    CASES.append({
+        "name": "BULK_" + _n,
+        "desc": "c:%s 批量冒烟（entsel 点选实体）" % _n,
+        "setup": BULK_SETUP,
+        "inputs": [_n] + _seq,
+        "expect": ["###COUNT:BULK_%s=" % _n],
+        "forbid": BULK_FORBID,
+    })
+
+for _n, _seq in BULK_GETPT:
+    CASES.append({
+        "name": "BULK_" + _n,
+        "desc": "c:%s 批量冒烟（getpoint 取点）" % _n,
+        "setup": BULK_SETUP,
+        "inputs": [_n] + _seq,
+        "expect": ([] if _n in COUNT_UNRELIABLE else ["###COUNT:BULK_%s=" % _n]),
+        "forbid": BULK_FORBID,
+    })
+
+for _n, _seq, _d in BULK_MORE:
+    CASES.append({
+        "name": "BULK_" + _n,
+        "desc": "c:%s 批量冒烟（%s）" % (_n, _d),
+        "setup": BULK_SETUP,
+        "inputs": [_n] + _seq,
+        "expect": ([] if _n in COUNT_UNRELIABLE else ["###COUNT:BULK_%s=" % _n]),
+        "forbid": BULK_FORBID,
+    })
 
 CASES += [_bulk_case(n) for n in BULK_SSGET]
 for _n, _seq in BULK_CUSTOM.items():
@@ -348,7 +447,7 @@ def run_scr(accore: str, timeout: int = 45, quiet: bool = False) -> str:
     """执行 .scr 并返回引擎输出（已解码）。"""
     with tempfile.TemporaryDirectory(prefix="tb_inter_") as tmp:
         scr = Path(tmp) / "run.scr"
-        scr.write_text(SCR_PATH.read_text(encoding="ascii"), encoding="ascii")
+        scr.write_text(SCR_PATH.read_text(encoding="gbk"), encoding="gbk")
         proc = subprocess.run([accore, "/s", str(scr)], capture_output=True, timeout=timeout)
     raw = (proc.stdout or b"") + (proc.stderr or b"")
     for enc in ("utf-16-le", "utf-8", "gbk"):
@@ -413,11 +512,12 @@ def run_suite(accore=None, only=None, verbose=False):
         return -1, -1, []
 
     cases = [c for c in CASES if only is None or c["name"] in only]
+    cases = [c for c in cases if c["name"].replace("BULK_", "") not in MANUAL_ONLY]
     results, passed, failed = [], 0, 0
     for c in cases:
         single = dict(c)
         single["_only_this"] = True
-        SCR_PATH.write_text(build_scr([single]), encoding="ascii")
+        SCR_PATH.write_text(build_scr([single]), encoding="gbk")
         cfg = TB_DIR / "TB-SysConfig.cfg"
         backup = cfg.read_bytes() if cfg.exists() else None
         output = ""
@@ -483,7 +583,7 @@ def main() -> int:
     if args.gen:
         _check_balanced(HELPER_SRC, "helper")
         HELPER_LSP.write_text(HELPER_SRC, encoding="gbk")
-        SCR_PATH.write_text(build_scr(), encoding="ascii")
+        SCR_PATH.write_text(build_scr(), encoding="gbk")
         print("已生成: %s（%d 个用例）" % (SCR_PATH.name, len(CASES)))
         return 0
 
