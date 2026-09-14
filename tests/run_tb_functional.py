@@ -280,6 +280,16 @@ BEHAVIOR_LSP += r"""
              (T:num "  -> curve:length 校验" '(lambda () (curve:length v)) 157.079633 0.001))
   (bad "entity:make-circle 返回 nil"))
 
+;; entity:get-bbox 形参两个 (ename offset)，曾有两处只传一个，批量打印因此报"参数太少"。
+(setq v (T:apply "entity:get-bbox" '(lambda () (entity:get-bbox *E:LINE* 0.0))))
+(if (and (listp v) (= (length v) 2) (listp (car v)) (listp (cadr v)))
+  (ok "entity:get-bbox 返回 (最小点 最大点)")
+  (bad (strcat "entity:get-bbox -> " (vl-princ-to-string v))))
+(setq v (T:apply "entity:get-bbox 带偏移" '(lambda () (entity:get-bbox *E:LINE* 10.0))))
+(if (and (listp v) (< (abs (- (caar v) -10.0)) 0.001))
+  (ok "entity:get-bbox 偏移生效 (xmin -10)")
+  (bad (strcat "entity:get-bbox 偏移 -> " (vl-princ-to-string v))))
+
 (setq v (T:apply "entity:make-text" '(lambda () (entity:make-text "MAKE_TEXT_OK" '(0.0 300.0 0.0) 3.0 "Standard" "0"))))
 (if v (progn (ok "entity:make-text 创建")
              (A:str "  -> 内容回读" (T:apply "gc" '(lambda () (txt:get-content v))) "MAKE_TEXT_OK"))

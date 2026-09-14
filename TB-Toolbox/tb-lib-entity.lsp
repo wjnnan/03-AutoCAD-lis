@@ -152,7 +152,10 @@
   (if (and result offset (not (equal offset 0 1e-8)))
     (list
       (list (- (caar result) offset) (- (cadar result) offset) (if (caddar result) (caddar result) 0.0))
-      (list (+ (caadr result) offset) (+ (cadadr result) offset) (if (caddadr result) (caddadr result) 0.0)))
+      ;; 注意：AutoLISP 的 c...r 组合最多 4 层，没有 caddadr；
+      ;; 取 (cadr result) 的第三个分量须用 (nth 2 ...)
+      (list (+ (caadr result) offset) (+ (cadadr result) offset)
+            (if (nth 2 (cadr result)) (nth 2 (cadr result)) 0.0)))
     result))
 
 (defun entity:bbox-activex (ename / core-res core-box obj-res obj minpt maxpt bbox-res)

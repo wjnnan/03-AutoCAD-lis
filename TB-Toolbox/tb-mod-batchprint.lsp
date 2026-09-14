@@ -133,7 +133,7 @@
 (defun bp:get-block-bbox (e)
   "取块引用的包围盒。ActiveX 优先，无 COM 走纯 Lisp 递归。"
   (if *SYS:HAS-ACTIVEX*
-    (entity:get-bbox e)
+    (entity:get-bbox e 0.0)      ; 第二参数为偏移量，此处不需要留边距
     (entity:block-bbox-pure e)))
 
 (defun bp:attr-val (attrs tags)
@@ -193,7 +193,7 @@
       (setq result nil)
       (sel:for-each ss
         '(lambda (e / bbox w h center paper-name)
-           (setq bbox (entity:get-bbox e))
+           (setq bbox (entity:get-bbox e 0.0))   ; 第二参数为偏移量，此处不需要留边距
            (if (and bbox (> (distance (car bbox) (cadr bbox)) 1.0))
              (progn
                (setq w (abs (- (caadr bbox) (caar bbox)))
