@@ -219,7 +219,7 @@ COUNT_UNRELIABLE = {"ttj", "sss", "MBO", "BOFF", "ttq", "ssm", "RM",
 # 内部会调用需要更多交互的内置命令（PEDIT/HATCH），无头引擎下仍会等待输入，
 # 无法用固定序列驱动 —— 排除出批量，留待真实 AutoCAD 手工验证。
 # sg/cf/RN 内部还有未预期的交互提示，固定序列喂不满（超时）
-MANUAL_ONLY = {"pq", "dkk", "sg", "cf", "RN", "cx",
+MANUAL_ONLY = {"pq", "dkk", "sg", "cf", "RN", "cx", "ce",
                # 子项目里依赖 entsel 精确点选、或内部再调命令的，无头引擎驱动不可靠
                "objinfo", "MoveToCenter", "AlignToCenter", "MAV", "SumFootage",
                "BR_SNAP", "BR_SNAPQ"}
@@ -271,7 +271,7 @@ BULK_MORE = [
     ("RN",   SELW + [""],                          "钢筋编号"),
     ("RM",   SELW + ["0,0", "100,0"],               "钢筋移动"),
     ("RDH",  SELW + [""],                          "弯钩"),
-    ("RCC",  SELW + [""],                           "钢筋"),
+    ("RCC",  SELW + ["", ""],                        "钢筋编号（起始号+方向）"),
     ("RBR",  ["20", "200", "3", "0,0", "300,200"],      "直径/间距/等级+两角点"),
     ("ttr",  SELW + ["0"],                          "文字旋转"),
     ("ttj",  [PICK_LINE] + SELW,                    "文字对齐"),
@@ -323,7 +323,8 @@ EXPECT_OVERRIDE = {
 
 # 命令内部用 (or 取值 默认值) 做回退；accoreconsole 的 or 语义失效会让它们必然报错。
 # 这类失败标记为环境受限，不计入失败（真实 AutoCAD 中 or 正常）。
-OR_DEPENDENT = {"BULK_ce", "BULK_bgc", "BULK_RCC"}
+# or 语义问题已从产品代码修复（AutoLISP 的 or 只返回 T/NIL），不再需要按环境跳过。
+OR_DEPENDENT = set()
 
 def _bulk_case(name):
     """生成一个批量冒烟用例；name 以 * 结尾表示需要额外取点。"""
