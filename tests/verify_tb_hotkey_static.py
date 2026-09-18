@@ -14,7 +14,7 @@ TB_DCL_LAUNCHER = ROOT / "TB-Toolbox" / "tb-dcl-launcher.dcl"
 TB_DCL_HOTKEY = ROOT / "TB-Toolbox" / "tb-dcl-hotkey.dcl"
 TB_HOTKEY_LSP = ROOT / "TB-Toolbox" / "tb-mod-hotkey.lsp"
 
-EXPECT_PAGE_COUNTS = [46, 14, 11, 8, 8, 23, 19]
+EXPECT_PAGE_COUNTS = [22, 24, 14, 11, 8, 8, 23, 19]
 
 
 def parse_binds(text: str):
@@ -90,7 +90,7 @@ def main() -> int:
         assert cp.isdigit(), f"页号非数字: {bk}"
 
     # 3. 每页数量
-    for page_idx in range(7):
+    for page_idx in range(len(EXPECT_PAGE_COUNTS)):
         n = len([c for c in catalog if int(c[3]) == page_idx])
         assert n == EXPECT_PAGE_COUNTS[page_idx], f"页{page_idx}数量 {n} != {EXPECT_PAGE_COUNTS[page_idx]}"
 

@@ -195,6 +195,7 @@
     "\n║     tb-dcl-setting.dcl                               ║"
     "\n║     tb-dcl-batchprint.dcl                            ║"
     "\n║     tb-dcl-hotkey.dcl                               ║"
+    "\n║     tb-dcl-help.dcl                                    ║"
     "\n║     (如果还有其他 .dcl 也一并加入)                     ║"
     "\n║                                                      ║"
     "\n║  7. 点击「编译应用程序」                              ║"

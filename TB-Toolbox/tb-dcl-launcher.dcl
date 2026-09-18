@@ -1,14 +1,15 @@
-// tb-dcl-launcher.dcl — 建筑结构工具箱主界面
-// 7 个独立标签页 dialog（tb_page_0 ~ tb_page_6），通过 done_dialog 循环真正切页
-// 布局思路参考「贱人工具箱」：boxed_row 分区标题 + 多列紧凑按钮网格
+// tb-dcl-launcher.dcl — 主界面 8 个标签页
+// 设计：8 个同尺寸 dialog 通过 done_dialog 200+i 循环切换（DCL 无原生 Tab）
+// 每页用 :spacer 占位补齐到统一高度；同一 :row 内各列按钮数已对齐（不足处补 :spacer）
 
 tb_page_0:dialog{
-  label="建筑结构工具箱 v1.0 - 绘图编辑";
+  label="建筑结构工具箱 v1.1 - 绘图编辑";
   initial_focus="tab_edit";
 
   :boxed_radio_row{
     key="tabs";
     :radio_button{label="绘图编辑";key="tab_edit";}
+    :radio_button{label="缩放视图";key="tab_view";}
     :radio_button{label="文字处理";key="tab_text";}
     :radio_button{label="图层管理";key="tab_layer";}
     :radio_button{label="图块管理";key="tab_block";}
@@ -64,23 +65,52 @@ tb_page_0:dialog{
         }
       }
     }
+  }
+
+  :row{
+    :button{label="设置(S)";key="settings";width=12;fixed_width=true;}
+    :button{label="帮助(H)";key="help";width=12;fixed_width=true;}
+    spacer;
+    :button{label="关闭";key="close";is_default=true;width=10;fixed_width=true;}
+  }
+}
+
+tb_page_1:dialog{
+  label="建筑结构工具箱 v1.1 - 缩放视图";
+  initial_focus="tab_view";
+
+  :boxed_radio_row{
+    key="tabs";
+    :radio_button{label="绘图编辑";key="tab_edit";}
+    :radio_button{label="缩放视图";key="tab_view";}
+    :radio_button{label="文字处理";key="tab_text";}
+    :radio_button{label="图层管理";key="tab_layer";}
+    :radio_button{label="图块管理";key="tab_block";}
+    :radio_button{label="标注处理";key="tab_dim";}
+    :radio_button{label="结构通用";key="tab_struct";}
+    :radio_button{label="辅助功能";key="tab_misc";}
+  }
+
+  :boxed_row{label="缩放视图";key="grp_view";
     :boxed_row{label="快捷缩放·旋转";
       :row{
         :column{
-          :button{label="缩放0.5× S1";key="btn_s1";width=14;fixed_width=true;}
-          :button{label="缩放2× S2";key="btn_s2";width=14;fixed_width=true;}
-          :button{label="缩放4× S4";key="btn_s4";width=14;fixed_width=true;}
+          :button{label="缩放0.5× S1";key="btn_s1";width=16;fixed_width=true;}
+          :button{label="缩放2× S2";key="btn_s2";width=16;fixed_width=true;}
+          :button{label="缩放4× S4";key="btn_s4";width=16;fixed_width=true;}
+          :spacer{height=1;}
         }
         :column{
-          :button{label="缩放5× S5";key="btn_s5";width=14;fixed_width=true;}
-          :button{label="缩放100× S0";key="btn_s0";width=14;fixed_width=true;}
-          :button{label="缩放1000× S00";key="btn_s00";width=14;fixed_width=true;}
+          :button{label="缩放5× S5";key="btn_s5";width=16;fixed_width=true;}
+          :button{label="缩放100× S0";key="btn_s0";width=16;fixed_width=true;}
+          :button{label="缩放1000× S00";key="btn_s00";width=16;fixed_width=true;}
+          :spacer{height=1;}
         }
         :column{
-          :button{label="顺转45 R4";key="btn_r4";width=14;fixed_width=true;}
-          :button{label="顺转90 R9";key="btn_r9";width=14;fixed_width=true;}
-          :button{label="逆转45 R5";key="btn_r5";width=14;fixed_width=true;}
-          :button{label="逆转90 R0";key="btn_r0";width=14;fixed_width=true;}
+          :button{label="顺转45 R4";key="btn_r4";width=16;fixed_width=true;}
+          :button{label="顺转90 R9";key="btn_r9";width=16;fixed_width=true;}
+          :button{label="逆转45 R5";key="btn_r5";width=16;fixed_width=true;}
+          :button{label="逆转90 R0";key="btn_r0";width=16;fixed_width=true;}
         }
       }
     }
@@ -124,13 +154,14 @@ tb_page_0:dialog{
   }
 }
 
-tb_page_1:dialog{
-  label="建筑结构工具箱 v1.0 - 文字处理";
+tb_page_2:dialog{
+  label="建筑结构工具箱 v1.1 - 文字处理";
   initial_focus="tab_text";
 
   :boxed_radio_row{
     key="tabs";
     :radio_button{label="绘图编辑";key="tab_edit";}
+    :radio_button{label="缩放视图";key="tab_view";}
     :radio_button{label="文字处理";key="tab_text";}
     :radio_button{label="图层管理";key="tab_layer";}
     :radio_button{label="图块管理";key="tab_block";}
@@ -139,6 +170,9 @@ tb_page_1:dialog{
     :radio_button{label="辅助功能";key="tab_misc";}
   }
 
+  :column{
+    :spacer{height=1;}
+  }
   :boxed_row{label="文字处理";key="grp_text";
     :boxed_row{label="文字样式";
       :row{
@@ -160,6 +194,7 @@ tb_page_1:dialog{
         :column{
           :button{label="左对齐 TTY";key="btn_tty";width=14;fixed_width=true;}
           :button{label="查找替换 TH";key="btn_th";width=14;fixed_width=true;}
+          :spacer{height=1;}
         }
       }
     }
@@ -171,6 +206,7 @@ tb_page_1:dialog{
         }
         :column{
           :button{label="文字加框 TJK";key="btn_tjk";width=14;fixed_width=true;}
+          :spacer{height=1;}
         }
       }
     }
@@ -187,6 +223,9 @@ tb_page_1:dialog{
       }
     }
   }
+  :column{
+    :spacer{height=1;}
+  }
 
   :row{
     :button{label="设置(S)";key="settings";width=12;fixed_width=true;}
@@ -196,13 +235,14 @@ tb_page_1:dialog{
   }
 }
 
-tb_page_2:dialog{
-  label="建筑结构工具箱 v1.0 - 图层管理";
+tb_page_3:dialog{
+  label="建筑结构工具箱 v1.1 - 图层管理";
   initial_focus="tab_layer";
 
   :boxed_radio_row{
     key="tabs";
     :radio_button{label="绘图编辑";key="tab_edit";}
+    :radio_button{label="缩放视图";key="tab_view";}
     :radio_button{label="文字处理";key="tab_text";}
     :radio_button{label="图层管理";key="tab_layer";}
     :radio_button{label="图块管理";key="tab_block";}
@@ -211,6 +251,9 @@ tb_page_2:dialog{
     :radio_button{label="辅助功能";key="tab_misc";}
   }
 
+  :column{
+    :spacer{height=2;}
+  }
   :boxed_row{label="图层管理";key="grp_layer";
     :boxed_row{label="图层开关";
       :row{
@@ -234,13 +277,14 @@ tb_page_2:dialog{
         }
         :column{
           :button{label="全部显示 TX";key="btn_tx";width=14;fixed_width=true;}
+          :spacer{height=1;}
         }
       }
     }
     :boxed_row{label="当前层";
       :row{
         :column{
-          :button{label="切当前层 TQ";key="btn_tq";width=14;fixed_width=true;}
+          :button{label="切当前层 TQ";key="btn_tq";width=16;fixed_width=true;}
         }
         :column{
           :button{label="改到当前层 GTC";key="btn_gtc";width=16;fixed_width=true;}
@@ -248,45 +292,8 @@ tb_page_2:dialog{
       }
     }
   }
-
-  :row{
-    :button{label="设置(S)";key="settings";width=12;fixed_width=true;}
-    :button{label="帮助(H)";key="help";width=12;fixed_width=true;}
-    spacer;
-    :button{label="关闭";key="close";is_default=true;width=10;fixed_width=true;}
-  }
-}
-
-tb_page_3:dialog{
-  label="建筑结构工具箱 v1.0 - 图块管理";
-  initial_focus="tab_block";
-
-  :boxed_radio_row{
-    key="tabs";
-    :radio_button{label="绘图编辑";key="tab_edit";}
-    :radio_button{label="文字处理";key="tab_text";}
-    :radio_button{label="图层管理";key="tab_layer";}
-    :radio_button{label="图块管理";key="tab_block";}
-    :radio_button{label="标注处理";key="tab_dim";}
-    :radio_button{label="结构通用";key="tab_struct";}
-    :radio_button{label="辅助功能";key="tab_misc";}
-  }
-
-  :boxed_row{label="图块管理";key="grp_block";
-    :row{
-      :column{
-        :button{label="快速建块 JK";key="btn_jk";width=14;fixed_width=true;}
-        :button{label="块统计 KTJ";key="btn_ktj";width=14;fixed_width=true;}
-        :button{label="块改名 GKM";key="btn_gkm";width=14;fixed_width=true;}
-        :button{label="块向匹配 MBO";key="btn_mbo";width=16;fixed_width=true;}
-      }
-      :column{
-        :button{label="改块属性 GKS";key="btn_gks";width=14;fixed_width=true;}
-        :button{label="删重叠块 SK";key="btn_sk";width=14;fixed_width=true;}
-        :button{label="属性取整 RAV";key="btn_rav";width=16;fixed_width=true;}
-        :button{label="批量换块 RBLK";key="btn_rblk";width=16;fixed_width=true;}
-      }
-    }
+  :column{
+    :spacer{height=3;}
   }
 
   :row{
@@ -298,12 +305,13 @@ tb_page_3:dialog{
 }
 
 tb_page_4:dialog{
-  label="建筑结构工具箱 v1.0 - 标注处理";
-  initial_focus="tab_dim";
+  label="建筑结构工具箱 v1.1 - 图块管理";
+  initial_focus="tab_block";
 
   :boxed_radio_row{
     key="tabs";
     :radio_button{label="绘图编辑";key="tab_edit";}
+    :radio_button{label="缩放视图";key="tab_view";}
     :radio_button{label="文字处理";key="tab_text";}
     :radio_button{label="图层管理";key="tab_layer";}
     :radio_button{label="图块管理";key="tab_block";}
@@ -312,6 +320,56 @@ tb_page_4:dialog{
     :radio_button{label="辅助功能";key="tab_misc";}
   }
 
+  :column{
+    :spacer{height=4;}
+  }
+  :boxed_row{label="图块管理";key="grp_block";
+    :row{
+      :column{
+        :button{label="快速建块 JK";key="btn_jk";width=16;fixed_width=true;}
+        :button{label="块统计 KTJ";key="btn_ktj";width=16;fixed_width=true;}
+        :button{label="块改名 GKM";key="btn_gkm";width=16;fixed_width=true;}
+        :button{label="块向匹配 MBO";key="btn_mbo";width=16;fixed_width=true;}
+      }
+      :column{
+        :button{label="改块属性 GKS";key="btn_gks";width=16;fixed_width=true;}
+        :button{label="删重叠块 SK";key="btn_sk";width=16;fixed_width=true;}
+        :button{label="属性取整 RAV";key="btn_rav";width=16;fixed_width=true;}
+        :button{label="批量换块 RBLK";key="btn_rblk";width=16;fixed_width=true;}
+      }
+    }
+  }
+  :column{
+    :spacer{height=5;}
+  }
+
+  :row{
+    :button{label="设置(S)";key="settings";width=12;fixed_width=true;}
+    :button{label="帮助(H)";key="help";width=12;fixed_width=true;}
+    spacer;
+    :button{label="关闭";key="close";is_default=true;width=10;fixed_width=true;}
+  }
+}
+
+tb_page_5:dialog{
+  label="建筑结构工具箱 v1.1 - 标注处理";
+  initial_focus="tab_dim";
+
+  :boxed_radio_row{
+    key="tabs";
+    :radio_button{label="绘图编辑";key="tab_edit";}
+    :radio_button{label="缩放视图";key="tab_view";}
+    :radio_button{label="文字处理";key="tab_text";}
+    :radio_button{label="图层管理";key="tab_layer";}
+    :radio_button{label="图块管理";key="tab_block";}
+    :radio_button{label="标注处理";key="tab_dim";}
+    :radio_button{label="结构通用";key="tab_struct";}
+    :radio_button{label="辅助功能";key="tab_misc";}
+  }
+
+  :column{
+    :spacer{height=4;}
+  }
   :boxed_row{label="标注处理";key="grp_dim";
     :row{
       :column{
@@ -328,6 +386,9 @@ tb_page_4:dialog{
       }
     }
   }
+  :column{
+    :spacer{height=5;}
+  }
 
   :row{
     :button{label="设置(S)";key="settings";width=12;fixed_width=true;}
@@ -337,13 +398,14 @@ tb_page_4:dialog{
   }
 }
 
-tb_page_5:dialog{
-  label="建筑结构工具箱 v1.0 - 结构通用";
+tb_page_6:dialog{
+  label="建筑结构工具箱 v1.1 - 结构通用";
   initial_focus="tab_struct";
 
   :boxed_radio_row{
     key="tabs";
     :radio_button{label="绘图编辑";key="tab_edit";}
+    :radio_button{label="缩放视图";key="tab_view";}
     :radio_button{label="文字处理";key="tab_text";}
     :radio_button{label="图层管理";key="tab_layer";}
     :radio_button{label="图块管理";key="tab_block";}
@@ -365,6 +427,7 @@ tb_page_5:dialog{
           :button{label="改宽度 RW";key="btn_rw";width=14;fixed_width=true;}
           :button{label="偏移钢筋 RO";key="btn_ro";width=14;fixed_width=true;}
           :button{label="线变筋 RL";key="btn_rl";width=14;fixed_width=true;}
+          :spacer{height=1;}
         }
         :column{
           :button{label="钢筋标注 RD";key="btn_rd";width=14;fixed_width=true;}
@@ -377,9 +440,9 @@ tb_page_5:dialog{
     :boxed_row{label="钢筋编辑";
       :row{
         :column{
-          :button{label="编辑标注 RE";key="btn_re";width=14;fixed_width=true;}
-          :button{label="配筋面积 RA";key="btn_ra";width=14;fixed_width=true;}
-          :button{label="编号管理 RN";key="btn_rn";width=14;fixed_width=true;}
+          :button{label="编辑标注 RE";key="btn_re";width=16;fixed_width=true;}
+          :button{label="配筋面积 RA";key="btn_ra";width=16;fixed_width=true;}
+          :button{label="编号管理 RN";key="btn_rn";width=16;fixed_width=true;}
         }
         :column{
           :button{label="钢筋镜像 RM";key="btn_rm";width=16;fixed_width=true;}
@@ -403,6 +466,9 @@ tb_page_5:dialog{
       }
     }
   }
+  :column{
+    :spacer{height=1;}
+  }
 
   :row{
     :button{label="设置(S)";key="settings";width=12;fixed_width=true;}
@@ -412,13 +478,14 @@ tb_page_5:dialog{
   }
 }
 
-tb_page_6:dialog{
-  label="建筑结构工具箱 v1.0 - 辅助功能";
+tb_page_7:dialog{
+  label="建筑结构工具箱 v1.1 - 辅助功能";
   initial_focus="tab_misc";
 
   :boxed_radio_row{
     key="tabs";
     :radio_button{label="绘图编辑";key="tab_edit";}
+    :radio_button{label="缩放视图";key="tab_view";}
     :radio_button{label="文字处理";key="tab_text";}
     :radio_button{label="图层管理";key="tab_layer";}
     :radio_button{label="图块管理";key="tab_block";}
@@ -436,6 +503,7 @@ tb_page_6:dialog{
         }
         :column{
           :button{label="出图比例 XD";key="btn_xd";width=14;fixed_width=true;}
+          :spacer{height=1;}
         }
       }
     }
@@ -455,6 +523,9 @@ tb_page_6:dialog{
         }
         :column{
           :button{label="中心线 CE";key="btn_ce";width=14;fixed_width=true;}
+          :spacer{height=1;}
+          :spacer{height=1;}
+          :spacer{height=1;}
         }
       }
     }
@@ -473,7 +544,8 @@ tb_page_6:dialog{
     :boxed_row{label="选择·批量打印";
       :row{
         :column{
-          :button{label="选择易 SS";key="btn_ss";width=14;fixed_width=true;}
+          :button{label="选择易 SS";key="btn_ss";width=16;fixed_width=true;}
+          :spacer{height=1;}
         }
         :column{
           :button{label="批量打印 BPT";key="btn_bpt";width=16;fixed_width=true;}
@@ -490,3 +562,4 @@ tb_page_6:dialog{
     :button{label="关闭";key="close";is_default=true;width=10;fixed_width=true;}
   }
 }
+

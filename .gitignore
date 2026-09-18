@@ -1,5 +1,6 @@
 *.fas
 *.vlx
+*.prv
 *.tmp
 *.bak
 *.dwl
@@ -38,3 +39,7 @@ tests/_tb_interactive_helper.lsp
 _tb_interactive.scr
 # 子项目命令（BR_SNAP 等）运行时会写的快照目录
 /DATA/
+# 打包合并产物（由 build:merge / 合并步骤生成，重跑即可再生）
+TB-Toolbox/build/intermediate.lsp
+# 发布包产物
+/dist/
