@@ -1,9 +1,14 @@
 #!/bin/sh
-# AutoLISP 静态检查 pre-commit 钩子（由 install-hooks.bat 安装）
-# 每次 git commit 自动运行 run_tests.py --static（无需 CAD，秒级）。
+# AutoLISP 检查 pre-commit 钩子（由 install-hooks.bat 安装）
+#
+# 每次 git commit 自动运行 run_tests.py --runtime：
+#   静态检查（秒级）+ 运行时验证（accoreconsole 真机，本机实测约 5s）。
+# 没有安装 AutoCAD 时，run_tests.py 会自动跳过运行时层（不视为失败），
+# 所以这个钩子在无 CAD 的机器上也是安全的，只是退化成纯静态检查。
+#
 # 临时跳过: git commit --no-verify
 
-# 定位仓库根目录（钩子可能位于 .git/hooks/ 或 .git/worktrees/*/hooks/）
+# 兼容工作树（钩子可能位于 .git/hooks/ 或 .git/worktrees/*/hooks/）
 ROOT=$(git rev-parse --show-toplevel) || exit 1
 cd "$ROOT" || exit 1
 
@@ -16,4 +21,4 @@ else
   exit 0
 fi
 
-exec "$PY" run_tests.py --static
+exec "$PY" run_tests.py --runtime

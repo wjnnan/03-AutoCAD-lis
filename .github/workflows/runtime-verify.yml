@@ -1,7 +1,13 @@
 name: Runtime Verify
 
-# 运行时验证：需要 AutoCAD（accoreconsole），在本机 self-hosted runner 上运行
-# 手动触发（workflow_dispatch）或 push 到本机 runner
+# 运行时验证：需要 AutoCAD（accoreconsole），在装有 AutoCAD 的 self-hosted runner 上运行。
+#
+# 统一走 run_tests.py --runtime —— 本地与 CI 跑的是同一套，测试由
+# tests/verify_*_runtime.py 自动发现，路径在运行时生成，无需替换脚本里的硬编码路径。
+#
+# 说明：自 2026-09-19 起 accoreconsole 在 Agent 的 bash 里也能跑通了
+# （此前失败是 MSYS2 把 /s 转成路径所致；run_tests.py 用 subprocess 传参数列表，
+#  不经过 shell，不受影响）。
 
 on:
   push:
@@ -9,29 +15,10 @@ on:
 
 jobs:
   runtime-verify:
-    # 需在装有 AutoCAD 的本机注册 self-hosted runner，标签 autocad
     runs-on: [self-hosted, windows]
     steps:
       - name: 检出代码
         uses: actions/checkout@v4
 
-      - name: 修复脚本中的本地路径
-        shell: powershell
-        run: |
-          $ws = "${{ github.workspace }}"
-          $wsSlash = $ws -replace '\\', '/'
-          # 替换 smoke 脚本里的 Windows 反斜杠路径
-          (Get-Content "tests\autocad_2024_smoke.scr" -Raw) -replace [regex]::Escape('d:\My Code\Claude Code\03-AutoCAD-lisp'), $ws | Set-Content "tests\autocad_2024_smoke.scr" -NoNewline
-          # 替换测试脚本里的正斜杠路径
-          (Get-Content "_test_script.scr" -Raw) -replace 'd:/My Code/Claude Code/03-AutoCAD-lisp', $wsSlash | Set-Content "_test_script.scr" -NoNewline
-          Write-Host "脚本路径已修复为: $ws"
-
-      - name: 运行 accoreconsole 冒烟测试
-        shell: cmd
-        run: |
-          "C:\Program Files\Autodesk\AutoCAD 2024\accoreconsole.exe" /s "tests\autocad_2024_smoke.scr"
-
-      - name: 运行 AutoLISP 测试套件
-        shell: cmd
-        run: |
-          "C:\Program Files\Autodesk\AutoCAD 2024\accoreconsole.exe" /s "_test_script.scr"
+      - name: 静态 + 运行时验证（失败即非 0 退出，CI 会变红）
+        run: python run_tests.py --runtime

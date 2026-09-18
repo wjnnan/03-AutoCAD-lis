@@ -1,7 +1,11 @@
 name: Static Verify
 
-# 静态验证：无需 CAD 环境，GitHub 托管 runner 免费运行
-# 验证括号平衡、语法、目录一致性、defun 结构等
+# 静态验证：无需 CAD，GitHub 托管 runner 运行。
+#
+# 统一走 run_tests.py --static —— 测试由 tests/verify_*.py 自动发现。
+# 不要在这里列举测试文件名：此前手写清单漏掉了 verify_arg_count 和
+# verify_or_value_use（正是抓 lay:make 参数不足、or 取值误用的两个），
+# 导致这两类 bug 回归时 CI 也不会变红。
 
 on:
   push:
@@ -20,27 +24,5 @@ jobs:
         with:
           python-version: '3.x'
 
-      - name: 运行静态校验脚本
-        run: |
-          cd tests
-          set +e
-          fail=0
-          for f in \
-            verify_tb_main_balance.py \
-            verify_tb_main_defuns.py \
-            verify_tb_hotkey_static.py \
-            verify_tb_dcl_cleanup.py \
-            verify_diffcheck_command_locals.py \
-            verify_diffcheck_helper_locals.py \
-            verify_diffcheck_no_nested_helper_defun.py \
-            verify_syncblock_helper_locals.py \
-            verify_syncblock_name_fallback.py \
-            verify_tb_core_legacy_guard_wrappers.py \
-            verify_tb_rebar_edit_helper_defs.py \
-            verify_uc_core_error_safety.py \
-            verify_layer_make_convergence.py
-          do
-            echo "=== $f ==="
-            python "$f" || fail=1
-          done
-          exit $fail
+      - name: 运行静态校验（run_tests.py 统一入口，失败即非 0 退出）
+        run: python run_tests.py --static

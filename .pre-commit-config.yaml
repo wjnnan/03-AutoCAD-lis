@@ -1,12 +1,14 @@
-# AutoLISP 静态检查 pre-commit 钩子（pre-commit 框架版）
+# AutoLISP 检查 pre-commit 钩子（pre-commit 框架版）
 # 与 install-hooks.bat 安装的普通 git 钩子二选一，不要同时启用。
 # 需要先安装框架: pip install pre-commit && pre-commit install
+#
+# 跑 --runtime（静态 + accoreconsole 真机验证）；没有 AutoCAD 时运行时层自动跳过。
 repos:
   - repo: local
     hooks:
-      - id: autolisp-static-check
-        name: AutoLISP 静态检查
-        entry: python run_tests.py --static
+      - id: autolisp-check
+        name: AutoLISP 检查（静态 + 真机运行时）
+        entry: python run_tests.py --runtime
         language: system
         pass_filenames: false
         always_run: true

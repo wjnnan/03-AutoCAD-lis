@@ -1,10 +1,12 @@
 @echo off
 rem ============================================================
-rem  Install AutoLISP static-check pre-commit hook (no deps).
+rem  Install AutoLISP check pre-commit hook (no deps).
 rem  NOTE: English comments only - cmd parses batch as GBK,
 rem        UTF-8 Chinese comments break parsing.
 rem
-rem  Effect: every `git commit` runs `python run_tests.py --static`
+rem  Effect: every `git commit` runs `python run_tests.py --runtime`
+rem          (static + accoreconsole runtime checks; runtime auto-skips
+rem           when AutoCAD is absent, so this is safe on any machine)
 rem  Skip once: git commit --no-verify
 rem ============================================================
 setlocal
@@ -26,6 +28,6 @@ if %errorlevel% neq 0 (
   exit /b 1
 )
 
-echo [install-hooks] pre-commit hook installed (runs run_tests.py --static)
+echo [install-hooks] pre-commit hook installed (runs run_tests.py --runtime)
 echo [install-hooks] skip once with: git commit --no-verify
 exit /b 0
