@@ -135,13 +135,12 @@
 ;; ============================================================================
 
 (defun tb:update-page-labels (page / e cmd sh)
-  "按配置刷新当前页按钮 label（功能名 + 用户快捷键）。"
+  "按配置刷新全部按钮 label（功能名 + 用户快捷键）。
+   page 参数保留以兼容调用方；主界面改为单界面后为全量刷新。"
   (foreach e *TB:CMD-CATALOG*
-    (if (= (cadddr e) page)
-      (progn
-        (setq cmd (cadr e)
-              sh  (strcase (tb:effective-shortcut cmd)))
-        (set_tile (car e) (strcat (caddr e) " " sh))))))
+    (setq cmd (cadr e)
+          sh  (strcase (tb:effective-shortcut cmd)))
+    (set_tile (car e) (strcat (caddr e) " " sh))))
 
 ;; ============================================================================
 ;; 快捷键设置对话框

@@ -29,8 +29,8 @@ KNOWN_TILES = {
     "help_button", "retirement_button", "icon",
 }
 
-# 每页都必须有的导航/底栏控件
-REQUIRED_KEYS = {"tabs", "settings", "help", "close"}
+# 界面必备控件。主界面改为单界面后不再有 tabs（标签栏已移除）
+REQUIRED_KEYS = {"settings", "help", "close"}
 
 
 def collect(text: str):
@@ -104,9 +104,9 @@ def main() -> int:
     assert vm, "未找到 *TB:VERSION*"
     version = vm.group(1)                       # 例如 1.1.0
     major_minor = ".".join(version.split(".")[:2])
-    tags = set(re.findall(r"建筑结构工具箱\s+(v[\d.]+)\s*-", launcher))
+    tags = set(re.findall(r"建筑结构工具箱\s+(v[\d.]+)", launcher))
     if not tags:
-        errors.append("launcher DCL 标题里找不到版本号（形如 建筑结构工具箱 v1.1 - xxx）")
+        errors.append("launcher DCL 标题里找不到版本号（形如 建筑结构工具箱 v1.1）")
     else:
         if len(tags) > 1:
             errors.append(f"launcher DCL 标题版本号不统一: {sorted(tags)}")

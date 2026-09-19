@@ -5,8 +5,9 @@
   (progn
     (setq *TB:LOADED* T
           *TB:VERSION* "1.1.0"
-          *TB:PAGES* '("tb_page_0" "tb_page_1" "tb_page_2" "tb_page_3" "tb_page_4" "tb_page_5" "tb_page_6" "tb_page_7")
-          *TB:TAB-KEYS* '("tab_edit" "tab_view" "tab_text" "tab_layer" "tab_block" "tab_dim" "tab_struct" "tab_misc")
+          ;; 单界面：只有一个 dialog，不再有标签页
+          *TB:PAGES* '("tb_main")
+          *TB:TAB-KEYS* '()
           *TB:PAGE-BINDS* '(
     ;; 页0
     (("btn_q" . "q") ("btn_qw" . "qw") ("btn_ww" . "ww") ("btn_ty" . "ty") ("btn_qr" . "qr") ("btn_pp" . "pp") ("btn_te" . "te") ("btn_we" . "we") ("btn_a" . "a") ("btn_s" . "s") ("btn_sc" . "sc") ("btn_r" . "r") ("btn_de" . "de") ("btn_cx" . "cx") ("btn_cc" . "cc") ("btn_cf" . "cf") ("btn_cr" . "cr") ("btn_cl" . "cl") ("btn_ff" . "ff") ("btn_fr" . "fr") ("btn_oo" . "oo") ("btn_mof" . "MOF"))
@@ -197,59 +198,49 @@
             (princ (strcat "\n[TB] 未定义命令: " *TB:CMD*)))
           (setq *TB:CMD* nil))))
 
-    (defun tb:bind-tabs nil
-      "绑定 8 个标签页 radio，点击时 done_dialog 200+index 触发切页。"
-      (foreach i '(0 1 2 3 4 5 6 7)
-        (action_tile (nth i *TB:TAB-KEYS*)
-          (strcat "(done_dialog " (itoa (+ 200 i)) ")"))))
-
-    (defun tb:bind-page (page-index)
-      "绑定指定标签页的按钮。"
+    (defun tb:bind-all nil
+      "绑定界面上全部按钮。PAGE-BINDS 仍按 8 个区块分组存放，这里逐块绑定。"
       (setq *TB:BIND-ID* 10)
-      (foreach pair (nth page-index *TB:PAGE-BINDS*)
-        (tb:bind (car pair) (cdr pair))))
+      (foreach blk *TB:PAGE-BINDS*
+        (foreach pair blk
+          (tb:bind (car pair) (cdr pair)))))
 
     (defun c:TB (/ dcl-fn dcl-id result olderror)
-      "打开工具箱主界面。7 个标签页通过 done_dialog 循环真正切页。"
+      "打开主界面（单界面，8 个功能区块，无标签页）。"
       (setq olderror *error*
             *error* (lambda (msg)
                       (if dcl-id (vl-catch-all-apply 'unload_dialog (list dcl-id)))
-                      (setq *TB:DONE* T)   ; 已卸载对话框，退出循环，不再重开
+                      (setq *TB:DONE* T)
                       (setq *error* olderror)
                       (princ (strcat "\n[TB] 界面异常: " (if msg msg "")))
                       (princ)))
       (setq dcl-fn (tb:resolve-dcl "tb-dcl-launcher.dcl"))
       (if (and dcl-fn (setq dcl-id (load_dialog dcl-fn)))
         (progn
-          (setq *TB:CUR-PAGE* 0
-                *TB:DONE* nil
+          (setq *TB:DONE* nil
                 *TB:CMD* nil)
           (while (not *TB:DONE*)
-            (if (new_dialog (nth *TB:CUR-PAGE* *TB:PAGES*) dcl-id)
+            (if (new_dialog "tb_main" dcl-id)
               (progn
-                (set_tile (nth *TB:CUR-PAGE* *TB:TAB-KEYS*) "1")
-                (tb:bind-tabs)
-                (tb:bind-page *TB:CUR-PAGE*)
+                (tb:bind-all)
                 (if (uc:function-defined-p 'tb:update-page-labels)
-                  (vl-catch-all-apply 'tb:update-page-labels (list *TB:CUR-PAGE*)))
+                  (vl-catch-all-apply 'tb:update-page-labels (list 0)))
                 (action_tile "settings" "(done_dialog 99)")
                 (action_tile "help"     "(done_dialog 100)")
                 (action_tile "close"    "(done_dialog 0)")
                 (setq result (start_dialog))
                 (cond
-                  ;; start_dialog 返回非法值（含 nil）时一律退出，
-                  ;; 否则 while 会立即重开对话框，表现为"点了没反应、窗口还在"。
+                  ;; 返回非法值（含 nil）一律退出，否则 while 会立即重开对话框
                   ((null result) (setq *TB:DONE* T))
-                  ((and (numberp result) (>= result 200))
-                   (setq *TB:CUR-PAGE* (- result 200)))
-                  ;; 设置与帮助：不置 *TB:DONE*，while 会重开主界面并停在当前页
+                  ;; 设置与帮助：不置 *TB:DONE*，while 会重开主界面
                   ((= result 99) (c:TBSETTING2))
                   ((= result 100) (tb:show-help))
                   ((= result 0) (setq *TB:DONE* T))
                   ((and (numberp result) (< result 0)) (setq *TB:DONE* T))
                   ((and *TB:CMD* (numberp result) (> result 10))
                    (tb:run-bound-command) (setq *TB:DONE* T))
-                  (t (setq *TB:DONE* T))))   ; 兜底：任何未知返回码都退出
+                  (t (setq *TB:DONE* T)))
+                (setq *TB:CMD* nil))
               (progn
                 (unload_dialog dcl-id)
                 (princ "\n[TB] 无法初始化主界面对话框。")
