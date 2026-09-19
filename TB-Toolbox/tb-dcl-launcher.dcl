@@ -6,7 +6,7 @@
 // 列对齐：组内各列用等高空按钮补齐
 
 tb_main:dialog{
-  label="建筑结构工具箱 v1.1";
+  label="建筑结构工具箱 v1.2";
   initial_focus="btn_q";
 
   :row{children_alignment=top;

@@ -4,7 +4,7 @@
   (princ "\n[TB] 工具箱已加载，跳过重复加载。")
   (progn
     (setq *TB:LOADED* T
-          *TB:VERSION* "1.1.0"
+          *TB:VERSION* "1.2.0"
           ;; 单界面：只有一个 dialog，不再有标签页
           *TB:PAGES* '("tb_main")
           *TB:TAB-KEYS* '()
