@@ -10,7 +10,13 @@ name: Runtime Verify
 #  不经过 shell，不受影响）。
 
 on:
-  push:
+  # 只在手动触发。
+  #
+  # 此前挂了 push，但本机 self-hosted runner 从未注册（actions-runner/ 下只有一个
+  # 未解压的 zip），于是每次推送都会在 Actions 页面留下一个永远排队、永不结束的任务。
+  #
+  # 真机回归已由本地 pre-commit hook 承担（每次 git commit 跑 run_tests.py --runtime，
+  # 约 6 秒）。等以后真装好 runner 想恢复到 push 触发，把这行加回来即可。
   workflow_dispatch:
 
 jobs:
